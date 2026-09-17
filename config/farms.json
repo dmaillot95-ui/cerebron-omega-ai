@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "owner": "dmaillot95-ui",
   "farms": [
     {"id":1,"repo":"cerebron-collatz-theory-farm","domain":"collatz-theory"},
@@ -47,6 +47,6 @@
     {"id":43,"repo":"cerebron-farm-43-civilization-synthesis","domain":"civilization-synthesis"},
     {"id":44,"repo":"cerebron-farm-44-ai-platform-routing","domain":"ai-platform-routing"},
     {"id":45,"repo":"cerebron-farm-45-agent-runtime","domain":"agent-runtime"},
-    {"id":46,"repo":"cerebron-omega-ai:farms/46-global-video-research","domain":"global-video-research","mode":"central-hosted"}
+    {"id":46,"repo":"cerebron-farm-46-global-video-research","domain":"global-video-research"}
   ]
 }
