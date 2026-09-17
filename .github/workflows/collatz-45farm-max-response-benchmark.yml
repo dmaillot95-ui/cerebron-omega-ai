@@ -1,0 +1,149 @@
+name: CEREBRON Collatz 45-Farm Max Response Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-45farm-max-response-benchmark.yml'
+      - 'config/farms.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerebron-collatz-45farm-max-response-benchmark
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain']} for f in d['farms']]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm-benchmark:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Execute 20 single-lane roles with sequential fallback
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
+          roles=['PROOF_STRATEGIST','NUMBER_THEORIST','DYNAMICAL_SYSTEMS_ANALYST','DIOPHANTINE_ANALYST','P_ADIC_ANALYST','PARITY_VECTOR_ANALYST','CYCLE_OBSTRUCTION_ANALYST','DIVERGENCE_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','ARITHMETIC_VERIFIER','REPLICATOR','RED_TEAM','LITERATURE_SYNTHESIZER','INVARIANT_HUNTER','LEMMA_INVENTOR','GAP_ANALYST','PROOF_SYNTHESIZER','OMEGA_JUDGE']
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          result={'schema':'cerebron-45farm-max-response-v1','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':20,'successful_roles':0,'provider_attempts':0,'outputs':[]}
+
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          def one(i):
+            role=roles[i]
+            prompt=(f'CEREBRON OMEGA — 45-FARM MAX RESPONSE BENCHMARK\nFARM {fid} {domain}\nROLE {role}\n'
+                    'Work on the current Collatz H-COUPLING/H-LOG/SMALL-h/LOWER-GAP checkpoint. '
+                    'REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF; SYMBOLIC REDUCTION BEFORE MULTIPLICATION. '
+                    'Return ESTABLISHED / DERIVATION / FALSIFICATION / GAP / NEXTLOCK.')
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt)
+                attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  return {'index':i+1,'role':role,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
+              except Exception as e:
+                attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'index':i+1,'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
+
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,i) for i in range(20)]
+            for fut in as_completed(futs):
+              row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
+          result['outputs'].sort(key=lambda x:x['index'])
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          result['success_rate_per_role']=round(result['successful_roles']/20,4)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'successful_roles':result['successful_roles'],'provider_attempts':result['provider_attempts'],'elapsed_seconds':result['elapsed_seconds']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: max-response-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: farm-benchmark
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: max-response-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          total_success=sum(r.get('successful_roles',0) for r in rows)
+          total_attempts=sum(r.get('provider_attempts',0) for r in rows)
+          rows_sorted=sorted(rows,key=lambda r:(r.get('successful_roles',0),-r.get('provider_attempts',0)),reverse=True)
+          summary={
+            'schema':'cerebron-45farm-max-response-accounting-v1',
+            'farms_received':len(rows),
+            'expected_farms':45,
+            'logical_roles':45*20,
+            'theoretical_max_successful_role_outputs':45*20,
+            'successful_role_outputs':total_success,
+            'provider_attempts':total_attempts,
+            'success_rate_per_logical_role':round(total_success/(45*20),6),
+            'success_rate_per_provider_attempt':round(total_success/total_attempts,6) if total_attempts else 0,
+            'farms_with_at_least_one_success':sum(r.get('successful_roles',0)>0 for r in rows),
+            'best_farm_success_count':max([r.get('successful_roles',0) for r in rows],default=0),
+            'per_farm':[{'farm_id':r.get('farm_id'),'domain':r.get('domain'),'success':r.get('successful_roles',0),'attempts':r.get('provider_attempts',0),'elapsed_seconds':r.get('elapsed_seconds'),'error':r.get('error')} for r in rows_sorted],
+            'claim_note':'Workflow success is not scientific validation. successful_role_outputs counts non-empty external model responses only.'
+          }
+          Path('max-response-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: max-response-accounting
+          path: max-response-accounting.json
+          retention-days: 14
