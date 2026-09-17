@@ -1,0 +1,147 @@
+name: CEREBRON Collatz Qwen Firewall 45-Farm
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-qwen-firewall-45farm.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          print('matrix='+json.dumps({'include':d['farms']},separators=(',',':')))
+          PY
+
+  qwen-firewall:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Qwen generator plus independent counter-audit
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          git clone --depth 1 https://github.com/dmaillot95-ui/cerebron-collatz-theory-farm.git worker-src >/dev/null 2>&1
+          python - <<'PY'
+          import os,json,pathlib,importlib.util,time,hashlib,re
+          fid=int(os.environ['FARM_ID']); domain=os.environ['FARM_DOMAIN']
+          wp=pathlib.Path('worker-src/worker/farm_worker.py')
+          R={'schema':'cerebron-qwen-firewall-v1','farm_id':fid,'domain':domain,'qwen_success':0,'audit_success':0,'provider_attempts':0,'decision':'NO_OUTPUT','flags':[]}
+          if not wp.exists():
+            R['error']='worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(R,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location('fw',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+          checkpoint=('Accelerated odd Collatz map. Current campaign checkpoint only: H-COUPLING + H-LOG + SMALL-h exception budget + independent LOWER GAP. '
+                      'Known campaign result only: no positive nontrivial odd cycle with N<=4. Arbitrary N remains open. '
+                      'Do not infer large u implies large h. COMPUTATION != PROOF; FINITE TEST != UNIVERSAL PROOF.')
+          gen_prompt=(f'CEREBRON OMEGA QWEN GENERATOR — FARM {fid} {domain}\n{checkpoint}\n'
+                      'Generate exactly ONE candidate: derivation, obstruction, counterexample, invariant, or falsification. '
+                      'Prefer symbolic reduction before multiplication. State assumptions and exact equations. '
+                      'Never claim Collatz solved. Mark every claim ESTABLISHED / DERIVED / SPECULATIVE / OPEN.')
+          qrow={}
+          try:
+            ok,text,meta=fw.invoke('Qwen/Qwen3-Demo',gen_prompt); R['provider_attempts']+=1
+            if ok and str(text).strip():
+              q=str(text); R['qwen_success']=1; R['qwen_response']=q; R['qwen_sha256']=hashlib.sha256(q.encode()).hexdigest(); qrow=meta or {}
+            else: R['flags'].append('QWEN_NO_RESPONSE')
+          except Exception as e:
+            R['provider_attempts']+=1; R['flags'].append('QWEN_EXCEPTION'); R['qwen_error']=repr(e)
+          q=R.get('qwen_response','')
+          if q:
+            bad_patterns=[
+              r'collatz (is|has been) (proved|solved)',
+              r'proof of the collatz conjecture',
+              r'confirmed up to 2\^?60',
+              r't\(n\)\s*<\s*3n/4.*2\^?20',
+              r'large u.*large h'
+            ]
+            low=q.lower()
+            for pat in bad_patterns:
+              if re.search(pat,low,re.I|re.S): R['flags'].append('KNOWN_BAD_OR_UNSUPPORTED_PATTERN:'+pat)
+            audit_prompt=(f'CEREBRON OMEGA INDEPENDENT COUNTER-AUDIT — FARM {fid} {domain}\n{checkpoint}\n'
+                          'Audit the following candidate from an independent model. Try to falsify it. Check algebra, quantifiers, hidden assumptions, finite-test leakage, equivalent-hardness, and unsupported theorem claims. '
+                          'Return only: VALID_DERIVATION, REJECTED, or NEEDS_FORMAL_AUDIT, then concise reasons.\n\nCANDIDATE:\n'+q[:12000])
+            audit_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+            for sp in audit_spaces:
+              try:
+                ok2,t2,m2=fw.invoke(sp,audit_prompt); R['provider_attempts']+=1
+                if ok2 and str(t2).strip():
+                  R['audit_success']=1; R['audit_space']=sp; R['audit_response']=str(t2); break
+              except Exception as e:
+                R['provider_attempts']+=1
+              time.sleep(0.2)
+            aud=R.get('audit_response','').upper()
+            if R['flags']:
+              R['decision']='REJECTED'
+            elif 'REJECTED' in aud:
+              R['decision']='REJECTED'
+            elif 'VALID_DERIVATION' in aud:
+              R['decision']='CANDIDATE'
+              R['flags'].append('MODEL_AUDIT_IS_NOT_FORMAL_PROOF')
+            elif R['audit_success']:
+              R['decision']='NEEDS_FORMAL_AUDIT'
+            else:
+              R['decision']='NEEDS_FORMAL_AUDIT'
+              R['flags'].append('NO_INDEPENDENT_AUDIT_RESPONSE')
+          pathlib.Path('out/result.json').write_text(json.dumps(R,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'qwen_success':R['qwen_success'],'audit_success':R['audit_success'],'decision':R['decision'],'attempts':R['provider_attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qwen-firewall-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: qwen-firewall
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: qwen-firewall-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json,collections
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          dec=collections.Counter(r.get('decision','?') for r in rows)
+          s={'schema':'cerebron-qwen-firewall-accounting-v1','farms_received':len(rows),'qwen_successes':sum(r.get('qwen_success',0) for r in rows),'independent_audit_successes':sum(r.get('audit_success',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'decisions':dict(dec),'rule':'CANDIDATE is not validated mathematics; formal verification remains required.'}
+          Path('qwen-firewall-accounting.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(s,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qwen-firewall-accounting
+          path: qwen-firewall-accounting.json
+          retention-days: 14
