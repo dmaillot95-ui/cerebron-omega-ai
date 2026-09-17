@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "farm_id": 48,
+  "domain": "global-scientific-literature-intelligence",
+  "mission": "Discover, route, deduplicate, provenance-check, and prioritize global scholarly sources before independent mathematical/scientific audit.",
+  "rules": [
+    "SOURCE_FOUND != CLAIM_VERIFIED",
+    "PREPRINT != PEER_REVIEWED",
+    "REPOSITORY_PRESENCE != VALIDATION",
+    "DEDUPLICATE_BY_DOI_OR_STABLE_ID_BEFORE_COUNTING",
+    "PRIMARY_SOURCE > SECONDARY_SUMMARY",
+    "RETRACTION_OR_CORRECTION_STATUS_MUST_BE_CHECKED_WHEN_AVAILABLE",
+    "CLAIM <= EVIDENCE"
+  ],
+  "routing": [
+    {"source":"OpenAlex","role":"global discovery graph, citations, authors, institutions, deduplication seed","priority":"global-first"},
+    {"source":"OpenAIRE","role":"global open research graph linking publications, datasets, software and grants","priority":"global-first"},
+    {"source":"Crossref","role":"DOI metadata, provenance, relationships, corrections/retractions metadata when deposited","priority":"identity-provenance"},
+    {"source":"DataCite","role":"DOI metadata for datasets, software and other research outputs","priority":"identity-provenance"},
+    {"source":"CORE","role":"open-access full-text repository aggregation","priority":"fulltext"},
+    {"source":"arXiv","role":"preprints in mathematics, physics, computer science and related fields","priority":"domain-preprint"},
+    {"source":"HAL","role":"French and international open archive; publications and unpublished research outputs","priority":"institutional-national"},
+    {"source":"Zenodo","role":"catch-all research repository for publications, datasets, software and artifacts","priority":"artifacts-data-software"},
+    {"source":"zbMATH Open","role":"specialized mathematics literature and reviews/indexing","priority":"math-specialist"},
+    {"source":"EuDML","role":"European digitized mathematical literature","priority":"math-archive"},
+    {"source":"DOAJ","role":"peer-reviewed open-access journals and articles","priority":"open-peer-reviewed"},
+    {"source":"PubMed","role":"biomedical and life-science literature","priority":"biomed-specialist"}
+  ],
+  "workflow": [
+    "QUERY_DECOMPOSITION",
+    "GLOBAL_DISCOVERY_OPENALEX_OPENAIRE",
+    "DOMAIN_ROUTING",
+    "IDENTIFIER_PROVENANCE_CROSSREF_DATACITE",
+    "FULLTEXT_RETRIEVAL_WHEN_OPEN",
+    "DEDUPLICATION",
+    "PUBLICATION_STATUS_CLASSIFICATION",
+    "CLAIM_EXTRACTION",
+    "INDEPENDENT_RECONSTRUCTION",
+    "RED_TEAM",
+    "REPLICATION",
+    "AUDIT",
+    "VERIFIED_KNOWLEDGE_BANK_OR_REJECTED_BANK"
+  ],
+  "status_labels": [
+    "PEER_REVIEWED",
+    "PREPRINT",
+    "THESIS",
+    "REPORT",
+    "DATASET",
+    "SOFTWARE",
+    "CONFERENCE",
+    "REPOSITORY_ONLY",
+    "CORRECTED",
+    "RETRACTED",
+    "STATUS_UNKNOWN"
+  ]
+}
