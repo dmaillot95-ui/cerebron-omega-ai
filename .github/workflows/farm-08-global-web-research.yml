@@ -1,0 +1,57 @@
+name: CEREBRON FARM-08 Global Web Research
+
+on:
+  workflow_dispatch:
+    inputs:
+      query:
+        description: Research query
+        required: false
+        default: "Collatz H-coupling small-h exception budget"
+  schedule:
+    - cron: '17 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  research-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet ddgs
+      - name: Search world web
+        env:
+          INPUT_QUERY: ${{ github.event.inputs.query }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,time,datetime
+          from ddgs import DDGS
+          q=os.environ.get('INPUT_QUERY') or 'Collatz H-coupling small-h exception budget'
+          queries=[q, q+' mathematics proof', q+' counterexample', q+' arxiv', q+' github']
+          rows=[]; seen=set()
+          with DDGS() as d:
+            for qq in queries:
+              try:
+                for r in d.text(qq,max_results=20):
+                  u=r.get('href') or r.get('url')
+                  if not u or u in seen: continue
+                  seen.add(u)
+                  rows.append({'query':qq,'title':r.get('title'),'url':u,'snippet':r.get('body'),'source':'web-search'})
+              except Exception as e:
+                rows.append({'query':qq,'error':repr(e)})
+              time.sleep(.4)
+          out={'schema':'cerebron-farm08-global-web-v1','farm_id':8,'domain':'research-web','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'query':q,'result_count':sum(1 for x in rows if x.get('url')),'results':rows,'rules':['SOURCE != CLAIM','SEARCH RESULT != VERIFIED FACT','Deduplicate before synthesis','Prefer primary sources','Record date and URL']}
+          open('out/web-research.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'query':q,'results':out['result_count']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: farm-08-global-web-research
+          path: out/web-research.json
+          retention-days: 14
