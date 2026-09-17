@@ -48,7 +48,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install --quiet hf-gradio
-      - name: Execute 20 roles as coupled independent lanes
+      - name: Execute 20 roles as coupled independent lanes with staggered API flow
         env:
           FARM_ID: ${{ matrix.id }}
           FARM_REPO: ${{ matrix.repo }}
@@ -57,45 +57,60 @@ jobs:
         run: |
           mkdir -p out
           python - <<'PY'
-          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib,random
           from concurrent.futures import ThreadPoolExecutor,as_completed
           fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
           roles=['PROOF_STRATEGIST','NUMBER_THEORIST','DYNAMICAL_SYSTEMS_ANALYST','DIOPHANTINE_ANALYST','P_ADIC_ANALYST','PARITY_VECTOR_ANALYST','CYCLE_OBSTRUCTION_ANALYST','DIVERGENCE_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','ARITHMETIC_VERIFIER','REPLICATOR','RED_TEAM','LITERATURE_SYNTHESIZER','INVARIANT_HUNTER','LEMMA_INVENTOR','GAP_ANALYST','PROOF_SYNTHESIZER','OMEGA_JUDGE']
           laneA=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/llama-2-7b-chat','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-13b-chat']
           laneB=['huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-13b-chat','huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/llama-2-7b-chat']
-          result={'schema':'cerebron-paired-provider-sharding-v1','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':20,'planned_lanes_per_role':2,'successful_lane_outputs':0,'provider_attempts':0,'pairs':[]}
+          result={'schema':'cerebron-paired-provider-sharding-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':20,'planned_lanes_per_role':2,'successful_lane_outputs':0,'provider_attempts':0,'pairs':[],'stagger_policy':{'farm_slot_ms':350,'farm_jitter_ms_max':250,'role_step_ms':75,'lane_offset_ms':35,'lane_jitter_ms_max':90,'retry_backoff_ms_min':180,'retry_backoff_ms_max':400}}
+
+          # Smooth the 45-farm launch wave: sub-second staggering, not meaningless nanoseconds.
+          farm_delay=((fid-1)%8)*0.350 + random.uniform(0.0,0.250)
+          time.sleep(farm_delay)
+
           cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
           wp=pathlib.Path('farm/worker/farm_worker.py')
           if cp.returncode!=0 or not wp.exists():
             result['error']='clone_or_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
           spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
           def lane(role,label,spaces):
+            role_i=roles.index(role)
+            lane_offset=0.0 if label=='A_PRIMARY' else 0.035
+            launch_delay=(role_i%5)*0.075 + lane_offset + random.uniform(0.0,0.090)
+            time.sleep(launch_delay)
             prompt=(f'CEREBRON OMEGA — PAIRED PROVIDER SHARDING\nFARM {fid} {domain}\nROLE {role}\nLANE {label}\n'
                     'Work on the current Collatz H-COUPLING/H-LOG/SMALL-h/LOWER-GAP checkpoint. '
                     'SYMBOLIC REDUCTION BEFORE MULTIPLICATION. REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF. '
                     'Return ESTABLISHED / DERIVATION / FALSIFICATION / GAP / NEXTLOCK. Lane B must independently challenge Lane A style assumptions.')
             attempts=[]
-            for space in spaces:
+            for attempt_i,space in enumerate(spaces):
+              if attempt_i:
+                time.sleep(random.uniform(0.180,0.400))
               try:
                 ok,text,meta=fw.invoke(space,prompt); attempts.append({'space':space,'ok':bool(ok),'meta':meta})
                 if ok and str(text).strip():
-                  return {'lane':label,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'response':str(text),'attempts':attempts}
+                  return {'lane':label,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'response':str(text),'attempts':attempts,'launch_delay_ms':round(launch_delay*1000,1)}
               except Exception as e: attempts.append({'space':space,'ok':False,'error':repr(e)})
-            return {'lane':label,'success':False,'attempts':attempts}
+            return {'lane':label,'success':False,'attempts':attempts,'launch_delay_ms':round(launch_delay*1000,1)}
+
           def pair(role):
             with ThreadPoolExecutor(max_workers=2) as ex:
               a=ex.submit(lane,role,'A_PRIMARY',laneA); b=ex.submit(lane,role,'B_INDEPENDENT',laneB)
               A=a.result(); B=b.result()
             dup=A.get('success') and B.get('success') and A.get('sha256')==B.get('sha256')
             return {'role':role,'lane_a':A,'lane_b':B,'independent_successes':int(A.get('success',False))+int(B.get('success',False)),'duplicate_hash':bool(dup)}
+
           with ThreadPoolExecutor(max_workers=4) as ex:
             futs=[ex.submit(pair,r) for r in roles]
             for fut in as_completed(futs):
               p=fut.result(); result['pairs'].append(p); result['successful_lane_outputs']+=p['independent_successes']; result['provider_attempts']+=len(p['lane_a'].get('attempts',[]))+len(p['lane_b'].get('attempts',[]))
           result['pairs'].sort(key=lambda x:roles.index(x['role']))
           result['evidence_state']='UNREVIEWED_EXTERNAL_AGENT_OUTPUT' if result['successful_lane_outputs'] else 'EXTERNAL_INFERENCE_FAILED'
+          result['farm_initial_delay_ms']=round(farm_delay*1000,1)
           pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-          print(json.dumps({'farm_id':fid,'successful_lane_outputs':result['successful_lane_outputs'],'provider_attempts':result['provider_attempts']}))
+          print(json.dumps({'farm_id':fid,'successful_lane_outputs':result['successful_lane_outputs'],'provider_attempts':result['provider_attempts'],'farm_initial_delay_ms':result['farm_initial_delay_ms']}))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -123,7 +138,7 @@ jobs:
           for p in Path('results').rglob('result.json'):
             try: rows.append(json.loads(p.read_text()))
             except: pass
-          summary={'schema':'cerebron-paired-provider-accounting-v1','farm_rows':len(rows),'expected_farms':45,'roles_per_farm':20,'lanes_per_role':2,'logical_lane_calls':45*20*2,'successful_lane_outputs':sum(r.get('successful_lane_outputs',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'farms_with_success':sum(r.get('successful_lane_outputs',0)>0 for r in rows),'claim_note':'Pairing increases independent attempts; it does not increase provider quotas. Outputs remain unaudited until formal audit/replication.'}
+          summary={'schema':'cerebron-paired-provider-accounting-v2','farm_rows':len(rows),'expected_farms':45,'roles_per_farm':20,'lanes_per_role':2,'logical_lane_calls':45*20*2,'successful_lane_outputs':sum(r.get('successful_lane_outputs',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'farms_with_success':sum(r.get('successful_lane_outputs',0)>0 for r in rows),'stagger_enabled':True,'claim_note':'Millisecond staggering/jitter can reduce synchronized bursts and rate-limit collisions; it does not increase provider quotas. Outputs remain unaudited until formal audit/replication.'}
           Path('paired-provider-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
           print(json.dumps(summary,ensure_ascii=False,indent=2))
           PY
