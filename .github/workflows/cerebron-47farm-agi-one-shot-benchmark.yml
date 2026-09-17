@@ -1,0 +1,138 @@
+name: CEREBRON 47-Farm AGI One-Shot Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/cerebron-47farm-agi-one-shot-benchmark.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerebron-47farm-agi-one-shot-benchmark
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain']} for f in d['farms']]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm-test:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Execute 20 one-shot AGI roles
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          git clone --depth 1 https://github.com/dmaillot95-ui/cerebron-collatz-theory-farm.git provider-worker >/dev/null 2>&1 || true
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib,re
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+
+          fid=int(os.environ['FARM_ID']); domain=os.environ['FARM_DOMAIN']
+          roles=['PLANNER','ARITHMETIC_CHECKER','SYSTEMS_ENGINEER','ENERGY_ANALYST','OPERATIONS_RESEARCHER','FALSIFIER','RED_TEAM','SAFETY_ANALYST','LOGIC_AUDITOR','RESOURCE_OPTIMIZER','COUNTERFACTUAL_ANALYST','VERIFIER','REPLICATOR','CONSTRAINT_ANALYST','DECISION_ANALYST','ROBUSTNESS_ANALYST','ERROR_HUNTER','SYNTHESIZER','INDEPENDENT_SOLVER','OMEGA_JUDGE']
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          wp=pathlib.Path('provider-worker/worker/farm_worker.py')
+          result={'schema':'cerebron-47farm-agi-one-shot-v1','farm_id':fid,'domain':domain,'planned_roles':20,'successful_roles':0,'provider_attempts':0,'correct_exact':0,'outputs':[]}
+          if not wp.exists():
+            result['error']='provider_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          challenge='''ONE-SHOT AGI TEST. Solve independently. Return ONLY one compact JSON object with keys feasible_base, minimum_fuel_l, reserve_fuel_l, battery_needed_kwh, g2_failure_10_14_feasible, failure_reason_kw.\nSystem: 24 h mission. Loads: hospital 70 kW for all 24 h; communications 15 kW for all 24 h; water plant adds 35 kW from hour 6 inclusive to hour 18 exclusive (12 h). Generator G1 max 80 kW and consumes fuel linearly at 0.10 L/kWh. Generator G2 max 50 kW and consumes fuel linearly at 0.08 L/kWh. Total fuel available 240 L. Battery starts with 60 kWh usable energy, max discharge 30 kW, no recharge losses need be considered. Optimize fuel use while meeting every hourly power constraint. Then evaluate a counterfactual where G2 is completely unavailable from hour 10 inclusive to hour 14 exclusive. Required exact base-case answers are numeric/bool; failure_reason_kw is the instantaneous unmet power in the counterfactual if infeasible. No prose outside JSON.'''
+
+          def score(text):
+            try:
+              m=re.search(r'\{.*\}',str(text),re.S); obj=json.loads(m.group(0)) if m else None
+              if not isinstance(obj,dict): return False
+              return (obj.get('feasible_base') is True and abs(float(obj.get('minimum_fuel_l'))-222.0)<0.51 and abs(float(obj.get('reserve_fuel_l'))-18.0)<0.51 and abs(float(obj.get('battery_needed_kwh'))-0.0)<0.51 and obj.get('g2_failure_10_14_feasible') is False and abs(float(obj.get('failure_reason_kw'))-10.0)<0.51)
+            except Exception:
+              return False
+
+          def one(i):
+            role=roles[i]
+            prompt=f'CEREBRON OMEGA — FARM {fid} {domain} — ROLE {role}\nREALITY>COHERENCE. CLAIM<=EVIDENCE. COMPUTATION!=PROOF.\n{challenge}'
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt)
+                attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  return {'index':i+1,'role':role,'success':True,'correct_exact':score(text),'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
+              except Exception as e:
+                attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'index':i+1,'role':role,'success':False,'correct_exact':False,'provider_attempts':len(attempts),'attempts':attempts}
+
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,i) for i in range(20)]
+            for fut in as_completed(futs):
+              row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['correct_exact']+=int(row['correct_exact']); result['outputs'].append(row)
+          result['outputs'].sort(key=lambda x:x['index'])
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'success':result['successful_roles'],'correct_exact':result['correct_exact'],'attempts':result['provider_attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agi-one-shot-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: farm-test
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: agi-one-shot-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          success=sum(r.get('successful_roles',0) for r in rows)
+          correct=sum(r.get('correct_exact',0) for r in rows)
+          attempts=sum(r.get('provider_attempts',0) for r in rows)
+          summary={'schema':'cerebron-47farm-agi-one-shot-accounting-v1','farms_received':len(rows),'expected_farms':47,'logical_roles':47*20,'successful_external_responses':success,'exact_correct_responses':correct,'provider_attempts':attempts,'response_rate':round(success/(47*20),6),'exact_accuracy_among_responses':round(correct/success,6) if success else 0,'farms_with_response':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_exact_correct':sum(r.get('correct_exact',0)>0 for r in rows),'per_farm':[{'farm_id':r.get('farm_id'),'domain':r.get('domain'),'responses':r.get('successful_roles',0),'correct':r.get('correct_exact',0),'attempts':r.get('provider_attempts',0),'error':r.get('error')} for r in sorted(rows,key=lambda x:x.get('farm_id',0))],'answer_key':{'feasible_base':True,'minimum_fuel_l':222.0,'reserve_fuel_l':18.0,'battery_needed_kwh':0.0,'g2_failure_10_14_feasible':False,'failure_reason_kw':10.0},'claim_note':'Counts non-empty external model responses. Exact correctness is local deterministic JSON validation, not a general AGI proof.'}
+          Path('agi-one-shot-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agi-one-shot-accounting
+          path: agi-one-shot-accounting.json
+          retention-days: 14
