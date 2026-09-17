@@ -1,0 +1,170 @@
+name: CEREBRON Omega Full 45 Farms Agent Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/all-farms-full-agent-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain']} for f in d['farms']]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm-full-agent-test:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 45
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependency
+        run: pip install --quiet hf-gradio
+      - name: Detect configured roles and execute real calls
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+          DEFAULT_MODEL: huggingface-projects/llama-3.2-3B-Instruct
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,re,json,subprocess,pathlib,importlib.util,time,hashlib
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']; default_model=os.environ['DEFAULT_MODEL']
+          result={'schema':'cerebron-full-farm-agent-test-v1','farm_id':fid,'repo':repo,'domain':domain,'clone_success':False,'worker_present':False,'roles_detected':[],'planned_calls':0,'attempted_calls':0,'successful_calls':0,'failed_calls':0,'outputs':[],'evidence_state':'UNKNOWN'}
+          t0=time.time()
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          result['clone_success']=cp.returncode==0
+          if cp.returncode!=0:
+            result['error']=(cp.stderr or cp.stdout)[-1500:]
+          else:
+            wp=pathlib.Path('farm/worker/farm_worker.py')
+            result['worker_present']=wp.exists()
+            roles=[]
+            wfdir=pathlib.Path('farm/.github/workflows')
+            if wfdir.exists():
+              for p in wfdir.glob('*.y*ml'):
+                txt=p.read_text(encoding='utf-8',errors='ignore')
+                # Python tuple matrices: ('ROLE','space','family') or ("ROLE",...)
+                for m in re.finditer(r"\(\s*['\"]([A-Z][A-Z0-9_\-]{2,})['\"]\s*,\s*['\"]([^'\"]+)['\"](?:\s*,\s*['\"]([^'\"]*)['\"])?\s*\)",txt):
+                  role,model,fam=m.group(1),m.group(2),m.group(3) or ''
+                  if 'huggingface' in model or '/' in model:
+                    roles.append((role,model,fam))
+                # YAML include style: role: X followed nearby by model/space
+                lines=txt.splitlines()
+                for i,line in enumerate(lines):
+                  mm=re.search(r'\brole\s*:\s*["\']?([A-Za-z0-9_\-]+)',line)
+                  if mm:
+                    role=mm.group(1); model=None; fam=''
+                    window='\n'.join(lines[i:i+6])
+                    sm=re.search(r'\b(?:space|model)\s*:\s*["\']?([^\s"\']+)',window)
+                    if sm: model=sm.group(1)
+                    roles.append((role,model or default_model,fam))
+            # de-duplicate exact roles, preserve order
+            seen=set(); uniq=[]
+            for r,m,f in roles:
+              key=r
+              if key not in seen:
+                seen.add(key); uniq.append((r,m,f))
+            roles=uniq
+            # If workflow does not expose explicit roles, execute one real farm-level agent.
+            if not roles:
+              roles=[(f'FARM_{fid:02d}_AGENT',default_model,'default')]
+            # Safety bound: preserve detected farm architecture up to 32 roles.
+            roles=roles[:32]
+            result['roles_detected']=[{'role':r,'model':m,'family':f} for r,m,f in roles]
+            result['planned_calls']=len(roles)
+            if wp.exists():
+              try:
+                spec=importlib.util.spec_from_file_location(f'farm_worker_{fid}',wp)
+                fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+                for role,model,fam in roles:
+                  prompt=(f'CEREBRON OMEGA FULL FARM EXECUTION TEST\nFARM {fid}: {repo}\nDOMAIN: {domain}\nROLE: {role}\n'
+                          'Mission: identify one important risk, one required proof/evidence, and one unknown for a distributed zero-user-cost CEREBRON OMEGA system. '
+                          'Distinguish ESTABLISHED / HYPOTHESIS / UNKNOWN. Infrastructure test only; generated text is not validation.')
+                  result['attempted_calls']+=1
+                  try:
+                    ok,text,meta=fw.invoke(model,prompt)
+                    ok=bool(ok and str(text).strip())
+                    if ok: result['successful_calls']+=1
+                    else: result['failed_calls']+=1
+                    result['outputs'].append({'role':role,'model':model,'success':ok,'sha256':hashlib.sha256(str(text).encode()).hexdigest() if ok else None,'meta':meta})
+                  except Exception as e:
+                    result['failed_calls']+=1
+                    result['outputs'].append({'role':role,'model':model,'success':False,'error':repr(e)})
+              except Exception as e:
+                result['error']='worker_import:'+repr(e)
+            result['evidence_state']='UNREVIEWED_EXTERNAL_AGENT_OUTPUT' if result['successful_calls'] else ('EXTERNAL_INFERENCE_FAILED' if result['attempted_calls'] else 'UNKNOWN')
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:result.get(k) for k in ['farm_id','repo','planned_calls','attempted_calls','successful_calls','failed_calls','evidence_state']},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  omega-accounting:
+    needs: farm-full-agent-test
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: full-farm-*
+          path: results
+          merge-multiple: false
+      - name: Aggregate all farms
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text(encoding='utf-8')))
+            except: pass
+          rows.sort(key=lambda r:r.get('farm_id',999))
+          summary={
+            'schema':'cerebron-full-45-farms-accounting-v1',
+            'farm_rows':len(rows),
+            'total_planned_calls':sum(r.get('planned_calls',0) for r in rows),
+            'total_attempted_calls':sum(r.get('attempted_calls',0) for r in rows),
+            'total_successful_calls':sum(r.get('successful_calls',0) for r in rows),
+            'total_failed_calls':sum(r.get('failed_calls',0) for r in rows),
+            'farms_with_at_least_one_success':sum(r.get('successful_calls',0)>0 for r in rows),
+            'per_farm':[{'farm_id':r.get('farm_id'),'repo':r.get('repo'),'planned':r.get('planned_calls',0),'attempted':r.get('attempted_calls',0),'successful':r.get('successful_calls',0),'failed':r.get('failed_calls',0)} for r in rows],
+            'claim_note':'Calls counted from actual fw.invoke attempts in this run. Successful call requires non-empty external model output. Content remains unaudited.'
+          }
+          Path('full-45-farms-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: full-45-farms-accounting
+          path: full-45-farms-accounting.json
+          retention-days: 14
