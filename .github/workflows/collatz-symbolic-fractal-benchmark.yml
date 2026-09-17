@@ -1,0 +1,31 @@
+name: CEREBRON Collatz Symbolic Fractal Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/collatz_symbolic_fractal_reducer.py'
+      - '.github/workflows/collatz-symbolic-fractal-benchmark.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  symbolic-reducer:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run symbolic/fractal reducer benchmark
+        run: |
+          mkdir -p out
+          python tools/collatz_symbolic_fractal_reducer.py --max-u 8 --max-r 12 --h-max 199
+      - uses: actions/upload-artifact@v4
+        with:
+          name: collatz-symbolic-fractal-benchmark
+          path: |
+            out/symbolic-reducer-summary.json
+            cache/collatz-symbolic-cache.json
+          retention-days: 14
