@@ -1,0 +1,135 @@
+name: CEREBRON Collatz Mirror Counter Audit Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/collatz-mirror-counter-audit-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  mirror-counter-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+
+      - name: Download real paired outputs from core Collatz farms
+        uses: actions/download-artifact@v4
+        with:
+          pattern: paired-farm-{1,3,4,6,7}
+          path: paired
+          merge-multiple: false
+          github-token: ${{ github.token }}
+          repository: dmaillot95-ui/cerebron-omega-ai
+          run-id: 35229383170
+
+      - name: Run CEREBRON mirror, counter and audit
+        shell: bash
+        run: |
+          set -e
+          git clone --depth 1 https://github.com/dmaillot95-ui/cerebron-collatz-theory-farm.git mirror-worker
+          mkdir -p out
+          python - <<'PY'
+          import json, pathlib, importlib.util, hashlib, time
+
+          spec=importlib.util.spec_from_file_location('fw', pathlib.Path('mirror-worker/worker/farm_worker.py'))
+          fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          rows=[]; provider_attempts_in=0; successful_in=0
+          for p in pathlib.Path('paired').rglob('result.json'):
+              try: r=json.loads(p.read_text())
+              except Exception: continue
+              provider_attempts_in += r.get('provider_attempts',0)
+              successful_in += r.get('successful_lane_outputs',0)
+              for pair in r.get('pairs',[]):
+                  for key in ('lane_a','lane_b'):
+                      x=pair.get(key,{})
+                      if x.get('success') and x.get('response'):
+                          rows.append({
+                              'farm_id':r.get('farm_id'), 'domain':r.get('domain'), 'role':pair.get('role'),
+                              'lane':x.get('lane'), 'space':x.get('space'), 'response':x.get('response')
+                          })
+
+          # Deduplicate exact outputs before mirror reuse.
+          seen=set(); unique=[]
+          for x in rows:
+              h=hashlib.sha256(x['response'].encode()).hexdigest()
+              if h in seen: continue
+              seen.add(h); x['sha256']=h; unique.append(x)
+
+          # Bound prompt size while preserving provenance. Every reused item is explicitly tagged.
+          reused=unique[:40]
+          source='\n\n'.join(
+              f"[SRC farm={x['farm_id']} domain={x['domain']} role={x['role']} lane={x['lane']} model={x['space']} sha={x['sha256'][:12]}]\n{x['response'][:2200]}"
+              for x in reused
+          )
+
+          mirror_prompt='''CEREBRON MIRROR — COLLATZ CORE SYNTHESIS\nYou are the local mirror coordinator. Use ONLY the tagged real external outputs below plus the stated checkpoint.\nCheckpoint: H-COUPLING + H-LOG + small-h exception budget + independent LOWER GAP.\nRules: REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF; CONSENSUS!=TRUTH; EQUIVALENT-HARDNESS firewall; SYMBOLIC REDUCTION BEFORE MULTIPLICATION.\nDo not claim Collatz solved.\nProduce: SOURCE_COUNT / CANDIDATE_CLAIMS / DERIVATIONS / REJECT_NOW / OPEN_GAPS / NEXTLOCK.\nEvery candidate must cite at least one SRC tag.\n\nSOURCES:\n'''+source
+
+          counter_prompt_prefix='''CEREBRON COUNTER — RED TEAM\nAttack the mirror synthesis below. Find false implications, circularity, equivalent-hardness, missing quantifiers, finite-test errors, invalid modular lifting, and any claim not supported by its cited source.\nDo not improve rhetoric; improve correctness.\nReturn: ATTACKS / BROKEN_CLAIMS / SURVIVORS / REQUIRED_REPAIRS / NEXTLOCK.\n\nMIRROR:\n'''
+
+          audit_prompt_prefix='''CEREBRON FORMAL AUDIT — FINAL\nIndependently audit the mirror and counter reports against the Collatz checkpoint.\nReturn exactly these sections: VERIFIED / NARROWED / REJECTED / OPEN / EQUIVALENT_HARDNESS / COMPUTATION_ONLY / FINAL_NEXTLOCK / FINAL_ANSWER.\nFINAL_ANSWER must be the strongest rigorous conclusion actually supported, not a solution claim.\n\nMIRROR:\n'''
+
+          model_orders={
+              'mirror':['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat'],
+              'counter':['huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-13b-chat','huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/llama-2-7b-chat'],
+              'audit':['huggingface-projects/llama-2-13b-chat','huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat']
+          }
+
+          def call(stage,prompt):
+              attempts=[]
+              for space in model_orders[stage]:
+                  time.sleep(0.22)
+                  try:
+                      ok,text,meta=fw.invoke(space,prompt)
+                      attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                      if ok and str(text).strip():
+                          return {'success':True,'space':space,'text':str(text),'attempts':attempts}
+                  except Exception as e:
+                      attempts.append({'space':space,'ok':False,'error':repr(e)})
+              return {'success':False,'text':'','attempts':attempts}
+
+          mirror=call('mirror',mirror_prompt)
+          counter=call('counter',counter_prompt_prefix+mirror.get('text','')) if mirror['success'] else {'success':False,'text':'','attempts':[]}
+          audit_prompt=audit_prompt_prefix+mirror.get('text','')+'\n\nCOUNTER:\n'+counter.get('text','')+'\n\nSOURCE HASHES:\n'+'\n'.join(x['sha256'] for x in reused)
+          audit=call('audit',audit_prompt) if mirror['success'] else {'success':False,'text':'','attempts':[]}
+
+          gates=['VERIFIED','NARROWED','REJECTED','OPEN','EQUIVALENT_HARDNESS','COMPUTATION_ONLY','FINAL_NEXTLOCK','FINAL_ANSWER']
+          final_text=audit.get('text','')
+          quality_gate_hits=sum(1 for g in gates if g in final_text.upper())
+          counter_terms=['circular','quantifier','equivalent','finite','unsupported','invalid','false','gap','reject','repair']
+          counter_hit_count=sum(1 for t in counter_terms if t in counter.get('text','').lower())
+
+          out={
+              'schema':'cerebron-mirror-counter-audit-test-v1',
+              'source_run_id':35229383170,
+              'core_farms_requested':[1,3,4,6,7],
+              'input_provider_attempts':provider_attempts_in,
+              'input_successful_lane_outputs':successful_in,
+              'unique_successful_outputs':len(unique),
+              'reused_outputs_in_mirror':len(reused),
+              'mirror':{'success':mirror['success'],'space':mirror.get('space'),'attempts':len(mirror.get('attempts',[])),'text':mirror.get('text','')},
+              'counter':{'success':counter['success'],'space':counter.get('space'),'attempts':len(counter.get('attempts',[])),'counter_gate_hits':counter_hit_count,'text':counter.get('text','')},
+              'audit':{'success':audit['success'],'space':audit.get('space'),'attempts':len(audit.get('attempts',[])),'quality_gate_hits':quality_gate_hits,'quality_gate_total':len(gates),'text':final_text},
+              'note':'Quality gate hits measure structural epistemic coverage, not mathematical truth. Final claims remain subject to independent human/formal verification.'
+          }
+          pathlib.Path('out/mirror-counter-audit.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          pathlib.Path('out/FINAL.md').write_text(final_text or 'AUDIT FAILED\n')
+          print(json.dumps({k:out[k] for k in ['input_provider_attempts','input_successful_lane_outputs','unique_successful_outputs','reused_outputs_in_mirror']},ensure_ascii=False))
+          print(json.dumps({'mirror_success':mirror['success'],'counter_success':counter['success'],'audit_success':audit['success'],'quality_gate_hits':quality_gate_hits,'quality_gate_total':len(gates)},ensure_ascii=False))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: collatz-mirror-counter-audit-test
+          path: out/
+          retention-days: 14
