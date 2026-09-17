@@ -1,0 +1,114 @@
+name: CEREBRON Collatz Baseline Recovery Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-baseline-recovery-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  baseline-core:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - {id: 1, repo: cerebron-collatz-theory-farm, domain: collatz-theory}
+          - {id: 2, repo: cerebron-collatz-dynamics-farm, domain: collatz-dynamics}
+          - {id: 3, repo: cerebron-collatz-farm-03-adic, domain: collatz-adic}
+          - {id: 4, repo: cerebron-collatz-farm-04-counterexample, domain: collatz-counterexample}
+          - {id: 6, repo: cerebron-collatz-farm-06-formal-audit, domain: collatz-formal-audit}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Execute old single-lane mode
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
+          roles=['PROOF_STRATEGIST','NUMBER_THEORIST','DYNAMICAL_SYSTEMS_ANALYST','DIOPHANTINE_ANALYST','P_ADIC_ANALYST','PARITY_VECTOR_ANALYST','CYCLE_OBSTRUCTION_ANALYST','DIVERGENCE_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','ARITHMETIC_VERIFIER','REPLICATOR','RED_TEAM','LITERATURE_SYNTHESIZER','INVARIANT_HUNTER','LEMMA_INVENTOR','GAP_ANALYST','PROOF_SYNTHESIZER','OMEGA_JUDGE']
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          result={'schema':'cerebron-collatz-baseline-recovery-v1','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':20,'successful_roles':0,'provider_attempts':0,'outputs':[]}
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          def one(i):
+            role=roles[i]
+            prompt=(f'CEREBRON OMEGA — BASELINE RECOVERY\nFARM {fid} {domain}\nROLE {role}\n'
+                    'Work on current Collatz H-COUPLING/H-LOG/SMALL-h/LOWER-GAP checkpoint. '
+                    'REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF; SYMBOLIC REDUCTION BEFORE MULTIPLICATION. '
+                    'Return ESTABLISHED / DERIVATION / FALSIFICATION / GAP / NEXTLOCK.')
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt); attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  return {'index':i+1,'role':role,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
+              except Exception as e:
+                attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'index':i+1,'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
+
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,i) for i in range(20)]
+            for fut in as_completed(futs):
+              row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
+          result['outputs'].sort(key=lambda x:x['index'])
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          result['success_rate_per_role']=round(result['successful_roles']/20,4)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'successful_roles':result['successful_roles'],'provider_attempts':result['provider_attempts'],'elapsed_seconds':result['elapsed_seconds']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-core-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: baseline-core
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: baseline-core-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          s={'schema':'cerebron-baseline-core-accounting-v1','farms':len(rows),'planned_roles':len(rows)*20,'successful_roles':sum(r.get('successful_roles',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'per_farm':[{'farm_id':r.get('farm_id'),'success':r.get('successful_roles',0),'attempts':r.get('provider_attempts',0),'elapsed_seconds':r.get('elapsed_seconds')} for r in rows]}
+          Path('baseline-core-accounting.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(s,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: baseline-core-accounting
+          path: baseline-core-accounting.json
+          retention-days: 14
