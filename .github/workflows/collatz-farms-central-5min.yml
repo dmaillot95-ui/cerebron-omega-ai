@@ -7,6 +7,8 @@ on:
   push:
     paths:
       - '.github/workflows/collatz-farms-central-5min.yml'
+      - 'CENTRAL-COLLATZ-ORDERS.md'
+      - 'config/farms.json'
 
 permissions:
   contents: read
@@ -22,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Collect latest farm executions
+      - name: Collect latest executions from all 45 farms
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -31,13 +33,9 @@ jobs:
           import json, os, urllib.request, datetime
           from pathlib import Path
 
-          farms = [
-            {'id':1,'name':'theory','repo':'dmaillot95-ui/cerebron-collatz-theory-farm','workflow':'theory-farm.yml'},
-            {'id':2,'name':'dynamics','repo':'dmaillot95-ui/cerebron-collatz-dynamics-farm','workflow':'dynamics-farm.yml'},
-            {'id':3,'name':'adic','repo':'dmaillot95-ui/cerebron-collatz-farm-03-adic','workflow':'adic-farm.yml'},
-            {'id':4,'name':'counterexample','repo':'dmaillot95-ui/cerebron-collatz-farm-04-counterexample','workflow':'counterexample-farm.yml'},
-            {'id':6,'name':'formal-audit','repo':'dmaillot95-ui/cerebron-collatz-farm-06-formal-audit','workflow':'formal-audit-farm.yml'},
-          ]
+          cfg=json.loads(Path('config/farms.json').read_text())
+          owner=cfg['owner']
+          farms=cfg['farms']
           token=os.environ.get('GH_TOKEN','')
           headers={'Accept':'application/vnd.github+json','User-Agent':'CEREBRON-Omega-Hub'}
           if token:
@@ -50,54 +48,66 @@ jobs:
               return json.loads(r.read().decode())
 
           rows=[]
+          total_success_proxy=0
           for f in farms:
-            base='https://api.github.com/repos/'+f['repo']
+            full=f"{owner}/{f['repo']}"
+            base='https://api.github.com/repos/'+full
+            row={'farm_id':f['id'],'domain':f['domain'],'repo':full,'latest_run':None,'artifacts':[],'error':None}
             try:
-              data=get(base+'/actions/workflows/'+f['workflow']+'/runs?per_page=1')
+              data=get(base+'/actions/runs?per_page=1')
               runs=data.get('workflow_runs',[])
               run=runs[0] if runs else None
-              row={'farm_id':f['id'],'farm':f['name'],'repo':f['repo'],'workflow':f['workflow'],'latest_run':None,'artifacts':[],'error':None}
               if run:
-                row['latest_run']={k:run.get(k) for k in ['id','run_number','event','status','conclusion','created_at','updated_at','head_sha','html_url']}
+                row['latest_run']={k:run.get(k) for k in ['id','name','path','run_number','event','status','conclusion','created_at','updated_at','head_sha','html_url']}
                 try:
                   arts=get(base+'/actions/runs/'+str(run['id'])+'/artifacts?per_page=100').get('artifacts',[])
                   row['artifacts']=[{'id':a.get('id'),'name':a.get('name'),'size_in_bytes':a.get('size_in_bytes'),'expired':a.get('expired'),'created_at':a.get('created_at')} for a in arts]
                 except Exception as e:
                   row['artifact_error']=repr(e)
-              rows.append(row)
             except Exception as e:
-              rows.append({'farm_id':f['id'],'farm':f['name'],'repo':f['repo'],'workflow':f['workflow'],'latest_run':None,'artifacts':[],'error':repr(e)})
+              row['error']=repr(e)
+            rows.append(row)
 
+          order={
+            'network_target_successful_external_outputs_per_cycle_min':100,
+            'network_target_successful_external_outputs_per_cycle_max':120,
+            'farm_work_passes':55,
+            'farm_output_packets_per_cycle':1,
+            'farm_count':45,
+            'cadence_minutes':5,
+            'note':'55 passes are work units inside one farm packet unless separately executed as real external calls.'
+          }
           routing={
-            'A_H_COUPLING':['theory','dynamics','adic'],
-            'B_SMALL_H_BUDGET':['adic','counterexample','formal-audit'],
-            'C_LOWER_GAP':['theory','adic','formal-audit'],
-            'D_RED_TEAM':['counterexample','formal-audit','dynamics'],
-            'E_FUSION':['theory','dynamics','adic','counterexample','formal-audit']
+            'A_H_COUPLING':['collatz-theory','collatz-dynamics','collatz-adic','science-math','invention-discovery','replication','contradiction-resolution'],
+            'B_SMALL_H_BUDGET':['collatz-adic','collatz-counterexample','collatz-formal-audit','science-math','replication','unknowns-gaps'],
+            'C_LOWER_GAP':['collatz-theory','collatz-literature','research-web','science-math','formal-audit','replication'],
+            'D_RED_TEAM':['collatz-counterexample','collatz-formal-audit','counterexample-red-team','formal-audit','replication','contradiction-resolution'],
+            'E_FUSION':['collatz-synthesis','data-knowledge','unknowns-gaps','memory-compression','capability-evaluation','meta-orchestration','civilization-synthesis','ai-platform-routing','agent-runtime']
           }
           state={
-            'schema':'cerebron-collatz-central-5min-v1',
+            'schema':'cerebron-collatz-central-45farm-5min-v2',
             'generated_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            'cadence_minutes':5,
-            'rules':['REALITY>COHERENCE','CLAIM<=EVIDENCE','WORKFLOW_SUCCESS!=MODEL_SUCCESS','CONSENSUS!=TRUTH','COMPUTATION!=PROOF'],
+            'orders_file':'CENTRAL-COLLATZ-ORDERS.md',
+            'network_order':order,
+            'rules':['REALITY>COHERENCE','EVIDENCE>CONFIDENCE','CLAIM<=EVIDENCE','WORKFLOW_SUCCESS!=MODEL_SUCCESS','AGENT_COUNT!=INTELLIGENCE','CONSENSUS!=TRUTH','COMPUTATION!=PROOF','SYMBOLIC_REDUCTION_BEFORE_MULTIPLICATION'],
             'task_routing':routing,
             'farms':rows
           }
           Path('central').mkdir(exist_ok=True)
-          Path('central/collatz-farm-state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
+          Path('central/collatz-45farm-state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
           Path('central/task-routing.json').write_text(json.dumps(routing,ensure_ascii=False,indent=2)+'\n')
-
-          md=['# CEREBRON Collatz Central 5min','']
+          Path('central/network-order.json').write_text(json.dumps(order,ensure_ascii=False,indent=2)+'\n')
+          md=['# CEREBRON Collatz Central — 45 farms / 5 min','',f"Target successful external outputs per network cycle: {order['network_target_successful_external_outputs_per_cycle_min']}–{order['network_target_successful_external_outputs_per_cycle_max']}",f"Per farm: {order['farm_work_passes']} work passes → 1 consolidated packet",'']
           for r in rows:
             x=r.get('latest_run') or {}
-            md.append(f"- Farm {r['farm_id']:02d} {r['farm']}: run={x.get('id')} status={x.get('status')} conclusion={x.get('conclusion')} artifacts={len(r.get('artifacts',[]))}")
+            md.append(f"- Farm {r['farm_id']:02d} {r['domain']}: run={x.get('id')} status={x.get('status')} conclusion={x.get('conclusion')} artifacts={len(r.get('artifacts',[]))}")
           Path('central/STATUS.md').write_text('\n'.join(md)+'\n')
           print(json.dumps(state,ensure_ascii=False,indent=2))
           PY
 
-      - name: Upload centralized farm state
+      - name: Upload centralized 45-farm state
         uses: actions/upload-artifact@v4
         with:
-          name: collatz-farms-central-state
+          name: collatz-45-farms-central-state
           path: central/
           retention-days: 14
