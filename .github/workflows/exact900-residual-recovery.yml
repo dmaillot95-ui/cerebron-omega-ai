@@ -1,0 +1,120 @@
+name: CEREBRON Omega Residual Recovery
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/exact900-residual-recovery.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  recover-zero-success-farms:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        include:
+          - {id: 5, repo: cerebron-collatz-farm-05-literature, domain: collatz-literature}
+          - {id: 23, repo: cerebron-farm-23-law-regulation, domain: law-regulation}
+          - {id: 25, repo: cerebron-farm-25-geography-infrastructure, domain: geography-infrastructure}
+          - {id: 31, repo: cerebron-farm-31-forecast-scenarios, domain: forecast-scenarios}
+          - {id: 36, repo: cerebron-farm-36-simulation-modeling, domain: simulation-modeling}
+          - {id: 39, repo: cerebron-farm-39-unknowns-gaps, domain: unknowns-gaps}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Recover 20 calls with multi-space failover
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
+          spaces=[
+            'huggingface-projects/llama-3.2-3B-Instruct',
+            'huggingface-projects/gemma-2-9b-it',
+            'huggingface-projects/llama-2-7b-chat',
+            'huggingface-projects/llama-2-13b-chat'
+          ]
+          roles=['RESEARCHER','DOMAIN_SPECIALIST','ANALYST','MODELER','THEORIST','EVIDENCE_AUDITOR','SOURCE_AUDITOR','COUNTEREXAMPLE_HUNTER','FALSIFIER','RED_TEAM','REPLICATOR','VERIFIER','FORMAL_AUDITOR','UNCERTAINTY_ANALYST','FAILURE_ANALYST','INVENTOR','SYSTEMS_SYNTHESIZER','CAPABILITY_EVALUATOR','CONTRADICTION_AUDITOR','OMEGA_JUDGE']
+          result={'schema':'cerebron-residual-recovery-v1','farm_id':fid,'repo':repo,'planned_calls':20,'attempted_roles':0,'successful_roles':0,'failed_roles':0,'provider_attempts':0,'outputs':[]}
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          if cp.returncode!=0:
+            result['error']='clone:'+((cp.stderr or cp.stdout)[-1000:])
+          else:
+            wp=pathlib.Path('farm/worker/farm_worker.py')
+            if not wp.exists(): result['error']='worker_missing'
+            else:
+              spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+              def one(i):
+                role=roles[i]; prompt=f'CEREBRON OMEGA RESIDUAL RECOVERY\nFARM {fid} {domain}\nROLE {role}\nGive one risk, one required evidence item, and one unknown. Separate ESTABLISHED / HYPOTHESIS / UNKNOWN.'
+                tries=[]
+                ordered=spaces[i%len(spaces):]+spaces[:i%len(spaces)]
+                for sp in ordered:
+                  try:
+                    ok,text,meta=fw.invoke(sp,prompt)
+                    tries.append({'space':sp,'ok':bool(ok and str(text).strip()),'meta':meta})
+                    if ok and str(text).strip():
+                      return {'index':i+1,'role':role,'success':True,'space':sp,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'tries':tries}
+                    err=str((meta or {}).get('error','')).lower()
+                    if 'quota' in err or 'no compatible endpoint' in err or 'paused' in err or 'runtime' in err:
+                      continue
+                  except Exception as e:
+                    tries.append({'space':sp,'ok':False,'error':repr(e)})
+                return {'index':i+1,'role':role,'success':False,'tries':tries}
+              with ThreadPoolExecutor(max_workers=2) as ex:
+                futs=[ex.submit(one,i) for i in range(20)]
+                for fut in as_completed(futs):
+                  row=fut.result(); result['attempted_roles']+=1; result['provider_attempts']+=len(row.get('tries',[])); result['outputs'].append(row)
+                  if row['success']: result['successful_roles']+=1
+                  else: result['failed_roles']+=1
+              result['outputs'].sort(key=lambda x:x['index'])
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({k:result.get(k) for k in ['farm_id','attempted_roles','successful_roles','failed_roles','provider_attempts']},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: residual-recovery-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: recover-zero-success-farms
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: residual-recovery-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          rows.sort(key=lambda r:r.get('farm_id',999))
+          out={'schema':'cerebron-residual-recovery-accounting-v1','farm_rows':len(rows),'planned_roles':sum(r.get('planned_calls',0) for r in rows),'attempted_roles':sum(r.get('attempted_roles',0) for r in rows),'successful_roles':sum(r.get('successful_roles',0) for r in rows),'failed_roles':sum(r.get('failed_roles',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'per_farm':[{'farm_id':r.get('farm_id'),'successful':r.get('successful_roles',0),'failed':r.get('failed_roles',0),'provider_attempts':r.get('provider_attempts',0)} for r in rows]}
+          Path('residual-recovery-accounting.json').write_text(json.dumps(out,indent=2)+'\n'); print(json.dumps(out,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: residual-recovery-accounting
+          path: residual-recovery-accounting.json
+          retention-days: 14
