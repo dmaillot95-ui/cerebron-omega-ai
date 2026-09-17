@@ -1,4 +1,4 @@
-name: CEREBRON Collatz 47-Farm Specialized Compute
+name: CEREBRON Collatz 48-Farm Specialized Compute
 
 on:
   workflow_dispatch:
@@ -7,12 +7,13 @@ on:
       - '.github/workflows/collatz-47farm-specialized-compute.yml'
       - 'tools/collatz_specialized_compute.py'
       - 'config/farms.json'
+      - 'config/scientific_sources.json'
 
 permissions:
   contents: read
 
 concurrency:
-  group: cerebron-collatz-47farm-specialized-compute
+  group: cerebron-collatz-48farm-specialized-compute
   cancel-in-progress: false
 
 jobs:
@@ -97,9 +98,9 @@ jobs:
           by={}
           for r in rows: by[r.get('worker')]=by.get(r.get('worker'),0)+1
           summary={
-            'schema':'cerebron-47farm-specialized-compute-v1',
+            'schema':'cerebron-48farm-specialized-compute-v1',
             'farms_received':len(rows),
-            'expected_farms':47,
+            'expected_farms':48,
             'worker_distribution':by,
             'claim_note':'All outputs are finite symbolic/bounded computations unless independently promoted by proof audit.',
             'results':[{'farm_id':r.get('farm_id'),'worker':r.get('worker'),'claim_level':r.get('claim_level'),'sha256':r.get('sha256'),'cycles_count':r.get('cycles_count'),'nodes':r.get('nodes'),'edges':r.get('edges')} for r in sorted(rows,key=lambda x:x.get('farm_id',0))]
