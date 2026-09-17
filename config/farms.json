@@ -1,5 +1,5 @@
 {
-  "version": "1.4",
+  "version": "1.5",
   "owner": "dmaillot95-ui",
   "farms": [
     {"id":1,"repo":"cerebron-collatz-theory-farm","domain":"collatz-theory"},
@@ -49,6 +49,7 @@
     {"id":45,"repo":"cerebron-farm-45-agent-runtime","domain":"agent-runtime"},
     {"id":46,"repo":"cerebron-farm-46-global-video-research","domain":"global-video-research"},
     {"id":47,"repo":"cerebron-farm-47-global-country-web-intelligence","domain":"global-country-web-intelligence"},
-    {"id":48,"repo":"cerebron-farm-48-global-scientific-literature-intelligence","domain":"global-scientific-literature-intelligence"}
+    {"id":48,"repo":"cerebron-farm-48-global-scientific-literature-intelligence","domain":"global-scientific-literature-intelligence"},
+    {"id":49,"repo":"cerebron-farm-49-engineering-cad-digital-twin","domain":"engineering-cad-digital-twin"}
   ]
 }
