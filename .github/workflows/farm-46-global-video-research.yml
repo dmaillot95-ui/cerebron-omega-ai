@@ -7,6 +7,9 @@ on:
         description: Video research query
         required: false
         default: "Collatz conjecture mathematics"
+  push:
+    paths:
+      - '.github/workflows/farm-46-global-video-research.yml'
   schedule:
     - cron: '43 * * * *'
 
@@ -30,18 +33,10 @@ jobs:
         run: |
           mkdir -p out
           python - <<'PY'
-          import os,json,time,datetime,subprocess,re
+          import os,json,time,datetime,subprocess
           from ddgs import DDGS
           q=os.environ.get('INPUT_QUERY') or 'Collatz conjecture mathematics'
-          site_queries=[
-            q+' site:youtube.com/watch',
-            q+' site:youtu.be',
-            q+' site:vimeo.com',
-            q+' site:dailymotion.com',
-            q+' site:bilibili.com/video',
-            q+' site:rutube.ru/video',
-            q+' site:vkvideo.ru'
-          ]
+          site_queries=[q+' site:youtube.com/watch',q+' site:youtu.be',q+' site:vimeo.com',q+' site:dailymotion.com',q+' site:bilibili.com/video',q+' site:rutube.ru/video',q+' site:vkvideo.ru']
           rows=[]; seen=set()
           with DDGS() as d:
             for qq in site_queries:
@@ -54,7 +49,6 @@ jobs:
               except Exception as e:
                 rows.append({'query':qq,'error':repr(e)})
               time.sleep(.35)
-          # Best-effort metadata for a small YouTube subset; failure never becomes evidence.
           checked=0
           for row in rows:
             u=row.get('url','')
@@ -67,8 +61,7 @@ jobs:
                 j=json.loads(p.stdout)
                 row['metadata']={k:j.get(k) for k in ['id','title','channel','channel_id','upload_date','duration','view_count','webpage_url']}
                 row['metadata_status']='OK'
-              else:
-                row['metadata_status']='FAILED'
+              else: row['metadata_status']='FAILED'
             except Exception as e:
               row['metadata_status']='FAILED'; row['metadata_error']=repr(e)
           out={'schema':'cerebron-farm46-global-video-v1','farm_id':46,'domain':'global-video-research','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'query':q,'result_count':sum(1 for x in rows if x.get('url')),'results':rows,'rules':['VIDEO != EVIDENCE','TRANSCRIPT != VERIFIED CLAIM','Cross-check claims against primary sources','Record platform/date/channel when available','No copyright rehosting; store metadata and citations only']}
