@@ -1,0 +1,132 @@
+name: CEREBRON Collatz Japan China Free Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-japan-china-free-benchmark.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          print('matrix='+json.dumps({'include':d['farms']},separators=(',',':')))
+          PY
+
+  international-benchmark:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Query Japanese and Chinese public AI spaces
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          git clone --depth 1 https://github.com/dmaillot95-ui/cerebron-collatz-theory-farm.git worker-src >/dev/null 2>&1
+          python - <<'PY'
+          import os,json,pathlib,importlib.util,time,hashlib
+          fid=int(os.environ['FARM_ID']); domain=os.environ['FARM_DOMAIN']
+          wp=pathlib.Path('worker-src/worker/farm_worker.py')
+          result={'schema':'cerebron-international-free-v1','farm_id':fid,'domain':domain,'successful_outputs':0,'provider_attempts':0,'outputs':[]}
+          if not wp.exists():
+            result['error']='worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location('fw',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+          targets=[
+            {'region':'JAPAN','space':'cyberagent/CALM3-22B-Chat-Demo','language_hint':'日本語で考えてもよいですが、最終回答は英語で簡潔にしてください。'},
+            {'region':'CHINA_ASIA','space':'Qwen/Qwen3-Demo','language_hint':'可以用中文思考，但最终请用简洁的英文回答。'}
+          ]
+          for t in targets:
+            prompt=(f'CEREBRON OMEGA INTERNATIONAL INDEPENDENT REVIEW — FARM {fid} {domain}\n'
+                    'Current Collatz checkpoint: H-COUPLING + H-LOG + SMALL-h exception budget + LOWER GAP. '
+                    'Do not claim Collatz solved. REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF; FINITE TEST!=UNIVERSAL PROOF. '
+                    'Seek one genuinely useful derivation, counterexample, audit, invariant, or obstruction. '
+                    'Prefer symbolic reduction before multiplication. Explicitly classify ESTABLISHED / DERIVED / REJECTED / OPEN / NEXTLOCK. '
+                    + t['language_hint'])
+            row={'region':t['region'],'space':t['space'],'success':False}
+            t0=time.time()
+            try:
+              ok,text,meta=fw.invoke(t['space'],prompt)
+              result['provider_attempts']+=1
+              row['success']=bool(ok and str(text).strip())
+              row['meta']=meta
+              row['elapsed_seconds']=round(time.time()-t0,3)
+              if row['success']:
+                s=str(text)
+                row['response']=s
+                row['sha256']=hashlib.sha256(s.encode()).hexdigest()
+                result['successful_outputs']+=1
+            except Exception as e:
+              result['provider_attempts']+=1
+              row['error']=repr(e)
+              row['elapsed_seconds']=round(time.time()-t0,3)
+            result['outputs'].append(row)
+            time.sleep(0.35)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'success':result['successful_outputs'],'attempts':result['provider_attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: international-free-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: international-benchmark
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: international-free-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          by={}
+          for r in rows:
+            for o in r.get('outputs',[]):
+              z=by.setdefault(o.get('region','?'),{'attempts':0,'success':0,'farms_with_success':0})
+              z['attempts']+=1
+              z['success']+=int(bool(o.get('success')))
+          for region in list(by):
+            by[region]['farms_with_success']=sum(any(o.get('region')==region and o.get('success') for o in r.get('outputs',[])) for r in rows)
+          s={'schema':'cerebron-international-free-accounting-v1','farms_received':len(rows),'logical_requests':sum(len(r.get('outputs',[])) for r in rows),'successful_outputs':sum(r.get('successful_outputs',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'by_region':by,'note':'Public Space availability can change; successful output is not mathematical validation.'}
+          Path('international-free-accounting.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(s,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: international-free-accounting
+          path: international-free-accounting.json
+          retention-days: 14
