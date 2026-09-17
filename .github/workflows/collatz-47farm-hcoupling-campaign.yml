@@ -1,0 +1,142 @@
+name: CEREBRON Collatz 47-Farm H-Coupling Campaign
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-47farm-hcoupling-campaign.yml'
+      - 'config/farms.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerebron-collatz-47farm-hcoupling
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain']} for f in d['farms']]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Focused symbolic Collatz work
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
+          fronts=[
+            ('H_COUPLING','Exploit the exact coupling 2^(u_next+2r_next) h_next - 3^(u_next+r) h = 3^u_next - 2^u_next. Seek a genuinely new universal restriction, monotonic quantity, congruence obstruction, or descent. Prove every algebraic step.'),
+            ('SMALL_H','Build a rigorous SMALL-h exception budget. Use h odd, h>=5, h≡5 mod6, and the known mod-9 classes. Determine what finite/structured families of small h can persist under repeated coupling, without assuming large u implies large h.'),
+            ('P_ADIC','Develop collective 3-adic restrictions from h≡-4^(-r) mod 3^u and ord_{3^u}(4)=3^(u-1). Seek constraints across successive blocks, not isolated congruences.'),
+            ('LOWER_GAP','Seek an independent Diophantine lower bound for delta=A ln2-N ln3 compatible with cycle words. Do not merely restate generic irrationality; connect any bound to the H variables or block structure.'),
+            ('H_LOG','Use delta=sum log((1+(3^r h)^-1)/(1+(4^r h)^-1)). Derive useful upper/lower inequalities with explicit domains and check whether they couple to small-h counts.'),
+            ('COUNTEREXAMPLE','Act as falsifier. Try to construct symbolic/local parameter families satisfying all currently listed congruences and coupling equations. Any candidate obstruction must survive these tests.'),
+            ('SYNTHESIS','Search for a bridge lemma combining at least two of H_COUPLING, SMALL_H, P_ADIC, LOWER_GAP, H_LOG. Reject equivalences/rephrasings as progress.'),
+            ('FORMAL_AUDIT','Audit the checkpoint identities for hidden assumptions, invalid division, wrong quantifiers, or false independence. Return only corrections or certified lemmas with proof.')
+          ]
+          front=fronts[(fid-1)%len(fronts)]
+          roles=['DERIVE','FALSIFY','REPLICATE','SYNTHESIZE']
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          base='''CEREBRON OMEGA — COLLATZ CHECKPOINT 17 SEP 2026\nDo NOT claim Collatz solved. COMPUTATION != PROOF. FINITE TEST != UNIVERSAL PROOF. CLAIM <= EVIDENCE. SYMBOLIC REDUCTION BEFORE MULTIPLICATION.\nMap T(x)=(3x+1)/2^v2(3x+1) on positive odds. For a hypothetical odd cycle, blocks are 1^(u_j) followed by r_j valuations equal 2 in the compressed run notation already derived. Established identities:\n3^u t - 1 = 4^r h; 2^(u_next) t_next - 1 = 3^r h; h odd, h≡5 mod6, h>=5.\nState transition x_next=2*3^r*h+1.\nH-coupling: 3^(u_next)(3^r h+1)=2^(u_next)(4^(r_next)h_next+1), equivalently 2^(u_next+2r_next)h_next-3^(u_next+r)h=3^(u_next)-2^(u_next).\n3-adic: h≡-4^(-r) mod 3^u and ord_(3^u)(4)=3^(u-1). Large u does NOT by itself imply large h.\nH-log: delta=sum_j log[(1+(3^r_j h_j)^-1)/(1+(4^r_j h_j)^-1)]>0.\nKnown upper-gap work is not a closure. Need a universal obstruction for arbitrary N or a clearly proved partial lemma.\n'''
+          result={'schema':'cerebron-collatz-hcoupling-campaign-v1','farm_id':fid,'domain':domain,'front':front[0],'outputs':[],'successful':0,'attempts':0}
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          def one(i):
+            role=roles[i]
+            prompt=base+f'\nFARM {fid} DOMAIN {domain}\nFRONT {front[0]}: {front[1]}\nROLE {role}.\nReturn exactly these headings: ESTABLISHED; DERIVATION; FALSIFICATION; NEW_LEMMA; GAP; NEXT_LOCK. No motivational prose.'
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt)
+                attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  s=str(text)
+                  return {'role':role,'success':True,'space':space,'sha256':hashlib.sha256(s.encode()).hexdigest(),'response':s,'provider_attempts':len(attempts),'attempts':attempts}
+              except Exception as e:
+                attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
+
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,i) for i in range(len(roles))]
+            for fut in as_completed(futs):
+              row=fut.result(); result['outputs'].append(row); result['successful']+=int(row['success']); result['attempts']+=row['provider_attempts']
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'front':front[0],'successful':result['successful'],'attempts':result['attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: collatz-hcoupling-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: farm
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: collatz-hcoupling-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          by={}
+          for r in rows:
+            f=r.get('front','UNKNOWN'); by.setdefault(f,{'farms':0,'successful_outputs':0,'attempts':0}); by[f]['farms']+=1; by[f]['successful_outputs']+=r.get('successful',0); by[f]['attempts']+=r.get('attempts',0)
+          out={'schema':'cerebron-collatz-hcoupling-accounting-v1','farms_received':len(rows),'expected_farms':47,'logical_outputs':47*4,'successful_outputs':sum(r.get('successful',0) for r in rows),'provider_attempts':sum(r.get('attempts',0) for r in rows),'by_front':by,'claim_note':'Non-empty external responses are candidates only; no response is a proof until independently audited.'}
+          Path('collatz-hcoupling-accounting.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: collatz-hcoupling-accounting
+          path: collatz-hcoupling-accounting.json
+          retention-days: 14
