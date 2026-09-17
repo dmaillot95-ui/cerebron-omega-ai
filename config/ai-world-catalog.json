@@ -1,0 +1,37 @@
+{
+  "schema": "cerebron-ai-world-catalog-v1",
+  "purpose": "Living registry of AI families worth testing. Not a claim to enumerate every AI system in existence.",
+  "rules": [
+    "REALITY > COHERENCE",
+    "CLAIM <= EVIDENCE",
+    "A listed model is not an available endpoint unless access.status says TESTABLE_NOW",
+    "No paid API is called unless explicitly enabled",
+    "Model output is evidence only after independent verification"
+  ],
+  "math_priority": [
+    {"family":"Mistral","model":"mistralai/Mathstral-7B-v0.1","origin":"France/EU","specialty":"math-science","access":{"status":"MODEL_AVAILABLE_ENDPOINT_UNAVAILABLE","channel":"Hugging Face model","cost_policy":"open weights; no live provider detected"}},
+    {"family":"Mistral","model":"mistralai/Magistral-Small-2506","origin":"France/EU","specialty":"reasoning","access":{"status":"MODEL_AVAILABLE","channel":"Hugging Face/open weights or Mistral API","cost_policy":"do not call paid API without explicit enablement"}},
+    {"family":"Mistral","model":"hysts/mistral-7b","origin":"France/EU","specialty":"general baseline","access":{"status":"TESTABLE_NOW","channel":"public Hugging Face Space","cost_policy":"public Space; best-effort only"}},
+    {"family":"Qwen","model":"Qwen/Qwen3-Demo","origin":"China","specialty":"general-reasoning","access":{"status":"TESTABLE_NOW","channel":"public Hugging Face Space","cost_policy":"public Space; firewall required"}},
+    {"family":"DeepSeek","model":"DeepSeek family","origin":"China","specialty":"reasoning-math-code","access":{"status":"DISCOVER_AND_PROBE","channel":"official/open model endpoints","cost_policy":"probe free/public endpoints only"}},
+    {"family":"Gemma","model":"Google Gemma family","origin":"USA","specialty":"general-reasoning","access":{"status":"TESTABLE_NOW_OR_DISCOVER","channel":"Hugging Face Spaces/models","cost_policy":"free/public endpoint preferred"}},
+    {"family":"Llama","model":"Meta Llama family","origin":"USA","specialty":"general-reasoning","access":{"status":"TESTABLE_NOW","channel":"existing public Hugging Face Spaces","cost_policy":"free/public endpoint preferred"}},
+    {"family":"GLM","model":"Z.ai GLM family","origin":"China","specialty":"reasoning-agentic","access":{"status":"DISCOVER_AND_PROBE","channel":"open models/API","cost_policy":"free/public endpoint preferred"}},
+    {"family":"OLMo","model":"Ai2 OLMo family","origin":"USA","specialty":"open research/reasoning","access":{"status":"DISCOVER_AND_PROBE","channel":"Hugging Face","cost_policy":"open models"}},
+    {"family":"Granite","model":"IBM Granite family","origin":"USA","specialty":"enterprise-code-reasoning","access":{"status":"DISCOVER_AND_PROBE","channel":"Hugging Face/open models","cost_policy":"open/public preferred"}},
+    {"family":"Nemotron","model":"NVIDIA Nemotron family","origin":"USA","specialty":"reasoning-math-code","access":{"status":"DISCOVER_AND_PROBE","channel":"Hugging Face/open models","cost_policy":"open/public preferred"}}
+  ],
+  "major_global_families": [
+    {"region":"France/EU","families":["Mistral","Mixtral","Ministral","Magistral","Mathstral","Devstral","Codestral","Pixtral","Voxtral"]},
+    {"region":"China","families":["Qwen","DeepSeek","GLM/Z.ai","Kimi/Moonshot","MiniMax","Yi/01.AI","Baichuan","InternLM","ERNIE","Hunyuan","Doubao","StepFun"]},
+    {"region":"USA","families":["OpenAI GPT","Anthropic Claude","Google Gemini/Gemma","Meta Llama","Microsoft Phi","xAI Grok","Cohere Command","NVIDIA Nemotron","IBM Granite","Ai2 OLMo","Databricks DBRX"]},
+    {"region":"Korea/Japan/Asia-Pacific","families":["NAVER HyperCLOVA X","LG EXAONE","Kakao Kanana","Rakuten AI","NTT tsuzumi","Sakana AI systems"]},
+    {"region":"Open/community","families":["Falcon","BLOOM","StableLM","OpenChat","Nous Hermes","Dolphin","StarCoder","CodeLlama","DeepCoder variants"]}
+  ],
+  "evaluation_axes": ["math correctness","proof discipline","counterexample ability","formalism","coding","web research","multilingual","vision","audio","video","latency","availability","cost","rate-limit stability"],
+  "routing": {
+    "collatz_math": ["Mathstral","Magistral","Qwen","DeepSeek","GLM","Gemma","Llama","OLMo","Nemotron"],
+    "web_research": "FARM-08",
+    "video_research": "FARM-46"
+  }
+}
