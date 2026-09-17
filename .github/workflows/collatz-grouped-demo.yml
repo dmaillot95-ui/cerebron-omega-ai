@@ -1,0 +1,83 @@
+name: CEREBRON Collatz Grouped Response Demo
+
+on:
+  push:
+    paths:
+      - '.github/workflows/collatz-grouped-demo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependency
+        run: pip install --quiet hf-gradio
+      - name: Collect real Collatz role outputs
+        shell: bash
+        run: |
+          mkdir -p out
+          git clone --depth 1 https://github.com/dmaillot95-ui/cerebron-collatz-theory-farm.git farm
+          python - <<'PY'
+          import json, pathlib, importlib.util
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          spec=importlib.util.spec_from_file_location('fw',wp)
+          fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          roles=[
+            'NUMBER_THEORIST','DYNAMICAL_SYSTEMS_ANALYST','DIOPHANTINE_ANALYST','P_ADIC_ANALYST',
+            'CYCLE_OBSTRUCTION_ANALYST','DIVERGENCE_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER',
+            'FORMAL_AUDITOR','INVARIANT_HUNTER','LEMMA_INVENTOR','GAP_ANALYST'
+          ]
+          spaces=[
+            'huggingface-projects/llama-3.2-3B-Instruct',
+            'huggingface-projects/gemma-2-9b-it',
+            'huggingface-projects/llama-2-7b-chat',
+            'huggingface-projects/llama-2-13b-chat'
+          ]
+
+          def one(role):
+            prompt=(
+              'CEREBRON OMEGA — COLLATZ GROUPED RESPONSE DEMO\n'
+              f'ROLE: {role}\n'
+              'Study the odd-only Collatz map T(x)=(3x+1)/2^v2(3x+1). '
+              'Contribute one rigorous, concise advance toward excluding nontrivial cycles or divergence for arbitrary odd period N. '
+              'Use exact cycle identities, valuation/parity words, minimum-element arguments, modular or Diophantine constraints where appropriate. '
+              'Return exactly five short sections: ESTABLISHED; DERIVATION; GAP; FALSIFICATION; NEXT LEMMA. '
+              'Do not claim Collatz is solved.'
+            )
+            attempts=[]
+            for s in spaces:
+              try:
+                ok,text,meta=fw.invoke(s,prompt)
+                attempts.append({'space':s,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  return {'role':role,'success':True,'space':s,'text':str(text)[:12000],'attempts':attempts}
+              except Exception as e:
+                attempts.append({'space':s,'ok':False,'error':repr(e)})
+            return {'role':role,'success':False,'attempts':attempts}
+
+          rows=[]
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,r) for r in roles]
+            for f in as_completed(futs): rows.append(f.result())
+          rows.sort(key=lambda x: roles.index(x['role']))
+          out={'schema':'collatz-grouped-demo-v1','requested_roles':len(roles),'successful_roles':sum(r['success'] for r in rows),'rows':rows}
+          pathlib.Path('out/raw-responses.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          pathlib.Path('out/raw-responses.md').write_text('\n\n'.join([f"## {r['role']}\n\n{r.get('text','NO RESPONSE')}" for r in rows]),encoding='utf-8')
+          print(json.dumps({'requested':len(roles),'successful':out['successful_roles']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: collatz-grouped-demo-raw
+          path: out/
+          retention-days: 14
