@@ -1,0 +1,36 @@
+{
+  "schema": "cerebron-ai-provider-catalog-v1",
+  "updated": "2026-09-17",
+  "goal": "Increase successful external AI responses beyond the measured 110/900 baseline without paid credits or quota evasion.",
+  "policy": {
+    "zero_cost_only": true,
+    "respect_terms_and_rate_limits": true,
+    "no_multi_account_quota_evasion": true,
+    "claim_success_only_after_real_response": true,
+    "quality_firewall_required": true
+  },
+  "providers": [
+    {"id":"hf_public_spaces","region":"global","status":"FREE_LIMITED","auth":"often-none","notes":"Public Gradio Spaces; variable uptime/capacity. Existing CEREBRON path."},
+    {"id":"openrouter_free","region":"global","status":"FREE_CONFIRMED","auth":"api-key","endpoint":"https://openrouter.ai/api/v1/chat/completions","notes":"Free plan/free model router; current published free-plan rate limit is limited."},
+    {"id":"groq_free","region":"US/global","status":"FREE_CONFIRMED","auth":"api-key","endpoint":"https://api.groq.com/openai/v1/chat/completions","notes":"Free tier with model-specific RPM/RPD/TPM limits."},
+    {"id":"mistral_free","region":"France/EU","status":"FREE_CONFIRMED","auth":"api-key","endpoint":"https://api.mistral.ai/v1/chat/completions","notes":"Free mode intended for evaluation/prototyping; lowest limits."},
+    {"id":"gemini_free","region":"global","status":"FREE_CONFIRMED","auth":"api-key","notes":"Eligible Gemini Developer API models have a free tier; model-specific limits apply."},
+    {"id":"cloudflare_workers_ai_free","region":"global","status":"FREE_CONFIRMED","auth":"account-token","notes":"10,000 Neurons/day free allocation; some high-cost models excluded from Free plan."},
+    {"id":"cerebras_free","region":"US/global","status":"FREE_CONFIRMED","auth":"api-key","endpoint":"https://api.cerebras.ai/v1/chat/completions","notes":"Free tier with model-specific RPM/RPD/TPM limits."},
+    {"id":"cohere_trial","region":"Canada/global","status":"FREE_LIMITED","auth":"trial-api-key","notes":"Free trial/evaluation key; chat currently limited and 1,000 calls/month overall trial cap."},
+    {"id":"nvidia_nim_catalog","region":"global","status":"CANDIDATE_ACCOUNT_REQUIRED","auth":"developer-account","notes":"Developer Program provides free access to NIM catalog/self-hosting; hosted API quota must be verified before activation."},
+    {"id":"together_ai","region":"global","status":"PAID_OR_EXCLUDED","notes":"No general free trial; minimum credit purchase required for platform/API access."},
+    {"id":"sambanova_cloud","region":"global","status":"PAID_OR_EXCLUDED","notes":"Current Free plan page requires payment method and purchased credits for requests."},
+    {"id":"github_models","region":"global","status":"RETIRED","notes":"Retired July 30, 2026."}
+  ],
+  "routing": {
+    "stage_0":"health probe each enabled provider",
+    "stage_1":"send each role to one healthy provider only",
+    "stage_2":"fallback to next healthy provider only after technical failure",
+    "stage_3":"second independent model only for promising outputs",
+    "stage_4":"counterexample + symbolic check + formal audit",
+    "stop_condition":"network success budget reached",
+    "target_successes_per_cycle":150,
+    "baseline_successes_observed":110
+  }
+}
