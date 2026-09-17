@@ -1,0 +1,90 @@
+name: CEREBRON FARM-47 AI World Discovery
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/farm-47-ai-world-discovery.yml'
+      - 'config/ai-world-catalog.json'
+  schedule:
+    - cron: '11 */6 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet huggingface_hub requests
+      - name: Discover public model families and classify access
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import json,datetime,time
+          from pathlib import Path
+          from huggingface_hub import HfApi
+
+          cat=json.load(open('config/ai-world-catalog.json'))
+          api=HfApi()
+          families=[]
+          for g in cat.get('major_global_families',[]):
+            for fam in g.get('families',[]):
+              families.append({'family':fam,'region':g.get('region')})
+
+          rows=[]
+          for item in families:
+            fam=item['family']
+            rec={'family':fam,'region':item['region'],'model_exists':False,'endpoint_callable':'UNTESTED','examples':[]}
+            try:
+              # Discovery only: public Hub metadata, not paid inference.
+              models=list(api.list_models(search=fam,limit=3,sort='downloads'))
+              if models:
+                rec['model_exists']=True
+                rec['examples']=[{'id':m.id,'downloads':getattr(m,'downloads',None),'likes':getattr(m,'likes',None),'pipeline_tag':getattr(m,'pipeline_tag',None)} for m in models]
+              else:
+                rec['endpoint_callable']='NO_PUBLIC_HUB_MATCH'
+            except Exception as e:
+              rec['discovery_error']=repr(e)
+              rec['endpoint_callable']='DISCOVERY_FAILED'
+            rows.append(rec)
+            time.sleep(.05)
+
+          # Explicit known/test candidates from catalog. Endpoint status is inherited only when declared there.
+          declared=[]
+          for m in cat.get('math_priority',[]):
+            a=m.get('access',{})
+            declared.append({'family':m.get('family'),'model':m.get('model'),'declared_status':a.get('status'),'channel':a.get('channel'),'cost_policy':a.get('cost_policy')})
+
+          out={
+            'schema':'cerebron-farm47-ai-world-discovery-v1',
+            'farm_id':47,
+            'canonical':False,
+            'role':'auxiliary worldwide AI discovery and endpoint registry',
+            'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            'families_scanned':len(rows),
+            'families_with_public_hub_matches':sum(1 for r in rows if r['model_exists']),
+            'discovery':rows,
+            'declared_test_candidates':declared,
+            'rules':[
+              'MODEL_EXISTS != ENDPOINT_CALLABLE',
+              'ENDPOINT_CALLABLE != FREE_UNLIMITED',
+              'No paid API calls',
+              'Discovery metadata is not a benchmark result',
+              'Only an executed successful inference may set endpoint_callable=true in a later probe stage'
+            ]
+          }
+          Path('out/ai-world-discovery.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'families_scanned':out['families_scanned'],'hub_matches':out['families_with_public_hub_matches']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: farm-47-ai-world-discovery
+          path: out/ai-world-discovery.json
+          retention-days: 14
