@@ -1,0 +1,114 @@
+name: CEREBRON Collatz 47-Farm Specialized Compute
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-47farm-specialized-compute.yml'
+      - 'tools/collatz_specialized_compute.py'
+      - 'config/farms.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerebron-collatz-47farm-specialized-compute
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          workers=['sympy','modular','z3','graph']
+          inc=[]
+          for f in d['farms']:
+              wid=workers[(int(f['id'])-1)%len(workers)]
+              inc.append({'id':f['id'],'repo':f['repo'],'domain':f['domain'],'worker':wid})
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  compute:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install math engines
+        run: pip install --quiet sympy z3-solver networkx
+      - name: Execute specialized worker
+        shell: bash
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+          WORKER: ${{ matrix.worker }}
+        run: |
+          mkdir -p out
+          python tools/collatz_specialized_compute.py --worker "$WORKER" --out "out/result-${FARM_ID}.json"
+          python - <<'PY'
+          import json,os,pathlib,hashlib
+          p=pathlib.Path(f"out/result-{os.environ['FARM_ID']}.json")
+          d=json.loads(p.read_text())
+          d.update({'farm_id':int(os.environ['FARM_ID']),'farm_repo':os.environ['FARM_REPO'],'farm_domain':os.environ['FARM_DOMAIN'],'worker':os.environ['WORKER']})
+          raw=json.dumps(d,sort_keys=True).encode()
+          d['sha256']=hashlib.sha256(raw).hexdigest()
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: specialized-compute-farm-${{ matrix.id }}
+          path: out/result-${{ matrix.id }}.json
+          retention-days: 14
+
+  accounting:
+    needs: compute
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: specialized-compute-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result-*.json'):
+              try: rows.append(json.loads(p.read_text()))
+              except Exception: pass
+          by={}
+          for r in rows: by[r.get('worker')]=by.get(r.get('worker'),0)+1
+          summary={
+            'schema':'cerebron-47farm-specialized-compute-v1',
+            'farms_received':len(rows),
+            'expected_farms':47,
+            'worker_distribution':by,
+            'claim_note':'All outputs are finite symbolic/bounded computations unless independently promoted by proof audit.',
+            'results':[{'farm_id':r.get('farm_id'),'worker':r.get('worker'),'claim_level':r.get('claim_level'),'sha256':r.get('sha256'),'cycles_count':r.get('cycles_count'),'nodes':r.get('nodes'),'edges':r.get('edges')} for r in sorted(rows,key=lambda x:x.get('farm_id',0))]
+          }
+          Path('specialized-compute-accounting.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(json.dumps(summary,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: specialized-compute-accounting
+          path: specialized-compute-accounting.json
+          retention-days: 14
