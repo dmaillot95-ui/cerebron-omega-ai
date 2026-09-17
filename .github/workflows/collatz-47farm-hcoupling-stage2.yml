@@ -1,0 +1,138 @@
+name: CEREBRON Collatz 47-Farm H-Coupling Stage 2
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/collatz-47farm-hcoupling-stage2.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerebron-collatz-hcoupling-stage2
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d=json.load(open('config/farms.json'))
+          # Stage 2 keeps the full farm network but assigns only five mathematically precise tasks.
+          inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain'],'task':(f['id']-1)%5} for f in d['farms']]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: H-coupling cyclic compatibility stage 2
+        env:
+          FARM_ID: ${{ matrix.id }}
+          FARM_REPO: ${{ matrix.repo }}
+          FARM_DOMAIN: ${{ matrix.domain }}
+          TASK_ID: ${{ matrix.task }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,hashlib,time
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']; task=int(os.environ['TASK_ID'])
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          task_texts=[
+            'TASK A: Starting ONLY from 2^(u_next+2*r_next) h_next - 3^(u_next+r) h = 3^u_next-2^u_next, derive all valid consequences modulo 3^u_next and modulo 2^u_next. Do not divide by nonunits. State gcd assumptions explicitly.',
+            'TASK B: Combine h == -4^(-r) mod 3^u with the exact H-coupling equation. Determine whether two consecutive blocks force a nontrivial compatibility condition linking (u,r) and (u_next,r_next). If not, prove why the attempted condition is equivalent/redundant.',
+            'TASK C: Study the cyclic composition of the exact block relation around m blocks. Seek an invariant, determinant/product identity, or telescoping obstruction that must hold for a closed cycle. No numerical sampling as proof.',
+            'TASK D: SMALL-h exception budget. For h in {5,11,17,23,29,35,41,47,53,59}, use only exact congruences to characterize possible u,r residue classes and determine whether repeated small-h blocks can form a cycle. Distinguish finite elimination from universal proof.',
+            'TASK E: Connect any rigorously derived lower bound on h or residue-class sparsity to H-LOG delta=sum log((1+(3^r h)^-1)/(1+(4^r h)^-1)). Determine exactly what additional lemma would be needed for a contradiction. Do not assume such lemma.'
+          ]
+          roles=['DERIVER','FALSIFIER','REPLICATOR']
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          result={'schema':'cerebron-collatz-hcoupling-stage2-v1','farm_id':fid,'repo':repo,'domain':domain,'task_id':task,'outputs':[],'successful_roles':0,'provider_attempts':0}
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+
+          base='''CEREBRON OMEGA — COLLATZ H-COUPLING STAGE 2\nRULES: REALITY>COHERENCE; CLAIM<=EVIDENCE; COMPUTATION!=PROOF; NO CLAIM COLLATZ SOLVED.\nESTABLISHED EXACT RELATIONS:\n(1) 3^u h - 1 = 4^r h_prev-style relation is NOT assumed unless derived; use only the explicit equations below.\n(2) H-COUPLING: 3^(u_next)*(3^r*h+1)=2^(u_next)*(4^r_next*h_next+1).\nEquivalent: 2^(u_next+2*r_next) h_next - 3^(u_next+r) h = 3^u_next-2^u_next.\n(3) Local 3-adic condition when valid for a block: h == -4^(-r) (mod 3^u).\n(4) h odd and h == 5 (mod 6).\n(5) H-LOG identity on a closed cycle: delta=sum_j log((1+(3^r_j h_j)^-1)/(1+(4^r_j h_j)^-1)) >0.\nReturn exactly sections: ESTABLISHED / DERIVATION / FALSIFICATION / NEW_LEMMA_STATUS / NEXT_LOCK.\nEvery new lemma must list quantifiers and modulus/gcd conditions.\n'''
+          def one(i):
+            role=roles[i]
+            prompt=base+f'\nFARM {fid} DOMAIN {domain}\nROLE {role}\n'+task_texts[task]
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt)
+                attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  s=str(text)
+                  return {'role':role,'success':True,'space':space,'sha256':hashlib.sha256(s.encode()).hexdigest(),'response':s,'provider_attempts':len(attempts)}
+              except Exception as e:
+                attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            for fut in as_completed([ex.submit(one,i) for i in range(len(roles))]):
+              row=fut.result(); result['outputs'].append(row); result['successful_roles']+=int(row.get('success',False)); result['provider_attempts']+=row.get('provider_attempts',0)
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'task':task,'success':result['successful_roles'],'attempts':result['provider_attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: collatz-hcoupling-stage2-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: farm
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: collatz-hcoupling-stage2-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          out={'schema':'cerebron-collatz-hcoupling-stage2-accounting-v1','farms_received':len(rows),'expected_farms':47,'logical_roles':47*3,'successful_external_responses':sum(r.get('successful_roles',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'by_task':{}}
+          for t in range(5):
+            rr=[r for r in rows if r.get('task_id')==t]
+            out['by_task'][str(t)]={'farms':len(rr),'responses':sum(r.get('successful_roles',0) for r in rr),'attempts':sum(r.get('provider_attempts',0) for r in rr)}
+          out['claim_note']='Counts external non-empty responses only. No scientific lemma is validated by accounting.'
+          Path('stage2-accounting.json').write_text(json.dumps(out,indent=2)+'\n')
+          print(json.dumps(out,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: collatz-hcoupling-stage2-accounting
+          path: stage2-accounting.json
+          retention-days: 14
