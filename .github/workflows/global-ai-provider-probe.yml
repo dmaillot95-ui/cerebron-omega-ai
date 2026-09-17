@@ -2,6 +2,10 @@ name: CEREBRON Global AI Provider Probe
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'tools/global_ai_router.py'
+      - '.github/workflows/global-ai-provider-probe.yml'
 
 permissions:
   contents: read
@@ -28,6 +32,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python tools/global_ai_router.py
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: global-ai-provider-probe
           path: out/global-ai-provider-probe.json
