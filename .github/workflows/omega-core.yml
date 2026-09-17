@@ -1,0 +1,34 @@
+name: CEREBRON Omega Core
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate registry
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('config/farms.json')
+          d=json.loads(p.read_text())
+          ids=[f['id'] for f in d['farms']]
+          assert ids==list(range(1,46)), ids
+          assert len({f['repo'] for f in d['farms']})==45
+          print('REGISTRY_OK', len(d['farms']))
+          PY
+      - name: Test router
+        run: |
+          python core/router.py "AI agent platform routing and audit" | tee omega-route.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: omega-core-route
+          path: omega-route.json
