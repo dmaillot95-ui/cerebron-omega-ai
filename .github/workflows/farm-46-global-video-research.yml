@@ -6,10 +6,11 @@ on:
       query:
         description: Video research query
         required: false
-        default: "Collatz conjecture mathematics"
+        default: "Collatz conjecture mathematics research lecture"
   push:
     paths:
       - '.github/workflows/farm-46-global-video-research.yml'
+      - 'farms/46-global-video-research/**'
   schedule:
     - cron: '43 * * * *'
 
@@ -25,7 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --quiet ddgs yt-dlp
+      - run: pip install --quiet ddgs yt-dlp requests
       - name: Search global video sources
         env:
           INPUT_QUERY: ${{ github.event.inputs.query }}
@@ -33,40 +34,55 @@ jobs:
         run: |
           mkdir -p out
           python - <<'PY'
-          import os,json,time,datetime,subprocess
+          import os,json,time,datetime,subprocess,hashlib,urllib.parse,requests
           from ddgs import DDGS
-          q=os.environ.get('INPUT_QUERY') or 'Collatz conjecture mathematics'
-          site_queries=[q+' site:youtube.com/watch',q+' site:youtu.be',q+' site:vimeo.com',q+' site:dailymotion.com',q+' site:bilibili.com/video',q+' site:rutube.ru/video',q+' site:vkvideo.ru']
-          rows=[]; seen=set()
-          with DDGS() as d:
-            for qq in site_queries:
-              try:
-                for r in d.text(qq,max_results=15):
-                  u=r.get('href') or r.get('url')
-                  if not u or u in seen: continue
-                  seen.add(u)
-                  rows.append({'query':qq,'title':r.get('title'),'url':u,'snippet':r.get('body'),'platform':'web-video-index'})
-              except Exception as e:
-                rows.append({'query':qq,'error':repr(e)})
-              time.sleep(.35)
-          checked=0
-          for row in rows:
-            u=row.get('url','')
-            if checked>=8: break
-            if 'youtube.com/watch' not in u and 'youtu.be/' not in u: continue
-            checked+=1
-            try:
-              p=subprocess.run(['yt-dlp','--skip-download','--dump-single-json','--no-warnings',u],capture_output=True,text=True,timeout=45)
-              if p.returncode==0 and p.stdout.strip():
-                j=json.loads(p.stdout)
-                row['metadata']={k:j.get(k) for k in ['id','title','channel','channel_id','upload_date','duration','view_count','webpage_url']}
-                row['metadata_status']='OK'
-              else: row['metadata_status']='FAILED'
-            except Exception as e:
-              row['metadata_status']='FAILED'; row['metadata_error']=repr(e)
-          out={'schema':'cerebron-farm46-global-video-v1','farm_id':46,'domain':'global-video-research','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'query':q,'result_count':sum(1 for x in rows if x.get('url')),'results':rows,'rules':['VIDEO != EVIDENCE','TRANSCRIPT != VERIFIED CLAIM','Cross-check claims against primary sources','Record platform/date/channel when available','No copyright rehosting; store metadata and citations only']}
+          q=os.environ.get('INPUT_QUERY') or 'Collatz conjecture mathematics research lecture'
+          rows=[]; seen=set(); errors=[]
+          def add(platform,title,url,publisher=None,date=None,language=None,snippet=None):
+            if not url or url in seen:return
+            seen.add(url)
+            rows.append({'platform':platform,'title':title,'url':url,'publisher':publisher,'publication_date':date,'language':language,'snippet':snippet,'duplication_hash':hashlib.sha256(url.encode()).hexdigest()[:20],'evidence_class':'UNKNOWN'})
+
+          site_queries=[q+' site:youtube.com/watch',q+' site:vimeo.com',q+' site:dailymotion.com',q+' site:bilibili.com/video',q+' site:rutube.ru/video',q+' site:vkvideo.ru']
+          try:
+            with DDGS() as d:
+              for qq in site_queries:
+                try:
+                  for r in d.text(qq,max_results=12): add('web-video-index',r.get('title'),r.get('href') or r.get('url'),snippet=r.get('body'))
+                except Exception as e: errors.append({'source':qq,'error':repr(e)})
+                time.sleep(.35)
+          except Exception as e: errors.append({'source':'ddgs','error':repr(e)})
+
+          try:
+            p=subprocess.run(['yt-dlp','--flat-playlist','--dump-single-json',f'ytsearch15:{q}'],capture_output=True,text=True,timeout=120)
+            if p.returncode==0 and p.stdout.strip():
+              for e in json.loads(p.stdout).get('entries',[]):
+                vid=e.get('id'); add('youtube',e.get('title'),f'https://www.youtube.com/watch?v={vid}' if vid else e.get('url'),e.get('channel') or e.get('uploader'),e.get('upload_date'),e.get('language'))
+            else: errors.append({'source':'youtube-yt-dlp','error':p.stderr[-500:]})
+          except Exception as e: errors.append({'source':'youtube-yt-dlp','error':repr(e)})
+
+          try:
+            u='https://sepiasearch.org/api/v1/search/videos?'+urllib.parse.urlencode({'search':q,'count':15})
+            r=requests.get(u,timeout=30,headers={'User-Agent':'CEREBRON-FARM46/1.1'})
+            if r.ok:
+              for e in r.json().get('data',[]): add('peertube',e.get('name'),e.get('url'),(e.get('channel') or {}).get('displayName'),e.get('publishedAt'),e.get('language'))
+            else: errors.append({'source':'peertube','http':r.status_code})
+          except Exception as e: errors.append({'source':'peertube','error':repr(e)})
+
+          try:
+            params={'q':f'({q}) AND mediatype:movies','fl[]':['identifier','title','creator','date','language'],'rows':15,'page':1,'output':'json'}
+            r=requests.get('https://archive.org/advancedsearch.php',params=params,timeout=30,headers={'User-Agent':'CEREBRON-FARM46/1.1'})
+            if r.ok:
+              for e in r.json().get('response',{}).get('docs',[]):
+                ident=e.get('identifier'); add('internet_archive',e.get('title'),f'https://archive.org/details/{ident}' if ident else None,e.get('creator'),e.get('date'),e.get('language'))
+            else: errors.append({'source':'internet_archive','http':r.status_code})
+          except Exception as e: errors.append({'source':'internet_archive','error':repr(e)})
+
+          counts={}
+          for row in rows: counts[row['platform']]=counts.get(row['platform'],0)+1
+          out={'schema':'cerebron-farm46-global-video-v2','farm_id':46,'domain':'global-video-research','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'query':q,'result_count':len(rows),'platform_counts':counts,'results':rows,'errors':errors,'rules':['VIDEO != EVIDENCE','TRANSCRIPT != VERIFIED CLAIM','Cross-check claims against primary sources','No copyright rehosting; store metadata/citations only']}
           open('out/video-research.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
-          print(json.dumps({'query':q,'results':out['result_count'],'youtube_metadata_checked':checked}))
+          print(json.dumps({'query':q,'results':len(rows),'platform_counts':counts,'errors':len(errors)}))
           PY
       - uses: actions/upload-artifact@v4
         with:
