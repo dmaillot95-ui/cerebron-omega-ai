@@ -1,0 +1,88 @@
+{
+  "schema": "cerebron-farm-49-engineering-cad-digital-twin-v1",
+  "farm_id": 49,
+  "name": "FARM 49 — Engineering CAD / Digital Twin",
+  "domain": "engineering-cad-digital-twin",
+  "mission": "Create auditable parametric engineering geometry, assemblies, digital twins and domain-specific scientific 3D models from structured requirements and validated evidence.",
+  "core_rules": [
+    "REALITY > COHERENCE",
+    "EVIDENCE > CONFIDENCE",
+    "CLAIM <= EVIDENCE",
+    "IMAGE_3D != CAD_MODEL",
+    "CAD_MODEL != VALIDATED_ENGINEERING_DESIGN",
+    "SIMULATION != TEST",
+    "VERIFY BEFORE COMMIT",
+    "PARAMETRIC_GEOMETRY BEFORE RENDERING"
+  ],
+  "default_stack": {
+    "cad_kernel": ["OpenCascade", "CadQuery"],
+    "mesh_and_exchange": ["STEP", "STL", "3MF", "glTF"],
+    "web_viewer": ["Three.js", "WebGL"],
+    "optional_connectors": ["Autodesk Platform Services", "AutoCAD", "Inventor", "Fusion"],
+    "policy": "open-source first; paid/proprietary connectors optional"
+  },
+  "model_classes": [
+    "mechanical_part",
+    "mechanical_assembly",
+    "architecture_bim_like",
+    "spacecraft_system",
+    "fluidic_network",
+    "electromechanical_system",
+    "molecular_structure",
+    "crystal_structure",
+    "biological_structure",
+    "generic_scientific_geometry"
+  ],
+  "pipeline": [
+    "requirements",
+    "source_research",
+    "parameter_extraction",
+    "units_and_tolerances",
+    "parametric_geometry",
+    "assembly_constraints",
+    "interference_check",
+    "mass_volume_area_properties",
+    "export",
+    "3d_view",
+    "simulation_handoff",
+    "red_team",
+    "revision",
+    "evidence_record"
+  ],
+  "minimum_part_record": [
+    "part_id",
+    "revision",
+    "units",
+    "parameters",
+    "geometry_source",
+    "material",
+    "mass_status",
+    "tolerances",
+    "interfaces",
+    "constraints",
+    "evidence_level",
+    "sha256"
+  ],
+  "minimum_assembly_record": [
+    "assembly_id",
+    "revision",
+    "parts",
+    "mates",
+    "coordinate_frames",
+    "clearances",
+    "interferences",
+    "configuration",
+    "configuration_passport",
+    "evidence_level"
+  ],
+  "quality_gates": [
+    "unit_consistency",
+    "closed_or_valid_geometry",
+    "parameter_traceability",
+    "assembly_constraint_consistency",
+    "interference_status",
+    "export_reproducibility",
+    "source_provenance",
+    "claim_level"
+  ]
+}
