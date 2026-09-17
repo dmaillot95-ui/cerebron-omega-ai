@@ -1,4 +1,4 @@
-name: CEREBRON Omega Full 45 Farms Agent Test
+name: CEREBRON Omega Exact 900 Call Test
 
 on:
   push:
@@ -23,17 +23,18 @@ jobs:
           import json
           d=json.load(open('config/farms.json'))
           inc=[{'id':f['id'],'repo':f['repo'],'domain':f['domain']} for f in d['farms']]
+          assert len(inc)==45
           print('matrix='+json.dumps({'include':inc},separators=(',',':')))
           PY
 
-  farm-full-agent-test:
+  farm-20-calls:
     needs: plan
     strategy:
       fail-fast: false
-      max-parallel: 45
+      max-parallel: 20
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,104 +42,86 @@ jobs:
           python-version: '3.12'
       - name: Install dependency
         run: pip install --quiet hf-gradio
-      - name: Detect configured roles and execute real calls
+      - name: Execute exactly 20 real model attempts for this farm
         env:
           FARM_ID: ${{ matrix.id }}
           FARM_REPO: ${{ matrix.repo }}
           FARM_DOMAIN: ${{ matrix.domain }}
-          DEFAULT_MODEL: huggingface-projects/llama-3.2-3B-Instruct
+          MODEL_A: huggingface-projects/llama-3.2-3B-Instruct
+          MODEL_B: huggingface-projects/gemma-2-9b-it
         shell: bash
         run: |
           mkdir -p out
           python - <<'PY'
-          import os,re,json,subprocess,pathlib,importlib.util,time,hashlib
-          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']; default_model=os.environ['DEFAULT_MODEL']
-          result={'schema':'cerebron-full-farm-agent-test-v1','farm_id':fid,'repo':repo,'domain':domain,'clone_success':False,'worker_present':False,'roles_detected':[],'planned_calls':0,'attempted_calls':0,'successful_calls':0,'failed_calls':0,'outputs':[],'evidence_state':'UNKNOWN'}
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+
+          fid=int(os.environ['FARM_ID']); repo=os.environ['FARM_REPO']; domain=os.environ['FARM_DOMAIN']
+          model_a=os.environ['MODEL_A']; model_b=os.environ['MODEL_B']
+          roles=[
+            'RESEARCHER','DOMAIN_SPECIALIST','ANALYST','MODELER','THEORIST',
+            'EVIDENCE_AUDITOR','SOURCE_AUDITOR','COUNTEREXAMPLE_HUNTER','FALSIFIER','RED_TEAM',
+            'REPLICATOR','VERIFIER','FORMAL_AUDITOR','UNCERTAINTY_ANALYST','FAILURE_ANALYST',
+            'INVENTOR','SYSTEMS_SYNTHESIZER','CAPABILITY_EVALUATOR','CONTRADICTION_AUDITOR','OMEGA_JUDGE'
+          ]
+          assert len(roles)==20
+          models=[model_a if i%2==0 else model_b for i in range(20)]
+          result={'schema':'cerebron-exact-20-per-farm-v1','farm_id':fid,'repo':repo,'domain':domain,'planned_calls':20,'attempted_calls':0,'successful_calls':0,'failed_calls':0,'outputs':[],'clone_success':False,'worker_present':False,'evidence_state':'UNKNOWN'}
           t0=time.time()
           cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
           result['clone_success']=cp.returncode==0
-          if cp.returncode!=0:
-            result['error']=(cp.stderr or cp.stdout)[-1500:]
-          else:
-            wp=pathlib.Path('farm/worker/farm_worker.py')
-            result['worker_present']=wp.exists()
-            roles=[]
-            wfdir=pathlib.Path('farm/.github/workflows')
-            if wfdir.exists():
-              for p in wfdir.glob('*.y*ml'):
-                txt=p.read_text(encoding='utf-8',errors='ignore')
-                # Python tuple matrices: ('ROLE','space','family') or ("ROLE",...)
-                for m in re.finditer(r"\(\s*['\"]([A-Z][A-Z0-9_\-]{2,})['\"]\s*,\s*['\"]([^'\"]+)['\"](?:\s*,\s*['\"]([^'\"]*)['\"])?\s*\)",txt):
-                  role,model,fam=m.group(1),m.group(2),m.group(3) or ''
-                  if 'huggingface' in model or '/' in model:
-                    roles.append((role,model,fam))
-                # YAML include style: role: X followed nearby by model/space
-                lines=txt.splitlines()
-                for i,line in enumerate(lines):
-                  mm=re.search(r'\brole\s*:\s*["\']?([A-Za-z0-9_\-]+)',line)
-                  if mm:
-                    role=mm.group(1); model=None; fam=''
-                    window='\n'.join(lines[i:i+6])
-                    sm=re.search(r'\b(?:space|model)\s*:\s*["\']?([^\s"\']+)',window)
-                    if sm: model=sm.group(1)
-                    roles.append((role,model or default_model,fam))
-            # de-duplicate exact roles, preserve order
-            seen=set(); uniq=[]
-            for r,m,f in roles:
-              key=r
-              if key not in seen:
-                seen.add(key); uniq.append((r,m,f))
-            roles=uniq
-            # If workflow does not expose explicit roles, execute one real farm-level agent.
-            if not roles:
-              roles=[(f'FARM_{fid:02d}_AGENT',default_model,'default')]
-            # Safety bound: preserve detected farm architecture up to 32 roles.
-            roles=roles[:32]
-            result['roles_detected']=[{'role':r,'model':m,'family':f} for r,m,f in roles]
-            result['planned_calls']=len(roles)
+          if cp.returncode==0:
+            wp=pathlib.Path('farm/worker/farm_worker.py'); result['worker_present']=wp.exists()
             if wp.exists():
               try:
                 spec=importlib.util.spec_from_file_location(f'farm_worker_{fid}',wp)
                 fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
-                for role,model,fam in roles:
-                  prompt=(f'CEREBRON OMEGA FULL FARM EXECUTION TEST\nFARM {fid}: {repo}\nDOMAIN: {domain}\nROLE: {role}\n'
-                          'Mission: identify one important risk, one required proof/evidence, and one unknown for a distributed zero-user-cost CEREBRON OMEGA system. '
-                          'Distinguish ESTABLISHED / HYPOTHESIS / UNKNOWN. Infrastructure test only; generated text is not validation.')
-                  result['attempted_calls']+=1
+                def one(i):
+                  role=roles[i]; model=models[i]
+                  prompt=(f'CEREBRON OMEGA EXACT 900-CALL BENCHMARK\nFARM {fid}: {repo}\nDOMAIN: {domain}\nROLE: {role}\n'
+                          'Identify one major risk, one required piece of evidence, and one unknown for a distributed zero-user-cost CEREBRON OMEGA system. '
+                          'Separate ESTABLISHED / HYPOTHESIS / UNKNOWN. Infrastructure benchmark only. Generated text is not validated knowledge.')
                   try:
                     ok,text,meta=fw.invoke(model,prompt)
                     ok=bool(ok and str(text).strip())
-                    if ok: result['successful_calls']+=1
-                    else: result['failed_calls']+=1
-                    result['outputs'].append({'role':role,'model':model,'success':ok,'sha256':hashlib.sha256(str(text).encode()).hexdigest() if ok else None,'meta':meta})
+                    return {'index':i+1,'role':role,'model':model,'success':ok,'sha256':hashlib.sha256(str(text).encode()).hexdigest() if ok else None,'meta':meta}
                   except Exception as e:
-                    result['failed_calls']+=1
-                    result['outputs'].append({'role':role,'model':model,'success':False,'error':repr(e)})
+                    return {'index':i+1,'role':role,'model':model,'success':False,'error':repr(e)}
+                with ThreadPoolExecutor(max_workers=4) as ex:
+                  futs=[ex.submit(one,i) for i in range(20)]
+                  for fut in as_completed(futs):
+                    row=fut.result(); result['attempted_calls']+=1
+                    if row['success']: result['successful_calls']+=1
+                    else: result['failed_calls']+=1
+                    result['outputs'].append(row)
+                result['outputs'].sort(key=lambda x:x['index'])
               except Exception as e:
                 result['error']='worker_import:'+repr(e)
-            result['evidence_state']='UNREVIEWED_EXTERNAL_AGENT_OUTPUT' if result['successful_calls'] else ('EXTERNAL_INFERENCE_FAILED' if result['attempted_calls'] else 'UNKNOWN')
+          else:
+            result['error']=(cp.stderr or cp.stdout)[-1500:]
+          result['evidence_state']='UNREVIEWED_EXTERNAL_AGENT_OUTPUT' if result['successful_calls'] else ('EXTERNAL_INFERENCE_FAILED' if result['attempted_calls'] else 'UNKNOWN')
           result['elapsed_seconds']=round(time.time()-t0,3)
           pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps({k:result.get(k) for k in ['farm_id','repo','planned_calls','attempted_calls','successful_calls','failed_calls','evidence_state']},ensure_ascii=False))
+          print(json.dumps({k:result[k] for k in ['farm_id','planned_calls','attempted_calls','successful_calls','failed_calls','evidence_state']},ensure_ascii=False))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: full-farm-${{ matrix.id }}
+          name: exact900-farm-${{ matrix.id }}
           path: out/result.json
           retention-days: 14
 
   omega-accounting:
-    needs: farm-full-agent-test
+    needs: farm-20-calls
     if: always()
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/download-artifact@v4
         with:
-          pattern: full-farm-*
+          pattern: exact900-farm-*
           path: results
           merge-multiple: false
-      - name: Aggregate all farms
+      - name: Aggregate exact 900-call benchmark
         shell: bash
         run: |
           python - <<'PY'
@@ -147,24 +130,28 @@ jobs:
           rows=[]
           for p in Path('results').rglob('result.json'):
             try: rows.append(json.loads(p.read_text(encoding='utf-8')))
-            except: pass
+            except Exception: pass
           rows.sort(key=lambda r:r.get('farm_id',999))
           summary={
-            'schema':'cerebron-full-45-farms-accounting-v1',
+            'schema':'cerebron-exact-900-accounting-v1',
+            'expected_farms':45,
+            'calls_per_farm':20,
+            'expected_calls':900,
             'farm_rows':len(rows),
             'total_planned_calls':sum(r.get('planned_calls',0) for r in rows),
             'total_attempted_calls':sum(r.get('attempted_calls',0) for r in rows),
             'total_successful_calls':sum(r.get('successful_calls',0) for r in rows),
             'total_failed_calls':sum(r.get('failed_calls',0) for r in rows),
+            'farms_with_20_attempts':sum(r.get('attempted_calls',0)==20 for r in rows),
             'farms_with_at_least_one_success':sum(r.get('successful_calls',0)>0 for r in rows),
             'per_farm':[{'farm_id':r.get('farm_id'),'repo':r.get('repo'),'planned':r.get('planned_calls',0),'attempted':r.get('attempted_calls',0),'successful':r.get('successful_calls',0),'failed':r.get('failed_calls',0)} for r in rows],
-            'claim_note':'Calls counted from actual fw.invoke attempts in this run. Successful call requires non-empty external model output. Content remains unaudited.'
+            'claim_note':'900 is the planned target: 45 farms x 20 real fw.invoke attempts. Actual attempted and successful totals are reported separately. Outputs remain unaudited.'
           }
-          Path('full-45-farms-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('exact-900-accounting.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(summary,ensure_ascii=False,indent=2))
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: full-45-farms-accounting
-          path: full-45-farms-accounting.json
+          name: exact-900-accounting
+          path: exact-900-accounting.json
           retention-days: 14
