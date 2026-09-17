@@ -1,6 +1,7 @@
 # CEREBRON OMEGA — ALL FARMS SMOKE TEST
 
 TEST_ID: ALL-FARMS-SMOKE-2026-09-17
+RERUN: 2 — standardized worker runtime
 
 SUBJECT:
 Quels sont les risques, les preuves nécessaires et les inconnues d'un système CEREBRON OMEGA distribué à coût utilisateur nul ?
