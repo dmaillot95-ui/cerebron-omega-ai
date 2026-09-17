@@ -39,7 +39,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install --quiet hf-gradio
-      - name: Qwen generator plus independent counter-audit
+      - name: Qwen generator plus independent Mistral/Llama/Gemma counter-audit
         env:
           FARM_ID: ${{ matrix.id }}
           FARM_DOMAIN: ${{ matrix.domain }}
@@ -51,7 +51,7 @@ jobs:
           import os,json,pathlib,importlib.util,time,hashlib,re
           fid=int(os.environ['FARM_ID']); domain=os.environ['FARM_DOMAIN']
           wp=pathlib.Path('worker-src/worker/farm_worker.py')
-          R={'schema':'cerebron-qwen-firewall-v1','farm_id':fid,'domain':domain,'qwen_success':0,'audit_success':0,'provider_attempts':0,'decision':'NO_OUTPUT','flags':[]}
+          R={'schema':'cerebron-qwen-firewall-v2','farm_id':fid,'domain':domain,'qwen_success':0,'audit_success':0,'provider_attempts':0,'decision':'NO_OUTPUT','flags':[]}
           if not wp.exists():
             R['error']='worker_missing'; pathlib.Path('out/result.json').write_text(json.dumps(R,indent=2)); raise SystemExit(0)
           spec=importlib.util.spec_from_file_location('fw',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
@@ -62,36 +62,35 @@ jobs:
                       'Generate exactly ONE candidate: derivation, obstruction, counterexample, invariant, or falsification. '
                       'Prefer symbolic reduction before multiplication. State assumptions and exact equations. '
                       'Never claim Collatz solved. Mark every claim ESTABLISHED / DERIVED / SPECULATIVE / OPEN.')
-          qrow={}
           try:
             ok,text,meta=fw.invoke('Qwen/Qwen3-Demo',gen_prompt); R['provider_attempts']+=1
             if ok and str(text).strip():
-              q=str(text); R['qwen_success']=1; R['qwen_response']=q; R['qwen_sha256']=hashlib.sha256(q.encode()).hexdigest(); qrow=meta or {}
+              q=str(text); R['qwen_success']=1; R['qwen_response']=q; R['qwen_sha256']=hashlib.sha256(q.encode()).hexdigest()
             else: R['flags'].append('QWEN_NO_RESPONSE')
           except Exception as e:
             R['provider_attempts']+=1; R['flags'].append('QWEN_EXCEPTION'); R['qwen_error']=repr(e)
           q=R.get('qwen_response','')
           if q:
-            bad_patterns=[
-              r'collatz (is|has been) (proved|solved)',
-              r'proof of the collatz conjecture',
-              r'confirmed up to 2\^?60',
-              r't\(n\)\s*<\s*3n/4.*2\^?20',
-              r'large u.*large h'
-            ]
+            bad_patterns=[r'collatz (is|has been) (proved|solved)',r'proof of the collatz conjecture',r'confirmed up to 2\^?60',r't\(n\)\s*<\s*3n/4.*2\^?20',r'large u.*large h']
             low=q.lower()
             for pat in bad_patterns:
               if re.search(pat,low,re.I|re.S): R['flags'].append('KNOWN_BAD_OR_UNSUPPORTED_PATTERN:'+pat)
             audit_prompt=(f'CEREBRON OMEGA INDEPENDENT COUNTER-AUDIT — FARM {fid} {domain}\n{checkpoint}\n'
                           'Audit the following candidate from an independent model. Try to falsify it. Check algebra, quantifiers, hidden assumptions, finite-test leakage, equivalent-hardness, and unsupported theorem claims. '
                           'Return only: VALID_DERIVATION, REJECTED, or NEEDS_FORMAL_AUDIT, then concise reasons.\n\nCANDIDATE:\n'+q[:12000])
-            audit_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+            audit_spaces=[
+              'hysts/mistral-7b',
+              'huggingface-projects/llama-3.2-3B-Instruct',
+              'huggingface-projects/gemma-2-9b-it',
+              'huggingface-projects/llama-2-7b-chat',
+              'huggingface-projects/llama-2-13b-chat'
+            ]
             for sp in audit_spaces:
               try:
                 ok2,t2,m2=fw.invoke(sp,audit_prompt); R['provider_attempts']+=1
                 if ok2 and str(t2).strip():
                   R['audit_success']=1; R['audit_space']=sp; R['audit_response']=str(t2); break
-              except Exception as e:
+              except Exception:
                 R['provider_attempts']+=1
               time.sleep(0.2)
             aud=R.get('audit_response','').upper()
@@ -100,15 +99,13 @@ jobs:
             elif 'REJECTED' in aud:
               R['decision']='REJECTED'
             elif 'VALID_DERIVATION' in aud:
-              R['decision']='CANDIDATE'
-              R['flags'].append('MODEL_AUDIT_IS_NOT_FORMAL_PROOF')
+              R['decision']='CANDIDATE'; R['flags'].append('MODEL_AUDIT_IS_NOT_FORMAL_PROOF')
             elif R['audit_success']:
               R['decision']='NEEDS_FORMAL_AUDIT'
             else:
-              R['decision']='NEEDS_FORMAL_AUDIT'
-              R['flags'].append('NO_INDEPENDENT_AUDIT_RESPONSE')
+              R['decision']='NEEDS_FORMAL_AUDIT'; R['flags'].append('NO_INDEPENDENT_AUDIT_RESPONSE')
           pathlib.Path('out/result.json').write_text(json.dumps(R,ensure_ascii=False,indent=2)+'\n')
-          print(json.dumps({'farm_id':fid,'qwen_success':R['qwen_success'],'audit_success':R['audit_success'],'decision':R['decision'],'attempts':R['provider_attempts']}))
+          print(json.dumps({'farm_id':fid,'qwen_success':R['qwen_success'],'audit_success':R['audit_success'],'audit_space':R.get('audit_space'),'decision':R['decision'],'attempts':R['provider_attempts']}))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -136,7 +133,8 @@ jobs:
             try: rows.append(json.loads(p.read_text()))
             except: pass
           dec=collections.Counter(r.get('decision','?') for r in rows)
-          s={'schema':'cerebron-qwen-firewall-accounting-v1','farms_received':len(rows),'qwen_successes':sum(r.get('qwen_success',0) for r in rows),'independent_audit_successes':sum(r.get('audit_success',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'decisions':dict(dec),'rule':'CANDIDATE is not validated mathematics; formal verification remains required.'}
+          aud=collections.Counter(r.get('audit_space','NONE') for r in rows)
+          s={'schema':'cerebron-qwen-firewall-accounting-v2','farms_received':len(rows),'qwen_successes':sum(r.get('qwen_success',0) for r in rows),'independent_audit_successes':sum(r.get('audit_success',0) for r in rows),'provider_attempts':sum(r.get('provider_attempts',0) for r in rows),'audit_sources':dict(aud),'decisions':dict(dec),'rule':'CANDIDATE is not validated mathematics; formal verification remains required.'}
           Path('qwen-firewall-accounting.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
           print(json.dumps(s,ensure_ascii=False,indent=2))
           PY
