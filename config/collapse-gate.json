@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-COLLAPSE-GATE-OMEGA",
+  "purpose": "Collapse redundant vector branches without collapsing independent evidence, contradictions, or provenance.",
+  "decisions": [
+    "MERGE_REFERENCE",
+    "KEEP_INDEPENDENT",
+    "KEEP_CONTRADICTION",
+    "RECOMPUTE_REQUIRED"
+  ],
+  "rules": [
+    "SAME_HASH=>MERGE_REFERENCE",
+    "SAME_CLAIM_SHARED_DEPENDENCY=>CORRELATED_NOT_INDEPENDENT",
+    "SAME_CLAIM_DISTINCT_METHOD_AND_DEPENDENCY=>KEEP_INDEPENDENT",
+    "DIFFERENT_CLAIM=>KEEP_CONTRADICTION",
+    "COLLAPSE != VALIDATION",
+    "RAW_ARTIFACT_IMMUTABLE"
+  ]
+}
