@@ -1,4 +1,10 @@
-from tools.glyph_router import encode,verify,route,decode
+import importlib.util
+from pathlib import Path
+
+P=Path(__file__).resolve().parents[1]/"tools"/"glyph_router.py"
+S=importlib.util.spec_from_file_location("glyph_router",P)
+M=importlib.util.module_from_spec(S); S.loader.exec_module(M)
+encode,verify,route,decode=M.encode,M.verify,M.route,M.decode
 
 def test_roundtrip_collatz():
     x=encode("collatz","cycle closure","symbolic","E2","VERIFY","high","reason",{"finite":True})
