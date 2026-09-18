@@ -1,4 +1,4 @@
-name: CEREBRON OpenRouter Safe Test 1
+name: CEREBRON OpenRouter Safe Test 20
 
 on:
   workflow_dispatch:
@@ -12,26 +12,22 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
     steps:
-      - name: Test one scientific call
+      - name: Test twenty scientific calls
         shell: bash
         run: |
           python - <<'PY'
           import os
           import json
-          import traceback
+          import time
+          import collections
           import urllib.request
           import urllib.error
-
-          # ============================================================
-          # CEREBRON OMEGA — OPENROUTER SAFE PREFLIGHT
-          # Objectif : 1 seul appel externe réel et diagnostic complet
-          # ============================================================
 
           key = os.environ.get("OPENROUTER_API_KEY", "").strip()
 
@@ -40,181 +36,292 @@ jobs:
               print("REASON=MISSING_SECRET")
               raise SystemExit(1)
 
+          TOTAL = 20
+
+          roles = [
+              "REALITY_RESEARCH",
+              "SYSTEM_ARCHITECT",
+              "CALCULATION",
+              "SIMULATION",
+              "CAUSAL_ANALYSIS",
+              "INVENTION",
+              "FAILURE_ANALYSIS",
+              "COUNTEREXAMPLE_HUNTER",
+              "FALSIFIER",
+              "FORMAL_AUDITOR",
+              "INDEPENDENT_REPLICATOR",
+              "UNCERTAINTY_ANALYST",
+              "INTERFACE_ANALYST",
+              "INVARIANT_HUNTER",
+              "EXPERIMENT_DESIGN",
+              "CONTRADICTION_RESOLUTION",
+              "UNKNOWN_GAP_ANALYST",
+              "EVIDENCE_AUDITOR",
+              "SYNTHESIS_ANALYST",
+              "OMEGA_JUDGE"
+          ]
+
+          results = []
+          models = collections.Counter()
+          errors = collections.Counter()
+
           print("SECRET_PRESENT=YES")
-          print("TEST_CALLS=1")
+          print("PLANNED_CALLS=" + str(TOTAL))
 
-          prompt = """
-          CEREBRON scientific preflight.
+          for i in range(TOTAL):
 
-          Analyze one consistency constraint in relativistic
-          hydrodynamics.
+              role = roles[i]
 
-          Explain how four-velocity normalization and causality
-          constrain physically admissible fluid states.
+              prompt = f"""
+              CEREBRON OMEGA scientific test.
 
-          Define all assumptions.
+              Worker {i+1:02d}/20
+              Role: {role}
 
-          Separate:
-          - established physics,
-          - mathematical deductions,
-          - inference,
-          - uncertainty.
+              Subject:
+              relativistic hydrodynamics.
 
-          CLAIM <= EVIDENCE.
-          """
+              Analyze how four-velocity normalization,
+              causality and relativistic signal propagation
+              constrain physically admissible fluid states.
 
-          payload_object = {
-              "model": "openrouter/free",
-              "messages": [
-                  {
-                      "role": "user",
-                      "content": prompt
-                  }
-              ],
-              "max_tokens": 300
-          }
+              Focus specifically on the perspective of:
+              {role}
 
-          payload = json.dumps(payload_object).encode("utf-8")
+              Define assumptions.
+              Identify possible failure modes.
+              Separate established physics from inference.
 
-          request = urllib.request.Request(
-              "https://openrouter.ai/api/v1/chat/completions",
-              data=payload,
-              headers={
-                  "Authorization": "Bearer " + key,
-                  "Content-Type": "application/json",
-                  "HTTP-Referer": "https://github.com/dmaillot95-ui/cerebron-omega-ai",
-                  "X-Title": "CEREBRON Omega"
-              },
-              method="POST"
+              REALITY > COHERENCE.
+              EVIDENCE > CONFIDENCE.
+              CLAIM <= EVIDENCE.
+              """
+
+              payload = json.dumps({
+                  "model": "openrouter/free",
+                  "messages": [
+                      {
+                          "role": "user",
+                          "content": prompt
+                      }
+                  ],
+                  "max_tokens": 350
+              }).encode("utf-8")
+
+              request = urllib.request.Request(
+                  "https://openrouter.ai/api/v1/chat/completions",
+                  data=payload,
+                  headers={
+                      "Authorization": "Bearer " + key,
+                      "Content-Type": "application/json",
+                      "HTTP-Referer":
+                          "https://github.com/dmaillot95-ui/cerebron-omega-ai",
+                      "X-Title": "CEREBRON Omega"
+                  },
+                  method="POST"
+              )
+
+              success = False
+              last_error = ""
+
+              for attempt in range(3):
+
+                  try:
+                      start = time.time()
+
+                      with urllib.request.urlopen(
+                          request,
+                          timeout=90
+                      ) as response:
+                          status = response.getcode()
+                          raw = response.read().decode("utf-8")
+
+                      data = json.loads(raw)
+
+                      choices = data.get("choices")
+
+                      if not isinstance(choices, list) or not choices:
+                          raise ValueError("NO_CHOICES")
+
+                      choice = choices[0]
+
+                      if not isinstance(choice, dict):
+                          raise ValueError("INVALID_CHOICE")
+
+                      message = choice.get("message")
+
+                      if not isinstance(message, dict):
+                          raise ValueError("INVALID_MESSAGE")
+
+                      content = message.get("content")
+
+                      if isinstance(content, str):
+                          text = content.strip()
+
+                      elif isinstance(content, list):
+                          parts = []
+
+                          for item in content:
+                              if isinstance(item, dict):
+                                  value = item.get("text")
+
+                                  if isinstance(value, str):
+                                      parts.append(value)
+
+                          text = "\n".join(parts).strip()
+
+                      else:
+                          text = ""
+
+                      if not text:
+                          raise ValueError("EMPTY_CONTENT")
+
+                      model = str(data.get("model", "unknown"))
+
+                      latency = round(time.time() - start, 2)
+
+                      models[model] += 1
+
+                      results.append({
+                          "worker": i + 1,
+                          "role": role,
+                          "success": True,
+                          "model": model,
+                          "chars": len(text),
+                          "latency_s": latency,
+                          "attempt": attempt + 1
+                      })
+
+                      print(
+                          f"CALL={i+1:02d}/20 "
+                          f"RESULT=SUCCESS "
+                          f"ROLE={role} "
+                          f"MODEL={model} "
+                          f"CHARS={len(text)} "
+                          f"LATENCY={latency}s "
+                          f"ATTEMPT={attempt+1}"
+                      )
+
+                      success = True
+                      break
+
+                  except urllib.error.HTTPError as error:
+
+                      last_error = "HTTP_" + str(error.code)
+
+                      if error.code == 429 and attempt < 2:
+                          print(
+                              f"CALL={i+1:02d}/20 "
+                              f"RETRY=YES "
+                              f"HTTP_STATUS=429 "
+                              f"ATTEMPT={attempt+1}"
+                          )
+
+                          time.sleep(5 * (attempt + 1))
+                          continue
+
+                      break
+
+                  except Exception as error:
+
+                      last_error = (
+                          type(error).__name__
+                          + ":"
+                          + str(error)[:120]
+                      )
+
+                      break
+
+              if not success:
+
+                  errors[last_error] += 1
+
+                  results.append({
+                      "worker": i + 1,
+                      "role": role,
+                      "success": False,
+                      "error": last_error
+                  })
+
+                  print(
+                      f"CALL={i+1:02d}/20 "
+                      f"RESULT=FAIL "
+                      f"ROLE={role} "
+                      f"ERROR={last_error}"
+                  )
+
+              # volontairement séquentiel pour le préflight
+              time.sleep(2)
+
+          successful = sum(
+              1 for row in results
+              if row["success"]
           )
 
-          try:
-              print("REQUEST_START=YES")
+          failed = TOTAL - successful
 
-              with urllib.request.urlopen(request, timeout=90) as response:
-                  status = response.getcode()
-                  raw = response.read().decode("utf-8")
+          print("")
+          print("========================================")
+          print("CEREBRON_20_CALL_ACCOUNTING")
+          print("========================================")
+          print("PLANNED=" + str(TOTAL))
+          print("SUCCESSFUL=" + str(successful))
+          print("FAILED=" + str(failed))
+          print(
+              "YIELD_PCT="
+              + str(round(100 * successful / TOTAL, 2))
+          )
+          print(
+              "MODELS="
+              + json.dumps(dict(models), sort_keys=True)
+          )
+          print(
+              "ERRORS="
+              + json.dumps(dict(errors), sort_keys=True)
+          )
 
-              print("HTTP_STATUS=" + str(status))
-              print("RESPONSE_BYTES=" + str(len(raw)))
+          report = {
+              "schema":
+                  "cerebron-openrouter-preflight-20-v1",
+              "planned": TOTAL,
+              "successful_external_model_outputs":
+                  successful,
+              "failed": failed,
+              "yield_pct":
+                  round(100 * successful / TOTAL, 2),
+              "models":
+                  dict(models),
+              "errors":
+                  dict(errors),
+              "results":
+                  results
+          }
 
-              data = json.loads(raw)
+          with open(
+              "router-scientific-preflight-20.json",
+              "w"
+          ) as f:
+              json.dump(report, f, indent=2)
 
-              if not isinstance(data, dict):
-                  print("RESULT=FAIL")
-                  print("REASON=RESPONSE_NOT_OBJECT")
-                  print("RESPONSE_TYPE=" + type(data).__name__)
-                  raise SystemExit(1)
-
-              print("JSON_OBJECT=YES")
-              print("TOP_LEVEL_KEYS=" + ",".join(sorted(str(k) for k in data.keys())))
-
-              choices = data.get("choices")
-
-              if not isinstance(choices, list):
-                  print("RESULT=FAIL")
-                  print("REASON=CHOICES_NOT_LIST")
-                  print("CHOICES_TYPE=" + type(choices).__name__)
-                  raise SystemExit(1)
-
-              if len(choices) == 0:
-                  print("RESULT=FAIL")
-                  print("REASON=EMPTY_CHOICES")
-                  raise SystemExit(1)
-
-              first_choice = choices[0]
-
-              if not isinstance(first_choice, dict):
-                  print("RESULT=FAIL")
-                  print("REASON=CHOICE_NOT_OBJECT")
-                  print("CHOICE_TYPE=" + type(first_choice).__name__)
-                  raise SystemExit(1)
-
-              message = first_choice.get("message")
-
-              if not isinstance(message, dict):
-                  print("RESULT=FAIL")
-                  print("REASON=MESSAGE_NOT_OBJECT")
-                  print("MESSAGE_TYPE=" + type(message).__name__)
-                  raise SystemExit(1)
-
-              content = message.get("content")
-
-              if content is None:
-                  print("RESULT=FAIL")
-                  print("REASON=CONTENT_IS_NONE")
-                  raise SystemExit(1)
-
-              if isinstance(content, str):
-                  text = content.strip()
-
-              elif isinstance(content, list):
-                  parts = []
-
-                  for item in content:
-                      if isinstance(item, dict):
-                          value = item.get("text")
-                          if isinstance(value, str):
-                              parts.append(value)
-
-                  text = "\n".join(parts).strip()
-
-              else:
-                  print("RESULT=FAIL")
-                  print("REASON=UNSUPPORTED_CONTENT_TYPE")
-                  print("CONTENT_TYPE=" + type(content).__name__)
-                  raise SystemExit(1)
-
-              if not text:
-                  print("RESULT=FAIL")
-                  print("REASON=EMPTY_RESPONSE")
-                  raise SystemExit(1)
-
-              model = data.get("model", "unknown")
-
-              print("RESULT=SUCCESS")
-              print("EXTERNAL_RESPONSES=1/1")
-              print("MODEL=" + str(model))
-              print("RESPONSE_RECEIVED=YES")
-              print("RESPONSE_CHARS=" + str(len(text)))
-
-          except urllib.error.HTTPError as error:
+          # Le workflow échoue seulement si aucun appel
+          # externe n'a fonctionné.
+          if successful == 0:
               print("RESULT=FAIL")
-              print("ERROR_TYPE=HTTPError")
-              print("HTTP_STATUS=" + str(error.code))
-
-              try:
-                  error_raw = error.read().decode("utf-8", errors="replace")
-                  error_data = json.loads(error_raw)
-
-                  if isinstance(error_data, dict):
-                      err = error_data.get("error")
-
-                      if isinstance(err, dict):
-                          if "code" in err:
-                              print("PROVIDER_ERROR_CODE=" + str(err.get("code")))
-
-                          if "message" in err:
-                              message = str(err.get("message"))
-                              print("PROVIDER_ERROR_MESSAGE=" + message[:500])
-
-              except Exception:
-                  print("ERROR_BODY_PARSE=FAILED")
-
               raise SystemExit(1)
 
-          except urllib.error.URLError as error:
-              print("RESULT=FAIL")
-              print("ERROR_TYPE=URLError")
-              print("ERROR_MESSAGE=" + str(error.reason))
-              traceback.print_exc()
-              raise SystemExit(1)
-
-          except Exception as error:
-              print("RESULT=FAIL")
-              print("ERROR_TYPE=" + type(error).__name__)
-              print("ERROR_MESSAGE=" + str(error))
-              traceback.print_exc()
-              raise SystemExit(1)
+          print("RESULT=SUCCESS")
+          print(
+              "EXTERNAL_RESPONSES="
+              + str(successful)
+              + "/20"
+          )
 
           PY
+
+      - name: Upload accounting report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-openrouter-preflight-20
+          path: router-scientific-preflight-20.json
+          retention-days: 1
