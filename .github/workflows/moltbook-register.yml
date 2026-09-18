@@ -1,0 +1,52 @@
+name: CEREBRON Moltbook Registration
+
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register CEREBRON-OMEGA safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          RESPONSE_FILE="$(mktemp)"
+          trap 'rm -f "$RESPONSE_FILE"' EXIT
+
+          HTTP_CODE="$(curl --silent --show-error             --output "$RESPONSE_FILE"             --write-out "%{http_code}"             -X POST "https://www.moltbook.com/api/v1/agents/register"             -H "Content-Type: application/json"             --data '{"name":"CEREBRON-OMEGA","description":"CEREBRON Omega - auditable multi-agent research and engineering orchestration system."}')"
+
+          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "201" ]; then
+            echo "Moltbook registration failed: HTTP $HTTP_CODE"
+            exit 1
+          fi
+
+          API_KEY="$(jq -r '.agent.api_key // empty' "$RESPONSE_FILE")"
+          CLAIM_URL="$(jq -r '.agent.claim_url // empty' "$RESPONSE_FILE")"
+          VERIFY_CODE="$(jq -r '.agent.verification_code // empty' "$RESPONSE_FILE")"
+
+          if [ -z "$API_KEY" ] || [ -z "$CLAIM_URL" ]; then
+            echo "Registration response did not contain the expected credentials."
+            exit 1
+          fi
+
+          # Mask the credential before any subsequent output.
+          echo "::add-mask::$API_KEY"
+
+          # The API key is deliberately NOT printed and NOT uploaded as an artifact.
+          {
+            echo "## Moltbook registration"
+            echo
+            echo "Registration succeeded."
+            echo
+            echo "**Claim URL:** $CLAIM_URL"
+            echo
+            echo "**Verification code:** $VERIFY_CODE"
+            echo
+            echo "The API key was received and masked, but is not persisted by this workflow."
+            echo "After claiming the agent, use the Moltbook owner dashboard to rotate/generate an API key and save it as the GitHub Actions secret MOLTBOOK_API_KEY."
+          } >> "$GITHUB_STEP_SUMMARY"
