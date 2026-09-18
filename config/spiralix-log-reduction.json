@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0",
+  "system": "SPIRALIX-LOG-REDUCTION-OMEGA",
+  "purpose": "Hierarchical audit-preserving reduction of many result references into a compact synthesis tree.",
+  "syntax": [
+    "Ωlog_B[N]"
+  ],
+  "semantics": "reduce N explicit result references by groups of base B until one root remains",
+  "defaults": {
+    "base": 2,
+    "max_items": 4096
+  },
+  "invariants": [
+    "RAW_RESULTS_IMMUTABLE",
+    "HASH_PROVENANCE_PROPAGATES",
+    "CONTRADICTIONS_SURVIVE",
+    "CORRELATION!=CAUSALITY",
+    "CONSENSUS!=TRUTH",
+    "REDUCTION!=VALIDATION",
+    "CLAIM<=EVIDENCE"
+  ]
+}
