@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "protocol": "SPIRALIX-FORUM-OMEGA",
+  "types": [
+    "QUESTION",
+    "HYPOTHESIS",
+    "RESULT",
+    "COUNTEREXAMPLE",
+    "EVIDENCE",
+    "AUDIT",
+    "CHALLENGE",
+    "SYNTHESIS"
+  ],
+  "statuses": [
+    "OPEN",
+    "SUPPORTED",
+    "CONTRADICTORY",
+    "VERIFIED",
+    "FAILED",
+    "UNKNOWN",
+    "CLOSED"
+  ],
+  "rules": [
+    "CONSENSUS != TRUTH",
+    "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
+    "CLAIM <= EVIDENCE",
+    "VERIFY BEFORE COMMIT"
+  ],
+  "target_farm": "F67",
+  "evidence_gate": "F72",
+  "note": "Master-hosted MVP until F67/F72 repositories physically exist."
+}
