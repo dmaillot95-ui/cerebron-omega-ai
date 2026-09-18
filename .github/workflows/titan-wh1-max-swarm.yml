@@ -60,7 +60,7 @@ jobs:
           f=next(x for x in registry if int(x['id'])==fid)
           repo=f['repo']; domain=f['domain']
           roles=['REALITY_RESEARCH','SYSTEM_ARCHITECT','CALCULATION','SIMULATION','CAUSAL_ANALYSIS','INVENTION','FAILURE_ANALYSIS','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','EXPERIMENT_DESIGN','CONTRADICTION_RESOLUTION','UNKNOWN_GAP_ANALYST','EVIDENCE_AUDITOR','SYNTHESIS_ANALYST','OMEGA_JUDGE']
-          candidate_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat','lmz/candle-llama2','mkmenta/gpt-1-and-gpt-2']
+          candidate_spaces=['openbmb/MiniCPM5-2B-Demo','Qwen/Qwen3-Demo','tencent/Hy3','MinimaLabs/KeyLM-75m-Instruct-Demo','mkmenta/gpt-1-and-gpt-2']
           QUOTA_MARKERS=('ZeroGPU quota','quota','rate limit','429')
           result={'schema':'titan-wh1-fixed-worker-v10','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
           cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
@@ -85,7 +85,7 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='CEREBRON_FIXED_WORKER_IDENTITY_V10'
+          result['routing_policy']='CEREBRON_PROVIDER_RECOVERY_V11'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
