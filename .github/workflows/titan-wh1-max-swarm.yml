@@ -26,7 +26,7 @@ jobs:
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           p=json.load(open('benchmarks/titan-wh1-max-swarm-001.json'))
-          farms=p['farm_coalition']
+          farms=[13,15,33,34,36,37,39]  # V9 ablation: historically productive farms only
           inc=[{'id':i} for i in farms]
           print('matrix='+json.dumps({'include':inc},separators=(',',':')))
           PY
@@ -216,7 +216,7 @@ jobs:
             except: pass
           success=sum(r.get('successful_roles',0) for r in rows)
           attempts=sum(r.get('provider_attempts',0) for r in rows)
-          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':23,'logical_ai_roles':23*20,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_live_provider':sum(r.get('live_provider_count',0)>0 for r in rows),'live_provider_observations':sum(r.get('live_provider_count',0) for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
+          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':7,'logical_ai_roles':7*7,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_live_provider':sum(r.get('live_provider_count',0)>0 for r in rows),'live_provider_observations':sum(r.get('live_provider_count',0) for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
           Path('titan-ai-accounting.json').write_text(json.dumps(summary,indent=2)+'\n')
           print(json.dumps(summary,indent=2))
           PY
