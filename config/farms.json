@@ -1,5 +1,5 @@
 {
-  "version": "1.7",
+  "version": "1.8",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -251,6 +251,60 @@
       "id": 50,
       "repo": "cerebron-farm-50-technical-visual-engineering-documentation",
       "domain": "technical-visual-engineering-documentation"
+    },
+    {
+      "id": 51,
+      "repo": "cerebron-farm-51-architecton-struct",
+      "domain": "architecton-struct",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 52,
+      "repo": "cerebron-farm-52-architecton-cfd",
+      "domain": "architecton-cfd",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 53,
+      "repo": "cerebron-farm-53-architecton-thermal",
+      "domain": "architecton-thermal",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 54,
+      "repo": "cerebron-farm-54-architecton-multiphysics",
+      "domain": "architecton-multiphysics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 55,
+      "repo": "cerebron-farm-55-architecton-electrical",
+      "domain": "architecton-electrical",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 56,
+      "repo": "cerebron-farm-56-architecton-control",
+      "domain": "architecton-control",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 57,
+      "repo": "cerebron-farm-57-architecton-cam",
+      "domain": "architecton-cam",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 58,
+      "repo": "cerebron-farm-58-architecton-metrology",
+      "domain": "architecton-metrology",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 59,
+      "repo": "cerebron-farm-59-verified-learning",
+      "domain": "verified-learning",
+      "status": "SCAFFOLDED"
     },
     {
       "id": 60,
