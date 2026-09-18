@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-ANTI-REDUNDANCY-SCHEDULER-OMEGA",
+  "purpose": "Schedule a task only when no verified equivalent is reusable and no equivalent task is already in flight.",
+  "decisions": [
+    "REUSE_VERIFIED",
+    "JOIN_INFLIGHT",
+    "EXECUTE_NEW"
+  ],
+  "identity_fields": [
+    "objective",
+    "method",
+    "configuration_id",
+    "input_hashes",
+    "engine",
+    "engine_version"
+  ],
+  "rules": [
+    "ONE_CANONICAL_WORK_KEY",
+    "DO_NOT_MULTIPLY_IDENTICAL_RUNS",
+    "JOIN_INFLIGHT_PRESERVES_REQUESTERS",
+    "FAILED_RUN_MAY_RETRY_WITH_PROVENANCE"
+  ]
+}
