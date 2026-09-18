@@ -2,6 +2,9 @@ name: CEREBRON Batch 8 + Retry Queue
 
 'on':
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/router-scientific-preflight.yml"
 
 permissions:
   contents: read
