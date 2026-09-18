@@ -85,11 +85,12 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='AGORA_API_SCHEMA_DISCOVERY_V4'
+          result['routing_policy']='CEREBRON_INTER_AI_HIGHWAY_V5'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
           result['provider_api_schema']={}
+          result['exchange_highway']={'enabled':True,'rounds':2,'handoffs':0,'verified_handoffs':0}
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
@@ -105,6 +106,8 @@ jobs:
                 continue
               try:
                 route_stats[space]['attempts']+=1
+                exchange_context=''
+                prompt=base_prompt + exchange_context
                 ok,text,meta=fw.invoke(space,prompt)
                 err=str((meta or {}).get('error',''))
                 m=meta or {}
@@ -127,6 +130,22 @@ jobs:
                   blocked_spaces.add(space)
                 if ok and str(text).strip():
                   route_stats[space]['success']+=1
+                  first=str(text).strip()
+                  # Round 2: hand the first model output to another productive route for critique.
+                  for peer in spaces:
+                    if peer==space or peer in blocked_spaces: continue
+                    critique_prompt=("CEREBRON INTER-AI HIGHWAY. Independently audit the following candidate. "
+                      "Identify errors, contradictions, missing evidence, and return a corrected synthesis. "
+                      "Do not treat the candidate as evidence.\nCANDIDATE:\n"+first[:12000])
+                    try:
+                      result['exchange_highway']['handoffs']+=1
+                      ok2,text2,meta2=fw.invoke(peer,critique_prompt)
+                      if ok2 and str(text2).strip():
+                        result['exchange_highway']['verified_handoffs']+=1
+                        first += "\n\n--- INTER_AI_AUDIT ---\n"+str(text2).strip()
+                        break
+                    except Exception:
+                      pass
                   return {'index':i+1,'role':role,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
               except Exception as e: attempts.append({'space':space,'ok':False,'error':repr(e)})
             return {'index':i+1,'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
