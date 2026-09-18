@@ -1,5 +1,5 @@
 {
-  "version": "1.9",
+  "version": "2.0",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -389,6 +389,12 @@
       "repo": "cerebron-farm-73-system-integration-qualification",
       "domain": "system-integration-qualification",
       "status": "SCAFFOLDED"
+    },
+    {
+      "id": 74,
+      "repo": "cerebron-farm-74-session-memory-encyclopedia",
+      "domain": "session-memory-encyclopedia",
+      "status": "PLANNED"
     }
   ]
 }
