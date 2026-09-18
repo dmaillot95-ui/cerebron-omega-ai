@@ -59,7 +59,7 @@ jobs:
           registry=json.load(open('config/farms.json'))['farms']
           f=next(x for x in registry if int(x['id'])==fid)
           repo=f['repo']; domain=f['domain']
-          roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST','THERMAL_ANALYST','MULTIPHYSICS_ANALYST','FAILURE_ANALYST','CAUSAL_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','SYNTHESIS_ANALYST','OMEGA_JUDGE']
+          roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST']
           candidate_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat','lmz/candle-llama2','mkmenta/gpt-1-and-gpt-2']
           QUOTA_MARKERS=('ZeroGPU quota','quota','rate limit','429')
           result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
@@ -85,7 +85,7 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='CEREBRON_GENERATION_PREFLIGHT_V8'
+          result['routing_policy']='CEREBRON_PRODUCTIVE_ROUTE_ABLATION_V9'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
@@ -93,20 +93,7 @@ jobs:
           result['exchange_highway']={'enabled':True,'rounds':2,'handoffs':0,'verified_handoffs':0}
           result['interchange_network']={'enabled':True,'switches':0,'bypasses':0,'routes_tried':0,'route_success':{}}
           result['multirate_modulator']={'enabled':True,'hf_seen':0,'hf_duplicates':0,'hf_survivors':0,'bf_audits':0,'raw_preserved':True}
-          result['generation_preflight']={'tested':0,'productive':[],'rejected':{},'policy':'GENERATE_ONCE_BEFORE_OPENING_ROUTE'}
-          productive_spaces=[]
-          for ps in candidate_spaces:
-            try:
-              result['generation_preflight']['tested']+=1
-              pok,ptext,pmeta=fw.invoke(ps,"Reply with exactly: CEREBRON_PREFLIGHT_OK")
-              if pok and str(ptext).strip():
-                productive_spaces.append(ps)
-                result['generation_preflight']['productive'].append(ps)
-              else:
-                result['generation_preflight']['rejected'][ps]=str((pmeta or {}).get('error','EMPTY_OR_FAILED'))[:500]
-            except Exception as pe:
-              result['generation_preflight']['rejected'][ps]=repr(pe)[:500]
-          spaces=productive_spaces
+          spaces=candidate_spaces
           seen_signatures=set()
           def hf_filter(txt):
             import hashlib,re
