@@ -1,0 +1,9 @@
+{
+  "schema":"cerebron-cognitive-digital-architecture-graph-v1",
+  "current_version":"V0",
+  "nodes":[],
+  "edges":[],
+  "edge_types":["DEPENDS_ON","CREATES","IMPROVES","UNLOCKS","VALIDATES","CONTRADICTS"],
+  "promotion_rule":"NEW_VERSION only after VERSION_EVOLUTION_GATE",
+  "weight_update":false
+}
