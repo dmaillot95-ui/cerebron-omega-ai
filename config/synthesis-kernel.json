@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-SYNTHESIS-KERNEL-OMEGA",
+  "purpose": "Produce short, precise, auditable R&D synthesis from compressed evidence without majority voting.",
+  "required_fields": [
+    "question",
+    "established",
+    "derived",
+    "contradictions",
+    "unknowns",
+    "next_discriminating_test",
+    "evidence_refs"
+  ],
+  "limits": {
+    "max_established": 5,
+    "max_derived": 5,
+    "max_contradictions": 5,
+    "max_unknowns": 5,
+    "max_next_tests": 3
+  },
+  "rules": [
+    "NO_BLABLA",
+    "NO_MAJORITY_AS_TRUTH",
+    "NO_EVIDENCE_LOSS",
+    "CONTRADICTION_VISIBLE",
+    "UNKNOWN_VISIBLE",
+    "CLAIM <= EVIDENCE",
+    "SOURCE_HASH_REQUIRED"
+  ]
+}
