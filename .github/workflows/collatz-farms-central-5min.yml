@@ -1,6 +1,6 @@
 name: CEREBRON Collatz Farms Central 5min Hub
 
-on:
+'on':
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       - 'config/farms.json'
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 concurrency:
@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Collect latest executions from all 45 farms
+      - name: Collect latest executions and write human-readable Collatz synthesis
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -34,8 +34,7 @@ jobs:
           from pathlib import Path
 
           cfg=json.loads(Path('config/farms.json').read_text())
-          owner=cfg['owner']
-          farms=cfg['farms']
+          owner=cfg['owner']; farms=cfg['farms']
           token=os.environ.get('GH_TOKEN','')
           headers={'Accept':'application/vnd.github+json','User-Agent':'CEREBRON-Omega-Hub'}
           if token:
@@ -48,62 +47,86 @@ jobs:
               return json.loads(r.read().decode())
 
           rows=[]
-          total_success_proxy=0
           for f in farms:
-            full=f"{owner}/{f['repo']}"
-            base='https://api.github.com/repos/'+full
+            full=f"{owner}/{f['repo']}"; base='https://api.github.com/repos/'+full
             row={'farm_id':f['id'],'domain':f['domain'],'repo':full,'latest_run':None,'artifacts':[],'error':None}
             try:
-              data=get(base+'/actions/runs?per_page=1')
-              runs=data.get('workflow_runs',[])
+              runs=get(base+'/actions/runs?per_page=1').get('workflow_runs',[])
               run=runs[0] if runs else None
               if run:
                 row['latest_run']={k:run.get(k) for k in ['id','name','path','run_number','event','status','conclusion','created_at','updated_at','head_sha','html_url']}
                 try:
                   arts=get(base+'/actions/runs/'+str(run['id'])+'/artifacts?per_page=100').get('artifacts',[])
                   row['artifacts']=[{'id':a.get('id'),'name':a.get('name'),'size_in_bytes':a.get('size_in_bytes'),'expired':a.get('expired'),'created_at':a.get('created_at')} for a in arts]
-                except Exception as e:
-                  row['artifact_error']=repr(e)
-            except Exception as e:
-              row['error']=repr(e)
+                except Exception as e: row['artifact_error']=repr(e)
+            except Exception as e: row['error']=repr(e)
             rows.append(row)
 
-          order={
-            'network_target_successful_external_outputs_per_cycle_min':100,
-            'network_target_successful_external_outputs_per_cycle_max':120,
-            'farm_work_passes':55,
-            'farm_output_packets_per_cycle':1,
-            'farm_count':45,
-            'cadence_minutes':5,
-            'note':'55 passes are work units inside one farm packet unless separately executed as real external calls.'
-          }
+          order={'network_target_successful_external_outputs_per_cycle_min':100,'network_target_successful_external_outputs_per_cycle_max':120,'farm_work_passes':55,'farm_output_packets_per_cycle':1,'farm_count':45,'cadence_minutes':5,'note':'55 passes are work units inside one farm packet unless separately executed as real external calls.'}
           routing={
             'A_H_COUPLING':['collatz-theory','collatz-dynamics','collatz-adic','science-math','invention-discovery','replication','contradiction-resolution'],
             'B_SMALL_H_BUDGET':['collatz-adic','collatz-counterexample','collatz-formal-audit','science-math','replication','unknowns-gaps'],
             'C_LOWER_GAP':['collatz-theory','collatz-literature','research-web','science-math','formal-audit','replication'],
             'D_RED_TEAM':['collatz-counterexample','collatz-formal-audit','counterexample-red-team','formal-audit','replication','contradiction-resolution'],
-            'E_FUSION':['collatz-synthesis','data-knowledge','unknowns-gaps','memory-compression','capability-evaluation','meta-orchestration','civilization-synthesis','ai-platform-routing','agent-runtime']
-          }
-          state={
-            'schema':'cerebron-collatz-central-45farm-5min-v2',
-            'generated_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            'orders_file':'CENTRAL-COLLATZ-ORDERS.md',
-            'network_order':order,
-            'rules':['REALITY>COHERENCE','EVIDENCE>CONFIDENCE','CLAIM<=EVIDENCE','WORKFLOW_SUCCESS!=MODEL_SUCCESS','AGENT_COUNT!=INTELLIGENCE','CONSENSUS!=TRUTH','COMPUTATION!=PROOF','SYMBOLIC_REDUCTION_BEFORE_MULTIPLICATION'],
-            'task_routing':routing,
-            'farms':rows
-          }
+            'E_FUSION':['collatz-synthesis','data-knowledge','unknowns-gaps','memory-compression','capability-evaluation','meta-orchestration','civilization-synthesis','ai-platform-routing','agent-runtime']}
+          state={'schema':'cerebron-collatz-central-45farm-5min-v3','generated_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'orders_file':'CENTRAL-COLLATZ-ORDERS.md','network_order':order,'rules':['REALITY>COHERENCE','EVIDENCE>CONFIDENCE','CLAIM<=EVIDENCE','WORKFLOW_SUCCESS!=MODEL_SUCCESS','AGENT_COUNT!=INTELLIGENCE','CONSENSUS!=TRUTH','COMPUTATION!=PROOF','SYMBOLIC_REDUCTION_BEFORE_MULTIPLICATION'],'task_routing':routing,'farms':rows}
           Path('central').mkdir(exist_ok=True)
           Path('central/collatz-45farm-state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
           Path('central/task-routing.json').write_text(json.dumps(routing,ensure_ascii=False,indent=2)+'\n')
           Path('central/network-order.json').write_text(json.dumps(order,ensure_ascii=False,indent=2)+'\n')
-          md=['# CEREBRON Collatz Central — 45 farms / 5 min','',f"Target successful external outputs per network cycle: {order['network_target_successful_external_outputs_per_cycle_min']}–{order['network_target_successful_external_outputs_per_cycle_max']}",f"Per farm: {order['farm_work_passes']} work passes → 1 consolidated packet",'']
+
+          successful=sum((r.get('latest_run') or {}).get('conclusion')=='success' for r in rows)
+          failed=sum((r.get('latest_run') or {}).get('conclusion')=='failure' for r in rows)
+          with_artifacts=sum(bool(r.get('artifacts')) for r in rows)
+          md=[
+            '# CÉRÉBRON Ω — Synthèse scientifique Collatz',
+            '',
+            '> Cette page sépare strictement résultat mathématique et état de l’infrastructure. Un workflow GitHub vert ne constitue pas une preuve.',
+            '',
+            '## Résultat mathématique consolidé',
+            '',
+            '- **Démontré / consolidé :** pour la transformation accélérée sur les impairs T(x)=(3x+1)/2^{v2(3x+1)}, aucun cycle positif non trivial comportant exactement 1, 2, 3 ou 4 termes impairs ; le seul cycle positif de période impaire N≤4 est 1→1.',
+            '- **Fronts actuellement étudiés :** H-coupling / H-log, contraintes diophantiennes, filtres 3-adiques, small-h budget et lower-gap.',
+            '- **N=5 / N=6 :** conserver les résultats de campagne comme résultats intermédiaires tant qu’une preuve complète auditable n’est pas présente dans les sorties récupérées par le Hub.',
+            '- **N arbitraire :** aucune obstruction universelle vérifiée n’est actuellement enregistrée par ce Hub.',
+            '- **Conclusion :** la conjecture de Collatz n’est pas déclarée démontrée.',
+            '',
+            '## Règle de promotion',
+            '',
+            'Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après récupération de son contenu, vérification mathématique, contre-audit et reproduction indépendante. CLAIM <= EVIDENCE.',
+            '',
+            '## État des fermes au dernier cycle',
+            '',
+            f'- Fermes configurées : {len(rows)}',
+            f'- Derniers workflows en succès : {successful}',
+            f'- Derniers workflows en échec : {failed}',
+            f'- Fermes avec au moins un artefact sur leur dernier run : {with_artifacts}',
+            '',
+            '## Détail technique',
+            ''
+          ]
           for r in rows:
             x=r.get('latest_run') or {}
             md.append(f"- Farm {r['farm_id']:02d} {r['domain']}: run={x.get('id')} status={x.get('status')} conclusion={x.get('conclusion')} artifacts={len(r.get('artifacts',[]))}")
+          Path('central/COLLATZ-SYNTHESIS.md').write_text('\n'.join(md)+'\n')
           Path('central/STATUS.md').write_text('\n'.join(md)+'\n')
-          print(json.dumps(state,ensure_ascii=False,indent=2))
+          print('\n'.join(md[:32]))
           PY
+
+      - name: Publish latest synthesis in repository
+        shell: bash
+        run: |
+          mkdir -p reports
+          cp central/COLLATZ-SYNTHESIS.md reports/COLLATZ-LATEST-SYNTHESIS.md
+          git config user.name "cerebron-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports/COLLATZ-LATEST-SYNTHESIS.md
+          if git diff --cached --quiet; then
+            echo "No synthesis change to commit"
+          else
+            git commit -m "Update Collatz farm scientific synthesis [skip ci]"
+            git push
+          fi
 
       - name: Upload centralized 45-farm state
         uses: actions/upload-artifact@v4
