@@ -1,0 +1,72 @@
+{
+  "protocol": "CEREBRON-RD-MISSION-OMEGA/0.1",
+  "mission_id": "COLLATZ-RETURN-OBSTRUCTION-001",
+  "objective": "Find or rule out a universal obstruction to nontrivial return in the accelerated odd Collatz map.",
+  "checkpoint": {
+    "verified_finite": [
+      "H-coupling formulations agree on tested finite domain",
+      "tested transition graph: 2500 nodes, 113 edges, 0 cycles, 0 nontrivial SCC"
+    ],
+    "supported": [
+      "H-coupling alone is not a universal obstruction: admissible finite solutions exist"
+    ],
+    "failed": [
+      "strict monotone rank family: 295 candidates, none worked"
+    ],
+    "unknown": [
+      "universal return obstruction",
+      "arbitrary-r proof"
+    ]
+  },
+  "coalition": [
+    {
+      "farm": "F1",
+      "role": "exact cyclic algebra / return identity"
+    },
+    {
+      "farm": "F3",
+      "role": "3-adic valuation constraints"
+    },
+    {
+      "farm": "F9",
+      "role": "independent mathematical derivation"
+    },
+    {
+      "farm": "F33",
+      "role": "counterexample / adversarial search"
+    },
+    {
+      "farm": "F34",
+      "role": "formal audit"
+    },
+    {
+      "farm": "F39",
+      "role": "unknown/gap isolation"
+    }
+  ],
+  "planned_future": {
+    "F70": "theorem-proof engineering once physical repo exists"
+  },
+  "task_funnel": [
+    "derive exact admissible transition compatibility constraints",
+    "compose constraints along a chain",
+    "derive closure condition for return X_k=X_0",
+    "search for cumulative obstruction Q",
+    "attack Q with 3-adic and lower-gap constraints",
+    "red-team candidate obstruction",
+    "audit arbitrary-r argument"
+  ],
+  "anti_redundancy": {
+    "reuse_verified": true,
+    "join_identical_inflight": true,
+    "forbidden_repeat": "295 strict monotone rank family unless materially changed"
+  },
+  "stop_conditions": [
+    "counterexample to candidate obstruction",
+    "no information gain",
+    "proof gap detected",
+    "universal argument verified"
+  ],
+  "evidence_ceiling": "UNKNOWN until arbitrary-r proof exists",
+  "claim": "mission packet only; Collatz is not solved"
+}
