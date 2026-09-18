@@ -1,0 +1,58 @@
+name: CEREBRON 144 Relativistic Fluid Dynamics R&D Benchmark
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/relativistic-fluid-144-worker-test.yml']
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import os,json,time,urllib.request,urllib.error,collections
+          farms={13:"engineering-systems",15:"space",33:"counterexample-red-team",34:"formal-audit",36:"simulation-modeling",37:"experiment-test-design",39:"unknowns-gaps"}
+          roles=["REALITY_RESEARCH","SYSTEM_ARCHITECT","CALCULATION","SIMULATION","CAUSAL_ANALYSIS","INVENTION","FAILURE_ANALYSIS","COUNTEREXAMPLE_HUNTER","FALSIFIER","FORMAL_AUDITOR","INDEPENDENT_REPLICATOR","UNCERTAINTY_ANALYST","INTERFACE_ANALYST","INVARIANT_HUNTER","EXPERIMENT_DESIGN","CONTRADICTION_RESOLUTION","UNKNOWN_GAP_ANALYST","EVIDENCE_AUDITOR","SYNTHESIS_ANALYST","OMEGA_JUDGE"]
+          key=os.environ.get("OPENROUTER_API_KEY",""); rows=[]
+          for n in range(144):
+            fid,domain=list(farms.items())[n % len(farms)]
+            i=n % len(roles); role=roles[i]
+            row={"call":n+1,"farm_id":fid,"farm_domain":domain,"worker":f"W{i+1:02d}","role":role,"success":False}
+            msg=f"""CEREBRON Omega scientific benchmark. Farm F{fid} domain {domain}. Fixed worker W{i+1:02d} role {role}.
+MISSION: analyze constrained relativistic fluid dynamics (special and general relativistic hydrodynamics), focusing on physical/mathematical constraints: conservation of stress-energy and baryon number, four-velocity normalization, causality and characteristic/sound speeds, equation-of-state admissibility, entropy/second-law constraints, shocks and Rankine-Hugoniot conditions, hyperbolicity/well-posedness, and numerical constraint preservation. Identify failure modes and falsifiable tests.
+RULES: established facts must be separated from derivations/speculation; define equations and assumptions; check dimensions where relevant; CLAIM<=EVIDENCE; do not invent citations; RESPONSE!=EVIDENCE.
+ROLE: perform the analysis specifically from the cognitive function {role}. Return a dense self-contained technical contribution suitable for later cross-worker synthesis."""
+            payload=json.dumps({"model":"openrouter/free","messages":[{"role":"user","content":msg}],"max_tokens":900}).encode()
+            t=time.time()
+            for attempt in range(3):
+              req=urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",data=payload,headers={"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":"https://github.com/dmaillot95-ui/cerebron-omega-ai","X-Title":"CEREBRON Omega"})
+              try:
+                with urllib.request.urlopen(req,timeout=90) as resp: data=json.loads(resp.read().decode())
+                txt=((data.get("choices") or [{}])[0].get("message") or {}).get("content","")
+                row.update(success=bool(str(txt).strip()),provider_model=data.get("model"),latency_s=round(time.time()-t,3),attempts=attempt+1,response=str(txt),preview=str(txt)[:240]); break
+              except urllib.error.HTTPError as e:
+                code=e.code; row.update(error="HTTP_"+str(code),error_body=e.read().decode(errors="replace")[:180],attempts=attempt+1)
+                if code==429 and attempt<2: time.sleep(3*(attempt+1)); continue
+                break
+              except Exception as e:
+                row.update(error=type(e).__name__+": "+str(e)[:160],attempts=attempt+1); break
+            rows.append(row); print(json.dumps(row),flush=True); time.sleep(1)
+          ok=sum(r["success"] for r in rows); total=len(rows)
+          models=collections.Counter(r.get("provider_model","") for r in rows if r["success"])
+          errors=collections.Counter(r.get("error","") for r in rows if not r["success"])
+          per_farm={str(fid):sum(r["success"] for r in rows if r["farm_id"]==fid) for fid in farms}
+          out={"schema":"cerebron-relativistic-fluid-144-v1","farms":len(farms),"workers_per_farm":20,"planned":total,"successful_external_model_outputs":ok,"failed":total-ok,"yield_pct":round(100*ok/total,2),"successful_by_farm":per_farm,"models":dict(models),"errors":dict(errors),"rows":rows}
+          print("ACCOUNTING "+json.dumps({k:v for k,v in out.items() if k!="rows"}),flush=True)
+          open("relativistic-fluid-144.json","w").write(json.dumps(out,indent=2)+"\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relativistic-fluid-144
+          path: relativistic-fluid-144.json
+          retention-days: 3
