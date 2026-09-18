@@ -1,0 +1,49 @@
+{
+  "schema": "cerebron-session-memory-encyclopedia-v1",
+  "farm_id": 74,
+  "command": "FIN DE SESSION",
+  "purpose": "Persistent auditable cross-session memory capsules and domain encyclopedia on GitHub",
+  "capsule_fields": [
+    "session_id",
+    "timestamp",
+    "projects",
+    "verified_results",
+    "decisions",
+    "unknowns",
+    "contradictions",
+    "active_tasks",
+    "important_commits_runs",
+    "next_checkpoint",
+    "evidence",
+    "provenance"
+  ],
+  "encyclopedia_domains": [
+    "CEREBRON",
+    "COLLATZ",
+    "ARCHITECTON",
+    "SPATIAL",
+    "ENERGY",
+    "PHYSICS",
+    "ENGINEERING",
+    "AI",
+    "INDUSTRY",
+    "OTHER"
+  ],
+  "pipeline": [
+    "FIN_DE_SESSION",
+    "CAPSULE",
+    "SYADRIX_DEDUP",
+    "F66_INDEX",
+    "ENCYCLOPEDIA_UPDATE",
+    "GITHUB_COMMIT",
+    "NEXT_SESSION_RESTORE"
+  ],
+  "rules": [
+    "CLAIM<=EVIDENCE",
+    "RAW_CHAT!=MEMORY",
+    "PRESERVE_CONTRADICTIONS",
+    "NO_SILENT_OVERWRITE",
+    "CAPSULE_BEFORE_ACCUMULATION",
+    "VERIFY_BEFORE_COMMIT"
+  ]
+}
