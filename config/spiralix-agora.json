@@ -1,0 +1,28 @@
+{
+  "version": "0.1.0",
+  "system": "SPIRALIX-AGORA-OMEGA",
+  "purpose": "Vector task allocation, redundancy control, coalition formation, error triangulation.",
+  "geometry_layers": {
+    "concave": "exploration: seek missing hypotheses and gaps",
+    "plane": "baseline: independent replication and neutral comparison",
+    "convex": "exploitation: converge on supported candidates",
+    "stratospheric": "meta-layer: cross-domain synthesis and escalation only when evidence justifies it"
+  },
+  "mechanisms": {
+    "vector_showroom": "publish compact capability vectors for farms/tasks",
+    "vector_distributor": "assign tasks by domain/method/evidence needs and diversity",
+    "redundancy_budget": "retain deliberate independent replication; suppress useless duplicate work",
+    "collapse_vector": "merge equivalent task branches only after provenance/independence check",
+    "scaling_scan": "estimate whether adding farms adds method/data diversity rather than headcount only",
+    "micro_impulse": "small targeted challenge injected to break coalition lock-in",
+    "error_triangulation": "compare >=3 methodologically distinct paths; disagreement remains explicit"
+  },
+  "hard_rules": [
+    "CONSENSUS != TRUTH",
+    "AGENT_COUNT != INTELLIGENCE",
+    "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
+    "COLLAPSE != VALIDATION",
+    "CLAIM <= EVIDENCE",
+    "VERIFY BEFORE COMMIT"
+  ]
+}
