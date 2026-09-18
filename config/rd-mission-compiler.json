@@ -1,0 +1,35 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-RD-MISSION-COMPILER-OMEGA",
+  "purpose": "Compile a scientific question into a compact, auditable execution packet for the existing farm network.",
+  "stages": [
+    "QUESTION",
+    "KNOWN_EVIDENCE",
+    "CENTRAL_UNKNOWN",
+    "WORK_KEY",
+    "REUSE_CHECK",
+    "CAPABILITY_MATCH",
+    "DIVERSITY_CHECK",
+    "COALITION",
+    "MICRO_IMPULSE",
+    "VALIDATION_PLAN",
+    "SYNTHESIS_SCHEMA"
+  ],
+  "output_fields": [
+    "mission_id",
+    "objective",
+    "central_unknown",
+    "reuse_policy",
+    "coalition_requirements",
+    "validation",
+    "evidence_ceiling",
+    "stop_conditions"
+  ],
+  "rules": [
+    "NO_NEW_LAYER_IF_EXISTING_CAPABILITY_SUFFICES",
+    "COMPUTATION != PROOF",
+    "STOP_ON_VERIFIED_REUSE",
+    "STOP_ON_NO_INFORMATION_GAIN",
+    "CLAIM <= EVIDENCE"
+  ]
+}
