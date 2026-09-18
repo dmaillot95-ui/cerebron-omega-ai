@@ -1,0 +1,80 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-FARM-QUALIFICATION-OMEGA",
+  "purpose": "Pre-qualify planned F60-F73 against explicit capability gains before physical repository creation.",
+  "states": [
+    "PLANNED",
+    "JUSTIFIED",
+    "CREATED",
+    "SCAFFOLDED",
+    "EXECUTABLE",
+    "TESTED",
+    "VERIFIED",
+    "INTEGRATED",
+    "QUALIFIED"
+  ],
+  "farms": {
+    "F60": [
+      "hardware-system-architecture",
+      "requirements-interfaces"
+    ],
+    "F61": [
+      "pcb-design",
+      "signal-power-integrity"
+    ],
+    "F62": [
+      "embedded-firmware",
+      "mcu-fpga-rtos"
+    ],
+    "F63": [
+      "hardware-hil",
+      "fault-injection-E4"
+    ],
+    "F64": [
+      "hardware-reliability",
+      "fmea-fmeda-derating"
+    ],
+    "F65": [
+      "physical-prototype",
+      "qualification-E5plus"
+    ],
+    "F66": [
+      "knowledge-graph",
+      "vector-index"
+    ],
+    "F67": [
+      "cross-farm-communication",
+      "forum-agora-transport"
+    ],
+    "F68": [
+      "experiment-orchestration",
+      "closed-loop-task-routing"
+    ],
+    "F69": [
+      "causal-discovery",
+      "causal-hypothesis-tests"
+    ],
+    "F70": [
+      "theorem-proof-engineering",
+      "formal-proof-checking"
+    ],
+    "F71": [
+      "scientific-reproduction",
+      "independent-reproduction"
+    ],
+    "F72": [
+      "reality-evidence-gate",
+      "claim-evidence-enforcement"
+    ],
+    "F73": [
+      "system-integration",
+      "qualification-gate"
+    ]
+  },
+  "rules": [
+    "JUSTIFIED != CREATED",
+    "PLANNED_REPO != EXECUTABLE_FARM",
+    "ABLATION_BEFORE_ADDITION",
+    "CLAIM <= EVIDENCE"
+  ]
+}
