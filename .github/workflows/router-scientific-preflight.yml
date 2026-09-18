@@ -1,4 +1,4 @@
-name: CEREBRON OpenRouter Reliability Test 20
+name: CEREBRON OpenRouter Adaptive Queue Test 20
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -38,6 +38,8 @@ jobs:
 
           TOTAL = 20
           MIN_CHARS = 120
+          BASE_DELAY = 8
+          RATE_LIMIT_DELAY = 35
 
           roles = [
               "REALITY_RESEARCH",
@@ -177,16 +179,18 @@ jobs:
                       if not text:
                           last_error = "EMPTY_CONTENT"
                           if attempt < 2:
-                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=EMPTY_CONTENT ATTEMPT={attempt+1}")
-                              time.sleep(3 * (attempt + 1))
+                              wait = 8 * (attempt + 1)
+                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=EMPTY_CONTENT WAIT={wait}s ATTEMPT={attempt+1}")
+                              time.sleep(wait)
                               continue
                           break
 
                       if len(text) < MIN_CHARS:
                           last_error = "LOW_QUALITY_SHORT_CONTENT_" + str(len(text))
                           if attempt < 2:
-                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=SHORT_CONTENT CHARS={len(text)} ATTEMPT={attempt+1}")
-                              time.sleep(3 * (attempt + 1))
+                              wait = 8 * (attempt + 1)
+                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=SHORT_CONTENT CHARS={len(text)} WAIT={wait}s ATTEMPT={attempt+1}")
+                              time.sleep(wait)
                               continue
                           break
 
@@ -224,14 +228,16 @@ jobs:
                       last_error = "HTTP_" + str(error.code)
 
                       if error.code == 429 and attempt < 2:
+                          wait = RATE_LIMIT_DELAY * (attempt + 1)
                           print(
                               f"CALL={i+1:02d}/20 "
                               f"RETRY=YES "
                               f"HTTP_STATUS=429 "
+                              f"WAIT={wait}s "
                               f"ATTEMPT={attempt+1}"
                           )
 
-                          time.sleep(5 * (attempt + 1))
+                          time.sleep(wait)
                           continue
 
                       break
@@ -245,8 +251,9 @@ jobs:
                       )
 
                       if attempt < 2:
-                          print(f"CALL={i+1:02d}/20 RETRY=YES REASON={type(error).__name__} ATTEMPT={attempt+1}")
-                          time.sleep(3 * (attempt + 1))
+                          wait = 8 * (attempt + 1)
+                          print(f"CALL={i+1:02d}/20 RETRY=YES REASON={type(error).__name__} WAIT={wait}s ATTEMPT={attempt+1}")
+                          time.sleep(wait)
                           continue
 
                       break
@@ -269,8 +276,8 @@ jobs:
                       f"ERROR={last_error}"
                   )
 
-              # volontairement séquentiel pour le préflight
-              time.sleep(2)
+              # File adaptative: réduit la pression sur le routeur gratuit.
+              time.sleep(BASE_DELAY)
 
           successful = sum(
               1 for row in results
@@ -301,7 +308,7 @@ jobs:
 
           report = {
               "schema":
-                  "cerebron-openrouter-reliability-20-v2",
+                  "cerebron-openrouter-adaptive-queue-20-v3",
               "planned": TOTAL,
               "successful_external_model_outputs":
                   successful,
