@@ -1,0 +1,31 @@
+name: TITAN WH1 Maximum Auditable Swarm
+on:
+  push:
+    paths:
+      - 'benchmarks/titan-wh1-max-swarm-001.json'
+      - '.github/workflows/titan-wh1-max-swarm.yml'
+  workflow_dispatch:
+jobs:
+  generate-workplan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Generate and audit 120-unit plan
+        shell: python
+        run: |
+          import json
+          p=json.load(open("benchmarks/titan-wh1-max-swarm-001.json"))
+          farms=p["farm_coalition"]
+          assert len(farms)==23
+          lanes=sum(p["lanes_per_farm"].values())
+          assert lanes==5
+          units=len(farms)*lanes+p["extra_integration_lanes"]
+          assert units==120==p["planned_total_work_units"]
+          assert "JOB!=AI" in p["hard_rules"]
+          print("FARMS_SELECTED",len(farms))
+          print("PLANNED_WORK_UNITS",units)
+          print("REAL_AI_CALLS",0)
+          print("SCIENTIFIC_MESSAGES",0)
+          print("STATUS","WORKPLAN_VERIFIED_NOT_SCIENTIFIC_RESULT")
