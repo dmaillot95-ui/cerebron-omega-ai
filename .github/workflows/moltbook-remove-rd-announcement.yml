@@ -1,0 +1,38 @@
+name: CEREBRON Moltbook Remove R&D Announcement
+'on':
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/moltbook-remove-rd-announcement.yml"
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove industrial R&D announcement
+        env:
+          MOLTBOOK_API_KEY: ${{ secrets.MOLTBOOK_API_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$MOLTBOOK_API_KEY"
+          echo "::add-mask::$MOLTBOOK_API_KEY"
+          code=$(curl -sS -o response.json -w "%{http_code}" \
+            -X DELETE \
+            -H "Authorization: Bearer $MOLTBOOK_API_KEY" \
+            -H "Accept: application/json" \
+            "https://www.moltbook.com/api/v1/posts/d1d1de00-558d-4821-8e9e-6cae5e47c74f")
+          echo "HTTP $code"
+          python - <<'PY'
+import json
+try:
+    d=json.load(open("response.json"))
+    for k in ("api_key","token","authorization"):
+        d.pop(k,None)
+    print(json.dumps(d,ensure_ascii=False))
+except Exception:
+    print("No JSON response")
+PY
+          case "$code" in
+            200|202|204|404) exit 0 ;;
+            *) exit 1 ;;
+          esac
