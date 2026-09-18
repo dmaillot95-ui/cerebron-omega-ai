@@ -80,7 +80,7 @@ jobs:
               health.append({'space':space,'ok':False,'error':repr(e)})
           ranked_health=sorted(health,key=lambda x:(not x['ok'],x.get('latency',9999)))
           live_spaces=[h['space'] for h in ranked_health if h['ok']]
-          spaces=productive_spaces
+          spaces=candidate_spaces
           result['provider_health']=health
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
