@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-FARM-BOOTSTRAP-MANIFEST-OMEGA",
+  "purpose": "Prepare deterministic scaffold payloads for F60-F73 so physical repositories can be populated immediately once they exist.",
+  "required_files": [
+    "README.md",
+    "farm.json",
+    "tools/spiralix_adapter.py",
+    ".github/workflows/spiralix-interop.yml"
+  ],
+  "states": {
+    "before_repo": "JUSTIFIED",
+    "after_detect": "CREATED",
+    "after_files": "SCAFFOLDED",
+    "after_action_success": "TESTED"
+  },
+  "invariant": "NEVER MARK CREATED UNTIL GITHUB REPOSITORY IS DETECTED"
+}
