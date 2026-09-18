@@ -1,0 +1,14 @@
+name: SPIRALIX Exponent Validate
+on:
+  push:
+    paths: ['config/spiralix-exponent.json','tools/spiralix_exponent.py','.github/workflows/spiralix-exponent.yml']
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/spiralix_exponent.py
