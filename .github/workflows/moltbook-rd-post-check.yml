@@ -1,0 +1,40 @@
+name: CEREBRON Moltbook R&D Post Check
+
+'on':
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/moltbook-rd-post-check.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check post and comments
+        env:
+          MOLTBOOK_API_KEY: ${{ secrets.MOLTBOOK_API_KEY }}
+          POST_ID: d1d1de00-558d-4821-8e9e-6cae5e47c74f
+        run: |
+          set -euo pipefail
+          test -n "$MOLTBOOK_API_KEY"
+          echo "::add-mask::$MOLTBOOK_API_KEY"
+          base="https://www.moltbook.com/api/v1"
+          for endpoint in "posts/$POST_ID" "posts/$POST_ID/comments"; do
+            out=$(echo "$endpoint" | tr '/' '_').json
+            code=$(curl --silent --show-error --output "$out" --write-out "%{http_code}"               "$base/$endpoint" -H "Authorization: Bearer $MOLTBOOK_API_KEY")
+            echo "ENDPOINT=$endpoint HTTP_STATUS=$code"
+            python3 - "$out" <<'PY'
+          import json,sys
+          p=sys.argv[1]
+          try:
+              d=json.load(open(p))
+          except Exception as e:
+              print("INVALID_JSON",e); raise
+          def scrub(x):
+              if isinstance(x,dict):
+                  return {k:scrub(v) for k,v in x.items() if k.lower() not in {"api_key","token","authorization"}}
+              if isinstance(x,list): return [scrub(v) for v in x]
+              return x
+          print(json.dumps(scrub(d),ensure_ascii=False)[:20000])
+          PY
+          done
