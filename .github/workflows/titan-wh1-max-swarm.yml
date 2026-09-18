@@ -61,7 +61,14 @@ jobs:
           repo=f['repo']; domain=f['domain']
           roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST','THERMAL_ANALYST','MULTIPHYSICS_ANALYST','FAILURE_ANALYST','CAUSAL_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','SYNTHESIS_ANALYST','OMEGA_JUDGE']
           candidate_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
-          # Health-router: probe providers once per farm, then route roles only to live Spaces.
+          result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'
+            pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+          # Health-router runs only after result and farm worker exist.
           probe_prompt='Reply exactly HEALTH_OK.'
           health=[]
           for space in candidate_spaces:
@@ -74,13 +81,6 @@ jobs:
           result['provider_health']=health
           result['live_spaces']=spaces
           result['dead_spaces']=[h['space'] for h in health if not h['ok']]
-          result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
-          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
-          wp=pathlib.Path('farm/worker/farm_worker.py')
-          if cp.returncode!=0 or not wp.exists():
-            result['error']='clone_or_worker_missing'
-            pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
-          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
