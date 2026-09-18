@@ -1,0 +1,18 @@
+name: CEREBRON Causal Action Gate
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/causal-action-gate.json'
+      - 'tools/causal_action_gate.py'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: |
+          python -m py_compile tools/causal_action_gate.py
+          echo '{"reasons":["PLAN_ONLY"]}' | python tools/causal_action_gate.py | grep SUPPRESSED
+          echo '{"reasons":["NEW_VERIFIED_RESULT"]}' | python tools/causal_action_gate.py | grep VERIFIED
