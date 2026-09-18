@@ -4,6 +4,16 @@ Noyau central d’orchestration de CÉRÉBRON Ω.
 
 Mission : recevoir une tâche, la classifier, sélectionner les fermes pertinentes, appliquer les contraintes de coût et de preuve, agréger les résultats, déclencher audit/réplication si nécessaire, puis produire une synthèse Ω traçable.
 
+## SPIRALIX Ω — langage inter-IA
+
+SPIRALIX Ω est le langage symbolique compact commun de CÉRÉBRON, ARCHITECTON et SPIRALION. GLYPH-VECTOR Ω est sa couche machine d'encodage, vectorisation, indexation et routage.
+
+Chaîne canonique :
+
+SPIRALIX -> GLYPH-VECTOR -> JSON / langage naturel -> ROUTER -> COMPUTE-FIRST -> FERMES -> sorties réelles -> FALSIFICATION -> AUDIT -> RÉPLICATION -> SYNTHÈSE Ω.
+
+Une IA n'a pas besoin d'avoir appris SPIRALIX : le routeur doit fournir une expansion JSON et/ou langage naturel sémantiquement équivalente. Les glyphes compressent les instructions mais ne créent ni capacité, ni agent, ni preuve supplémentaire.
+
 ## Invariants
 
 - REALITY > COHERENCE
@@ -21,35 +31,11 @@ Mission : recevoir une tâche, la classifier, sélectionner les fermes pertinent
 
 Pour toute nouvelle tâche, CÉRÉBRON doit d’abord déterminer si une partie significative du problème est calculable de façon déterministe.
 
-Ordre par défaut :
+Ordre par défaut : réduction symbolique avant calcul massif ; calcul déterministe spécialisé ; raisonnement/recherche ; falsification ; réplication indépendante ; audit ; synthèse.
 
-1. réduction symbolique avant calcul massif ;
-2. calcul déterministe spécialisé quand applicable ;
-3. raisonnement / recherche pour ce qui ne peut pas être calculé directement ;
-4. falsification ;
-5. réplication indépendante ;
-6. audit ;
-7. synthèse.
+Moteurs spécialisés : SymPy, arithmétique modulaire, Z3/SMT, graphes et Python déterministe.
 
-Moteurs spécialisés par défaut :
-
-- SymPy : algèbre, identités, simplification, calcul symbolique ;
-- arithmétique modulaire : congruences, ordres, résidus, divisibilité ;
-- Z3 / SMT : contraintes exactes bornées et recherche de contre-modèles ;
-- graphes : transitions, cycles, connectivité, états admissibles ;
-- Python déterministe : vérification numérique, exploration finie, statistiques et réplication.
-
-Règles d’allocation :
-
-- ne pas demander à un modèle de deviner un résultat qu’un moteur déterministe peut calculer ;
-- ne pas multiplier des workers identiques sans information indépendante ;
-- préférer SYMBOLIC REDUCTION > TARGETED COMPUTATION > BRUTE FORCE ;
-- toute sortie de calcul doit enregistrer paramètres, limites, moteur, résultat et hash ;
-- un test fini reste un test fini ;
-- une sortie SMT bornée ne constitue pas une preuve universelle hors de son domaine ;
-- un résultat n’est intégré qu’après vérification adaptée à son niveau de preuve.
-
-Cette politique est le comportement par défaut de toutes les futures campagnes CÉRÉBRON sauf instruction explicite contraire.
+Règles : ne pas demander à un modèle de deviner un résultat calculable ; ne pas multiplier des workers identiques sans information indépendante ; préférer SYMBOLIC REDUCTION > TARGETED COMPUTATION > BRUTE FORCE ; enregistrer paramètres/limites/moteur/résultat/hash ; test fini != preuve universelle ; SMT borné != preuve hors domaine ; intégrer seulement après vérification adaptée.
 
 ## Contraintes d’infrastructure
 
@@ -61,6 +47,6 @@ Cette politique est le comportement par défaut de toutes les futures campagnes 
 
 ## Architecture
 
-HUMAIN -> CÉRÉBRON Ω -> ROUTER -> COMPUTE-FIRST -> FERMES -> AGENTS/WORKERS RÉELS -> AUDIT -> RÉPLICATION -> SYNTHÈSE Ω -> MÉMOIRE VÉRIFIÉE -> HUMAIN
+HUMAIN -> CÉRÉBRON Ω -> SPIRALIX Ω -> ROUTER -> COMPUTE-FIRST -> FERMES -> AGENTS/WORKERS RÉELS -> AUDIT -> RÉPLICATION -> SYNTHÈSE Ω -> MÉMOIRE VÉRIFIÉE -> HUMAIN
 
 Un rôle déclaré n’est pas un agent réel. Une exécution IA externe n’est comptée comme telle que si un appel modèle réel et une sortie vérifiable existent.
