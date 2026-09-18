@@ -1,4 +1,4 @@
-name: CEREBRON 144 Relativistic Fluid Dynamics R&D Benchmark
+name: CEREBRON 144 Relativistic Fluid Dynamics RnD Benchmark
 on:
   workflow_dispatch:
   push:
