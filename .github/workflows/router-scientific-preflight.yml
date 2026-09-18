@@ -24,10 +24,15 @@ jobs:
           python - <<'PY'
           import os
           import json
+          import traceback
           import urllib.request
           import urllib.error
 
-          # Nettoyage défensif du secret
+          # ============================================================
+          # CEREBRON OMEGA — OPENROUTER SAFE PREFLIGHT
+          # Objectif : 1 seul appel externe réel et diagnostic complet
+          # ============================================================
+
           key = os.environ.get("OPENROUTER_API_KEY", "").strip()
 
           if not key:
@@ -35,22 +40,30 @@ jobs:
               print("REASON=MISSING_SECRET")
               raise SystemExit(1)
 
+          print("SECRET_PRESENT=YES")
+          print("TEST_CALLS=1")
+
           prompt = """
           CEREBRON scientific preflight.
 
           Analyze one consistency constraint in relativistic
-          hydrodynamics:
+          hydrodynamics.
 
           Explain how four-velocity normalization and causality
           constrain physically admissible fluid states.
 
-          Define assumptions.
-          Separate established physics from inference.
+          Define all assumptions.
+
+          Separate:
+          - established physics,
+          - mathematical deductions,
+          - inference,
+          - uncertainty.
 
           CLAIM <= EVIDENCE.
           """
 
-          payload = json.dumps({
+          payload_object = {
               "model": "openrouter/free",
               "messages": [
                   {
@@ -59,7 +72,9 @@ jobs:
                   }
               ],
               "max_tokens": 300
-          }).encode("utf-8")
+          }
+
+          payload = json.dumps(payload_object).encode("utf-8")
 
           request = urllib.request.Request(
               "https://openrouter.ai/api/v1/chat/completions",
@@ -67,43 +82,139 @@ jobs:
               headers={
                   "Authorization": "Bearer " + key,
                   "Content-Type": "application/json",
+                  "HTTP-Referer": "https://github.com/dmaillot95-ui/cerebron-omega-ai",
                   "X-Title": "CEREBRON Omega"
               },
               method="POST"
           )
 
           try:
+              print("REQUEST_START=YES")
+
               with urllib.request.urlopen(request, timeout=90) as response:
-                  data = json.loads(response.read().decode("utf-8"))
+                  status = response.getcode()
+                  raw = response.read().decode("utf-8")
 
-              text = (
-                  ((data.get("choices") or [{}])[0]
-                  .get("message") or {})
-                  .get("content", "")
-              ).strip()
+              print("HTTP_STATUS=" + str(status))
+              print("RESPONSE_BYTES=" + str(len(raw)))
 
-              model = data.get("model", "unknown")
+              data = json.loads(raw)
+
+              if not isinstance(data, dict):
+                  print("RESULT=FAIL")
+                  print("REASON=RESPONSE_NOT_OBJECT")
+                  print("RESPONSE_TYPE=" + type(data).__name__)
+                  raise SystemExit(1)
+
+              print("JSON_OBJECT=YES")
+              print("TOP_LEVEL_KEYS=" + ",".join(sorted(str(k) for k in data.keys())))
+
+              choices = data.get("choices")
+
+              if not isinstance(choices, list):
+                  print("RESULT=FAIL")
+                  print("REASON=CHOICES_NOT_LIST")
+                  print("CHOICES_TYPE=" + type(choices).__name__)
+                  raise SystemExit(1)
+
+              if len(choices) == 0:
+                  print("RESULT=FAIL")
+                  print("REASON=EMPTY_CHOICES")
+                  raise SystemExit(1)
+
+              first_choice = choices[0]
+
+              if not isinstance(first_choice, dict):
+                  print("RESULT=FAIL")
+                  print("REASON=CHOICE_NOT_OBJECT")
+                  print("CHOICE_TYPE=" + type(first_choice).__name__)
+                  raise SystemExit(1)
+
+              message = first_choice.get("message")
+
+              if not isinstance(message, dict):
+                  print("RESULT=FAIL")
+                  print("REASON=MESSAGE_NOT_OBJECT")
+                  print("MESSAGE_TYPE=" + type(message).__name__)
+                  raise SystemExit(1)
+
+              content = message.get("content")
+
+              if content is None:
+                  print("RESULT=FAIL")
+                  print("REASON=CONTENT_IS_NONE")
+                  raise SystemExit(1)
+
+              if isinstance(content, str):
+                  text = content.strip()
+
+              elif isinstance(content, list):
+                  parts = []
+
+                  for item in content:
+                      if isinstance(item, dict):
+                          value = item.get("text")
+                          if isinstance(value, str):
+                              parts.append(value)
+
+                  text = "\n".join(parts).strip()
+
+              else:
+                  print("RESULT=FAIL")
+                  print("REASON=UNSUPPORTED_CONTENT_TYPE")
+                  print("CONTENT_TYPE=" + type(content).__name__)
+                  raise SystemExit(1)
 
               if not text:
                   print("RESULT=FAIL")
                   print("REASON=EMPTY_RESPONSE")
                   raise SystemExit(1)
 
+              model = data.get("model", "unknown")
+
               print("RESULT=SUCCESS")
               print("EXTERNAL_RESPONSES=1/1")
               print("MODEL=" + str(model))
               print("RESPONSE_RECEIVED=YES")
+              print("RESPONSE_CHARS=" + str(len(text)))
 
           except urllib.error.HTTPError as error:
-              # Ne jamais imprimer le corps complet de l'erreur :
-              # il pourrait contenir des informations sensibles.
               print("RESULT=FAIL")
+              print("ERROR_TYPE=HTTPError")
               print("HTTP_STATUS=" + str(error.code))
+
+              try:
+                  error_raw = error.read().decode("utf-8", errors="replace")
+                  error_data = json.loads(error_raw)
+
+                  if isinstance(error_data, dict):
+                      err = error_data.get("error")
+
+                      if isinstance(err, dict):
+                          if "code" in err:
+                              print("PROVIDER_ERROR_CODE=" + str(err.get("code")))
+
+                          if "message" in err:
+                              message = str(err.get("message"))
+                              print("PROVIDER_ERROR_MESSAGE=" + message[:500])
+
+              except Exception:
+                  print("ERROR_BODY_PARSE=FAILED")
+
+              raise SystemExit(1)
+
+          except urllib.error.URLError as error:
+              print("RESULT=FAIL")
+              print("ERROR_TYPE=URLError")
+              print("ERROR_MESSAGE=" + str(error.reason))
+              traceback.print_exc()
               raise SystemExit(1)
 
           except Exception as error:
-              # Type uniquement, aucune valeur potentiellement sensible.
               print("RESULT=FAIL")
               print("ERROR_TYPE=" + type(error).__name__)
+              print("ERROR_MESSAGE=" + str(error))
+              traceback.print_exc()
               raise SystemExit(1)
+
           PY
