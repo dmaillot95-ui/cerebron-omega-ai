@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-COALITION-DATABANK-OMEGA",
+  "inputs": [
+    "SPIRALIX",
+    "SYADRIX",
+    "AGORA",
+    "FORUM"
+  ],
+  "outputs": [
+    "mission_packet",
+    "coalition_packet",
+    "forum_handoff",
+    "evidence_gate_handoff"
+  ],
+  "invariants": [
+    "RAW_EVIDENCE_IMMUTABLE",
+    "NO_DUPLICATE_COMPUTE_IF_VERIFIED_HASH_MATCH",
+    "CORRELATION_NOT_INDEPENDENCE",
+    "CONTRADICTIONS_SURVIVE",
+    "CLAIM_LE_EVIDENCE"
+  ],
+  "planned_targets": {
+    "communication": "F67",
+    "orchestration": "F68",
+    "evidence_gate": "F72"
+  },
+  "mode": "MASTER_MVP_UNTIL_F67_F68_F72_EXIST"
+}
