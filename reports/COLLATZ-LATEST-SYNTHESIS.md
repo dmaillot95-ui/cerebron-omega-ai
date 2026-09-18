@@ -17,18 +17,18 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 74
-- Derniers workflows en succès : 71
+- Derniers workflows en succès : 70
 - Derniers workflows en échec : 1
 - Fermes avec au moins un artefact sur leur dernier run : 27
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35391573287 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35391511215 status=completed conclusion=success artifacts=21
-- Farm 03 collatz-adic: run=35391965993 status=queued conclusion=None artifacts=6
-- Farm 04 collatz-counterexample: run=35391870428 status=completed conclusion=success artifacts=21
+- Farm 01 collatz-theory: run=35392367370 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35392822850 status=in_progress conclusion=None artifacts=21
+- Farm 03 collatz-adic: run=35391965993 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35392846013 status=in_progress conclusion=None artifacts=18
 - Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35391599641 status=completed conclusion=success artifacts=21
+- Farm 06 collatz-formal-audit: run=35392510613 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35308728535 status=completed conclusion=success artifacts=0
 - Farm 08 research-web: run=35308732220 status=completed conclusion=success artifacts=0
 - Farm 09 science-math: run=35308735512 status=completed conclusion=success artifacts=1
