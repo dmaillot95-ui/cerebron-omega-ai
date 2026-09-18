@@ -22,23 +22,23 @@ jobs:
           for n in range(432):
             fid,domain=list(farms.items())[n % len(farms)]
             i=n % len(roles); role=roles[i]
-              row={"call":n+1,"farm_id":fid,"farm_domain":domain,"worker":f"W{i+1:02d}","role":role,"success":False}
-              msg=f"CEREBRON connectivity benchmark. Farm F{fid} domain {domain}. Fixed worker W{i+1:02d} role {role}. Reply in one short line beginning CEREBRON_OK."
-              payload=json.dumps({"model":"openrouter/free","messages":[{"role":"user","content":msg}],"max_tokens":32}).encode()
-              t=time.time()
-              for attempt in range(3):
-                req=urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",data=payload,headers={"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":"https://github.com/dmaillot95-ui/cerebron-omega-ai","X-Title":"CEREBRON Omega"})
-                try:
-                  with urllib.request.urlopen(req,timeout=90) as resp: data=json.loads(resp.read().decode())
-                  txt=((data.get("choices") or [{}])[0].get("message") or {}).get("content","")
-                  row.update(success=bool(str(txt).strip()),provider_model=data.get("model"),latency_s=round(time.time()-t,3),attempts=attempt+1,preview=str(txt)[:100]); break
-                except urllib.error.HTTPError as e:
-                  code=e.code; row.update(error="HTTP_"+str(code),error_body=e.read().decode(errors="replace")[:180],attempts=attempt+1)
-                  if code==429 and attempt<2: time.sleep(3*(attempt+1)); continue
-                  break
-                except Exception as e:
-                  row.update(error=type(e).__name__+": "+str(e)[:160],attempts=attempt+1); break
-              rows.append(row); print(json.dumps(row),flush=True); time.sleep(1)
+            row={"call":n+1,"farm_id":fid,"farm_domain":domain,"worker":f"W{i+1:02d}","role":role,"success":False}
+            msg=f"CEREBRON connectivity benchmark. Farm F{fid} domain {domain}. Fixed worker W{i+1:02d} role {role}. Reply in one short line beginning CEREBRON_OK."
+            payload=json.dumps({"model":"openrouter/free","messages":[{"role":"user","content":msg}],"max_tokens":32}).encode()
+            t=time.time()
+            for attempt in range(3):
+              req=urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",data=payload,headers={"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":"https://github.com/dmaillot95-ui/cerebron-omega-ai","X-Title":"CEREBRON Omega"})
+              try:
+                with urllib.request.urlopen(req,timeout=90) as resp: data=json.loads(resp.read().decode())
+                txt=((data.get("choices") or [{}])[0].get("message") or {}).get("content","")
+                row.update(success=bool(str(txt).strip()),provider_model=data.get("model"),latency_s=round(time.time()-t,3),attempts=attempt+1,preview=str(txt)[:100]); break
+              except urllib.error.HTTPError as e:
+                code=e.code; row.update(error="HTTP_"+str(code),error_body=e.read().decode(errors="replace")[:180],attempts=attempt+1)
+                if code==429 and attempt<2: time.sleep(3*(attempt+1)); continue
+                break
+              except Exception as e:
+                row.update(error=type(e).__name__+": "+str(e)[:160],attempts=attempt+1); break
+            rows.append(row); print(json.dumps(row),flush=True); time.sleep(1)
           ok=sum(r["success"] for r in rows); total=len(rows)
           models=collections.Counter(r.get("provider_model","") for r in rows if r["success"])
           errors=collections.Counter(r.get("error","") for r in rows if not r["success"])
