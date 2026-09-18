@@ -1,6 +1,6 @@
 name: CEREBRON Batch Test 8 - Group 1
 
-on:
+'on':
   workflow_dispatch:
   push:
     paths:
