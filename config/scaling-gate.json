@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-SCALING-GATE-OMEGA",
+  "purpose": "Decide whether an additional farm/worker/run adds measurable capability or only redundant activity.",
+  "dimensions": [
+    "new_domain",
+    "new_method",
+    "new_independent_dependency",
+    "new_engine",
+    "new_evidence_level_reach",
+    "new_failure_detection"
+  ],
+  "decisions": [
+    "SCALE",
+    "REUSE_EXISTING",
+    "EXTEND_EXISTING",
+    "REJECT_REDUNDANT"
+  ],
+  "rules": [
+    "AGENT_COUNT != INTELLIGENCE",
+    "ACTIVITY != PROGRESS",
+    "SCALE_ONLY_IF_CAPABILITY_GAIN",
+    "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
+    "ABLATION_BEFORE_ADDITION"
+  ]
+}
