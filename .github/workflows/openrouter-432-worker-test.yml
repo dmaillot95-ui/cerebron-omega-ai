@@ -1,4 +1,5 @@
 name: OpenRouter 432 Controlled Worker Executions Benchmark
+# rerun after credential sanitation
 on:
   workflow_dispatch:
   push:
