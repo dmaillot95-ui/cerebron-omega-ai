@@ -85,8 +85,10 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='AGORA_QUOTA_CIRCUIT_BREAKER_V2'
+          result['routing_policy']='AGORA_QUOTA_CIRCUIT_BREAKER_V3'
           result['provider_failures']={}
+          blocked_spaces=set()
+          route_stats={s:{'attempts':0,'success':0,'quota_blocked':0} for s in candidate_spaces}
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
@@ -98,14 +100,20 @@ jobs:
                     'Return ESTABLISHED / DERIVED / CONTRADICTIONS / FAILURE_MODES / UNKNOWNS / NEXT_TEST / SYNTHESIS.')
             attempts=[]
             for space in spaces:
+              if space in blocked_spaces:
+                continue
               try:
+                route_stats[space]['attempts']+=1
                 ok,text,meta=fw.invoke(space,prompt)
                 err=str((meta or {}).get('error',''))
                 quota_block=any(m.lower() in err.lower() for m in QUOTA_MARKERS)
                 attempts.append({'space':space,'ok':bool(ok),'quota_block':quota_block,'meta':meta})
                 if quota_block:
                   result['provider_failures'][space]='QUOTA_BLOCKED'
+                  route_stats[space]['quota_blocked']+=1
+                  blocked_spaces.add(space)
                 if ok and str(text).strip():
+                  route_stats[space]['success']+=1
                   return {'index':i+1,'role':role,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
               except Exception as e: attempts.append({'space':space,'ok':False,'error':repr(e)})
             return {'index':i+1,'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
@@ -115,6 +123,8 @@ jobs:
             for fut in as_completed(futs):
               row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
           result['outputs'].sort(key=lambda x:x['index'])
+          result['route_stats']=route_stats
+          result['blocked_spaces']=sorted(blocked_spaces)
           result['live_provider_count']=len(live_spaces)
           result['elapsed_seconds']=round(time.time()-t0,3)
           pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
