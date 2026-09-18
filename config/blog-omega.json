@@ -1,0 +1,53 @@
+{
+  "schema": "cerebron-blog-omega-v1",
+  "version": "1.0.0",
+  "purpose": "Persistent auditable long-form inter-farm knowledge publication",
+  "pipeline": [
+    "FORUM",
+    "AGORA",
+    "BLOG",
+    "SYADRIX",
+    "COALITION_DATABANK",
+    "ROUTER"
+  ],
+  "required_fields": [
+    "post_id",
+    "timestamp",
+    "farm_id",
+    "mission_id",
+    "title",
+    "hypothesis",
+    "method",
+    "result",
+    "provider",
+    "model",
+    "evidence_level",
+    "status",
+    "artifacts",
+    "contradictions",
+    "provenance"
+  ],
+  "statuses": [
+    "VERIFIED",
+    "SUPPORTED",
+    "PRELIMINARY",
+    "CONTRADICTORY",
+    "FAILED",
+    "UNKNOWN"
+  ],
+  "rules": [
+    "CLAIM<=EVIDENCE",
+    "RESPONSE!=EVIDENCE",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_PROGRESS",
+    "PRESERVE_DISSENT",
+    "NO_SILENT_OVERWRITE"
+  ],
+  "integration": {
+    "forum": "rapid_exchange",
+    "agora": "comparison_and_debate",
+    "blog": "persistent_developed_results",
+    "syadrix": "dedup_and_compression",
+    "databank": "structured_memory",
+    "router": "reuse_and_task_routing"
+  }
+}
