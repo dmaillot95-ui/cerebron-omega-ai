@@ -1,4 +1,4 @@
-name: CEREBRON Batch 8 Group 1
+name: CEREBRON Batch 20 Optimized
 
 'on':
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
     steps:
-      - name: Run eight farm probes
+      - name: Run twenty probes
         shell: bash
         run: |
           cat > /tmp/batch8.py <<'PY'
@@ -25,14 +25,16 @@ jobs:
               raise SystemExit(1)
 
           farms = [
-              ("FARM01", "ROOT_COORDINATION"),
-              ("FARM02", "COLLATZ_PROOF"),
-              ("FARM03", "ADIC_ANALYSIS"),
-              ("FARM04", "COUNTEREXAMPLE"),
-              ("FARM05", "LITERATURE"),
-              ("FARM06", "FORMAL_AUDIT"),
-              ("FARM07", "SYNTHESIS"),
-              ("FARM08", "RESEARCH_WEB"),
+              ("FARM01","ROOT_COORDINATION"),("FARM02","COLLATZ_PROOF"),
+              ("FARM03","ADIC_ANALYSIS"),("FARM04","COUNTEREXAMPLE"),
+              ("FARM05","LITERATURE"),("FARM06","FORMAL_AUDIT"),
+              ("FARM07","SYNTHESIS"),("FARM08","RESEARCH_WEB"),
+              ("FARM09","SCIENCE_MATH"),("FARM10","SCIENCE_PHYSICS"),
+              ("FARM11","CHEMISTRY_MATERIALS"),("FARM12","BIOLOGY_HEALTH"),
+              ("FARM13","ENGINEERING_SYSTEMS"),("FARM14","ENERGY"),
+              ("FARM15","SPACE"),("FARM16","INDUSTRY_MANUFACTURING"),
+              ("FARM17","COMPUTING_SOFTWARE"),("FARM18","AI_AGENTS"),
+              ("FARM19","CYBERSECURITY"),("FARM20","DATA_KNOWLEDGE"),
           ]
           results = []
           for n, (farm, role) in enumerate(farms, 1):
@@ -72,7 +74,7 @@ jobs:
                           break
                       model = str(data.get("model", "unknown"))
                       results.append({"farm": farm, "success": True, "model": model, "chars": len(text), "attempt": attempt})
-                      print("CALL=%d/8 FARM=%s RESULT=SUCCESS MODEL=%s CHARS=%d ATTEMPT=%d" % (n, farm, model, len(text), attempt))
+                      print("CALL=%d/20 FARM=%s RESULT=SUCCESS MODEL=%s CHARS=%d ATTEMPT=%d" % (n, farm, model, len(text), attempt))
                       ok = True
                       break
                   except urllib.error.HTTPError as exc:
@@ -89,11 +91,11 @@ jobs:
                       break
               if not ok:
                   results.append({"farm": farm, "success": False, "error": error})
-                  print("CALL=%d/8 FARM=%s RESULT=FAIL ERROR=%s" % (n, farm, error))
+                  print("CALL=%d/20 FARM=%s RESULT=FAIL ERROR=%s" % (n, farm, error))
               time.sleep(2)
 
           success = sum(1 for x in results if x["success"])
-          failed = 8 - success
+          failed = 20 - success
           errors = {}
           models = {}
           for x in results:
@@ -101,17 +103,17 @@ jobs:
                   models[x["model"]] = models.get(x["model"], 0) + 1
               else:
                   errors[x["error"]] = errors.get(x["error"], 0) + 1
-          report = {"group": 1, "planned": 8, "successful": success, "failed": failed,
-                    "yield_pct": success * 12.5, "models": models, "errors": errors, "results": results}
-          with open("batch8-group1.json", "w") as fh:
+          report = {"group": "TEST20", "planned": 20, "successful": success, "failed": failed,
+                    "yield_pct": success * 5.0, "models": models, "errors": errors, "results": results}
+          with open("batch20-optimized.json", "w") as fh:
               json.dump(report, fh, indent=2)
-          print("PLANNED=8")
+          print("PLANNED=20")
           print("SUCCESSFUL=" + str(success))
           print("FAILED=" + str(failed))
           print("YIELD_PCT=" + str(success * 12.5))
           print("MODELS=" + json.dumps(models, sort_keys=True))
           print("ERRORS=" + json.dumps(errors, sort_keys=True))
-          print("EXTERNAL_RESPONSES=%d/8" % success)
+          print("EXTERNAL_RESPONSES=%d/20" % success)
           print("RESULT=" + ("SUCCESS" if success else "FAIL"))
           if success == 0:
               raise SystemExit(1)
@@ -122,6 +124,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: batch8-group1
-          path: batch8-group1.json
+          name: batch20-optimized
+          path: batch20-optimized.json
           retention-days: 1
