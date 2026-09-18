@@ -1,0 +1,30 @@
+name: TITAN WH1 Coupled Engineering Benchmark
+on:
+  push:
+    paths:
+      - 'benchmarks/titan-wh1-coupled-engineering-001.json'
+      - '.github/workflows/titan-wh1-coupled-engineering.yml'
+  workflow_dispatch:
+jobs:
+  benchmark-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Audit benchmark contract
+        shell: python
+        run: |
+          import json
+          p=json.load(open("benchmarks/titan-wh1-coupled-engineering-001.json"))
+          assert len(p["selected_farms"])==9
+          assert len(p["conditional_farms"])==3
+          assert 72 in p["selected_farms"] and 73 in p["selected_farms"]
+          assert p["evidence_ceiling"].startswith("E2")
+          assert len(p["required_unknowns"])>=10
+          print("BENCHMARK_CONTRACT_VERIFIED")
+          print("SELECTED_FARMS",len(p["selected_farms"]))
+          print("CONDITIONAL_FARMS",len(p["conditional_farms"]))
+          print("AI_CALLS",0)
+          print("SCIENTIFIC_MESSAGES",0)
+          print("NOTE deterministic contract audit only; no farm or AI result is simulated")
