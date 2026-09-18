@@ -1,5 +1,5 @@
 name: CEREBRON 144 Relativistic Fluid Dynamics RnD Benchmark
-on:
+'on':
   workflow_dispatch:
   push:
     paths: ['.github/workflows/relativistic-fluid-144-rd-test.yml']
