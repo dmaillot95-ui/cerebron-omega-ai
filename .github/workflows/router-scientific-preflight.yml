@@ -1,100 +1,127 @@
-name: CEREBRON Batch Test 8 - Group 1
+name: CEREBRON Batch 8 Group 1
 
 'on':
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/router-scientific-preflight.yml"
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  batch8:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 12
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-
     steps:
-      - name: Test group 1 - eight farms
+      - name: Run eight farm probes
         shell: bash
         run: |
-          python - <<'PY'
-          import os,json,time,collections,urllib.request,urllib.error
-          key=os.environ.get("OPENROUTER_API_KEY","").strip()
+          cat > /tmp/batch8.py <<'PY'
+          import os, json, time, urllib.request, urllib.error
+          key = os.environ.get("OPENROUTER_API_KEY", "").strip()
           if not key:
-              print("RESULT=FAIL REASON=MISSING_SECRET"); raise SystemExit(1)
+              print("RESULT=FAIL")
+              print("REASON=MISSING_SECRET")
+              raise SystemExit(1)
 
-          farms=[
-            ("FARM01","ROOT_COORDINATION"),
-            ("FARM02","COLLATZ_PROOF"),
-            ("FARM03","ADIC_ANALYSIS"),
-            ("FARM04","COUNTEREXAMPLE"),
-            ("FARM05","LITERATURE"),
-            ("FARM06","FORMAL_AUDIT"),
-            ("FARM07","SYNTHESIS"),
-            ("FARM08","RESEARCH_WEB")
+          farms = [
+              ("FARM01", "ROOT_COORDINATION"),
+              ("FARM02", "COLLATZ_PROOF"),
+              ("FARM03", "ADIC_ANALYSIS"),
+              ("FARM04", "COUNTEREXAMPLE"),
+              ("FARM05", "LITERATURE"),
+              ("FARM06", "FORMAL_AUDIT"),
+              ("FARM07", "SYNTHESIS"),
+              ("FARM08", "RESEARCH_WEB"),
           ]
-          MIN_CHARS=120
-          results=[]; models=collections.Counter(); errors=collections.Counter()
-          print("PLANNED_CALLS=8")
-
-          for idx,(farm,role) in enumerate(farms,1):
-              prompt=f"""CEREBRON OMEGA connectivity and scientific reasoning test.
-Farm: {farm}
-Role: {role}
-Task: In 4 to 7 concise sentences, explain one rigorous method your role can use to test a scientific claim. State assumptions, evidence required, one failure mode, and how you avoid confusing computation with proof.
-REALITY > COHERENCE. EVIDENCE > CONFIDENCE. CLAIM <= EVIDENCE."""
-              payload=json.dumps({"model":"openrouter/free","messages":[{"role":"user","content":prompt}],"max_tokens":300}).encode()
-              req=urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",data=payload,headers={"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":"https://github.com/dmaillot95-ui/cerebron-omega-ai","X-Title":"CEREBRON Omega"},method="POST")
-              ok=False; last=""
-              for attempt in range(2):
+          results = []
+          for n, (farm, role) in enumerate(farms, 1):
+              prompt = (
+                  "CEREBRON OMEGA probe. Farm: " + farm + ". Role: " + role + ". "
+                  "Give a rigorous 4-7 sentence method for testing a scientific claim. "
+                  "State assumptions, evidence required, one failure mode, and distinguish computation from proof."
+              )
+              body = json.dumps({
+                  "model": "openrouter/free",
+                  "messages": [{"role": "user", "content": prompt}],
+                  "max_tokens": 300
+              }).encode("utf-8")
+              req = urllib.request.Request(
+                  "https://openrouter.ai/api/v1/chat/completions",
+                  data=body,
+                  headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
+                  method="POST"
+              )
+              ok = False
+              error = ""
+              for attempt in (1, 2):
                   try:
-                      start=time.time()
-                      with urllib.request.urlopen(req,timeout=90) as resp:
-                          data=json.loads(resp.read().decode("utf-8"))
-                      msg=(data.get("choices") or [{}])[0].get("message") or {}
-                      c=msg.get("content","")
-                      if isinstance(c,list): c="\n".join(x.get("text","") for x in c if isinstance(x,dict))
-                      text=c.strip() if isinstance(c,str) else ""
-                      if len(text)<MIN_CHARS:
-                          last="EMPTY_CONTENT" if not text else "SHORT_"+str(len(text))
-                          if attempt==0: time.sleep(5); continue
+                      with urllib.request.urlopen(req, timeout=90) as response:
+                          data = json.loads(response.read().decode("utf-8"))
+                      choices = data.get("choices") or []
+                      msg = choices[0].get("message", {}) if choices else {}
+                      text = msg.get("content", "")
+                      if isinstance(text, list):
+                          text = "\n".join(x.get("text", "") for x in text if isinstance(x, dict))
+                      text = text.strip() if isinstance(text, str) else ""
+                      if len(text) < 120:
+                          error = "EMPTY" if not text else "SHORT_" + str(len(text))
+                          if attempt == 1:
+                              time.sleep(4)
+                              continue
                           break
-                      model=str(data.get("model","unknown")); models[model]+=1
-                      row={"farm":farm,"role":role,"success":True,"model":model,"chars":len(text),"latency_s":round(time.time()-start,2),"attempt":attempt+1}
-                      results.append(row); ok=True
-                      print(f"CALL={idx}/8 FARM={farm} RESULT=SUCCESS MODEL={model} CHARS={len(text)} ATTEMPT={attempt+1}")
+                      model = str(data.get("model", "unknown"))
+                      results.append({"farm": farm, "success": True, "model": model, "chars": len(text), "attempt": attempt})
+                      print("CALL=%d/8 FARM=%s RESULT=SUCCESS MODEL=%s CHARS=%d ATTEMPT=%d" % (n, farm, model, len(text), attempt))
+                      ok = True
                       break
-                  except urllib.error.HTTPError as e:
-                      last="HTTP_"+str(e.code)
-                      if e.code==429 and attempt==0: time.sleep(10); continue
+                  except urllib.error.HTTPError as exc:
+                      error = "HTTP_" + str(exc.code)
+                      if exc.code == 429 and attempt == 1:
+                          time.sleep(8)
+                          continue
                       break
-                  except Exception as e:
-                      last=type(e).__name__+":"+str(e)[:80]
-                      if attempt==0: time.sleep(5); continue
+                  except Exception as exc:
+                      error = type(exc).__name__ + ":" + str(exc)[:80]
+                      if attempt == 1:
+                          time.sleep(4)
+                          continue
                       break
               if not ok:
-                  errors[last]+=1; results.append({"farm":farm,"role":role,"success":False,"error":last})
-                  print(f"CALL={idx}/8 FARM={farm} RESULT=FAIL ERROR={last}")
-              time.sleep(3)
+                  results.append({"farm": farm, "success": False, "error": error})
+                  print("CALL=%d/8 FARM=%s RESULT=FAIL ERROR=%s" % (n, farm, error))
+              time.sleep(2)
 
-          successful=sum(r["success"] for r in results); failed=8-successful
-          print("PLANNED=8"); print("SUCCESSFUL="+str(successful)); print("FAILED="+str(failed))
-          print("YIELD_PCT="+str(round(successful*12.5,1)))
-          print("MODELS="+json.dumps(dict(models),sort_keys=True)); print("ERRORS="+json.dumps(dict(errors),sort_keys=True))
-          print(f"EXTERNAL_RESPONSES={successful}/8")
-          report={"schema":"cerebron-batch8-group1-v1","group":1,"planned":8,"successful":successful,"failed":failed,"yield_pct":round(successful*12.5,1),"models":dict(models),"errors":dict(errors),"results":results}
-          open("cerebron-batch8-group1.json","w").write(json.dumps(report,indent=2))
-          if successful==0: print("RESULT=FAIL"); raise SystemExit(1)
-          print("RESULT=SUCCESS")
+          success = sum(1 for x in results if x["success"])
+          failed = 8 - success
+          errors = {}
+          models = {}
+          for x in results:
+              if x["success"]:
+                  models[x["model"]] = models.get(x["model"], 0) + 1
+              else:
+                  errors[x["error"]] = errors.get(x["error"], 0) + 1
+          report = {"group": 1, "planned": 8, "successful": success, "failed": failed,
+                    "yield_pct": success * 12.5, "models": models, "errors": errors, "results": results}
+          with open("batch8-group1.json", "w") as fh:
+              json.dump(report, fh, indent=2)
+          print("PLANNED=8")
+          print("SUCCESSFUL=" + str(success))
+          print("FAILED=" + str(failed))
+          print("YIELD_PCT=" + str(success * 12.5))
+          print("MODELS=" + json.dumps(models, sort_keys=True))
+          print("ERRORS=" + json.dumps(errors, sort_keys=True))
+          print("EXTERNAL_RESPONSES=%d/8" % success)
+          print("RESULT=" + ("SUCCESS" if success else "FAIL"))
+          if success == 0:
+              raise SystemExit(1)
           PY
+          python /tmp/batch8.py
 
-      - name: Upload group accounting
+      - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cerebron-batch8-group1
-          path: cerebron-batch8-group1.json
+          name: batch8-group1
+          path: batch8-group1.json
           retention-days: 1
