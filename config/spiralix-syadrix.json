@@ -1,0 +1,35 @@
+{
+  "version": "0.1.0",
+  "system": "SPIRALIX-SYADRIX-OMEGA",
+  "purpose": "Lossless-first vector compression and correlated evidence/data cache for faster synthesis without destroying auditability.",
+  "pipeline": [
+    "INGEST",
+    "CANONICALIZE",
+    "HASH",
+    "DEDUP_EXACT",
+    "GROUP_CORRELATED",
+    "PRESERVE_DISSENT",
+    "COMPRESS_REFERENCES",
+    "SYNTHESIZE",
+    "COUNTER_AUDIT",
+    "COMMIT_OR_ROLLBACK"
+  ],
+  "rules": [
+    "SOURCE DATA IS IMMUTABLE",
+    "COMPRESSION BEFORE ACCUMULATION",
+    "DEDUPLICATION != DELETION",
+    "CORRELATION != CAUSALITY",
+    "CONSENSUS != TRUTH",
+    "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
+    "DISSENT AND CONTRADICTIONS MUST SURVIVE COMPRESSION",
+    "CLAIM <= EVIDENCE",
+    "VERIFY BEFORE COMMIT"
+  ],
+  "stores": {
+    "source_bank": "immutable raw/source artifacts by hash",
+    "correlation_bank": "relationships and shared dependencies; never evidence by itself",
+    "synthesis_bank": "compact references to source hashes plus explicit status",
+    "contradiction_bank": "non-collapsible disagreements"
+  },
+  "note": "No additional real AI agents are created by this layer. It reduces duplicate work and prepares tasks for whatever real runtimes are available."
+}
