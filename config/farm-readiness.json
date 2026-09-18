@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-FARM-READINESS-OMEGA",
+  "purpose": "Single readiness matrix for F60-F73; separate architecture readiness from physical repository existence.",
+  "gates": [
+    "justified",
+    "bootstrap_manifest",
+    "repository_exists",
+    "scaffold_present",
+    "workflow_success",
+    "integration_registered"
+  ],
+  "rules": [
+    "MISSING_REPOSITORY=>BLOCK_CREATED",
+    "MISSING_WORKFLOW_SUCCESS=>BLOCK_TESTED",
+    "NO_AUTOMATIC_EVIDENCE_PROMOTION"
+  ]
+}
