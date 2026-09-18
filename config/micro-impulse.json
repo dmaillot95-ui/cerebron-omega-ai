@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-MICRO-IMPULSE-OMEGA",
+  "purpose": "Inject the smallest useful non-redundant task when a coalition stalls or collapses prematurely.",
+  "triggers": [
+    "CONTRADICTION",
+    "NO_PROGRESS",
+    "LOW_METHOD_DIVERSITY",
+    "PREMATURE_CONSENSUS"
+  ],
+  "policy": [
+    "DO_NOT_REPEAT_VERIFIED_WORK",
+    "TARGET_ONE_UNCERTAINTY",
+    "PREFER_NEW_METHOD_OR_INDEPENDENT_DEPENDENCY",
+    "PRESERVE_BASELINE",
+    "COMPARE_BEFORE_AFTER",
+    "ROLLBACK_IF_NO_INFORMATION_GAIN"
+  ],
+  "outputs": [
+    "impulse_task",
+    "before_signature",
+    "after_signature",
+    "information_gain",
+    "decision"
+  ],
+  "rules": [
+    "MICRO_IMPULSE != PROOF",
+    "ACTIVITY != PROGRESS",
+    "CONSENSUS != TRUTH",
+    "CLAIM <= EVIDENCE"
+  ]
+}
