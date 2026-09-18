@@ -1,4 +1,4 @@
-name: CEREBRON OpenRouter Adaptive Queue Test 20
+name: CEREBRON Batch Test 8 - Group 1
 
 on:
   workflow_dispatch:
@@ -12,342 +12,89 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
+    timeout-minutes: 15
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
     steps:
-      - name: Test twenty scientific calls
+      - name: Test group 1 - eight farms
         shell: bash
         run: |
           python - <<'PY'
-          import os
-          import json
-          import time
-          import collections
-          import urllib.request
-          import urllib.error
-
-          key = os.environ.get("OPENROUTER_API_KEY", "").strip()
-
+          import os,json,time,collections,urllib.request,urllib.error
+          key=os.environ.get("OPENROUTER_API_KEY","").strip()
           if not key:
-              print("RESULT=FAIL")
-              print("REASON=MISSING_SECRET")
-              raise SystemExit(1)
+              print("RESULT=FAIL REASON=MISSING_SECRET"); raise SystemExit(1)
 
-          TOTAL = 20
-          MIN_CHARS = 120
-          BASE_DELAY = 8
-          RATE_LIMIT_DELAY = 35
-
-          roles = [
-              "REALITY_RESEARCH",
-              "SYSTEM_ARCHITECT",
-              "CALCULATION",
-              "SIMULATION",
-              "CAUSAL_ANALYSIS",
-              "INVENTION",
-              "FAILURE_ANALYSIS",
-              "COUNTEREXAMPLE_HUNTER",
-              "FALSIFIER",
-              "FORMAL_AUDITOR",
-              "INDEPENDENT_REPLICATOR",
-              "UNCERTAINTY_ANALYST",
-              "INTERFACE_ANALYST",
-              "INVARIANT_HUNTER",
-              "EXPERIMENT_DESIGN",
-              "CONTRADICTION_RESOLUTION",
-              "UNKNOWN_GAP_ANALYST",
-              "EVIDENCE_AUDITOR",
-              "SYNTHESIS_ANALYST",
-              "OMEGA_JUDGE"
+          farms=[
+            ("FARM01","ROOT_COORDINATION"),
+            ("FARM02","COLLATZ_PROOF"),
+            ("FARM03","ADIC_ANALYSIS"),
+            ("FARM04","COUNTEREXAMPLE"),
+            ("FARM05","LITERATURE"),
+            ("FARM06","FORMAL_AUDIT"),
+            ("FARM07","SYNTHESIS"),
+            ("FARM08","RESEARCH_WEB")
           ]
+          MIN_CHARS=120
+          results=[]; models=collections.Counter(); errors=collections.Counter()
+          print("PLANNED_CALLS=8")
 
-          results = []
-          models = collections.Counter()
-          errors = collections.Counter()
-
-          print("SECRET_PRESENT=YES")
-          print("PLANNED_CALLS=" + str(TOTAL))
-
-          for i in range(TOTAL):
-
-              role = roles[i]
-
-              prompt = f"""
-              CEREBRON OMEGA scientific test.
-
-              Worker {i+1:02d}/20
-              Role: {role}
-
-              Subject:
-              relativistic hydrodynamics.
-
-              Analyze how four-velocity normalization,
-              causality and relativistic signal propagation
-              constrain physically admissible fluid states.
-
-              Focus specifically on the perspective of:
-              {role}
-
-              Define assumptions.
-              Identify possible failure modes.
-              Separate established physics from inference.
-
-              REALITY > COHERENCE.
-              EVIDENCE > CONFIDENCE.
-              CLAIM <= EVIDENCE.
-              """
-
-              payload = json.dumps({
-                  "model": "openrouter/free",
-                  "messages": [
-                      {
-                          "role": "user",
-                          "content": prompt
-                      }
-                  ],
-                  "max_tokens": 350
-              }).encode("utf-8")
-
-              request = urllib.request.Request(
-                  "https://openrouter.ai/api/v1/chat/completions",
-                  data=payload,
-                  headers={
-                      "Authorization": "Bearer " + key,
-                      "Content-Type": "application/json",
-                      "HTTP-Referer":
-                          "https://github.com/dmaillot95-ui/cerebron-omega-ai",
-                      "X-Title": "CEREBRON Omega"
-                  },
-                  method="POST"
-              )
-
-              success = False
-              last_error = ""
-
-              for attempt in range(3):
-
+          for idx,(farm,role) in enumerate(farms,1):
+              prompt=f"""CEREBRON OMEGA connectivity and scientific reasoning test.
+Farm: {farm}
+Role: {role}
+Task: In 4 to 7 concise sentences, explain one rigorous method your role can use to test a scientific claim. State assumptions, evidence required, one failure mode, and how you avoid confusing computation with proof.
+REALITY > COHERENCE. EVIDENCE > CONFIDENCE. CLAIM <= EVIDENCE."""
+              payload=json.dumps({"model":"openrouter/free","messages":[{"role":"user","content":prompt}],"max_tokens":300}).encode()
+              req=urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",data=payload,headers={"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":"https://github.com/dmaillot95-ui/cerebron-omega-ai","X-Title":"CEREBRON Omega"},method="POST")
+              ok=False; last=""
+              for attempt in range(2):
                   try:
-                      start = time.time()
-
-                      with urllib.request.urlopen(
-                          request,
-                          timeout=90
-                      ) as response:
-                          status = response.getcode()
-                          raw = response.read().decode("utf-8")
-
-                      data = json.loads(raw)
-
-                      choices = data.get("choices")
-
-                      if not isinstance(choices, list) or not choices:
-                          raise ValueError("NO_CHOICES")
-
-                      choice = choices[0]
-
-                      if not isinstance(choice, dict):
-                          raise ValueError("INVALID_CHOICE")
-
-                      message = choice.get("message")
-
-                      if not isinstance(message, dict):
-                          raise ValueError("INVALID_MESSAGE")
-
-                      content = message.get("content")
-
-                      if isinstance(content, str):
-                          text = content.strip()
-
-                      elif isinstance(content, list):
-                          parts = []
-
-                          for item in content:
-                              if isinstance(item, dict):
-                                  value = item.get("text")
-
-                                  if isinstance(value, str):
-                                      parts.append(value)
-
-                          text = "\n".join(parts).strip()
-
-                      else:
-                          text = ""
-
-                      if not text:
-                          last_error = "EMPTY_CONTENT"
-                          if attempt < 2:
-                              wait = 8 * (attempt + 1)
-                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=EMPTY_CONTENT WAIT={wait}s ATTEMPT={attempt+1}")
-                              time.sleep(wait)
-                              continue
+                      start=time.time()
+                      with urllib.request.urlopen(req,timeout=90) as resp:
+                          data=json.loads(resp.read().decode("utf-8"))
+                      msg=(data.get("choices") or [{}])[0].get("message") or {}
+                      c=msg.get("content","")
+                      if isinstance(c,list): c="\n".join(x.get("text","") for x in c if isinstance(x,dict))
+                      text=c.strip() if isinstance(c,str) else ""
+                      if len(text)<MIN_CHARS:
+                          last="EMPTY_CONTENT" if not text else "SHORT_"+str(len(text))
+                          if attempt==0: time.sleep(5); continue
                           break
-
-                      if len(text) < MIN_CHARS:
-                          last_error = "LOW_QUALITY_SHORT_CONTENT_" + str(len(text))
-                          if attempt < 2:
-                              wait = 8 * (attempt + 1)
-                              print(f"CALL={i+1:02d}/20 RETRY=YES REASON=SHORT_CONTENT CHARS={len(text)} WAIT={wait}s ATTEMPT={attempt+1}")
-                              time.sleep(wait)
-                              continue
-                          break
-
-                      model = str(data.get("model", "unknown"))
-
-                      latency = round(time.time() - start, 2)
-
-                      models[model] += 1
-
-                      results.append({
-                          "worker": i + 1,
-                          "role": role,
-                          "success": True,
-                          "model": model,
-                          "chars": len(text),
-                          "latency_s": latency,
-                          "attempt": attempt + 1
-                      })
-
-                      print(
-                          f"CALL={i+1:02d}/20 "
-                          f"RESULT=SUCCESS "
-                          f"ROLE={role} "
-                          f"MODEL={model} "
-                          f"CHARS={len(text)} "
-                          f"LATENCY={latency}s "
-                          f"ATTEMPT={attempt+1}"
-                      )
-
-                      success = True
+                      model=str(data.get("model","unknown")); models[model]+=1
+                      row={"farm":farm,"role":role,"success":True,"model":model,"chars":len(text),"latency_s":round(time.time()-start,2),"attempt":attempt+1}
+                      results.append(row); ok=True
+                      print(f"CALL={idx}/8 FARM={farm} RESULT=SUCCESS MODEL={model} CHARS={len(text)} ATTEMPT={attempt+1}")
                       break
-
-                  except urllib.error.HTTPError as error:
-
-                      last_error = "HTTP_" + str(error.code)
-
-                      if error.code == 429 and attempt < 2:
-                          wait = RATE_LIMIT_DELAY * (attempt + 1)
-                          print(
-                              f"CALL={i+1:02d}/20 "
-                              f"RETRY=YES "
-                              f"HTTP_STATUS=429 "
-                              f"WAIT={wait}s "
-                              f"ATTEMPT={attempt+1}"
-                          )
-
-                          time.sleep(wait)
-                          continue
-
+                  except urllib.error.HTTPError as e:
+                      last="HTTP_"+str(e.code)
+                      if e.code==429 and attempt==0: time.sleep(10); continue
                       break
-
-                  except Exception as error:
-
-                      last_error = (
-                          type(error).__name__
-                          + ":"
-                          + str(error)[:120]
-                      )
-
-                      if attempt < 2:
-                          wait = 8 * (attempt + 1)
-                          print(f"CALL={i+1:02d}/20 RETRY=YES REASON={type(error).__name__} WAIT={wait}s ATTEMPT={attempt+1}")
-                          time.sleep(wait)
-                          continue
-
+                  except Exception as e:
+                      last=type(e).__name__+":"+str(e)[:80]
+                      if attempt==0: time.sleep(5); continue
                       break
+              if not ok:
+                  errors[last]+=1; results.append({"farm":farm,"role":role,"success":False,"error":last})
+                  print(f"CALL={idx}/8 FARM={farm} RESULT=FAIL ERROR={last}")
+              time.sleep(3)
 
-              if not success:
-
-                  errors[last_error] += 1
-
-                  results.append({
-                      "worker": i + 1,
-                      "role": role,
-                      "success": False,
-                      "error": last_error
-                  })
-
-                  print(
-                      f"CALL={i+1:02d}/20 "
-                      f"RESULT=FAIL "
-                      f"ROLE={role} "
-                      f"ERROR={last_error}"
-                  )
-
-              # File adaptative: réduit la pression sur le routeur gratuit.
-              time.sleep(BASE_DELAY)
-
-          successful = sum(
-              1 for row in results
-              if row["success"]
-          )
-
-          failed = TOTAL - successful
-
-          print("")
-          print("========================================")
-          print("CEREBRON_20_CALL_ACCOUNTING")
-          print("========================================")
-          print("PLANNED=" + str(TOTAL))
-          print("SUCCESSFUL=" + str(successful))
-          print("FAILED=" + str(failed))
-          print(
-              "YIELD_PCT="
-              + str(round(100 * successful / TOTAL, 2))
-          )
-          print(
-              "MODELS="
-              + json.dumps(dict(models), sort_keys=True)
-          )
-          print(
-              "ERRORS="
-              + json.dumps(dict(errors), sort_keys=True)
-          )
-
-          report = {
-              "schema":
-                  "cerebron-openrouter-adaptive-queue-20-v3",
-              "planned": TOTAL,
-              "successful_external_model_outputs":
-                  successful,
-              "failed": failed,
-              "yield_pct":
-                  round(100 * successful / TOTAL, 2),
-              "models":
-                  dict(models),
-              "errors":
-                  dict(errors),
-              "results":
-                  results
-          }
-
-          with open(
-              "router-scientific-preflight-20.json",
-              "w"
-          ) as f:
-              json.dump(report, f, indent=2)
-
-          # Le workflow échoue seulement si aucun appel
-          # externe n'a fonctionné.
-          if successful == 0:
-              print("RESULT=FAIL")
-              raise SystemExit(1)
-
+          successful=sum(r["success"] for r in results); failed=8-successful
+          print("PLANNED=8"); print("SUCCESSFUL="+str(successful)); print("FAILED="+str(failed))
+          print("YIELD_PCT="+str(round(successful*12.5,1)))
+          print("MODELS="+json.dumps(dict(models),sort_keys=True)); print("ERRORS="+json.dumps(dict(errors),sort_keys=True))
+          print(f"EXTERNAL_RESPONSES={successful}/8")
+          report={"schema":"cerebron-batch8-group1-v1","group":1,"planned":8,"successful":successful,"failed":failed,"yield_pct":round(successful*12.5,1),"models":dict(models),"errors":dict(errors),"results":results}
+          open("cerebron-batch8-group1.json","w").write(json.dumps(report,indent=2))
+          if successful==0: print("RESULT=FAIL"); raise SystemExit(1)
           print("RESULT=SUCCESS")
-          print(
-              "EXTERNAL_RESPONSES="
-              + str(successful)
-              + "/20"
-          )
-
           PY
 
-      - name: Upload accounting report
+      - name: Upload group accounting
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cerebron-openrouter-preflight-20
-          path: router-scientific-preflight-20.json
+          name: cerebron-batch8-group1
+          path: cerebron-batch8-group1.json
           retention-days: 1
