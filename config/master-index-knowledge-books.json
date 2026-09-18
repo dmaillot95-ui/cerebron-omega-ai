@@ -1,0 +1,75 @@
+{
+  "schema": "cerebron-master-index-knowledge-books-v1",
+  "proposed_farm_id": 75,
+  "proposed_repo": "cerebron-farm-75-master-index-knowledge-books",
+  "status": "PLANNED",
+  "purpose": "Hierarchical table-of-contents and knowledge navigation across CEREBRON encyclopedias, books, chapters, sections, capsules, evidence and artifacts.",
+  "hierarchy": [
+    "LIBRARY",
+    "ENCYCLOPEDIA",
+    "BOOK",
+    "CHAPTER",
+    "SECTION",
+    "CAPSULE",
+    "EVIDENCE_ARTIFACT"
+  ],
+  "routing_chain": [
+    "INDEX_OMEGA",
+    "RELEVANT_ENCYCLOPEDIA",
+    "RELEVANT_BOOK",
+    "RELEVANT_CHAPTER",
+    "EXACT_KNOWLEDGE",
+    "COMPETENT_FARM",
+    "ACTION"
+  ],
+  "responsibilities": [
+    "maintain master table of contents",
+    "maintain encyclopedia and book indexes",
+    "resolve knowledge location",
+    "link knowledge to provenance and evidence",
+    "link knowledge to competent farms",
+    "preserve contradictions and unknowns",
+    "avoid duplicating session memory owned by F74"
+  ],
+  "interfaces": {
+    "F74": "session capsules and persistent memory",
+    "F66": "hybrid retrieval and indexing",
+    "SPIRALIX": "mission vector and routing",
+    "SYADRIX": "deduplication and compression",
+    "FORUM_AGORA_BLOG": "discussion, comparison and persistent publications"
+  },
+  "initial_encyclopedias": [
+    "CEREBRON",
+    "COLLATZ",
+    "ARCHITECTON",
+    "SPATIAL",
+    "ENERGY",
+    "PHYSICS",
+    "ENGINEERING",
+    "AI",
+    "INDUSTRY",
+    "OTHER"
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "INDEX!=EVIDENCE",
+    "REFERENCE!=VALIDATION",
+    "NO_SILENT_OVERWRITE",
+    "PRESERVE_DISSENT",
+    "COMPRESSION_BEFORE_ACCUMULATION",
+    "VERIFY_BEFORE_COMMIT"
+  ],
+  "lifecycle": [
+    "PLANNED",
+    "JUSTIFIED",
+    "CREATED",
+    "SCAFFOLDED",
+    "EXECUTABLE",
+    "TESTED",
+    "VERIFIED",
+    "INTEGRATED",
+    "QUALIFIED"
+  ]
+}
