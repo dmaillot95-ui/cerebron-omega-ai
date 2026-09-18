@@ -1,49 +1,100 @@
 {
-  "schema": "cerebron-session-memory-encyclopedia-v1",
+  "schema": "cerebron-session-memory-capability-evolution-v2",
   "farm_id": 74,
+  "status": "PLANNED",
   "command": "FIN DE SESSION",
-  "purpose": "Persistent auditable cross-session memory capsules and domain encyclopedia on GitHub",
-  "capsule_fields": [
-    "session_id",
-    "timestamp",
-    "projects",
-    "verified_results",
-    "decisions",
-    "unknowns",
-    "contradictions",
-    "active_tasks",
-    "important_commits_runs",
-    "next_checkpoint",
+  "purpose": "Persistent session memory plus a living digital capability genome and validated cognitive-architecture evolution loop.",
+  "modules": [
+    "SESSION_MEMORY",
+    "LIVING_CAPABILITY_SUMMARY",
+    "CAPABILITY_MATRIX",
+    "CAPABILITY_GENOME",
+    "COGNITIVE_DIGITAL_ARCHITECTURE_GRAPH",
+    "VERSION_EVOLUTION_GATE"
+  ],
+  "capability_record_fields": [
+    "capability_id",
+    "parent_seed",
+    "name",
+    "state",
+    "evidence_level",
     "evidence",
-    "provenance"
+    "source_farms_tools",
+    "dependencies",
+    "contradictions",
+    "missing_requirements",
+    "unlocks",
+    "last_improvement",
+    "tests",
+    "version_introduced"
   ],
-  "encyclopedia_domains": [
-    "CEREBRON",
-    "COLLATZ",
-    "ARCHITECTON",
-    "SPATIAL",
-    "ENERGY",
-    "PHYSICS",
-    "ENGINEERING",
-    "AI",
-    "INDUSTRY",
-    "OTHER"
+  "capability_states": [
+    "ACQUIRED",
+    "PARTIAL",
+    "MISSING",
+    "REGRESSED",
+    "UNKNOWN"
   ],
-  "pipeline": [
+  "evolution_chain": [
+    "CURRENT_VERSION",
+    "REAL_WORK",
+    "CANDIDATE_CAPABILITY",
+    "EVIDENCE",
+    "RED_TEAM",
+    "ABLATION",
+    "COMPARE_CURRENT_CANDIDATE",
+    "REGRESSION_CHECK",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "cognitive_chain": [
+    "INPUT",
+    "PROBLEM_IDENTIFICATION",
+    "CAPABILITY_GRAPH",
+    "COGNITIVE_CHAIN_SELECTION",
+    "FARMS_TOOLS",
+    "EXECUTION",
+    "COUNTER_ANALYSIS",
+    "VALIDATION",
+    "SYNTHESIS",
+    "RESULT_MEASUREMENT",
+    "ARCHITECTURE_UPDATE_CANDIDATE"
+  ],
+  "version_gate": {
+    "promote_only_if": [
+      "JUSTIFIED",
+      "MEASURABLE_GAIN",
+      "NON_REDUNDANT",
+      "VALIDATED",
+      "NO_UNACCEPTABLE_REGRESSION",
+      "CLAIM<=EVIDENCE"
+    ],
+    "otherwise": "KEEP_CURRENT_OR_ROLLBACK"
+  },
+  "end_session_pipeline": [
     "FIN_DE_SESSION",
     "CAPSULE",
+    "DETECT_REAL_CHANGES",
     "SYADRIX_DEDUP",
+    "UPDATE_CHANGED_CAPABILITY_BRANCHES_ONLY",
+    "UPDATE_CAUSAL_UNLOCK_GRAPH",
     "F66_INDEX",
-    "ENCYCLOPEDIA_UPDATE",
+    "VERSION_GATE",
     "GITHUB_COMMIT",
     "NEXT_SESSION_RESTORE"
   ],
   "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
     "CLAIM<=EVIDENCE",
     "RAW_CHAT!=MEMORY",
+    "MEMORY!=LEARNING",
+    "ARCHITECTURE_UPDATE!=WEIGHT_UPDATE",
+    "MORE_CODE!=BETTER_VERSION",
+    "MORE_FARMS!=BETTER_VERSION",
     "PRESERVE_CONTRADICTIONS",
     "NO_SILENT_OVERWRITE",
-    "CAPSULE_BEFORE_ACCUMULATION",
+    "ABLATION_BEFORE_ADDITION",
     "VERIFY_BEFORE_COMMIT"
-  ]
+  ],
+  "note": "This evolves CEREBRON's external digital architecture, routing, memory and validated workflows; it does not modify GPT model weights."
 }
