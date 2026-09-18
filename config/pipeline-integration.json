@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "system": "CEREBRON-PIPELINE-INTEGRATION-OMEGA",
+  "stages": [
+    "SPIRALIX",
+    "SYADRIX",
+    "COALITION_DATABANK",
+    "COLLAPSE_GATE",
+    "AGORA",
+    "MICRO_IMPULSE",
+    "FORUM",
+    "SYNTHESIS_KERNEL",
+    "EVIDENCE_GATE"
+  ],
+  "invariants": [
+    "NO_STAGE_MAY_RAISE_EVIDENCE_LEVEL",
+    "CONTRADICTIONS_PROPAGATE",
+    "SOURCE_HASHES_PROPAGATE",
+    "FAILED_GATE_BLOCKS_COMMIT",
+    "ROLLBACK_PRESERVES_RAW_EVIDENCE"
+  ],
+  "target_farms": {
+    "communication": "F67",
+    "orchestration": "F68",
+    "evidence": "F72",
+    "integration": "F73"
+  },
+  "current_mode": "MASTER_INTEGRATION_MVP"
+}
