@@ -1,0 +1,85 @@
+{
+  "schema": "cerebron-task-ledger-v1",
+  "owner_module": "F74",
+  "purpose": "Persistent auditable registry of significant work to prevent duplicate work, preserve open tasks, and connect verified work to capability evolution.",
+  "statuses": [
+    "TODO",
+    "ACTIVE",
+    "BLOCKED",
+    "FAILED",
+    "DONE",
+    "VERIFIED",
+    "SUPERSEDED"
+  ],
+  "rule": "DONE!=VERIFIED",
+  "task_fields": [
+    "task_id",
+    "mission_id",
+    "created_at",
+    "updated_at",
+    "title",
+    "objective",
+    "status",
+    "assigned_farms",
+    "dependencies",
+    "work_key",
+    "result",
+    "evidence",
+    "evidence_level",
+    "commits_runs_artifacts",
+    "contradictions",
+    "capability_impact",
+    "next_action"
+  ],
+  "lifecycle": [
+    "MISSION",
+    "TASK",
+    "ASSIGNED",
+    "EXECUTED",
+    "RESULT",
+    "VERIFIED_OR_FAILED_OR_BLOCKED",
+    "EVIDENCE",
+    "CAPABILITY_IMPACT",
+    "CLOSED"
+  ],
+  "automation": {
+    "on_task_start": [
+      "CREATE_OR_REUSE_WORK_KEY",
+      "CHECK_DUPLICATE",
+      "REGISTER_ACTIVE"
+    ],
+    "on_result": [
+      "STORE_RESULT",
+      "LINK_EVIDENCE",
+      "SET_DONE_NOT_VERIFIED"
+    ],
+    "on_validation": [
+      "SET_VERIFIED_OR_FAILED",
+      "UPDATE_CAPABILITY_IMPACT"
+    ],
+    "on_end_session": [
+      "CLOSE_VERIFIED",
+      "PRESERVE_OPEN",
+      "MERGE_DUPLICATES",
+      "UPDATE_CAPABILITY_GENOME",
+      "COMPUTE_NEXT_CHECKPOINT",
+      "COMMIT_STATE"
+    ],
+    "on_resume": [
+      "LOAD_OPEN_TASKS",
+      "RESOLVE_DEPENDENCIES",
+      "PRIORITIZE",
+      "SELECT_USEFUL_FARMS",
+      "RESUME"
+    ]
+  },
+  "rules": [
+    "REALITY>COHERENCE",
+    "CLAIM<=EVIDENCE",
+    "NO_SILENT_OVERWRITE",
+    "NO_DUPLICATE_EXECUTION_WHEN_REUSABLE",
+    "TASK_RECORD!=EVIDENCE",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_PROGRESS",
+    "VERIFY_BEFORE_CLOSE"
+  ]
+}
