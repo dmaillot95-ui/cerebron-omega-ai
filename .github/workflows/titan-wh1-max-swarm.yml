@@ -60,7 +60,20 @@ jobs:
           f=next(x for x in registry if int(x['id'])==fid)
           repo=f['repo']; domain=f['domain']
           roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST','THERMAL_ANALYST','MULTIPHYSICS_ANALYST','FAILURE_ANALYST','CAUSAL_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','SYNTHESIS_ANALYST','OMEGA_JUDGE']
-          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          candidate_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          # Health-router: probe providers once per farm, then route roles only to live Spaces.
+          probe_prompt='Reply exactly HEALTH_OK.'
+          health=[]
+          for space in candidate_spaces:
+            try:
+              t=time.time(); ok,txt,meta=fw.invoke(space,probe_prompt)
+              health.append({'space':space,'ok':bool(ok and str(txt).strip()),'latency':round(time.time()-t,3),'meta':meta})
+            except Exception as e:
+              health.append({'space':space,'ok':False,'error':repr(e)})
+          spaces=[h['space'] for h in sorted(health,key=lambda x:(not x['ok'],x.get('latency',9999))) if h['ok']]
+          result['provider_health']=health
+          result['live_spaces']=spaces
+          result['dead_spaces']=[h['space'] for h in health if not h['ok']]
           result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
           cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
           wp=pathlib.Path('farm/worker/farm_worker.py')
@@ -92,6 +105,7 @@ jobs:
             for fut in as_completed(futs):
               row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
           result['outputs'].sort(key=lambda x:x['index'])
+          result['live_provider_count']=len(spaces)
           result['elapsed_seconds']=round(time.time()-t0,3)
           pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
           print(json.dumps({'farm_id':fid,'successful_ai_outputs':result['successful_roles'],'provider_attempts':result['provider_attempts']}))
@@ -123,7 +137,7 @@ jobs:
             except: pass
           success=sum(r.get('successful_roles',0) for r in rows)
           attempts=sum(r.get('provider_attempts',0) for r in rows)
-          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':23,'logical_ai_roles':23*20,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
+          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':23,'logical_ai_roles':23*20,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_live_provider':sum(r.get('live_provider_count',0)>0 for r in rows),'live_provider_observations':sum(r.get('live_provider_count',0) for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
           Path('titan-ai-accounting.json').write_text(json.dumps(summary,indent=2)+'\n')
           print(json.dumps(summary,indent=2))
           PY
