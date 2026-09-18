@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "system": "SPIRALIX-EXPONENT-OMEGA",
+  "purpose": "Compact notation that expands explicitly into real task instances; exponent never implies hidden compute.",
+  "syntax": [
+    "Ω^N[targets]",
+    "Ω^N{task}"
+  ],
+  "limits": {
+    "max_expansion": 64,
+    "requires_explicit_targets": true
+  },
+  "rules": [
+    "EXPONENT_IS_COMPRESSION_NOT_COMPUTE",
+    "ONE_EXPANDED_ITEM_EQUALS_ONE_REAL_TASK_REQUEST",
+    "NO_FAKE_AGENT_MULTIPLICATION",
+    "ANTI_REDUNDANCY_AFTER_EXPANSION",
+    "CLAIM<=EVIDENCE"
+  ]
+}
