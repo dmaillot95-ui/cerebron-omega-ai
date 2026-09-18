@@ -80,12 +80,12 @@ jobs:
               health.append({'space':space,'ok':False,'error':repr(e)})
           ranked_health=sorted(health,key=lambda x:(not x['ok'],x.get('latency',9999)))
           live_spaces=[h['space'] for h in ranked_health if h['ok']]
-          spaces=live_spaces+[s for s in candidate_spaces if s not in live_spaces]
+          spaces=productive_spaces
           result['provider_health']=health
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='CEREBRON_MULTIRATE_INTERCHANGE_V7'
+          result['routing_policy']='CEREBRON_GENERATION_PREFLIGHT_V8'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
@@ -93,6 +93,20 @@ jobs:
           result['exchange_highway']={'enabled':True,'rounds':2,'handoffs':0,'verified_handoffs':0}
           result['interchange_network']={'enabled':True,'switches':0,'bypasses':0,'routes_tried':0,'route_success':{}}
           result['multirate_modulator']={'enabled':True,'hf_seen':0,'hf_duplicates':0,'hf_survivors':0,'bf_audits':0,'raw_preserved':True}
+          result['generation_preflight']={'tested':0,'productive':[],'rejected':{},'policy':'GENERATE_ONCE_BEFORE_OPENING_ROUTE'}
+          productive_spaces=[]
+          for ps in candidate_spaces:
+            try:
+              result['generation_preflight']['tested']+=1
+              pok,ptext,pmeta=fw.invoke(ps,"Reply with exactly: CEREBRON_PREFLIGHT_OK")
+              if pok and str(ptext).strip():
+                productive_spaces.append(ps)
+                result['generation_preflight']['productive'].append(ps)
+              else:
+                result['generation_preflight']['rejected'][ps]=str((pmeta or {}).get('error','EMPTY_OR_FAILED'))[:500]
+            except Exception as pe:
+              result['generation_preflight']['rejected'][ps]=repr(pe)[:500]
+          spaces=productive_spaces
           seen_signatures=set()
           def hf_filter(txt):
             import hashlib,re
