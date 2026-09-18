@@ -50,3 +50,5 @@ if __name__=="__main__":
         ok,status=verify(x)
         print(json.dumps({"verify":status,"route":route(x),"decoded":decode(x),"sha256":x["sha256"]},ensure_ascii=False))
         raise SystemExit(0 if ok and route(x)["status"]=="ROUTED" else 1)
+
+# validation-trigger: 2026-09-18T-SPIRALIX-01
