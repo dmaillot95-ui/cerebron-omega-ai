@@ -1,0 +1,51 @@
+{
+  "benchmark_id": "TITAN-WH1-COUPLED-ENGINEERING-001",
+  "objective": "Close the coupled S1 cryogenic tank/feed/slosh-pogo/structure/GNC engineering risk without inventing TBD physical parameters.",
+  "selected_farms": [
+    51,
+    52,
+    54,
+    56,
+    60,
+    64,
+    69,
+    72,
+    73
+  ],
+  "conditional_farms": [
+    33,
+    37,
+    63
+  ],
+  "required_unknowns": [
+    "tank_geometry",
+    "tank_mass",
+    "material_properties",
+    "wall_thickness",
+    "operating_pressure",
+    "structural_modes",
+    "engine_thrust_spectrum",
+    "feedline_impedance",
+    "pressurization_law",
+    "slosh_model",
+    "GNC_gains",
+    "flight_envelope"
+  ],
+  "gates": [
+    "REQUIREMENTS",
+    "COUPLING_MAP",
+    "FAILURE_SCENARIOS",
+    "RED_TEAM",
+    "COUNTER_AUDIT",
+    "EVIDENCE_GATE",
+    "INTEGRATION"
+  ],
+  "evidence_ceiling": "E2-until-physical-inputs-and-tests-exist",
+  "rules": [
+    "REALITY>COHERENCE",
+    "CLAIM<=EVIDENCE",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_PROGRESS",
+    "ABLATION_BEFORE_ADDITION"
+  ]
+}
