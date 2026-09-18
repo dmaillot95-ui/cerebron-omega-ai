@@ -1,31 +1,134 @@
 name: TITAN WH1 Maximum Auditable Swarm
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'benchmarks/titan-wh1-max-swarm-001.json'
       - '.github/workflows/titan-wh1-max-swarm.yml'
-  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: titan-wh1-max-ai-swarm
+  cancel-in-progress: false
+
 jobs:
-  generate-workplan:
+  plan:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p=json.load(open('benchmarks/titan-wh1-max-swarm-001.json'))
+          farms=p['farm_coalition']
+          inc=[{'id':i} for i in farms]
+          print('matrix='+json.dumps({'include':inc},separators=(',',':')))
+          PY
+
+  farm-ai:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: '3.12'}
-      - name: Generate and audit 120-unit plan
-        shell: python
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet hf-gradio
+      - name: Execute maximum external-model yield
+        env:
+          FARM_ID: ${{ matrix.id }}
+        shell: bash
         run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,subprocess,pathlib,importlib.util,time,hashlib
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+          p=json.load(open('benchmarks/titan-wh1-max-swarm-001.json'))
+          fid=int(os.environ['FARM_ID'])
+          registry=json.load(open('config/farms.json'))['farms']
+          f=next(x for x in registry if int(x['id'])==fid)
+          repo=f['repo']; domain=f['domain']
+          roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST','THERMAL_ANALYST','MULTIPHYSICS_ANALYST','FAILURE_ANALYST','CAUSAL_ANALYST','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','SYNTHESIS_ANALYST','OMEGA_JUDGE']
+          spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat']
+          result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
+          cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
+          wp=pathlib.Path('farm/worker/farm_worker.py')
+          if cp.returncode!=0 or not wp.exists():
+            result['error']='clone_or_worker_missing'
+            pathlib.Path('out/result.json').write_text(json.dumps(result,indent=2)); raise SystemExit(0)
+          spec=importlib.util.spec_from_file_location(f'fw_{fid}',wp); fw=importlib.util.module_from_spec(spec); spec.loader.exec_module(fw)
+          unknowns=', '.join(p.get('required_unknowns',[]))
+          def one(i):
+            role=roles[i]
+            prompt=(f'CEREBRON OMEGA — TITAN WH1 MAXIMUM AUDITABLE AI SWARM\nFARM {fid} {domain}\nROLE {role}\n'
+                    'Analyze the coupled S1 cryogenic tank/feed/slosh-pogo/structure/GNC engineering problem. '
+                    f'Physical unknowns that MUST remain explicit: {unknowns}. '
+                    'Do not invent missing dimensions or test data. REALITY>COHERENCE; EVIDENCE>CONFIDENCE; CLAIM<=EVIDENCE; '
+                    'SIMULATION!=TEST; WORKFLOW_SUCCESS!=SCIENTIFIC_PROGRESS. '
+                    'Return ESTABLISHED / DERIVED / CONTRADICTIONS / FAILURE_MODES / UNKNOWNS / NEXT_TEST / SYNTHESIS.')
+            attempts=[]
+            for space in spaces:
+              try:
+                ok,text,meta=fw.invoke(space,prompt)
+                attempts.append({'space':space,'ok':bool(ok),'meta':meta})
+                if ok and str(text).strip():
+                  return {'index':i+1,'role':role,'success':True,'space':space,'sha256':hashlib.sha256(str(text).encode()).hexdigest(),'provider_attempts':len(attempts),'response':str(text),'attempts':attempts}
+              except Exception as e: attempts.append({'space':space,'ok':False,'error':repr(e)})
+            return {'index':i+1,'role':role,'success':False,'provider_attempts':len(attempts),'attempts':attempts}
+          t0=time.time()
+          with ThreadPoolExecutor(max_workers=2) as ex:
+            futs=[ex.submit(one,i) for i in range(len(roles))]
+            for fut in as_completed(futs):
+              row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
+          result['outputs'].sort(key=lambda x:x['index'])
+          result['elapsed_seconds']=round(time.time()-t0,3)
+          pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'farm_id':fid,'successful_ai_outputs':result['successful_roles'],'provider_attempts':result['provider_attempts']}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: titan-ai-farm-${{ matrix.id }}
+          path: out/result.json
+          retention-days: 14
+
+  accounting:
+    needs: farm-ai
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: titan-ai-farm-*
+          path: results
+      - shell: bash
+        run: |
+          python - <<'PY'
           import json
-          p=json.load(open("benchmarks/titan-wh1-max-swarm-001.json"))
-          farms=p["farm_coalition"]
-          assert len(farms)==23
-          lanes=sum(p["lanes_per_farm"].values())
-          assert lanes==5
-          units=len(farms)*lanes+p["extra_integration_lanes"]
-          assert units==120==p["planned_total_work_units"]
-          assert "JOB!=AI" in p["hard_rules"]
-          print("FARMS_SELECTED",len(farms))
-          print("PLANNED_WORK_UNITS",units)
-          print("REAL_AI_CALLS",0)
-          print("SCIENTIFIC_MESSAGES",0)
-          print("STATUS","WORKPLAN_VERIFIED_NOT_SCIENTIFIC_RESULT")
+          from pathlib import Path
+          rows=[]
+          for p in Path('results').rglob('result.json'):
+            try: rows.append(json.loads(p.read_text()))
+            except: pass
+          success=sum(r.get('successful_roles',0) for r in rows)
+          attempts=sum(r.get('provider_attempts',0) for r in rows)
+          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':23,'logical_ai_roles':23*20,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
+          Path('titan-ai-accounting.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(json.dumps(summary,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: titan-ai-accounting
+          path: titan-ai-accounting.json
+          retention-days: 14
