@@ -1,0 +1,39 @@
+{
+  "schema": "cerebron-causal-action-gate-v1",
+  "version": "1.0.0",
+  "purpose": "Suppress non-actionable intermediate messages and force causal execution before reporting",
+  "chain": [
+    "INTENTION",
+    "REAL_STATE",
+    "CAUSE",
+    "POSSIBLE_ACTION",
+    "EXECUTION",
+    "VERIFICATION",
+    "RESULT",
+    "MESSAGE"
+  ],
+  "message_gate": {
+    "allow_if_any": [
+      "NEW_VERIFIED_RESULT",
+      "USER_ACTION_REQUIRED",
+      "USER_DECISION_REQUIRED",
+      "HARD_BLOCKER"
+    ],
+    "suppress": [
+      "PLAN_ONLY",
+      "I_WILL_CHECK",
+      "CHECK_IN_PROGRESS",
+      "I_WILL_FIX",
+      "NO_NEW_INFORMATION"
+    ]
+  },
+  "rules": [
+    "ACTION_BEFORE_NARRATION",
+    "VERIFY_BEFORE_REPORT",
+    "CLAIM<=EVIDENCE",
+    "NO_SIMULATED_EXECUTION",
+    "BATCH_WHEN_SAFE",
+    "ONE_CLEAN_PASS_WHEN_POSSIBLE"
+  ],
+  "applies_to": "ALL_FARMS_AND_ORCHESTRATION"
+}
