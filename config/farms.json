@@ -1,5 +1,5 @@
 {
-  "version": "1.8",
+  "version": "1.9",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -310,85 +310,85 @@
       "id": 60,
       "repo": "cerebron-farm-60-hardware-architecture",
       "domain": "hardware-architecture",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 61,
       "repo": "cerebron-farm-61-electronics-pcb",
       "domain": "electronics-pcb",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 62,
       "repo": "cerebron-farm-62-embedded-firmware",
       "domain": "embedded-firmware",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 63,
       "repo": "cerebron-farm-63-hardware-test-hil",
       "domain": "hardware-test-hil",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 64,
       "repo": "cerebron-farm-64-hardware-reliability-safety",
       "domain": "hardware-reliability-safety",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 65,
       "repo": "cerebron-farm-65-physical-prototype-qualification",
       "domain": "physical-prototype-qualification",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 66,
       "repo": "cerebron-farm-66-knowledge-graph-vector-index",
       "domain": "knowledge-graph-vector-index",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 67,
       "repo": "cerebron-farm-67-cross-farm-communication",
       "domain": "cross-farm-communication",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 68,
       "repo": "cerebron-farm-68-autonomous-experiment-orchestrator",
       "domain": "autonomous-experiment-orchestrator",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 69,
       "repo": "cerebron-farm-69-causal-discovery",
       "domain": "causal-discovery",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 70,
       "repo": "cerebron-farm-70-theorem-proof-engineering",
       "domain": "theorem-proof-engineering",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 71,
       "repo": "cerebron-farm-71-scientific-reproduction",
       "domain": "scientific-reproduction",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 72,
       "repo": "cerebron-farm-72-reality-evidence-gate",
       "domain": "reality-evidence-gate",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 73,
       "repo": "cerebron-farm-73-system-integration-qualification",
       "domain": "system-integration-qualification",
-      "status": "PLANNED"
+      "status": "SCAFFOLDED"
     }
   ]
 }
