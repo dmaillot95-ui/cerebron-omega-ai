@@ -1,4 +1,4 @@
-name: CEREBRON Batch 8 + Retry Queue
+name: CEREBRON Batch 8 Group 29-36
 
 'on':
   workflow_dispatch:
@@ -28,14 +28,14 @@ jobs:
               raise SystemExit(1)
 
           farms = [
-              ("FARM21","ECONOMICS_FINANCE"),
-              ("FARM22","BUSINESS_MARKET"),
-              ("FARM23","LAW_REGULATION"),
-              ("FARM24","PUBLIC_POLICY_ANALYSIS"),
-              ("FARM25","GEOGRAPHY_INFRASTRUCTURE"),
-              ("FARM26","CLIMATE_ENVIRONMENT"),
-              ("FARM27","AGRICULTURE_FOOD"),
-              ("FARM28","EDUCATION_KNOWLEDGE_TRANSFER"),
+              ("FARM29","LANGUAGE_CULTURE"),
+              ("FARM30","HUMAN_FACTORS"),
+              ("FARM31","FORECAST_SCENARIOS"),
+              ("FARM32","INVENTION_DISCOVERY"),
+              ("FARM33","COUNTEREXAMPLE_RED_TEAM"),
+              ("FARM34","FORMAL_AUDIT"),
+              ("FARM35","REPLICATION"),
+              ("FARM36","SIMULATION_MODELING"),
           ]
           results = []
           for n, (farm, role) in enumerate(farms, 1):
@@ -104,9 +104,9 @@ jobs:
                   models[x["model"]] = models.get(x["model"], 0) + 1
               else:
                   errors[x["error"]] = errors.get(x["error"], 0) + 1
-          report = {"group": 2, "planned": 8, "successful": success, "failed": failed,
+          report = {"group": 3, "planned": 8, "successful": success, "failed": failed,
                     "yield_pct": success * 5.0, "models": models, "errors": errors, "results": results}
-          with open("batch8-group2.json", "w") as fh:
+          with open("batch8-group3.json", "w") as fh:
               json.dump(report, fh, indent=2)
           print("PLANNED=8")
           print("SUCCESSFUL=" + str(success))
@@ -125,6 +125,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: batch8-group2
-          path: batch8-group2.json
+          name: batch8-group3
+          path: batch8-group3.json
           retention-days: 1
