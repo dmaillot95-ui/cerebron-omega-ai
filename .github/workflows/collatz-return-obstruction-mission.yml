@@ -9,16 +9,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: '3.12'}
+        with:
+          python-version: '3.12'
       - run: python tools/rd_mission_compiler.py
       - run: python tools/anti_redundancy_scheduler.py
       - run: python tools/micro_impulse.py
       - run: python tools/synthesis_kernel.py
       - run: python tools/pipeline_integration.py
-      - run: python - <<'PY'
+      - name: Verify mission packet
+        shell: python
+        run: |
           import json
-          p=json.load(open('missions/collatz-return-obstruction-001.json'))
-          assert p['claim'].endswith('Collatz is not solved')
-          assert p['evidence_ceiling']=='UNKNOWN until arbitrary-r proof exists'
-          print('MISSION_PACKET_VERIFIED')
-          PY
+          with open("missions/collatz-return-obstruction-001.json", encoding="utf-8") as fh:
+              p = json.load(fh)
+          assert p["claim"].endswith("Collatz is not solved")
+          assert p["evidence_ceiling"] == "UNKNOWN until arbitrary-r proof exists"
+          print("MISSION_PACKET_VERIFIED")
