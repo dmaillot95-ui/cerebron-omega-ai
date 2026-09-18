@@ -59,10 +59,10 @@ jobs:
           registry=json.load(open('config/farms.json'))['farms']
           f=next(x for x in registry if int(x['id'])==fid)
           repo=f['repo']; domain=f['domain']
-          roles=['SYSTEM_ARCHITECT','CRYOGENIC_ANALYST','FEED_SYSTEM_ANALYST','SLOSH_ANALYST','POGO_ANALYST','STRUCTURAL_DYNAMICS','GNC_ANALYST']
+          roles=['REALITY_RESEARCH','SYSTEM_ARCHITECT','CALCULATION','SIMULATION','CAUSAL_ANALYSIS','INVENTION','FAILURE_ANALYSIS','COUNTEREXAMPLE_HUNTER','FALSIFIER','FORMAL_AUDITOR','INDEPENDENT_REPLICATOR','UNCERTAINTY_ANALYST','INTERFACE_ANALYST','INVARIANT_HUNTER','EXPERIMENT_DESIGN','CONTRADICTION_RESOLUTION','UNKNOWN_GAP_ANALYST','EVIDENCE_AUDITOR','SYNTHESIS_ANALYST','OMEGA_JUDGE']
           candidate_spaces=['huggingface-projects/llama-3.2-3B-Instruct','huggingface-projects/gemma-2-9b-it','huggingface-projects/llama-2-7b-chat','huggingface-projects/llama-2-13b-chat','lmz/candle-llama2','mkmenta/gpt-1-and-gpt-2']
           QUOTA_MARKERS=('ZeroGPU quota','quota','rate limit','429')
-          result={'schema':'titan-wh1-max-ai-v2','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
+          result={'schema':'titan-wh1-fixed-worker-v10','farm_id':fid,'repo':repo,'domain':domain,'planned_roles':len(roles),'successful_roles':0,'provider_attempts':0,'outputs':[]}
           cp=subprocess.run(['git','clone','--depth','1',f'https://github.com/dmaillot95-ui/{repo}.git','farm'],capture_output=True,text=True,timeout=120)
           wp=pathlib.Path('farm/worker/farm_worker.py')
           if cp.returncode!=0 or not wp.exists():
@@ -85,7 +85,7 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='CEREBRON_PRODUCTIVE_ROUTE_ABLATION_V9'
+          result['routing_policy']='CEREBRON_FIXED_WORKER_IDENTITY_V10'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
@@ -113,12 +113,12 @@ jobs:
           def ranked_routes(routes):
             return sorted(routes,key=lambda s:(s in blocked_spaces,-route_stats[s]['success'],route_stats[s]['attempts']))
           def bypass(space):
-            bypass(space)
+            blocked_spaces.add(space)
             result['interchange_network']['bypasses']+=1
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
-            prompt=(f'CEREBRON OMEGA — TITAN WH1 MAXIMUM AUDITABLE AI SWARM\nFARM {fid} {domain}\nROLE {role}\n'
+            base_prompt=(f'CEREBRON OMEGA — TITAN WH1 MAXIMUM AUDITABLE AI SWARM\nFARM {fid} {domain}\nROLE {role}\n'
                     'Analyze the coupled S1 cryogenic tank/feed/slosh-pogo/structure/GNC engineering problem. '
                     f'Physical unknowns that MUST remain explicit: {unknowns}. '
                     'Do not invent missing dimensions or test data. REALITY>COHERENCE; EVIDENCE>CONFIDENCE; CLAIM<=EVIDENCE; '
@@ -216,7 +216,7 @@ jobs:
             except: pass
           success=sum(r.get('successful_roles',0) for r in rows)
           attempts=sum(r.get('provider_attempts',0) for r in rows)
-          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':7,'logical_ai_roles':7*7,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_live_provider':sum(r.get('live_provider_count',0)>0 for r in rows),'live_provider_observations':sum(r.get('live_provider_count',0) for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
+          summary={'schema':'titan-wh1-max-ai-accounting-v2','farms_received':len(rows),'planned_farms':7,'workers_per_farm':20,'logical_ai_roles':7*20,'successful_external_model_outputs':success,'provider_attempts':attempts,'farms_with_ai_output':sum(r.get('successful_roles',0)>0 for r in rows),'farms_with_live_provider':sum(r.get('live_provider_count',0)>0 for r in rows),'live_provider_observations':sum(r.get('live_provider_count',0) for r in rows),'claim_note':'Counts only non-empty external model responses. JOB!=AI; response!=evidence; workflow success!=engineering validation.'}
           Path('titan-ai-accounting.json').write_text(json.dumps(summary,indent=2)+'\n')
           print(json.dumps(summary,indent=2))
           PY
