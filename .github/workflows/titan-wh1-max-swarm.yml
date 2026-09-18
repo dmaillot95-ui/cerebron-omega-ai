@@ -77,10 +77,14 @@ jobs:
               health.append({'space':space,'ok':bool(ok and str(txt).strip()),'latency':round(time.time()-t,3),'meta':meta})
             except Exception as e:
               health.append({'space':space,'ok':False,'error':repr(e)})
-          spaces=[h['space'] for h in sorted(health,key=lambda x:(not x['ok'],x.get('latency',9999))) if h['ok']]
+          ranked_health=sorted(health,key=lambda x:(not x['ok'],x.get('latency',9999)))
+          live_spaces=[h['space'] for h in ranked_health if h['ok']]
+          spaces=live_spaces+[s for s in candidate_spaces if s not in live_spaces]
           result['provider_health']=health
-          result['live_spaces']=spaces
-          result['dead_spaces']=[h['space'] for h in health if not h['ok']]
+          result['live_spaces']=live_spaces
+          result['provider_route']=spaces
+          result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
+          result['routing_policy']='AGORA_SOFT_SCORE_FALLBACK_V1'
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
@@ -105,7 +109,7 @@ jobs:
             for fut in as_completed(futs):
               row=fut.result(); result['provider_attempts']+=row['provider_attempts']; result['successful_roles']+=int(row['success']); result['outputs'].append(row)
           result['outputs'].sort(key=lambda x:x['index'])
-          result['live_provider_count']=len(spaces)
+          result['live_provider_count']=len(live_spaces)
           result['elapsed_seconds']=round(time.time()-t0,3)
           pathlib.Path('out/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
           print(json.dumps({'farm_id':fid,'successful_ai_outputs':result['successful_roles'],'provider_attempts':result['provider_attempts']}))
