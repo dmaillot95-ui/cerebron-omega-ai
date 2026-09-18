@@ -85,12 +85,18 @@ jobs:
           result['live_spaces']=live_spaces
           result['provider_route']=spaces
           result['degraded_spaces']=[h['space'] for h in health if not h['ok']]
-          result['routing_policy']='CEREBRON_INTER_AI_HIGHWAY_V5'
+          result['routing_policy']='CEREBRON_INTERCHANGE_NETWORK_V6'
           result['provider_failures']={}
           blocked_spaces=set()
           route_stats={s:{'attempts':0,'success':0,'quota_blocked':0,'errors':{}} for s in candidate_spaces}
           result['provider_api_schema']={}
           result['exchange_highway']={'enabled':True,'rounds':2,'handoffs':0,'verified_handoffs':0}
+          result['interchange_network']={'enabled':True,'switches':0,'bypasses':0,'routes_tried':0,'route_success':{}}
+          def ranked_routes(routes):
+            return sorted(routes,key=lambda s:(s in blocked_spaces,-route_stats[s]['success'],route_stats[s]['attempts']))
+          def bypass(space):
+            bypass(space)
+            result['interchange_network']['bypasses']+=1
           unknowns=', '.join(p.get('required_unknowns',[]))
           def one(i):
             role=roles[i]
@@ -101,7 +107,8 @@ jobs:
                     'SIMULATION!=TEST; WORKFLOW_SUCCESS!=SCIENTIFIC_PROGRESS. '
                     'Return ESTABLISHED / DERIVED / CONTRADICTIONS / FAILURE_MODES / UNKNOWNS / NEXT_TEST / SYNTHESIS.')
             attempts=[]
-            for space in spaces:
+            for space in ranked_routes(spaces):
+              result['interchange_network']['routes_tried']+=1
               if space in blocked_spaces:
                 continue
               try:
@@ -130,10 +137,12 @@ jobs:
                   blocked_spaces.add(space)
                 if ok and str(text).strip():
                   route_stats[space]['success']+=1
+                  result['interchange_network']['route_success'][space]=result['interchange_network']['route_success'].get(space,0)+1
                   first=str(text).strip()
                   # Round 2: hand the first model output to another productive route for critique.
-                  for peer in spaces:
+                  for peer in ranked_routes(spaces):
                     if peer==space or peer in blocked_spaces: continue
+                    result['interchange_network']['switches']+=1
                     critique_prompt=("CEREBRON INTER-AI HIGHWAY. Independently audit the following candidate. "
                       "Identify errors, contradictions, missing evidence, and return a corrected synthesis. "
                       "Do not treat the candidate as evidence.\nCANDIDATE:\n"+first[:12000])
