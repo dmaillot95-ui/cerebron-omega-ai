@@ -1,0 +1,43 @@
+name: OpenRouter Free Smoke Test
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/openrouter-smoke-test.yml'
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error
+          key=os.environ.get('OPENROUTER_API_KEY','')
+          out={'schema':'cerebron-openrouter-smoke-v1','key_present':bool(key),'model':'openrouter/free','success':False}
+          if not key:
+            out['error']='KEY_ABSENT'
+          else:
+            body=json.dumps({'model':'openrouter/free','messages':[{'role':'user','content':'Reply exactly CEREBRON_OK'}],'max_tokens':16}).encode()
+            req=urllib.request.Request('https://openrouter.ai/api/v1/chat/completions',data=body,headers={'Authorization':'Bearer '+key,'Content-Type':'application/json','HTTP-Referer':'https://github.com/dmaillot95-ui/cerebron-omega-ai','X-Title':'CEREBRON Omega'})
+            try:
+              with urllib.request.urlopen(req,timeout=60) as r:
+                data=json.loads(r.read().decode())
+              txt=((data.get('choices') or [{}])[0].get('message') or {}).get('content','')
+              out.update(success=bool(str(txt).strip()),response_nonempty=bool(str(txt).strip()),response_preview=str(txt)[:80],provider_model=data.get('model'))
+            except urllib.error.HTTPError as e:
+              out['error']='HTTP_'+str(e.code); out['error_body']=e.read().decode(errors='replace')[:300]
+            except Exception as e: out['error']=type(e).__name__+': '+str(e)[:200]
+          print(json.dumps(out,indent=2))
+          open('openrouter-smoke.json','w').write(json.dumps(out,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: openrouter-smoke
+          path: openrouter-smoke.json
+          retention-days: 1
