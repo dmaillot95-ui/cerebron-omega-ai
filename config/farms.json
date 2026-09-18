@@ -1,56 +1,340 @@
 {
-  "version": "1.6",
+  "version": "1.7",
   "owner": "dmaillot95-ui",
   "farms": [
-    {"id":1,"repo":"cerebron-collatz-theory-farm","domain":"collatz-theory"},
-    {"id":2,"repo":"cerebron-collatz-dynamics-farm","domain":"collatz-dynamics"},
-    {"id":3,"repo":"cerebron-collatz-farm-03-adic","domain":"collatz-adic"},
-    {"id":4,"repo":"cerebron-collatz-farm-04-counterexample","domain":"collatz-counterexample"},
-    {"id":5,"repo":"cerebron-collatz-farm-05-literature","domain":"collatz-literature"},
-    {"id":6,"repo":"cerebron-collatz-farm-06-formal-audit","domain":"collatz-formal-audit"},
-    {"id":7,"repo":"cerebron-collatz-farm-07-synthesis","domain":"collatz-synthesis"},
-    {"id":8,"repo":"cerebron-farm-08-research-web","domain":"research-web"},
-    {"id":9,"repo":"cerebron-farm-09-science-math","domain":"science-math"},
-    {"id":10,"repo":"cerebron-farm-10-science-physics","domain":"science-physics"},
-    {"id":11,"repo":"cerebron-farm-11-science-chemistry-materials","domain":"chemistry-materials"},
-    {"id":12,"repo":"cerebron-farm-12-biology-health","domain":"biology-health"},
-    {"id":13,"repo":"cerebron-farm-13-engineering-systems","domain":"engineering-systems"},
-    {"id":14,"repo":"cerebron-farm-14-energy","domain":"energy"},
-    {"id":15,"repo":"cerebron-farm-15-space","domain":"space"},
-    {"id":16,"repo":"cerebron-farm-16-industry-manufacturing","domain":"industry-manufacturing"},
-    {"id":17,"repo":"cerebron-farm-17-computing-software","domain":"computing-software"},
-    {"id":18,"repo":"cerebron-farm-18-ai-agents","domain":"ai-agents"},
-    {"id":19,"repo":"cerebron-farm-19-cybersecurity","domain":"cybersecurity"},
-    {"id":20,"repo":"cerebron-farm-20-data-knowledge","domain":"data-knowledge"},
-    {"id":21,"repo":"cerebron-farm-21-economics-finance","domain":"economics-finance"},
-    {"id":22,"repo":"cerebron-farm-22-business-market","domain":"business-market"},
-    {"id":23,"repo":"cerebron-farm-23-law-regulation","domain":"law-regulation"},
-    {"id":24,"repo":"cerebron-farm-24-public-policy-analysis","domain":"public-policy-analysis"},
-    {"id":25,"repo":"cerebron-farm-25-geography-infrastructure","domain":"geography-infrastructure"},
-    {"id":26,"repo":"cerebron-farm-26-climate-environment","domain":"climate-environment"},
-    {"id":27,"repo":"cerebron-farm-27-agriculture-food","domain":"agriculture-food"},
-    {"id":28,"repo":"cerebron-farm-28-education-knowledge-transfer","domain":"education-knowledge-transfer"},
-    {"id":29,"repo":"cerebron-farm-29-language-culture","domain":"language-culture"},
-    {"id":30,"repo":"cerebron-farm-30-human-factors","domain":"human-factors"},
-    {"id":31,"repo":"cerebron-farm-31-forecast-scenarios","domain":"forecast-scenarios"},
-    {"id":32,"repo":"cerebron-farm-32-invention-discovery","domain":"invention-discovery"},
-    {"id":33,"repo":"cerebron-farm-33-counterexample-red-team","domain":"counterexample-red-team"},
-    {"id":34,"repo":"cerebron-farm-34-formal-audit","domain":"formal-audit"},
-    {"id":35,"repo":"cerebron-farm-35-replication","domain":"replication"},
-    {"id":36,"repo":"cerebron-farm-36-simulation-modeling","domain":"simulation-modeling"},
-    {"id":37,"repo":"cerebron-farm-37-experiment-test-design","domain":"experiment-test-design"},
-    {"id":38,"repo":"cerebron-farm-38-contradiction-resolution","domain":"contradiction-resolution"},
-    {"id":39,"repo":"cerebron-farm-39-unknowns-gaps","domain":"unknowns-gaps"},
-    {"id":40,"repo":"cerebron-farm-40-memory-compression","domain":"memory-compression"},
-    {"id":41,"repo":"FARM-41-Capability-Evaluation","domain":"capability-evaluation"},
-    {"id":42,"repo":"cerebron-farm-42-meta-orchestration","domain":"meta-orchestration"},
-    {"id":43,"repo":"cerebron-farm-43-civilization-synthesis","domain":"civilization-synthesis"},
-    {"id":44,"repo":"cerebron-farm-44-ai-platform-routing","domain":"ai-platform-routing"},
-    {"id":45,"repo":"cerebron-farm-45-agent-runtime","domain":"agent-runtime"},
-    {"id":46,"repo":"cerebron-farm-46-global-video-research","domain":"global-video-research"},
-    {"id":47,"repo":"cerebron-farm-47-global-country-web-intelligence","domain":"global-country-web-intelligence"},
-    {"id":48,"repo":"cerebron-farm-48-global-scientific-literature-intelligence","domain":"global-scientific-literature-intelligence"},
-    {"id":49,"repo":"cerebron-farm-49-engineering-cad-digital-twin","domain":"engineering-cad-digital-twin"},
-    {"id":50,"repo":"cerebron-farm-50-technical-visual-engineering-documentation","domain":"technical-visual-engineering-documentation"}
+    {
+      "id": 1,
+      "repo": "cerebron-collatz-theory-farm",
+      "domain": "collatz-theory"
+    },
+    {
+      "id": 2,
+      "repo": "cerebron-collatz-dynamics-farm",
+      "domain": "collatz-dynamics"
+    },
+    {
+      "id": 3,
+      "repo": "cerebron-collatz-farm-03-adic",
+      "domain": "collatz-adic"
+    },
+    {
+      "id": 4,
+      "repo": "cerebron-collatz-farm-04-counterexample",
+      "domain": "collatz-counterexample"
+    },
+    {
+      "id": 5,
+      "repo": "cerebron-collatz-farm-05-literature",
+      "domain": "collatz-literature"
+    },
+    {
+      "id": 6,
+      "repo": "cerebron-collatz-farm-06-formal-audit",
+      "domain": "collatz-formal-audit"
+    },
+    {
+      "id": 7,
+      "repo": "cerebron-collatz-farm-07-synthesis",
+      "domain": "collatz-synthesis"
+    },
+    {
+      "id": 8,
+      "repo": "cerebron-farm-08-research-web",
+      "domain": "research-web"
+    },
+    {
+      "id": 9,
+      "repo": "cerebron-farm-09-science-math",
+      "domain": "science-math"
+    },
+    {
+      "id": 10,
+      "repo": "cerebron-farm-10-science-physics",
+      "domain": "science-physics"
+    },
+    {
+      "id": 11,
+      "repo": "cerebron-farm-11-science-chemistry-materials",
+      "domain": "chemistry-materials"
+    },
+    {
+      "id": 12,
+      "repo": "cerebron-farm-12-biology-health",
+      "domain": "biology-health"
+    },
+    {
+      "id": 13,
+      "repo": "cerebron-farm-13-engineering-systems",
+      "domain": "engineering-systems"
+    },
+    {
+      "id": 14,
+      "repo": "cerebron-farm-14-energy",
+      "domain": "energy"
+    },
+    {
+      "id": 15,
+      "repo": "cerebron-farm-15-space",
+      "domain": "space"
+    },
+    {
+      "id": 16,
+      "repo": "cerebron-farm-16-industry-manufacturing",
+      "domain": "industry-manufacturing"
+    },
+    {
+      "id": 17,
+      "repo": "cerebron-farm-17-computing-software",
+      "domain": "computing-software"
+    },
+    {
+      "id": 18,
+      "repo": "cerebron-farm-18-ai-agents",
+      "domain": "ai-agents"
+    },
+    {
+      "id": 19,
+      "repo": "cerebron-farm-19-cybersecurity",
+      "domain": "cybersecurity"
+    },
+    {
+      "id": 20,
+      "repo": "cerebron-farm-20-data-knowledge",
+      "domain": "data-knowledge"
+    },
+    {
+      "id": 21,
+      "repo": "cerebron-farm-21-economics-finance",
+      "domain": "economics-finance"
+    },
+    {
+      "id": 22,
+      "repo": "cerebron-farm-22-business-market",
+      "domain": "business-market"
+    },
+    {
+      "id": 23,
+      "repo": "cerebron-farm-23-law-regulation",
+      "domain": "law-regulation"
+    },
+    {
+      "id": 24,
+      "repo": "cerebron-farm-24-public-policy-analysis",
+      "domain": "public-policy-analysis"
+    },
+    {
+      "id": 25,
+      "repo": "cerebron-farm-25-geography-infrastructure",
+      "domain": "geography-infrastructure"
+    },
+    {
+      "id": 26,
+      "repo": "cerebron-farm-26-climate-environment",
+      "domain": "climate-environment"
+    },
+    {
+      "id": 27,
+      "repo": "cerebron-farm-27-agriculture-food",
+      "domain": "agriculture-food"
+    },
+    {
+      "id": 28,
+      "repo": "cerebron-farm-28-education-knowledge-transfer",
+      "domain": "education-knowledge-transfer"
+    },
+    {
+      "id": 29,
+      "repo": "cerebron-farm-29-language-culture",
+      "domain": "language-culture"
+    },
+    {
+      "id": 30,
+      "repo": "cerebron-farm-30-human-factors",
+      "domain": "human-factors"
+    },
+    {
+      "id": 31,
+      "repo": "cerebron-farm-31-forecast-scenarios",
+      "domain": "forecast-scenarios"
+    },
+    {
+      "id": 32,
+      "repo": "cerebron-farm-32-invention-discovery",
+      "domain": "invention-discovery"
+    },
+    {
+      "id": 33,
+      "repo": "cerebron-farm-33-counterexample-red-team",
+      "domain": "counterexample-red-team"
+    },
+    {
+      "id": 34,
+      "repo": "cerebron-farm-34-formal-audit",
+      "domain": "formal-audit"
+    },
+    {
+      "id": 35,
+      "repo": "cerebron-farm-35-replication",
+      "domain": "replication"
+    },
+    {
+      "id": 36,
+      "repo": "cerebron-farm-36-simulation-modeling",
+      "domain": "simulation-modeling"
+    },
+    {
+      "id": 37,
+      "repo": "cerebron-farm-37-experiment-test-design",
+      "domain": "experiment-test-design"
+    },
+    {
+      "id": 38,
+      "repo": "cerebron-farm-38-contradiction-resolution",
+      "domain": "contradiction-resolution"
+    },
+    {
+      "id": 39,
+      "repo": "cerebron-farm-39-unknowns-gaps",
+      "domain": "unknowns-gaps"
+    },
+    {
+      "id": 40,
+      "repo": "cerebron-farm-40-memory-compression",
+      "domain": "memory-compression"
+    },
+    {
+      "id": 41,
+      "repo": "FARM-41-Capability-Evaluation",
+      "domain": "capability-evaluation"
+    },
+    {
+      "id": 42,
+      "repo": "cerebron-farm-42-meta-orchestration",
+      "domain": "meta-orchestration"
+    },
+    {
+      "id": 43,
+      "repo": "cerebron-farm-43-civilization-synthesis",
+      "domain": "civilization-synthesis"
+    },
+    {
+      "id": 44,
+      "repo": "cerebron-farm-44-ai-platform-routing",
+      "domain": "ai-platform-routing"
+    },
+    {
+      "id": 45,
+      "repo": "cerebron-farm-45-agent-runtime",
+      "domain": "agent-runtime"
+    },
+    {
+      "id": 46,
+      "repo": "cerebron-farm-46-global-video-research",
+      "domain": "global-video-research"
+    },
+    {
+      "id": 47,
+      "repo": "cerebron-farm-47-global-country-web-intelligence",
+      "domain": "global-country-web-intelligence"
+    },
+    {
+      "id": 48,
+      "repo": "cerebron-farm-48-global-scientific-literature-intelligence",
+      "domain": "global-scientific-literature-intelligence"
+    },
+    {
+      "id": 49,
+      "repo": "cerebron-farm-49-engineering-cad-digital-twin",
+      "domain": "engineering-cad-digital-twin"
+    },
+    {
+      "id": 50,
+      "repo": "cerebron-farm-50-technical-visual-engineering-documentation",
+      "domain": "technical-visual-engineering-documentation"
+    },
+    {
+      "id": 60,
+      "repo": "cerebron-farm-60-hardware-architecture",
+      "domain": "hardware-architecture",
+      "status": "PLANNED"
+    },
+    {
+      "id": 61,
+      "repo": "cerebron-farm-61-electronics-pcb",
+      "domain": "electronics-pcb",
+      "status": "PLANNED"
+    },
+    {
+      "id": 62,
+      "repo": "cerebron-farm-62-embedded-firmware",
+      "domain": "embedded-firmware",
+      "status": "PLANNED"
+    },
+    {
+      "id": 63,
+      "repo": "cerebron-farm-63-hardware-test-hil",
+      "domain": "hardware-test-hil",
+      "status": "PLANNED"
+    },
+    {
+      "id": 64,
+      "repo": "cerebron-farm-64-hardware-reliability-safety",
+      "domain": "hardware-reliability-safety",
+      "status": "PLANNED"
+    },
+    {
+      "id": 65,
+      "repo": "cerebron-farm-65-physical-prototype-qualification",
+      "domain": "physical-prototype-qualification",
+      "status": "PLANNED"
+    },
+    {
+      "id": 66,
+      "repo": "cerebron-farm-66-knowledge-graph-vector-index",
+      "domain": "knowledge-graph-vector-index",
+      "status": "PLANNED"
+    },
+    {
+      "id": 67,
+      "repo": "cerebron-farm-67-cross-farm-communication",
+      "domain": "cross-farm-communication",
+      "status": "PLANNED"
+    },
+    {
+      "id": 68,
+      "repo": "cerebron-farm-68-autonomous-experiment-orchestrator",
+      "domain": "autonomous-experiment-orchestrator",
+      "status": "PLANNED"
+    },
+    {
+      "id": 69,
+      "repo": "cerebron-farm-69-causal-discovery",
+      "domain": "causal-discovery",
+      "status": "PLANNED"
+    },
+    {
+      "id": 70,
+      "repo": "cerebron-farm-70-theorem-proof-engineering",
+      "domain": "theorem-proof-engineering",
+      "status": "PLANNED"
+    },
+    {
+      "id": 71,
+      "repo": "cerebron-farm-71-scientific-reproduction",
+      "domain": "scientific-reproduction",
+      "status": "PLANNED"
+    },
+    {
+      "id": 72,
+      "repo": "cerebron-farm-72-reality-evidence-gate",
+      "domain": "reality-evidence-gate",
+      "status": "PLANNED"
+    },
+    {
+      "id": 73,
+      "repo": "cerebron-farm-73-system-integration-qualification",
+      "domain": "system-integration-qualification",
+      "status": "PLANNED"
+    }
   ]
 }
