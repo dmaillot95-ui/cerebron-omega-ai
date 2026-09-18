@@ -1,0 +1,47 @@
+name: OpenRouter 20 Fixed Workers Test
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/openrouter-20-worker-test.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - shell: bash
+        run: |
+          python - <<'PY'
+          import os,json,time,urllib.request,urllib.error
+          roles=["REALITY_RESEARCH","SYSTEM_ARCHITECT","CALCULATION","SIMULATION","CAUSAL_ANALYSIS","INVENTION","FAILURE_ANALYSIS","COUNTEREXAMPLE_HUNTER","FALSIFIER","FORMAL_AUDITOR","INDEPENDENT_REPLICATOR","UNCERTAINTY_ANALYST","INTERFACE_ANALYST","INVARIANT_HUNTER","EXPERIMENT_DESIGN","CONTRADICTION_RESOLUTION","UNKNOWN_GAP_ANALYST","EVIDENCE_AUDITOR","SYNTHESIS_ANALYST","OMEGA_JUDGE"]
+          key=os.environ.get('OPENROUTER_API_KEY','')
+          rows=[]
+          for i,role in enumerate(roles,1):
+            row={'worker':f'W{i:02d}','role':role,'success':False}
+            body=json.dumps({'model':'openrouter/free','messages':[{'role':'user','content':f'CEREBRON fixed-worker connectivity test. You are {role}. Reply in one short line beginning CEREBRON_OK and your role.'}],'max_tokens':40}).encode()
+            req=urllib.request.Request('https://openrouter.ai/api/v1/chat/completions',data=body,headers={'Authorization':'Bearer '+key,'Content-Type':'application/json','HTTP-Referer':'https://github.com/dmaillot95-ui/cerebron-omega-ai','X-Title':'CEREBRON Omega'})
+            t=time.time()
+            try:
+              with urllib.request.urlopen(req,timeout=90) as r: data=json.loads(r.read().decode())
+              txt=((data.get('choices') or [{}])[0].get('message') or {}).get('content','')
+              row.update(success=bool(str(txt).strip()),response_nonempty=bool(str(txt).strip()),provider_model=data.get('model'),latency_s=round(time.time()-t,3),preview=str(txt)[:120])
+            except urllib.error.HTTPError as e:
+              row.update(error='HTTP_'+str(e.code),error_body=e.read().decode(errors='replace')[:250],latency_s=round(time.time()-t,3))
+            except Exception as e: row.update(error=type(e).__name__+': '+str(e)[:180],latency_s=round(time.time()-t,3))
+            rows.append(row); print(json.dumps(row))
+            time.sleep(1)
+          ok=sum(bool(r['success']) for r in rows)
+          out={'schema':'cerebron-openrouter-fixed-workers-v1','planned':20,'successful_external_model_outputs':ok,'failed':20-ok,'yield_pct':ok*5,'workers':rows}
+          print('ACCOUNTING '+json.dumps({k:v for k,v in out.items() if k!='workers'}))
+          open('openrouter-20-workers.json','w').write(json.dumps(out,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: openrouter-20-workers
+          path: openrouter-20-workers.json
+          retention-days: 1
