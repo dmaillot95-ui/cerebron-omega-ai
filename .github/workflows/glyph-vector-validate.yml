@@ -1,0 +1,21 @@
+name: SPIRALIX GLYPH-VECTOR Validate
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/glyph-vector.json'
+      - 'tools/glyph_router.py'
+      - 'tests/test_glyph_router.py'
+      - '.github/workflows/glyph-vector-validate.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/glyph_router.py --self-test
+      - run: pip install -q pytest
+      - run: pytest -q tests/test_glyph_router.py
