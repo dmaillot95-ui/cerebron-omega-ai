@@ -1,4 +1,4 @@
-import json, math, pathlib, re
+import json, pathlib
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 GLYPHS=ROOT/'config'/'glyph-vector.json'
 FARMS=ROOT/'config'/'farms.json'
@@ -7,12 +7,14 @@ METHOD_HINTS={'Θ':[9,34,35],'Δ':[9,36,34],'Σ':[43,38,40,42],'Χ':[33,34,35],'
 def load(p): return json.loads(p.read_text(encoding='utf-8'))
 def tokenize(expr):
  g=load(GLYPHS)['glyphs']; return [k for k in sorted(g,key=len,reverse=True) if k in expr]
+def expand(expr):
+ spec=load(GLYPHS); toks=tokenize(expr)
+ return {'language':spec['language'],'expression':expr,'tokens':toks,'natural_language':[spec['glyphs'][t] for t in toks]}
 def route_glyph(expr,max_farms=16):
- reg=load(FARMS); by={f['id']:f for f in reg['farms']}; toks=tokenize(expr); scores={}
+ spec=load(GLYPHS); reg=load(FARMS); by={f['id']:f for f in reg['farms']}; toks=tokenize(expr); scores={}
  for t in toks:
-  for rank,i in enumerate(DOMAIN_HINTS.get(t,[])+METHOD_HINTS.get(t,[])):
-   scores[i]=scores.get(i,0)+max(1,20-rank)
+  for rank,i in enumerate(DOMAIN_HINTS.get(t,[])+METHOD_HINTS.get(t,[])): scores[i]=scores.get(i,0)+max(1,20-rank)
  ranked=sorted(scores.items(),key=lambda x:(-x[1],x[0]))
- return {'expression':expr,'tokens':toks,'selected_farms':[by[i]|{'vector_score':s} for i,s in ranked[:max_farms] if i in by],'rules':load(GLYPHS)['rules']}
+ return {'language':spec['language'],'layer':spec['layer'],'expression':expr,'tokens':toks,'natural_language':[spec['glyphs'][t] for t in toks],'selected_farms':[by[i]|{'vector_score':s} for i,s in ranked[:max_farms] if i in by],'rules':spec['rules']}
 if __name__=='__main__':
  import sys; print(json.dumps(route_glyph(' '.join(sys.argv[1:])),ensure_ascii=False,indent=2))
