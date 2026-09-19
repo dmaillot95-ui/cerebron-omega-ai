@@ -1,0 +1,34 @@
+{
+  "receive": "current Collatz arbitrary-N checkpoint",
+  "branches": [
+    {
+      "role": "THEORY",
+      "target": "collective arbitrary-N obstruction"
+    },
+    {
+      "role": "DYNAMICS",
+      "target": "transition invariant / curvature / potential"
+    },
+    {
+      "role": "ADIC",
+      "target": "collective exception budget"
+    },
+    {
+      "role": "COUNTEREXAMPLE",
+      "target": "break candidate lemmas"
+    },
+    {
+      "role": "FORMAL_AUDIT",
+      "target": "quantifiers/circularity/equivalent-hardness"
+    },
+    {
+      "role": "REPLICATION",
+      "target": "independent reproduction"
+    },
+    {
+      "role": "EVIDENCE_GATE",
+      "target": "promotion only with auditable evidence"
+    }
+  ],
+  "promotion": "CLAIM <= EVIDENCE"
+}

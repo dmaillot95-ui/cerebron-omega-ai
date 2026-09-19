@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-09-19T02:57:31.144827+00:00",
+  "mode": "ASTRA_LIKE_BEHAVIORAL_ORCHESTRATION",
+  "claim": "orchestration state only; not GPT/Astra weights or proof",
+  "front": "H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory",
+  "workers": [
+    {
+      "farm": 1,
+      "repo": "cerebron-collatz-theory-farm",
+      "role": "THEORY",
+      "run_id": 35417068707,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 2,
+      "repo": "cerebron-collatz-dynamics-farm",
+      "role": "DYNAMICS",
+      "run_id": 35417124979,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "farm": 3,
+      "repo": "cerebron-collatz-farm-03-adic",
+      "role": "ADIC",
+      "run_id": 35416646726,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 4,
+      "repo": "cerebron-collatz-farm-04-counterexample",
+      "role": "COUNTEREXAMPLE",
+      "run_id": 35417107641,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "farm": 6,
+      "repo": "cerebron-collatz-farm-06-formal-audit",
+      "role": "FORMAL_AUDIT",
+      "run_id": 35417058594,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 35,
+      "repo": "cerebron-farm-35-replication",
+      "role": "REPLICATION",
+      "run_id": 35309402634,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 70,
+      "repo": "cerebron-farm-70-theorem-proof-engineering",
+      "role": "PROOF_ENGINEERING",
+      "run_id": 35315254265,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 71,
+      "repo": "cerebron-farm-71-scientific-reproduction",
+      "role": "REPRODUCTION",
+      "run_id": 35315320155,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "farm": 72,
+      "repo": "cerebron-farm-72-reality-evidence-gate",
+      "role": "EVIDENCE_GATE",
+      "run_id": 35315424946,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}
