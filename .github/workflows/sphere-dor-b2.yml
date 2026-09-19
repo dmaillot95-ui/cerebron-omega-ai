@@ -1,0 +1,15 @@
+name: CEREBRON Sphere dOr Blind Discovery B2
+on:
+  push:
+    paths: ['research/sphere_dor_b2_blind16.py','.github/workflows/sphere-dor-b2.yml']
+  workflow_dispatch:
+jobs:
+  blind-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/sphere_dor_b2_blind16.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b2-blind16, path: artifacts/sphere-dor-b2.json}
