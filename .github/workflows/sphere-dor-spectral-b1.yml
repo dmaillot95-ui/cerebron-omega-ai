@@ -1,0 +1,15 @@
+name: CEREBRON Sphere dOr Spectral Discovery B1
+on:
+  push:
+    paths: ['research/sphere_dor_spectral_b1.py','.github/workflows/sphere-dor-spectral-b1.yml']
+  workflow_dispatch:
+jobs:
+  spectral-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/sphere_dor_spectral_b1.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-spectral-b1, path: artifacts/spectral-map-b1.json}
