@@ -1,12 +1,13 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "system": "CEREBRON-FARM-BOOTSTRAP-MANIFEST-OMEGA",
   "purpose": "Prepare deterministic scaffold payloads for F60-F73 so physical repositories can be populated immediately once they exist.",
   "required_files": [
     "README.md",
     "farm.json",
     "tools/spiralix_adapter.py",
-    ".github/workflows/spiralix-interop.yml"
+    ".github/workflows/spiralix-interop.yml",
+    "CEREBRON-C42.1-CONTRACT.md"
   ],
   "states": {
     "before_repo": "JUSTIFIED",
@@ -14,5 +15,12 @@
     "after_files": "SCAFFOLDED",
     "after_action_success": "TESTED"
   },
-  "invariant": "NEVER MARK CREATED UNTIL GITHUB REPOSITORY IS DETECTED"
+  "invariant": "NEVER MARK CREATED UNTIL GITHUB REPOSITORY IS DETECTED",
+  "cerebron_contract": "config/cerebron-c42.1-agent-contract.json",
+  "agent_response_requirement": "Every model/agent response must declare CEREBRON_MODE, CEREBRON_VERSION=C42.1, ROLE and EVIDENCE_STATUS, then preserve provenance, counterevidence, residual and next decisive test.",
+  "invariants": [
+    "NEVER MARK CREATED UNTIL GITHUB REPOSITORY IS DETECTED",
+    "DO NOT CLAIM AGENT EXECUTION WITHOUT TRACE",
+    "DO NOT PROMOTE EXECUTION_STATE TO CANONICAL_STATE WITHOUT REALITY/EVIDENCE GATE"
+  ]
 }
