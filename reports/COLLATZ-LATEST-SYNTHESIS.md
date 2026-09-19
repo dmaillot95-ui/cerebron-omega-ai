@@ -23,12 +23,12 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35412401421 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35412224085 status=completed conclusion=success artifacts=21
-- Farm 03 collatz-adic: run=35411946247 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35412632043 status=queued conclusion=None artifacts=0
+- Farm 01 collatz-theory: run=35412928953 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35412993346 status=completed conclusion=success artifacts=21
+- Farm 03 collatz-adic: run=35412838788 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35413193793 status=queued conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35412390649 status=completed conclusion=success artifacts=21
+- Farm 06 collatz-formal-audit: run=35412956166 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35308728535 status=completed conclusion=success artifacts=0
 - Farm 08 research-web: run=35308732220 status=completed conclusion=success artifacts=0
 - Farm 09 science-math: run=35308735512 status=completed conclusion=success artifacts=1
@@ -69,7 +69,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 44 ai-platform-routing: run=35309592552 status=completed conclusion=success artifacts=0
 - Farm 45 agent-runtime: run=35309596027 status=completed conclusion=success artifacts=0
 - Farm 46 global-video-research: run=35410650076 status=completed conclusion=success artifacts=1
-- Farm 47 global-country-web-intelligence: run=35409846036 status=completed conclusion=success artifacts=21
+- Farm 47 global-country-web-intelligence: run=35412754957 status=completed conclusion=success artifacts=21
 - Farm 48 global-scientific-literature-intelligence: run=35309608719 status=completed conclusion=success artifacts=0
 - Farm 49 engineering-cad-digital-twin: run=35309609848 status=completed conclusion=success artifacts=0
 - Farm 50 technical-visual-engineering-documentation: run=35309647337 status=completed conclusion=success artifacts=1
