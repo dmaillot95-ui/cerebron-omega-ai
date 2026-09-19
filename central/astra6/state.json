@@ -1,0 +1,273 @@
+{
+  "generated_at": "2026-09-19T03:16:34.233211+00:00",
+  "roles": {
+    "A_CONSTRUCTOR": [
+      1,
+      2,
+      3,
+      9,
+      32,
+      70
+    ],
+    "B_INDEPENDENT": [
+      35,
+      36,
+      69
+    ],
+    "C_CALCULATOR": [
+      4,
+      35,
+      36,
+      71
+    ],
+    "D_RED_TEAM": [
+      33,
+      34,
+      38,
+      39
+    ],
+    "E_FORMALIST": [
+      6,
+      34,
+      70
+    ],
+    "F_COORDINATOR": [
+      7,
+      40,
+      42,
+      66,
+      67,
+      72,
+      74
+    ]
+  },
+  "observations": {
+    "1": {
+      "repo": "cerebron-collatz-theory-farm",
+      "run_id": 35417934884,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "2": {
+      "repo": "cerebron-collatz-dynamics-farm",
+      "run_id": 35417982589,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "3": {
+      "repo": "cerebron-collatz-farm-03-adic",
+      "run_id": 35417207652,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "4": {
+      "repo": "cerebron-collatz-farm-04-counterexample",
+      "run_id": 35417593344,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "6": {
+      "repo": "cerebron-collatz-farm-06-formal-audit",
+      "run_id": 35417404123,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "7": {
+      "repo": "cerebron-collatz-farm-07-synthesis",
+      "run_id": 35308728535,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "9": {
+      "repo": "cerebron-farm-09-science-math",
+      "run_id": 35308735512,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "32": {
+      "repo": "cerebron-farm-32-invention-discovery",
+      "run_id": 35309389951,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "33": {
+      "repo": "cerebron-farm-33-counterexample-red-team",
+      "run_id": 35309393144,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "34": {
+      "repo": "cerebron-farm-34-formal-audit",
+      "run_id": 35309398569,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "35": {
+      "repo": "cerebron-farm-35-replication",
+      "run_id": 35309402634,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "36": {
+      "repo": "cerebron-farm-36-simulation-modeling",
+      "run_id": 35309404789,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "38": {
+      "repo": "cerebron-farm-38-contradiction-resolution",
+      "run_id": 35309410445,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "39": {
+      "repo": "cerebron-farm-39-unknowns-gaps",
+      "run_id": 35309422334,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "40": {
+      "repo": "cerebron-farm-40-memory-compression",
+      "run_id": 35309427288,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "42": {
+      "repo": "cerebron-farm-42-meta-orchestration",
+      "run_id": 35309585758,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "66": {
+      "repo": "cerebron-farm-66-knowledge-graph-vector-index",
+      "run_id": 35314979276,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "67": {
+      "repo": "cerebron-farm-67-cross-farm-communication",
+      "run_id": 35315041171,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "69": {
+      "repo": "cerebron-farm-69-causal-discovery",
+      "run_id": 35315171693,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "70": {
+      "repo": "cerebron-farm-70-theorem-proof-engineering",
+      "run_id": 35315254265,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "71": {
+      "repo": "cerebron-farm-71-scientific-reproduction",
+      "run_id": 35315320155,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "72": {
+      "repo": "cerebron-farm-72-reality-evidence-gate",
+      "run_id": 35315424946,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "74": {
+      "repo": "cerebron-farm-74-session-memory-encyclopedia",
+      "run_id": null,
+      "status": null,
+      "conclusion": null
+    }
+  },
+  "graph": {
+    "mission": "Collatz arbitrary-N: H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory",
+    "policy": "minimum necessary farms",
+    "blind_rule": "A and B must be produced independently before confrontation",
+    "stages": [
+      {
+        "stage": 0,
+        "name": "TRI_DEDUP_MEMORY",
+        "farms": [
+          42,
+          66,
+          74
+        ]
+      },
+      {
+        "stage": 1,
+        "name": "BLIND_A_B",
+        "roles": [
+          "A_CONSTRUCTOR",
+          "B_INDEPENDENT"
+        ]
+      },
+      {
+        "stage": 2,
+        "name": "CALC_ATTACK",
+        "roles": [
+          "C_CALCULATOR",
+          "D_RED_TEAM"
+        ]
+      },
+      {
+        "stage": 3,
+        "name": "SURVIVAL_GATE",
+        "rule": "archive if no discriminating information gain"
+      },
+      {
+        "stage": 4,
+        "name": "FORMAL_AUDIT",
+        "role": "E_FORMALIST"
+      },
+      {
+        "stage": 5,
+        "name": "PREMIUM_OPTIONAL",
+        "rule": "only decisive surviving lock; never automatic"
+      },
+      {
+        "stage": 6,
+        "name": "FUSION_REALITY_GATE",
+        "role": "F_COORDINATOR",
+        "promotion_farm": 72
+      }
+    ],
+    "stop_rule": "stop after two waves without measurable information gain",
+    "guardrails": [
+      "same model+prompt+data = one proof family",
+      "workflow success != scientific progress",
+      "finite computation != universal proof",
+      "replication != truth",
+      "consensus != demonstration",
+      "F does not invent solutions",
+      "FARM72 required for certified memory"
+    ],
+    "budget_target": {
+      "memory_dedup": 3,
+      "cheap_exploration": 12,
+      "calculation_counterexample": 20,
+      "replication_audit": 25,
+      "premium_max": 30,
+      "fusion_reality_gate": 10,
+      "unit": "relative; target not validated optimum"
+    },
+    "elimination_target": "70-80% before premium; experimental target, not established optimum"
+  },
+  "result_contract": {
+    "claim": "",
+    "status": "UNRESOLVED",
+    "hypotheses": [],
+    "method": "",
+    "dependencies": [],
+    "tests_performed": [],
+    "counterexamples_sought": [],
+    "independence_family": "",
+    "contradictions": [],
+    "artifact": "",
+    "evidence_level": "E0",
+    "smallest_remaining_gap": "",
+    "next_decisive_test": "",
+    "cost": {}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "claim": "",
+  "status": "UNRESOLVED",
+  "hypotheses": [],
+  "method": "",
+  "dependencies": [],
+  "tests_performed": [],
+  "counterexamples_sought": [],
+  "independence_family": "",
+  "contradictions": [],
+  "artifact": "",
+  "evidence_level": "E0",
+  "smallest_remaining_gap": "",
+  "next_decisive_test": "",
+  "cost": {}
+}

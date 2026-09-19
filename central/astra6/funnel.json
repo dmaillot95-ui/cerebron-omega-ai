@@ -1,0 +1,73 @@
+{
+  "mission": "Collatz arbitrary-N: H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory",
+  "policy": "minimum necessary farms",
+  "blind_rule": "A and B must be produced independently before confrontation",
+  "stages": [
+    {
+      "stage": 0,
+      "name": "TRI_DEDUP_MEMORY",
+      "farms": [
+        42,
+        66,
+        74
+      ]
+    },
+    {
+      "stage": 1,
+      "name": "BLIND_A_B",
+      "roles": [
+        "A_CONSTRUCTOR",
+        "B_INDEPENDENT"
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "CALC_ATTACK",
+      "roles": [
+        "C_CALCULATOR",
+        "D_RED_TEAM"
+      ]
+    },
+    {
+      "stage": 3,
+      "name": "SURVIVAL_GATE",
+      "rule": "archive if no discriminating information gain"
+    },
+    {
+      "stage": 4,
+      "name": "FORMAL_AUDIT",
+      "role": "E_FORMALIST"
+    },
+    {
+      "stage": 5,
+      "name": "PREMIUM_OPTIONAL",
+      "rule": "only decisive surviving lock; never automatic"
+    },
+    {
+      "stage": 6,
+      "name": "FUSION_REALITY_GATE",
+      "role": "F_COORDINATOR",
+      "promotion_farm": 72
+    }
+  ],
+  "stop_rule": "stop after two waves without measurable information gain",
+  "guardrails": [
+    "same model+prompt+data = one proof family",
+    "workflow success != scientific progress",
+    "finite computation != universal proof",
+    "replication != truth",
+    "consensus != demonstration",
+    "F does not invent solutions",
+    "FARM72 required for certified memory"
+  ],
+  "budget_target": {
+    "memory_dedup": 3,
+    "cheap_exploration": 12,
+    "calculation_counterexample": 20,
+    "replication_audit": 25,
+    "premium_max": 30,
+    "fusion_reality_gate": 10,
+    "unit": "relative; target not validated optimum"
+  },
+  "elimination_target": "70-80% before premium; experimental target, not established optimum"
+}
