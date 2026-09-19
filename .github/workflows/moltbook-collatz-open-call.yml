@@ -1,6 +1,6 @@
 name: MOLTBOOK Collatz Open Research Call
 
-on:
+'on':
   workflow_dispatch:
   push:
     paths:
