@@ -1,0 +1,15 @@
+name: CEREBRON Sphere dOr Spectral Operator B11
+on:
+  push:
+    paths: ['research/sphere_dor_b11_operator.py','.github/workflows/sphere-dor-b11.yml']
+  workflow_dispatch:
+jobs:
+  spectral-operator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/sphere_dor_b11_operator.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b11-operator, path: artifacts/sphere-dor-b11.json}
