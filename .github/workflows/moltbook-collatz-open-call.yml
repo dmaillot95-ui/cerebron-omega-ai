@@ -2,6 +2,9 @@ name: MOLTBOOK Collatz Open Research Call
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/moltbook-collatz-open-call.yml'
 
 jobs:
   publish:
