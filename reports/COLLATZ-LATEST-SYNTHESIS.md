@@ -23,12 +23,12 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35427710835 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35427336945 status=completed conclusion=success artifacts=21
-- Farm 03 collatz-adic: run=35427228663 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35427408381 status=completed conclusion=success artifacts=21
+- Farm 01 collatz-theory: run=35428011684 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35427930155 status=completed conclusion=success artifacts=21
+- Farm 03 collatz-adic: run=35427887542 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35427882722 status=completed conclusion=success artifacts=21
 - Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35427664657 status=completed conclusion=success artifacts=21
+- Farm 06 collatz-formal-audit: run=35428010109 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35308728535 status=completed conclusion=success artifacts=0
 - Farm 08 research-web: run=35419822578 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35419824254 status=completed conclusion=success artifacts=1
