@@ -1,0 +1,16 @@
+name: CEREBRON Sphere dOr Continuous Intersection B10
+on:
+  push:
+    paths: ['research/sphere_dor_b10_continuous.py','.github/workflows/sphere-dor-b10.yml']
+  workflow_dispatch:
+jobs:
+  continuous-law:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip -q install sympy
+      - run: python research/sphere_dor_b10_continuous.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b10-continuous, path: artifacts/sphere-dor-b10.json}
