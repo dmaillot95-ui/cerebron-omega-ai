@@ -1,0 +1,95 @@
+name: CEREBRON Astra-Like Orchestrator Pilot
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ASTRA-LIKE-ORCHESTRATOR.md'
+      - 'COLLATZ-NEW-MATHEMATICS-CAMPAIGN.md'
+      - '.github/workflows/astra-like-orchestrator.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: astra-like-collatz-pilot
+  cancel-in-progress: false
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build mission graph and inspect real farms
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, datetime
+          owner="dmaillot95-ui"
+          farms=[
+            (1,"cerebron-collatz-theory-farm","THEORY"),
+            (2,"cerebron-collatz-dynamics-farm","DYNAMICS"),
+            (3,"cerebron-collatz-farm-03-adic","ADIC"),
+            (4,"cerebron-collatz-farm-04-counterexample","COUNTEREXAMPLE"),
+            (6,"cerebron-collatz-farm-06-formal-audit","FORMAL_AUDIT"),
+            (35,"cerebron-farm-35-replication","REPLICATION"),
+            (70,"cerebron-farm-70-theorem-proof-engineering","PROOF_ENGINEERING"),
+            (71,"cerebron-farm-71-scientific-reproduction","REPRODUCTION"),
+            (72,"cerebron-farm-72-reality-evidence-gate","EVIDENCE_GATE"),
+          ]
+          headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"}
+          def get(url):
+            try:
+              req=urllib.request.Request(url,headers=headers)
+              with urllib.request.urlopen(req,timeout=20) as r: return json.load(r)
+            except Exception as e: return {"error":str(e)}
+          rows=[]
+          for fid,repo,role in farms:
+            runs=get(f"https://api.github.com/repos/{owner}/{repo}/actions/runs?per_page=1")
+            run=(runs.get("workflow_runs") or [{}])[0]
+            rows.append({"farm":fid,"repo":repo,"role":role,"run_id":run.get("id"),"status":run.get("status"),"conclusion":run.get("conclusion")})
+          os.makedirs("central/astra_like",exist_ok=True)
+          state={"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"mode":"ASTRA_LIKE_BEHAVIORAL_ORCHESTRATION","claim":"orchestration state only; not GPT/Astra weights or proof","front":"H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory","workers":rows}
+          open("central/astra_like/state.json","w").write(json.dumps(state,indent=2))
+          open("central/astra_like/mission-graph.json","w").write(json.dumps({
+            "receive":"current Collatz arbitrary-N checkpoint",
+            "branches":[
+              {"role":"THEORY","target":"collective arbitrary-N obstruction"},
+              {"role":"DYNAMICS","target":"transition invariant / curvature / potential"},
+              {"role":"ADIC","target":"collective exception budget"},
+              {"role":"COUNTEREXAMPLE","target":"break candidate lemmas"},
+              {"role":"FORMAL_AUDIT","target":"quantifiers/circularity/equivalent-hardness"},
+              {"role":"REPLICATION","target":"independent reproduction"},
+              {"role":"EVIDENCE_GATE","target":"promotion only with auditable evidence"}
+            ],
+            "promotion":"CLAIM <= EVIDENCE"
+          },indent=2))
+          lines=["# ASTRA-LIKE PILOT — LIVE STATE","",
+            "Behavioral orchestrator pilot. This is not a copy of GPT-6 Astra and does not claim model-equivalent capability.","",
+            "## Active Collatz front","H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory.","",
+            "## Farm observations"]
+          for x in rows: lines.append(f"- FARM{x['farm']:02d} {x['role']}: run={x['run_id']} status={x['status']} conclusion={x['conclusion']}")
+          lines += ["","## Promotion gate","A mathematical claim is promoted only after content retrieval, adversarial audit and independent reproduction. Workflow success is not mathematical proof."]
+          open("central/astra_like/STATUS.md","w").write("\n".join(lines)+"\n")
+          PY
+
+      - name: Persist live state
+        run: |
+          git config user.name "cerebron-omega-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add central/astra_like/
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Astra-like Collatz orchestration state [skip ci]"
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-like-collatz-pilot-state
+          path: central/astra_like/
+          retention-days: 14
