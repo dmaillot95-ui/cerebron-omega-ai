@@ -1,0 +1,16 @@
+name: CEREBRON Sphere dOr Exact Intersections B9
+on:
+  push:
+    paths: ['research/sphere_dor_b9_exact.py','.github/workflows/sphere-dor-b9.yml']
+  workflow_dispatch:
+jobs:
+  exact-intersections:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip -q install sympy
+      - run: python research/sphere_dor_b9_exact.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b9-exact, path: artifacts/sphere-dor-b9.json}
