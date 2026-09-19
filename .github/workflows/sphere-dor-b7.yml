@@ -1,0 +1,16 @@
+name: CEREBRON Sphere dOr Cyclotomic Chebyshev B7
+on:
+  push:
+    paths: ['research/sphere_dor_b7_cyclotomic.py','.github/workflows/sphere-dor-b7.yml']
+  workflow_dispatch:
+jobs:
+  cyclotomic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip -q install sympy
+      - run: python research/sphere_dor_b7_cyclotomic.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b7-cyclotomic, path: artifacts/sphere-dor-b7.json}
