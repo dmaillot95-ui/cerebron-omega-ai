@@ -17,18 +17,18 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 74
-- Derniers workflows en succès : 70
+- Derniers workflows en succès : 69
 - Derniers workflows en échec : 1
 - Fermes avec au moins un artefact sur leur dernier run : 26
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35419339986 status=queued conclusion=None artifacts=0
-- Farm 02 collatz-dynamics: run=35418726270 status=completed conclusion=success artifacts=21
-- Farm 03 collatz-adic: run=35418892727 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35419332237 status=in_progress conclusion=None artifacts=15
+- Farm 01 collatz-theory: run=35419672827 status=queued conclusion=None artifacts=20
+- Farm 02 collatz-dynamics: run=35419398081 status=completed conclusion=success artifacts=21
+- Farm 03 collatz-adic: run=35419525917 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35419728669 status=in_progress conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35419110249 status=completed conclusion=success artifacts=21
+- Farm 06 collatz-formal-audit: run=35419480597 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35308728535 status=completed conclusion=success artifacts=0
 - Farm 08 research-web: run=35308732220 status=completed conclusion=success artifacts=0
 - Farm 09 science-math: run=35308735512 status=completed conclusion=success artifacts=1
@@ -64,11 +64,11 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 39 unknowns-gaps: run=35309422334 status=completed conclusion=success artifacts=0
 - Farm 40 memory-compression: run=35309427288 status=completed conclusion=success artifacts=21
 - Farm 41 capability-evaluation: run=35309581979 status=completed conclusion=success artifacts=0
-- Farm 42 meta-orchestration: run=35309585758 status=completed conclusion=success artifacts=21
+- Farm 42 meta-orchestration: run=35419620829 status=in_progress conclusion=None artifacts=18
 - Farm 43 civilization-synthesis: run=35309589067 status=completed conclusion=success artifacts=21
 - Farm 44 ai-platform-routing: run=35309592552 status=completed conclusion=success artifacts=0
 - Farm 45 agent-runtime: run=35309596027 status=completed conclusion=success artifacts=0
-- Farm 46 global-video-research: run=35416648307 status=completed conclusion=success artifacts=1
+- Farm 46 global-video-research: run=35419481666 status=completed conclusion=success artifacts=1
 - Farm 47 global-country-web-intelligence: run=35418630125 status=completed conclusion=success artifacts=21
 - Farm 48 global-scientific-literature-intelligence: run=35309608719 status=completed conclusion=success artifacts=0
 - Farm 49 engineering-cad-digital-twin: run=35309609848 status=completed conclusion=success artifacts=0
