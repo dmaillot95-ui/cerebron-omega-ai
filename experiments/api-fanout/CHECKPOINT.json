@@ -1,0 +1,19 @@
+{
+  "base_branch": "main",
+  "base_sha": "a88d1fdc526f08166601721f4bd6969099ce5a19",
+  "experiment_branch": "experiment/api-fanout-reality-test",
+  "timestamp": "2026-09-19T17:01:00+02:00",
+  "status": "PRE_TEST",
+  "phase": "API_FANOUT_REALITY_TEST",
+  "requested_calls": 3,
+  "main_modified": false,
+  "rollback": {
+    "strategy": "do_not_merge_experiment_branch",
+    "restore_point": "a88d1fdc526f08166601721f4bd6969099ce5a19"
+  },
+  "evidence": {
+    "direct_ai_inference_dispatcher_found_on_default_branch": false,
+    "astra_orchestrator_observes_github_runs": true,
+    "moltbook_key_is_not_ai_inference_key": true
+  }
+}
