@@ -1,4 +1,4 @@
-name: CEREBRON Astra-Like Orchestrator Pilot
+name: CEREBRON ASTRA-6 x 74 Funnel
 
 on:
   workflow_dispatch:
@@ -13,83 +13,109 @@ permissions:
   actions: read
 
 concurrency:
-  group: astra-like-collatz-pilot
+  group: astra6-cerebron74-collatz
   cancel-in-progress: false
 
 jobs:
-  orchestrate:
+  funnel:
     runs-on: ubuntu-latest
+    env:
+      MISSION: "Collatz arbitrary-N: H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory"
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: {fetch-depth: 0}
 
-      - name: Build mission graph and inspect real farms
+      - name: ASTRA-6 selective routing and evidence contract
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python - <<'PY'
           import json, os, urllib.request, datetime
           owner="dmaillot95-ui"
-          farms=[
-            (1,"cerebron-collatz-theory-farm","THEORY"),
-            (2,"cerebron-collatz-dynamics-farm","DYNAMICS"),
-            (3,"cerebron-collatz-farm-03-adic","ADIC"),
-            (4,"cerebron-collatz-farm-04-counterexample","COUNTEREXAMPLE"),
-            (6,"cerebron-collatz-farm-06-formal-audit","FORMAL_AUDIT"),
-            (35,"cerebron-farm-35-replication","REPLICATION"),
-            (70,"cerebron-farm-70-theorem-proof-engineering","PROOF_ENGINEERING"),
-            (71,"cerebron-farm-71-scientific-reproduction","REPRODUCTION"),
-            (72,"cerebron-farm-72-reality-evidence-gate","EVIDENCE_GATE"),
-          ]
-          headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"}
-          def get(url):
+          # 74 farms are a capability library. Only mission-relevant farms enter this cycle.
+          roles={
+            "A_CONSTRUCTOR":[1,2,3,9,32,70],
+            "B_INDEPENDENT":[35,36,69],
+            "C_CALCULATOR":[4,35,36,71],
+            "D_RED_TEAM":[33,34,38,39],
+            "E_FORMALIST":[6,34,70],
+            "F_COORDINATOR":[7,40,42,66,67,72,74]
+          }
+          repos={
+            1:"cerebron-collatz-theory-farm",2:"cerebron-collatz-dynamics-farm",
+            3:"cerebron-collatz-farm-03-adic",4:"cerebron-collatz-farm-04-counterexample",
+            6:"cerebron-collatz-farm-06-formal-audit",7:"cerebron-collatz-farm-07-synthesis",
+            9:"cerebron-farm-09-science-math",32:"cerebron-farm-32-invention-discovery",
+            33:"cerebron-farm-33-counterexample-red-team",34:"cerebron-farm-34-formal-audit",
+            35:"cerebron-farm-35-replication",36:"cerebron-farm-36-simulation-modeling",
+            38:"cerebron-farm-38-contradiction-resolution",39:"cerebron-farm-39-unknowns-gaps",
+            40:"cerebron-farm-40-memory-compression",42:"cerebron-farm-42-meta-orchestration",
+            66:"cerebron-farm-66-knowledge-graph-vector-index",67:"cerebron-farm-67-cross-farm-communication",
+            69:"cerebron-farm-69-causal-discovery",70:"cerebron-farm-70-theorem-proof-engineering",
+            71:"cerebron-farm-71-scientific-reproduction",72:"cerebron-farm-72-reality-evidence-gate",
+            74:"cerebron-farm-74-session-memory-encyclopedia"
+          }
+          H={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"}
+          def latest(repo):
             try:
-              req=urllib.request.Request(url,headers=headers)
-              with urllib.request.urlopen(req,timeout=20) as r: return json.load(r)
-            except Exception as e: return {"error":str(e)}
-          rows=[]
-          for fid,repo,role in farms:
-            runs=get(f"https://api.github.com/repos/{owner}/{repo}/actions/runs?per_page=1")
-            run=(runs.get("workflow_runs") or [{}])[0]
-            rows.append({"farm":fid,"repo":repo,"role":role,"run_id":run.get("id"),"status":run.get("status"),"conclusion":run.get("conclusion")})
-          os.makedirs("central/astra_like",exist_ok=True)
-          state={"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"mode":"ASTRA_LIKE_BEHAVIORAL_ORCHESTRATION","claim":"orchestration state only; not GPT/Astra weights or proof","front":"H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory","workers":rows}
-          open("central/astra_like/state.json","w").write(json.dumps(state,indent=2))
-          open("central/astra_like/mission-graph.json","w").write(json.dumps({
-            "receive":"current Collatz arbitrary-N checkpoint",
-            "branches":[
-              {"role":"THEORY","target":"collective arbitrary-N obstruction"},
-              {"role":"DYNAMICS","target":"transition invariant / curvature / potential"},
-              {"role":"ADIC","target":"collective exception budget"},
-              {"role":"COUNTEREXAMPLE","target":"break candidate lemmas"},
-              {"role":"FORMAL_AUDIT","target":"quantifiers/circularity/equivalent-hardness"},
-              {"role":"REPLICATION","target":"independent reproduction"},
-              {"role":"EVIDENCE_GATE","target":"promotion only with auditable evidence"}
+              q=urllib.request.Request(f"https://api.github.com/repos/{owner}/{repo}/actions/runs?per_page=1",headers=H)
+              with urllib.request.urlopen(q,timeout=20) as r: d=json.load(r)
+              x=(d.get("workflow_runs") or [{}])[0]
+              return {"run_id":x.get("id"),"status":x.get("status"),"conclusion":x.get("conclusion")}
+            except Exception as e:return {"error":str(e)}
+          unique=sorted(set(sum(roles.values(),[])))
+          observations={str(i):{"repo":repos[i],**latest(repos[i])} for i in unique if i in repos}
+          contract={
+            "claim":"","status":"UNRESOLVED","hypotheses":[],"method":"",
+            "dependencies":[],"tests_performed":[],"counterexamples_sought":[],
+            "independence_family":"","contradictions":[],"artifact":"",
+            "evidence_level":"E0","smallest_remaining_gap":"","next_decisive_test":"","cost":{}
+          }
+          graph={
+            "mission":os.environ["MISSION"],"policy":"minimum necessary farms",
+            "blind_rule":"A and B must be produced independently before confrontation",
+            "stages":[
+              {"stage":0,"name":"TRI_DEDUP_MEMORY","farms":[42,66,74]},
+              {"stage":1,"name":"BLIND_A_B","roles":["A_CONSTRUCTOR","B_INDEPENDENT"]},
+              {"stage":2,"name":"CALC_ATTACK","roles":["C_CALCULATOR","D_RED_TEAM"]},
+              {"stage":3,"name":"SURVIVAL_GATE","rule":"archive if no discriminating information gain"},
+              {"stage":4,"name":"FORMAL_AUDIT","role":"E_FORMALIST"},
+              {"stage":5,"name":"PREMIUM_OPTIONAL","rule":"only decisive surviving lock; never automatic"},
+              {"stage":6,"name":"FUSION_REALITY_GATE","role":"F_COORDINATOR","promotion_farm":72}
             ],
-            "promotion":"CLAIM <= EVIDENCE"
-          },indent=2))
-          lines=["# ASTRA-LIKE PILOT — LIVE STATE","",
-            "Behavioral orchestrator pilot. This is not a copy of GPT-6 Astra and does not claim model-equivalent capability.","",
-            "## Active Collatz front","H-COUPLING + H-LOG + 3-adic + LOWER-GAP + SMALL-H + curvature/potential/memory.","",
-            "## Farm observations"]
-          for x in rows: lines.append(f"- FARM{x['farm']:02d} {x['role']}: run={x['run_id']} status={x['status']} conclusion={x['conclusion']}")
-          lines += ["","## Promotion gate","A mathematical claim is promoted only after content retrieval, adversarial audit and independent reproduction. Workflow success is not mathematical proof."]
-          open("central/astra_like/STATUS.md","w").write("\n".join(lines)+"\n")
+            "stop_rule":"stop after two waves without measurable information gain",
+            "guardrails":["same model+prompt+data = one proof family","workflow success != scientific progress","finite computation != universal proof","replication != truth","consensus != demonstration","F does not invent solutions","FARM72 required for certified memory"],
+            "budget_target":{"memory_dedup":3,"cheap_exploration":12,"calculation_counterexample":20,"replication_audit":25,"premium_max":30,"fusion_reality_gate":10,"unit":"relative; target not validated optimum"},
+            "elimination_target":"70-80% before premium; experimental target, not established optimum"
+          }
+          os.makedirs("central/astra6",exist_ok=True)
+          json.dump({"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"roles":roles,"observations":observations,"graph":graph,"result_contract":contract},open("central/astra6/state.json","w"),indent=2)
+          json.dump(graph,open("central/astra6/funnel.json","w"),indent=2)
+          json.dump(contract,open("central/astra6/result-contract.json","w"),indent=2)
+          md=["# ASTRA-6 × CÉRÉBRON-74 — LIVE FUNNEL","",
+              "**74 farms = capability library, not 74 independent AIs.**","",
+              "Mission: "+os.environ["MISSION"],"",
+              "## Six exclusive roles"]
+          for role,ids in roles.items(): md.append(f"- {role}: "+", ".join(f"F{i:02d}" for i in ids))
+          md += ["","## Evidence policy","Only FARM72 may promote a result to certified memory. A/B independence must be preserved before confrontation. Two waves without information gain trigger stop. Premium-model calls are optional and require a surviving decisive lock.","","## Current farm observations"]
+          for i in unique:
+            if str(i) in observations:
+              x=observations[str(i)]; md.append(f"- F{i:02d} {x['repo']}: run={x.get('run_id')} status={x.get('status')} conclusion={x.get('conclusion')}")
+          open("central/astra6/STATUS.md","w").write("\n".join(md)+"\n")
           PY
 
-      - name: Persist live state
+      - name: Persist orchestrator state
         run: |
           git config user.name "cerebron-omega-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add central/astra_like/
+          git add central/astra6/
           if ! git diff --cached --quiet; then
-            git commit -m "Update Astra-like Collatz orchestration state [skip ci]"
+            git commit -m "Update ASTRA-6 x CEREBRON-74 funnel state [skip ci]"
             git push
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: astra-like-collatz-pilot-state
-          path: central/astra_like/
+          name: astra6-cerebron74-funnel-state
+          path: central/astra6/
           retention-days: 14
