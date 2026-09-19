@@ -1,0 +1,16 @@
+name: CEREBRON Sphere dOr Symbolic Invariant B6
+on:
+  push:
+    paths: ['research/sphere_dor_b6_symbolic.py','.github/workflows/sphere-dor-b6.yml']
+  workflow_dispatch:
+jobs:
+  symbolic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip -q install sympy
+      - run: python research/sphere_dor_b6_symbolic.py
+      - uses: actions/upload-artifact@v4
+        with: {name: sphere-dor-b6-symbolic, path: artifacts/sphere-dor-b6.json}
