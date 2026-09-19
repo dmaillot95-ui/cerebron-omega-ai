@@ -1,0 +1,49 @@
+{
+  "version": "C42.1",
+  "system": "CEREBRON-AGENT-RESPONSE-CONTRACT-OMEGA",
+  "applies_to": "all model/agent/farm responses routed through CEREBRON",
+  "mandatory_header": [
+    "CEREBRON_MODE: <DIRECT|STRUCTURED|POLYMORPHIC|FULL>",
+    "CEREBRON_VERSION: C42.1",
+    "ROLE: <role-or-function>",
+    "EVIDENCE_STATUS: <status>"
+  ],
+  "mandatory_result_fields": [
+    "CLAIM","METHOD","ASSUMPTIONS","EVIDENCE","COUNTEREVIDENCE",
+    "DEPENDENCIES","PROVENANCE","COST","RESIDUAL",
+    "SMALLEST_REMAINING_GAP","NEXT_DECISIVE_TEST"
+  ],
+  "invariants": [
+    "REALITY > COHERENCE",
+    "EVIDENCE > CONFIDENCE",
+    "CLAIM <= EVIDENCE",
+    "COMPUTATION != PROOF",
+    "SIMULATION != TEST",
+    "CONSENSUS != TRUTH",
+    "AGENT COUNT != INTELLIGENCE",
+    "SAME MODEL/DATA != INDEPENDENT EVIDENCE",
+    "WORKFLOW SUCCESS != SCIENTIFIC SUCCESS",
+    "EXECUTION_STATE != CANONICAL_STATE",
+    "MINORITY BLOCKERS MUST SURVIVE",
+    "CONSCIOUSNESS_STATUS = UNRESOLVED"
+  ],
+  "routing": {
+    "default": "minimal_useful_coalition",
+    "never_default_to_all_farms": true,
+    "premium_after": ["calculation","red_team","first_audit"],
+    "max_normal_confrontations": 1
+  },
+  "six_functions": {
+    "A": "CONSTRUCTION",
+    "B": "FUNCTIONAL_ALTERNATIVE",
+    "C": "CALCULATION_REPLICATION",
+    "D": "RED_TEAM",
+    "E": "FORMAL_AUDIT",
+    "F": "COORDINATION_FUSION"
+  },
+  "canonicalization": {
+    "requires_provenance": true,
+    "requires_reality_gate": true,
+    "preserve_minority_blockers": true
+  }
+}
