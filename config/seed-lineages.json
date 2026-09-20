@@ -1,0 +1,115 @@
+{
+  "schema": "cerebron-seed-lineage-registry-v1",
+  "version": "1.0",
+  "status": "DESIGNED_EMPTY",
+  "authority": "AFAH",
+  "purpose": "Genealogical registry linking base models, trainable adapters/weights, validated memory and colony learning without storing large weights in Git.",
+  "storage": {
+    "github": {
+      "stores": [
+        "lineage metadata",
+        "immutable model/adaptor references",
+        "digests",
+        "training recipes",
+        "benchmark results",
+        "validated compact checkpoints",
+        "provenance"
+      ],
+      "does_not_store": [
+        "full model weights",
+        "large checkpoints",
+        "provider credentials"
+      ]
+    },
+    "external_model_store": {
+      "preferred": "HUGGING_FACE",
+      "stores": [
+        "base model weights",
+        "LoRA/adapters",
+        "large training datasets when approved",
+        "versioned model artifacts"
+      ]
+    },
+    "active_colony_memory": {
+      "stores": [
+        "temporary context",
+        "intermediate results",
+        "runtime cache"
+      ],
+      "persistence": "EPHEMERAL_UNTIL_VALIDATED"
+    },
+    "F66": {
+      "role": "RELATION_INDEX",
+      "stores": [
+        "model-memory-evidence-training relationships",
+        "retrieval/index metadata"
+      ]
+    },
+    "F74": {
+      "role": "VALIDATED_MEMORY_CATALOG",
+      "stores": [
+        "validated lessons",
+        "checkpoint references",
+        "generation history",
+        "provenance"
+      ]
+    }
+  },
+  "lineage_record_contract": {
+    "required": [
+      "seed_id",
+      "generation",
+      "family",
+      "base_model.provider",
+      "base_model.model_id",
+      "base_model.immutable_revision",
+      "memory_id",
+      "training_status",
+      "benchmark_status",
+      "provenance"
+    ],
+    "optional": [
+      "parent_seed_ids",
+      "adapter.provider",
+      "adapter.id",
+      "adapter.immutable_revision",
+      "dataset_refs",
+      "training_recipe_ref",
+      "metrics_before",
+      "metrics_after",
+      "artifact_digests",
+      "assigned_colonies"
+    ]
+  },
+  "lifecycle": [
+    "DISCOVER_BASE",
+    "PIN_REVISION",
+    "CREATE_G0",
+    "ASSIGN_COLONY",
+    "RUN",
+    "VALIDATE_MEMORY",
+    "TRAIN_ADAPTER_IF_JUSTIFIED",
+    "COLD_BENCHMARK",
+    "AUDIT",
+    "RED_TEAM",
+    "ABLATION",
+    "TRANSFER",
+    "PROMOTE_GENERATION_OR_ROLLBACK"
+  ],
+  "promotion_rules": [
+    "No generation promotion from training loss alone.",
+    "A new generation requires measurable cold-benchmark improvement or another explicitly validated capability gain.",
+    "Failed or regressed generations remain traceable and are not silently overwritten.",
+    "Memory promotion requires provenance and validation.",
+    "Same ancestry must be recorded and is not automatically independent evidence."
+  ],
+  "concurrency": {
+    "hf_channel_per_colony": 1,
+    "global_colony_hf_slots": 20,
+    "behavior": "QUEUE_EXCESS_REQUESTS",
+    "adaptive_backoff": true,
+    "note": "20 is an orchestration ceiling, not a guarantee that an external free service accepts 20 concurrent requests."
+  },
+  "seeds": [],
+  "next_gate": "PUBLIC_HF_CONNECTIVITY_PASS_THEN_DISCOVER_REAL_BASE_MODELS"
+}
