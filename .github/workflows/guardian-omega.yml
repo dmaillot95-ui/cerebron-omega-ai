@@ -72,5 +72,23 @@ jobs:
               prev_id=r["checkpoint_id"]; prev_hash=r["record_hash"]
           print("Checkpoint ledger chain valid; records:", 0 if prev_id is None else ">=1")
           PY
+      - name: Enforce fail-closed human gate marker
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("security/GITHUB_PROTECTION_REQUIRED.md")
+          if not p.exists(): raise SystemExit("GUARDIAN BLOCK: GitHub protection requirements missing")
+          s=p.read_text()
+          required=[
+            "HUMAN_GATE_VERIFIED = FALSE",
+            "LEDGER_AUTOMATIC_WRITE = DISABLED",
+            "CHECKPOINT_PROMOTION = HOLD",
+            "PRIVILEGED_RECOVERY = BLOCKED"
+          ]
+          missing=[x for x in required if x not in s]
+          if missing: raise SystemExit("GUARDIAN BLOCK: fail-closed markers missing: "+repr(missing))
+          print("Human gate remains fail-closed until external GitHub protection is verified")
+          PY
       - name: Security decision
         run: echo "Static policy gate PASS. Critical authorization still requires explicit AFAH approval."
