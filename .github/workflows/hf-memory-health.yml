@@ -1,0 +1,60 @@
+name: HF Private Memory Health
+on:
+  push:
+    paths:
+      - '.github/workflows/hf-memory-health.yml'
+      - 'config/hf-memory-health-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Private memory read and integrity health
+        run: |
+          mkdir -p receipts/p03
+          python - <<'PY'
+          import os,json,hashlib
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+          repo="cerebron-omega/cerebron-private-memory"; token=os.environ["HF_TOKEN"]
+          checks={}; details={}
+          try:
+            info=HfApi(token=token).model_info(repo)
+            checks["AUTH"]="PASS"; checks["PRIVATE_REPO"]="PASS" if bool(getattr(info,"private",False)) else "FAIL"
+          except Exception as e:
+            checks["AUTH"]="FAIL";checks["PRIVATE_REPO"]="UNVERIFIED";details["auth_error"]=type(e).__name__
+          targets=[
+            ("C01_FIXTURE","colony/C01-SIGMA/memory/C01-SIGMA-MEMTEST-0001.json",{"colony_id":"C01-SIGMA","memory_id":"C01-SIGMA-MEMTEST-0001"}),
+            ("SAPHEA_M1","colony/C01-SIGMA/agents/SIGMA-FORMALIZER/memory/M1/checkpoint.json",{"colony_id":"C01-SIGMA","agent_id":"SIGMA-FORMALIZER","generation":"M1","parent_generation":"M0"})
+          ]
+          for name,p,expected in targets:
+            try:
+              fn=hf_hub_download(repo_id=repo,filename=p,token=token,force_download=True)
+              b=open(fn,"rb").read();o=json.loads(b)
+              ok=all(o.get(k)==v for k,v in expected.items())
+              checks[name+"_READ"]="PASS";checks[name+"_IDENTITY"]="PASS" if ok else "FAIL"
+              details[name+"_sha256"]=hashlib.sha256(b).hexdigest()
+            except Exception as e:
+              checks[name+"_READ"]="FAIL";checks[name+"_IDENTITY"]="UNVERIFIED";details[name+"_error"]=type(e).__name__
+          status="PASS" if checks and all(v=="PASS" for v in checks.values()) else "FAIL"
+          r={"schema":"cerebron-hf-memory-health-v1","status":status,"repo":repo,"checks":checks,"details":details,"claim_scope":"authenticated private read + identity + content digest; no claim of learning quality"}
+          Path("receipts/p03/hf-memory-health.json").write_text(json.dumps(r,indent=2)+"\n")
+          if status!="PASS": raise SystemExit(2)
+          PY
+      - name: Persist non-sensitive health receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/hf-memory-health.json
+          git diff --cached --quiet && exit 0
+          git commit -m "P03 receipt: HF private memory health"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
