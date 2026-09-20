@@ -1,0 +1,8 @@
+{
+  "schema": "p04-pin-receipt-v1",
+  "model": "Qwen/Qwen3-4B",
+  "requested_revision": "1cfa9a7",
+  "resolved_sha": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "pin_resolve": "PASS",
+  "config_load": "PASS"
+}\n
