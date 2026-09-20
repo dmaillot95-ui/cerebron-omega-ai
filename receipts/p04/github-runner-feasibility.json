@@ -1,0 +1,13 @@
+{
+  "schema": "cerebron-p04-runner-feasibility-v1",
+  "status": "RESOURCE_PROBE_PASS",
+  "runner": "ubuntu-latest",
+  "cpu_count": 4,
+  "mem_total_mb": 15989,
+  "disk_free_mb": 88134,
+  "python": "3.12.3",
+  "machine": "x86_64",
+  "model_load": "NOT_EXECUTED",
+  "inference": "NOT_EXECUTED",
+  "rule": "Resource probe is not model runtime proof."
+}
