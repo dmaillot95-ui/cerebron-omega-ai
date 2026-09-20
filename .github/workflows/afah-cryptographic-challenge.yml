@@ -1,0 +1,41 @@
+name: AFAH Cryptographic Challenge
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  challenge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sign and verify fresh challenge
+        shell: bash
+        env:
+          AFAH_SIGNING_PRIVATE_KEY: ${{ secrets.AFAH_SIGNING_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$AFAH_SIGNING_PRIVATE_KEY" || { echo "BLOCK: secret absent"; exit 1; }
+          test -s security/keys/afah-signing-public.pem || { echo "BLOCK: public key absent"; exit 1; }
+          umask 077
+          printf '%s' "$AFAH_SIGNING_PRIVATE_KEY" > /tmp/afah-private.pem
+          trap 'rm -f /tmp/afah-private.pem /tmp/afah-challenge /tmp/afah-signature' EXIT
+
+          openssl rand -hex 32 > /tmp/afah-challenge
+
+          if ! openssl pkeyutl -sign -rawin               -inkey /tmp/afah-private.pem               -in /tmp/afah-challenge               -out /tmp/afah-signature; then
+            echo "BLOCK: signing failed"
+            exit 1
+          fi
+
+          if ! openssl pkeyutl -verify -rawin -pubin               -inkey security/keys/afah-signing-public.pem               -sigfile /tmp/afah-signature               -in /tmp/afah-challenge; then
+            echo "BLOCK: private/public key mismatch"
+            exit 1
+          fi
+
+          echo "PASS: AFAH private secret matches enrolled public key."
+          echo "NOTE: this proves keypair consistency only; it does not by itself prove human intent for a future privileged act."
