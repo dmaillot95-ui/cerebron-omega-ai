@@ -1,0 +1,20 @@
+{
+  "schema": "colony-hf-memory-gate-v1",
+  "checked_at": "2026-09-20T19:40:30.075615+00:00",
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "colonies": [
+    {
+      "colony_id": "C03-SIGMA",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS"
+    },
+    {
+      "colony_id": "C12-ARGUS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS"
+    }
+  ],
+  "status": "PASS"
+}
