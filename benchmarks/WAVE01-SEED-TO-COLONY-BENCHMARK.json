@@ -1,0 +1,62 @@
+{
+  "schema": "cerebron-wave01-seed-to-colony-benchmark-v1",
+  "status": "FROZEN_NOT_EXECUTED",
+  "wave": 1,
+  "objective": "Test whether each verified seed farm contributes useful role-aligned capability to its target colony before any SAPHEA activation.",
+  "cases": [
+    {
+      "id": "W01-SIGMA-F01",
+      "colony": "C03-SIGMA",
+      "farm": "F01",
+      "task": "Formalize a candidate accelerated odd-Collatz cycle claim into definitions, quantified obligations, and a falsifiable proof checklist.",
+      "expected_role": "theory/proof decomposition"
+    },
+    {
+      "id": "W01-SIGMA-F09",
+      "colony": "C03-SIGMA",
+      "farm": "F09",
+      "task": "Independently audit the same mathematical claim for hidden assumptions, invalid local-to-global steps, and exact arithmetic obligations.",
+      "expected_role": "general mathematical verification"
+    },
+    {
+      "id": "W01-ARGUS-F06",
+      "colony": "C12-ARGUS",
+      "farm": "F06",
+      "task": "Audit a supplied proof fragment for quantifier errors, dependency gaps, congruence mistakes, and arbitrary-N overclaim.",
+      "expected_role": "formal audit"
+    },
+    {
+      "id": "W01-ARGUS-F34",
+      "colony": "C12-ARGUS",
+      "farm": "F34",
+      "task": "Red-team the same proof fragment and classify every claim as established, derived, computational, conjectural, refuted, or unverified.",
+      "expected_role": "independent audit/red-team"
+    }
+  ],
+  "execution_requirements": [
+    "real farm workflow or real model execution",
+    "immutable input digest",
+    "raw output preserved",
+    "output SHA256",
+    "runtime/workflow receipt",
+    "no cross-case output sharing before freeze",
+    "memory write to colony private HF namespace only after audit"
+  ],
+  "scoring": [
+    "role_alignment",
+    "correctness",
+    "scope_control",
+    "error_detection",
+    "evidence_calibration",
+    "reproducibility"
+  ],
+  "pass_gate": [
+    "all four cases executed",
+    "all raw hashes verified",
+    "no fabricated evidence",
+    "audit completed",
+    "dependency fingerprint recorded"
+  ],
+  "claim_limit": "Frozen benchmark design is not execution evidence.",
+  "next_if_pass": "bind qualified farm capabilities into colony router, then run SAPHEA model-role benchmark"
+}
