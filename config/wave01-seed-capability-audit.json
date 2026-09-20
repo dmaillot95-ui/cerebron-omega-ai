@@ -1,6 +1,6 @@
 {
   "schema": "cerebron-wave01-seed-capability-audit-v1",
-  "status": "PARTIAL_PASS",
+  "status": "DESCRIPTIVE_MAPPING_PASS",
   "checks": [
     {
       "colony": "C03-SIGMA",
@@ -26,9 +26,9 @@
     {
       "colony": "C12-ARGUS",
       "farm": "F34",
-      "evidence": "repository identity only; README not found in inspected paths",
-      "capability": "UNVERIFIED",
-      "mapping": "HOLD"
+      "evidence": "MISSION.md",
+      "capability": "formal audit of claims/proofs/calculations/models/specifications/reasoning; implicit assumptions, quantification, circularity, domain/unit/dependency/reproducibility checks",
+      "mapping": "PASS"
     }
   ],
   "rules": [
@@ -36,5 +36,5 @@
     "F34 remains HOLD until manifest/content confirms formal-audit capability",
     "No colony activation from descriptive mapping alone"
   ],
-  "next_gate": "inspect F34 repository contents and then execute farm-to-colony task benchmark"
+  "next_gate": "execute farm-to-colony benchmark; descriptive mapping is not execution evidence"
 }
