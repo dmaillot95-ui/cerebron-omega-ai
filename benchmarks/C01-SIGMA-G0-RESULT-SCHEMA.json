@@ -1,0 +1,53 @@
+{
+  "schema": "cerebron-c01-g0-result-schema-v1",
+  "status": "FROZEN_PRE_RESULTS",
+  "raw_result": {
+    "required": [
+      "candidate",
+      "task_id",
+      "taskset_version",
+      "output_text",
+      "output_sha256",
+      "completion_status",
+      "latency_ms",
+      "runtime_receipt"
+    ],
+    "immutable_after_write": true
+  },
+  "audit_result": {
+    "required": [
+      "candidate",
+      "task_id",
+      "primary_score",
+      "penalties",
+      "evidence_refs",
+      "red_team_findings",
+      "reproduction_status",
+      "final_score"
+    ],
+    "score_range": [
+      0,
+      10
+    ]
+  },
+  "aggregate": {
+    "required": [
+      "candidate",
+      "completed_tasks",
+      "raw_hashes_verified",
+      "score_total",
+      "critical_failures",
+      "audit_complete",
+      "decision_gate_state"
+    ],
+    "max_score": 70
+  },
+  "integrity_rules": [
+    "Recompute output SHA before audit",
+    "Reject score if raw output missing",
+    "Never overwrite raw result; new execution gets new run_id",
+    "Model identity remains blinded until all candidate final scores freeze",
+    "Infrastructure failure is recorded separately from model failure"
+  ],
+  "promotion_rule": "Result schema records evidence only; promotion is controlled by C01-SIGMA-G0-DECISION-GATES.json."
+}
