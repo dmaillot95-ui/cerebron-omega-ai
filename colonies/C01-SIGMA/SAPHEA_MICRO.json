@@ -1,0 +1,190 @@
+{
+  "schema": "cerebron-saphea-micro-assignment-v1",
+  "version": "1.0",
+  "colony_id": "C01",
+  "colony": "SIGMA",
+  "status": "DESIGNED_UNASSIGNED",
+  "principle": "SAPHEA MICRO are specialized executable units only after a real model/resource is bound. A role definition is not an executed agent.",
+  "units": [
+    {
+      "id": "SM-SIGMA-01",
+      "team_slot": "SIGMA-CHIEF",
+      "specialization": [
+        "routing",
+        "proof-obligation-decomposition",
+        "checkpoint-control"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-02",
+      "team_slot": "SIGMA-FORMALIZER",
+      "specialization": [
+        "formalization",
+        "quantifiers",
+        "definitions",
+        "lemma-graph"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-03",
+      "team_slot": "SIGMA-PROVER-A",
+      "specialization": [
+        "primary-proof-search",
+        "lemma-composition"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-04",
+      "team_slot": "SIGMA-PROVER-B",
+      "specialization": [
+        "alternate-proof-search",
+        "dependency-diversification"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-05",
+      "team_slot": "SIGMA-COMPUTE",
+      "specialization": [
+        "symbolic-checks",
+        "finite-verification",
+        "arithmetic-validation"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-06",
+      "team_slot": "SIGMA-COUNTEREX",
+      "specialization": [
+        "counterexample-search",
+        "adversarial-math",
+        "assumption-attacks"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-07",
+      "team_slot": "SIGMA-AUDITOR",
+      "specialization": [
+        "formal-audit",
+        "inference-checking",
+        "proof-gap-detection"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-08",
+      "team_slot": "SIGMA-REPRODUCER",
+      "specialization": [
+        "clean-reproduction",
+        "independence-check"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-09",
+      "team_slot": "SIGMA-EVIDENCE",
+      "specialization": [
+        "provenance",
+        "dependency-fingerprint",
+        "evidence-ledger"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "id": "SM-SIGMA-10",
+      "team_slot": "SIGMA-SYNTH",
+      "specialization": [
+        "audited-fusion",
+        "contradiction-preservation",
+        "agora-egress"
+      ],
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    }
+  ],
+  "binding_contract": {
+    "required_fields": [
+      "provider",
+      "model_id",
+      "model_version_or_revision",
+      "execution_endpoint_or_runner",
+      "availability_status",
+      "benchmark_id",
+      "cost_class",
+      "latency_measurement",
+      "context_limit_if_known",
+      "tool_access",
+      "binding_timestamp"
+    ],
+    "activation_sequence": [
+      "DISCOVER_REAL_RESOURCE",
+      "RECORD_IDENTITY",
+      "BASELINE",
+      "COLD_BENCHMARK",
+      "AUDIT",
+      "RED_TEAM",
+      "ABLATION",
+      "TRANSFER",
+      "BIND_OR_REJECT"
+    ],
+    "no_fake_binding": true,
+    "same_model_independence": "Multiple SAPHEA using the same model may be useful for search diversity but are not automatically independent evidence.",
+    "replacement": "A model can be replaced only through CRISTAL impact/test/rollback procedure."
+  },
+  "selection_metrics": [
+    "correctness",
+    "formal_discipline",
+    "calibration",
+    "evidence_quality",
+    "counterexample_detection",
+    "reproducibility",
+    "transfer",
+    "hallucination_error_rate",
+    "cost",
+    "latency"
+  ],
+  "farm_support": {
+    "primary": [
+      "F01",
+      "F09"
+    ],
+    "audit": [
+      "F06",
+      "F34"
+    ],
+    "red_team": [
+      "F04",
+      "F33"
+    ],
+    "reproduction": [
+      "F35",
+      "F71"
+    ],
+    "proof_engineering": [
+      "F70"
+    ],
+    "learning": [
+      "F59"
+    ],
+    "reality": [
+      "F72"
+    ],
+    "memory": [
+      "F74"
+    ]
+  },
+  "next_gate": "DISCOVER_AND_BENCHMARK_REAL_MODEL_RESERVOIR"
+}
