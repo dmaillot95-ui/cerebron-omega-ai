@@ -1,0 +1,112 @@
+{
+  "schema": "cerebron-saphea-memory-runtime-v1",
+  "status": "DESIGNED_PENDING_E2E_GATE",
+  "authority": "AFAH",
+  "depends_on": "P02 C01 end-to-end recall PASS",
+  "namespace": "colony/{COLONY_ID}/agents/{AGENT_ID}",
+  "memory_classes": {
+    "identity": {
+      "retention": "DURABLE_MINIMAL",
+      "fields": [
+        "agent_id",
+        "colony_id",
+        "role",
+        "model_id",
+        "model_revision",
+        "lineage_id"
+      ]
+    },
+    "checkpoint": {
+      "retention": "LATEST_VALIDATED_PLUS_ROLLBACK",
+      "fields": [
+        "objective",
+        "verified_state",
+        "open_gap",
+        "next_test",
+        "evidence_refs",
+        "generation"
+      ]
+    },
+    "skill": {
+      "retention": "VALIDATED_COMPRESSED",
+      "fields": [
+        "skill_id",
+        "scope",
+        "method",
+        "benchmark_delta",
+        "ablation_status",
+        "transfer_status",
+        "provenance"
+      ]
+    },
+    "failure": {
+      "retention": "COMPRESSED_NONREDUNDANT",
+      "fields": [
+        "failure_id",
+        "failed_path",
+        "cause",
+        "counterexample_or_evidence",
+        "avoidance_rule"
+      ]
+    },
+    "parametric": {
+      "retention": "POINTER_ONLY_IN_GITHUB",
+      "fields": [
+        "artifact_id",
+        "hf_private_object",
+        "sha256",
+        "base_revision",
+        "training_recipe_ref",
+        "benchmark_ref"
+      ]
+    }
+  },
+  "storage": {
+    "private_payload": "HUGGING_FACE_PRIVATE",
+    "catalog": "F74_OPAQUE_POINTER",
+    "index": "F66",
+    "github": "CONTROL_METADATA_ONLY"
+  },
+  "write_pipeline": [
+    "WORKING",
+    "CLASSIFY",
+    "COMPRESS",
+    "PROVENANCE",
+    "AUDIT",
+    "HASH",
+    "HF_PRIVATE_WRITE",
+    "AUTH_READBACK",
+    "DIGEST_VERIFY",
+    "F74_POINTER",
+    "F66_INDEX",
+    "RECALL_TEST",
+    "PROMOTE"
+  ],
+  "recall_pipeline": [
+    "MISSION",
+    "F66_LOOKUP",
+    "F74_VALIDATE",
+    "HF_PRIVATE_READ",
+    "DIGEST_VERIFY",
+    "MINIMUM_RELEVANT_CONTEXT"
+  ],
+  "generation_policy": {
+    "format": "M{n}",
+    "promotion_requires": [
+      "RECALL_PASS",
+      "AUDIT_PASS",
+      "NO_PRIVACY_LEAK",
+      "ROLLBACK_AVAILABLE"
+    ],
+    "preserve_previous_generation": true
+  },
+  "rules": [
+    "MEMORY!=LEARNING",
+    "COMPRESSION_BEFORE_ACCUMULATION",
+    "PRIVATE_BY_DEFAULT",
+    "NO_SECRET_IN_MEMORY",
+    "NO_RAW_CHAT_HISTORY_BY_DEFAULT",
+    "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE",
+    "FAILED_GATE=>HOLD"
+  ]
+}
