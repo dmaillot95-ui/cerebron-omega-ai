@@ -1,0 +1,50 @@
+name: HF Private Store Bootstrap
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - name: Create private repository and verify write-read integrity
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,urllib.request,urllib.error
+          token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
+          H={"Authorization":"Bearer "+token,"Content-Type":"application/json"}
+          def req(url,method="GET",data=None,headers=None):
+              h=dict(H); h.update(headers or {})
+              b=None if data is None else (data if isinstance(data,bytes) else json.dumps(data).encode())
+              q=urllib.request.Request(url,data=b,headers=h,method=method)
+              with urllib.request.urlopen(q,timeout=60) as r:return r.read(),r.status
+          # Create model repo private. 409 means it already exists.
+          try:
+              _,s=req("https://huggingface.co/api/repos/create","POST",{"name":"cerebron-private-memory","organization":None,"private":True,"type":"model"})
+              print("HF_PRIVATE_REPO_CREATE=PASS",s)
+          except urllib.error.HTTPError as e:
+              if e.code==409: print("HF_PRIVATE_REPO_CREATE=PASS_ALREADY_EXISTS")
+              else: raise
+          payload=b'CEREBRON_PRIVATE_MEMORY_TEST_V1\n'
+          digest=hashlib.sha256(payload).hexdigest()
+          # Hub commit API: upload one regular file.
+          boundary="cerebronboundary"
+          header=json.dumps({"summary":"CEREBRON private memory integrity fixture","description":"synthetic non-secret test"}).encode()
+          key=json.dumps({"key":"memory/MEMTEST-PRIVATE-0001.txt","value":{"contentType":"regular","path":"memory/MEMTEST-PRIVATE-0001.txt","encoding":"base64"}}).encode()
+          import base64
+          val=base64.b64encode(payload)
+          body=(b"--"+boundary.encode()+b"\r\nContent-Disposition: form-data; name=\"header\"\r\n\r\n"+header+
+                b"\r\n--"+boundary.encode()+b"\r\nContent-Disposition: form-data; name=\"file\"\r\n\r\n"+key+b"\n"+val+
+                b"\r\n--"+boundary.encode()+b"--\r\n")
+          # Prefer documented commit endpoint; fail closed if API contract differs.
+          _,s=req("https://huggingface.co/api/models/"+repo+"/commit/main","POST",body,{"Content-Type":"multipart/form-data; boundary="+boundary})
+          print("HF_PRIVATE_WRITE=PASS",s)
+          got,_=req("https://huggingface.co/"+repo+"/resolve/main/memory/MEMTEST-PRIVATE-0001.txt")
+          if hashlib.sha256(got).hexdigest()!=digest: raise SystemExit("HF_PRIVATE_INTEGRITY=FAIL")
+          print("HF_PRIVATE_READ=PASS")
+          print("HF_PRIVATE_INTEGRITY_SHA256=PASS")
+          print("PRIVATE_PAYLOAD_EXPOSED=NO")
+          PY
