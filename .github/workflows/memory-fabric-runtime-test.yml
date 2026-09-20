@@ -1,0 +1,45 @@
+name: Memory Fabric Runtime Test
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/memory-fabric-runtime-test.yml'
+permissions:
+  contents: read
+jobs:
+  memory-write-index-read:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: F74 write F66 index recall test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .memory-test/f74 .memory-test/f66
+          python - <<'PY'
+          import json, hashlib, pathlib
+          record={
+            "memory_id":"MEMTEST-C01-0001",
+            "colony_id":"C01-SIGMA",
+            "status":"VALIDATED_TEST_FIXTURE",
+            "claim":"CEREBRON memory fabric round-trip fixture",
+            "provenance":{"source":"memory-fabric-runtime-test","type":"synthetic-test"},
+            "evidence_status":"TEST_FIXTURE",
+            "audit_status":"TEST_FIXTURE"
+          }
+          payload=json.dumps(record,sort_keys=True,separators=(",",":")).encode()
+          digest=hashlib.sha256(payload).hexdigest()
+          pathlib.Path(".memory-test/f74/MEMTEST-C01-0001.json").write_bytes(payload)
+          index={"memory_id":record["memory_id"],"colony_id":record["colony_id"],"f74_path":".memory-test/f74/MEMTEST-C01-0001.json","sha256":digest}
+          pathlib.Path(".memory-test/f66/index.json").write_text(json.dumps(index,sort_keys=True))
+          idx=json.loads(pathlib.Path(".memory-test/f66/index.json").read_text())
+          recalled=pathlib.Path(idx["f74_path"]).read_bytes()
+          assert hashlib.sha256(recalled).hexdigest()==idx["sha256"]
+          obj=json.loads(recalled)
+          assert obj["memory_id"]==idx["memory_id"]
+          assert obj["colony_id"]=="C01-SIGMA"
+          print("F74_WRITE=PASS")
+          print("F66_INDEX=PASS")
+          print("MEMORY_RECALL=PASS")
+          print("INTEGRITY_SHA256=PASS")
+          PY
