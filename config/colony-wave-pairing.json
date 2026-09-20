@@ -1,0 +1,86 @@
+{
+  "schema": "cerebron-colony-wave-pairing-v1",
+  "status": "DESIGNED_CANDIDATES_UNBOUND",
+  "cadence": {
+    "agora_target_minutes": 5,
+    "note": "schedule target; GitHub Actions may delay; each cycle must persist receipt"
+  },
+  "deployment_policy": {
+    "batch_size": 2,
+    "rule": "activate at most two new colonies per validated wave; no next pair until health/benchmark/memory gates pass",
+    "automatic_recording": true,
+    "private_memory": "HF private",
+    "public_control": "GitHub non-sensitive receipts/pointers"
+  },
+  "learning_loop": [
+    "AGORA_TASK",
+    "COLONY_CHIEF",
+    "REAL_SAPHEA",
+    "TASK_OUTPUT",
+    "AUDIT",
+    "RED_TEAM",
+    "SYNTHESIS",
+    "VALIDATED_LESSON",
+    "SAPHEIDE",
+    "HF_PRIVATE_MEMORY",
+    "F66_INDEX",
+    "F74_CATALOG",
+    "NEXT_AGORA_CYCLE"
+  ],
+  "pair_01": [
+    {
+      "colony": "C03-SIGMA",
+      "domain": "mathematics-formalization-proofs",
+      "model_candidates": [
+        {
+          "id": "Qwen/Qwen3-4B",
+          "parameters": "4B",
+          "license": "Apache-2.0",
+          "status": "CANDIDATE_ALREADY_IN_RUNTIME_GATE"
+        },
+        {
+          "id": "HuggingFaceTB/SmolLM3-3B",
+          "parameters": "3B",
+          "license": "Apache-2.0",
+          "status": "CANDIDATE_RUNTIME_CANARY_PASS"
+        }
+      ]
+    },
+    {
+      "colony": "C12-ARGUS",
+      "domain": "audit-error-detection",
+      "model_candidates": [
+        {
+          "id": "Qwen/Qwen3-8B",
+          "parameters": "8B",
+          "license": "Apache-2.0",
+          "status": "NEW_CANDIDATE_NEEDS_PIN_RUNTIME_BENCHMARK"
+        },
+        {
+          "id": "Qwen/Qwen3-4B",
+          "parameters": "4B",
+          "license": "Apache-2.0",
+          "status": "CANDIDATE_NEEDS_ROLE_BENCHMARK"
+        }
+      ]
+    }
+  ],
+  "gates": [
+    "exact immutable model revision",
+    "license/provenance",
+    "real inference runtime",
+    "cold role benchmark",
+    "audit/red-team",
+    "memory write/read/hash",
+    "no leakage",
+    "rollback",
+    "AGORA receipt"
+  ],
+  "rules": [
+    "candidate is not assignment",
+    "task-agent output is training material only after validation",
+    "SAPHEIDE receives validated lessons, not raw consensus",
+    "no autonomous privilege escalation",
+    "AFAH remains final authority"
+  ]
+}
