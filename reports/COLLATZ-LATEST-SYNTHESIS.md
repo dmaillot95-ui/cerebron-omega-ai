@@ -17,19 +17,19 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 74
-- Derniers workflows en succès : 70
+- Derniers workflows en succès : 72
 - Derniers workflows en échec : 2
-- Fermes avec au moins un artefact sur leur dernier run : 64
+- Fermes avec au moins un artefact sur leur dernier run : 65
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35510832071 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35511107708 status=in_progress conclusion=None artifacts=16
-- Farm 03 collatz-adic: run=35511160601 status=queued conclusion=None artifacts=4
-- Farm 04 collatz-counterexample: run=35511104132 status=completed conclusion=success artifacts=21
-- Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35510774565 status=completed conclusion=success artifacts=21
-- Farm 07 collatz-synthesis: run=35451808691 status=completed conclusion=success artifacts=22
+- Farm 01 collatz-theory: run=35511441740 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35511107708 status=completed conclusion=success artifacts=21
+- Farm 03 collatz-adic: run=35511160601 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35511682236 status=completed conclusion=success artifacts=21
+- Farm 05 collatz-literature: run=35511257726 status=completed conclusion=success artifacts=22
+- Farm 06 collatz-formal-audit: run=35511402679 status=completed conclusion=success artifacts=21
+- Farm 07 collatz-synthesis: run=35511273774 status=completed conclusion=success artifacts=22
 - Farm 08 research-web: run=35419822578 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35419824254 status=completed conclusion=success artifacts=1
 - Farm 10 science-physics: run=35419826266 status=completed conclusion=success artifacts=21
@@ -68,7 +68,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 43 civilization-synthesis: run=35420388222 status=completed conclusion=success artifacts=21
 - Farm 44 ai-platform-routing: run=35420094884 status=completed conclusion=success artifacts=21
 - Farm 45 agent-runtime: run=35420391067 status=completed conclusion=success artifacts=21
-- Farm 46 global-video-research: run=35508680097 status=completed conclusion=success artifacts=1
+- Farm 46 global-video-research: run=35511713764 status=completed conclusion=success artifacts=1
 - Farm 47 global-country-web-intelligence: run=35510920331 status=completed conclusion=success artifacts=21
 - Farm 48 global-scientific-literature-intelligence: run=35309608719 status=completed conclusion=success artifacts=0
 - Farm 49 engineering-cad-digital-twin: run=35309609848 status=completed conclusion=success artifacts=0
