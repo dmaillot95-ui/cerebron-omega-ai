@@ -1,0 +1,58 @@
+{
+  "schema": "cerebron-c01-g0-decision-gates-v1",
+  "status": "FROZEN_PRE_RESULTS",
+  "gates": [
+    {
+      "id": "G1_RUNTIME",
+      "pass": "exact pinned revision loads and completes inference with integrity receipt"
+    },
+    {
+      "id": "G2_BASELINE",
+      "pass": "all 7 frozen cold tasks complete with immutable raw-output hashes"
+    },
+    {
+      "id": "G3_PRIMARY_AUDIT",
+      "pass": "all tasks scored under frozen rubric with evidence references"
+    },
+    {
+      "id": "G4_RED_TEAM",
+      "pass": "unsupported claims and critical errors reviewed; unresolved issues explicit"
+    },
+    {
+      "id": "G5_REPRODUCTION",
+      "pass": "deterministic arithmetic/algebra checks independently recomputed where applicable"
+    },
+    {
+      "id": "G6_ABLATION",
+      "pass": "later specialization gain is compared against this untouched G0 baseline"
+    },
+    {
+      "id": "G7_TRANSFER",
+      "pass": "measured gain survives novel cold tasks not used for specialization"
+    }
+  ],
+  "decisions": {
+    "QUALIFIED_G0": "G1-G5 PASS; eligible for controlled SAPHEA specialization experiment",
+    "PROMOTABLE_SPECIALIST": "G1-G7 PASS with measurable gain",
+    "HOLD": "missing/unverified gate or infrastructure ambiguity",
+    "REJECT": "demonstrated model-level failure under valid runtime/protocol; infrastructure failure alone is not rejection"
+  },
+  "anti_shortcuts": [
+    "Pin/config success is not runtime success",
+    "One canary is not baseline completion",
+    "High aggregate score does not bypass critical false-proof review",
+    "Training-set gain does not prove transfer",
+    "Same lineage agreement does not prove independent reproduction"
+  ],
+  "current": {
+    "smollm3_3b": {
+      "G1_RUNTIME": "PASS_CANARY_ONLY",
+      "G2_BASELINE": "NOT_EXECUTED",
+      "decision": "HOLD"
+    },
+    "others": {
+      "G1_RUNTIME": "NOT_EXECUTED",
+      "decision": "HOLD"
+    }
+  }
+}
