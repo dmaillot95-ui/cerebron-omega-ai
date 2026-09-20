@@ -1,0 +1,98 @@
+{
+  "schema": "cerebron-c01-p07-ablation-matrix-v1",
+  "status": "FROZEN_PRE_LEARNING",
+  "colony_id": "C01-SIGMA",
+  "purpose": "Identify which component causes any measured specialist gain.",
+  "conditions": [
+    {
+      "id": "A0",
+      "memory": false,
+      "adapter": false,
+      "tools": false,
+      "role_prompt": false,
+      "label": "G0_CONTROL"
+    },
+    {
+      "id": "A1",
+      "memory": false,
+      "adapter": false,
+      "tools": false,
+      "role_prompt": true,
+      "label": "ROLE_PROMPT_ONLY"
+    },
+    {
+      "id": "A2",
+      "memory": true,
+      "adapter": false,
+      "tools": false,
+      "role_prompt": true,
+      "label": "MEMORY_ONLY"
+    },
+    {
+      "id": "A3",
+      "memory": false,
+      "adapter": true,
+      "tools": false,
+      "role_prompt": true,
+      "label": "ADAPTER_ONLY"
+    },
+    {
+      "id": "A4",
+      "memory": false,
+      "adapter": false,
+      "tools": true,
+      "role_prompt": true,
+      "label": "TOOLS_ONLY"
+    },
+    {
+      "id": "A5",
+      "memory": true,
+      "adapter": true,
+      "tools": false,
+      "role_prompt": true,
+      "label": "MEMORY_PLUS_ADAPTER"
+    },
+    {
+      "id": "A6",
+      "memory": true,
+      "adapter": false,
+      "tools": true,
+      "role_prompt": true,
+      "label": "MEMORY_PLUS_TOOLS"
+    },
+    {
+      "id": "A7",
+      "memory": false,
+      "adapter": true,
+      "tools": true,
+      "role_prompt": true,
+      "label": "ADAPTER_PLUS_TOOLS"
+    },
+    {
+      "id": "A8",
+      "memory": true,
+      "adapter": true,
+      "tools": true,
+      "role_prompt": true,
+      "label": "FULL_SPECIALIST"
+    }
+  ],
+  "controls": {
+    "same_model_revision": true,
+    "same_cold_taskset": true,
+    "same_generation_parameters": true,
+    "no_cross_condition_output_sharing": true,
+    "raw_output_hash_required": true
+  },
+  "analysis": [
+    "compare A8 vs A0 total gain",
+    "estimate marginal memory contribution",
+    "estimate marginal adapter contribution",
+    "estimate marginal tools contribution",
+    "test interactions",
+    "flag regressions and critical penalties"
+  ],
+  "promotion_rule": "No specialist promotion unless A8 beats A0 on cold role tasks and novel transfer, with at least one causal component supported by ablation.",
+  "anti_leakage": "Any task exposure before freeze invalidates that taskset for transfer.",
+  "authority": "AFAH"
+}
