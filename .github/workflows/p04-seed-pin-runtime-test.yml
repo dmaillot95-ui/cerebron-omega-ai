@@ -1,0 +1,44 @@
+name: P04 Seed Pin Runtime Test
+on:
+  push:
+    paths:
+      - '.github/workflows/p04-seed-pin-runtime-test.yml'
+      - 'config/p04-seed-pin-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pin-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - model: Qwen/Qwen3-4B
+            revision: 1cfa9a7
+          - model: Qwen/Qwen3-4B-Base
+            revision: 906bfd4
+          - model: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a
+          - model: HuggingFaceTB/SmolLM3-3B-Base
+            revision: d78a42f
+    steps:
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Resolve pinned revision without downloading weights
+        env:
+          MODEL_ID: ${{ matrix.model }}
+          REVISION: ${{ matrix.revision }}
+        run: |
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi, hf_hub_download
+          m=os.environ["MODEL_ID"]; r=os.environ["REVISION"]
+          info=HfApi().model_info(m, revision=r)
+          assert info.sha and info.sha.startswith(r)
+          f=hf_hub_download(repo_id=m,filename="config.json",revision=r)
+          assert os.path.getsize(f)>0
+          print("MODEL="+m)
+          print("RESOLVED_SHA="+info.sha)
+          print("PIN_RESOLVE=PASS")
+          print("CONFIG_LOAD=PASS")
+          PY
