@@ -1,0 +1,61 @@
+{
+  "schema": "cerebron-c01-p07-specialist-skill-bank-v1",
+  "status": "EMPTY_PRE_VALIDATION",
+  "colony_id": "C01-SIGMA",
+  "purpose": "Catalog only specialist capabilities that survive evidence gates; never equate stored memory or training completion with a validated skill.",
+  "skills": [],
+  "entry_required": [
+    "skill_id",
+    "agent_id",
+    "generation",
+    "role",
+    "capability_statement",
+    "parent_g0",
+    "training_receipt",
+    "cold_benchmark_ref",
+    "ablation_ref",
+    "transfer_ref",
+    "audit_ref",
+    "red_team_ref",
+    "reproduction_ref",
+    "measured_gain",
+    "dependency_fingerprint",
+    "validation_status"
+  ],
+  "validation_status": [
+    "CANDIDATE",
+    "VALIDATED",
+    "REGRESSED",
+    "REVOKED"
+  ],
+  "admission_gate": [
+    "training receipt integrity PASS",
+    "cold benchmark complete",
+    "A8 beats A0 on target capability",
+    "novel transfer gain > 0",
+    "no critical failure regression",
+    "audit PASS",
+    "red team PASS",
+    "reproduction PASS"
+  ],
+  "revocation_triggers": [
+    "benchmark regression",
+    "new counterexample invalidates capability claim",
+    "provenance failure",
+    "artifact integrity failure",
+    "dependency misclassification",
+    "privacy violation"
+  ],
+  "rules": [
+    "Skill claim scope must match tested domain",
+    "No general intelligence claim from narrow skill gain",
+    "Each validated skill retains its exact evidence chain",
+    "Regression never deletes history; mark REGRESSED or REVOKED",
+    "Cross-colony reuse requires separate transfer validation"
+  ],
+  "storage": {
+    "catalog": "GitHub non-sensitive metadata",
+    "private_artifacts": "HF private"
+  },
+  "authority": "AFAH"
+}
