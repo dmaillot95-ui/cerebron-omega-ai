@@ -1,0 +1,24 @@
+{
+  "schema": "cerebron-wave-memory-status-v1",
+  "wave": 1,
+  "status": "HF_PRIVATE_MEMORY_GATE_PASS",
+  "colonies": [
+    {
+      "id": "C03-SIGMA",
+      "hf_private_write": "PASS",
+      "hf_private_read": "PASS",
+      "sha256_integrity": "PASS",
+      "model_binding": "PENDING"
+    },
+    {
+      "id": "C12-ARGUS",
+      "hf_private_write": "PASS",
+      "hf_private_read": "PASS",
+      "sha256_integrity": "PASS",
+      "model_binding": "PENDING"
+    }
+  ],
+  "evidence": "receipts/colonies/wave01-hf-memory-gate.json",
+  "next_gate": "REAL_MODEL_BINDING_AND_ROLE_BENCHMARK",
+  "claim_limit": "Memory connectivity PASS does not mean colony ACTIVE or model qualified."
+}
