@@ -1,0 +1,8 @@
+{
+  "schema": "p04-pin-receipt-v1",
+  "model": "HuggingFaceTB/SmolLM3-3B-Base",
+  "requested_revision": "d78a42f",
+  "resolved_sha": "d78a42f79198603e614095753484a04c10c2b940",
+  "pin_resolve": "PASS",
+  "config_load": "PASS"
+}\n
