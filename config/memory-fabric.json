@@ -1,0 +1,74 @@
+{
+  "schema": "cerebron-memory-fabric-v1",
+  "version": "1.0",
+  "status": "DESIGNED_NOT_RUNTIME_VALIDATED",
+  "authority": "AFAH",
+  "roles": {
+    "F66": {
+      "repo": "cerebron-farm-66-knowledge-graph-vector-index",
+      "role": "RELATION_INDEX",
+      "registry_status": "SCAFFOLDED"
+    },
+    "F74": {
+      "repo": "cerebron-farm-74-session-memory-encyclopedia",
+      "role": "VALIDATED_MEMORY_CATALOG",
+      "registry_status": "PLANNED"
+    }
+  },
+  "tiers": {
+    "working": {
+      "scope": "per-colony",
+      "persistence": "EPHEMERAL",
+      "contents": [
+        "task context",
+        "intermediate results",
+        "runtime cache"
+      ]
+    },
+    "validated": {
+      "scope": "CEREBRON",
+      "persistence": "VERSIONED",
+      "contents": [
+        "validated lessons",
+        "provenance",
+        "evidence links",
+        "checkpoint references"
+      ],
+      "catalog": "F74",
+      "index": "F66"
+    },
+    "parametric": {
+      "scope": "seed-lineage",
+      "persistence": "EXTERNAL_PRIVATE",
+      "contents": [
+        "weights",
+        "LoRA/adapters"
+      ],
+      "store": "HUGGING_FACE_PRIVATE_WHEN_AUTHENTICATED"
+    }
+  },
+  "colony_memory_namespace": {
+    "pattern": "colony/{colony_id}/memory/{memory_id}",
+    "count_target": 62,
+    "provisioning": "LAZY_ON_FIRST_VALIDATED_WRITE"
+  },
+  "write_gate": [
+    "PROVENANCE_PRESENT",
+    "EVIDENCE_STATUS_SET",
+    "AUDIT_STATUS_SET",
+    "NO_SECRET",
+    "NO_LARGE_WEIGHTS",
+    "VERSION_EXPECTED"
+  ],
+  "read_route": "COLONY -> F66 INDEX -> F74 VALIDATED RECORD -> EVIDENCE/ARTIFACT REFERENCE",
+  "promotion": "WORKING -> AUDIT -> VALIDATED -> F74 + F66 INDEX",
+  "rollback": "APPEND_NEW_VERSION_AND_RETAIN_PRIOR_PROVENANCE",
+  "current_truth": {
+    "F66_runtime_verified": false,
+    "F74_runtime_verified": false,
+    "colony_memory_runtime_verified": false,
+    "public_hf_verified": true,
+    "private_hf_verified": false
+  },
+  "next_gate": "BOOTSTRAP_F74_AND_F66_RUNTIME_THEN_WRITE_READ_RECALL_TEST"
+}
