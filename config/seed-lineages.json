@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-seed-lineage-registry-v1",
   "version": "1.0",
-  "status": "DESIGNED_EMPTY",
+  "status": "DISCOVERY_STARTED",
   "authority": "AFAH",
   "purpose": "Genealogical registry linking base models, trainable adapters/weights, validated memory and colony learning without storing large weights in Git.",
   "storage": {
@@ -126,5 +126,84 @@
     "publication": "DENY_BY_DEFAULT_REQUIRES_EXPLICIT_AFAH_APPROVAL",
     "secrets": "NEVER_COMMIT_TOKENS_OR_PRIVATE_CREDENTIALS",
     "current_private_store_status": "NOT_CONNECTED_NO_AUTHENTICATED_PROVIDER_VERIFIED"
+  },
+  "candidate_seeds": [
+    {
+      "seed_id": "G0-QWEN3-4B",
+      "model_id": "Qwen/Qwen3-4B",
+      "family": "Qwen3",
+      "parameters": "4B",
+      "license": "Apache-2.0",
+      "source_status": "PUBLIC_VERIFIED",
+      "intended_evaluation": [
+        "general_reasoning",
+        "math_reasoning",
+        "C01-SIGMA"
+      ],
+      "binding_status": "CANDIDATE_NOT_BOUND",
+      "evidence_url": "https://huggingface.co/Qwen/Qwen3-4B",
+      "notes": "Official HF model page verified; benchmark before binding."
+    },
+    {
+      "seed_id": "G0-QWEN3-4B-BASE",
+      "model_id": "Qwen/Qwen3-4B-Base",
+      "family": "Qwen3",
+      "parameters": "4B",
+      "license": "Apache-2.0",
+      "source_status": "PUBLIC_VERIFIED",
+      "intended_evaluation": [
+        "base_training_seed",
+        "adapter_training"
+      ],
+      "binding_status": "CANDIDATE_NOT_BOUND",
+      "evidence_url": "https://huggingface.co/Qwen/Qwen3-4B-Base",
+      "notes": "Base model candidate; never promote without cold benchmark/audit."
+    },
+    {
+      "seed_id": "G0-SMOLLM3-3B",
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "family": "SmolLM3",
+      "parameters": "3B",
+      "license": "Apache-2.0",
+      "source_status": "PUBLIC_VERIFIED",
+      "intended_evaluation": [
+        "compact_reasoning",
+        "multilingual",
+        "C01-SIGMA"
+      ],
+      "binding_status": "CANDIDATE_NOT_BOUND",
+      "evidence_url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "notes": "Official HF model; benchmark as independent family candidate."
+    },
+    {
+      "seed_id": "G0-SMOLLM3-3B-BASE",
+      "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+      "family": "SmolLM3",
+      "parameters": "3B",
+      "license": "Apache-2.0",
+      "source_status": "PUBLIC_VERIFIED",
+      "intended_evaluation": [
+        "base_training_seed",
+        "adapter_training"
+      ],
+      "binding_status": "CANDIDATE_NOT_BOUND",
+      "evidence_url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B-Base",
+      "notes": "Base candidate; current HF page reports no deployed inference provider."
+    }
+  ],
+  "selection_policy": {
+    "rule": "NO_BINDING_BY_POPULARITY",
+    "required_before_binding": [
+      "PIN_IMMUTABLE_REVISION",
+      "LICENSE_CHECK",
+      "BASELINE",
+      "COLD_BENCHMARK",
+      "AUDIT",
+      "RED_TEAM",
+      "ABLATION",
+      "TRANSFER"
+    ],
+    "first_target": "C01-SIGMA",
+    "diversity_rule": "Prefer genuinely different model families/lineages when independence matters."
   }
 }
