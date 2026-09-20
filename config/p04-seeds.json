@@ -28,11 +28,26 @@
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B",
-      "state": "CANDIDATE"
+      "state": "CANDIDATE",
+      "license": "Apache-2.0",
+      "parameters": "3B",
+      "architecture": "decoder-only transformer; GQA; NoPE",
+      "layers": 36,
+      "context_config": 65536,
+      "long_context_note": "model card documents YaRN extension beyond native config",
+      "revision_status": "REVISION_PIN_PENDING",
+      "source": "official_huggingface"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B-Base",
-      "state": "CANDIDATE"
+      "state": "CANDIDATE",
+      "license": "Apache-2.0",
+      "parameters": "3B",
+      "architecture": "decoder-only transformer; GQA; NoPE",
+      "context_config": 65536,
+      "inference_provider_status_observed": "NO_DEPLOYED_PROVIDER_AT_DISCOVERY",
+      "revision_status": "REVISION_PIN_PENDING",
+      "source": "official_huggingface"
     }
   ],
   "gates": [
