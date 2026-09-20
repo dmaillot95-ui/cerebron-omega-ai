@@ -1,0 +1,39 @@
+{
+  "schema": "cerebron-p05-state-v1",
+  "phase": "P05_C01_BENCHMARK_HARNESS",
+  "status": "ACTIVE",
+  "frozen_assets": {
+    "taskset": "PASS",
+    "execution_protocol": "PASS",
+    "scoring_rubric": "PASS",
+    "audit_protocol": "PASS",
+    "decision_gates": "PASS",
+    "result_schema": "PASS",
+    "run_manifest": "PASS"
+  },
+  "runtime_evidence": {
+    "github_runner_resource_probe": "PASS",
+    "smollm3_3b_runtime_canary": "PASS",
+    "smollm3_3b_t04_cold": "AWAITING_RECEIPT",
+    "qwen3_4b": "NOT_EXECUTED",
+    "qwen3_4b_base": "NOT_EXECUTED",
+    "smollm3_3b_base": "NOT_EXECUTED"
+  },
+  "blockers": [
+    "Cold T04 receipt absent",
+    "Three candidate runtime canaries not executed"
+  ],
+  "safe_parallel_work_complete": [
+    "benchmark frozen before results",
+    "blind scoring frozen",
+    "red-team/reproduction protocol frozen",
+    "28-run manifest frozen"
+  ],
+  "next_actions": [
+    "Do not alter frozen benchmark v1",
+    "When T04 receipt appears verify raw hash and arithmetic",
+    "Then authorize SmolLM3 seven-task run",
+    "Qualify remaining three runtimes sequentially"
+  ],
+  "claim_rule": "ACTIVE is not PASS; designed assets are not execution evidence."
+}
