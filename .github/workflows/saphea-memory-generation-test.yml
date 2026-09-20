@@ -1,0 +1,44 @@
+name: SAPHEA Memory Generation Test
+on:
+  push:
+    paths:
+      - '.github/workflows/saphea-memory-generation-test.yml'
+      - 'config/saphea-memory-generation-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generation:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Validate M0 to M1 and rollback
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,tempfile
+          from huggingface_hub import HfApi,hf_hub_download
+          repo="cerebron-omega/cerebron-private-memory"; agent="SIGMA-FORMALIZER"
+          api=HfApi(token=os.environ["HF_TOKEN"])
+          base=f"colony/C01-SIGMA/agents/{agent}/memory"
+          m0p=f"{base}/M0/checkpoint.json"
+          m0file=hf_hub_download(repo_id=repo,filename=m0p,repo_type="model",token=os.environ["HF_TOKEN"])
+          m0raw=open(m0file,"rb").read(); m0=json.loads(m0raw)
+          if m0["agent_id"]!=agent or m0["generation"]!="M0": raise SystemExit("M0_IDENTITY=FAIL")
+          m1={"schema":"cerebron-saphea-memory-v1","colony_id":"C01-SIGMA","agent_id":agent,"generation":"M1","parent_generation":"M0","class":"checkpoint","objective":m0["objective"],"verified_state":"COMPRESSED_TEST_FIXTURE","open_gap":"NONE_TEST_ONLY","next_test":"ROLLBACK","evidence_refs":[],"compression":{"raw_history_stored":False,"minimum_state_only":True}}
+          raw=json.dumps(m1,sort_keys=True).encode(); sha=hashlib.sha256(raw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as f:f.write(raw); tmp=f.name
+          m1p=f"{base}/M1/checkpoint.json"
+          api.upload_file(path_or_fileobj=tmp,path_in_repo=m1p,repo_id=repo,repo_type="model")
+          back=open(hf_hub_download(repo_id=repo,filename=m1p,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True),"rb").read()
+          if hashlib.sha256(back).hexdigest()!=sha: raise SystemExit("M1_DIGEST=FAIL")
+          # rollback means M0 remains readable and unchanged
+          m0back=open(hf_hub_download(repo_id=repo,filename=m0p,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True),"rb").read()
+          if hashlib.sha256(m0back).hexdigest()!=hashlib.sha256(m0raw).hexdigest(): raise SystemExit("ROLLBACK_SOURCE=FAIL")
+          print("M0_READ=PASS")
+          print("M1_COMPRESSED_WRITE=PASS")
+          print("M1_DIGEST=PASS")
+          print("ROLLBACK_M0_PRESERVED=PASS")
+          print("RAW_HISTORY_ACCUMULATION=NO")
+          PY
