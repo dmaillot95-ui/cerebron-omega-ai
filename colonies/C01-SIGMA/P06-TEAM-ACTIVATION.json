@@ -1,0 +1,93 @@
+{
+  "schema": "cerebron-c01-p06-team-activation-v1",
+  "status": "DESIGNED_NOT_ACTIVATED",
+  "colony_id": "C01-SIGMA",
+  "max_agents": 10,
+  "prerequisites": {
+    "P03_unified_memory_recall": "PASS_REQUIRED",
+    "P04_candidate_runtime": "PASS_REQUIRED_PER_BOUND_MODEL",
+    "P05_G1_G5": "PASS_REQUIRED_BEFORE_QUALIFIED_G0_BINDING"
+  },
+  "slots": [
+    {
+      "agent_id": "SIGMA-CHIEF",
+      "role": "coordination",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-FORMALIZER",
+      "role": "formalization",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-A",
+      "role": "independent_proof_A",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-B",
+      "role": "independent_proof_B",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-COMPUTE",
+      "role": "checkable_computation",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-COUNTEREX",
+      "role": "counterexample_attack",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-AUDITOR",
+      "role": "audit",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-REPRODUCER",
+      "role": "clean_reproduction",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-EVIDENCE",
+      "role": "evidence_provenance",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-SYNTH",
+      "role": "synthesis",
+      "model_binding": null,
+      "state": "UNASSIGNED"
+    }
+  ],
+  "independence_rules": [
+    "Different slot names do not imply independent evidence",
+    "Shared model+prompt+data lineage must be dependency-tagged",
+    "PROVER-A and PROVER-B require materially independent derivations to count as two proof lines",
+    "AUDITOR cannot certify its own privilege or promotion",
+    "REPRODUCER receives minimum clean packet"
+  ],
+  "activation_sequence": [
+    "QUALIFY_G0",
+    "BIND_EXPERIMENTAL",
+    "BASELINE",
+    "ROLE_SPECIALIZATION",
+    "COLD_ABLATION",
+    "TRANSFER",
+    "AUDIT",
+    "RED_TEAM",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "failure_rule": "Any missing evidence => HOLD; infrastructure failure != model rejection",
+  "authority": "AFAH"
+}
