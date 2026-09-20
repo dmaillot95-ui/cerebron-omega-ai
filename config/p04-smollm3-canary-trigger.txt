@@ -1,0 +1,2 @@
+trigger=2
+purpose=smollm3-3b-exact-revision-runtime-canary
