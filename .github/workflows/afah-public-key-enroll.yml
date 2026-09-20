@@ -1,0 +1,43 @@
+name: AFAH Public Key Enrollment
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  enroll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Derive public key without exposing private key
+        shell: bash
+        env:
+          AFAH_SIGNING_PRIVATE_KEY: ${{ secrets.AFAH_SIGNING_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$AFAH_SIGNING_PRIVATE_KEY" || { echo "BLOCK: secret absent"; exit 1; }
+          umask 077
+          printf '%s' "$AFAH_SIGNING_PRIVATE_KEY" > /tmp/afah-private.pem
+          mkdir -p security/keys
+          if ! openssl pkey -in /tmp/afah-private.pem -pubout -out security/keys/afah-signing-public.pem 2>/dev/null; then
+            echo "BLOCK: secret is not a supported PEM private key"
+            rm -f /tmp/afah-private.pem
+            exit 1
+          fi
+          rm -f /tmp/afah-private.pem
+          openssl pkey -pubin -in security/keys/afah-signing-public.pem -outform DER 2>/dev/null | sha256sum | awk '{print $1}' > security/keys/afah-signing-public.sha256
+          echo "Public key derived; private key was not printed or persisted."
+
+      - name: Commit public material only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "guardian-omega"
+          git config user.email "guardian-omega@users.noreply.github.com"
+          git add security/keys/afah-signing-public.pem security/keys/afah-signing-public.sha256
+          git diff --cached --quiet && { echo "No public-key change."; exit 0; }
+          git commit -m "GUARDIAN: enroll AFAH public verification key"
+          git push
