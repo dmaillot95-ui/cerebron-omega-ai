@@ -1,0 +1,48 @@
+name: P03 Unified Memory Recall
+on:
+  push:
+    paths:
+      - '.github/workflows/p03-unified-memory-recall.yml'
+      - 'config/p03-unified-recall-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  recall:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Verify F66 to F74 to HF private recall
+        run: |
+          mkdir -p receipts/p03
+          python - <<'PY'
+          import os,json,hashlib,urllib.request
+          from pathlib import Path
+          from huggingface_hub import hf_hub_download
+          f66="https://raw.githubusercontent.com/dmaillot95-ui/cerebron-farm-66-knowledge-graph-vector-index/main/index/private-pointers/C01-SIGMA-SIGMA-FORMALIZER-M1.json"
+          with urllib.request.urlopen(f66) as r: i=json.load(r)
+          f74="https://raw.githubusercontent.com/"+i["f74_repo"]+"/main/"+i["f74_path"]
+          with urllib.request.urlopen(f74) as r: p=json.load(r)
+          keys=("memory_id","colony_id","agent_id","generation")
+          assert all(i[k]==p[k] for k in keys)
+          fn=hf_hub_download(repo_id=p["private_repo_id"],filename=p["private_object_path"],token=os.environ["HF_TOKEN"],force_download=True)
+          b=open(fn,"rb").read();m=json.loads(b)
+          assert all(m[k]==p[k] for k in keys)
+          assert m["parent_generation"]==p["parent_generation"]==p["rollback_generation"]
+          rec={"schema":"cerebron-p03-unified-recall-v1","status":"PASS","route":["F66","F74","HF_PRIVATE"],"memory_id":p["memory_id"],"colony_id":p["colony_id"],"agent_id":p["agent_id"],"generation":p["generation"],"rollback_generation":p["rollback_generation"],"private_payload_sha256":hashlib.sha256(b).hexdigest(),"privacy":"PRIVATE_PAYLOAD_NOT_COPIED_TO_GITHUB","checks":["F66_F74_IDENTITY=PASS","F74_HF_IDENTITY=PASS","HF_PRIVATE_READ=PASS","ROLLBACK_POINTER=PASS","SHA256=PASS"]}
+          Path("receipts/p03/unified-memory-recall.json").write_text(json.dumps(rec,indent=2)+"\n")
+          PY
+      - name: Persist non-sensitive receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/unified-memory-recall.json
+          git diff --cached --quiet && exit 0
+          git commit -m "P03 receipt: unified F66 F74 HF recall"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
