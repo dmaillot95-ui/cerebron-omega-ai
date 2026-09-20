@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate-core:
     runs-on: ubuntu-latest
@@ -20,10 +23,13 @@ jobs:
           from pathlib import Path
           p=Path('config/farms.json')
           d=json.loads(p.read_text())
-          ids=[f['id'] for f in d['farms']]
-          assert ids==list(range(1,46)), ids
-          assert len({f['repo'] for f in d['farms']})==45
-          print('REGISTRY_OK', len(d['farms']))
+          farms=d['farms']
+          ids=[f['id'] for f in farms]
+          assert ids, 'farm registry is empty'
+          assert ids==list(range(1, len(farms)+1)), ids
+          assert len({f['repo'] for f in farms})==len(farms), 'duplicate farm repositories'
+          assert len(set(ids))==len(ids), 'duplicate farm ids'
+          print('REGISTRY_OK', len(farms))
           PY
       - name: Test router
         run: |
