@@ -1,0 +1,79 @@
+{
+  "schema": "cerebron-colony-seed-farm-link-policy-v1",
+  "status": "MANDATORY",
+  "principle": "Every colony must retain a permanent traceable link to one or more seed farms. A colony never replaces its seed farm; it specializes and learns above it.",
+  "required_link_fields": [
+    "colony_id",
+    "seed_farm_id",
+    "seed_farm_repo",
+    "relationship",
+    "capability_source",
+    "dependency_fingerprint",
+    "validation_status",
+    "last_verified_commit"
+  ],
+  "relationship": [
+    "PRIMARY_SEED",
+    "SECONDARY_SEED",
+    "AUDIT_SEED",
+    "TRANSFER_SEED"
+  ],
+  "runtime_chain": [
+    "SEED_FARM",
+    "COLONY_CHIEF",
+    "SAPHEA_TEAM",
+    "AUDIT_RED_TEAM",
+    "SAPHEIDE",
+    "AGORA",
+    "MEMORY_HF_PRIVATE"
+  ],
+  "wave01": {
+    "colonies": [
+      {
+        "colony_id": "C03-SIGMA",
+        "seed_farms": [
+          {
+            "farm_id": "F01",
+            "repo": "cerebron-collatz-theory-farm",
+            "relationship": "PRIMARY_SEED"
+          },
+          {
+            "farm_id": "F09",
+            "repo": "cerebron-farm-09-science-math",
+            "relationship": "SECONDARY_SEED"
+          }
+        ]
+      },
+      {
+        "colony_id": "C12-ARGUS",
+        "seed_farms": [
+          {
+            "farm_id": "F06",
+            "repo": "cerebron-collatz-farm-06-formal-audit",
+            "relationship": "PRIMARY_SEED"
+          },
+          {
+            "farm_id": "F34",
+            "repo": "cerebron-farm-34-formal-audit",
+            "relationship": "AUDIT_SEED"
+          }
+        ]
+      }
+    ]
+  },
+  "gates": [
+    "seed farm exists",
+    "repository identity verified",
+    "capability mapping verified",
+    "colony HF memory PASS",
+    "real model binding",
+    "role benchmark"
+  ],
+  "rules": [
+    "No ACTIVE colony without verified seed-farm link",
+    "Farm output is evidence input, not automatically validated knowledge",
+    "Same underlying evidence does not become independent by crossing farm/colony boundary",
+    "Broken seed link puts colony on HOLD until repaired"
+  ],
+  "authority": "AFAH"
+}
