@@ -1,0 +1,47 @@
+{
+  "schema": "cerebron-wave01-execution-state-v1",
+  "wave": 1,
+  "status": "PREFLIGHT_PASS_REAL_EXECUTION_PENDING",
+  "preflight": {
+    "status": "PASS",
+    "receipt": "receipts/colonies/wave01-seed-colony-preflight.json",
+    "benchmark_sha256": "797f12f5855ca594d0235fc7c6d1b90d52d85fa9483db15d03530a7651182841"
+  },
+  "routes": [
+    {
+      "farm": "F01",
+      "colony": "C03-SIGMA",
+      "state": "READY_FOR_REAL_EXECUTION"
+    },
+    {
+      "farm": "F09",
+      "colony": "C03-SIGMA",
+      "state": "READY_FOR_REAL_EXECUTION"
+    },
+    {
+      "farm": "F06",
+      "colony": "C12-ARGUS",
+      "state": "READY_FOR_REAL_EXECUTION"
+    },
+    {
+      "farm": "F34",
+      "colony": "C12-ARGUS",
+      "state": "READY_FOR_REAL_EXECUTION"
+    }
+  ],
+  "mandatory_cycle": [
+    "VERIFY_SEED_FARM",
+    "VERIFY_COLONY_ROUTE",
+    "VERIFY_HF_PRIVATE_MEMORY",
+    "EXECUTE_REAL_RESOURCE",
+    "PRESERVE_RAW_OUTPUT",
+    "AUDIT",
+    "RED_TEAM",
+    "WRITE_VALIDATED_MEMORY",
+    "READBACK_SHA",
+    "SAPHÉIDE_LESSON",
+    "AGORA_SYNTHESIS"
+  ],
+  "claim_limit": "READY does not mean EXECUTED. No capability PASS until real execution receipt exists.",
+  "next_gate": "REAL_FARM_EXECUTION"
+}
