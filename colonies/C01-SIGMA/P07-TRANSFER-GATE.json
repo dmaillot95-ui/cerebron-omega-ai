@@ -1,0 +1,35 @@
+{
+  "schema": "cerebron-c01-p07-transfer-gate-v1",
+  "status": "FROZEN_PRE_LEARNING",
+  "colony_id": "C01-SIGMA",
+  "objective": "Require specialist gains to survive on unseen tasks before any learning claim or promotion.",
+  "sets": {
+    "baseline": "C01-SIGMA-G0-TASKSET-v1",
+    "specialization_train": "PRIVATE_VERSIONED_NOT_YET_CREATED",
+    "transfer_v1": "SEALED_NOT_YET_CREATED"
+  },
+  "transfer_rules": [
+    "transfer tasks must be created and frozen before specialist training outputs are inspected",
+    "no overlap with baseline or training examples",
+    "no semantic near-duplicates intentionally derived from training items",
+    "same evaluation rubric family but novel problem instances",
+    "raw outputs immutable and SHA256 verified",
+    "identity blinded during scoring"
+  ],
+  "minimum_evidence": {
+    "cold_transfer_complete": true,
+    "full_specialist_beats_G0": true,
+    "critical_failure_regression": false,
+    "audit": "PASS",
+    "red_team": "PASS",
+    "reproduction": "PASS"
+  },
+  "outcomes": {
+    "pass": "SPECIALIST_TRANSFER_PASS",
+    "no_gain": "HOLD_NO_TRANSFER_GAIN",
+    "regression": "ROLLBACK",
+    "leakage": "INVALIDATE_TRANSFER_SET_AND_CREATE_NEW_VERSION"
+  },
+  "claim_rule": "A training-set or baseline-only gain is not evidence of generalization.",
+  "authority": "AFAH"
+}
