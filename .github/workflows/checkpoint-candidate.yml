@@ -1,0 +1,62 @@
+name: GUARDIAN Checkpoint Candidate
+on:
+  workflow_dispatch:
+    inputs:
+      source_state_id:
+        description: Source collective state ID
+        required: true
+        type: string
+      evidence_manifest_hash:
+        description: SHA-256 evidence manifest hash
+        required: true
+        type: string
+      cerebron_audit:
+        description: CEREBRON audit result
+        required: true
+        type: choice
+        options: [PASS, FAIL]
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: GUARDIAN preflight
+        shell: bash
+        env:
+          SOURCE_STATE_ID: ${{ inputs.source_state_id }}
+          EVIDENCE_HASH: ${{ inputs.evidence_manifest_hash }}
+          CEREBRON_AUDIT: ${{ inputs.cerebron_audit }}
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,pathlib,datetime,re
+          if os.environ["CEREBRON_AUDIT"]!="PASS":
+              raise SystemExit("BLOCK: CEREBRON audit is not PASS")
+          if not re.fullmatch(r"[0-9a-fA-F]{64}",os.environ["EVIDENCE_HASH"]):
+              raise SystemExit("BLOCK: evidence_manifest_hash must be SHA-256")
+          policy=pathlib.Path("security/GUARDIAN_OMEGA_POLICY.md").read_bytes()
+          policy_hash=hashlib.sha256(policy).hexdigest()
+          candidate={
+            "schema":"GUARDIAN_CHECKPOINT_CANDIDATE_V1",
+            "candidate_id":"CANDIDATE:"+os.environ["GITHUB_RUN_ID"],
+            "source_state_id":os.environ["SOURCE_STATE_ID"],
+            "candidate_commit_sha":os.environ["GITHUB_SHA"],
+            "evidence_manifest_hash":os.environ["EVIDENCE_HASH"].lower(),
+            "policy_hash":policy_hash,
+            "guardian_preflight":"PASS",
+            "cerebron_audit":"PASS",
+            "afah_approval":"PENDING",
+            "ledger_write":"FORBIDDEN_UNTIL_AFAH_APPROVAL",
+            "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "rules":["AI_CANNOT_SELF_APPROVE","AFAH_APPROVAL_REQUIRED"]
+          }
+          pathlib.Path(".guardian").mkdir(exist_ok=True)
+          pathlib.Path(".guardian/checkpoint-candidate.json").write_text(json.dumps(candidate,indent=2))
+          print(json.dumps(candidate,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: guardian-checkpoint-candidate-${{ github.run_id }}
+          path: .guardian/checkpoint-candidate.json
+          retention-days: 30
