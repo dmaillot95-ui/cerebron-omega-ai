@@ -1,0 +1,26 @@
+name: HF Private Auth Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify HF token without exposing it
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_AUTH=FAIL_MISSING_SECRET")
+          req=urllib.request.Request("https://huggingface.co/api/whoami-v2",headers={"Authorization":"Bearer "+token})
+          with urllib.request.urlopen(req,timeout=30) as r:
+              data=json.load(r)
+          name=data.get("name") or data.get("fullname") or "UNKNOWN"
+          print("HF_AUTH=PASS")
+          print("HF_ACCOUNT="+str(name))
+          print("TOKEN_EXPOSED=NO")
+          PY
