@@ -1,0 +1,46 @@
+name: Wave01 Seed-Colony Preflight
+on:
+  push:
+    paths:
+      - "config/wave01-seed-colony-trigger.txt"
+      - ".github/workflows/wave01-seed-colony-preflight.yml"
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate frozen benchmark and memory evidence
+        run: |
+          python - <<'PY'
+          import json,hashlib,os
+          b=json.load(open("benchmarks/WAVE01-SEED-TO-COLONY-BENCHMARK.json"))
+          m=json.load(open("receipts/colonies/wave01-hf-memory-gate.json"))
+          expected={"W01-SIGMA-F01","W01-SIGMA-F09","W01-ARGUS-F06","W01-ARGUS-F34"}
+          got={x["id"] for x in b["cases"]}
+          checks={
+            "benchmark_frozen": b["status"]=="FROZEN_NOT_EXECUTED",
+            "four_seed_cases": got==expected,
+            "hf_memory_gate": m["status"]=="PASS",
+            "sigma_memory": any(x["colony_id"]=="C03-SIGMA" and x["write"]=="PASS" and x["read"]=="PASS" and x["sha256"]=="PASS" for x in m["colonies"]),
+            "argus_memory": any(x["colony_id"]=="C12-ARGUS" and x["write"]=="PASS" and x["read"]=="PASS" and x["sha256"]=="PASS" for x in m["colonies"])
+          }
+          r={"schema":"wave01-seed-colony-preflight-v1","status":"PASS" if all(checks.values()) else "FAIL","checks":checks,
+             "benchmark_sha256":hashlib.sha256(open("benchmarks/WAVE01-SEED-TO-COLONY-BENCHMARK.json","rb").read()).hexdigest(),
+             "claim_limit":"Preflight validates routing prerequisites only; it does not execute or prove farm capability.",
+             "next_gate":"REAL_FARM_EXECUTION"}
+          os.makedirs("receipts/colonies",exist_ok=True)
+          open("receipts/colonies/wave01-seed-colony-preflight.json","w").write(json.dumps(r,indent=2)+"\n")
+          if r["status"]!="PASS": raise SystemExit(1)
+          PY
+      - name: Persist receipt
+        if: always()
+        run: |
+          git config user.name "cerebron-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/colonies/wave01-seed-colony-preflight.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: wave01 seed-colony preflight"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
