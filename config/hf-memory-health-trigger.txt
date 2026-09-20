@@ -1,0 +1,2 @@
+trigger=1
+scope=hf-private-memory-live-health
