@@ -1,0 +1,54 @@
+name: P04 Qwen3 4B Runtime Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/p04-qwen3-4b-runtime-canary.yml'
+      - 'config/p04-qwen3-4b-canary-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Exact revision load and inference
+        env:
+          MODEL_ID: Qwen/Qwen3-4B
+          REVISION: 1cfa9a7208912126459214e8b04321603b3df60c
+        shell: bash
+        run: |
+          mkdir -p receipts/p04
+          python - <<'PY'
+          import json,hashlib,time,os
+          from pathlib import Path
+          r={"schema":"cerebron-p04-runtime-canary-v1","model_id":os.environ["MODEL_ID"],"requested_revision_sha":os.environ["REVISION"],"runner":"github-actions/ubuntu-latest","load":"FAIL","inference":"NOT_EXECUTED"}
+          t=time.time()
+          try:
+            import torch
+            from transformers import AutoTokenizer,AutoModelForCausalLM
+            mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+            tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+            m=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+            r["load"]="PASS";r["precision"]="float32";r["device"]="cpu"
+            x=tok("Return exactly: CEREBRON_CANARY_OK",return_tensors="pt")
+            with torch.no_grad(): yy=m.generate(**x,max_new_tokens=16,do_sample=False)
+            out=tok.decode(yy[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+            r["inference"]="PASS";r["output_sha256"]=hashlib.sha256(out.encode()).hexdigest();r["output_length"]=len(out)
+          except Exception as e:
+            r["failure_class"]=type(e).__name__;r["failure_message"]=str(e)[:500]
+          r["latency_ms"]=round((time.time()-t)*1000)
+          Path("receipts/p04/qwen3-4b-runtime-canary.json").write_text(json.dumps(r,indent=2)+"\n")
+          PY
+      - name: Persist receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p04/qwen3-4b-runtime-canary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "P04 receipt: Qwen3 4B runtime canary"
+          git push
