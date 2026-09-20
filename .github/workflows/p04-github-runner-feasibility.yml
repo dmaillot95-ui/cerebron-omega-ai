@@ -1,0 +1,56 @@
+name: P04 GitHub Runner Feasibility
+on:
+  push:
+    paths:
+      - '.github/workflows/p04-github-runner-feasibility.yml'
+      - 'config/p04-runner-feasibility-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Probe runner resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p receipts/p04
+          MEM_KB=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+          MEM_MB=$((MEM_KB/1024))
+          DISK_KB=$(df -Pk . | awk 'NR==2 {print $4}')
+          DISK_MB=$((DISK_KB/1024))
+          CPUS=$(getconf _NPROCESSORS_ONLN)
+          python - <<'PY'
+          import json,os,platform
+          p="receipts/p04/github-runner-feasibility.json"
+          d={"schema":"cerebron-p04-runner-feasibility-v1","status":"RESOURCE_PROBE_ONLY","runner":"ubuntu-latest","cpu_count":int(os.environ["CPUS"]),"mem_total_mb":int(os.environ["MEM_MB"]),"disk_free_mb":int(os.environ["DISK_MB"]),"python":platform.python_version(),"machine":platform.machine(),"model_load":"NOT_EXECUTED","inference":"NOT_EXECUTED","rule":"Resource probe is not model runtime proof."}
+          open(p,"w").write(json.dumps(d,indent=2)+"\n")
+          PY
+        env:
+          CPUS: ${{ env.CPUS }}
+          MEM_MB: ${{ env.MEM_MB }}
+          DISK_MB: ${{ env.DISK_MB }}
+      - name: Rebuild receipt with shell values
+        shell: bash
+        run: |
+          MEM_KB=$(awk '/MemTotal/ {print $2}' /proc/meminfo); export MEM_MB=$((MEM_KB/1024))
+          DISK_KB=$(df -Pk . | awk 'NR==2 {print $4}'); export DISK_MB=$((DISK_KB/1024))
+          export CPUS=$(getconf _NPROCESSORS_ONLN)
+          python - <<'PY'
+          import json,os,platform
+          d={"schema":"cerebron-p04-runner-feasibility-v1","status":"RESOURCE_PROBE_PASS","runner":"ubuntu-latest","cpu_count":int(os.environ["CPUS"]),"mem_total_mb":int(os.environ["MEM_MB"]),"disk_free_mb":int(os.environ["DISK_MB"]),"python":platform.python_version(),"machine":platform.machine(),"model_load":"NOT_EXECUTED","inference":"NOT_EXECUTED","rule":"Resource probe is not model runtime proof."}
+          open("receipts/p04/github-runner-feasibility.json","w").write(json.dumps(d,indent=2)+"\n")
+          PY
+      - name: Persist non-sensitive receipt
+        shell: bash
+        run: |
+          git config user.name "cerebron-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/p04/github-runner-feasibility.json
+          git diff --cached --quiet && exit 0
+          git commit -m "P04 receipt: GitHub runner resource probe"
+          git push
