@@ -1,0 +1,59 @@
+{
+  "schema": "cerebron-c01-p07-learning-loop-v1",
+  "status": "DESIGNED_BLOCKED_BY_P06",
+  "colony_id": "C01-SIGMA",
+  "objective": "Permit learning only when a measured specialist gain survives cold ablation, transfer, audit and rollback.",
+  "cycle": [
+    "FREEZE_G0_BASELINE",
+    "SELECT_SINGLE_ROLE_SKILL",
+    "BUILD_MINIMAL_TRAINING_SET",
+    "PROVENANCE_AND_LICENSE_GATE",
+    "TRAIN_ADAPTER_OR_UPDATE_MEMORY",
+    "STORE_PRIVATE_ARTIFACT",
+    "COLD_ROLE_BENCHMARK",
+    "ABLATE_MEMORY_ADAPTER_TOOLS",
+    "NOVEL_TRANSFER_SET",
+    "RED_TEAM",
+    "CLEAN_REPRODUCTION",
+    "COMPARE_TO_G0",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "promotion_metrics": {
+    "required": [
+      "role_task_gain>0",
+      "no critical penalty increase",
+      "transfer_gain>0",
+      "integrity PASS",
+      "audit PASS",
+      "red_team PASS",
+      "reproduction PASS"
+    ],
+    "not_sufficient": [
+      "training loss decreases",
+      "self-evaluation improves",
+      "same benchmark memorization",
+      "more tokens",
+      "agent consensus"
+    ]
+  },
+  "memory_vs_learning": {
+    "working_memory": "context only",
+    "validated_memory": "recalled knowledge with provenance",
+    "parametric_learning": "adapter/weights; requires benchmark evidence",
+    "rule": "MEMORY != LEARNING"
+  },
+  "artifact_policy": {
+    "weights": "HF_PRIVATE_ONLY",
+    "github": "metadata + hashes + opaque pointers only",
+    "publication": "DENY unless explicit AFAH authorization"
+  },
+  "generation_policy": {
+    "format": "G{n}",
+    "parent_required": true,
+    "rollback_required": true,
+    "no_overwrite": true
+  },
+  "current_generation": "G0_UNSPECIALIZED",
+  "next_gate": "P06 first real EXPERIMENTAL_BOUND SAPHEA plus frozen G0 baseline",
+  "authority": "AFAH"
+}
