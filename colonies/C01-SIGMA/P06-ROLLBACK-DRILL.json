@@ -1,0 +1,35 @@
+{
+  "schema": "cerebron-c01-p06-rollback-drill-v1",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "colony_id": "C01-SIGMA",
+  "objective": "Prove a SAPHEA can revert to the last validated binding and memory generation without deleting failed evidence.",
+  "preconditions": [
+    "at least one EXPERIMENTAL_BOUND agent",
+    "validated predecessor binding or explicit UNBOUND baseline",
+    "memory generation with parent pointer"
+  ],
+  "drill": [
+    "SNAPSHOT_CURRENT_BINDING_POINTERS",
+    "INJECT_SYNTHETIC_NON_SENSITIVE_FAILURE_FLAG",
+    "BLOCK_PROMOTION",
+    "SELECT_LAST_VALIDATED_BINDING",
+    "SELECT_PARENT_MEMORY_GENERATION",
+    "RESTORE_POINTERS_ONLY",
+    "VERIFY_MODEL_REVISION",
+    "VERIFY_MEMORY_IDENTITY_AND_DIGEST",
+    "VERIFY_FAILED_EXECUTION_REMAINS_IN_LEDGER",
+    "AUDIT_ROLLBACK",
+    "CLEAR_SYNTHETIC_FLAG"
+  ],
+  "pass_requires": [
+    "promotion blocked during fault",
+    "prior binding restored exactly",
+    "parent memory generation recalled and verified",
+    "failed evidence retained append-only",
+    "audit PASS",
+    "no private payload copied to public GitHub"
+  ],
+  "failure_action": "HOLD_AND_NO_ACTIVATION",
+  "scope": "Synthetic control-plane drill only; never corrupt real private memory or weights.",
+  "authority": "AFAH"
+}
