@@ -1,0 +1,58 @@
+name: Colony HF Memory Gate
+on:
+  push:
+    paths:
+      - "config/colony-hf-memory-trigger.txt"
+      - ".github/workflows/colony-hf-memory-gate.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip -q install huggingface_hub
+      - name: Verify private HF memory route for first colony pair
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,datetime
+          from huggingface_hub import HfApi,hf_hub_download
+          repo="cerebron-omega/cerebron-private-memory"
+          colonies=["C03-SIGMA","C12-ARGUS"]
+          receipt={"schema":"colony-hf-memory-gate-v1","checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"repo":repo,"colonies":[],"status":"PASS"}
+          api=HfApi(token=os.environ["HF_TOKEN"])
+          try:
+            info=api.repo_info(repo_id=repo,repo_type="model")
+            if not getattr(info,"private",False): raise RuntimeError("HF repository is not private")
+            for c in colonies:
+              payload={"colony_id":c,"kind":"CONNECTIVITY_FIXTURE","private":True}
+              raw=(json.dumps(payload,sort_keys=True)+"\n").encode()
+              local=f"/tmp/{c}.json"; open(local,"wb").write(raw)
+              remote=f"colony/{c}/health/connectivity.json"
+              api.upload_file(path_or_fileobj=local,path_in_repo=remote,repo_id=repo,repo_type="model")
+              got=hf_hub_download(repo_id=repo,filename=remote,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True)
+              b=open(got,"rb").read()
+              receipt["colonies"].append({"colony_id":c,"write":"PASS","read":"PASS","sha256":"PASS" if hashlib.sha256(b).hexdigest()==hashlib.sha256(raw).hexdigest() else "FAIL"})
+            if any(x["sha256"]!="PASS" for x in receipt["colonies"]): receipt["status"]="FAIL"
+          except Exception as e:
+            receipt["status"]="FAIL"; receipt["error_class"]=type(e).__name__
+          os.makedirs("receipts/colonies",exist_ok=True)
+          open("receipts/colonies/wave01-hf-memory-gate.json","w").write(json.dumps(receipt,indent=2)+"\n")
+          if receipt["status"]!="PASS": raise SystemExit(1)
+          PY
+      - name: Persist non-sensitive receipt
+        if: always()
+        run: |
+          git config user.name "cerebron-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/colonies/wave01-hf-memory-gate.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: wave01 colony HF memory gate"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
