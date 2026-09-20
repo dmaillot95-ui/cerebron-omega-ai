@@ -1,0 +1,37 @@
+{
+  "schema": "p04-seeds-v1",
+  "phase": "P04",
+  "status": "PREPARED",
+  "target": "C01-SIGMA",
+  "candidates": [
+    {
+      "id": "Qwen/Qwen3-4B",
+      "state": "CANDIDATE"
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Base",
+      "state": "CANDIDATE"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B",
+      "state": "CANDIDATE"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B-Base",
+      "state": "CANDIDATE"
+    }
+  ],
+  "gates": [
+    "PIN_REVISION",
+    "LICENSE",
+    "RUNTIME",
+    "BASELINE",
+    "COLD_BENCHMARK",
+    "AUDIT",
+    "RED_TEAM",
+    "ABLATION",
+    "TRANSFER",
+    "BIND_OR_REJECT"
+  ],
+  "rule": "No candidate becomes a SAPHEA binding before all required gates pass."
+}
