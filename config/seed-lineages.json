@@ -89,6 +89,7 @@
     "RUN",
     "VALIDATE_MEMORY",
     "TRAIN_ADAPTER_IF_JUSTIFIED",
+    "STORE_DERIVED_ARTIFACT_PRIVATE",
     "COLD_BENCHMARK",
     "AUDIT",
     "RED_TEAM",
@@ -111,5 +112,19 @@
     "note": "20 is an orchestration ceiling, not a guarantee that an external free service accepts 20 concurrent requests."
   },
   "seeds": [],
-  "next_gate": "PUBLIC_HF_CONNECTIVITY_PASS_THEN_DISCOVER_REAL_BASE_MODELS"
+  "next_gate": "PUBLIC_HF_CONNECTIVITY_PASS_THEN_DISCOVER_REAL_BASE_MODELS",
+  "privacy_policy": {
+    "default_visibility": "PRIVATE",
+    "applies_to": [
+      "CEREBRON-trained weights",
+      "LoRA/adapters",
+      "derived seed generations G1+"
+    ],
+    "public_base_models": "MAY_BE_REFERENCED_AND_READ_IF_LICENSE_PERMITS",
+    "private_access": "MODEL_GATEWAY_AUTHENTICATED_ONLY",
+    "access_principle": "LEAST_PRIVILEGE",
+    "publication": "DENY_BY_DEFAULT_REQUIRES_EXPLICIT_AFAH_APPROVAL",
+    "secrets": "NEVER_COMMIT_TOKENS_OR_PRIVATE_CREDENTIALS",
+    "current_private_store_status": "NOT_CONNECTED_NO_AUTHENTICATED_PROVIDER_VERIFIED"
+  }
 }
