@@ -6,7 +6,7 @@ on:
       - 'config/p04-seed-pin-trigger.txt'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   pin-test:
     runs-on: ubuntu-latest
@@ -41,4 +41,23 @@ jobs:
           print("RESOLVED_SHA="+info.sha)
           print("PIN_RESOLVE=PASS")
           print("CONFIG_LOAD=PASS")
+          import json
+          os.makedirs("receipts/p04",exist_ok=True)
+          key=m.replace("/","__")
+          receipt={"schema":"p04-pin-receipt-v1","model":m,"requested_revision":r,"resolved_sha":info.sha,"pin_resolve":"PASS","config_load":"PASS"}
+          open(f"receipts/p04/{key}.json","w").write(json.dumps(receipt,indent=2)+"\\n")
           PY
+      - name: Commit non-sensitive receipt
+        env:
+          MODEL_ID: ${{ matrix.model }}
+        run: |
+          git config user.name "cerebron-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/p04/
+          git diff --cached --quiet && exit 0
+          git commit -m "P04 receipt: ${MODEL_ID}"
+          for n in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((n*2))
+          done
+          exit 1
