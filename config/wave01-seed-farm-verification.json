@@ -1,0 +1,44 @@
+{
+  "schema": "cerebron-wave01-seed-farm-verification-v1",
+  "status": "IDENTITY_PASS_CAPABILITY_BENCHMARK_PENDING",
+  "verified_repositories": [
+    {
+      "colony": "C03-SIGMA",
+      "farm": "F01",
+      "repo": "dmaillot95-ui/cerebron-collatz-theory-farm",
+      "repo_id": "1373855257",
+      "default_branch": "main",
+      "archived": false,
+      "identity": "PASS"
+    },
+    {
+      "colony": "C03-SIGMA",
+      "farm": "F09",
+      "repo": "dmaillot95-ui/cerebron-farm-09-science-math",
+      "repo_id": "1373890292",
+      "default_branch": "main",
+      "archived": false,
+      "identity": "PASS"
+    },
+    {
+      "colony": "C12-ARGUS",
+      "farm": "F06",
+      "repo": "dmaillot95-ui/cerebron-collatz-farm-06-formal-audit",
+      "repo_id": "1373866545",
+      "default_branch": "main",
+      "archived": false,
+      "identity": "PASS"
+    },
+    {
+      "colony": "C12-ARGUS",
+      "farm": "F34",
+      "repo": "dmaillot95-ui/cerebron-farm-34-formal-audit",
+      "repo_id": "1374057128",
+      "default_branch": "main",
+      "archived": false,
+      "identity": "PASS"
+    }
+  ],
+  "claim_limit": "Repository identity/existence verified only. Capability and colony-role performance remain pending.",
+  "next_gate": "inspect farm manifests then benchmark farm-to-colony capability mapping"
+}
