@@ -1,0 +1,63 @@
+{
+  "schema": "AGORA_VALIDATION_PACKET_V1",
+  "packet_id": "AVP-0001",
+  "purpose": "End-to-end calibration of the scientific validation gates using a deterministic repository fact.",
+  "claim": {
+    "id": "C1",
+    "text": "The active CEREBRON farm registry contains exactly 74 farms with integer IDs 1 through 74, with no duplicate IDs and no duplicate repository names.",
+    "scope": "config/farms.json at the packet source commit",
+    "scientific_novelty": "NONE",
+    "calibration_only": true
+  },
+  "evidence": [
+    {
+      "id": "E1",
+      "type": "repository_data",
+      "path": "config/farms.json",
+      "required_checks": [
+        "parse JSON",
+        "count farms == 74",
+        "IDs equal [1..74]",
+        "IDs unique",
+        "repo names unique"
+      ]
+    },
+    {
+      "id": "E2",
+      "type": "independent_execution",
+      "workflow": "CEREBRON Omega Core",
+      "run_id": 35517284995,
+      "observed_result": "REGISTRY_OK 74"
+    }
+  ],
+  "reproduction_protocol": {
+    "independent_method": "Read config/farms.json and recompute all five checks without trusting E2.",
+    "pass_condition": "All required_checks are true.",
+    "fail_condition": "Any required_check is false."
+  },
+  "reality_gate_protocol": {
+    "pass_condition": "Claim C1 exactly matches independently recomputed repository state.",
+    "fail_condition": "Claim exceeds or disagrees with observed repository state."
+  },
+  "ablation_protocol": {
+    "remove_E2": "C1 must remain independently verifiable from E1.",
+    "remove_E1": "Do not promote C1 solely from the workflow statement E2.",
+    "pass_condition": "E1 is sufficient for recomputation and E2 is corroborative rather than sole evidence."
+  },
+  "transfer_protocol": {
+    "target": "Apply the same validator to a synthetic registry fixture with a duplicate ID or duplicate repo.",
+    "pass_condition": "Validator rejects the corrupted fixture.",
+    "note": "Transfer PASS requires an actually executed fixture test; specification alone is PENDING."
+  },
+  "required_outputs": {
+    "F71": "reproduction PASS/FAIL with computed observations",
+    "F72": "reality_gate PASS/FAIL with evidence IDs",
+    "F59": "ablation PASS/FAIL and transfer PASS/FAIL with executed observations"
+  },
+  "rules": [
+    "CLAIM<=EVIDENCE",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_PROOF",
+    "IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION",
+    "NO_GATE_PASS_WITHOUT_EXECUTED_CHECK"
+  ]
+}
