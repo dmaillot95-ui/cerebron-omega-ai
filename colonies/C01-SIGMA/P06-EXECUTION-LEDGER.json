@@ -1,0 +1,51 @@
+{
+  "schema": "cerebron-c01-p06-execution-ledger-v1",
+  "status": "EMPTY_PRE_EXECUTION",
+  "colony_id": "C01-SIGMA",
+  "purpose": "Immutable index of real SAPHEA executions and their evidence packets.",
+  "entries": [],
+  "append_only": true,
+  "entry_required": [
+    "execution_id",
+    "task_id",
+    "agent_id",
+    "binding_revision",
+    "runtime_receipt",
+    "input_digest",
+    "output_digest",
+    "dependency_fingerprint",
+    "started_at",
+    "completed_at",
+    "execution_status",
+    "packet_ref"
+  ],
+  "execution_status": [
+    "COMPLETE",
+    "FAILED",
+    "TIMEOUT",
+    "INFRA_FAILURE",
+    "CANCELLED"
+  ],
+  "rules": [
+    "Never create an entry for a simulated or planned execution",
+    "Never overwrite a prior execution; append a new execution_id",
+    "A retry is a new entry and preserves the failed predecessor",
+    "runtime_receipt must identify a real bound model revision",
+    "output_digest must verify before packet handoff",
+    "private payloads remain outside this public ledger",
+    "absence of receipt means NON_EXECUTED"
+  ],
+  "gates": {
+    "to_audit": [
+      "COMPLETE",
+      "OUTPUT_DIGEST_VERIFIED"
+    ],
+    "to_agora": [
+      "AUDIT_PASS",
+      "REPRODUCTION_PASS_WHEN_APPLICABLE",
+      "EVIDENCE_GATE_PASS"
+    ],
+    "on_failure": "HOLD"
+  },
+  "authority": "AFAH"
+}
