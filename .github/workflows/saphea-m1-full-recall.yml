@@ -1,0 +1,34 @@
+name: SAPHEA M1 Full Recall
+on:
+  push:
+    paths:
+      - '.github/workflows/saphea-m1-full-recall.yml'
+      - 'config/saphea-m1-full-recall-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recall:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Verify private SAPHEA M1 recall
+        run: |
+          python - <<'PY'
+          import os,json
+          from huggingface_hub import hf_hub_download
+          repo="cerebron-omega/cerebron-private-memory"
+          path="colony/C01-SIGMA/agents/SIGMA-FORMALIZER/memory/M1/checkpoint.json"
+          fn=hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True)
+          obj=json.load(open(fn))
+          assert obj["colony_id"]=="C01-SIGMA"
+          assert obj["agent_id"]=="SIGMA-FORMALIZER"
+          assert obj["generation"]=="M1"
+          assert obj["parent_generation"]=="M0"
+          print("HF_PRIVATE_READ=PASS")
+          print("HF_SAPHEA_IDENTITY=PASS")
+          print("ROLLBACK_POINTER_M0=PASS")
+          print("SAPHEA_M1_PRIVATE_RECALL=PASS")
+          PY
