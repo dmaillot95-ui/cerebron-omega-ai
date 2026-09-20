@@ -1,0 +1,6 @@
+# GUARDIAN Ω critical surfaces
+# This file expresses intended ownership. Enforcement requires GitHub branch/ruleset protection.
+# AFAH GitHub account:
+/security/ @dmaillot95-ui
+/config/ @dmaillot95-ui
+/.github/workflows/ @dmaillot95-ui
