@@ -1,0 +1,32 @@
+{
+  "schema": "cerebron-inference-runner-canary-v1",
+  "status": "FROZEN_NOT_EXECUTED",
+  "contract": "config/inference-runner-contract.json",
+  "purpose": "Qualify a real inference runner before spending 28 benchmark executions.",
+  "canary": {
+    "model_id": "Qwen/Qwen3-4B",
+    "revision_sha": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "prompt": "Return exactly: CEREBRON_CANARY_OK",
+    "temperature": 0,
+    "max_new_tokens": 16,
+    "seed": 0
+  },
+  "required_evidence": [
+    "provider_or_runner_id",
+    "requested_revision_sha",
+    "resolved_revision_sha",
+    "completion_status",
+    "raw_output",
+    "output_sha256",
+    "latency_ms"
+  ],
+  "pass_conditions": [
+    "resolved revision equals requested 40-char SHA",
+    "completion status COMPLETE",
+    "raw output integrity hash recomputes",
+    "no fallback model",
+    "runtime identity recorded"
+  ],
+  "after_pass": "Run one frozen benchmark task T04 as a second canary before authorizing the 28-run matrix.",
+  "after_fail": "HOLD runner; preserve failure receipt; do not alter frozen benchmark."
+}
