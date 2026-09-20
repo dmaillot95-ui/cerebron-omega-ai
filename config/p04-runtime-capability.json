@@ -1,0 +1,23 @@
+{
+  "schema": "cerebron-p04-runtime-capability-v1",
+  "status": "BLOCKED_PENDING_REAL_INFERENCE_RUNTIME",
+  "verified_inputs": {
+    "pinned_seed_receipts": 4,
+    "taskset": "C01-SIGMA-G0-TASKSET v1",
+    "execution_protocol": "C01-SIGMA-G0-EXECUTION v1"
+  },
+  "requirements": {
+    "must_execute_model_weights": true,
+    "must_pin_exact_revision": true,
+    "must_preserve_28_raw_outputs": true,
+    "must_record_latency_and_completion": true,
+    "must_not_use_memory_rag_agora_or_cross_model_help": true
+  },
+  "available_path_assessment": {
+    "github_actions_cpu": "NOT_ACCEPTED_AS_3B_4B_INFERENCE_RUNTIME_WITHOUT_MEASURED_RESOURCE_PROOF",
+    "hf_public_inference": "NOT_ASSUMED_AVAILABLE_FOR_ALL_FOUR_PINNED_REVISIONS",
+    "hf_private_store": "STORAGE_NOT_INFERENCE"
+  },
+  "decision": "DO_NOT_FAKE_RUNTIME",
+  "next_unlock": "Attach or verify a real inference provider/runner capable of exact pinned revisions, then execute 4x7 cold benchmark."
+}
