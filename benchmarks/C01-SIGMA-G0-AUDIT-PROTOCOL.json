@@ -1,0 +1,73 @@
+{
+  "schema": "cerebron-c01-g0-audit-protocol-v1",
+  "status": "FROZEN_BEFORE_SCORING",
+  "inputs": [
+    "benchmarks/C01-SIGMA-G0-TASKSET.json",
+    "benchmarks/C01-SIGMA-G0-SCORING.json"
+  ],
+  "roles": [
+    {
+      "id": "PRIMARY",
+      "sees": "candidate label + task + raw output",
+      "does_not_see": "model identity"
+    },
+    {
+      "id": "RED_TEAM",
+      "sees": "candidate label + task + raw output + primary findings",
+      "mission": "seek concrete mathematical/logical errors and unsupported claims"
+    },
+    {
+      "id": "ARBITER",
+      "sees": "disagreements + cited output spans",
+      "mission": "resolve only from explicit evidence"
+    },
+    {
+      "id": "REPRODUCER",
+      "mission": "recompute deterministic arithmetic/algebra checks independently where applicable"
+    }
+  ],
+  "independence_rules": [
+    "Same model lineage or copied reasoning is not independent evidence",
+    "No candidate identity before score freeze",
+    "No aggregate winner is promoted automatically",
+    "Every penalty requires an explicit evidence reference",
+    "Unknown or unverifiable claims remain UNVERIFIED, not PASS"
+  ],
+  "task_specific_checks": {
+    "T01": [
+      "odd positive domain",
+      "v2 defined",
+      "cycle length condition"
+    ],
+    "T02": [
+      "cycle equations used consistently",
+      "A=sum a_i",
+      "identity algebraically valid"
+    ],
+    "T03": [
+      "counterexample truly increases",
+      "scope does not claim conjecture false"
+    ],
+    "T04": [
+      "3*27+1=82",
+      "v2(82)=1",
+      "T(27)=41"
+    ],
+    "T05": [
+      "finite-to-universal inference rejected"
+    ],
+    "T06": [
+      "all four evidence classes correctly distinguished"
+    ],
+    "T07": [
+      "established/computational/open/next-test separated"
+    ]
+  },
+  "outputs": {
+    "primary": "benchmarks/audit/c01-g0-v1/{candidate}/primary.json",
+    "red_team": "benchmarks/audit/c01-g0-v1/{candidate}/red-team.json",
+    "reproduction": "benchmarks/audit/c01-g0-v1/{candidate}/reproduction.json",
+    "final": "benchmarks/audit/c01-g0-v1/{candidate}/final.json"
+  },
+  "freeze_rule": "Any protocol change after scoring begins requires v2 and rerun of all candidates."
+}
