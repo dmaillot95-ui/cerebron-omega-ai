@@ -1,0 +1,53 @@
+{
+  "schema": "cerebron-c01-p07-training-factory-contract-v1",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "colony_id": "C01-SIGMA",
+  "objective": "Convert one qualified G0 binding into one auditable specialist candidate without contaminating control baselines.",
+  "inputs": [
+    "qualified_parent_binding",
+    "frozen_private_dataset_manifest",
+    "role_target",
+    "training_recipe_version",
+    "resource_budget"
+  ],
+  "pipeline": [
+    "VERIFY_PARENT_GATES",
+    "VERIFY_DATA_GATE",
+    "LOCK_DATASET_DIGEST",
+    "CREATE_NEW_RUN_ID",
+    "TRAIN_EPHEMERAL_WORKSPACE",
+    "HASH_ARTIFACT",
+    "WRITE_HF_PRIVATE",
+    "READBACK_HF_PRIVATE",
+    "VERIFY_ARTIFACT_SHA256",
+    "WRITE_NON_SENSITIVE_RECEIPT",
+    "RUN_COLD_ABLATION_MATRIX",
+    "RUN_SEALED_TRANSFER",
+    "AUDIT",
+    "RED_TEAM",
+    "CLEAN_REPRODUCTION",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "resource_policy": {
+    "default_method": "parameter-efficient adapter before full-weight training",
+    "reason": "lower compute/storage and easier rollback",
+    "full_weight_training": "only after measured adapter ceiling or explicit justified experiment",
+    "concurrency": "one training run per SAPHEA lineage until benchmarked"
+  },
+  "separation_rules": [
+    "G0 control remains immutable",
+    "training worker cannot score its own promotion",
+    "transfer set remains sealed from training worker",
+    "failed artifacts are never promoted",
+    "derived artifact gets new generation and parent pointer"
+  ],
+  "outputs": [
+    "private artifact",
+    "training receipt",
+    "ablation results",
+    "transfer results",
+    "audit packet",
+    "promotion decision"
+  ],
+  "authority": "AFAH"
+}
