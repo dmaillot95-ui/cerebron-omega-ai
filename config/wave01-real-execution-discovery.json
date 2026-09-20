@@ -1,0 +1,31 @@
+{
+  "schema": "cerebron-wave01-real-execution-discovery-v1",
+  "status": "RUNNER_PATH_NOT_FOUND_IN_COMMON_WORKFLOW_NAMES",
+  "checked": [
+    {
+      "repo": "dmaillot95-ui/cerebron-collatz-theory-farm",
+      "common_worker_workflow": "NOT_FOUND"
+    },
+    {
+      "repo": "dmaillot95-ui/cerebron-farm-09-science-math",
+      "common_worker_workflow": "NOT_FOUND"
+    },
+    {
+      "repo": "dmaillot95-ui/cerebron-collatz-farm-06-formal-audit",
+      "common_worker_workflow": "NOT_FOUND"
+    },
+    {
+      "repo": "dmaillot95-ui/cerebron-farm-34-formal-audit",
+      "common_worker_workflow": "NOT_FOUND"
+    }
+  ],
+  "paths_checked": [
+    ".github/workflows/farm-worker.yml",
+    ".github/workflows/worker.yml",
+    ".github/workflows/main.yml",
+    ".github/workflows/run.yml"
+  ],
+  "interpretation": "This does not prove that the repositories have no workflows or executable resources; only these common paths were absent.",
+  "decision": "HOLD_REAL_FARM_EXECUTION",
+  "next_gate": "discover actual execution entrypoint or install an explicit auditable runner"
+}
