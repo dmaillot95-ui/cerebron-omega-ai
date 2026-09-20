@@ -1,0 +1,59 @@
+{
+  "schema": "cerebron-c01-g0-execution-v1",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "taskset": "benchmarks/C01-SIGMA-G0-TASKSET.json",
+  "models": [
+    {
+      "id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Base",
+      "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B-Base",
+      "revision": "d78a42f79198603e614095753484a04c10c2b940"
+    }
+  ],
+  "protocol": {
+    "temperature": 0,
+    "max_new_tokens": 1024,
+    "one_model_one_task_context": true,
+    "prior_task_outputs_visible": false,
+    "cerebron_memory": false,
+    "rag": false,
+    "tools": false,
+    "agora": false,
+    "raw_outputs_immutable": true
+  },
+  "output_layout": "benchmarks/results/c01-g0-v1/{anonymous_candidate}/{task_id}.json",
+  "anonymization": {
+    "candidate_labels": [
+      "CAND-A",
+      "CAND-B",
+      "CAND-C",
+      "CAND-D"
+    ],
+    "mapping_private_until_scoring_complete": true
+  },
+  "audit": {
+    "blind": true,
+    "score_after_all_outputs_frozen": true,
+    "red_team_after_primary_score": true
+  },
+  "required_receipt": [
+    "model_revision",
+    "taskset_version",
+    "task_id",
+    "output_sha256",
+    "runtime",
+    "latency_ms",
+    "completion_status"
+  ],
+  "rule": "Execution evidence is required. DESIGNED is not RUN."
+}
