@@ -10,41 +10,31 @@ jobs:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_REPO: cerebron-omega/cerebron-private-memory
     steps:
-      - name: Create private repository and verify write-read integrity
+      - name: Install Hugging Face Hub client
+        run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Verify private repository write-read integrity
         run: |
           python - <<'PY'
-          import os,json,hashlib,urllib.request,urllib.error
+          import os, hashlib, tempfile
+          from huggingface_hub import HfApi, hf_hub_download
           token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
-          H={"Authorization":"Bearer "+token,"Content-Type":"application/json"}
-          def req(url,method="GET",data=None,headers=None):
-              h=dict(H); h.update(headers or {})
-              b=None if data is None else (data if isinstance(data,bytes) else json.dumps(data).encode())
-              q=urllib.request.Request(url,data=b,headers=h,method=method)
-              with urllib.request.urlopen(q,timeout=60) as r:return r.read(),r.status
-          # Create model repo private. 409 means it already exists.
-          try:
-              _,s=req("https://huggingface.co/api/repos/create","POST",{"name":"cerebron-private-memory","organization":None,"private":True,"type":"model"})
-              print("HF_PRIVATE_REPO_CREATE=PASS",s)
-          except urllib.error.HTTPError as e:
-              if e.code==409: print("HF_PRIVATE_REPO_CREATE=PASS_ALREADY_EXISTS")
-              else: raise
-          payload=b'CEREBRON_PRIVATE_MEMORY_TEST_V1\n'
+          api=HfApi(token=token)
+          api.create_repo(repo_id=repo, repo_type="model", private=True, exist_ok=True)
+          info=api.repo_info(repo_id=repo, repo_type="model")
+          if info.private is not True:
+              raise SystemExit("HF_PRIVATE_VISIBILITY=FAIL")
+          print("HF_PRIVATE_REPO=PASS")
+          payload=b"CEREBRON_PRIVATE_MEMORY_TEST_V2\n"
           digest=hashlib.sha256(payload).hexdigest()
-          # Hub commit API: upload one regular file.
-          boundary="cerebronboundary"
-          header=json.dumps({"summary":"CEREBRON private memory integrity fixture","description":"synthetic non-secret test"}).encode()
-          key=json.dumps({"key":"memory/MEMTEST-PRIVATE-0001.txt","value":{"contentType":"regular","path":"memory/MEMTEST-PRIVATE-0001.txt","encoding":"base64"}}).encode()
-          import base64
-          val=base64.b64encode(payload)
-          body=(b"--"+boundary.encode()+b"\r\nContent-Disposition: form-data; name=\"header\"\r\n\r\n"+header+
-                b"\r\n--"+boundary.encode()+b"\r\nContent-Disposition: form-data; name=\"file\"\r\n\r\n"+key+b"\n"+val+
-                b"\r\n--"+boundary.encode()+b"--\r\n")
-          # Prefer documented commit endpoint; fail closed if API contract differs.
-          _,s=req("https://huggingface.co/api/models/"+repo+"/commit/main","POST",body,{"Content-Type":"multipart/form-data; boundary="+boundary})
-          print("HF_PRIVATE_WRITE=PASS",s)
-          got,_=req("https://huggingface.co/"+repo+"/resolve/main/memory/MEMTEST-PRIVATE-0001.txt")
-          if hashlib.sha256(got).hexdigest()!=digest: raise SystemExit("HF_PRIVATE_INTEGRITY=FAIL")
+          with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+              t.write(payload); src=t.name
+          api.upload_file(path_or_fileobj=src,path_in_repo="memory/MEMTEST-PRIVATE-0001.txt",repo_id=repo,repo_type="model",commit_message="CEREBRON private integrity fixture")
+          print("HF_PRIVATE_WRITE=PASS")
+          dst=hf_hub_download(repo_id=repo,filename="memory/MEMTEST-PRIVATE-0001.txt",repo_type="model",token=token,force_download=True)
+          with open(dst,"rb") as g: got=g.read()
+          if hashlib.sha256(got).hexdigest()!=digest:
+              raise SystemExit("HF_PRIVATE_INTEGRITY=FAIL")
           print("HF_PRIVATE_READ=PASS")
           print("HF_PRIVATE_INTEGRITY_SHA256=PASS")
-          print("PRIVATE_PAYLOAD_EXPOSED=NO")
+          print("TOKEN_EXPOSED=NO")
           PY
