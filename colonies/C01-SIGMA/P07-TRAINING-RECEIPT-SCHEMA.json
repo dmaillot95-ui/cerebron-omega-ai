@@ -1,0 +1,44 @@
+{
+  "schema": "cerebron-c01-p07-training-receipt-v1",
+  "status": "FROZEN_PRE_TRAINING",
+  "colony_id": "C01-SIGMA",
+  "required": [
+    "training_run_id",
+    "agent_id",
+    "parent_model_id",
+    "parent_revision_sha",
+    "dataset_version",
+    "dataset_digest",
+    "training_method",
+    "hyperparameter_digest",
+    "code_revision",
+    "runner_identity",
+    "started_at",
+    "completed_at",
+    "artifact_private_ref",
+    "artifact_sha256",
+    "training_status"
+  ],
+  "training_status": [
+    "COMPLETE",
+    "FAILED",
+    "INFRA_FAILURE",
+    "CANCELLED"
+  ],
+  "post_training_required": [
+    "HF_PRIVATE_WRITE_PASS",
+    "HF_PRIVATE_READBACK_PASS",
+    "ARTIFACT_SHA256_PASS",
+    "COLD_BENCHMARK_PENDING"
+  ],
+  "rules": [
+    "receipt does not prove improvement",
+    "training loss does not prove capability gain",
+    "artifact must remain private by default",
+    "failed run remains append-only",
+    "new training attempt gets new run_id",
+    "promotion impossible before ablation and cold transfer"
+  ],
+  "public_receipt_policy": "No dataset examples, private prompts, weights, adapters, secrets or confidential payloads in GitHub.",
+  "authority": "AFAH"
+}
