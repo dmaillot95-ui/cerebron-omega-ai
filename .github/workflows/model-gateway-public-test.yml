@@ -1,0 +1,29 @@
+name: MODEL Gateway Public Hugging Face Test
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/model-gateway-public-test.yml'
+permissions:
+  contents: read
+jobs:
+  public-hf-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Test public Hugging Face Hub without token
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "${HF_TOKEN:-}" || { echo "Unexpected HF_TOKEN in public test"; exit 1; }
+          python - <<'PY'
+          import json, urllib.request
+          url="https://huggingface.co/api/models?sort=downloads&direction=-1&limit=3"
+          req=urllib.request.Request(url,headers={"User-Agent":"CEREBRON-Model-Gateway/1.0"})
+          with urllib.request.urlopen(req,timeout=20) as r:
+              data=json.load(r)
+          assert isinstance(data,list) and len(data)>0
+          safe=[{"id":x.get("id"),"private":x.get("private"),"gated":x.get("gated")} for x in data]
+          print("HF_PUBLIC_NO_TOKEN=PASS")
+          print(json.dumps(safe,ensure_ascii=False))
+          PY
