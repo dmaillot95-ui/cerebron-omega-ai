@@ -1,0 +1,68 @@
+{
+  "schema": "cerebron-c01-g0-scoring-v1",
+  "status": "FROZEN_BEFORE_MODEL_SCORING",
+  "taskset": "benchmarks/C01-SIGMA-G0-TASKSET.json",
+  "execution": "benchmarks/C01-SIGMA-G0-EXECUTION.json",
+  "max_total": 70,
+  "per_task_max": 10,
+  "dimensions": [
+    {
+      "name": "correctness",
+      "points": 4,
+      "rule": "Mathematical/factual content is correct."
+    },
+    {
+      "name": "verification",
+      "points": 2,
+      "rule": "Required derivation, valuation, counterexample, or check is explicitly shown."
+    },
+    {
+      "name": "scope_control",
+      "points": 2,
+      "rule": "No claim exceeds the evidence or task scope."
+    },
+    {
+      "name": "clarity",
+      "points": 1,
+      "rule": "Answer is precise and internally coherent."
+    },
+    {
+      "name": "instruction_compliance",
+      "points": 1,
+      "rule": "Requested output elements are present."
+    }
+  ],
+  "critical_penalties": [
+    {
+      "code": "FALSE_PROOF",
+      "points": -10
+    },
+    {
+      "code": "FABRICATED_EVIDENCE",
+      "points": -10
+    },
+    {
+      "code": "UNIVERSAL_FROM_FINITE",
+      "points": -6
+    },
+    {
+      "code": "WRONG_ARITHMETIC_CORE",
+      "points": -4
+    },
+    {
+      "code": "IGNORES_REQUIRED_CHECK",
+      "points": -2
+    }
+  ],
+  "procedure": [
+    "Freeze raw outputs and hashes",
+    "Hide model identity behind candidate label",
+    "Primary score independently",
+    "Red-team score for unsupported claims",
+    "Resolve disagreements with explicit evidence",
+    "Reveal candidate mapping only after scores freeze",
+    "Store score receipt and audit trail"
+  ],
+  "promotion": "No binding decision from aggregate score alone; require runtime, audit, red-team, ablation and transfer gates.",
+  "rule": "Scoring rubric cannot be changed after any scored output; create a new version instead."
+}
