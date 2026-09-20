@@ -1,0 +1,57 @@
+{
+  "schema": "cerebron-c01-p07-training-data-gate-v1",
+  "status": "FROZEN_PRE_DATASET",
+  "colony_id": "C01-SIGMA",
+  "objective": "Prevent contaminated, unlicensed, unverifiable or benchmark-leaking examples from entering SAPHEA specialization.",
+  "required_per_example": [
+    "example_id",
+    "source_class",
+    "source_ref",
+    "license_status",
+    "provenance_digest",
+    "task_family",
+    "created_before_transfer_freeze",
+    "baseline_overlap_check",
+    "transfer_overlap_check",
+    "validation_status"
+  ],
+  "source_classes": [
+    "SELF_GENERATED_VERIFIED",
+    "PUBLIC_LICENSED",
+    "AFAH_APPROVED_PRIVATE"
+  ],
+  "forbidden": [
+    "unknown license",
+    "secret or credential",
+    "personal/confidential data without explicit authorization",
+    "baseline answer leakage",
+    "transfer task or answer leakage",
+    "unverified synthetic claim labeled as truth",
+    "copied model output without provenance"
+  ],
+  "gates": [
+    "LICENSE_PASS",
+    "PROVENANCE_PASS",
+    "PRIVACY_PASS",
+    "DEDUP_PASS",
+    "BASELINE_LEAKAGE_PASS",
+    "TRANSFER_LEAKAGE_PASS",
+    "EVIDENCE_LABEL_PASS"
+  ],
+  "labels": [
+    "PROVEN_FACT",
+    "DERIVATION",
+    "COMPUTATION",
+    "CONJECTURE",
+    "COUNTEREXAMPLE",
+    "FAILURE_CASE",
+    "AUDIT_FINDING"
+  ],
+  "storage": {
+    "dataset": "HF_PRIVATE",
+    "github": "manifest hashes counts licenses and opaque refs only"
+  },
+  "failure_rule": "Any failed or unknown mandatory gate => exclude example; never silently downgrade.",
+  "freeze_rule": "Dataset version and digest freeze before training run; later edits create a new version.",
+  "authority": "AFAH"
+}
