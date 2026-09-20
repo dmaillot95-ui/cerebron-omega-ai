@@ -1,0 +1,26 @@
+{
+  "schema": "cerebron-colony-id-aliases-v1",
+  "status": "ACTIVE_NON_DESTRUCTIVE",
+  "aliases": [
+    {
+      "canonical_registry_id": "C03-SIGMA",
+      "registry_numeric_id": 3,
+      "name": "SIGMA",
+      "historical_workspace": "colonies/C01-SIGMA",
+      "memory_aliases": [
+        "C03-SIGMA",
+        "C01-SIGMA"
+      ],
+      "rule": "C03-SIGMA is canonical for registry/routing; C01-SIGMA remains a historical workspace/memory alias until controlled migration.",
+      "migration": "NO_RENAME_NO_DELETE"
+    }
+  ],
+  "resolution_rules": [
+    "Never create a second SIGMA colony from the historical C01 label",
+    "Never split memory lineage because of alias",
+    "New routing/receipts use canonical C03-SIGMA",
+    "Existing C01-SIGMA artifacts remain valid historical evidence",
+    "Migration requires pointer integrity check and rollback snapshot first"
+  ],
+  "next_gate": "P03 unified F66-F74-HF recall"
+}
