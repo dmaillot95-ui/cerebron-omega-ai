@@ -1,7 +1,7 @@
 {
   "schema": "p04-seeds-v1",
   "phase": "P04",
-  "status": "PIN_CANDIDATES_RECORDED_RUNTIME_TEST_PENDING",
+  "status": "PINS_RESOLVED_CONFIG_LOAD_PASS_FULL_RUNTIME_PENDING",
   "target": "C01-SIGMA",
   "candidates": [
     {
@@ -14,7 +14,10 @@
       "source": "official_huggingface",
       "pin_candidate": "1cfa9a7",
       "pin_source": "HF official commit history",
-      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
+      "pin_state": "PIN_RESOLVE_PASS_CONFIG_LOAD_PASS",
+      "resolved_sha": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "runtime_weight_load": "NOT_TESTED",
+      "binding_state": "UNBOUND"
     },
     {
       "id": "Qwen/Qwen3-4B-Base",
@@ -30,7 +33,10 @@
       "source": "official_huggingface",
       "pin_candidate": "906bfd4",
       "pin_source": "HF official commit history",
-      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
+      "pin_state": "PIN_RESOLVE_PASS_CONFIG_LOAD_PASS",
+      "resolved_sha": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+      "runtime_weight_load": "NOT_TESTED",
+      "binding_state": "UNBOUND"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B",
@@ -45,7 +51,10 @@
       "source": "official_huggingface",
       "pin_candidate": "a07cc9a",
       "pin_source": "HF official commit history",
-      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
+      "pin_state": "PIN_RESOLVE_PASS_CONFIG_LOAD_PASS",
+      "resolved_sha": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "runtime_weight_load": "NOT_TESTED",
+      "binding_state": "UNBOUND"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B-Base",
@@ -59,7 +68,10 @@
       "source": "official_huggingface",
       "pin_candidate": "d78a42f",
       "pin_source": "HF official commit history",
-      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
+      "pin_state": "PIN_RESOLVE_PASS_CONFIG_LOAD_PASS",
+      "resolved_sha": "d78a42f79198603e614095753484a04c10c2b940",
+      "runtime_weight_load": "NOT_TESTED",
+      "binding_state": "UNBOUND"
     }
   ],
   "gates": [
