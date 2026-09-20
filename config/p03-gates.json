@@ -1,0 +1,18 @@
+{
+  "schema": "p03-gates-v1",
+  "phase": "P03",
+  "status": "ACTIVE",
+  "gates": {
+    "private_memory": "AWAITING_RUN_VERIFICATION",
+    "generation_rollback": "AWAITING_RUN_VERIFICATION",
+    "public_catalog": "PASS",
+    "private_m1_recall": "AWAITING_RUN_VERIFICATION",
+    "unified_recall": "NOT_EXECUTED"
+  },
+  "public_catalog_evidence": [
+    "3774d3a6da3ad1e4f6b0ccea618411d2da67bff1",
+    "6a00e8d247ede1535bf019cd6825c9b7547454e3"
+  ],
+  "rule": "Trigger or design is not PASS. P03 closes only on verified executable evidence.",
+  "next": "P04_MODEL_SEED_BANK"
+}
