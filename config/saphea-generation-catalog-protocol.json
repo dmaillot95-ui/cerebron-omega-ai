@@ -1,0 +1,53 @@
+{
+  "schema": "cerebron-saphea-generation-catalog-v1",
+  "status": "DESIGNED",
+  "scope": "all colonies / all real SAPHEA",
+  "trigger": "AFTER_PRIVATE_HF_READBACK_AND_DIGEST_PASS",
+  "f74_pointer": {
+    "required": [
+      "memory_id",
+      "colony_id",
+      "agent_id",
+      "generation",
+      "parent_generation",
+      "memory_class",
+      "hf_private_object_path",
+      "sha256",
+      "validation_status",
+      "rollback_generation"
+    ],
+    "forbidden": [
+      "private_payload",
+      "raw_prompt",
+      "secret",
+      "token",
+      "raw_chat_history"
+    ]
+  },
+  "f66_index": {
+    "required": [
+      "memory_id",
+      "colony_id",
+      "agent_id",
+      "generation",
+      "f74_repo",
+      "f74_path",
+      "f74_commit",
+      "status"
+    ],
+    "rule": "INDEX_POINTER_NOT_PRIVATE_PAYLOAD"
+  },
+  "promotion_order": [
+    "HF_PRIVATE_WRITE",
+    "HF_AUTH_READBACK",
+    "SHA256_PASS",
+    "F74_POINTER_WRITE",
+    "F74_READBACK",
+    "F66_INDEX_WRITE",
+    "F66_READBACK",
+    "END_TO_END_RECALL",
+    "PROMOTE_GENERATION"
+  ],
+  "failure": "HOLD_AND_KEEP_PREVIOUS_GENERATION",
+  "invariant": "No generation is current until F66/F74/HF recall passes."
+}
