@@ -1,0 +1,133 @@
+{
+  "schema": "cerebron-c01-dependency-graph-v1",
+  "status": "FROZEN_PRE_BINDING",
+  "colony_id": "C01-SIGMA",
+  "nodes": [
+    {
+      "agent_id": "SIGMA-CHIEF",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-FORMALIZER",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-A",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-B",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-COMPUTE",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-COUNTEREX",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-AUDITOR",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-REPRODUCER",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-EVIDENCE",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    },
+    {
+      "agent_id": "SIGMA-SYNTH",
+      "model_id": null,
+      "revision": null,
+      "lineage_id": null,
+      "training_dataset_fingerprint": null,
+      "memory_generation": null,
+      "dependency_fingerprint": null,
+      "state": "UNBOUND"
+    }
+  ],
+  "independence_test": {
+    "independent_only_if": [
+      "different relevant evidence source OR independently reproduced derivation",
+      "no hidden shared output copied between claimed-independent paths",
+      "dependency fingerprint reviewed"
+    ],
+    "not_sufficient": [
+      "different agent_id",
+      "different prompt wording",
+      "separate workflow jobs",
+      "multiple calls to same model revision",
+      "consensus"
+    ]
+  },
+  "edges_to_record": [
+    "SAME_MODEL_REVISION",
+    "SAME_BASE_LINEAGE",
+    "SAME_TRAINING_DATA",
+    "SAME_MEMORY",
+    "OUTPUT_DERIVED_FROM",
+    "SHARED_EXTERNAL_SOURCE",
+    "AUDITS"
+  ],
+  "counting_rule": "Evidence branches connected by material causal dependency are one dependency family unless clean reproduction establishes otherwise.",
+  "red_team_rule": "RED TEAM must inspect dependency graph before any multi-agent consensus claim.",
+  "authority": "AFAH"
+}
