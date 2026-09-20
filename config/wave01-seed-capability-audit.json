@@ -1,0 +1,40 @@
+{
+  "schema": "cerebron-wave01-seed-capability-audit-v1",
+  "status": "PARTIAL_PASS",
+  "checks": [
+    {
+      "colony": "C03-SIGMA",
+      "farm": "F01",
+      "evidence": "README",
+      "capability": "independent theoretical proof factory; accelerated odd Collatz",
+      "mapping": "PASS"
+    },
+    {
+      "colony": "C03-SIGMA",
+      "farm": "F09",
+      "evidence": "README",
+      "capability": "algebra/analysis/number theory/logic/proof/falsification/audit/replication",
+      "mapping": "PASS"
+    },
+    {
+      "colony": "C12-ARGUS",
+      "farm": "F06",
+      "evidence": "README",
+      "capability": "formal proof audit; quantifiers/dependencies/local-global/congruences/arbitrary-N",
+      "mapping": "PASS"
+    },
+    {
+      "colony": "C12-ARGUS",
+      "farm": "F34",
+      "evidence": "repository identity only; README not found in inspected paths",
+      "capability": "UNVERIFIED",
+      "mapping": "HOLD"
+    }
+  ],
+  "rules": [
+    "README capability evidence is descriptive, not benchmark evidence",
+    "F34 remains HOLD until manifest/content confirms formal-audit capability",
+    "No colony activation from descriptive mapping alone"
+  ],
+  "next_gate": "inspect F34 repository contents and then execute farm-to-colony task benchmark"
+}
