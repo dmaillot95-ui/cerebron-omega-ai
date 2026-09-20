@@ -1,0 +1,18 @@
+{
+  "schema": "cerebron-hf-memory-health-v1",
+  "status": "PASS",
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "checks": {
+    "AUTH": "PASS",
+    "PRIVATE_REPO": "PASS",
+    "C01_FIXTURE_READ": "PASS",
+    "C01_FIXTURE_IDENTITY": "PASS",
+    "SAPHEA_M1_READ": "PASS",
+    "SAPHEA_M1_IDENTITY": "PASS"
+  },
+  "details": {
+    "C01_FIXTURE_sha256": "7ef3c66218f60d862ff797becaca5dbe0791367642484f6f86aedc0b9554bfe4",
+    "SAPHEA_M1_sha256": "78ecfc80a9b91b454a2ca6fbf5c89b22114fca5afe77de1ef658964eaef3f257"
+  },
+  "claim_scope": "authenticated private read + identity + content digest; no claim of learning quality"
+}
