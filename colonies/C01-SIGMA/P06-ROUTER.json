@@ -1,0 +1,102 @@
+{
+  "schema": "cerebron-c01-p06-router-v1",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "colony_id": "C01-SIGMA",
+  "objective": "Route a math task to the minimum justified SAPHEA team, then enforce independent attack, audit, reproduction and synthesis.",
+  "routes": [
+    {
+      "task_class": "FORMALIZATION",
+      "primary": [
+        "SIGMA-FORMALIZER"
+      ],
+      "checks": [
+        "SIGMA-AUDITOR",
+        "SIGMA-EVIDENCE"
+      ]
+    },
+    {
+      "task_class": "PROOF",
+      "primary": [
+        "SIGMA-PROVER-A",
+        "SIGMA-PROVER-B"
+      ],
+      "checks": [
+        "SIGMA-COUNTEREX",
+        "SIGMA-AUDITOR",
+        "SIGMA-REPRODUCER",
+        "SIGMA-EVIDENCE"
+      ]
+    },
+    {
+      "task_class": "COMPUTATION",
+      "primary": [
+        "SIGMA-COMPUTE"
+      ],
+      "checks": [
+        "SIGMA-AUDITOR",
+        "SIGMA-REPRODUCER"
+      ]
+    },
+    {
+      "task_class": "COUNTEREXAMPLE",
+      "primary": [
+        "SIGMA-COUNTEREX"
+      ],
+      "checks": [
+        "SIGMA-COMPUTE",
+        "SIGMA-AUDITOR"
+      ]
+    },
+    {
+      "task_class": "SYNTHESIS",
+      "primary": [
+        "SIGMA-SYNTH"
+      ],
+      "checks": [
+        "SIGMA-EVIDENCE",
+        "SIGMA-CHIEF"
+      ]
+    }
+  ],
+  "execution_order": [
+    "CHIEF_CLASSIFY",
+    "ROUTE_MINIMAL_TEAM",
+    "PARALLEL_PRIMARY_WHERE_JUSTIFIED",
+    "COUNTEREXAMPLE_ATTACK",
+    "AUDIT",
+    "CLEAN_REPRODUCTION_WHEN_APPLICABLE",
+    "EVIDENCE_GATE",
+    "SYNTHESIS",
+    "CHIEF_HANDOFF_TO_AGORA"
+  ],
+  "hard_gates": [
+    "ONLY_BOUND_REAL_AGENTS_EXECUTE",
+    "NO_SELF_CERTIFICATION",
+    "NO_FAKE_INDEPENDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "COMPUTATION_NE_PROOF",
+    "FAILED_OR_MISSING_GATE=>HOLD"
+  ],
+  "resource_policy": {
+    "max_agents_per_task": 10,
+    "default": "minimum necessary",
+    "parallelism": "only where roles are materially distinct",
+    "memory": "retrieve minimum validated context through P03 route",
+    "model_binding": "P06-BINDING-PROTOCOL"
+  },
+  "output_packet_required": [
+    "task_id",
+    "route",
+    "executed_agents",
+    "nonexecuted_agents",
+    "dependency_fingerprints",
+    "claims",
+    "evidence_refs",
+    "counterexamples",
+    "audit_status",
+    "reproduction_status",
+    "uncertainties",
+    "next_decisive_test"
+  ],
+  "authority": "AFAH"
+}
