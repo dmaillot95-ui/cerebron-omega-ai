@@ -1,0 +1,50 @@
+{
+  "schema": "cerebron-c01-output-packet-v1",
+  "status": "FROZEN_PRE_EXECUTION",
+  "required": {
+    "packet_id": "string",
+    "task_id": "string",
+    "task_class": "FORMALIZATION|PROOF|COMPUTATION|COUNTEREXAMPLE|SYNTHESIS",
+    "executed_agents": "array",
+    "nonexecuted_agents": "array",
+    "claims": "array",
+    "evidence_refs": "array",
+    "dependency_fingerprints": "array",
+    "audit_status": "PASS|HOLD|FAIL|NOT_APPLICABLE",
+    "reproduction_status": "PASS|HOLD|FAIL|NOT_APPLICABLE",
+    "uncertainties": "array",
+    "next_decisive_test": "string"
+  },
+  "claim_fields": [
+    "claim_id",
+    "statement",
+    "status",
+    "evidence_refs",
+    "dependency_fingerprint"
+  ],
+  "claim_status": [
+    "ESTABLISHED",
+    "DERIVED",
+    "COMPUTATIONAL",
+    "CONJECTURAL",
+    "REFUTED",
+    "UNVERIFIED"
+  ],
+  "invariants": [
+    "executed_agents must have real execution receipts",
+    "nonexecuted agents cannot contribute claims",
+    "each ESTABLISHED claim requires evidence_refs",
+    "shared dependency fingerprint prevents false independence count",
+    "COMPUTATIONAL cannot be promoted to ESTABLISHED without proof evidence",
+    "audit FAIL forces packet HOLD or FAIL",
+    "missing required field forces packet HOLD",
+    "raw private memory is never embedded"
+  ],
+  "handoff": {
+    "from": "C01-SIGMA",
+    "to": "AGORA",
+    "chief_signoff_required": true,
+    "auditor_signoff_required": true,
+    "afah_authority_preserved": true
+  }
+}
