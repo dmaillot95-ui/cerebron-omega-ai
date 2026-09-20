@@ -1,0 +1,62 @@
+name: P04 SmolLM3 T04 Cold Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/p04-smollm3-t04-canary.yml'
+      - 'config/p04-smollm3-t04-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  t04:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute frozen T04
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: bash
+        run: |
+          mkdir -p receipts/p04 benchmarks/results/c01-g0-v1
+          python - <<'PY'
+          import json,hashlib,time,os
+          from pathlib import Path
+          tasks=json.load(open("benchmarks/C01-SIGMA-G0-TASKSET.json"))["tasks"]
+          task=next(t for t in tasks if t["id"]=="T04")
+          prompt=task["prompt"]
+          r={"schema":"cerebron-p04-cold-task-canary-v1","task_id":"T04","taskset":"C01-SIGMA-G0-TASKSET-v1","model_id":os.environ["MODEL_ID"],"requested_revision_sha":os.environ["REVISION"],"cold_controls":{"memory":False,"rag":False,"adapter":False,"training":False,"agora_help":False,"cross_model_help":False},"load":"FAIL","inference":"NOT_EXECUTED"}
+          t=time.time()
+          try:
+            import torch
+            from transformers import AutoTokenizer,AutoModelForCausalLM
+            mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+            tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+            model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+            r["load"]="PASS"
+            x=tok(prompt,return_tensors="pt")
+            with torch.no_grad(): yy=model.generate(**x,max_new_tokens=256,do_sample=False)
+            out=tok.decode(yy[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+            raw={"task_id":"T04","candidate":"CAND-PENDING-BLIND-MAP","text":out}
+            raw_s=json.dumps(raw,ensure_ascii=False,separators=(",",":"))
+            Path("benchmarks/results/c01-g0-v1/T04-smollm3-canary.json").write_text(json.dumps(raw,ensure_ascii=False,indent=2)+"\n")
+            r["inference"]="PASS";r["output_sha256"]=hashlib.sha256(raw_s.encode()).hexdigest();r["output_length"]=len(out)
+          except Exception as e:
+            r["failure_class"]=type(e).__name__;r["failure_message"]=str(e)[:500]
+          r["latency_ms"]=round((time.time()-t)*1000)
+          Path("receipts/p04/smollm3-3b-t04-canary.json").write_text(json.dumps(r,indent=2)+"\n")
+          PY
+      - name: Persist evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "cerebron-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add receipts/p04/smollm3-3b-t04-canary.json benchmarks/results/c01-g0-v1/T04-smollm3-canary.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "P04 evidence: SmolLM3 cold T04 canary"
+          git push
