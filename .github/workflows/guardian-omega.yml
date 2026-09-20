@@ -49,5 +49,28 @@ jobs:
           if miss: raise SystemExit("GUARDIAN BLOCK: rollback invariants missing: "+repr(miss))
           print("Rollback authority invariants present")
           PY
+      - name: Verify checkpoint ledger chain
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,hashlib,pathlib
+          p=pathlib.Path("security/checkpoints/ledger.jsonl")
+          if not p.exists(): raise SystemExit("GUARDIAN BLOCK: checkpoint ledger missing")
+          prev_id=None; prev_hash=None
+          for n,line in enumerate(p.read_text().splitlines(),1):
+              if not line.strip(): continue
+              r=json.loads(line)
+              required=["checkpoint_id","commit_sha","source_state_id","evidence_manifest_hash","policy_hash","guardian_decision","cerebron_audit","afah_approval","previous_checkpoint_id","previous_record_hash","record_hash"]
+              miss=[k for k in required if k not in r]
+              if miss: raise SystemExit(f"GUARDIAN BLOCK line {n}: missing {miss}")
+              if r["afah_approval"] is not True: raise SystemExit(f"GUARDIAN BLOCK line {n}: no AFAH approval")
+              if r["guardian_decision"]!="PASS" or r["cerebron_audit"]!="PASS": raise SystemExit(f"GUARDIAN BLOCK line {n}: invalid gates")
+              if r["previous_checkpoint_id"]!=prev_id or r["previous_record_hash"]!=prev_hash: raise SystemExit(f"GUARDIAN BLOCK line {n}: broken chain")
+              body={k:v for k,v in r.items() if k!="record_hash"}
+              calc=hashlib.sha256(json.dumps(body,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+              if calc!=r["record_hash"]: raise SystemExit(f"GUARDIAN BLOCK line {n}: hash mismatch")
+              prev_id=r["checkpoint_id"]; prev_hash=r["record_hash"]
+          print("Checkpoint ledger chain valid; records:", 0 if prev_id is None else ">=1")
+          PY
       - name: Security decision
         run: echo "Static policy gate PASS. Critical authorization still requires explicit AFAH approval."
