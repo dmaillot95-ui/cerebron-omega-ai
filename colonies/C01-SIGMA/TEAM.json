@@ -1,0 +1,151 @@
+{
+  "schema": "cerebron-colony-team-v1",
+  "version": "1.0",
+  "colony_id": "C01",
+  "colony_name": "SIGMA",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "authority": "AFAH",
+  "mentor": "CEREBRON_AO_AGORA",
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "COMPUTATION!=PROOF",
+    "CONSENSUS!=TRUTH",
+    "NO_AGENT_SIMULATION",
+    "CHIEF_CANNOT_SELF_CERTIFY"
+  ],
+  "max_agents": 10,
+  "agents": [
+    {
+      "slot": 1,
+      "id": "SIGMA-CHIEF",
+      "role": "CHIEF",
+      "mission": "Route proof obligations, enforce version/checkpoint discipline, coordinate the team and submit packets to AGORA.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 2,
+      "id": "SIGMA-FORMALIZER",
+      "role": "FORMALIZER",
+      "mission": "Normalize statements, quantifiers, domains, definitions and proof obligations.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 3,
+      "id": "SIGMA-PROVER-A",
+      "role": "PROVER",
+      "mission": "Develop a primary derivation from the normalized statement.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 4,
+      "id": "SIGMA-PROVER-B",
+      "role": "ALTERNATE_PROVER",
+      "mission": "Seek a materially different derivation and expose shared dependencies.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 5,
+      "id": "SIGMA-COMPUTE",
+      "role": "COMPUTE_CHECKER",
+      "mission": "Run finite symbolic/numerical checks and label them strictly as computation, never universal proof.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 6,
+      "id": "SIGMA-COUNTEREX",
+      "role": "COUNTEREXAMPLE_RED_TEAM",
+      "mission": "Attack assumptions, search edge cases/counterexamples and identify hidden dependencies.",
+      "independent_validator": true,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 7,
+      "id": "SIGMA-AUDITOR",
+      "role": "FORMAL_AUDITOR",
+      "mission": "Check every inference, quantifier, algebraic transformation and dependency without authoring the primary proof.",
+      "independent_validator": true,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 8,
+      "id": "SIGMA-REPRODUCER",
+      "role": "CLEAN_REPRODUCER",
+      "mission": "Reconstruct the strongest claim from a minimal clean evidence packet; imported derivation is excluded when independence is required.",
+      "independent_validator": true,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 9,
+      "id": "SIGMA-EVIDENCE",
+      "role": "EVIDENCE_PROVENANCE",
+      "mission": "Maintain evidence IDs, lineage, dependency fingerprints, contradictions and proof/computation distinctions.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    },
+    {
+      "slot": 10,
+      "id": "SIGMA-SYNTH",
+      "role": "SYNTHESIZER",
+      "mission": "Fuse only audited material into the colony egress packet; preserve dissent and unresolved obligations.",
+      "independent_validator": false,
+      "status": "UNASSIGNED"
+    }
+  ],
+  "execution_policy": {
+    "assignment": "A slot becomes executable only after a real model/resource identity and version are recorded.",
+    "same_model_rule": "Same model+prompt+data lineage must not be counted as independent evidence.",
+    "chief_rule": "CHIEF routes and coordinates but cannot certify its own promotion.",
+    "quorum_rule": "Agent count is not evidence; validation depends on gates and independence.",
+    "missing_slot_rule": "UNASSIGNED remains UNASSIGNED; never simulate a missing teammate."
+  },
+  "routing": {
+    "seed_farms": [
+      "F01",
+      "F09"
+    ],
+    "audit_candidates": [
+      "F06",
+      "F34"
+    ],
+    "red_team_candidates": [
+      "F04",
+      "F33"
+    ],
+    "reproduction_candidates": [
+      "F35",
+      "F71"
+    ],
+    "proof_engineering_candidates": [
+      "F70"
+    ],
+    "reality_gate_candidates": [
+      "F72"
+    ],
+    "learning_candidates": [
+      "F59"
+    ],
+    "memory_candidates": [
+      "F74"
+    ]
+  },
+  "packet_flow": "MISSION -> CHIEF -> FORMALIZER -> PROVER_A||PROVER_B||COMPUTE -> COUNTEREX -> AUDITOR -> REPRODUCER -> EVIDENCE -> SYNTH -> AGORA",
+  "activation_gate": [
+    "real_resources_assigned",
+    "model_versions_recorded",
+    "baseline_frozen",
+    "cold_benchmark_passed",
+    "audit_passed",
+    "counter_audit_passed",
+    "incremental_value_measured",
+    "ablation_survived",
+    "cost_latency_recorded",
+    "rollback_defined"
+  ]
+}
