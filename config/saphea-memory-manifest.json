@@ -1,0 +1,108 @@
+{
+  "schema": "cerebron-saphea-memory-manifest-v1",
+  "colony_id": "C01-SIGMA",
+  "status": "DESIGNED_PENDING_RUNTIME_PASS",
+  "private_store": "cerebron-omega/cerebron-private-memory",
+  "agents": [
+    {
+      "agent_id": "SIGMA-CHIEF",
+      "slot": 1,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-CHIEF/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-FORMALIZER",
+      "slot": 2,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-FORMALIZER/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-A",
+      "slot": 3,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-PROVER-A/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-PROVER-B",
+      "slot": 4,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-PROVER-B/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-COMPUTE",
+      "slot": 5,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-COMPUTE/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-COUNTEREX",
+      "slot": 6,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-COUNTEREX/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-AUDITOR",
+      "slot": 7,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-AUDITOR/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-REPRODUCER",
+      "slot": 8,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-REPRODUCER/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-EVIDENCE",
+      "slot": 9,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-EVIDENCE/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    },
+    {
+      "agent_id": "SIGMA-SYNTH",
+      "slot": 10,
+      "namespace": "colony/C01-SIGMA/agents/SIGMA-SYNTH/",
+      "current_generation": null,
+      "last_validated_checkpoint": null,
+      "model_binding": null,
+      "status": "UNASSIGNED"
+    }
+  ],
+  "shared_namespace": "colony/C01-SIGMA/shared/",
+  "audit_namespace": "colony/C01-SIGMA/audit/",
+  "rules": {
+    "max_agents": 10,
+    "private_by_default": true,
+    "minimum_relevant_recall": true,
+    "compression_before_accumulation": true,
+    "cross_agent_copy": "PROVENANCE_REQUIRED",
+    "promotion": "AUDIT_AND_RECALL_REQUIRED"
+  }
+}
