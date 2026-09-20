@@ -17,18 +17,18 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 74
-- Derniers workflows en succès : 71
+- Derniers workflows en succès : 70
 - Derniers workflows en échec : 2
 - Fermes avec au moins un artefact sur leur dernier run : 63
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35502312812 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35502449788 status=completed conclusion=success artifacts=21
+- Farm 01 collatz-theory: run=35503071103 status=in_progress conclusion=None artifacts=3
+- Farm 02 collatz-dynamics: run=35503089976 status=in_progress conclusion=None artifacts=0
 - Farm 03 collatz-adic: run=35502546102 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35502494405 status=completed conclusion=success artifacts=21
+- Farm 04 collatz-counterexample: run=35502967475 status=completed conclusion=success artifacts=21
 - Farm 05 collatz-literature: run=35308721005 status=completed conclusion=success artifacts=0
-- Farm 06 collatz-formal-audit: run=35502388074 status=completed conclusion=success artifacts=21
+- Farm 06 collatz-formal-audit: run=35502824232 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35451808691 status=completed conclusion=success artifacts=22
 - Farm 08 research-web: run=35419822578 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35419824254 status=completed conclusion=success artifacts=1
@@ -89,7 +89,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 64 hardware-reliability-safety: run=35314709831 status=completed conclusion=success artifacts=0
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
 - Farm 66 knowledge-graph-vector-index: run=35420423815 status=completed conclusion=success artifacts=1
-- Farm 67 cross-farm-communication: run=35502621442 status=in_progress conclusion=None artifacts=0
+- Farm 67 cross-farm-communication: run=35502621442 status=completed conclusion=success artifacts=1
 - Farm 68 autonomous-experiment-orchestrator: run=35420430309 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=35421675194 status=completed conclusion=success artifacts=1
