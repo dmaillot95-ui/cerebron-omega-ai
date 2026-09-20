@@ -1,0 +1,67 @@
+{
+  "schema": "cerebron-model-gateway-v1",
+  "version": "1.0",
+  "status": "DESIGNED_NOT_CONNECTED",
+  "authority": "AFAH",
+  "purpose": "Central registry/router for external model weights and adapters. GitHub stores references and evidence, not model weights.",
+  "storage_policy": {
+    "github_allowed": [
+      "configuration",
+      "code",
+      "model IDs",
+      "immutable revisions/commit hashes",
+      "SHA256/digests",
+      "training recipes",
+      "metrics",
+      "small validated datasets",
+      "AGORA checkpoints"
+    ],
+    "github_forbidden": [
+      "full neural-network weight files",
+      "large duplicated checkpoints",
+      "provider secrets/tokens"
+    ],
+    "external_weight_store": "HUGGING_FACE_OR_OTHER_APPROVED_MODEL_STORE",
+    "secret_policy": "Secrets must remain in GitHub Secrets/provider secret storage; never commit them."
+  },
+  "providers": [
+    {
+      "id": "huggingface",
+      "status": "UNCONNECTED",
+      "endpoint_type": "REMOTE_MODEL_REGISTRY_OR_INFERENCE",
+      "credential_ref": "HF_TOKEN_SECRET_IF_REQUIRED"
+    }
+  ],
+  "models": [],
+  "adapters": [],
+  "request_contract": {
+    "required": [
+      "request_id",
+      "farm_id",
+      "colony_id",
+      "saphea_id",
+      "task",
+      "capability_required"
+    ],
+    "optional": [
+      "preferred_model_id",
+      "revision",
+      "adapter_id",
+      "max_cost_class",
+      "max_latency_ms"
+    ],
+    "response": [
+      "provider",
+      "model_id",
+      "immutable_revision",
+      "adapter_id",
+      "execution_route",
+      "availability",
+      "evidence_id"
+    ]
+  },
+  "binding_rule": "No SAPHEA becomes BOUND from a registry entry alone. Real availability plus benchmark and audit are required.",
+  "independence_rule": "Same base model, adapter, prompt/data lineage or shared evidence must be recorded and must not be counted automatically as independent reproduction.",
+  "cache_policy": "Runtime cache is ephemeral unless explicitly approved; never commit downloaded weights to Git.",
+  "next_gate": "CONNECT_PROVIDER_AND_DISCOVER_REAL_MODELS"
+}
