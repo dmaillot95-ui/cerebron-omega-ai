@@ -1,0 +1,71 @@
+{
+  "schema": "cerebron-c01-p06-promotion-gate-v1",
+  "status": "FROZEN_PRE_EXECUTION",
+  "colony_id": "C01-SIGMA",
+  "levels": [
+    {
+      "name": "DESIGNED",
+      "requires": [
+        "team schema",
+        "binding protocol",
+        "router",
+        "output packet schema",
+        "execution ledger",
+        "dependency graph"
+      ]
+    },
+    {
+      "name": "EXPERIMENTAL",
+      "requires": [
+        "real bound model exact revision",
+        "runtime PASS",
+        "memory route PASS",
+        "first execution receipt"
+      ]
+    },
+    {
+      "name": "QUALIFIED",
+      "requires": [
+        "cold baseline complete",
+        "primary audit PASS",
+        "red team PASS",
+        "clean reproduction PASS",
+        "no unresolved integrity failure"
+      ]
+    },
+    {
+      "name": "SPECIALIST_VALIDATED",
+      "requires": [
+        "ablation shows measurable role value",
+        "novel cold transfer PASS",
+        "dependency graph reviewed",
+        "no benchmark regression"
+      ]
+    },
+    {
+      "name": "ACTIVE",
+      "requires": [
+        "routing rule validated",
+        "cost/latency envelope measured",
+        "rollback tested",
+        "AGORA handoff PASS"
+      ]
+    }
+  ],
+  "forbidden_promotions": [
+    "DESIGNED->QUALIFIED",
+    "runtime canary->ACTIVE",
+    "consensus->proof",
+    "workflow success->scientific validation",
+    "self-certification by chief/auditor/model"
+  ],
+  "decision": {
+    "missing_evidence": "HOLD",
+    "infra_failure": "HOLD_NOT_REJECT",
+    "model_failure_under_valid_protocol": "REJECT_OR_ROLLBACK",
+    "regression": "ROLLBACK"
+  },
+  "current_level": "DESIGNED",
+  "next_required": "P03 unified memory PASS + qualified runtime evidence + first real bound execution",
+  "authority": "AFAH"
+}
