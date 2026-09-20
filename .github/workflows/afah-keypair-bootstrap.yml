@@ -1,0 +1,37 @@
+name: AFAH Keypair Bootstrap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate one-time AFAH keypair
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p /tmp/afah-keypair
+          openssl genpkey -algorithm ED25519 -out /tmp/afah-keypair/AFAH_PRIVATE_KEY.pem
+          openssl pkey -in /tmp/afah-keypair/AFAH_PRIVATE_KEY.pem -pubout -out /tmp/afah-keypair/AFAH_PUBLIC_KEY.pem
+          openssl pkey -pubin -in /tmp/afah-keypair/AFAH_PUBLIC_KEY.pem -outform DER | sha256sum | awk '{print $1}' > /tmp/afah-keypair/AFAH_PUBLIC_KEY.sha256
+          cat > /tmp/afah-keypair/README.txt <<'EOF'
+          AFAH BOOTSTRAP KEYPAIR
+          Keep AFAH_PRIVATE_KEY.pem secret.
+          Copy its complete contents into the GitHub Actions secret AFAH_SIGNING_PRIVATE_KEY.
+          Never commit the private key.
+          After successful enrollment, delete the downloaded bootstrap archive and local copies you do not intentionally keep.
+          EOF
+      - name: Upload private bootstrap package
+        uses: actions/upload-artifact@v4
+        with:
+          name: AFAH-KEYPAIR-BOOTSTRAP
+          path: /tmp/afah-keypair/
+          retention-days: 1
+          if-no-files-found: error
