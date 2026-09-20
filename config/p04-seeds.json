@@ -1,7 +1,7 @@
 {
   "schema": "p04-seeds-v1",
   "phase": "P04",
-  "status": "METADATA_DISCOVERY_ACTIVE",
+  "status": "PIN_CANDIDATES_RECORDED_RUNTIME_TEST_PENDING",
   "target": "C01-SIGMA",
   "candidates": [
     {
@@ -11,7 +11,10 @@
       "observed_revision": "2863ddf32bc3434b6c25143b11c15c5eaa820d15",
       "revision_status": "OBSERVED_HF_REVISION_NOT_YET_RUNTIME_PIN_TESTED",
       "storage_size_observed": "8.06 GB",
-      "source": "official_huggingface"
+      "source": "official_huggingface",
+      "pin_candidate": "1cfa9a7",
+      "pin_source": "HF official commit history",
+      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
     },
     {
       "id": "Qwen/Qwen3-4B-Base",
@@ -24,7 +27,10 @@
       "layers": 36,
       "context_length": 32768,
       "storage_size_observed": "8.06 GB",
-      "source": "official_huggingface"
+      "source": "official_huggingface",
+      "pin_candidate": "906bfd4",
+      "pin_source": "HF official commit history",
+      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B",
@@ -36,7 +42,10 @@
       "context_config": 65536,
       "long_context_note": "model card documents YaRN extension beyond native config",
       "revision_status": "REVISION_PIN_PENDING",
-      "source": "official_huggingface"
+      "source": "official_huggingface",
+      "pin_candidate": "a07cc9a",
+      "pin_source": "HF official commit history",
+      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B-Base",
@@ -47,7 +56,10 @@
       "context_config": 65536,
       "inference_provider_status_observed": "NO_DEPLOYED_PROVIDER_AT_DISCOVERY",
       "revision_status": "REVISION_PIN_PENDING",
-      "source": "official_huggingface"
+      "source": "official_huggingface",
+      "pin_candidate": "d78a42f",
+      "pin_source": "HF official commit history",
+      "pin_state": "CANDIDATE_PIN_NEEDS_RUNTIME_LOAD"
     }
   ],
   "gates": [
