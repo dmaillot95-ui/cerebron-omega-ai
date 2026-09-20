@@ -1,0 +1,56 @@
+{
+  "schema": "cerebron-pretraining-safety-freeze-v1",
+  "status": "ACTIVE",
+  "purpose": "Correct architecture defects before any parameter training without deleting or overwriting validated state.",
+  "non_destructive": true,
+  "freeze": [
+    "full-weight training",
+    "automatic promotion",
+    "overwrite of G0/base revisions",
+    "deletion of failed runs",
+    "publication of private artifacts"
+  ],
+  "preserve": [
+    "all existing receipts",
+    "raw outputs",
+    "seed-farm links",
+    "HF private memories",
+    "F66/F74 pointers",
+    "G0 immutable revisions",
+    "rollback generations"
+  ],
+  "corrections": [
+    {
+      "id": "C1",
+      "issue": "SIGMA identifier inconsistency: registry C03-SIGMA vs historical folder C01-SIGMA",
+      "action": "treat as explicit alias until controlled migration; never silently rename or split memory lineage",
+      "state": "HOLD_FOR_ALIAS"
+    },
+    {
+      "id": "C2",
+      "issue": "Task-agent teaching exists as design but is not yet evidence of real teacher executions",
+      "action": "require execution receipts before training dataset inclusion",
+      "state": "ENFORCED"
+    },
+    {
+      "id": "C3",
+      "issue": "P03 unified F66→F74→HF receipt absent",
+      "action": "block trusted-memory promotion until unified recall PASS",
+      "state": "BLOCKING"
+    },
+    {
+      "id": "C4",
+      "issue": "Farm workflow execution is deterministic code execution, not SAPHEA model reasoning",
+      "action": "keep evidence classes separate",
+      "state": "ENFORCED"
+    },
+    {
+      "id": "C5",
+      "issue": "Parameter training worker not yet validated",
+      "action": "start with reversible adapter/LoRA canary; base weights immutable; private HF only",
+      "state": "ENFORCED"
+    }
+  ],
+  "rollback_rule": "Any failed gate restores last validated generation/pointer; failed evidence is retained.",
+  "next_gate": "resolve C1 alias + P03 unified recall before first parameter-training canary"
+}
