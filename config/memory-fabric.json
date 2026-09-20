@@ -74,9 +74,13 @@
     "F74_cross_repo_persistence_verified": true,
     "private_memory_runtime_verified": true,
     "private_hf_repository_verified": true,
-    "private_hf_write_read_integrity_verified": true
+    "private_hf_write_read_integrity_verified": true,
+    "C01_private_memory_recall_verified": true,
+    "C01_private_write_verified": true,
+    "C01_private_read_verified": true,
+    "C01_private_sha256_integrity_verified": true
   },
-  "next_gate": "CONNECT_PRIVATE_STORE_TO_F66_F74_OPAQUE_POINTER_AND_C01_RECALL",
+  "next_gate": "PERSIST_C01_OPAQUE_POINTER_IN_F74_AND_F66_THEN_END_TO_END_RECALL",
   "verification": {
     "workflow": "Memory Fabric Runtime Test",
     "run_id": 35521880359,
@@ -118,5 +122,15 @@
       "SHA256"
     ],
     "secret": "HF_TOKEN (GitHub Actions secret; value never stored in repository)"
+  },
+  "verifications": {
+    "C01_private_memory_recall": {
+      "status": "PASS",
+      "workflow": "c01-private-memory-recall.yml",
+      "workflow_commit": "5426b74e4b9f25179cb43bdd368320cc8997dffa",
+      "run_number": 1,
+      "result_source": "user-confirmed green GitHub Actions run",
+      "scope": "Synthetic private C01 fixture: HF private write/read + SHA-256 + colony/memory identity; opaque pointer schema generated in-run but not yet persisted to F66/F74."
+    }
   }
 }
