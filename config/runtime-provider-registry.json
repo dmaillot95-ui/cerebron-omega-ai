@@ -1,0 +1,42 @@
+{
+  "schema": "cerebron-runtime-provider-registry-v1",
+  "status": "DISCOVERY",
+  "contract": "config/inference-runner-contract.json",
+  "canary": "config/inference-runner-canary.json",
+  "providers": [
+    {
+      "id": "GITHUB_ACTIONS_CPU",
+      "state": "UNQUALIFIED",
+      "exact_revision": "POSSIBLE_IN_PRINCIPLE",
+      "weights_execution": "NOT_PROVEN",
+      "cost_policy": "NO_PAID_ASSUMPTION",
+      "next_test": "resource feasibility canary only"
+    },
+    {
+      "id": "HF_SERVERLESS",
+      "state": "UNQUALIFIED",
+      "exact_revision": "NOT_PROVEN_FOR_REQUIRED_MODELS",
+      "weights_execution": "NOT_PROVEN",
+      "cost_policy": "NO_PAID_ASSUMPTION",
+      "next_test": "provider availability + exact revision guarantee"
+    },
+    {
+      "id": "HF_PRIVATE_STORAGE",
+      "state": "REJECT_AS_RUNNER",
+      "reason": "storage plane is not inference runtime"
+    },
+    {
+      "id": "EXTERNAL_GPU",
+      "state": "UNAVAILABLE_UNTIL_REAL_RESOURCE_CONNECTED",
+      "cost_policy": "DO_NOT_AUTO_PURCHASE"
+    }
+  ],
+  "qualification_order": [
+    "ZERO_COST_AVAILABLE_RESOURCE",
+    "EXACT_REVISION_SUPPORT",
+    "CANARY_1",
+    "CANARY_T04",
+    "AUTHORIZE_28_RUN_MATRIX"
+  ],
+  "rule": "No provider becomes QUALIFIED from documentation or configuration alone; executable evidence required."
+}
