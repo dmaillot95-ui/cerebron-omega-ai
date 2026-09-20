@@ -1,0 +1,73 @@
+{
+  "schema": "cerebron-private-memory-route-v1",
+  "version": "1.0",
+  "status": "HOLD_AWAITING_PRIVATE_AUTH",
+  "authority": "AFAH",
+  "objective": "Keep private colony learning and parametric artifacts outside public GitHub while retaining non-sensitive routing metadata.",
+  "routes": {
+    "public_control_plane": {
+      "store": "GitHub",
+      "allowed": [
+        "opaque memory_id",
+        "colony_id",
+        "generation",
+        "non-sensitive status",
+        "content digest",
+        "provider object ID if non-sensitive",
+        "benchmark/audit status"
+      ],
+      "forbidden": [
+        "private payload",
+        "training examples",
+        "private prompts/context",
+        "tokens",
+        "credentials",
+        "private weights/adapters"
+      ]
+    },
+    "private_data_plane": {
+      "preferred_store": "Hugging Face private repository",
+      "auth": "REQUIRED",
+      "contents": [
+        "private validated memory payloads",
+        "private datasets when approved",
+        "LoRA/adapters",
+        "derived weights"
+      ],
+      "availability": "NOT_VERIFIED"
+    }
+  },
+  "envelope": {
+    "public_pointer_fields": [
+      "memory_id",
+      "colony_id",
+      "generation",
+      "payload_sha256",
+      "provider",
+      "private_object_id",
+      "revision",
+      "validation_status"
+    ],
+    "private_payload_fields": [
+      "content",
+      "training_examples",
+      "private_context",
+      "adapter_or_weight_artifact"
+    ]
+  },
+  "protocol": [
+    "CLASSIFY",
+    "REJECT_SECRET",
+    "HASH_PRIVATE_PAYLOAD",
+    "WRITE_PRIVATE_STORE",
+    "READ_BACK_PRIVATE_STORE",
+    "VERIFY_DIGEST",
+    "WRITE_PUBLIC_OPAQUE_POINTER",
+    "INDEX_F66",
+    "REGISTER_F74_POINTER",
+    "RECALL_TEST"
+  ],
+  "failure_rule": "If private authentication/write/read is unavailable, keep payload local/ephemeral and do not publish it.",
+  "security": "A public pointer must not reveal sensitive content through names, descriptions, metadata, URLs, or embedded parameters.",
+  "next_gate": "AUTHENTICATED_PRIVATE_HF_WRITE_READ_DELETE_OR_RETAIN_TEST"
+}
