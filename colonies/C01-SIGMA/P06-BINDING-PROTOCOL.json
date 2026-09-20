@@ -1,0 +1,50 @@
+{
+  "schema": "cerebron-c01-p06-binding-protocol-v1",
+  "status": "FROZEN_PRE_BINDING",
+  "colony_id": "C01-SIGMA",
+  "purpose": "Bind only benchmark-qualified real model revisions to SAPHEA slots without manufacturing independence.",
+  "binding_record_required": [
+    "agent_id",
+    "model_id",
+    "resolved_revision_sha",
+    "runner",
+    "runtime_receipt",
+    "baseline_receipt",
+    "audit_receipt",
+    "red_team_receipt",
+    "reproduction_receipt",
+    "lineage_id",
+    "dependency_fingerprint",
+    "binding_timestamp",
+    "binding_status"
+  ],
+  "states": [
+    "UNASSIGNED",
+    "EXPERIMENTAL_BOUND",
+    "QUALIFIED_BOUND",
+    "HOLD",
+    "ROLLED_BACK"
+  ],
+  "rules": {
+    "experimental": "G1 runtime PASS plus explicit exact revision; cannot make validated scientific claims alone",
+    "qualified": "G1-G5 PASS",
+    "specialist_promotion": "G1-G7 PASS with measurable cold transfer gain",
+    "same_lineage": "must share dependency fingerprint and cannot count as independent evidence by default",
+    "chief": "cannot self-certify team promotion",
+    "auditor": "cannot be sole source of claim being audited",
+    "reproducer": "must receive clean minimum packet, not hidden reasoning history"
+  },
+  "rollback": {
+    "required": true,
+    "retain_prior_binding": true,
+    "trigger": [
+      "benchmark regression",
+      "integrity failure",
+      "revision drift",
+      "privacy violation",
+      "audit failure"
+    ]
+  },
+  "current_binding": "NONE",
+  "authority": "AFAH"
+}
