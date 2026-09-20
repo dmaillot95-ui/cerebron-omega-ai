@@ -1,16 +1,30 @@
 {
   "schema": "p04-seeds-v1",
   "phase": "P04",
-  "status": "PREPARED",
+  "status": "METADATA_DISCOVERY_ACTIVE",
   "target": "C01-SIGMA",
   "candidates": [
     {
       "id": "Qwen/Qwen3-4B",
-      "state": "CANDIDATE"
+      "state": "CANDIDATE",
+      "license": "Apache-2.0",
+      "observed_revision": "2863ddf32bc3434b6c25143b11c15c5eaa820d15",
+      "revision_status": "OBSERVED_HF_REVISION_NOT_YET_RUNTIME_PIN_TESTED",
+      "storage_size_observed": "8.06 GB",
+      "source": "official_huggingface"
     },
     {
       "id": "Qwen/Qwen3-4B-Base",
-      "state": "CANDIDATE"
+      "state": "CANDIDATE",
+      "license": "Apache-2.0",
+      "observed_revision": "b1ecb62b18378adb8af264260fbbbd618222be87",
+      "revision_status": "OBSERVED_HF_REVISION_NOT_YET_RUNTIME_PIN_TESTED",
+      "parameters": "4.0B",
+      "non_embedding_parameters": "3.6B",
+      "layers": 36,
+      "context_length": 32768,
+      "storage_size_observed": "8.06 GB",
+      "source": "official_huggingface"
     },
     {
       "id": "HuggingFaceTB/SmolLM3-3B",
