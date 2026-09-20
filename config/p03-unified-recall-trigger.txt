@@ -1,0 +1,3 @@
+trigger=1
+route=F66-F74-HF_PRIVATE
+memory=C01-SIGMA-SIGMA-FORMALIZER-M1
