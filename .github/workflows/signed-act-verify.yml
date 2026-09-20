@@ -1,0 +1,42 @@
+name: GUARDIAN Signed Act Verify
+
+on:
+  workflow_dispatch:
+    inputs:
+      act_file:
+        description: "Path under security/signed-acts/ to a signed act JSON"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail closed until AFAH public identity is enrolled
+        shell: bash
+        env:
+          ACT_FILE: ${{ inputs.act_file }}
+        run: |
+          set -euo pipefail
+          case "$ACT_FILE" in
+            security/signed-acts/*.json) ;;
+            *) echo "BLOCK: invalid act path"; exit 1 ;;
+          esac
+
+          test -f security/SIGNED_ACT_PROTOCOL.md
+          grep -F 'CRYPTOGRAPHIC_AFAH_IDENTITY = NOT_ENROLLED' security/SIGNED_ACT_PROTOCOL.md
+
+          if [ ! -f security/keys/afah-signing-public.pem ]; then
+            echo "HOLD: no AFAH public verification key enrolled."
+            exit 1
+          fi
+
+          echo "BLOCK: public key file exists but enrollment/verification has not yet been certified."
+          echo "No privileged transition is authorized by this workflow."
+          exit 1
