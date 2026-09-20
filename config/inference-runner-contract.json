@@ -1,0 +1,73 @@
+{
+  "schema": "cerebron-inference-runner-contract-v1",
+  "status": "FROZEN_V1",
+  "purpose": "Provider-neutral exact-revision inference contract for cold G0 benchmarks and later SAPHEA execution.",
+  "request": {
+    "required": [
+      "request_id",
+      "model_id",
+      "revision_sha",
+      "prompt",
+      "temperature",
+      "max_new_tokens",
+      "seed",
+      "taskset_version"
+    ],
+    "constraints": {
+      "revision_sha": "40-char immutable commit SHA",
+      "temperature": 0,
+      "external_memory": false,
+      "rag": false,
+      "agora": false,
+      "cross_model_context": false
+    }
+  },
+  "response": {
+    "required": [
+      "request_id",
+      "model_id",
+      "resolved_revision_sha",
+      "text",
+      "completion_status",
+      "latency_ms",
+      "runtime_id",
+      "output_sha256"
+    ],
+    "optional": [
+      "input_tokens",
+      "output_tokens",
+      "peak_memory_mb",
+      "device",
+      "precision"
+    ]
+  },
+  "verification": [
+    "resolved_revision_sha == requested revision_sha",
+    "output_sha256 recomputes exactly",
+    "completion_status == COMPLETE",
+    "no hidden fallback model",
+    "raw output stored before scoring",
+    "runtime identity recorded"
+  ],
+  "failure_codes": [
+    "REVISION_UNAVAILABLE",
+    "MODEL_LOAD_FAILED",
+    "OOM",
+    "TIMEOUT",
+    "PROVIDER_FALLBACK",
+    "REVISION_MISMATCH",
+    "INCOMPLETE",
+    "INTEGRITY_FAIL"
+  ],
+  "security": {
+    "secrets_in_git": false,
+    "private_token_output": false,
+    "raw_private_memory": false
+  },
+  "benchmark_binding": {
+    "taskset": "benchmarks/C01-SIGMA-G0-TASKSET.json",
+    "execution": "benchmarks/C01-SIGMA-G0-EXECUTION.json",
+    "expected_runs": 28
+  },
+  "rule": "A provider is compatible only after a real canary proves exact revision resolution and output integrity. Provider compatibility is not model quality."
+}
