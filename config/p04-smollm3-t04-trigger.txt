@@ -1,0 +1,2 @@
+trigger=1
+purpose=execute-frozen-T04-smollm3-3b
