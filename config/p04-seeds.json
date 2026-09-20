@@ -1,7 +1,7 @@
 {
   "schema": "p04-seeds-v1",
   "phase": "P04",
-  "status": "PINS_RESOLVED_CONFIG_LOAD_PASS_FULL_RUNTIME_PENDING",
+  "status": "RUNTIME_CANARY_PASS_1_OF_4_BASELINE_PENDING",
   "target": "C01-SIGMA",
   "candidates": [
     {
@@ -86,5 +86,12 @@
     "TRANSFER",
     "BIND_OR_REJECT"
   ],
-  "rule": "No candidate becomes a SAPHEA binding before all required gates pass."
+  "rule": "No candidate becomes a SAPHEA binding before all required gates pass.",
+  "last_verified": {
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "load": "PASS",
+    "inference": "PASS",
+    "scope": "single synthetic canary; not benchmark quality"
+  }
 }
