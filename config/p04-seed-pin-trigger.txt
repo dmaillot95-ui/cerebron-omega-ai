@@ -1,2 +1,3 @@
-P04 seed pin runtime trigger 001
-workflow=1626aa0197cbde69e3d0b71638b0365eaa2f8ddf
+P04 seed pin runtime trigger 002
+workflow=7d0421a136caaababbb9284843687eeb6804bd67
+receipt_mode=enabled
