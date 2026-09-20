@@ -1,0 +1,62 @@
+name: GUARDIAN Security Regression
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'security/**'
+      - 'config/**'
+      - '.github/workflows/**'
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify critical security invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          checks={
+            "security/GUARDIAN_OMEGA_POLICY.md":[
+              "AFAH_AUTHORITY = IMMUTABLE_BY_AI",
+              "GUARDIAN_BYPASS = FORBIDDEN",
+              "SELF_PROMOTION = FORBIDDEN",
+              "SELF_PERMISSION_CHANGE = FORBIDDEN",
+              "SAFETY_DOWNGRADE = FORBIDDEN",
+              "UNKNOWN = DENY"],
+            "security/LAST_VALIDATED_STATE_PROTOCOL.md":[
+              "AI_CAN_SELF_APPROVE_CHECKPOINT = FALSE",
+              "AFAH_APPROVAL_REQUIRED = TRUE",
+              "UNKNOWN_ROLLBACK_TARGET = HOLD"],
+            "security/GITHUB_PROTECTION_REQUIRED.md":[
+              "HUMAN_GATE_VERIFIED = FALSE",
+              "LEDGER_AUTOMATIC_WRITE = DISABLED",
+              "CHECKPOINT_PROMOTION = HOLD",
+              "PRIVILEGED_RECOVERY = BLOCKED"],
+            "security/QUARANTINE_ROLLBACK_PROTOCOL.md":[
+              "SECURITY_FAILURE => QUARANTINE",
+              "QUARANTINE => NO_PROMOTION",
+              "CRITICAL_RECOVERY => AFAH_APPROVAL_REQUIRED"]
+          }
+          errors=[]
+          for fn,required in checks.items():
+              p=Path(fn)
+              if not p.exists(): errors.append(f"MISSING:{fn}"); continue
+              s=p.read_text()
+              errors += [f"MISSING_INVARIANT:{fn}:{x}" for x in required if x not in s]
+          if errors:
+              print("\n".join(errors))
+              raise SystemExit("GUARDIAN SECURITY REGRESSION FAIL")
+          print("GUARDIAN SECURITY REGRESSION PASS")
+          PY
+      - name: Verify CODEOWNERS critical surfaces
+        shell: bash
+        run: |
+          grep -F '/security/ @dmaillot95-ui' CODEOWNERS
+          grep -F '/config/ @dmaillot95-ui' CODEOWNERS
+          grep -F '/.github/workflows/ @dmaillot95-ui' CODEOWNERS
