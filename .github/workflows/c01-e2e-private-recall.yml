@@ -1,0 +1,38 @@
+name: C01 E2E Private Recall
+on:
+  push:
+    paths:
+      - '.github/workflows/c01-e2e-private-recall.yml'
+      - 'config/c01-e2e-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - name: Install HF client
+        run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: F66 to F74 to HF private to C01
+        run: |
+          python - <<'PY'
+          import json,hashlib,urllib.request,os
+          from huggingface_hub import hf_hub_download
+          def public_json(url):
+              with urllib.request.urlopen(url,timeout=30) as r:return json.load(r)
+          idx=public_json("https://raw.githubusercontent.com/dmaillot95-ui/cerebron-farm-66-knowledge-graph-vector-index/main/index/private-pointers/C01-SIGMA-MEMTEST-0001.json")
+          print("F66_INDEX_READ=PASS")
+          ptr=public_json("https://raw.githubusercontent.com/"+idx["catalog_repo"]+"/main/"+idx["catalog_path"])
+          if idx["memory_id"]!=ptr["memory_id"] or idx["colony_id"]!=ptr["colony_id"]: raise SystemExit("F66_F74_LINK=FAIL")
+          print("F74_POINTER_READ=PASS")
+          print("F66_F74_LINK=PASS")
+          dst=hf_hub_download(repo_id=ptr["private_repo_id"],filename=ptr["private_object_path"],repo_type="model",token=os.environ["HF_TOKEN"],force_download=True)
+          raw=open(dst,"rb").read(); obj=json.loads(raw)
+          if obj["memory_id"]!=idx["memory_id"] or obj["colony_id"]!=idx["colony_id"]: raise SystemExit("C01_IDENTITY=FAIL")
+          print("HF_PRIVATE_READ=PASS")
+          print("C01_IDENTITY=PASS")
+          print("END_TO_END_RECALL=PASS")
+          print("PRIVATE_PAYLOAD_PUBLIC_WRITE=NO")
+          PY
