@@ -1,0 +1,2 @@
+trigger=1
+purpose=qwen3-4b-base-exact-revision-runtime-canary
