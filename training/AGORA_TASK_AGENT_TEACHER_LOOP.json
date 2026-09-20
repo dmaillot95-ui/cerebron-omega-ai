@@ -1,0 +1,106 @@
+{
+  "schema": "cerebron-agora-task-agent-teacher-loop-v1",
+  "status": "DESIGNED_FOR_EXECUTION",
+  "authority": "AFAH",
+  "purpose": "Use real AGORA task-agent outputs as teaching material for colony SAPHEA and SAPHEIDE, but only after evidence gates.",
+  "flow": [
+    "AGORA_TASK_AGENT",
+    "COLONY_CHIEF",
+    "SEED_FARM_CONTEXT",
+    "SAPHEA_ATTEMPT",
+    "TASK_AGENT_CRITIQUE",
+    "AUDITOR",
+    "COUNTER_AUDITOR",
+    "CLEAN_REPRODUCER",
+    "VERIFIED_LESSON",
+    "SAPHÉIDE",
+    "HF_PRIVATE_MEMORY",
+    "TRAINING_FACTORY",
+    "PRIVATE_ADAPTER_OR_WEIGHT_ARTIFACT",
+    "COLD_BENCHMARK",
+    "ABLATION",
+    "TRANSFER",
+    "PROMOTE_OR_ROLLBACK",
+    "AGORA"
+  ],
+  "teacher_roles": [
+    {
+      "id": "TASK-TEACHER",
+      "function": "produce exercises, explanations and corrections; never self-certify truth"
+    },
+    {
+      "id": "TASK-CRITIC",
+      "function": "compare SAPHEA attempt to evidence and identify precise failure modes"
+    },
+    {
+      "id": "TASK-RED",
+      "function": "attack lesson for leakage, circularity, unsupported claims and shared dependencies"
+    },
+    {
+      "id": "TASK-CURATOR",
+      "function": "compress only validated GOLD/RED lessons for SAPHÉIDE"
+    },
+    {
+      "id": "TASK-EVALUATOR",
+      "function": "run sealed cold/transfer evaluation; cannot train on evaluation answers"
+    }
+  ],
+  "wave01": {
+    "colonies": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "seed_farms": [
+      "F01",
+      "F09",
+      "F06",
+      "F34"
+    ],
+    "hf_memory_gate": "PASS",
+    "farm_execution_gate": "4_OF_4_PASS",
+    "model_parameter_training": "PENDING_REAL_TRAINING_WORKER"
+  },
+  "learning_contract": {
+    "gold": "validated correct derivation/skill",
+    "red": "validated failure/counterexample/audit finding",
+    "working": "not training truth",
+    "requirements": [
+      "provenance",
+      "license/privacy",
+      "audit",
+      "red-team",
+      "dependency fingerprint",
+      "no benchmark leakage"
+    ]
+  },
+  "parameter_update": {
+    "default": "LoRA_or_adapter_before_full_weight_training",
+    "storage": "HF_PRIVATE",
+    "github": "metadata_hashes_opaque_pointers_only",
+    "promotion": [
+      "artifact write PASS",
+      "authenticated readback PASS",
+      "SHA256 PASS",
+      "cold benchmark gain > 0",
+      "ablation supports causal value",
+      "novel transfer gain > 0",
+      "no critical regression",
+      "audit PASS",
+      "red-team PASS"
+    ]
+  },
+  "memory_check_each_cycle": [
+    "colony HF private write/read/SHA",
+    "F74 opaque pointer",
+    "F66 index",
+    "SAPHÉIDE lesson lineage"
+  ],
+  "rules": [
+    "TASK_AGENT_OUTPUT != TRUTH",
+    "MEMORY != PARAMETRIC_LEARNING",
+    "TRAINING_LOSS != CAPABILITY_GAIN",
+    "SAME_LINEAGE != INDEPENDENT_EVIDENCE",
+    "NO REAL EXECUTION => NON_EXECUTED"
+  ],
+  "next_gate": "IMPLEMENT_REAL_TRAINING_WORKER_FOR_FIRST_SAPHEA"
+}
