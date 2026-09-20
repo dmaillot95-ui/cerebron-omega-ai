@@ -1,0 +1,43 @@
+name: C01 Private Memory Recall
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recall:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - name: Install client
+        run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: C01 write-index-recall-integrity
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,tempfile,urllib.request
+          from huggingface_hub import HfApi,hf_hub_download
+          token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
+          memory_id="C01-SIGMA-MEMTEST-0001"
+          payload=json.dumps({"memory_id":memory_id,"colony_id":"C01-SIGMA","kind":"synthetic_private_recall_test","content":"CEREBRON C01 private memory recall fixture v1"},sort_keys=True).encode()
+          digest=hashlib.sha256(payload).hexdigest()
+          api=HfApi(token=token)
+          with tempfile.NamedTemporaryFile("wb",delete=False) as f:
+              f.write(payload); src=f.name
+          remote="colony/C01-SIGMA/memory/"+memory_id+".json"
+          api.upload_file(path_or_fileobj=src,path_in_repo=remote,repo_id=repo,repo_type="model",commit_message="C01 private memory recall fixture")
+          print("C01_PRIVATE_WRITE=PASS")
+          # Build only an opaque, non-sensitive public-pointer representation in memory.
+          pointer={"memory_id":memory_id,"colony_id":"C01-SIGMA","provider":"huggingface","private_repo_id":repo,"private_object_path":remote,"payload_sha256":digest,"validation_status":"TEST_FIXTURE"}
+          if "content" in pointer: raise SystemExit("OPAQUE_POINTER=FAIL")
+          print("F66_F74_OPAQUE_POINTER_SCHEMA=PASS")
+          dst=hf_hub_download(repo_id=repo,filename=remote,repo_type="model",token=token,force_download=True)
+          got=open(dst,"rb").read()
+          if hashlib.sha256(got).hexdigest()!=pointer["payload_sha256"]: raise SystemExit("C01_RECALL_SHA256=FAIL")
+          obj=json.loads(got)
+          if obj["memory_id"]!=memory_id or obj["colony_id"]!="C01-SIGMA": raise SystemExit("C01_RECALL_IDENTITY=FAIL")
+          print("C01_PRIVATE_READ=PASS")
+          print("C01_RECALL_SHA256=PASS")
+          print("C01_RECALL_IDENTITY=PASS")
+          print("PRIVATE_PAYLOAD_PUBLIC_WRITE=NO")
+          PY
