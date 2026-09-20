@@ -1,0 +1,78 @@
+{
+  "schema": "cerebron-c01-g0-run-manifest-v1",
+  "status": "READY_PENDING_RUNTIME_GATES",
+  "taskset_version": "C01-SIGMA-G0-TASKSET-v1",
+  "expected_runs": 28,
+  "candidates": [
+    {
+      "label": "CAND-A",
+      "model_mapping": "SEALED",
+      "tasks": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ]
+    },
+    {
+      "label": "CAND-B",
+      "model_mapping": "SEALED",
+      "tasks": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ]
+    },
+    {
+      "label": "CAND-C",
+      "model_mapping": "SEALED",
+      "tasks": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ]
+    },
+    {
+      "label": "CAND-D",
+      "model_mapping": "SEALED",
+      "tasks": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07"
+      ]
+    }
+  ],
+  "run_policy": {
+    "max_parallel_models": 1,
+    "max_parallel_tasks_per_model": 1,
+    "reason": "avoid RAM contention and preserve comparable CPU runtime",
+    "retry": "one infrastructure retry allowed with new run_id; never overwrite original",
+    "timeout_classification": "infrastructure unless evidence shows model-level cause"
+  },
+  "completion_gate": {
+    "required_completed_runs": 28,
+    "required_hash_verified": 28,
+    "allow_missing": false
+  },
+  "current_evidence": {
+    "smollm3_runtime_canary": "PASS",
+    "smollm3_t04_cold": "AWAITING_RECEIPT",
+    "other_models_runtime": "NOT_EXECUTED"
+  },
+  "next_after_complete": "blind primary audit under C01-SIGMA-G0-SCORING v1"
+}
