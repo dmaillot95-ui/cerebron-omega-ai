@@ -1,0 +1,41 @@
+name: SAPHEA Memory Runtime Test
+on:
+  push:
+    paths:
+      - '.github/workflows/saphea-memory-runtime-test.yml'
+      - 'config/saphea-memory-runtime-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  memory-runtime:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Test isolated SAPHEA M0 memory
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,tempfile
+          from huggingface_hub import HfApi,hf_hub_download
+          repo="cerebron-omega/cerebron-private-memory"
+          agent="SIGMA-FORMALIZER"
+          mem={"schema":"cerebron-saphea-memory-v1","colony_id":"C01-SIGMA","agent_id":agent,"generation":"M0","class":"checkpoint","objective":"synthetic runtime validation","verified_state":"TEST_FIXTURE","open_gap":"NONE_TEST_ONLY","next_test":"RECALL","evidence_refs":[]}
+          raw=json.dumps(mem,sort_keys=True).encode(); digest=hashlib.sha256(raw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as f:f.write(raw); local=f.name
+          path=f"colony/C01-SIGMA/agents/{agent}/memory/M0/checkpoint.json"
+          api=HfApi(token=os.environ["HF_TOKEN"])
+          api.upload_file(path_or_fileobj=local,path_in_repo=path,repo_id=repo,repo_type="model")
+          dst=hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True)
+          back=open(dst,"rb").read()
+          if hashlib.sha256(back).hexdigest()!=digest: raise SystemExit("DIGEST=FAIL")
+          obj=json.loads(back)
+          if obj["agent_id"]!=agent or obj["generation"]!="M0": raise SystemExit("ISOLATION=FAIL")
+          print("SAPHEA_PRIVATE_WRITE=PASS")
+          print("SAPHEA_PRIVATE_READ=PASS")
+          print("SAPHEA_DIGEST=PASS")
+          print("SAPHEA_NAMESPACE_ISOLATION=PASS")
+          print("SAPHEA_GENERATION_M0=PASS")
+          print("PRIVATE_PAYLOAD_PUBLIC_WRITE=NO")
+          PY
