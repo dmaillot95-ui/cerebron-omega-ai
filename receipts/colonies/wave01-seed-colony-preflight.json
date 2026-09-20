@@ -1,0 +1,14 @@
+{
+  "schema": "wave01-seed-colony-preflight-v1",
+  "status": "PASS",
+  "checks": {
+    "benchmark_frozen": true,
+    "four_seed_cases": true,
+    "hf_memory_gate": true,
+    "sigma_memory": true,
+    "argus_memory": true
+  },
+  "benchmark_sha256": "797f12f5855ca594d0235fc7c6d1b90d52d85fa9483db15d03530a7651182841",
+  "claim_limit": "Preflight validates routing prerequisites only; it does not execute or prove farm capability.",
+  "next_gate": "REAL_FARM_EXECUTION"
+}
