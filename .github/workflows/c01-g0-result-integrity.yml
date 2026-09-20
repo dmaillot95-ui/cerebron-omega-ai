@@ -1,0 +1,44 @@
+name: C01 G0 Result Integrity
+on:
+  push:
+    paths:
+      - 'benchmarks/results/c01-g0-v1/**'
+      - '.github/workflows/c01-g0-result-integrity.yml'
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Verify result structure and hashes
+        run: |
+          python - <<'PY'
+          import json,hashlib,glob
+          from pathlib import Path
+          files=sorted(glob.glob("benchmarks/results/c01-g0-v1/*.json"))
+          report={"schema":"cerebron-c01-g0-integrity-v1","checked":0,"pass":0,"fail":0,"results":[]}
+          for fn in files:
+            x=json.load(open(fn)); row={"file":fn,"status":"FAIL","errors":[]}
+            for k in ("task_id","output_text","output_sha256","completion_status"):
+              if k not in x: row["errors"].append("missing:"+k)
+            if not row["errors"]:
+              h=hashlib.sha256(x["output_text"].encode()).hexdigest()
+              if h!=x["output_sha256"]: row["errors"].append("output_sha256_mismatch")
+            row["status"]="PASS" if not row["errors"] else "FAIL"
+            report["checked"]+=1;report["pass"]+=row["status"]=="PASS";report["fail"]+=row["status"]=="FAIL";report["results"].append(row)
+          Path("receipts/p05").mkdir(parents=True,exist_ok=True)
+          Path("receipts/p05/c01-g0-result-integrity.json").write_text(json.dumps(report,indent=2)+"\n")
+          if report["fail"]: raise SystemExit(2)
+          PY
+      - name: Persist integrity receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p05/c01-g0-result-integrity.json
+          git diff --cached --quiet && exit 0
+          git commit -m "P05 receipt: verify C01 G0 result integrity"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
