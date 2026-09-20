@@ -1,0 +1,87 @@
+{
+  "schema": "cerebron-c01-g0-taskset-v1",
+  "status": "FROZEN_V1",
+  "tasks": [
+    {
+      "id": "T01",
+      "track": "formalization",
+      "prompt": "Formalize: for odd positive x define T(x)=(3x+1)/2^v2(3x+1). State precisely what constitutes an odd cycle of length N.",
+      "checks": [
+        "domain",
+        "v2 definition",
+        "cycle condition",
+        "no proof claim"
+      ]
+    },
+    {
+      "id": "T02",
+      "track": "proof_step",
+      "prompt": "Given x_i odd and 2^a_i x_{i+1}=3x_i+1 around a length-N cycle, derive the exact product identity relating x_0, A=sum a_i, and powers of 2 and 3.",
+      "checks": [
+        "algebra",
+        "indices",
+        "conditions"
+      ]
+    },
+    {
+      "id": "T03",
+      "track": "counterexample_search",
+      "prompt": "A proposed lemma says every accelerated Collatz step decreases an odd integer. Find a counterexample and explain why it refutes the lemma but not the Collatz conjecture.",
+      "checks": [
+        "valid counterexample",
+        "logical scope"
+      ]
+    },
+    {
+      "id": "T04",
+      "track": "arithmetic_check",
+      "prompt": "Compute T(27) exactly under the accelerated odd map and show the valuation used.",
+      "checks": [
+        "3*27+1",
+        "v2",
+        "result"
+      ]
+    },
+    {
+      "id": "T05",
+      "track": "error_detection",
+      "prompt": "Audit the inference: verified for all odd x below 10^9, therefore true for all odd positive integers. Identify the exact logical error.",
+      "checks": [
+        "finite verification",
+        "universal claim"
+      ]
+    },
+    {
+      "id": "T06",
+      "track": "evidence_calibration",
+      "prompt": "Classify each as PROOF, FINITE COMPUTATION, NECESSARY CONDITION, or CONJECTURE: exhaustive search to B; an algebraic identity valid for every cycle; a heuristic random-walk model; a divisibility condition every cycle must satisfy.",
+      "checks": [
+        "four classifications"
+      ]
+    },
+    {
+      "id": "T07",
+      "track": "synthesis",
+      "prompt": "Write a compact research checkpoint separating established results, computational evidence, open gap, and next decisive test for a hypothetical cycle-exclusion campaign.",
+      "checks": [
+        "four sections",
+        "no false closure"
+      ]
+    }
+  ],
+  "execution": {
+    "cold": true,
+    "memory": false,
+    "rag": false,
+    "adapter": false,
+    "training": false,
+    "agora_help": false,
+    "cross_model_help": false
+  },
+  "scoring": {
+    "per_task_max": 10,
+    "total_max": 70,
+    "blind_audit_required": true
+  },
+  "freeze_rule": "Do not alter task content after any candidate has seen this version; create v2 instead."
+}
