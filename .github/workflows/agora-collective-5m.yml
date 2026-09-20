@@ -1,0 +1,69 @@
+name: AGORA Collective Recursive Bus
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+permissions:
+  contents: read
+concurrency:
+  group: agora-collective-recursive-bus
+  cancel-in-progress: false
+jobs:
+  collective-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        with:
+          path: .agora-collective
+          key: agora-collective-${{ github.run_id }}
+          restore-keys: |
+            agora-collective-
+      - name: Compile collective STATE(t+1)
+        shell: bash
+        run: |
+          mkdir -p .agora-collective
+          python - <<'PY'
+          import json,os
+          p=".agora-collective/state.json"
+          try: prev=json.load(open(p))
+          except Exception: prev={}
+          farms=[59,66,67,68,70,71,72,74]
+          state={
+            "schema":"CEREBRON_AGORA_COLLECTIVE_V1",
+            "state_id":"COLLECTIVE:"+os.environ.get("GITHUB_RUN_ID","run"),
+            "parent_state_id":prev.get("state_id","GENESIS"),
+            "iteration":int(prev.get("iteration",0))+1,
+            "farm_ids":farms,
+            "ingress_status":{str(i):"AWAITING_REAL_PACKET" for i in farms},
+            "residual":prev.get("nextlock","INGEST_REAL_FARM_STATES"),
+            "candidate_lessons":[],
+            "contradictions":[],
+            "dependency_graph":{},
+            "reproduction_gate":"PENDING",
+            "reality_gate":"PENDING",
+            "ablation_gate":"PENDING",
+            "transfer_gate":"PENDING",
+            "promotion":"BLOCKED",
+            "memory_write":"BLOCKED",
+            "mentor_egress":"READY_FOR_REVIEW",
+            "nextlock":"INGEST_REAL_FARM_STATES",
+            "rules":["CLAIM<=EVIDENCE","CONSENSUS!=PROOF","COMPUTATION!=PROOF","MEMORY!=LEARNING","IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION"]
+          }
+          # Promotion is intentionally impossible without real packets and passed gates.
+          if state["reproduction_gate"]=="PASS" and state["reality_gate"]=="PASS" and state["ablation_gate"]=="PASS" and state["transfer_gate"]=="PASS":
+              state["promotion"]="ELIGIBLE"
+              state["memory_write"]="ELIGIBLE"
+          json.dump(state,open(p,"w"),indent=2)
+          PY
+          cat .agora-collective/state.json
+      - uses: actions/cache/save@v4
+        with:
+          path: .agora-collective
+          key: agora-collective-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-collective-state-${{ github.run_id }}
+          path: .agora-collective/state.json
+          retention-days: 30
