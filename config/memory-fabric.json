@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-memory-fabric-v1",
   "version": "1.0",
-  "status": "DESIGNED_NOT_RUNTIME_VALIDATED",
+  "status": "PROTOCOL_RUNTIME_VERIFIED",
   "authority": "AFAH",
   "roles": {
     "F66": {
@@ -66,9 +66,22 @@
   "current_truth": {
     "F66_runtime_verified": false,
     "F74_runtime_verified": false,
-    "colony_memory_runtime_verified": false,
+    "colony_memory_runtime_verified": true,
     "public_hf_verified": true,
-    "private_hf_verified": false
+    "private_hf_verified": false,
+    "master_round_trip_protocol_verified": true
   },
-  "next_gate": "BOOTSTRAP_F74_AND_F66_RUNTIME_THEN_WRITE_READ_RECALL_TEST"
+  "next_gate": "CROSS_REPOSITORY_F74_PERSISTENCE_AND_F66_INDEX_TEST",
+  "verification": {
+    "workflow": "Memory Fabric Runtime Test",
+    "run_id": 35521880359,
+    "job_id": 106107255978,
+    "results": [
+      "F74_WRITE=PASS",
+      "F66_INDEX=PASS",
+      "MEMORY_RECALL=PASS",
+      "INTEGRITY_SHA256=PASS"
+    ],
+    "scope": "Master-repository synthetic round-trip fixture; does not yet prove cross-repository persistence inside F66/F74."
+  }
 }
