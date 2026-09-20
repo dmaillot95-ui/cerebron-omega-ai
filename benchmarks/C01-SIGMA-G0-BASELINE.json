@@ -1,0 +1,59 @@
+{
+  "schema": "cerebron-c01-g0-baseline-v1",
+  "status": "DESIGNED_NOT_EXECUTED",
+  "colony": "C01-SIGMA",
+  "purpose": "Cold baseline before any SAPHEA specialization, memory injection, adapter training, or colony learning.",
+  "pinned_models": [
+    {
+      "id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+    },
+    {
+      "id": "Qwen/Qwen3-4B-Base",
+      "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+    },
+    {
+      "id": "HuggingFaceTB/SmolLM3-3B-Base",
+      "revision": "d78a42f79198603e614095753484a04c10c2b940"
+    }
+  ],
+  "tracks": [
+    "formalization",
+    "proof_step",
+    "counterexample_search",
+    "arithmetic_check",
+    "error_detection",
+    "evidence_calibration",
+    "synthesis"
+  ],
+  "controls": {
+    "cold": true,
+    "memory": false,
+    "rag": false,
+    "adapter": false,
+    "training": false,
+    "agora_help": false,
+    "cross_model_help": false
+  },
+  "required_metrics": [
+    "task_accuracy",
+    "invalid_claim_rate",
+    "verification_rate",
+    "latency",
+    "runtime_memory",
+    "failure_reason"
+  ],
+  "promotion": [
+    "runtime_weight_load",
+    "baseline_complete",
+    "audit",
+    "red_team",
+    "ablation",
+    "transfer"
+  ],
+  "rule": "No model-to-SAPHEA binding from pin/config success alone."
+}
