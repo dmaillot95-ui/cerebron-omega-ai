@@ -36,5 +36,18 @@ jobs:
               raise SystemExit("GUARDIAN BLOCK: missing invariants: "+repr(missing))
           print("GUARDIAN invariants present")
           PY
+      - name: Verify rollback protocol
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("security/LAST_VALIDATED_STATE_PROTOCOL.md")
+          if not p.exists(): raise SystemExit("GUARDIAN BLOCK: rollback protocol missing")
+          s=p.read_text()
+          req=["AI_CAN_SELF_APPROVE_CHECKPOINT = FALSE","AFAH_APPROVAL_REQUIRED = TRUE","UNKNOWN_ROLLBACK_TARGET = HOLD"]
+          miss=[x for x in req if x not in s]
+          if miss: raise SystemExit("GUARDIAN BLOCK: rollback invariants missing: "+repr(miss))
+          print("Rollback authority invariants present")
+          PY
       - name: Security decision
         run: echo "Static policy gate PASS. Critical authorization still requires explicit AFAH approval."
