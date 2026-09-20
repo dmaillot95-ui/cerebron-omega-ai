@@ -1,0 +1,40 @@
+name: GUARDIAN Omega
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'config/**'
+      - 'security/**'
+      - '.github/workflows/**'
+      - 'training/**'
+permissions:
+  contents: read
+jobs:
+  immutable-safety-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Guardian policy exists
+        shell: bash
+        run: test -s security/GUARDIAN_OMEGA_POLICY.md
+      - name: Detect forbidden authority mutations
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("security/GUARDIAN_OMEGA_POLICY.md").read_text()
+          required=[
+            "AFAH_AUTHORITY = IMMUTABLE_BY_AI",
+            "GUARDIAN_BYPASS = FORBIDDEN",
+            "SELF_PROMOTION = FORBIDDEN",
+            "SELF_PERMISSION_CHANGE = FORBIDDEN",
+            "SAFETY_DOWNGRADE = FORBIDDEN",
+            "UNKNOWN = DENY"
+          ]
+          missing=[x for x in required if x not in p]
+          if missing:
+              raise SystemExit("GUARDIAN BLOCK: missing invariants: "+repr(missing))
+          print("GUARDIAN invariants present")
+          PY
+      - name: Security decision
+        run: echo "Static policy gate PASS. Critical authorization still requires explicit AFAH approval."
