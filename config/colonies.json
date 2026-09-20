@@ -1434,5 +1434,80 @@
     "sharing_rule": "Only validated reusable lessons may propagate cross-colony. Raw consensus never upgrades evidence.",
     "receiving_rule": "Receiving colonies must preserve source lineage and may not count imported evidence as independent reproduction.",
     "rollback": true
+  },
+  "activation_policy": {
+    "schema": "cerebron-colony-activation-v1",
+    "mode": "EVIDENCE_GATED",
+    "principle": "No colony becomes ACTIVE merely because it exists in the registry.",
+    "stages": [
+      "INACTIVE",
+      "EXPERIMENTAL",
+      "VALIDATED",
+      "ACTIVE"
+    ],
+    "requirements": {
+      "EXPERIMENTAL": [
+        "real_resource_assigned",
+        "resource_identity_recorded",
+        "baseline_benchmark_defined"
+      ],
+      "VALIDATED": [
+        "cold_benchmark_completed",
+        "audit_completed",
+        "no_benchmark_leakage",
+        "measurable_specialist_value"
+      ],
+      "ACTIVE": [
+        "validated_status",
+        "routing_rule_defined",
+        "cost_latency_recorded",
+        "rollback_target_defined"
+      ]
+    },
+    "first_wave_candidates": [
+      {
+        "name": "SIGMA",
+        "reason": "proof/formalization; directly measurable on current Collatz workload"
+      },
+      {
+        "name": "ARGUS",
+        "reason": "audit/error detection; required to control training quality"
+      },
+      {
+        "name": "ANTITHESIS",
+        "reason": "counter-audit/falsification"
+      },
+      {
+        "name": "REPLICA",
+        "reason": "independent reproduction"
+      },
+      {
+        "name": "BENCHMARK",
+        "reason": "cold evaluation and promotion control"
+      },
+      {
+        "name": "MEMORIA",
+        "reason": "validated memory and provenance"
+      },
+      {
+        "name": "CHEMIA",
+        "reason": "first new scientific specialist requested"
+      },
+      {
+        "name": "MATERIA",
+        "reason": "materials specialist and cross-domain transfer target"
+      },
+      {
+        "name": "MOTORIS",
+        "reason": "motor/propulsion engineering specialist"
+      },
+      {
+        "name": "INDUSTRIA",
+        "reason": "industrialization/manufacturing specialist"
+      }
+    ],
+    "assignment_rule": "Candidate list is not activation. Assign only resources actually available; otherwise retain INACTIVE/UNAVAILABLE.",
+    "ablation_rule": "Compare routed system with and without each candidate colony before permanent activation.",
+    "growth_rule": "Expand only when incremental value survives cold benchmark and ablation."
   }
 }
