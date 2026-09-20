@@ -1,0 +1,13 @@
+{
+  "schema": "cerebron-p04-runtime-canary-v1",
+  "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+  "requested_revision_sha": "d78a42f79198603e614095753484a04c10c2b940",
+  "runner": "github-actions/ubuntu-latest",
+  "load": "PASS",
+  "inference": "PASS",
+  "precision": "float32",
+  "device": "cpu",
+  "output_sha256": "9d15f53f66f0eff07964e6b4c8a402dfd273591844af839ac7548a2421593cf6",
+  "output_length": 54,
+  "latency_ms": 44674
+}
