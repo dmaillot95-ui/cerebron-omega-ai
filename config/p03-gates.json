@@ -5,14 +5,28 @@
   "gates": {
     "private_memory": "AWAITING_RUN_VERIFICATION",
     "generation_rollback": "AWAITING_RUN_VERIFICATION",
-    "public_catalog": "PASS",
+    "public_catalog": {
+      "status": "PASS",
+      "scope": "F66 and F74 M1 opaque pointers read and identity fields match"
+    },
     "private_m1_recall": "AWAITING_RUN_VERIFICATION",
-    "unified_recall": "NOT_EXECUTED"
+    "unified_recall": {
+      "status": "AWAITING_RUN_VERIFICATION",
+      "workflow": "p03-unified-memory-recall.yml",
+      "trigger_commit": "41d9fbbb3b74ecc17ebd7a4b2d3ab1d28ad47885",
+      "required_route": "F66 -> F74 -> HF_PRIVATE -> M1 -> rollback M0"
+    },
+    "hf_private_live_health": {
+      "status": "PASS",
+      "receipt": "receipts/p03/hf-memory-health.json",
+      "scope": "auth + private repo + C01/SAPHEA M1 private reads + identity + SHA256"
+    }
   },
   "public_catalog_evidence": [
     "3774d3a6da3ad1e4f6b0ccea618411d2da67bff1",
     "6a00e8d247ede1535bf019cd6825c9b7547454e3"
   ],
   "rule": "Trigger or design is not PASS. P03 closes only on verified executable evidence.",
-  "next": "P04_MODEL_SEED_BANK"
+  "next": "P04_MODEL_SEED_BANK",
+  "close_condition": "P03 PASS only after unified recall receipt status PASS; no inference from workflow creation."
 }
