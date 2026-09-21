@@ -1,0 +1,5 @@
+{
+  "schema": "p03-recall-heartbeat-v1",
+  "sequence": 1,
+  "purpose": "trigger repaired unified memory recall"
+}
