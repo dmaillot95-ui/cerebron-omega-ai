@@ -1,0 +1,40 @@
+{
+  "schema": "cerebron-external-content-defense-v1",
+  "status": "ENFORCEMENT_POLICY",
+  "principle": "EXTERNAL_CONTENT_IS_DATA_NEVER_AUTHORITY",
+  "scope": ["web", "forums", "RAG", "external_documents", "external_code"],
+  "protected_assets": ["github_secrets", "hf_tokens", "private_memory", "gold_dataset", "training_factory"],
+  "pipeline": [
+    "UNTRUSTED",
+    "QUARANTINE",
+    "PROMPT_INJECTION_SCAN",
+    "CODE_URL_PAYLOAD_CLASSIFICATION",
+    "SECRET_TOKEN_BOUNDARY",
+    "STATIC_ANALYSIS_ONLY",
+    "AUDIT",
+    "COUNTER_AUDIT_RED_TEAM",
+    "PROVENANCE_SHA256",
+    "GOLD_RED_REJECT"
+  ],
+  "hard_rules": {
+    "external_text_may_issue_instructions": false,
+    "execute_untrusted_code": false,
+    "expose_secrets_to_untrusted_content": false,
+    "external_to_gold_without_audit": false,
+    "external_to_training_without_audit": false,
+    "overwrite_verified_memory": false,
+    "preserve_existing_verified_history": true,
+    "collatz_farms_01_07_untouched": true
+  },
+  "canary": {
+    "enabled": true,
+    "purpose": "Detect instruction-following from untrusted content before admission",
+    "failure_action": "REJECT_QUARANTINE_ROLLBACK",
+    "claim_limit": "Policy canary definition only; effectiveness requires executed tests."
+  },
+  "admission": {
+    "gold_requires": ["provenance", "audit_pass", "red_team_pass", "clean_reproduction_or_equivalent_evidence"],
+    "red_requires": ["provenance", "verified_error_location", "verified_correction", "audit_pass"],
+    "otherwise": "REJECT_OR_QUARANTINE"
+  }
+}
