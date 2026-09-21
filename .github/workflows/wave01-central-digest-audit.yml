@@ -30,10 +30,13 @@ jobs:
             url=f"https://raw.githubusercontent.com/{repo}/main/wave01/results/{task}.json"
             with urllib.request.urlopen(url,timeout=30) as r:
               raw=r.read()
-            actual=hashlib.sha256(raw).hexdigest()
-            checks.append({"farm":farm,"task":task,"expected_sha256":expected,"actual_sha256":actual,"match":actual==expected})
+            file_sha=hashlib.sha256(raw).hexdigest()
+            obj=json.loads(raw.decode("utf-8"))
+            canonical=json.dumps(obj,sort_keys=True).encode("utf-8")
+            canonical_sha=hashlib.sha256(canonical).hexdigest()
+            checks.append({"farm":farm,"task":task,"expected_sha256":expected,"file_sha256":file_sha,"canonical_payload_sha256":canonical_sha,"match":canonical_sha==expected,"hash_contract":"SHA256(json.dumps(parsed_result,sort_keys=True).encode()) ; published file includes trailing newline"})
           status="PASS" if all(x["match"] for x in checks) else "FAIL"
-          rec={"schema":"cerebron-wave01-central-digest-audit-v1","status":status,"checks":checks,"claim_limit":"Byte-level SHA256 verification of the four published raw farm result files only; not proof, model reasoning, or training-data admission."}
+          rec={"schema":"cerebron-wave01-central-digest-audit-v1","status":status,"checks":checks,"claim_limit":"Verification of the original farm hash contract against parsed published results; file-byte SHA differs because published files append a newline. Not proof, model reasoning, or training-data admission."}
           Path("receipts/colonies/wave01-central-digest-audit.json").write_text(json.dumps(rec,indent=2)+"\n")
           if status!="PASS": raise SystemExit(1)
           PY
