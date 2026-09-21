@@ -1,0 +1,28 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 6,
+  "repository": "dmaillot95-ui/cerebron-collatz-farm-06-formal-audit",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "1d962ff2fbd11835763fc316dc9bbf3a9f1d8e7d",
+  "tree_truncated": false,
+  "file_count": 15,
+  "observed_critical": {
+    "contract": true,
+    "registry": true,
+    "checkpoint": true,
+    "mission": true,
+    "worker": true,
+    "spiralix": true,
+    "wave01_receipt": "wave01/receipts/W01-ARGUS-F06.json",
+    "wave01_result": "wave01/results/W01-ARGUS-F06.json",
+    "workflows": [
+      "cerebron-5min-scheduler.yml",
+      "formal-audit-farm.yml",
+      "spiralix-interop.yml",
+      "wave01-colony-execution.yml"
+    ]
+  },
+  "loss_signal": "NONE_OBSERVED_IN_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
