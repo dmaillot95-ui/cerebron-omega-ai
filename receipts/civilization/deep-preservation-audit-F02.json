@@ -1,0 +1,29 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 2,
+  "repository": "dmaillot95-ui/cerebron-collatz-dynamics-farm",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "69451e760bfe2530368dc32fdc63e43a3b744344",
+  "tree_truncated": false,
+  "file_count": 15,
+  "observed_critical": {
+    "readme": true,
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "checkpoint": "checkpoints/COLLATZ_DELTA_2026-09-20.md",
+    "mission": "mission/C256-DYNAMICS-FARM.md",
+    "runtime_config": "config/cerebron-agent-runtime-v1.json",
+    "limit_cycle_plugin": "config/cerebron-limit-cycle-plugin-v1.json",
+    "status": "results-status/latest-status.json",
+    "worker": "worker/farm_worker.py",
+    "workflows": [
+      ".github/workflows/cerebron-5min-scheduler.yml",
+      ".github/workflows/dynamics-farm.yml",
+      ".github/workflows/gemini-smoke-test.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "loss_signal": "NONE_OBSERVED_IN_CURRENT_TREE",
+  "warning": "Current tree intact for observed critical structure; historical deletion audit remains separate.",
+  "mutation": "NONE"
+}
