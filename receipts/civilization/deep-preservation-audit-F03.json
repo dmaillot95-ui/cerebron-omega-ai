@@ -1,0 +1,26 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 3,
+  "repository": "dmaillot95-ui/cerebron-collatz-farm-03-adic",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "cbae38c3b65e0f3a35c9a35f78bd437f8ed0c3a3",
+  "tree_truncated": false,
+  "file_count": 11,
+  "observed_critical": {
+    "readme": true,
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "checkpoint": "checkpoints/COLLATZ_DELTA_2026-09-20.md",
+    "mission": "mission/C256-ADIC-FARM.md",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/adic-farm.yml",
+      ".github/workflows/cerebron-5min-scheduler.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "loss_signal": "NONE_OBSERVED_IN_CURRENT_TREE",
+  "warning": "No current-tree loss signal. Historical deletion comparison remains pending.",
+  "mutation": "NONE"
+}
