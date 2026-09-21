@@ -1,0 +1,63 @@
+{
+  "schema": "cerebron-spiralix-vector-v1",
+  "status": "EXPERIMENTAL",
+  "purpose": "Structured inter-colony state exchange, deduplication, routing and contradiction discovery.",
+  "principles": [
+    "VECTOR_IS_REPRESENTATION_NOT_PROOF",
+    "SEMANTIC_SIMILARITY_IS_NOT_INDEPENDENT_EVIDENCE",
+    "TEXT_AND_EVIDENCE_REMAIN_CANONICAL",
+    "CLAIM_LE_EVIDENCE",
+    "NO_AUTOMATIC_GOLD_ADMISSION"
+  ],
+  "state_vector": {
+    "symbol": "V",
+    "dimensions": [
+      {"id":"P","name":"problem","range":"structured_reference"},
+      {"id":"E","name":"evidence_level","range":"E0-E8"},
+      {"id":"C","name":"confidence","range":"0..1","note":"calibrated metadata, never proof"},
+      {"id":"U","name":"unknowns","range":"set"},
+      {"id":"R","name":"risk","range":"0..1"},
+      {"id":"D","name":"dependencies","range":"set"},
+      {"id":"M","name":"memory_checkpoint","range":"immutable_pointer"}
+    ]
+  },
+  "packet": {
+    "required": ["packet_id","source_colony","task_id","text_digest","V","evidence_refs","dependency_fingerprint","timestamp"],
+    "canonical_formula": "SV=[P,E,C,U,R,D,M]",
+    "text_digest": "sha256",
+    "immutable": true
+  },
+  "operations": {
+    "ROUTE": "select specialist from task/vector metadata",
+    "DEDUP": "cluster semantically similar outputs; never count a cluster as multiple independent proofs",
+    "DIVERGENCE": "surface distant hypotheses for audit rather than discard them",
+    "CONTRADICTION": "compare incompatible claims sharing scope",
+    "DEPENDENCY": "detect shared sources/models/data before independence claims",
+    "FUSE": "combine only after evidence-aware audit and counter-audit"
+  },
+  "pipeline": [
+    "HUMAN_OR_TASK",
+    "SPIRALIX",
+    "SPIRALIX_VECTOR_PACKET",
+    "SAPHEA_OR_COLONY_ROUTE",
+    "PARALLEL_REAL_EXECUTION",
+    "VECTOR_COMPARE",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "FUSION",
+    "AFAH",
+    "CHECKPOINT"
+  ],
+  "safety": {
+    "external_content_authority": false,
+    "vector_can_override_evidence": false,
+    "similarity_can_prove_truth": false,
+    "automatic_execution_from_vector": false,
+    "automatic_training_admission": false,
+    "preserve_verified_history": true
+  },
+  "promotion_gate": {
+    "required_tests": ["dedup_precision","contradiction_recall","routing_gain","false_merge_rate","ablation_vs_text_only"],
+    "rule": "PROMOTE_ONLY_IF_MEASURED_GAIN_WITHOUT_CRITICAL_REGRESSION"
+  }
+}
