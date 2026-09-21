@@ -1,0 +1,25 @@
+{
+  "schema": "cerebron-real-inference-receipt-v1",
+  "date": "2026-09-21",
+  "run_id": 35564707263,
+  "job_id": 106224129215,
+  "status": "PASS_WITH_CONTENT_CONSTRAINT_FAILURE",
+  "model": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "runtime": "github-hosted-ubuntu-cpu",
+  "real_inference": true,
+  "seconds": 217.679,
+  "prompt_task": "SIGMA parity canary",
+  "output": "To solve this, we can use the properties of odd and even numbers. When n is odd, 3n is always odd because the product of an odd number and any integer is odd. Adding 1 to an odd number results in an even number. Therefore, 3n+1 is always even when",
+  "content_audit": {
+    "parity_conclusion": "CORRECT",
+    "requested_algebraic_sentence": "NOT_SATISFIED",
+    "instruction_following": "FAIL",
+    "truncated": true,
+    "mathematical_note": "The statement 'product of an odd number and any integer is odd' is false in general; for 3*n with odd n the conclusion is correct.",
+    "quality_gate": "FAIL"
+  },
+  "binding": "DENY",
+  "interpretation": "Runtime compatibility proven for this immutable SmolLM3 revision on GitHub CPU; quality/binding not proven.",
+  "next_gate": "RUN_FROZEN_COLD_MATRIX_AND_SCORE_CONTENT"
+}
