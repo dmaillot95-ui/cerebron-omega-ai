@@ -1,0 +1,49 @@
+name: Wave01 Central Digest Audit
+on:
+  push:
+    paths:
+      - 'config/wave01-digest-trigger.json'
+      - '.github/workflows/wave01-central-digest-audit.yml'
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Recompute four raw result digests
+        run: |
+          mkdir -p receipts/colonies
+          python - <<'PY'
+          import json, hashlib, urllib.request
+          from pathlib import Path
+          items=[
+            ("F01","dmaillot95-ui/cerebron-collatz-theory-farm","W01-SIGMA-F01","a8e512e50c345efcc691f24908096495629f777e333fbe07be91016c0fe1a606"),
+            ("F09","dmaillot95-ui/cerebron-farm-09-science-math","W01-SIGMA-F09","ececf84a7c7313c8c28d456932ac2f664b73260902f592262f969691c37e3f12"),
+            ("F06","dmaillot95-ui/cerebron-collatz-farm-06-formal-audit","W01-ARGUS-F06","193fb245b9e72b91d9d2a0c2ae3f1db483689e61ef4b6e70729a5b23951269bc"),
+            ("F34","dmaillot95-ui/cerebron-farm-34-formal-audit","W01-ARGUS-F34","a9c330987ed5e2314da8350329acf92ee1ef4dd3d68e5bd06b9c466d0478fa91"),
+          ]
+          checks=[]
+          for farm,repo,task,expected in items:
+            url=f"https://raw.githubusercontent.com/{repo}/main/wave01/results/{task}.json"
+            with urllib.request.urlopen(url,timeout=30) as r:
+              raw=r.read()
+            actual=hashlib.sha256(raw).hexdigest()
+            checks.append({"farm":farm,"task":task,"expected_sha256":expected,"actual_sha256":actual,"match":actual==expected})
+          status="PASS" if all(x["match"] for x in checks) else "FAIL"
+          rec={"schema":"cerebron-wave01-central-digest-audit-v1","status":status,"checks":checks,"claim_limit":"Byte-level SHA256 verification of the four published raw farm result files only; not proof, model reasoning, or training-data admission."}
+          Path("receipts/colonies/wave01-central-digest-audit.json").write_text(json.dumps(rec,indent=2)+"\n")
+          if status!="PASS": raise SystemExit(1)
+          PY
+      - name: Persist receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/colonies/wave01-central-digest-audit.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Wave01 central digest audit receipt"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
