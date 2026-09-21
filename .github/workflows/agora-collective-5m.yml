@@ -1,5 +1,5 @@
 name: AGORA Collective Recursive Bus
-# bootstrap-repair-trigger-v2
+# bootstrap-repair-trigger-v3
 on:
   workflow_dispatch:
   push:
