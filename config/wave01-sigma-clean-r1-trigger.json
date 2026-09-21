@@ -1,0 +1,5 @@
+{
+  "schema": "wave01-sigma-clean-r1-trigger-v1",
+  "sequence": 1,
+  "purpose": "execute blind gate and require real independent reasoning resource"
+}
