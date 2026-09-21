@@ -1,0 +1,56 @@
+{
+  "schema": "etherion-rd-routing-v1",
+  "date": "2026-09-21",
+  "status": "READY_FOR_BENCHMARK",
+  "name": "ETHERION",
+  "purpose": "Dedicated complex R&D master lineage",
+  "farm_affinity": {
+    "primary": [
+      "F48",
+      "F49",
+      "F50",
+      "F68",
+      "F71",
+      "F72",
+      "F73"
+    ],
+    "support": [
+      "F08",
+      "F19",
+      "F44",
+      "F45",
+      "F59",
+      "F66",
+      "F74"
+    ],
+    "policy": "affinity is routing preference, not exclusive ownership"
+  },
+  "collaboration": {
+    "SAPHEA": "execution/tools/specialists",
+    "SPIRALION": "divergent reasoning and iterative refinement",
+    "AFAH": "receives only validated conclusions; never raw speculative output"
+  },
+  "rd_loop": [
+    "DEFINE",
+    "SOURCE",
+    "MODEL",
+    "CALCULATE",
+    "INVENT",
+    "RED_TEAM",
+    "SIMULATE_IF_AVAILABLE",
+    "DESIGN_TEST",
+    "AUDIT",
+    "SYNTHESIZE",
+    "EVIDENCE_GATE"
+  ],
+  "benchmark_required": [
+    "hard mathematics",
+    "physics/engineering",
+    "algorithmic design",
+    "cross-domain R&D",
+    "counterexample/falsification",
+    "experimental design",
+    "uncertainty calibration"
+  ],
+  "hf_policy": "HF inference calls remain gated by verified provider permission; no fabricated execution while 403 HOLD persists."
+}
