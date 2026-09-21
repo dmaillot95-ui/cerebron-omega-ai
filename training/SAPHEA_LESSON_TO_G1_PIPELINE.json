@@ -1,0 +1,101 @@
+{
+  "schema": "cerebron-saphea-lesson-to-g1-pipeline-v1",
+  "status": "READY_BLOCKED_BY_P03",
+  "mode": "NON_DESTRUCTIVE_REVERSIBLE",
+  "stages": [
+    {
+      "id": "L0",
+      "name": "validated_lesson_ingress",
+      "requires": [
+        "GOLD_OR_RED",
+        "provenance",
+        "audit_pass",
+        "red_team_pass",
+        "dependency_fingerprint"
+      ]
+    },
+    {
+      "id": "L1",
+      "name": "dataset_version",
+      "actions": [
+        "canonicalize",
+        "hash_records",
+        "deduplicate_lineage",
+        "exclude_cold_test",
+        "seal_manifest"
+      ],
+      "output": "HF_PRIVATE_DATASET_VERSION"
+    },
+    {
+      "id": "L2",
+      "name": "training",
+      "requires": [
+        "P03_UNIFIED_RECALL_PASS",
+        "IMMUTABLE_G0"
+      ],
+      "method": "PEFT_LORA_OR_EQUIVALENT_REVERSIBLE_ADAPTER",
+      "output": "G1_CANDIDATE"
+    },
+    {
+      "id": "L3",
+      "name": "artifact_integrity",
+      "actions": [
+        "HF_PRIVATE_WRITE",
+        "AUTHENTICATED_READBACK",
+        "SHA256_VERIFY",
+        "OPAQUE_POINTER_F74",
+        "INDEX_F66"
+      ]
+    },
+    {
+      "id": "L4",
+      "name": "evaluation",
+      "tests": [
+        "G0_BASELINE",
+        "G1_COLD",
+        "NOVEL_TRANSFER",
+        "ABLATION",
+        "REGRESSION"
+      ]
+    },
+    {
+      "id": "L5",
+      "name": "independent_review",
+      "tests": [
+        "AUDIT",
+        "RED_TEAM",
+        "DEPENDENCY_CHECK"
+      ]
+    },
+    {
+      "id": "L6",
+      "name": "decision",
+      "pass": "PROMOTE_G1_POINTER_WITH_G0_ROLLBACK",
+      "fail": "ROLLBACK_TO_G0_RETAIN_ALL_EVIDENCE"
+    }
+  ],
+  "receipts": [
+    "dataset_manifest_receipt",
+    "training_receipt",
+    "hf_artifact_receipt",
+    "readback_integrity_receipt",
+    "evaluation_receipt",
+    "audit_receipt",
+    "promotion_or_rollback_receipt"
+  ],
+  "wave01_order": [
+    "C03-SIGMA/SIGMA-FORMALIZER",
+    "C12-ARGUS/ARGUS-AUDITOR"
+  ],
+  "parallelism": 1,
+  "reason": "first canary isolates causality and limits loss",
+  "rules": [
+    "NO_P03_PASS_NO_TRAINING",
+    "NO_RAW_TASK_AGENT_TO_TRAINING",
+    "NO_COLD_TEST_LEAKAGE",
+    "NO_BASE_WEIGHT_OVERWRITE",
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB",
+    "NO_GAIN_CLAIM_WITHOUT_G0_G1_EVIDENCE"
+  ],
+  "next_gate": "fresh P03 PASS then C03 SIGMA single-agent G1 canary"
+}
