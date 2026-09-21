@@ -1,0 +1,5 @@
+{
+  "schema": "wave01-sigma-audit-trigger-v1",
+  "sequence": 1,
+  "purpose": "independent metadata/dependency/red-team gate for first SIGMA WARM candidates"
+}
