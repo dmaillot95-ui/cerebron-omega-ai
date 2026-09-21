@@ -1,0 +1,79 @@
+{
+  "schema": "cerebron-farm-direct-routing-v1",
+  "date": "2026-09-21",
+  "status": "ACTIVE_DESIGN",
+  "purpose": "Restore original farm-first CEREBRON routing while keeping the simplified three-master core",
+  "core": [
+    "SAPHEA",
+    "FRONTIER_OPEN",
+    "AFAH"
+  ],
+  "rules": [
+    "FARMS_ARE_PRESERVED_CAPABILITIES_NOT_PERMANENT_AGENTS",
+    "DIRECT_FARM_CALL_WHEN_SPECIALIST_FARM_IS_SUFFICIENT",
+    "CREATE_AGENT_ONLY_WHEN_STATEFUL_DELEGATION_OR_PARALLEL_WORK_ADDS_MEASURABLE_VALUE",
+    "MAX_20_DYNAMIC_AGENT_SLOTS",
+    "NO_AGENT_WRAPPER_FOR_SIMPLE_SPECIALIST_MODEL_CALL",
+    "FAILED_PROVIDER_DOES_NOT_DISABLE_FARM_IDENTITY",
+    "REAL_EXECUTION_RECEIPT_REQUIRED"
+  ],
+  "routing_classes": {
+    "proof": [
+      "F01",
+      "F09"
+    ],
+    "research": [
+      "F08",
+      "F47",
+      "F48"
+    ],
+    "security": [
+      "F19",
+      "F72"
+    ],
+    "memory": [
+      "F40",
+      "F66",
+      "F74"
+    ],
+    "ai_model_gateway": [
+      "F44"
+    ],
+    "agent_runtime": [
+      "F45"
+    ],
+    "video": [
+      "F46"
+    ],
+    "vision_cad": [
+      "F49",
+      "F50"
+    ],
+    "learning": [
+      "F59"
+    ],
+    "reproduction": [
+      "F71"
+    ],
+    "orchestration": [
+      "F67",
+      "F68"
+    ],
+    "integration": [
+      "F73"
+    ]
+  },
+  "dispatch": {
+    "simple": "TASK -> best specialist IA/farm -> audit if needed -> synthesis",
+    "hard": "TASK -> SAPHEA + FRONTIER_OPEN -> selected farms -> optional agents -> audit/counter-audit -> synthesis",
+    "validated_learning": "validated result -> SAPHEIDE -> private memory -> benchmark/ablation -> AFAH lineage admission"
+  },
+  "compatibility": {
+    "greek24": "routing vocabulary only; not mandatory persistent colonies",
+    "legacy62": "preserved reserve/archive",
+    "farms74": "preserved; unmapped farms remain available through registry"
+  },
+  "current_blockers": [
+    "HF inference provider permission 403 affects F44 provider path only; other GitHub farm/control functions remain available"
+  ]
+}
