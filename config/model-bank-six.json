@@ -1,0 +1,85 @@
+{
+  "schema": "cerebron-six-model-bank-v1",
+  "date": "2026-09-21",
+  "status": "SIX_CANDIDATES_IDENTIFIED_BINDING_PENDING_BENCHMARK",
+  "rule": "ONE_COLONY_ONE_MODEL; six models are assignment alternatives, not simultaneous members of a colony.",
+  "candidates": [
+    {
+      "id": "G0-QWEN3-4B",
+      "model": "Qwen/Qwen3-4B",
+      "family": "Qwen3",
+      "role": "instruct/reasoning",
+      "license": "Apache-2.0",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "evidence": "existing pinned registry"
+    },
+    {
+      "id": "G0-QWEN3-4B-BASE",
+      "model": "Qwen/Qwen3-4B-Base",
+      "family": "Qwen3",
+      "role": "base/trainable",
+      "license": "Apache-2.0",
+      "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+      "evidence": "existing pinned registry"
+    },
+    {
+      "id": "G0-SMOLLM3-3B",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "family": "SmolLM3",
+      "role": "compact instruct/reasoning",
+      "license": "Apache-2.0",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "evidence": "existing pinned registry"
+    },
+    {
+      "id": "G0-SMOLLM3-3B-BASE",
+      "model": "HuggingFaceTB/SmolLM3-3B-Base",
+      "family": "SmolLM3",
+      "role": "base/trainable",
+      "license": "Apache-2.0",
+      "revision": "d78a42f79198603e614095753484a04c10c2b940",
+      "evidence": "existing pinned registry"
+    },
+    {
+      "id": "G0-MINISTRAL3-3B-BASE-2512",
+      "model": "mistralai/Ministral-3-3B-Base-2512",
+      "family": "Ministral3",
+      "role": "base/trainable/multimodal",
+      "license": "Apache-2.0",
+      "revision": "3dd398144bd567095bc3293dd80e9495ebe03309",
+      "evidence": "official Hugging Face model repository; revision observed"
+    },
+    {
+      "id": "G0-MINISTRAL3-3B-INSTRUCT-2512-BF16",
+      "model": "mistralai/Ministral-3-3B-Instruct-2512-BF16",
+      "family": "Ministral3",
+      "role": "instruction/multimodal",
+      "license": "Apache-2.0",
+      "revision": "PIN_REQUIRED_BEFORE_BINDING",
+      "evidence": "official Hugging Face model repository"
+    }
+  ],
+  "selection_policy": {
+    "binding": "DENY_UNTIL_COLD_BENCHMARK",
+    "per_colony_model_slots": 1,
+    "criteria": [
+      "task capability",
+      "cold benchmark",
+      "runtime feasibility",
+      "license",
+      "audit",
+      "red-team",
+      "ablation",
+      "transfer"
+    ],
+    "popularity_not_selection": true
+  },
+  "first_pair": {
+    "colonies": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "status": "BENCHMARK_REQUIRED_NO_MODEL_BOUND"
+  },
+  "afah": "Separate seventh lineage; not one of these six and no naive weight merge."
+}
