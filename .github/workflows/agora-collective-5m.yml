@@ -22,7 +22,7 @@ jobs:
           import hashlib,json,os
           p="CEREBRON_CIVILIZATION_OPERATING_MANUAL.md"
           b=open(p,"rb").read()
-          if b"CEREBRON" not in b or b"AFAH" not in b or b"CRISTAL" not in b or b"AGORA" not in b:
+          t=b.decode("utf-8")\nif "CÉRÉBRON" not in t or "AFAH" not in t or "CRISTAL" not in t or "AGORA" not in t:
               raise SystemExit("CIVILIZATION_MANUAL_INVALID")
           os.makedirs(".agora-collective",exist_ok=True)
           json.dump({
