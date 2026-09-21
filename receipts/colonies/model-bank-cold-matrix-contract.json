@@ -1,0 +1,23 @@
+{
+  "schema": "cerebron-model-bank-matrix-contract-receipt-v1",
+  "date": "2026-09-21",
+  "workflow": "Colony Model Bank Cold Matrix",
+  "run_id": 35564393374,
+  "job_id": 106223236233,
+  "head_sha": "7a182709720044aca85f01868b5aa73029fc95f1",
+  "event": "push",
+  "conclusion": "success",
+  "verified": [
+    "six candidate entries",
+    "first pair C03-SIGMA/C12-ARGUS",
+    "one-model-per-colony contract"
+  ],
+  "not_verified": [
+    "real inference for all six models",
+    "cold benchmark scores",
+    "winner selection",
+    "model binding"
+  ],
+  "decision": "CONTRACT_PASS_REAL_EXECUTION_PENDING",
+  "next_gate": "BUILD_REAL_INFERENCE_RUNNER_WITH_RUNTIME_FEASIBILITY_AND_NO_FAKE_SCORES"
+}
