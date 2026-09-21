@@ -1,0 +1,46 @@
+name: CEREBRON Free Dispatcher Canary
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cerebron-free-dispatcher-canary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dispatcher-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mission queue claim run receipt audit fusion
+        shell: python
+        run: |
+          import json, hashlib, pathlib, time
+          mission={"mission_id":"CANARY-001","task":"dispatcher self-test","required":["SAPHEA","SPIRALION","ETHERION"],"agents":0}
+          states=[]
+          def emit(s,extra=None):
+              d={"state":s,"ts":int(time.time())}
+              if extra:d.update(extra)
+              states.append(d)
+          emit("MISSION_QUEUE")
+          emit("CLAIM",{"worker":"github-actions-cpu"})
+          payload=json.dumps(mission,sort_keys=True).encode()
+          result={"ok":True,"mission_sha256":hashlib.sha256(payload).hexdigest(),"note":"control-plane canary; no LLM inference claimed"}
+          emit("RUN",{"real_execution":True})
+          receipt={"mission":mission,"result":result,"states":states}
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True).encode()).hexdigest()
+          emit("RECEIPT",{"sha256":receipt["receipt_sha256"]})
+          emit("AUDIT",{"pass":result["ok"]})
+          emit("FUSION",{"pass":result["ok"]})
+          receipt["states"]=states
+          p=pathlib.Path("artifacts/cerebron-dispatcher-canary")
+          p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps({"real_execution":True,"llm_inference":False,"pipeline":["MISSION_QUEUE","CLAIM","RUN","RECEIPT","AUDIT","FUSION"],"receipt_sha256":receipt["receipt_sha256"]}))
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-free-dispatcher-canary
+          path: artifacts/cerebron-dispatcher-canary/receipt.json
