@@ -1,0 +1,65 @@
+{
+  "schema": "cerebron-crystal-memory-anti-regression-v1",
+  "status": "MANDATORY",
+  "purpose": "Prevent GitHub memory limits, stale snapshots, or HF reconnects from making a colony regress to an older identity/state.",
+  "source_of_truth": {
+    "github": "CONTROL_PLANE_ONLY: manifests, hashes, pointers, receipts, lineage, versions; never bulk private memory or weights",
+    "huggingface_private": "DURABLE_PRIVATE_STATE: colony memory, validated datasets, adapters, weights, checkpoints",
+    "f66": "INDEX_AND_RECALL_POINTERS",
+    "f74": "CATALOG_AND_VERSION_HISTORY"
+  },
+  "identity_key": [
+    "canonical_colony_id",
+    "colony_generation",
+    "state_version",
+    "content_sha256",
+    "parent_state_sha256"
+  ],
+  "read_protocol": [
+    "READ_GITHUB_MANIFEST",
+    "RESOLVE_F66_POINTER",
+    "RESOLVE_F74_VERSION",
+    "READ_HF_PRIVATE_HEAD",
+    "VERIFY_CANONICAL_COLONY_ID",
+    "VERIFY_MONOTONIC_GENERATION",
+    "VERIFY_PARENT_CHAIN",
+    "VERIFY_SHA256",
+    "ONLY_THEN_LOAD_STATE"
+  ],
+  "anti_regression_rules": [
+    "NEVER_SELECT_STATE_BY_FILENAME_OR_TIMESTAMP_ALONE",
+    "NEVER_OVERWRITE_NEWER_GENERATION_WITH_OLDER_GENERATION",
+    "OLDER_STATE_IS_ROLLBACK_ONLY",
+    "HF_HEAD_MUST_MATCH_PUBLIC_OPAQUE_POINTER_DIGEST",
+    "MISSING_OR_CONFLICTING_POINTER=>HOLD",
+    "COLONY_ID_ALIAS_MUST_RESOLVE_TO_CANONICAL_ID",
+    "CROSS_COLONY_MEMORY_LOAD_FORBIDDEN_UNLESS_EXPLICIT_VALIDATED_TRANSFER",
+    "GITHUB_CACHE_IS_NOT_SOURCE_OF_TRUTH",
+    "EPHEMERAL_RUNNER_CACHE_MAY_BE_DELETED_WITHOUT LOSING_DURABLE_STATE"
+  ],
+  "write_protocol": [
+    "LOCK_EXPECTED_PARENT_VERSION",
+    "WRITE_NEW_HF_PRIVATE_GENERATION",
+    "READ_BACK",
+    "VERIFY_SHA256",
+    "WRITE_F74_POINTER",
+    "INDEX_F66",
+    "COMMIT_GITHUB_MANIFEST_LAST",
+    "BROADCAST_VERSION"
+  ],
+  "conflict_policy": {
+    "stale_writer": "REJECT",
+    "digest_mismatch": "QUARANTINE",
+    "missing_parent": "HOLD",
+    "older_generation": "DO_NOT_LOAD_AUTOMATICALLY",
+    "manual_rollback": "AFAH_AUTHORIZED_AND_AUDITED_ONLY"
+  },
+  "storage_pressure": {
+    "github": "compress metadata; retain hashes/pointers/critical receipts; do not store model weights or raw private memories",
+    "hf_private": "primary scalable private durable store",
+    "runtime": "cache only current/minimum relevant context"
+  },
+  "civilization_rule": "Every colony keeps a monotonic lineage. Reconnection to Hugging Face must resume the verified head, never silently resurrect an earlier colony state.",
+  "next_gate": "IMPLEMENT_HEAD_POINTER_CHECK_BEFORE_EVERY_COLONY_RECALL",
+  "claim_limit": "Policy/contract. Enforcement requires runtime checks and receipts."
+}
