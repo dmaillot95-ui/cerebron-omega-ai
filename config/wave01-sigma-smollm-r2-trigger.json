@@ -1,0 +1,5 @@
+{
+  "schema": "wave01-sigma-smollm-r2-trigger-v1",
+  "sequence": 1,
+  "mode": "blind-real-inference"
+}
