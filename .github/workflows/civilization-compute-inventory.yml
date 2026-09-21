@@ -25,9 +25,13 @@ jobs:
               for l in open('/proc/meminfo'):
                   if l.startswith('MemTotal:'): mem_kb=int(l.split()[1]);break
           except: pass
-          gpu_nvidia=cmd("nvidia-smi --query-gpu=name,memory.total --format=csv,noheader")
-          gpu_rocm=cmd("rocminfo | head -40")
-          r={"schema":"cerebron-compute-inventory-receipt-v1","status":"OBSERVED","runner":{"os":platform.platform(),"cpu_logical":cpu,"memory_gib":round(mem_kb/1024/1024,2),"disk_free_gib":round(shutil.disk_usage('.').free/1024**3,2)},"accelerators":{"nvidia":{"available":gpu_nvidia!="UNAVAILABLE","detail":gpu_nvidia},"rocm":{"available":gpu_rocm!="UNAVAILABLE","detail":gpu_rocm}},"capability":{"cpu_worker":bool(cpu),"gpu_worker":gpu_nvidia!="UNAVAILABLE" or gpu_rocm!="UNAVAILABLE"},"claim_limit":"Observed resources on this GitHub-hosted runner only; not a claim about other providers or future runs."}
+          nvidia_bin=shutil.which("nvidia-smi")
+          rocm_bin=shutil.which("rocminfo")
+          gpu_nvidia=cmd(f"{nvidia_bin} --query-gpu=name,memory.total --format=csv,noheader") if nvidia_bin else "UNAVAILABLE"
+          gpu_rocm=cmd(f"{rocm_bin} | head -40") if rocm_bin else "UNAVAILABLE"
+          nvidia_ok=bool(nvidia_bin and gpu_nvidia and gpu_nvidia!="UNAVAILABLE")
+          rocm_ok=bool(rocm_bin and gpu_rocm and gpu_rocm!="UNAVAILABLE")
+          r={"schema":"cerebron-compute-inventory-receipt-v2","status":"OBSERVED","runner":{"os":platform.platform(),"cpu_logical":cpu,"memory_gib":round(mem_kb/1024/1024,2),"disk_free_gib":round(shutil.disk_usage('.').free/1024**3,2)},"accelerators":{"nvidia":{"binary_present":bool(nvidia_bin),"available":nvidia_ok,"detail":gpu_nvidia},"rocm":{"binary_present":bool(rocm_bin),"available":rocm_ok,"detail":gpu_rocm}},"capability":{"cpu_worker":bool(cpu),"gpu_worker":nvidia_ok or rocm_ok},"claim_limit":"Observed resources on this GitHub-hosted runner only; GPU availability requires a present accelerator tool and successful hardware query."}
           Path("receipts/civilization").mkdir(parents=True,exist_ok=True)
           Path("receipts/civilization/compute-inventory.json").write_text(json.dumps(r,indent=2)+"\n")
           PY
