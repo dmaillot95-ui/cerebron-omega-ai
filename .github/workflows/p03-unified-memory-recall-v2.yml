@@ -1,5 +1,6 @@
 name: P03 Unified Memory Recall V2
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'config/p03-unified-recall-v2-trigger.txt'
