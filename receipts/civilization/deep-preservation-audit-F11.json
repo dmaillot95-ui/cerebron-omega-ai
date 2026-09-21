@@ -1,0 +1,26 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 11,
+  "repository": "dmaillot95-ui/cerebron-farm-11-science-chemistry-materials",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "4c5b1a206de473ac3ec7ca3271d2e56457b911ef",
+  "tree_truncated": false,
+  "file_count": 10,
+  "observed_critical": {
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "mission": "MISSION.md",
+    "agent": "scripts/agent.py",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "wave_trigger": "trigger-wave-01.txt",
+    "workflows": [
+      ".github/workflows/chemistry-materials-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "F11 contract blob differs from the common contract blob seen in F01-F10; this may be an intentional local version and is not classified as corruption. Historical/content comparison required before any repair.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
