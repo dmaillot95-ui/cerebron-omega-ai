@@ -1,0 +1,27 @@
+{
+  "schema": "cerebron-wave01-sigma-independent-admission-audit-v1",
+  "status": "HOLD",
+  "checks": {
+    "candidate_count": true,
+    "digest_gate": true,
+    "not_training_eligible": true,
+    "distinct_source_farms": true,
+    "distinct_source_digests": true,
+    "benchmark_exclusion_declared": true,
+    "dependency_gate_declared": true,
+    "red_team_gate_declared": true
+  },
+  "dependency_fingerprint": {
+    "shared_problem_lineage": true,
+    "independence_status": "NOT_ESTABLISHED",
+    "reason": "F01 and F09 use related Wave01 Collatz framing; no clean reproducer receipt is attached."
+  },
+  "red_team": {
+    "status": "HOLD",
+    "finding": "Do not upgrade correlated farm packets to independent evidence."
+  },
+  "clean_reproduction": "MISSING",
+  "training_admission": "DENY",
+  "next_gate": "REAL_CLEAN_REPRODUCER_OR_EQUIVALENT_INDEPENDENT_EVIDENCE",
+  "claim_limit": "Metadata audit only; does not validate mathematical truth or authorize training."
+}
