@@ -1,0 +1,78 @@
+{
+  "schema": "cerebron-agent-budget-v1",
+  "date": "2026-09-21",
+  "status": "ACTIVE_DESIGN",
+  "objective": "Use at most 20 agent slots only where delegation adds value",
+  "capacity": {
+    "max_agent_slots": 20,
+    "default_active": 0,
+    "permanent_identity": false,
+    "slots_are": "execution capacity"
+  },
+  "allocation": [
+    {
+      "class": "SIMPLE",
+      "agents": "0",
+      "route": "direct specialist IA/farm"
+    },
+    {
+      "class": "STANDARD",
+      "agents": "1-3",
+      "route": "lead execution + optional audit"
+    },
+    {
+      "class": "HARD",
+      "agents": "4-8",
+      "route": "independent approaches + audit + synthesis"
+    },
+    {
+      "class": "CRITICAL",
+      "agents": "9-12",
+      "route": "multiple lineages + auditor + counter-auditor + synthesizer"
+    },
+    {
+      "class": "CAMPAIGN",
+      "agents": "13-20",
+      "route": "only after measured gain from smaller fanout"
+    }
+  ],
+  "escalation": [
+    "start minimum",
+    "measure disagreement/uncertainty/failure",
+    "add agents only if marginal information gain expected",
+    "stop when consensus adds no independent evidence",
+    "never exceed verified runtime/quota"
+  ],
+  "reserved_roles": {
+    "audit_min": 1,
+    "counter_audit_for_critical": 1,
+    "synthesis_min": 1
+  },
+  "independence_fields": [
+    "execution_id",
+    "farm_id",
+    "model_id",
+    "model_revision",
+    "provider",
+    "prompt_hash",
+    "data_lineage",
+    "tool_path",
+    "result_hash"
+  ],
+  "stop_conditions": [
+    "duplicate lineage",
+    "repeated answer without new evidence",
+    "quota pressure",
+    "provider degradation",
+    "audit detects systemic shared error",
+    "marginal gain below benchmark threshold"
+  ],
+  "failure_isolation": "provider/farm failure enters HOLD for that route; router selects verified fallback without mutating preserved farm history",
+  "evidence_rules": [
+    "AGENT_COUNT_NOT_EVIDENCE_COUNT",
+    "SAME_LINEAGE_NOT_INDEPENDENT",
+    "WORKFLOW_SUCCESS_NOT_RESULT_VALIDATION",
+    "CLAIM_LE_EVIDENCE"
+  ],
+  "next_gate": "implement receipt schema then run no-HF GitHub CPU routing canary"
+}
