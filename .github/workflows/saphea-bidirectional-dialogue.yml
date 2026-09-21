@@ -6,6 +6,9 @@ on:
         description: "Question sent to SAPHEA"
         required: true
         type: string
+  push:
+    paths:
+      - '.github/workflows/saphea-bidirectional-dialogue.yml'
 permissions:
   contents: read
 jobs:
@@ -20,7 +23,7 @@ jobs:
         env:
           MODEL_ID: HuggingFaceTB/SmolLM3-3B
           REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
-          QUESTION: ${{ inputs.question }}
+          QUESTION: ${{ github.event.inputs.question || 'Depuis le debut des cycles AGORA, estimes-tu avoir progresse ? Reponds OUI, NON ou INCERTAIN, puis explique precisement pourquoi et distingue memoire/contexte/politique de veritable apprentissage des poids.' }}
         shell: bash
         run: |
           mkdir -p out
@@ -33,25 +36,14 @@ jobs:
           t=time.time()
           tok=AutoTokenizer.from_pretrained(mid,revision=rev)
           model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
-          prompt="You are SAPHEA, a CEREBRON specialist assistant. Answer the user's question accurately and concisely. If uncertain, say so.\nUSER: "+q+"\nSAPHEA:"
+          prompt="You are SAPHEA, a CEREBRON specialist assistant. Answer accurately and concisely. Never claim weight learning without evidence.\nUSER: "+q+"\nSAPHEA:"
           x=tok(prompt,return_tensors="pt")
           with torch.no_grad():
               y=model.generate(**x,max_new_tokens=192,do_sample=False,pad_token_id=tok.eos_token_id)
           ans=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
-          receipt={
-            "schema":"cerebron-saphea-dialogue-v1",
-            "assistant":"SAPHEA",
-            "model_id":mid,
-            "revision":rev,
-            "question":q,
-            "question_sha256":hashlib.sha256(q.encode()).hexdigest(),
-            "answer":ans,
-            "answer_sha256":hashlib.sha256(ans.encode()).hexdigest(),
-            "latency_ms":round((time.time()-t)*1000),
-            "execution":"REAL_MODEL_INFERENCE"
-          }
+          receipt={"schema":"cerebron-saphea-dialogue-v1","assistant":"SAPHEA","model_id":mid,"revision":rev,"question":q,"question_sha256":hashlib.sha256(q.encode()).hexdigest(),"answer":ans,"answer_sha256":hashlib.sha256(ans.encode()).hexdigest(),"latency_ms":round((time.time()-t)*1000),"execution":"REAL_MODEL_INFERENCE"}
           Path("out/saphea-dialogue.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n")
-          print(json.dumps({"assistant":"SAPHEA","model_id":mid,"revision":rev,"answer_sha256":receipt["answer_sha256"],"answer":ans},ensure_ascii=False))
+          print(json.dumps(receipt,ensure_ascii=False))
           PY
       - name: Upload dialogue receipt
         uses: actions/upload-artifact@v4
