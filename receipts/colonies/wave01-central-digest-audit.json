@@ -1,0 +1,35 @@
+{
+  "schema": "cerebron-wave01-central-digest-audit-v1",
+  "status": "FAIL",
+  "checks": [
+    {
+      "farm": "F01",
+      "task": "W01-SIGMA-F01",
+      "expected_sha256": "a8e512e50c345efcc691f24908096495629f777e333fbe07be91016c0fe1a606",
+      "actual_sha256": "f04b438825c4180013a6c7da0d962705341819c1f6f4f44cd825c93f4b24362d",
+      "match": false
+    },
+    {
+      "farm": "F09",
+      "task": "W01-SIGMA-F09",
+      "expected_sha256": "ececf84a7c7313c8c28d456932ac2f664b73260902f592262f969691c37e3f12",
+      "actual_sha256": "bd54d1e6cb9e7d8cab3d4b1a315e42461c474af735c8fc281b0c493708848344",
+      "match": false
+    },
+    {
+      "farm": "F06",
+      "task": "W01-ARGUS-F06",
+      "expected_sha256": "193fb245b9e72b91d9d2a0c2ae3f1db483689e61ef4b6e70729a5b23951269bc",
+      "actual_sha256": "fcf7bcbc8e4c04efef077bd2fe688ee390805609022478c61df7c51d85773e58",
+      "match": false
+    },
+    {
+      "farm": "F34",
+      "task": "W01-ARGUS-F34",
+      "expected_sha256": "a9c330987ed5e2314da8350329acf92ee1ef4dd3d68e5bd06b9c466d0478fa91",
+      "actual_sha256": "ac9b565cabec4eb243be5ca9e0b10a1bc52eb1b208534f08af662fbec1b99954",
+      "match": false
+    }
+  ],
+  "claim_limit": "Byte-level SHA256 verification of the four published raw farm result files only; not proof, model reasoning, or training-data admission."
+}
