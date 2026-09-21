@@ -1,0 +1,288 @@
+{
+  "schema": "cerebron-colony-rollout-v1",
+  "date": "2026-09-21",
+  "status": "WAVE01_EXECUTION_IN_PROGRESS",
+  "total_colonies": 62,
+  "batch_size": 2,
+  "model_bank": {
+    "size": 6,
+    "rule": "EXACTLY_ONE_SELECTED_MODEL_PER_COLONY"
+  },
+  "waves": [
+    {
+      "wave": 1,
+      "colonies": [
+        1,
+        2
+      ],
+      "status": "IN_PROGRESS"
+    },
+    {
+      "wave": 2,
+      "colonies": [
+        3,
+        4
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 3,
+      "colonies": [
+        5,
+        6
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 4,
+      "colonies": [
+        7,
+        8
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 5,
+      "colonies": [
+        9,
+        10
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 6,
+      "colonies": [
+        11,
+        12
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 7,
+      "colonies": [
+        13,
+        14
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 8,
+      "colonies": [
+        15,
+        16
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 9,
+      "colonies": [
+        17,
+        18
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 10,
+      "colonies": [
+        19,
+        20
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 11,
+      "colonies": [
+        21,
+        22
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 12,
+      "colonies": [
+        23,
+        24
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 13,
+      "colonies": [
+        25,
+        26
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 14,
+      "colonies": [
+        27,
+        28
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 15,
+      "colonies": [
+        29,
+        30
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 16,
+      "colonies": [
+        31,
+        32
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 17,
+      "colonies": [
+        33,
+        34
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 18,
+      "colonies": [
+        35,
+        36
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 19,
+      "colonies": [
+        37,
+        38
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 20,
+      "colonies": [
+        39,
+        40
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 21,
+      "colonies": [
+        41,
+        42
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 22,
+      "colonies": [
+        43,
+        44
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 23,
+      "colonies": [
+        45,
+        46
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 24,
+      "colonies": [
+        47,
+        48
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 25,
+      "colonies": [
+        49,
+        50
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 26,
+      "colonies": [
+        51,
+        52
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 27,
+      "colonies": [
+        53,
+        54
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 28,
+      "colonies": [
+        55,
+        56
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 29,
+      "colonies": [
+        57,
+        58
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 30,
+      "colonies": [
+        59,
+        60
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    },
+    {
+      "wave": 31,
+      "colonies": [
+        61,
+        62
+      ],
+      "status": "WAITING_PREVIOUS_WAVE_GATE"
+    }
+  ],
+  "global_gates": [
+    "REAL_MODEL_AVAILABLE",
+    "IMMUTABLE_REVISION",
+    "SEED_FARM_LINK_VERIFIED",
+    "COLD_BASELINE",
+    "AUDIT",
+    "RED_TEAM",
+    "ROLLBACK_TARGET"
+  ],
+  "learning": {
+    "lineage": "G0->G1->G2...",
+    "derived_weights": "HF_PRIVATE",
+    "github": "CONTROL_METADATA_ONLY",
+    "cross_colony": "VALIDATED_GOLD_RED_ONLY"
+  },
+  "afah": {
+    "after_colony_rollout": true,
+    "lineage": "SEPARATE_SEVENTH_MODEL_LINEAGE",
+    "input": "VALIDATED_CROSS_COLONY_LEARNING",
+    "naive_weight_merge": false
+  },
+  "note": "Wave numbering is rollout scheduling only. Existing canonical colony IDs/names remain unchanged; Wave01 operational first pair is C03-SIGMA/C12-ARGUS and overrides numeric pairing for first execution.",
+  "wave01_override": [
+    "C03-SIGMA",
+    "C12-ARGUS"
+  ],
+  "next_gate": "FINISH_REAL_CANARY_AND_BIND_WAVE01_ONLY_AFTER_COLD_MATRIX"
+}
