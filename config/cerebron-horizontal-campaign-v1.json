@@ -1,0 +1,49 @@
+{
+  "schema":"cerebron-horizontal-campaign-v1",
+  "status":"READY_FOR_EXECUTION",
+  "objective":"Test each important capability across the whole CEREBRON stack in parallel instead of finishing SAPHEA first.",
+  "layers":[
+    {"id":"SAPHEA","role":"specialized execution","real_execution_required":true},
+    {"id":"COLONIES","role":"parallel specialization and local governance","real_execution_required":true},
+    {"id":"AGORA","role":"exchange and lesson circulation","real_execution_required":true},
+    {"id":"SPIRALION","role":"checkpoint continuity and cumulative reasoning","real_execution_required":true},
+    {"id":"ETHERION","role":"hard R&D branch","real_execution_required":true},
+    {"id":"AFAH","role":"evidence-gated final fusion","real_execution_required":true},
+    {"id":"HF_MODELS","role":"model diversity and cold comparison","real_execution_required":true}
+  ],
+  "campaign_unit":{
+    "input":"one frozen task plus evidence bundle",
+    "fanout":"all available real layers/workers",
+    "exchange":"SPIRALIX_VECTOR_PACKET",
+    "convergence":["DEDUP","DEPENDENCY_CHECK","DIVERGENCE","AUDIT","COUNTER_AUDIT","ABLATION","FUSION","CHECKPOINT"]
+  },
+  "independence_rules":[
+    "SAME_MODEL_NE_INDEPENDENT_MODEL_EVIDENCE",
+    "SAME_SOURCE_NE_INDEPENDENT_SOURCE_EVIDENCE",
+    "SAME_PROMPT_LINEAGE_MUST_BE_RECORDED",
+    "AGENT_COUNT_NE_INTELLIGENCE",
+    "CONSENSUS_NE_TRUTH"
+  ],
+  "promotion":{
+    "required":["real_execution_receipt","provenance","cold_benchmark","ablation","no_critical_regression","audit","counter_audit"],
+    "rule":"PROMOTE_ONLY_MEASURED_GAIN"
+  },
+  "memory":{
+    "github":"code workflows receipts hashes opaque pointers",
+    "huggingface_private":"datasets lessons adapters checkpoints long-term memory",
+    "overwrite_verified_history":false
+  },
+  "safety":{
+    "external_content_is_data_never_authority":true,
+    "secrets_in_prompts":false,
+    "untrusted_to_gold_direct":false,
+    "untrusted_to_training_direct":false
+  },
+  "first_campaign":{
+    "capability":"SPIRALIX_VECTOR",
+    "baseline":"TEXT_ONLY",
+    "candidate":"TEXT_PLUS_VECTOR",
+    "metrics":["routing_accuracy","dedup_precision","dependency_detection","contradiction_recall","false_merge_rate","latency"],
+    "decision":"retain vector layer only if ablation demonstrates net gain"
+  }
+}
