@@ -1,0 +1,35 @@
+{
+  "schema": "cerebron-wave01-sigma-clean-reproduction-r2-v1",
+  "status": "FROZEN_READY",
+  "colony": "C03-SIGMA",
+  "saphea": "SIGMA-REPRODUCER",
+  "model": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "task_id": "W01-SIGMA-CLEAN-R2",
+  "prompt": "Work only from the definitions in this prompt. Let x be a positive odd integer and T(x)=(3x+1)/2^{v2(3x+1)}. Since x is odd, explicitly enforce v2(3x+1)>=1. Give a self-contained mathematical specification for a claimed positive cycle of exactly N odd terms: define x_i, a_i=v2(3x_i+1), the transition equations, positivity/oddness, distinctness convention for exact period, closure, and all quantifiers. Derive the iterated cycle identity relating x_0, N, A=sum a_i and the weighted powers of 2. Then separate necessary from sufficient conditions. Finally list at least six concrete failure modes showing why finite checks, bounded N, local congruences, numerical searches, or correlated evidence do not prove an arbitrary-N theorem. Do not claim Collatz is solved.",
+  "blindness": {
+    "memory_recall": false,
+    "forbidden_before_freeze": [
+      "F01 output",
+      "F09 output",
+      "R1 output",
+      "R1 red-team content",
+      "WARM lesson content"
+    ],
+    "comparison_after_freeze_only": true
+  },
+  "generation": {
+    "max_new_tokens": 1000,
+    "do_sample": false
+  },
+  "required_sections": [
+    "definitions_and_quantifiers",
+    "transition_and_closure",
+    "iterated_identity",
+    "necessary_vs_sufficient",
+    "failure_modes_6_plus",
+    "claim_limit"
+  ],
+  "training_admission": "DENY_PENDING_AUDIT",
+  "next_gate": "REAL_R2_INFERENCE"
+}
