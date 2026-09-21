@@ -2,7 +2,8 @@ name: CEREBRON 5 Real AI Workers Canary
 on:
   push:
     paths:
-      - '.github/workflows/cerebron-3-real-ai-workers-canary.yml'
+      - '.github/workflows/cerebron-5-real-ai-workers-canary.yml'
+      - 'config/cerebron-5-worker-trigger.txt'
   workflow_dispatch:
 permissions:
   contents: read
