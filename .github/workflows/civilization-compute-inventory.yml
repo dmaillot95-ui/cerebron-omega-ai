@@ -1,0 +1,42 @@
+name: Civilization Compute Inventory
+on:
+  push:
+    paths:
+      - 'config/civilization-compute-inventory-trigger.json'
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Observe real runner resources
+        run: |
+          python - <<'PY'
+          import json,os,platform,shutil,subprocess
+          from pathlib import Path
+          def cmd(x):
+              try:return subprocess.check_output(x,shell=True,text=True,stderr=subprocess.STDOUT).strip()
+              except Exception as e:return "UNAVAILABLE"
+          cpu=os.cpu_count()
+          mem_kb=0
+          try:
+              for l in open('/proc/meminfo'):
+                  if l.startswith('MemTotal:'): mem_kb=int(l.split()[1]);break
+          except: pass
+          gpu_nvidia=cmd("nvidia-smi --query-gpu=name,memory.total --format=csv,noheader")
+          gpu_rocm=cmd("rocminfo | head -40")
+          r={"schema":"cerebron-compute-inventory-receipt-v1","status":"OBSERVED","runner":{"os":platform.platform(),"cpu_logical":cpu,"memory_gib":round(mem_kb/1024/1024,2),"disk_free_gib":round(shutil.disk_usage('.').free/1024**3,2)},"accelerators":{"nvidia":{"available":gpu_nvidia!="UNAVAILABLE","detail":gpu_nvidia},"rocm":{"available":gpu_rocm!="UNAVAILABLE","detail":gpu_rocm}},"capability":{"cpu_worker":bool(cpu),"gpu_worker":gpu_nvidia!="UNAVAILABLE" or gpu_rocm!="UNAVAILABLE"},"claim_limit":"Observed resources on this GitHub-hosted runner only; not a claim about other providers or future runs."}
+          Path("receipts/civilization").mkdir(parents=True,exist_ok=True)
+          Path("receipts/civilization/compute-inventory.json").write_text(json.dumps(r,indent=2)+"\n")
+          PY
+      - name: Persist receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/civilization/compute-inventory.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Record civilization compute inventory"
+          git pull --rebase origin main
+          git push
