@@ -1,0 +1,98 @@
+{
+  "schema": "cerebron-farm-preservation-manifest-v1",
+  "status": "FREEZE_BEFORE_DEEP_AUDIT",
+  "scope": {
+    "farms": "F01-F74",
+    "count": 74
+  },
+  "verified_baseline": {
+    "all_registry_repositories_present": true,
+    "missing_repositories": 0,
+    "archived_repositories": 0,
+    "default_branch_main": 74,
+    "push_access": 74
+  },
+  "preserve": [
+    "repository identity",
+    "farm numeric ID",
+    "default branch",
+    "Git history",
+    "workflows",
+    "receipts",
+    "results",
+    "evidence artifacts",
+    "F66 pointers",
+    "F74 catalog entries",
+    "HF private opaque references"
+  ],
+  "mutation_policy": {
+    "delete": "FORBIDDEN_DURING_AUDIT",
+    "force_push": "FORBIDDEN",
+    "history_rewrite": "FORBIDDEN",
+    "rename": "FORBIDDEN",
+    "automatic_repair": "FORBIDDEN_UNTIL_LOSS_CONFIRMED",
+    "repair_strategy": "RECOVER_FROM_HISTORY_OR_VERIFIED_DURABLE_COPY; NEVER INVENT"
+  },
+  "deep_audit_plan": [
+    {
+      "phase": 1,
+      "target": "F01-F20",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions"
+      ]
+    },
+    {
+      "phase": 2,
+      "target": "F21-F40",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions"
+      ]
+    },
+    {
+      "phase": 3,
+      "target": "F41-F59",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions"
+      ]
+    },
+    {
+      "phase": 4,
+      "target": "F60-F74",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions",
+        "extra scrutiny small repos"
+      ]
+    },
+    {
+      "phase": 5,
+      "target": "F66+F74+HF",
+      "checks": [
+        "pointer continuity",
+        "generation monotonicity",
+        "digest identity",
+        "rollback heads"
+      ]
+    }
+  ],
+  "loss_classification": [
+    "NEVER_EXISTED",
+    "PRESENT",
+    "MOVED_OR_RENAMED",
+    "DELETED_BUT_RECOVERABLE_FROM_GIT",
+    "DURABLE_COPY_ON_HF",
+    "UNRESOLVED"
+  ],
+  "claim_limit": "This preservation freeze prevents destructive repair while the deep content/history audit determines whether any essential work is actually missing."
+}
