@@ -1,0 +1,21 @@
+{
+  "schema": "cerebron-compute-inventory-audit-v1",
+  "status": "CORRECTION_REQUIRED",
+  "source_run_id": 35557245344,
+  "verified": {
+    "cpu_worker": true,
+    "cpu_logical": 4,
+    "memory_gib": 15.61,
+    "disk_free_gib": 86.07,
+    "nvidia_gpu": false,
+    "rocm_gpu": false,
+    "gpu_worker": false
+  },
+  "finding": {
+    "code": "ROCM_FALSE_POSITIVE",
+    "detail": "The probe returned shell text '/bin/sh: 1: rocminfo: not found', which the first script incorrectly treated as availability because it only compared against the literal UNAVAILABLE sentinel."
+  },
+  "decision": "DO_NOT_ROUTE_GPU_JOBS",
+  "next_gate": "FIX_ACCELERATOR_PROBE_AND_RERUN",
+  "claim_limit": "Current GitHub runner has verified CPU resources; no GPU is verified."
+}
