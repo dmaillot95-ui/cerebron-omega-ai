@@ -1,0 +1,17 @@
+{
+  "schema": "p03-recall-state-v1",
+  "status": "HOLD_STALE_RECEIPT",
+  "observed_receipt": {
+    "status": "FAIL",
+    "error": "KeyError: memory_id",
+    "interpretation": "stale receipt; does not demonstrate execution of repaired workflow"
+  },
+  "verified_path_so_far": [
+    "F66_READ_PASS",
+    "F74_READ_PASS",
+    "F66_F74_IDENTITY_PASS",
+    "HF_PRIVATE_READ_PASS"
+  ],
+  "safety": "parameter training remains blocked",
+  "next": "obtain fresh receipt whose workflow revision includes historical-schema compatibility fix"
+}
