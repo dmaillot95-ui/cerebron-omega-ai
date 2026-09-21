@@ -1,0 +1,77 @@
+{
+  "schema": "cerebron-colony-model-bank-benchmark-v1",
+  "date": "2026-09-21",
+  "status": "READY_TO_EXECUTE",
+  "purpose": "Select exactly one model lineage per colony from the six-model bank.",
+  "models": [
+    "G0-QWEN3-4B",
+    "G0-QWEN3-4B-BASE",
+    "G0-SMOLLM3-3B",
+    "G0-SMOLLM3-3B-BASE",
+    "G0-MINISTRAL3-3B-BASE-2512",
+    "G0-MINISTRAL3-3B-INSTRUCT-2512-BF16"
+  ],
+  "first_pair": [
+    {
+      "colony": "C03-SIGMA",
+      "seed_farms": [
+        "F01",
+        "F09"
+      ],
+      "tests": [
+        "formal-math-correctness",
+        "proof-step-consistency",
+        "counterexample-resistance",
+        "structured-output",
+        "latency-memory"
+      ],
+      "weights": {
+        "formal_math": 0.35,
+        "proof_consistency": 0.25,
+        "counterexample_resistance": 0.2,
+        "structured_output": 0.1,
+        "runtime_feasibility": 0.1
+      }
+    },
+    {
+      "colony": "C12-ARGUS",
+      "seed_farms": [
+        "F06",
+        "F34"
+      ],
+      "tests": [
+        "error-detection",
+        "false-proof-rejection",
+        "dependency-lineage-detection",
+        "adversarial-audit",
+        "latency-memory"
+      ],
+      "weights": {
+        "error_detection": 0.3,
+        "false_proof_rejection": 0.3,
+        "lineage_detection": 0.15,
+        "adversarial_audit": 0.15,
+        "runtime_feasibility": 0.1
+      }
+    }
+  ],
+  "controls": {
+    "same_frozen_tasks": true,
+    "cold_holdout": true,
+    "no_training_on_holdout": true,
+    "one_model_per_colony": true,
+    "base_and_instruct_scored_separately": true,
+    "no_binding_from_popularity": true,
+    "failed_runtime": "RECORDED_NOT_HIDDEN",
+    "selection_requires": [
+      "real execution",
+      "immutable revision",
+      "license pass",
+      "cold benchmark",
+      "audit",
+      "red-team"
+    ]
+  },
+  "decision": "NO_WINNER_UNTIL_REAL_RECEIPTS_EXIST",
+  "next_gate": "EXECUTE_SIX_MODEL_COLD_MATRIX_FOR_C03_AND_C12"
+}
