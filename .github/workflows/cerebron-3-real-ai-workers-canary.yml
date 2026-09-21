@@ -1,0 +1,53 @@
+name: CEREBRON 3 Real AI Workers Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/cerebron-3-real-ai-workers-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  worker:
+    strategy:
+      fail-fast: false
+      matrix:
+        worker: [SAPHEA-A, SAPHEA-B, SAPHEA-C]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Real inference and receipt
+        env:
+          WORKER: ${{ matrix.worker }}
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: python
+        run: |
+          import os,json,time,hashlib,pathlib
+          t=time.time()
+          mission={"mission_id":"3-WORKER-CANARY-001","worker":os.environ["WORKER"],"task":"State one concise reason independent parallel workers need separate execution receipts."}
+          r={"mission":mission,"model_id":os.environ["MODEL_ID"],"revision":os.environ["REVISION"],"real_execution":True,"llm_inference":False}
+          try:
+              import torch
+              from transformers import AutoTokenizer,AutoModelForCausalLM
+              tok=AutoTokenizer.from_pretrained(os.environ["MODEL_ID"],revision=os.environ["REVISION"])
+              model=AutoModelForCausalLM.from_pretrained(os.environ["MODEL_ID"],revision=os.environ["REVISION"],torch_dtype=torch.float32,low_cpu_mem_usage=True)
+              x=tok(mission["task"],return_tensors="pt")
+              with torch.no_grad(): y=model.generate(**x,max_new_tokens=40,do_sample=False)
+              out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+              r.update(llm_inference=True,inference="PASS",output=out[:500],output_sha256=hashlib.sha256(out.encode()).hexdigest())
+          except Exception as e:
+              r.update(inference="FAIL",failure_class=type(e).__name__,failure_message=str(e)[:500])
+          r["latency_s"]=round(time.time()-t,3)
+          r["receipt_sha256"]=hashlib.sha256(json.dumps(r,sort_keys=True).encode()).hexdigest()
+          p=pathlib.Path("artifacts")/os.environ["WORKER"]; p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(r,indent=2)+"\n")
+          print(json.dumps({k:r.get(k) for k in ["real_execution","llm_inference","inference","output","latency_s","receipt_sha256"]}))
+          if not r["llm_inference"]: raise SystemExit(2)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: receipt-${{ matrix.worker }}
+          path: artifacts/${{ matrix.worker }}/receipt.json
