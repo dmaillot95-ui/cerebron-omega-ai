@@ -1,0 +1,37 @@
+{
+  "schema": "cerebron-wave01-sigma-smollm-r1-redteam-v1",
+  "status": "FAIL_CONTENT_QUALITY",
+  "source_run_id": 35555930668,
+  "source_output_sha256": "5f9d9136926082f6624180ff9a8bd8d46d0b3f6dab89e716294f0e91355fd15d",
+  "checks": {
+    "real_inference": true,
+    "immutable_revision": true,
+    "blind_memory_disabled": true,
+    "output_frozen": true,
+    "domain_parity_correct": false,
+    "requested_obligations_complete": false,
+    "arbitrary_N_failure_modes_complete": false
+  },
+  "findings": [
+    {
+      "severity": "MAJOR",
+      "code": "DOMAIN_PARITY_ERROR",
+      "detail": "For positive odd x, 3x+1 is always even, hence v2(3x+1)>=1; the output discusses v2=0 as possible in the stated domain."
+    },
+    {
+      "severity": "MAJOR",
+      "code": "TRUNCATED_BEFORE_DELIVERABLE",
+      "detail": "Generation ends before supplying the requested complete definitions, proof obligations, and failure-mode list."
+    }
+  ],
+  "independence": {
+    "execution_lineage": "REAL_SMOLLM3_G0",
+    "blind_before_comparison": true,
+    "status": "EXECUTION_INDEPENDENCE_SUPPORTED_BUT_CONTENT_NOT_VALIDATED"
+  },
+  "comparison_policy": "Do not use F01/F09 agreement to repair or certify this frozen output.",
+  "training_admission": "DENY",
+  "lesson_candidate": "RED_CANDIDATE_ONLY",
+  "next_gate": "R2_CORRECTED_SEALED_PROMPT_WITH_LONGER_OUTPUT_THEN_INDEPENDENT_AUDIT",
+  "claim_limit": "Red-team assessment of a frozen model output; does not establish or refute an arbitrary-N Collatz theorem."
+}
