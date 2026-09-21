@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-model-gateway-v1",
   "version": "1.0",
-  "status": "PUBLIC_CONNECTED_PRIVATE_UNAUTHENTICATED",
+  "status": "PUBLIC_CONNECTED_PRIVATE_AUTHENTICATED",
   "authority": "AFAH",
   "purpose": "Central registry/router for external model weights and adapters. GitHub stores references and evidence, not model weights.",
   "storage_policy": {
@@ -27,17 +27,23 @@
   "providers": [
     {
       "id": "huggingface",
-      "status": "PUBLIC_CONNECTED",
+      "status": "PRIVATE_AUTHENTICATED",
       "endpoint_type": "REMOTE_MODEL_REGISTRY_OR_INFERENCE",
       "credential_ref": "HF_TOKEN_SECRET_IF_REQUIRED",
       "public_no_token_verified": true,
-      "private_authenticated": false,
+      "private_authenticated": true,
       "verification": {
         "workflow": "MODEL Gateway Public Hugging Face Test",
         "run_id": 35521084070,
         "job_id": 106105166919,
         "result": "PASS",
         "evidence": "HF_PUBLIC_NO_TOKEN=PASS"
+      },
+      "private_verification": {
+        "result": "PASS",
+        "evidence": "receipts/p03/unified-memory-recall-v2.json",
+        "run_id": 35554346451,
+        "scope": "authenticated private readback via F66→F74→HF route"
       }
     }
   ],
@@ -72,5 +78,5 @@
   "binding_rule": "No SAPHEA becomes BOUND from a registry entry alone. Real availability plus benchmark and audit are required.",
   "independence_rule": "Same base model, adapter, prompt/data lineage or shared evidence must be recorded and must not be counted automatically as independent reproduction.",
   "cache_policy": "Runtime cache is ephemeral unless explicitly approved; never commit downloaded weights to Git.",
-  "next_gate": "PRIVATE_HF_AUTHENTICATION_THEN_PRIVATE_REPO_WRITE_READ_TEST"
+  "next_gate": "IMMUTABLE_MODEL_BINDING_AND_COLD_BASELINE_BEFORE_TRAINING"
 }
