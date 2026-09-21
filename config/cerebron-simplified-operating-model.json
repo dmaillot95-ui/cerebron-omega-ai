@@ -1,0 +1,70 @@
+{
+  "schema": "cerebron-simplified-operating-model-v1",
+  "date": "2026-09-21",
+  "status": "TARGET_SIMPLIFICATION_FROZEN",
+  "principle": "SPECIALISTS_FIRST_AGENTS_ONLY_WHEN_USEFUL",
+  "layers": {
+    "permanent_agents": {
+      "max": 20,
+      "purpose": "orchestration audit counter-audit synthesis and exceptional parallel work",
+      "rule": "capacity ceiling not mandatory population"
+    },
+    "specialist_ias": {
+      "purpose": "stable specialist capabilities; no agent wrapper required when a direct model call is sufficient",
+      "examples": [
+        "math",
+        "code",
+        "research",
+        "physics",
+        "vision",
+        "data",
+        "security",
+        "memory"
+      ]
+    },
+    "github_farms": {
+      "purpose": "preserved callable roots selected by task as in original CEREBRON routing",
+      "preserve_all_existing": true,
+      "selection": "route only required farms"
+    },
+    "providers": {
+      "purpose": "interchangeable execution backends",
+      "examples": [
+        "Hugging Face",
+        "local/open models",
+        "other authorized providers"
+      ],
+      "rule": "provider failure must not redefine colony or farm identity"
+    }
+  },
+  "routing": [
+    "TASK",
+    "CEREBRON_ROUTER",
+    "SELECT_SPECIALIST_IAS_AND_FARMS",
+    "OPTIONAL_AGENT_TEAM",
+    "AUDIT",
+    "COUNTER_AUDIT_IF_REQUIRED",
+    "SYNTHESIS",
+    "MEMORY"
+  ],
+  "invariants": [
+    "PRESERVE_74_FARMS",
+    "NO_MASS_RENAME_OR_DELETE",
+    "NO_SIMULATED_AGENTS",
+    "REAL_EXECUTION_RECEIPTS",
+    "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "CRISTAL_PRESERVE"
+  ],
+  "supersession": {
+    "greek_24": "retain as functional taxonomy/map, not 24 mandatory always-on agent colonies",
+    "old_62_colonies": "retain as reserve/archive, not active population",
+    "farms": "remain executable GitHub roots and can be selected directly"
+  },
+  "scaling": {
+    "default": "minimum sufficient resources",
+    "agent_fanout": "1..20 permanent-agent capacity",
+    "beyond_20": "external/runtime workers only after measured need and available quota",
+    "gate": "benchmark + ablation + cost/resource + reliability"
+  }
+}
