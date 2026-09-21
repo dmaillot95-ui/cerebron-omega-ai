@@ -1,0 +1,69 @@
+name: HF 20 Civilization Council
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/hf-20-civilization-council.yml'
+permissions:
+  contents: read
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        include:
+          - {slot: 1, model: "Qwen/Qwen3-4B"}
+          - {slot: 2, model: "HuggingFaceTB/SmolLM3-3B"}
+          - {slot: 3, model: "mistralai/Ministral-3-3B-Instruct-2512"}
+          - {slot: 4, model: "Qwen/Qwen3-8B"}
+          - {slot: 5, model: "Qwen/Qwen3-14B"}
+          - {slot: 6, model: "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"}
+          - {slot: 7, model: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"}
+          - {slot: 8, model: "google/gemma-3-4b-it"}
+          - {slot: 9, model: "google/gemma-3-12b-it"}
+          - {slot: 10, model: "meta-llama/Llama-3.2-3B-Instruct"}
+          - {slot: 11, model: "microsoft/Phi-4-mini-instruct"}
+          - {slot: 12, model: "Qwen/Qwen2.5-Coder-7B-Instruct"}
+          - {slot: 13, model: "Qwen/Qwen2.5-Math-7B-Instruct"}
+          - {slot: 14, model: "NousResearch/Hermes-3-Llama-3.1-8B"}
+          - {slot: 15, model: "tiiuae/Falcon3-7B-Instruct"}
+          - {slot: 16, model: "ibm-granite/granite-3.3-8b-instruct"}
+          - {slot: 17, model: "allenai/OLMo-2-1124-7B-Instruct"}
+          - {slot: 18, model: "HuggingFaceH4/zephyr-7b-beta"}
+          - {slot: 19, model: "Qwen/Qwen2.5-7B-Instruct"}
+          - {slot: 20, model: "mistralai/Mistral-7B-Instruct-v0.3"}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ask real Hugging Face model
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          MODEL_ID: ${{ matrix.model }}
+          SLOT: ${{ matrix.slot }}
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error,time,hashlib
+          model=os.environ["MODEL_ID"]; token=os.environ.get("HF_TOKEN",""); slot=os.environ["SLOT"]
+          prompt="""You are an independent architecture reviewer. Review CEREBRON AO: 24 Greek-function AI colonies; each colony has CHIEF, parallel EXECUTORS, AUDITOR, COUNTER-AUDITOR, SYNTHESIZER. Central CEREBRON cross-audits colony syntheses, then PSI-AGORA collective debate and OMEGA-AFAH final convergence. Durable private memory is on Hugging Face, provenance/index via F74/F66, GitHub is control plane. SAPHEA is worker/runtime colony; SAPHEIDE converts only validated GOLD/RED lessons into learning. No simulated agents; same lineage is not independent evidence; promotion requires cold benchmarks, ablation, transfer, audit and rollback. Goal: evolve this into a powerful reliable AI civilization-like collective system. Give: (1) three strongest architectural ideas, (2) five biggest weaknesses/failure modes, (3) five concrete improvements, (4) what should be tested before scaling, (5) one architecture change you would prioritize. Be critical, concise, no flattery."""
+          url="https://router.huggingface.co/v1/chat/completions"
+          body=json.dumps({"model":model,"messages":[{"role":"user","content":prompt}],"max_tokens":700,"temperature":0.3}).encode()
+          req=urllib.request.Request(url,data=body,headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"})
+          rec={"slot":slot,"model":model,"real_call":False}
+          try:
+            with urllib.request.urlopen(req,timeout=120) as r:
+              data=json.loads(r.read()); out=data["choices"][0]["message"]["content"]
+              rec.update(real_call=True,status="PASS",output=out,sha256=hashlib.sha256(out.encode()).hexdigest())
+          except Exception as e:
+            rec.update(status="FAIL",error=repr(e))
+          os.makedirs("receipts/hf-council",exist_ok=True)
+          json.dump(rec,open(f"receipts/hf-council/{slot}.json","w"),indent=2)
+          print(json.dumps(rec,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hf-civilization-council-${{ matrix.slot }}
+          path: receipts/hf-council/${{ matrix.slot }}.json
+          retention-days: 90
