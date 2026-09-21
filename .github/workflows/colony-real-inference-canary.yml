@@ -29,7 +29,7 @@ jobs:
           prompt="""You are C03-SIGMA. Give only the parity (odd/even) of 3n+1 when n is a positive odd integer, then one algebraic sentence proving it."""
           t=time.time()
           tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=os.environ.get("HF_TOKEN"))
-          model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=HF_TOKEN,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=os.environ.get("HF_TOKEN"),torch_dtype=torch.float32,low_cpu_mem_usage=True)
           x=tok(prompt,return_tensors="pt")
           with torch.no_grad(): y=model.generate(**x,max_new_tokens=64,do_sample=False)
           out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
