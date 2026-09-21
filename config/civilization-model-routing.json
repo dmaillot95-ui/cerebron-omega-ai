@@ -4,52 +4,52 @@
   "status": "FROZEN_BEFORE_BINDING",
   "scope": {
     "colonies": 62,
-    "seed_farms": 74,
     "model_bank": 6,
-    "afah_lineages": 1
+    "afah_lineage": "SEPARATE"
   },
-  "routing_unit": "COLONY",
-  "rules": [
-    "Each colony has exactly one active weight model at a time.",
-    "The active model must come from the six-model approved bank until a later audited bank revision.",
-    "Seed farms remain permanently linked capability roots and are never replaced by the model.",
-    "Different colonies may select different models; sharing a G0 model does not merge colony lineage.",
-    "Every colony keeps independent memory, adapter lineage and generation head.",
-    "A model switch is a versioned migration, never an overwrite.",
-    "Cross-colony learning enters only through validated GOLD/RED lessons.",
-    "AFAH is a separate seventh lineage and is never selected as a colony model."
+  "routing": {
+    "unit": "COLONY",
+    "models_per_colony": 1,
+    "shared_base_allowed": true,
+    "shared_colony_state_forbidden": true,
+    "simultaneous_colony_limit": 20,
+    "rollout_batch": 2
+  },
+  "identity": [
+    "canonical_colony_id",
+    "selected_g0_model",
+    "immutable_g0_revision",
+    "colony_generation",
+    "state_version",
+    "parent_state_sha256",
+    "content_sha256"
   ],
-  "execution": {
-    "global_colony_concurrency_cap": 20,
-    "rollout_batch_size": 2,
-    "model_load_concurrency_on_github_cpu": 1,
-    "queue_required_above_cap": true
-  },
-  "state_machine": [
-    "UNBOUND",
-    "RUNTIME_VERIFIED",
-    "COLD_BENCHMARKED",
-    "AUDITED",
-    "RED_TEAMED",
-    "BOUND_G0",
-    "TRAINING_ELIGIBLE",
-    "G1_CANDIDATE",
-    "G1_VALIDATED"
+  "execution_order": [
+    "resolve canonical colony",
+    "verify permanent seed-farm links",
+    "resolve approved G0 immutable revision",
+    "verify compute compatibility receipt",
+    "load latest monotonic HF-private colony head",
+    "verify F66/F74 pointers and digest",
+    "execute colony task",
+    "audit and red-team",
+    "write validated lesson only",
+    "train only through separately gated reversible adapter pipeline"
   ],
   "anti_regression": [
-    "immutable G0 revision",
-    "monotonic generation",
-    "parent hash required",
-    "HF private head verification before recall",
-    "older generation cannot auto-replace newer head"
+    "never load state from another colony merely because base model is shared",
+    "never replace newer generation with older state",
+    "never treat GitHub cache as durable truth",
+    "never auto-promote raw AGORA output",
+    "never merge incompatible weights"
   ],
+  "civilization_flow": "74 SEED FARMS -> 62 COLONIES -> CHIEFS -> AGORA -> CEREBRON -> AFAH",
   "current_wave": {
     "colonies": [
       "C03-SIGMA",
       "C12-ARGUS"
     ],
-    "state": "UNBOUND",
-    "blocking_gate": "REAL_RUNTIME_CANARY"
+    "binding": "DENY_PENDING_REAL_COLD_EVIDENCE"
   },
-  "next": "After canary, execute identical frozen tasks across candidates without changing prompts."
+  "next_gate": "FIRST_REAL_MODEL_RUNTIME_PASS"
 }
