@@ -1,0 +1,28 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 10,
+  "repository": "dmaillot95-ui/cerebron-farm-10-science-physics",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "b86a9ac6de0e4cab4e8052d2b0950ce1e14c519c",
+  "tree_truncated": false,
+  "file_count": 9,
+  "observed_critical": {
+    "contract": true,
+    "registry": true,
+    "readme": true,
+    "mission": "mission/SCIENCE-PHYSICS-MISSION.md",
+    "workers": [
+      "worker/farm_worker.py",
+      "worker/adaptive_worker.py"
+    ],
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/science-physics-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "Adaptive worker is present. No 5-minute scheduler in current tree; not classified as loss without history.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
