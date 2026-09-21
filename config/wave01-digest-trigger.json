@@ -1,5 +1,5 @@
 {
   "schema": "wave01-digest-trigger-v1",
-  "sequence": 1,
-  "purpose": "recompute byte-level SHA256 for four Wave01 raw farm results"
+  "sequence": 2,
+  "purpose": "recompute Wave01 SHA using exact original canonical payload hash contract; preserve file-byte hashes separately"
 }
