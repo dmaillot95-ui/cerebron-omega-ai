@@ -1,6 +1,9 @@
 name: AGORA Collective Recursive Bus
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/agora-collective-5m.yml'
   schedule:
     - cron: '*/5 * * * *'
 permissions:
