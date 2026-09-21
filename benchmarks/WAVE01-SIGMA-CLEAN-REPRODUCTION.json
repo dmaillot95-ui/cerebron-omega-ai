@@ -1,0 +1,41 @@
+{
+  "schema": "cerebron-wave01-sigma-clean-reproduction-v1",
+  "status": "FROZEN_READY",
+  "colony": "C03-SIGMA",
+  "target": "SIGMA-FORMALIZER",
+  "input": {
+    "task_id": "W01-SIGMA-CLEAN-R1",
+    "prompt": "For the accelerated odd Collatz map T(x)=(3x+1)/2^{v2(3x+1)} on positive odd integers, independently state the exact definitions and proof obligations required for a claimed positive cycle, and list failure modes that prevent finite/local checks from establishing an arbitrary-N theorem."
+  },
+  "blindness": {
+    "forbidden_before_freeze": [
+      "wave01 F01 output",
+      "wave01 F09 output",
+      "their receipts beyond task identity",
+      "WARM candidate lesson text"
+    ],
+    "comparison_after_freeze_only": true
+  },
+  "required_output": [
+    "definitions",
+    "quantifiers",
+    "transition_identity",
+    "cycle_closure",
+    "necessary_vs_sufficient",
+    "local_vs_global_failure_modes",
+    "evidence_classification"
+  ],
+  "execution": {
+    "must_be_real_resource": true,
+    "deterministic_template_only_is_not_independent_reasoning": true,
+    "raw_output_preserved": true,
+    "sha256_required": true
+  },
+  "independence": {
+    "different_execution_lineage_required": true,
+    "shared_prompt_recorded": true,
+    "same_base_model_or_shared_context_must_be_disclosed": true
+  },
+  "decision": "Output remains UNREVIEWED until frozen, hashed, then compared and audited.",
+  "next_gate": "REAL_BLIND_EXECUTION"
+}
