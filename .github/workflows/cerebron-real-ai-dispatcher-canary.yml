@@ -1,0 +1,54 @@
+name: CEREBRON Real AI Dispatcher Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/cerebron-real-ai-dispatcher-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-ai-worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install local model runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Dispatch mission to real local AI worker
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: python
+        run: |
+          import os,json,time,hashlib,pathlib,traceback
+          mission={"mission_id":"REAL-AI-CANARY-001","role":"SAPHEA","task":"Reply with exactly CEREBRON_REAL_AI_OK"}
+          states=[]
+          def emit(state,**kw): states.append({"state":state,"ts":int(time.time()),**kw})
+          emit("MISSION_QUEUE"); emit("CLAIM",worker="github-actions-cpu")
+          receipt={"mission":mission,"model_id":os.environ["MODEL_ID"],"revision":os.environ["REVISION"],"runner":"github-actions/ubuntu-latest","real_execution":True,"llm_inference":False}
+          try:
+              import torch
+              from transformers import AutoTokenizer,AutoModelForCausalLM
+              tok=AutoTokenizer.from_pretrained(os.environ["MODEL_ID"],revision=os.environ["REVISION"])
+              model=AutoModelForCausalLM.from_pretrained(os.environ["MODEL_ID"],revision=os.environ["REVISION"],torch_dtype=torch.float32,low_cpu_mem_usage=True)
+              emit("RUN",model_loaded=True)
+              x=tok(mission["task"],return_tensors="pt")
+              with torch.no_grad(): y=model.generate(**x,max_new_tokens=24,do_sample=False)
+              out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+              receipt.update(llm_inference=True,inference="PASS",output=out[:300],output_sha256=hashlib.sha256(out.encode()).hexdigest())
+          except Exception as e:
+              receipt.update(inference="FAIL",failure_class=type(e).__name__,failure_message=str(e)[:500])
+          emit("RECEIPT")
+          emit("AUDIT",pass_=receipt.get("llm_inference",False))
+          emit("FUSION",pass_=receipt.get("llm_inference",False))
+          receipt["states"]=states
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True).encode()).hexdigest()
+          p=pathlib.Path("artifacts/cerebron-real-ai-dispatcher"); p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps({k:receipt.get(k) for k in ["real_execution","llm_inference","inference","model_id","output","receipt_sha256"]}))
+          if not receipt.get("llm_inference"): raise SystemExit(2)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-real-ai-dispatcher-canary
+          path: artifacts/cerebron-real-ai-dispatcher/receipt.json
