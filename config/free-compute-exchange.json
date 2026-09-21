@@ -1,0 +1,91 @@
+{
+  "schema": "cerebron-free-compute-exchange-v1",
+  "status": "CANDIDATE_REGISTRY",
+  "scope": "ALL_COLONIES",
+  "policy": {
+    "cost_ceiling_eur": 0,
+    "paid_fallback": false,
+    "availability_must_be_observed": true,
+    "terms_must_be_respected": true,
+    "no_quota_bypass": true,
+    "secrets_never_committed": true
+  },
+  "providers": [
+    {
+      "id": "GITHUB_ACTIONS_CPU",
+      "class": "CPU",
+      "status": "VERIFIED_AVAILABLE",
+      "evidence": "receipts/civilization/compute-inventory.json",
+      "routing": [
+        "CPU_INFERENCE",
+        "MATH_COMPUTE",
+        "BENCHMARK",
+        "ARTIFACT_INTEGRITY"
+      ]
+    },
+    {
+      "id": "HF_ZEROGPU",
+      "class": "GPU_SHARED",
+      "status": "CANDIDATE_TO_PROBE",
+      "constraints": [
+        "Gradio Space",
+        "daily quota",
+        "queue",
+        "real availability required"
+      ],
+      "routing": [
+        "GPU_INFERENCE",
+        "SHORT_LORA_CANARY"
+      ]
+    },
+    {
+      "id": "KAGGLE_NOTEBOOKS",
+      "class": "GPU_OR_TPU_NOTEBOOK",
+      "status": "CANDIDATE_MANUAL_OR_API_FEASIBILITY_CHECK",
+      "constraints": [
+        "free availability limited",
+        "queue/quota",
+        "automation must comply with Kaggle terms"
+      ],
+      "routing": [
+        "GPU_INFERENCE",
+        "LORA_TRAINING",
+        "BENCHMARK"
+      ]
+    },
+    {
+      "id": "GOOGLE_COLAB_FREE",
+      "class": "GPU_OR_TPU_NOTEBOOK",
+      "status": "CANDIDATE_INTERACTIVE_NOT_AUTOMATION_ASSUMED",
+      "constraints": [
+        "resources dynamic",
+        "access not guaranteed",
+        "free tier prioritizes interactive notebook use"
+      ],
+      "routing": [
+        "EXPERIMENTAL_GPU_INFERENCE",
+        "EXPERIMENTAL_TRAINING"
+      ]
+    }
+  ],
+  "scheduler": {
+    "preference": [
+      "VERIFIED_FREE_ACCELERATOR",
+      "VERIFIED_FREE_CPU",
+      "QUEUE"
+    ],
+    "reject": [
+      "UNVERIFIED_GPU_AS_AVAILABLE",
+      "PAID_RESOURCE",
+      "QUOTA_EVASION"
+    ],
+    "all_colonies": true,
+    "namespace_isolation": true
+  },
+  "next_gates": [
+    "PROBE_HF_ZEROGPU_WITH_EXISTING_HF_AUTH_WITHOUT_CREATING_PAID_RESOURCE",
+    "CHECK_KAGGLE_AUTOMATION_CREDENTIAL_AVAILABILITY_WITHOUT_REQUESTING_SECRET_IN_CHAT",
+    "KEEP_COLAB_AS_INTERACTIVE_CANDIDATE_UNTIL_COMPLIANT_AUTOMATION_ROUTE_EXISTS"
+  ],
+  "claim_limit": "Candidate exchange only. GitHub CPU is verified; Kaggle, Colab and ZeroGPU are not yet verified as callable CEREBRON workers."
+}
