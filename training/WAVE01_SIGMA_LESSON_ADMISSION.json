@@ -1,0 +1,42 @@
+{
+  "schema": "cerebron-wave01-sigma-lesson-admission-v1",
+  "status": "HOLD_PENDING_INDEPENDENT_AUDIT",
+  "colony": "C03-SIGMA",
+  "saphea": "SIGMA-FORMALIZER",
+  "cache_tier": "WARM",
+  "candidates": [
+    {
+      "lesson_id": "SIGMA-W01-F01-GOLD-CANDIDATE",
+      "class_candidate": "GOLD",
+      "source_farm": "F01",
+      "source_task": "W01-SIGMA-F01",
+      "source_digest": "a8e512e50c345efcc691f24908096495629f777e333fbe07be91016c0fe1a606",
+      "content_scope": "formalization obligations for accelerated odd-Collatz cycle claims"
+    },
+    {
+      "lesson_id": "SIGMA-W01-F09-RED-CANDIDATE",
+      "class_candidate": "RED",
+      "source_farm": "F09",
+      "source_task": "W01-SIGMA-F09",
+      "source_digest": "ececf84a7c7313c8c28d456932ac2f664b73260902f592262f969691c37e3f12",
+      "content_scope": "failure modes: local-to-global overreach and same-source agreement"
+    }
+  ],
+  "provenance": {
+    "farm_execution": "PASS_4_OF_4",
+    "central_digest": "PASS",
+    "digest_receipt": "receipts/colonies/wave01-central-digest-audit.json"
+  },
+  "required_before_validated": [
+    "independent_audit_pass",
+    "independent_red_team_pass",
+    "clean_reproduction_or_equivalent",
+    "dependency_fingerprint",
+    "rights_pass",
+    "benchmark_exclusion_pass"
+  ],
+  "independence_rule": "F01 and F09 packets may share problem framing; agreement is not independent evidence unless lineage/dependency audit demonstrates independence.",
+  "training_eligible": false,
+  "claim_limit": "Candidate lessons in WARM cache are not validated truth and cannot enter parameter training.",
+  "next_gate": "independent audit + red-team + dependency fingerprint"
+}
