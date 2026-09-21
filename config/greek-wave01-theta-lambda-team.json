@@ -1,0 +1,135 @@
+{
+  "schema": "cerebron-greek-wave01-team-v1",
+  "date": "2026-09-21",
+  "status": "DESIGNED_PENDING_REAL_E2E",
+  "purpose": "First real two-colony migration/calibration wave under the 24-Greek architecture.",
+  "global_rules": [
+    "REAL_EXECUTIONS_ONLY",
+    "NO_SIMULATED_AGENT",
+    "WORKFLOW_SUCCESS_NOT_MODEL_SUCCESS",
+    "SAME_MODEL_SAME_DATA_NOT_INDEPENDENT_EVIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "CRISTAL_PRESERVE"
+  ],
+  "colonies": [
+    {
+      "id": "THETA-MATHESIS",
+      "legacy_lineage": [
+        "C01-SIGMA(alias)",
+        "C03-SIGMA(canonical legacy)"
+      ],
+      "mission": "mathematics logic formal proof",
+      "team": [
+        {
+          "role": "CHIEF",
+          "count": 1,
+          "task": "decompose and dispatch without solving by authority"
+        },
+        {
+          "role": "EXECUTOR",
+          "count": "2_initial_calibrate_upward",
+          "task": "independent solution paths; provenance required"
+        },
+        {
+          "role": "AUDITOR",
+          "count": 1,
+          "task": "check arithmetic logic assumptions completeness"
+        },
+        {
+          "role": "COUNTER_AUDITOR",
+          "count": 1,
+          "task": "seek counterexamples hidden assumptions common-mode errors"
+        },
+        {
+          "role": "SYNTHESIZER",
+          "count": 1,
+          "task": "merge only surviving claims and expose residual uncertainty"
+        }
+      ],
+      "model_state": {
+        "binding": "DENY_UNTIL_E2E",
+        "eligible_runtime": [
+          "HuggingFaceTB/SmolLM3-3B",
+          "HuggingFaceTB/SmolLM3-3B-Base"
+        ],
+        "hold_runtime": [
+          "Qwen/Qwen3-4B",
+          "Qwen/Qwen3-4B-Base",
+          "mistralai/Ministral-3-3B-Base-2512"
+        ]
+      }
+    },
+    {
+      "id": "LAMBDA-ARGUS",
+      "legacy_lineage": [
+        "C12-ARGUS"
+      ],
+      "mission": "audit contradiction evidence control",
+      "team": [
+        {
+          "role": "CHIEF",
+          "count": 1,
+          "task": "split audit dimensions and assign independent checks"
+        },
+        {
+          "role": "EXECUTOR",
+          "count": "2_initial_calibrate_upward",
+          "task": "inspect claims evidence provenance and dependency"
+        },
+        {
+          "role": "AUDITOR",
+          "count": 1,
+          "task": "verify audit findings against source material"
+        },
+        {
+          "role": "COUNTER_AUDITOR",
+          "count": 1,
+          "task": "challenge both original claim and auditor conclusions"
+        },
+        {
+          "role": "SYNTHESIZER",
+          "count": 1,
+          "task": "return accepted rejected uncertain claims with reasons"
+        }
+      ],
+      "model_state": {
+        "binding": "DENY_UNTIL_E2E",
+        "eligible_runtime": [
+          "HuggingFaceTB/SmolLM3-3B",
+          "HuggingFaceTB/SmolLM3-3B-Base"
+        ],
+        "hold_runtime": [
+          "Qwen/Qwen3-4B",
+          "Qwen/Qwen3-4B-Base",
+          "mistralai/Ministral-3-3B-Base-2512"
+        ]
+      }
+    }
+  ],
+  "collector": {
+    "id": "CEREBRON-COLLECTOR",
+    "input": "two local synthesis receipts",
+    "pipeline": [
+      "COLLECT",
+      "CROSS_AUDIT",
+      "COUNTER_AUDIT",
+      "GLOBAL_SYNTHESIS"
+    ],
+    "output_route": [
+      "PSI-AGORA",
+      "OMEGA-AFAH"
+    ]
+  },
+  "promotion_gate": [
+    "all announced roles correspond to real executions",
+    "local receipts have hashes",
+    "counter-audit completed",
+    "SAPHÉIDE accepts only validated GOLD/RED",
+    "HF private authenticated readback and digest verify",
+    "F74 pointer registered",
+    "F66 indexed",
+    "GitHub manifest written last",
+    "cold recall succeeds"
+  ],
+  "next_wave_rule": "HOLD until both THETA and LAMBDA pass the complete gate"
+}
