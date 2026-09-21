@@ -1,6 +1,6 @@
 {
   "schema": "cerebron-wave01-sigma-lesson-admission-v1",
-  "status": "HOLD_PENDING_INDEPENDENT_AUDIT",
+  "status": "HOLD_CLEAN_REPRODUCTION_REQUIRED",
   "colony": "C03-SIGMA",
   "saphea": "SIGMA-FORMALIZER",
   "cache_tier": "WARM",
@@ -38,5 +38,11 @@
   "independence_rule": "F01 and F09 packets may share problem framing; agreement is not independent evidence unless lineage/dependency audit demonstrates independence.",
   "training_eligible": false,
   "claim_limit": "Candidate lessons in WARM cache are not validated truth and cannot enter parameter training.",
-  "next_gate": "independent audit + red-team + dependency fingerprint"
+  "next_gate": "REAL_CLEAN_REPRODUCER_OR_EQUIVALENT_INDEPENDENT_EVIDENCE",
+  "audit_receipt": "receipts/colonies/wave01-sigma-independent-admission-audit.json",
+  "audit_run_id": 35555272469,
+  "dependency_fingerprint": {
+    "shared_problem_lineage": true,
+    "independence_status": "NOT_ESTABLISHED"
+  }
 }
