@@ -1,0 +1,26 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 5,
+  "repository": "dmaillot95-ui/cerebron-collatz-farm-05-literature",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "92dd94c008608a13e9594a425119be8bf6beb115",
+  "tree_truncated": false,
+  "file_count": 11,
+  "observed_critical": {
+    "readme": true,
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "checkpoint": "checkpoints/COLLATZ_DELTA_2026-09-20.md",
+    "mission": "mission/C256-LITERATURE-FARM.md",
+    "literature_search": "scripts/literature_search.py",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/literature-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "Unlike F01-F04, no cerebron-5min-scheduler.yml is present in the current F05 tree. This is a difference only, not proof of deletion.",
+  "loss_signal": "NO_CONFIRMED_LOSS; SCHEDULER_DIFFERENCE_REQUIRES_HISTORY_CHECK",
+  "mutation": "NONE"
+}
