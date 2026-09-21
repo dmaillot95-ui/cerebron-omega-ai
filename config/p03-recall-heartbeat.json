@@ -1,5 +1,5 @@
 {
   "schema": "p03-recall-heartbeat-v1",
-  "sequence": 3,
-  "purpose": "trigger P03 V2 after workflow_dispatch fallback update"
+  "sequence": 4,
+  "purpose": "single clean run after full rewrite of corrupted P03 compatibility block"
 }
