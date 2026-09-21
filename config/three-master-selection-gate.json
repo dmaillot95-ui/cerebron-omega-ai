@@ -1,0 +1,62 @@
+{
+  "schema": "cerebron-three-master-selection-gate-v1",
+  "date": "2026-09-21",
+  "status": "READY_FOR_EXECUTION",
+  "objective": "Select M2 and AFAH G0 without confusing runtime availability with model quality",
+  "candidates": {
+    "M1_SAPHEA": {
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "known": "runtime compatible; quality HOLD"
+    },
+    "M2_FRONTIER_OPEN": [
+      {
+        "model": "Qwen/Qwen3-4B",
+        "state": "RETEST_REQUIRED"
+      },
+      {
+        "model": "Qwen/Qwen3-8B",
+        "state": "HF_GATE_OR_RUNTIME_REQUIRED"
+      },
+      {
+        "model": "HuggingFaceTB/SmolLM3-3B",
+        "state": "BASELINE"
+      }
+    ],
+    "AFAH_G0": "winner is not automatic; evaluate best immutable base separately after M2 selection"
+  },
+  "benchmark_axes": [
+    "mathematics-proof",
+    "code-compute",
+    "research-source-discipline",
+    "physics-engineering",
+    "red-team-error-detection",
+    "cross-domain-synthesis",
+    "tool-routing",
+    "memory-recall"
+  ],
+  "protocol": {
+    "stage1": "runtime admission",
+    "stage2": "same frozen tasks and decoding envelope",
+    "stage3": "blind rubric audit",
+    "stage4": "counter-audit hallucinations and unsupported claims",
+    "stage5": "transfer tasks unseen by selection",
+    "stage6": "ablation against single-model and no-agent baselines",
+    "stage7": "resource/time/reliability accounting"
+  },
+  "decision": {
+    "M2": "select only if evidence beats M1 baseline on hard-task aggregate without unacceptable reliability regression",
+    "AFAH_G0": "freeze immutable revision only after separate lineage suitability gate",
+    "tie": "retain simpler/lower-resource candidate; no forced winner"
+  },
+  "blockers": {
+    "HF_INFERENCE_PROVIDER": "HOLD_403_PERMISSION",
+    "QWEN_GITHUB_CPU": "prior cancellation is resource/runtime evidence, not quality evidence"
+  },
+  "no_claims": [
+    "no model winner yet",
+    "AFAH not trained",
+    "20 agents are capacity not evidence",
+    "workflow green is not model pass"
+  ],
+  "next_after_hf_gate": "1-model canary -> 3-candidate matrix -> audited selection receipt -> AFAH G0 gate"
+}
