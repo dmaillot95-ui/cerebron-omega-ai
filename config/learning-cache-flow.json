@@ -1,0 +1,126 @@
+{
+  "schema": "cerebron-learning-cache-flow-v1",
+  "version": "1.0",
+  "status": "DESIGNED_READY_FOR_CANARY",
+  "authority": "AFAH",
+  "purpose": "Fast reversible learning-flow buffer between AGORA/task agents/colonies and validated SAPHEIDE training memory.",
+  "placement": [
+    "AGORA_TASK_AGENTS",
+    "COLONY_CHIEF",
+    "SEED_FARMS",
+    "SAPHEA_TEAM",
+    "CACHE_FLOW",
+    "AUDIT_RED_TEAM_REPRODUCTION",
+    "VALIDATED_GOLD_RED",
+    "SAPHEIDE",
+    "HF_PRIVATE",
+    "TRAINING_FACTORY",
+    "G1_ADAPTER",
+    "COLD_TRANSFER_ABLATION",
+    "PROMOTE_OR_ROLLBACK",
+    "AGORA"
+  ],
+  "tiers": {
+    "HOT": {
+      "meaning": "recent working evidence; unvalidated",
+      "ttl_cycles": 12,
+      "training_eligible": false
+    },
+    "WARM": {
+      "meaning": "deduplicated/repeated candidate lessons awaiting independent gates",
+      "ttl_cycles": 144,
+      "training_eligible": false
+    },
+    "VALIDATED": {
+      "meaning": "audit + red-team + reproduction/equivalent passed",
+      "ttl_cycles": null,
+      "training_eligible": true
+    }
+  },
+  "record_required": [
+    "cache_id",
+    "created_at",
+    "colony_id",
+    "saphea_id",
+    "task_id",
+    "source_refs",
+    "source_digests",
+    "lineage_fingerprint",
+    "content_digest",
+    "evidence_class",
+    "privacy_class",
+    "tier",
+    "validation_state"
+  ],
+  "transitions": [
+    {
+      "from": "INGRESS",
+      "to": "HOT",
+      "requires": [
+        "provenance",
+        "content_digest",
+        "privacy_class"
+      ]
+    },
+    {
+      "from": "HOT",
+      "to": "WARM",
+      "requires": [
+        "deduplication",
+        "lineage_check",
+        "task_relevance"
+      ]
+    },
+    {
+      "from": "WARM",
+      "to": "VALIDATED",
+      "requires": [
+        "audit_pass",
+        "red_team_pass",
+        "clean_reproduction_or_equivalent",
+        "dependency_fingerprint",
+        "benchmark_exclusion"
+      ]
+    },
+    {
+      "from": "VALIDATED",
+      "to": "GOLD_RED",
+      "requires": [
+        "dataset_schema_pass",
+        "rights_pass",
+        "no_cold_test_leakage"
+      ]
+    }
+  ],
+  "rejection": [
+    "secret_in_public_route",
+    "missing_provenance",
+    "raw_consensus_as_truth",
+    "self_certification",
+    "cold_benchmark_answer",
+    "digest_mismatch",
+    "unresolved_dependency"
+  ],
+  "storage": {
+    "hot": "EPHEMERAL_RUNTIME",
+    "warm": "HF_PRIVATE_OR_EPHEMERAL_PRIVATE",
+    "validated": "HF_PRIVATE",
+    "github": "METADATA_HASH_POINTER_RECEIPT_ONLY",
+    "index": "F66",
+    "catalog": "F74"
+  },
+  "anti_echo": [
+    "same_lineage_not_independent",
+    "semantic_deduplication",
+    "source_ancestry_tracking",
+    "frequency_does_not_raise_truth_status"
+  ],
+  "rollback": "Delete/expire cache candidate or revert pointer; never overwrite immutable G0 or validated historical evidence.",
+  "canary": {
+    "colony": "C03-SIGMA",
+    "saphea": "SIGMA-FORMALIZER",
+    "parallelism": 1,
+    "next_gate": "WAVE01_DIGEST_PASS_THEN_FIRST_HOT_TO_VALIDATED_LESSON"
+  },
+  "claim_limit": "Cache improves routing/context reuse only. It is not parametric learning; capability gain requires G0/G1 evaluation."
+}
