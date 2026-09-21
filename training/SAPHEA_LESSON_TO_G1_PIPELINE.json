@@ -1,6 +1,6 @@
 {
   "schema": "cerebron-saphea-lesson-to-g1-pipeline-v1",
-  "status": "READY_BLOCKED_BY_P03",
+  "status": "P03_PASS_BLOCKED_BY_ZERO_ADMITTED_TRAINING_RECORDS",
   "mode": "NON_DESTRUCTIVE_REVERSIBLE",
   "stages": [
     {
@@ -97,5 +97,9 @@
     "NO_PRIVATE_PAYLOAD_ON_GITHUB",
     "NO_GAIN_CLAIM_WITHOUT_G0_G1_EVIDENCE"
   ],
-  "next_gate": "fresh P03 PASS then C03 SIGMA single-agent G1 canary"
+  "next_gate": "populate audited GOLD/RED dataset for C03-SIGMA before training",
+  "p03_evidence": {
+    "status": "PASS",
+    "run_id": 35554346451
+  }
 }
