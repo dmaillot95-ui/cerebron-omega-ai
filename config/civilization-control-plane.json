@@ -1,0 +1,90 @@
+{
+  "schema": "cerebron-civilization-control-plane-v1",
+  "status": "DESIGNED_FOR_EXECUTION",
+  "scope": "CEREBRON_ALPHA_OMEGA_CIVILIZATION",
+  "authority_chain": [
+    "AFAH",
+    "CEREBRON",
+    "AGORA",
+    "COLONY_CHIEFS",
+    "COLONIES",
+    "SAPHEA"
+  ],
+  "infrastructure_planes": {
+    "compute": "config/compute-fabric.json",
+    "memory": "HF_PRIVATE + F66_INDEX + F74_CATALOG",
+    "security": "GUARDIAN_OMEGA + F19_CYBER_VIGIE",
+    "learning": "CACHE_FLOW + GOLD_RED + SAPHEIDE",
+    "evidence": "AUDIT + RED_TEAM + CLEAN_REPRODUCTION",
+    "capability_roots": "74_SEED_FARMS"
+  },
+  "civilization_cycle": [
+    "OBSERVE_GLOBAL_STATE",
+    "CLASSIFY_TASKS",
+    "ROUTE_TO_COLONIES",
+    "ALLOCATE_REAL_COMPUTE",
+    "EXECUTE_SPECIALISTS",
+    "AUDIT_AND_COUNTER_AUDIT",
+    "CROSS_COLONY_SYNTHESIS",
+    "VALIDATE_LESSONS",
+    "UPDATE_SAPHEIDE_PRIVATE_MEMORY",
+    "BENCHMARK_TRANSFER",
+    "AGORA_FUSION",
+    "CEREBRON_DECISION_PACKET",
+    "AFAH_FINAL_AUTHORITY",
+    "VERSION_AND_ROLLBACK_POINT"
+  ],
+  "global_rules": [
+    "LOCAL_GAIN_MUST_NOT_DEGRADE_CIVILIZATION",
+    "SEED_FARM_LINKS_ARE_PERMANENT",
+    "COLONY_OUTPUT_IS_NOT_AUTOMATIC_TRUTH",
+    "SAME_LINEAGE_IS_NOT_INDEPENDENT_EVIDENCE",
+    "COMPUTE_SUCCESS_IS_NOT_CAPABILITY_GAIN",
+    "MEMORY_WRITE_REQUIRES_VALIDATION",
+    "PARAMETRIC_TRAINING_REQUIRES_COLD_GAIN_AND_TRANSFER",
+    "EVERY_CRITICAL_CHANGE_IS_VERSIONED_AND_REVERSIBLE",
+    "UNAVAILABLE_RESOURCE_IS_NEVER_SIMULATED"
+  ],
+  "scheduler": {
+    "unit_of_planning": "CIVILIZATION",
+    "local_canaries": "SUBTASKS_ONLY",
+    "rollout_batch_colonies": 2,
+    "max_parallel_colonies": 20,
+    "queue": "GLOBAL_WITH_COLONY_ISOLATION",
+    "priority": [
+      "SECURITY_AND_INTEGRITY",
+      "CIVILIZATION_HEALTH",
+      "AUDIT_AND_REPRODUCTION",
+      "CROSS_COLONY_TRANSFER",
+      "TRAINING",
+      "LOCAL_OPTIMIZATION"
+    ]
+  },
+  "health_vector": [
+    "seed_farm_link_integrity",
+    "colony_chief_binding",
+    "compute_availability",
+    "memory_read_write_integrity",
+    "audit_coverage",
+    "red_team_coverage",
+    "reproduction_coverage",
+    "learning_admission_quality",
+    "cross_colony_transfer",
+    "rollback_readiness",
+    "security_state"
+  ],
+  "promotion_gate": {
+    "required": [
+      "REAL_EXECUTION",
+      "PROVENANCE",
+      "AUDIT",
+      "RED_TEAM",
+      "REPRODUCTION_OR_EQUIVALENT",
+      "NO_CRITICAL_REGRESSION",
+      "ROLLBACK_READY"
+    ],
+    "afah_final_authority": true
+  },
+  "next_execution_phase": "CIVILIZATION_INVENTORY_AND_HEALTH_MATRIX",
+  "claim_limit": "Architecture-level control plane only. It does not imply that inactive colonies, unavailable models, GPU resources, or unexecuted agents are operational."
+}
