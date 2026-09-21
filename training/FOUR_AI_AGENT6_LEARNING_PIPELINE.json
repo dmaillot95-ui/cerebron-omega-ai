@@ -1,0 +1,111 @@
+{
+  "schema": "cerebron-four-ai-agent6-learning-pipeline-v1",
+  "status": "READY_FOR_AGENT6_INGRESS",
+  "mode": "NON_DESTRUCTIVE_REVERSIBLE",
+  "targets": {
+    "SAPHEA": {
+      "role": "specialized execution and skills",
+      "adaptation": "PEFT_LORA_OR_EQUIVALENT_WHEN_TRAINABLE"
+    },
+    "SPIRALION": {
+      "role": "cumulative reasoning, representation, compression, reuse",
+      "adaptation": "POLICY_MEMORY_ROUTING_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "ETHERION": {
+      "role": "hard R&D, invention, models, discriminating experiments",
+      "adaptation": "POLICY_TOOL_ROUTING_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "AFAH": {
+      "role": "evidence-gated fusion, contradiction preservation, final synthesis",
+      "adaptation": "FUSION_POLICY_AND_ADAPTER_WHEN_TRAINABLE"
+    }
+  },
+  "agent6_gate": {
+    "required": [
+      "6A_INDEPENDENT_REPRODUCTION",
+      "6B_ALTERNATIVE_METHOD",
+      "6C_FALSIFICATION",
+      "AUDIT",
+      "COUNTER_AUDIT",
+      "DEPENDENCY_FINGERPRINT",
+      "PROVENANCE",
+      "NO_BENCHMARK_LEAKAGE"
+    ],
+    "statuses": [
+      "GOLD_VALIDATED",
+      "RED_VALIDATED",
+      "REJECT"
+    ],
+    "rule": "AGENT6_OUTPUT_NE_TRAINING_TRUTH"
+  },
+  "routing": {
+    "targets": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "AFAH",
+      "TRANSVERSAL"
+    ],
+    "transversal_requires": "MEASURED_TRANSFER_GAIN"
+  },
+  "dataset": {
+    "splits": [
+      "TRAIN",
+      "VALIDATION",
+      "BLIND_TEST",
+      "TRANSFER",
+      "ADVERSARIAL"
+    ],
+    "rules": [
+      "BLIND_TEST_IMMUTABLE",
+      "BLIND_TEST_ANSWERS_NEVER_TRAIN",
+      "HASH_EVERY_RECORD",
+      "DEDUP_BY_LINEAGE",
+      "VERSION_EVERY_DATASET"
+    ]
+  },
+  "training": {
+    "default": "LoRA_or_reversible_adapter_before_full_weight_training",
+    "base": "IMMUTABLE_G0",
+    "generation": "G0_TO_G1_TO_G2",
+    "rollback": true,
+    "parallelism": 1
+  },
+  "evaluation": [
+    "G0_BASELINE",
+    "G1_COLD",
+    "TRANSFER",
+    "ADVERSARIAL",
+    "ABLATION_WITHOUT_ADAPTER",
+    "REGRESSION",
+    "AUDIT",
+    "RED_TEAM"
+  ],
+  "promotion": {
+    "requires": [
+      "REAL_ARTIFACT",
+      "HF_PRIVATE_WRITE_READ_SHA_PASS",
+      "COLD_GAIN_POSITIVE",
+      "TRANSFER_GAIN_POSITIVE",
+      "ABLATION_SUPPORTS_CAUSAL_VALUE",
+      "NO_CRITICAL_REGRESSION",
+      "AUDIT_PASS",
+      "RED_TEAM_PASS"
+    ],
+    "failure": "ROLLBACK_RETAIN_EVIDENCE"
+  },
+  "storage": {
+    "github": "CODE_CONTROL_RECEIPTS_HASHES_OPAQUE_POINTERS",
+    "huggingface_private": "DATASETS_ADAPTERS_CHECKPOINTS_LONG_TERM_MEMORY",
+    "never_overwrite_verified_history": true
+  },
+  "rules": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "MEMORY_NE_LEARNING",
+    "CONSENSUS_NE_PROOF",
+    "SAME_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "NO_REAL_EXECUTION_NON_EXECUTED"
+  ]
+}
