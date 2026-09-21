@@ -125,7 +125,10 @@ jobs:
             echo "No synthesis change to commit"
           else
             git commit -m "Update Collatz farm scientific synthesis [skip ci]"
-            git push
+            # Scheduled runs can race with normal repository updates. Rebase before push;
+            # never force-push or rewrite history.
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
 
       - name: Upload centralized 45-farm state
