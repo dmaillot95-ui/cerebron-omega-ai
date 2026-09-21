@@ -1,6 +1,6 @@
 name: SAPHEA External Content Cognitive Canary
 
-on:
+'on':
   workflow_dispatch:
   push:
     paths:
