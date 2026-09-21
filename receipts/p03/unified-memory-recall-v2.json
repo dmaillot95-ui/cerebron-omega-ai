@@ -1,0 +1,17 @@
+{
+  "schema": "cerebron-p03-unified-recall-v2",
+  "status": "FAIL",
+  "route": [
+    "F66",
+    "F74",
+    "HF_PRIVATE"
+  ],
+  "checks": [
+    "F66_READ=PASS",
+    "F74_READ=PASS",
+    "F66_F74_IDENTITY=PASS",
+    "HF_PRIVATE_READ=PASS"
+  ],
+  "error_class": "KeyError",
+  "error": "'memory_id'"
+}
