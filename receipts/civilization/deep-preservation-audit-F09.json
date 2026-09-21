@@ -1,0 +1,27 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 9,
+  "repository": "dmaillot95-ui/cerebron-farm-09-science-math",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "d6603de98c82e587f5c238312ac413c25473c83a",
+  "tree_truncated": false,
+  "file_count": 12,
+  "observed_critical": {
+    "contract": true,
+    "registry": true,
+    "mission": "mission/SCIENCE-MATH-MISSION.md",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "wave01_receipt": "wave01/receipts/W01-SIGMA-F09.json",
+    "wave01_result": "wave01/results/W01-SIGMA-F09.json",
+    "workflows": [
+      ".github/workflows/science-math-farm.yml",
+      ".github/workflows/spiralix-interop.yml",
+      ".github/workflows/wave01-colony-execution.yml"
+    ]
+  },
+  "observation": "No 5-minute scheduler in current tree. Wave01 SIGMA evidence is present. Absence is not classified as deletion without history.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
