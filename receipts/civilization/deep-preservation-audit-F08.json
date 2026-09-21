@@ -1,0 +1,27 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 8,
+  "repository": "dmaillot95-ui/cerebron-farm-08-research-web",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "ee69d31851a916af0c710c5a209a18cabae3a811",
+  "tree_truncated": false,
+  "file_count": 10,
+  "observed_critical": {
+    "contract": true,
+    "registry": true,
+    "readme": true,
+    "collector": "scripts/collect_sources.py",
+    "research_agent": "scripts/research_agent.py",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "trigger": "TRIGGER-001.txt",
+    "workflows": [
+      ".github/workflows/research-web-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "Current F08 structure differs from Collatz F01-F07: no Collatz checkpoint/mission files and no 5-minute scheduler are present. This is not treated as loss without historical evidence.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
