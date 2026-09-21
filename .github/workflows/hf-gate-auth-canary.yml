@@ -1,0 +1,53 @@
+name: HF Gate Auth Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/hf-gate-auth-canary.yml'
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diagnose HF identity and inference authorization
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error
+          token=os.environ.get("HF_TOKEN","")
+          def call(url,body=None):
+            headers={"Authorization":"Bearer "+token}
+            if body is not None: headers["Content-Type"]="application/json"
+            req=urllib.request.Request(url,data=(json.dumps(body).encode() if body else None),headers=headers)
+            try:
+              with urllib.request.urlopen(req,timeout=60) as r:
+                raw=r.read().decode("utf-8","replace")
+                return {"http":r.status,"ok":True,"body":raw[:1200]}
+            except urllib.error.HTTPError as e:
+              raw=e.read().decode("utf-8","replace")
+              return {"http":e.code,"ok":False,"body":raw[:1200]}
+            except Exception as e:
+              return {"ok":False,"error":repr(e)}
+          who=call("https://huggingface.co/api/whoami-v2")
+          infer=call("https://router.huggingface.co/v1/chat/completions",{
+            "model":"Qwen/Qwen3-4B",
+            "messages":[{"role":"user","content":"Reply exactly: CEREBRON_HF_GATE_OK"}],
+            "max_tokens":20,"temperature":0
+          })
+          # Never persist token; retain only diagnostic response.
+          rec={"schema":"cerebron-hf-gate-auth-canary-v1","token_present":bool(token),"identity":who,"inference":infer,
+               "gate":"PASS" if who.get("ok") and infer.get("ok") else "HOLD"}
+          os.makedirs("receipts/hf-gate",exist_ok=True)
+          json.dump(rec,open("receipts/hf-gate/auth-canary.json","w"),indent=2)
+          print(json.dumps(rec,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hf-gate-auth-canary
+          path: receipts/hf-gate/auth-canary.json
+          retention-days: 30
