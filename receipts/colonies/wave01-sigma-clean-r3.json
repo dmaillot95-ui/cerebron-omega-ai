@@ -1,0 +1,14 @@
+{
+  "schema": "cerebron-sigma-clean-reproducer-receipt-v1",
+  "status": "PASS",
+  "task_id": "W01-SIGMA-CLEAN-R3",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "immutable_revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "prompt_sha256": "3ff28d41d58f431973dbd7d9c3aaf321f9d2ad012811bb96408e74b9db5605ff",
+  "output_sha256": "4169a4b1c7a98c781d698d2794fc5ab870416b0c94ca7e07b5b035099cbc4c29",
+  "isolation": {
+    "repository_result_files_read_by_inference": false,
+    "f01_f09_answers_in_prompt": false
+  },
+  "claim_scope": "Real clean inference execution and provenance only; mathematical correctness and training admission still require independent audit and red-team."
+}
