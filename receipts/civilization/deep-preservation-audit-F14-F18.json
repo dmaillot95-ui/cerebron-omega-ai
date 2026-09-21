@@ -1,0 +1,41 @@
+{
+  "schema": "cerebron-deep-preservation-batch-v1",
+  "range": "F14-F18",
+  "status": "CURRENT_TREES_PRESENT",
+  "historical_check": "PENDING",
+  "mutation_to_farms": "NONE",
+  "farms": [
+    {
+      "id": 14,
+      "repo": "cerebron-farm-14-energy",
+      "sha": "25e2b1141e41f5f80ba82f5f8314b0d375ce1fcb",
+      "files": 9
+    },
+    {
+      "id": 15,
+      "repo": "cerebron-farm-15-space",
+      "sha": "ca56b9966286230c28425eb44b5e7260819112f5",
+      "files": 9
+    },
+    {
+      "id": 16,
+      "repo": "cerebron-farm-16-industry-manufacturing",
+      "sha": "e353e1ccaf3f2838c4c9db6fbeb46649d781afd5",
+      "files": 9
+    },
+    {
+      "id": 17,
+      "repo": "cerebron-farm-17-computing-software",
+      "sha": "73be978078b33479b398a56fbb8108ec23984747",
+      "files": 9
+    },
+    {
+      "id": 18,
+      "repo": "cerebron-farm-18-ai-agents",
+      "sha": "2909acb1347e5c7fb8724769285432496114562f",
+      "files": 9
+    }
+  ],
+  "loss_signal": "NONE_CONFIRMED_IN_CURRENT_TREES",
+  "note": "All five trees are complete/non-truncated and retain domain workflow, CEREBRON contract/registry, Spiralix adapter, and domain/common worker structures."
+}
