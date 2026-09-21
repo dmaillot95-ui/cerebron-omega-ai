@@ -1,0 +1,25 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 12,
+  "repository": "dmaillot95-ui/cerebron-farm-12-biology-health",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "d418059372c30ec049e3b05b108920d324fd6fed",
+  "tree_truncated": false,
+  "file_count": 8,
+  "observed_critical": {
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "readme": "README.md",
+    "agent": "scripts/biology_health_agent.py",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/biology-health-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "F12 uses the same local contract blob observed on F11. No standalone MISSION.md is present in current tree; specialization is represented by README/agent/workflow. No loss inferred without history.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
