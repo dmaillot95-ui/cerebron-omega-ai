@@ -22,13 +22,13 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           python - <<'PY'
-          import json,time,torch
+          import json,time,torch,os
           from transformers import AutoTokenizer,AutoModelForCausalLM
           model_id="HuggingFaceTB/SmolLM3-3B"
           revision="a07cc9a04f16550a088caea529712d1d335b0ac1"
           prompt="""You are C03-SIGMA. Give only the parity (odd/even) of 3n+1 when n is a positive odd integer, then one algebraic sentence proving it."""
           t=time.time()
-          tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=HF_TOKEN)
+          tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=os.environ.get("HF_TOKEN"))
           model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=HF_TOKEN,torch_dtype=torch.float32,low_cpu_mem_usage=True)
           x=tok(prompt,return_tensors="pt")
           with torch.no_grad(): y=model.generate(**x,max_new_tokens=64,do_sample=False)
