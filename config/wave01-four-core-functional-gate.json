@@ -1,0 +1,63 @@
+{
+  "schema": "cerebron-wave01-four-core-functional-gate-v1",
+  "date": "2026-09-21",
+  "authority": "AFAH",
+  "objective": "Make C03-SIGMA, C12-ARGUS, SAPHEA MICRO and SAPHEIDE functional as one verified chain before any colony expansion.",
+  "expansion_lock": "LOCK_60_OTHER_COLONIES_UNTIL_PASS",
+  "components": {
+    "C03-SIGMA": {
+      "registry": "PRESENT_EXPERIMENTAL",
+      "seed_farms": [
+        "F01",
+        "F09"
+      ],
+      "model_binding": "DENY_PENDING_G0_COMPARISON",
+      "functional": "PARTIAL"
+    },
+    "C12-ARGUS": {
+      "registry": "PRESENT_EXPERIMENTAL",
+      "seed_farms": [
+        "F06",
+        "F34"
+      ],
+      "model_binding": "DENY_PENDING_G0_COMPARISON",
+      "functional": "PARTIAL"
+    },
+    "SAPHEA_MICRO": {
+      "runtime_contract": "config/saphea-memory-runtime.json",
+      "manifest": "config/saphea-memory-manifest.json",
+      "current_issue": "manifest still uses historical C01-SIGMA namespaces and all slots UNASSIGNED; canonical C03 alias must be enforced without deleting lineage",
+      "functional": "DESIGNED_NOT_FULLY_BOUND"
+    },
+    "SAPHEIDE": {
+      "teacher_loop": "training/AGORA_TASK_AGENT_TEACHER_LOOP.json",
+      "current_issue": "learning destination/lineage exists but autonomous executable runtime not yet certified",
+      "functional": "DESIGNED_NOT_EXECUTABLE_CERTIFIED"
+    }
+  },
+  "required_e2e": [
+    "CANONICAL_C03_ALIAS_C01_PRESERVE_HISTORY",
+    "REAL_G0_BINDING_C03_AND_C12",
+    "REAL_SAPHEA_EXECUTION",
+    "AUDIT_AND_COUNTER_AUDIT",
+    "VALIDATED_GOLD_RED_LESSON",
+    "SAPHÉIDE_INGEST_WITH_LINEAGE",
+    "HF_PRIVATE_WRITE_READBACK_SHA256",
+    "F74_REGISTER",
+    "F66_INDEX",
+    "MONOTONIC_RECALL_TEST",
+    "AGORA_REINGEST",
+    "ROLLBACK_TEST"
+  ],
+  "rules": [
+    "NO_SIMULATED_AGENT",
+    "NO_RAW_OUTPUT_AS_TRAINING_TRUTH",
+    "NO_EXPANSION_BEFORE_E2E_PASS",
+    "CRISTAL_MUST_NOT_BREAK",
+    "SEED_FARM_LINK_PERMANENT",
+    "G0_IMMUTABLE",
+    "FAILED_GATE=>HOLD"
+  ],
+  "status": "HOLD_UNTIL_ALL_REQUIRED_E2E_GATES_PASS",
+  "next_action": "Finish G0 cold comparison while repairing SAPHEA canonical manifest and creating SAPHEIDE executable canary contract in parallel."
+}
