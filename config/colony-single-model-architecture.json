@@ -1,0 +1,63 @@
+{
+  "schema": "cerebron-colony-single-model-architecture-v1",
+  "version": "1.0",
+  "date": "2026-09-21",
+  "authority": "AFAH",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "principle": "ONE_COLONY_ONE_WEIGHT_MODEL_LINEAGE",
+  "rules": [
+    "Each colony binds exactly one base/weight model at a time.",
+    "The colony model is selected from a bank of at most six approved open-weight model candidates.",
+    "The six are alternatives for colony assignment, never six simultaneous models inside one colony.",
+    "Different colonies may select different candidates; multiple colonies may share the same G0 only with separate colony lineage, memory, adapters and generations.",
+    "Every colony remains permanently linked to its seed farm(s); a broken seed-farm link forces HOLD.",
+    "Binding requires real availability, immutable revision, license check and baseline evidence.",
+    "Training creates colony-specific G1/G2/... artifacts; G0 remains immutable.",
+    "Promotion requires cold benchmark, audit, red-team, ablation, transfer and rollback target.",
+    "Large/private weights and adapters live on private Hugging Face storage; GitHub stores control-plane metadata/digests only."
+  ],
+  "candidate_bank": {
+    "max_models": 6,
+    "current_verified_candidates": [
+      "G0-QWEN3-4B",
+      "G0-QWEN3-4B-BASE",
+      "G0-SMOLLM3-3B",
+      "G0-SMOLLM3-3B-BASE"
+    ],
+    "open_slots": 2,
+    "selection": "BENCHMARK_GATED_NOT_POPULARITY"
+  },
+  "colony_contract": {
+    "model_slots": 1,
+    "lineage": "G0->G1->G2->...",
+    "memory": "PRIVATE_PER_COLONY",
+    "seed_farm_link": "MANDATORY_PERMANENT",
+    "execution": "REAL_ONLY_NO_SIMULATION"
+  },
+  "afah": {
+    "role": "SEVENTH_DISTINCT_LINEAGE_ABOVE_COLONY_MODEL_BANK",
+    "base_model": "TO_BE_CREATED_OR_SELECTED_BY_SEPARATE_AFAH_PROGRAM",
+    "own_weights": true,
+    "training_input": "VALIDATED_CROSS_COLONY_GOLD_RED_KNOWLEDGE_AND_DISTILLATION",
+    "forbidden": "NAIVE_WEIGHT_MERGE",
+    "lineage": "AFAH-G0->AFAH-G1->AFAH-G2...",
+    "privacy": "PRIVATE",
+    "promotion": "AFAH_AUTHORIZED_EVIDENCE_GATED"
+  },
+  "rollout": {
+    "batch_size": 2,
+    "first_pair": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "next_action": "FILL_TWO_REMAINING_MODEL_BANK_SLOTS_THEN_COLD_BENCHMARK_AND_BIND_ONE_MODEL_PER_COLONY"
+  },
+  "epistemic": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY BEFORE COMMIT",
+    "ABLATION BEFORE ADDITION",
+    "TRANSFER BEFORE GENERALITY"
+  ]
+}
