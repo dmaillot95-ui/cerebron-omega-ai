@@ -1,0 +1,124 @@
+{
+  "schema": "CEREBRON_HF_FOUR_AI_ZERO_SATURATION_INBOX_V1",
+  "status": "ACTIVE_POLICY",
+  "purpose": "Use Hugging Face private storage as a quarantined transient inbox for four AI result streams without polluting GitHub durable memory.",
+  "invariants": [
+    "RAW_OUTPUT_NEVER_GITHUB_MEMORY",
+    "RAW_OUTPUT_NEVER_DIRECT_GOLD_RED",
+    "CLAIM_LE_EVIDENCE",
+    "VERIFY_BEFORE_PROMOTE",
+    "NEVER_DELETE_PROMOTED_GENERATION",
+    "PRESERVE_REQUIRED_REPRODUCIBILITY_EVIDENCE"
+  ],
+  "writers": {
+    "SAPHEA": "INBOX_TEMP/SAPHEA",
+    "SPIRALION": "INBOX_TEMP/SPIRALION",
+    "ETHERION": "INBOX_TEMP/ETHERION",
+    "AFAH": "INBOX_TEMP/AFAH"
+  },
+  "hf_private": {
+    "zones": [
+      "INBOX_TEMP",
+      "QUARANTINE",
+      "GOLD",
+      "RED",
+      "DATASETS",
+      "ADAPTERS",
+      "GENERATIONS"
+    ],
+    "inbox_ttl_hours": 24,
+    "raw_default_retention": "EPHEMERAL",
+    "promoted_memory": "IMMUTABLE_VERSIONED",
+    "content_address": "SHA256",
+    "dedup": "BEFORE_DURABLE_WRITE",
+    "max_inbox_policy": "BACKPRESSURE_BEFORE_SATURATION"
+  },
+  "ingress_required": [
+    "result_id",
+    "source_ai",
+    "task_id",
+    "timestamp",
+    "sha256",
+    "provenance",
+    "dependency_fingerprint",
+    "payload_pointer"
+  ],
+  "pipeline": [
+    "INGEST",
+    "HASH",
+    "DEDUP",
+    "PROVENANCE_CHECK",
+    "QUARANTINE",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "RED_TEAM",
+    "CLEAN_REPRODUCTION",
+    "CLASSIFY",
+    "COMPRESS",
+    "PROMOTE_OR_REJECT",
+    "PURGE_EXPIRED_RAW"
+  ],
+  "classifications": [
+    "GOLD_VALIDATED",
+    "RED_VALIDATED",
+    "SILVER",
+    "OPEN",
+    "REJECT"
+  ],
+  "promotion": {
+    "GOLD_VALIDATED": [
+      "audit_pass",
+      "counter_audit_pass",
+      "clean_reproduction_pass",
+      "provenance_pass"
+    ],
+    "RED_VALIDATED": [
+      "verified_error",
+      "verified_correction",
+      "anti_error_rule",
+      "audit_pass"
+    ],
+    "direct_raw_promotion": false
+  },
+  "purge": {
+    "delete_after_validation": [
+      "duplicate_raw",
+      "rejected_non_instructive_raw",
+      "expired_unpromoted_raw"
+    ],
+    "compress_before_retention": [
+      "useful_error",
+      "validated_knowledge"
+    ],
+    "never_delete": [
+      "promoted_generations",
+      "G0_rollback_baseline",
+      "gold_red_used_for_training",
+      "required_provenance",
+      "required_audit_evidence"
+    ]
+  },
+  "github": {
+    "allowed": [
+      "code",
+      "config",
+      "manifests",
+      "sha256",
+      "receipts",
+      "opaque_hf_pointers",
+      "validated_checkpoints"
+    ],
+    "forbidden": [
+      "bulk_raw_ai_responses",
+      "model_weights",
+      "large_datasets",
+      "temporary_inbox_payloads"
+    ]
+  },
+  "pressure": {
+    "NORMAL": "accept ingress",
+    "HIGH": "dedup aggressively and reduce nonessential retention",
+    "CRITICAL": "stop new heavy ingress; preserve validated artifacts; purge eligible temporary raw"
+  },
+  "next_gate": "IMPLEMENT_REAL_HF_PRIVATE_INBOX_WRITER_READER_AND_RUN_FOUR_SOURCE_CANARY"
+}
