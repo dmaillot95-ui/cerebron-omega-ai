@@ -1,0 +1,84 @@
+{
+  "schema": "cerebron-four-master-g0-selection-v1",
+  "date": "2026-09-21",
+  "status": "FROZEN_READY_WHEN_RUNTIME_AVAILABLE",
+  "purpose": "Select G0 bindings for SAPHEA, SPIRALION, ETHERION and AFAH by role-specific evidence.",
+  "candidates": [
+    "HuggingFaceTB/SmolLM3-3B",
+    "HuggingFaceTB/SmolLM3-3B-Base",
+    "Qwen/Qwen3-4B",
+    "Qwen/Qwen3-8B",
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+    "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "Qwen/Qwen2.5-Math-7B-Instruct",
+    "microsoft/Phi-4-mini-instruct"
+  ],
+  "roles": {
+    "SAPHEA": {
+      "weights": {
+        "tool_execution": 25,
+        "code": 20,
+        "instruction_following": 20,
+        "reliability": 20,
+        "efficiency": 15
+      }
+    },
+    "SPIRALION": {
+      "weights": {
+        "reasoning": 25,
+        "cross_domain": 20,
+        "alternative_hypotheses": 20,
+        "self_critique": 20,
+        "synthesis": 15
+      }
+    },
+    "ETHERION": {
+      "weights": {
+        "math_science": 25,
+        "engineering_rd": 25,
+        "modeling": 20,
+        "falsification": 15,
+        "experimental_design": 15
+      }
+    },
+    "AFAH": {
+      "weights": {
+        "calibration": 25,
+        "evidence_discipline": 25,
+        "synthesis": 20,
+        "transfer": 15,
+        "robustness": 15
+      }
+    }
+  },
+  "protocol": [
+    "runtime admission before quality scoring",
+    "same frozen role task sets",
+    "blind rubric scoring",
+    "counter-audit unsupported claims",
+    "transfer set not used in selection",
+    "ablation versus simplest baseline",
+    "record latency/resource/failure rate",
+    "freeze exact revision only after PASS"
+  ],
+  "decision_rules": [
+    "different roles may select different G0 models",
+    "same G0 may serve multiple roles but does not create independent evidence",
+    "no forced winner on insufficient evidence",
+    "AFAH G0 selection does not mean AFAH is trained",
+    "HF candidates remain NOT_EXECUTED while inference permission is HOLD"
+  ],
+  "current_evidence": {
+    "SmolLM3_3B": "runtime compatibility demonstrated previously; quality mixed/HOLD",
+    "SmolLM3_3B_Base": "real inference demonstrated previously; audit required/HOLD",
+    "Qwen3_4B": "previous GitHub CPU attempt cancelled/resource-runtime unresolved; no quality conclusion",
+    "HF_Inference": "HOLD_403_INFERENCE_PROVIDER_PERMISSION"
+  },
+  "outputs": [
+    "per-role scorecard",
+    "failure ledger",
+    "independence ledger",
+    "selected immutable revision or HOLD",
+    "selection receipt"
+  ]
+}
