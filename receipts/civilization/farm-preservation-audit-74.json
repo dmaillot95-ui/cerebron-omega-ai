@@ -1,0 +1,45 @@
+{
+  "schema": "cerebron-farm-preservation-audit-v1",
+  "status": "REGISTRY_PRESENCE_PASS_CONTENT_AUDIT_PENDING",
+  "scope": "F01-F74",
+  "checks": {
+    "registered": 74,
+    "repositories_present": 74,
+    "missing": 0,
+    "default_branch_main": 74,
+    "archived": 0,
+    "push_access": 74
+  },
+  "risk_flags": {
+    "tiny_repositories": [
+      48,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      69,
+      73
+    ],
+    "meaning": "Small repository size is not evidence of loss; inspect content/history before any repair."
+  },
+  "preservation_policy": [
+    "NO_DELETE",
+    "NO_FORCE_PUSH",
+    "NO_HISTORY_REWRITE",
+    "NO_REPO_RENAME_DURING_AUDIT",
+    "PRESERVE_FAILED_RECEIPTS",
+    "PRESERVE_SEED_FARM_IDS",
+    "BACKUP_CRITICAL_POINTERS_AND_HEAD_SHAS_BEFORE_MUTATION",
+    "CONTENT_DIFFERENCE_IS_NOT_LOSS_UNTIL COMPARED_WITH_EXPECTED_MANIFEST_OR_HISTORY"
+  ],
+  "next_pass": [
+    "CAPTURE_HEAD_SHA_F01_F74",
+    "CHECK_CRITICAL_FILES_AND_WORKFLOWS",
+    "CHECK_RECENT_HISTORY_FOR_DELETIONS_OR_REWRITES",
+    "COMPARE_F66_F74_MEMORY_POINTERS",
+    "BUILD_MISSING_ARTIFACT_REPORT_WITHOUT_AUTOREPAIR"
+  ],
+  "claim_limit": "All 74 registered farm repositories are currently visible and writable with main as default branch and none archived. This does not yet prove that no historical file or artifact disappeared."
+}
