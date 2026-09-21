@@ -1,0 +1,43 @@
+name: Colony Real Inference Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/colony-real-inference-canary.yml
+permissions:
+  contents: read
+jobs:
+  smollm3-real:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned runtime
+        run: pip install -q "transformers>=4.53,<5" "torch>=2.3" "accelerate>=1,<2" "safetensors>=0.4"
+      - name: Real cold inference canary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json,time,torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          model_id="HuggingFaceTB/SmolLM3-3B"
+          revision="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          prompt="""You are C03-SIGMA. Give only the parity (odd/even) of 3n+1 when n is a positive odd integer, then one algebraic sentence proving it."""
+          t=time.time()
+          tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=HF_TOKEN)
+          model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=HF_TOKEN,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          x=tok(prompt,return_tensors="pt")
+          with torch.no_grad(): y=model.generate(**x,max_new_tokens=64,do_sample=False)
+          out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+          print("REAL_INFERENCE=PASS")
+          print("MODEL="+model_id)
+          print("REVISION="+revision)
+          print("SECONDS=%.3f"%(time.time()-t))
+          print("OUTPUT_BEGIN")
+          print(out)
+          print("OUTPUT_END")
+          PY
