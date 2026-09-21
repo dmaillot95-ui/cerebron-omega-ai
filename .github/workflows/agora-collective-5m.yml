@@ -1,5 +1,5 @@
 name: AGORA Collective Recursive Bus
-# bootstrap-repair-trigger-v4-single-line
+# bootstrap-repair-trigger-v5-actual-newline
 on:
   workflow_dispatch:
   push:
@@ -26,8 +26,8 @@ jobs:
           import hashlib,json,os
           p="CEREBRON_CIVILIZATION_OPERATING_MANUAL.md"
           b=open(p,"rb").read()
-          t=b.decode("utf-8")\nif "CÉRÉBRON" not in t or "AFAH" not in t or "CRISTAL" not in t or "AGORA" not in t:
-              raise SystemExit("CIVILIZATION_MANUAL_INVALID")
+          t=b.decode("utf-8")
+          assert all(x in t for x in ("CÉRÉBRON","AFAH","CRISTAL","AGORA")), "CIVILIZATION_MANUAL_INVALID"
           os.makedirs(".agora-collective",exist_ok=True)
           json.dump({
             "manual":p,
