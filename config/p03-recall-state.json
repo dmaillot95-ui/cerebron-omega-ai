@@ -1,17 +1,32 @@
 {
   "schema": "p03-recall-state-v1",
-  "status": "HOLD_STALE_RECEIPT",
-  "observed_receipt": {
-    "status": "FAIL",
-    "error": "KeyError: memory_id",
-    "interpretation": "stale receipt; does not demonstrate execution of repaired workflow"
+  "status": "PASS",
+  "verified_run": {
+    "id": 35554346451,
+    "run_number": 11,
+    "head_sha": "c0fff7e2778b1fe3b17f06fde2aaacde502f073d",
+    "conclusion": "success"
   },
-  "verified_path_so_far": [
+  "route": [
+    "F66",
+    "F74",
+    "HF_PRIVATE"
+  ],
+  "checks": [
     "F66_READ_PASS",
     "F74_READ_PASS",
     "F66_F74_IDENTITY_PASS",
-    "HF_PRIVATE_READ_PASS"
+    "HF_PRIVATE_READ_PASS",
+    "F74_HF_IDENTITY_PASS",
+    "ROLLBACK_POINTER_PASS",
+    "SHA256_PASS"
   ],
-  "safety": "parameter training remains blocked",
-  "next": "obtain fresh receipt whose workflow revision includes historical-schema compatibility fix"
+  "memory": {
+    "canonical_colony_id": "C03-SIGMA",
+    "historical_alias": "C01-SIGMA",
+    "agent_id": "SIGMA-FORMALIZER",
+    "generation": "M1",
+    "rollback_generation": "M0"
+  },
+  "next_gate": "SINGLE_SAPHEA_G1_CANARY"
 }
