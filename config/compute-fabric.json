@@ -1,0 +1,125 @@
+{
+  "schema": "cerebron-compute-fabric-v1",
+  "status": "DESIGNED_GLOBAL",
+  "scope": {
+    "all_colonies": true,
+    "colony_registry": "config/colonies.json",
+    "candidate_colonies": 62,
+    "afah_execution_colony": false
+  },
+  "principle": "Colonies own cognition and evidence lineage; COMPUTE FABRIC supplies shared execution capacity only.",
+  "routing": [
+    "AGORA",
+    "COLONY_CHIEF",
+    "COMPUTE_ROUTER",
+    "QUEUE",
+    "ELIGIBLE_WORKER",
+    "MODEL_OR_COMPUTE_JOB",
+    "RESULT_SHA_METRICS",
+    "COLONY_AUDIT_RED_TEAM",
+    "SAPHEIDE",
+    "HF_PRIVATE_MEMORY"
+  ],
+  "worker_pools": [
+    {
+      "id": "CPU_INFERENCE",
+      "jobs": [
+        "small-model inference",
+        "tokenization",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "GPU_INFERENCE",
+      "jobs": [
+        "accelerated model inference"
+      ],
+      "requires": "REAL_GPU_RESOURCE"
+    },
+    {
+      "id": "LORA_TRAINING",
+      "jobs": [
+        "reversible adapter training"
+      ],
+      "requires": "QUALIFIED_CPU_OR_GPU_RESOURCE"
+    },
+    {
+      "id": "MATH_COMPUTE",
+      "jobs": [
+        "symbolic",
+        "numeric",
+        "search"
+      ]
+    },
+    {
+      "id": "RAG_EMBEDDING",
+      "jobs": [
+        "embedding",
+        "retrieval",
+        "index maintenance"
+      ]
+    },
+    {
+      "id": "BENCHMARK",
+      "jobs": [
+        "cold benchmark",
+        "transfer",
+        "ablation",
+        "regression"
+      ]
+    },
+    {
+      "id": "ARTIFACT_INTEGRITY",
+      "jobs": [
+        "hash",
+        "readback",
+        "provenance",
+        "artifact verification"
+      ]
+    }
+  ],
+  "scheduler": {
+    "global_queue": true,
+    "per_colony_namespace": true,
+    "priority_classes": [
+      "SECURITY",
+      "AUDIT",
+      "COLD_EVAL",
+      "TRAINING",
+      "INFERENCE",
+      "BACKGROUND"
+    ],
+    "max_parallel_colonies": 20,
+    "adaptive_backoff": true,
+    "retry_with_receipt": true,
+    "resource_discovery_required": true,
+    "no_fake_gpu": true,
+    "model_cache_preferred": true
+  },
+  "isolation": {
+    "namespace": "colony/{COLONY_ID}/jobs/{JOB_ID}",
+    "seed_farm_links_preserved": true,
+    "no_cross_colony_private_memory_by_default": true,
+    "cold_benchmark_isolation": true
+  },
+  "evidence_rules": [
+    "COMPUTE_SUCCESS != SCIENTIFIC_VALIDATION",
+    "SAME_MODEL_DUPLICATE != INDEPENDENT_EVIDENCE",
+    "WORKER_COUNT != INTELLIGENCE",
+    "GPU_AVAILABILITY MUST BE OBSERVED",
+    "NO RESOURCE => QUEUE OR HOLD"
+  ],
+  "storage": {
+    "github": "public control metadata, hashes, receipts only",
+    "huggingface_private": "private memory, adapters, weights, private datasets"
+  },
+  "activation_gate": [
+    "enumerate real CPU/GPU resources",
+    "benchmark worker types",
+    "bind scheduler",
+    "run two-colony canary C03+C12",
+    "audit isolation and hashes",
+    "expand to all colonies"
+  ],
+  "claim_limit": "This file defines global routing architecture. It does not claim GPU resources exist or that all colonies are active."
+}
