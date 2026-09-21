@@ -1,0 +1,49 @@
+name: Wave01 SIGMA SmolLM R2
+on:
+  push:
+    paths:
+      - 'config/wave01-sigma-smollm-r2-trigger.json'
+      - '.github/workflows/wave01-sigma-smollm-r2.yml'
+permissions:
+  contents: write
+jobs:
+  infer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install --quiet "transformers>=4.53" torch huggingface_hub
+      - name: Real blind R2 inference
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json,hashlib,os,time
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          s=json.loads(Path("benchmarks/WAVE01-SIGMA-CLEAN-R2.json").read_text())
+          mid=s["model"]; rev=s["revision"]; prompt=s["prompt"]
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev,token=os.getenv("HF_TOKEN"))
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True,token=os.getenv("HF_TOKEN"))
+          text=tok.apply_chat_template([{"role":"user","content":prompt}],tokenize=False,add_generation_prompt=True)
+          inp=tok(text,return_tensors="pt"); t=time.time()
+          with torch.no_grad(): out=model.generate(**inp,max_new_tokens=s["generation"]["max_new_tokens"],do_sample=False)
+          ans=tok.decode(out[0][inp["input_ids"].shape[1]:],skip_special_tokens=True)
+          raw={"task_id":s["task_id"],"model_id":mid,"immutable_revision":rev,"prompt":prompt,"output":ans}
+          rec={"schema":"cerebron-wave01-sigma-smollm-r2-v1","status":"EXECUTED_UNREVIEWED","execution_kind":"REAL_LOCAL_MODEL_INFERENCE_GITHUB_RUNNER","task_id":s["task_id"],"model_id":mid,"immutable_revision":rev,"input_sha256":hashlib.sha256(prompt.encode()).hexdigest(),"output_sha256":hashlib.sha256(ans.encode()).hexdigest(),"record_sha256":hashlib.sha256(json.dumps(raw,sort_keys=True,ensure_ascii=False).encode()).hexdigest(),"latency_seconds":round(time.time()-t,3),"training_admission":"DENY_PENDING_AUDIT","claim_limit":"Real blind inference only; not mathematical proof."}
+          Path("results/colonies").mkdir(parents=True,exist_ok=True);Path("receipts/colonies").mkdir(parents=True,exist_ok=True)
+          Path("results/colonies/wave01-sigma-smollm-r2.json").write_text(json.dumps(raw,indent=2,ensure_ascii=False)+"\n")
+          Path("receipts/colonies/wave01-sigma-smollm-r2.json").write_text(json.dumps(rec,indent=2)+"\n")
+          PY
+      - name: Persist
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add results/colonies/wave01-sigma-smollm-r2.json receipts/colonies/wave01-sigma-smollm-r2.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Freeze real SmolLM3 SIGMA R2 output"
+          git pull --rebase origin main
+          git push
