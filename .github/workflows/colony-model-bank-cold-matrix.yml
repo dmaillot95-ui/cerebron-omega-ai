@@ -1,0 +1,29 @@
+name: Colony Model Bank Cold Matrix
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - benchmarks/COLONY_MODEL_BANK_BENCHMARK_V1.json
+      - config/model-bank-six.json
+      - .github/workflows/colony-model-bank-cold-matrix.yml
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate frozen matrix
+        run: |
+          python - <<'PY'
+          import json
+          b=json.load(open("benchmarks/COLONY_MODEL_BANK_BENCHMARK_V1.json"))
+          m=json.load(open("config/model-bank-six.json"))
+          assert len(b["models"])==6
+          assert len(m["candidates"])==6
+          assert [x["colony"] for x in b["first_pair"]]==["C03-SIGMA","C12-ARGUS"]
+          assert b["controls"]["one_model_per_colony"] is True
+          print("MATRIX_CONTRACT=PASS")
+          print("REAL_MODEL_EXECUTION=NOT_PERFORMED_BY_THIS_JOB")
+          print("MODEL_BINDING=DENY")
+          PY
