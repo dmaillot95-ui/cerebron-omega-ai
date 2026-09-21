@@ -1,0 +1,55 @@
+{
+  "schema": "cerebron-civilization-model-routing-v1",
+  "date": "2026-09-21",
+  "status": "FROZEN_BEFORE_BINDING",
+  "scope": {
+    "colonies": 62,
+    "seed_farms": 74,
+    "model_bank": 6,
+    "afah_lineages": 1
+  },
+  "routing_unit": "COLONY",
+  "rules": [
+    "Each colony has exactly one active weight model at a time.",
+    "The active model must come from the six-model approved bank until a later audited bank revision.",
+    "Seed farms remain permanently linked capability roots and are never replaced by the model.",
+    "Different colonies may select different models; sharing a G0 model does not merge colony lineage.",
+    "Every colony keeps independent memory, adapter lineage and generation head.",
+    "A model switch is a versioned migration, never an overwrite.",
+    "Cross-colony learning enters only through validated GOLD/RED lessons.",
+    "AFAH is a separate seventh lineage and is never selected as a colony model."
+  ],
+  "execution": {
+    "global_colony_concurrency_cap": 20,
+    "rollout_batch_size": 2,
+    "model_load_concurrency_on_github_cpu": 1,
+    "queue_required_above_cap": true
+  },
+  "state_machine": [
+    "UNBOUND",
+    "RUNTIME_VERIFIED",
+    "COLD_BENCHMARKED",
+    "AUDITED",
+    "RED_TEAMED",
+    "BOUND_G0",
+    "TRAINING_ELIGIBLE",
+    "G1_CANDIDATE",
+    "G1_VALIDATED"
+  ],
+  "anti_regression": [
+    "immutable G0 revision",
+    "monotonic generation",
+    "parent hash required",
+    "HF private head verification before recall",
+    "older generation cannot auto-replace newer head"
+  ],
+  "current_wave": {
+    "colonies": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "state": "UNBOUND",
+    "blocking_gate": "REAL_RUNTIME_CANARY"
+  },
+  "next": "After canary, execute identical frozen tasks across candidates without changing prompts."
+}
