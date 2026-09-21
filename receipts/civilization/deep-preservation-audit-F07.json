@@ -1,0 +1,25 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 7,
+  "repository": "dmaillot95-ui/cerebron-collatz-farm-07-synthesis",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "7de6839aa7e2034f2e1ddeaeab73db83c91057ce",
+  "tree_truncated": false,
+  "file_count": 10,
+  "observed_critical": {
+    "contract": true,
+    "registry": true,
+    "checkpoint": true,
+    "mission": "mission/C256-SYNTHESIS-FARM.md",
+    "worker": true,
+    "spiralix": true,
+    "workflows": [
+      ".github/workflows/spiralix-interop.yml",
+      ".github/workflows/synthesis-farm.yml"
+    ]
+  },
+  "observation": "No cerebron-5min-scheduler.yml in current tree; as with F05 this is only a structural difference until history is checked.",
+  "loss_signal": "NO_CONFIRMED_LOSS; SCHEDULER_DIFFERENCE_REQUIRES_HISTORY_CHECK",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
