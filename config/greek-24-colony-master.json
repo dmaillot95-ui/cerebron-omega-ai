@@ -1,0 +1,59 @@
+{
+  "schema": "cerebron-greek-24-colony-master-v1",
+  "date": "2026-09-21",
+  "status": "TARGET_ARCHITECTURE_FROZEN_ROLLOUT_GATED",
+  "team_template": [
+    "CHIEF",
+    "PARALLEL_EXECUTORS",
+    "AUDITOR",
+    "COUNTER_AUDITOR",
+    "SYNTHESIZER"
+  ],
+  "colonies": [
+    "ALPHA-SAPHEA",
+    "BETA-CALCULUS",
+    "GAMMA-EVIDENTIA",
+    "DELTA-PHYSIS",
+    "EPSILON-CODEX",
+    "ZETA-HEURIS",
+    "ETA-NEXUS",
+    "THETA-MATHESIS",
+    "IOTA-REPLICA",
+    "KAPPA-ANTITHESIS",
+    "LAMBDA-ARGUS",
+    "MU-SAPHEIDE",
+    "NU-MEMORIA",
+    "XI-VECTOR",
+    "OMICRON-HF-GATE",
+    "PI-FORGE",
+    "RHO-VISION",
+    "SIGMA-VIDEO",
+    "TAU-DATA",
+    "UPSILON-COMPUTE",
+    "PHI-SECURITY",
+    "CHI-ORCHESTRA",
+    "PSI-AGORA",
+    "OMEGA-AFAH"
+  ],
+  "rules": [
+    "REAL_EXECUTIONS_ONLY",
+    "SEED_FARM_LINK_PERMANENT",
+    "HF_PRIVATE_DURABLE_PAYLOAD",
+    "GITHUB_CONTROL_PLANE",
+    "CRISTAL_PRESERVE",
+    "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE"
+  ],
+  "rollout": {
+    "current": [
+      "THETA-MATHESIS_FROM_C03_SIGMA",
+      "LAMBDA-ARGUS_FROM_C12_ARGUS"
+    ],
+    "batch_size": 2,
+    "next_pair_only_after_e2e_pass": true
+  },
+  "legacy": {
+    "colonies_62": "PRESERVE_RESERVE",
+    "farms_74": "PRESERVE_MAP_SEED_OR_SHARED_SERVICE"
+  },
+  "central_collector": "CEREBRON"
+}
