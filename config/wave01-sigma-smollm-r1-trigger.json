@@ -1,0 +1,6 @@
+{
+  "schema": "wave01-sigma-smollm-r1-trigger-v1",
+  "sequence": 1,
+  "model": "HuggingFaceTB/SmolLM3-3B",
+  "mode": "blind-real-inference"
+}
