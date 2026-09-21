@@ -1,0 +1,80 @@
+{
+  "schema": "cerebron-colony-cold-tasks-v1",
+  "date": "2026-09-21",
+  "status": "FROZEN",
+  "contamination_policy": "NEVER_TRAIN_ON_THESE_ITEMS",
+  "tasks": [
+    {
+      "id": "SIGMA-01",
+      "colony": "C03-SIGMA",
+      "type": "formal_math",
+      "prompt": "Let n be a positive odd integer. Determine the parity of 3n+1 and prove it in one algebraic sentence.",
+      "expected_constraints": [
+        "even",
+        "n=2k+1 implies 3n+1=6k+4=2(3k+2)"
+      ]
+    },
+    {
+      "id": "SIGMA-02",
+      "colony": "C03-SIGMA",
+      "type": "proof_audit",
+      "prompt": "Audit the claim: if a divides bc then a divides b or a divides c for all positive integers. Return VALID or INVALID and the smallest counterexample you can give.",
+      "expected_constraints": [
+        "INVALID",
+        "counterexample"
+      ]
+    },
+    {
+      "id": "SIGMA-03",
+      "colony": "C03-SIGMA",
+      "type": "logic",
+      "prompt": "State whether sqrt(2) is rational or irrational and give a compact contradiction proof outline without decimals.",
+      "expected_constraints": [
+        "irrational",
+        "contradiction",
+        "parity/divisibility"
+      ]
+    },
+    {
+      "id": "ARGUS-01",
+      "colony": "C12-ARGUS",
+      "type": "false_proof_rejection",
+      "prompt": "A proof says: x^2=x implies divide both sides by x, so x=1; therefore x=0 is not a solution. Identify the exact invalid step.",
+      "expected_constraints": [
+        "division by x",
+        "x may be zero"
+      ]
+    },
+    {
+      "id": "ARGUS-02",
+      "colony": "C12-ARGUS",
+      "type": "dependency_detection",
+      "prompt": "Two reports use the same dataset, same base model, same prompt, and same derived lemma. Are they independent reproductions? Answer YES or NO and name the dependency.",
+      "expected_constraints": [
+        "NO",
+        "shared lineage"
+      ]
+    },
+    {
+      "id": "ARGUS-03",
+      "colony": "C12-ARGUS",
+      "type": "adversarial_audit",
+      "prompt": "Audit: all tested integers up to 10^12 satisfy property P, therefore every positive integer satisfies P. Identify the inference error.",
+      "expected_constraints": [
+        "finite verification",
+        "not universal proof"
+      ]
+    }
+  ],
+  "scoring": {
+    "per_task": {
+      "correct_core": 2,
+      "required_reason": 2,
+      "constraint_following": 1
+    },
+    "max_per_task": 5,
+    "manual_or_verified_parser_required": true,
+    "no_self_awarded_score": true
+  },
+  "next_gate": "RUN_IDENTICAL_TASKS_ON_EACH_REAL_MODEL"
+}
