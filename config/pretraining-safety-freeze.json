@@ -24,7 +24,7 @@
       "id": "C1",
       "issue": "SIGMA identifier inconsistency: registry C03-SIGMA vs historical folder C01-SIGMA",
       "action": "treat as explicit alias until controlled migration; never silently rename or split memory lineage",
-      "state": "HOLD_FOR_ALIAS"
+      "state": "RESOLVED_BY_EXPLICIT_ALIAS"
     },
     {
       "id": "C2",
@@ -36,7 +36,7 @@
       "id": "C3",
       "issue": "P03 unified F66→F74→HF receipt absent",
       "action": "block trusted-memory promotion until unified recall PASS",
-      "state": "BLOCKING"
+      "state": "RESOLVED_PASS"
     },
     {
       "id": "C4",
@@ -52,5 +52,5 @@
     }
   ],
   "rollback_rule": "Any failed gate restores last validated generation/pointer; failed evidence is retained.",
-  "next_gate": "resolve C1 alias + P03 unified recall before first parameter-training canary"
+  "next_gate": "admit audited GOLD/RED lessons; then first reversible C03-SIGMA adapter canary"
 }
