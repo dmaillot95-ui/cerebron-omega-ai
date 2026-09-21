@@ -1,0 +1,26 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 4,
+  "repository": "dmaillot95-ui/cerebron-collatz-farm-04-counterexample",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "f35e58f9b34208727440e0259905747cf6a9c051",
+  "tree_truncated": false,
+  "file_count": 11,
+  "observed_critical": {
+    "readme": true,
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "checkpoint": "checkpoints/COLLATZ_DELTA_2026-09-20.md",
+    "mission": "mission/C256-COUNTEREXAMPLE-FARM.md",
+    "worker": "worker/farm_worker.py",
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/cerebron-5min-scheduler.yml",
+      ".github/workflows/counterexample-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "loss_signal": "NONE_OBSERVED_IN_CURRENT_TREE",
+  "warning": "Current-tree preservation only; historical deletion comparison remains pending.",
+  "mutation": "NONE"
+}
