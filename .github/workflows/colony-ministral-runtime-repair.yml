@@ -1,0 +1,57 @@
+name: Colony Ministral Runtime Repair
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/colony-ministral-runtime-repair.yml'
+permissions:
+  contents: read
+concurrency:
+  group: colony-ministral-runtime-repair
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install current model runtime
+        run: pip install -q --upgrade "transformers>=4.57,<5" "torch>=2.3" "accelerate>=1,<2" "safetensors>=0.4"
+      - name: Real frozen cold matrix
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          MODEL_ID: mistralai/Ministral-3-3B-Base-2512
+          REVISION: 3dd398144bd567095bc3293dd80e9495ebe03309
+        run: |
+          python - <<'PY'
+          import json,os,time,hashlib,torch,transformers
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          model_id=os.environ["MODEL_ID"]; revision=os.environ["REVISION"]
+          tasks=json.load(open("benchmarks/COLONY_COLD_TASKS_V1.json"))["tasks"]
+          token=os.environ.get("HF_TOKEN"); results=[]; t0=time.time()
+          try:
+              tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=token,trust_remote_code=True)
+              model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=token,dtype=torch.float32,low_cpu_mem_usage=True,trust_remote_code=True)
+              load=True
+              for task in tasks:
+                  x=tok(task["prompt"],return_tensors="pt"); t=time.time()
+                  with torch.no_grad(): y=model.generate(**x,max_new_tokens=96,do_sample=False)
+                  out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+                  results.append({"task_id":task["id"],"colony":task["colony"],"seconds":round(time.time()-t,3),"output":out,"sha256":hashlib.sha256(out.encode()).hexdigest()})
+              status="RUNTIME_PASS_AUDIT_REQUIRED"
+          except Exception as e:
+              load=False; status="RUNTIME_FAILURE"; results.append({"error":repr(e)})
+          receipt={"schema":"cerebron-ministral-runtime-repair-v1","model":model_id,"revision":revision,"transformers":transformers.__version__,"real_inference":load,"total_seconds":round(time.time()-t0,3),"results":results,"status":status,"binding":"DENY"}
+          os.makedirs("receipts/runtime",exist_ok=True)
+          json.dump(receipt,open("receipts/runtime/ministral3-3b-base-repair.json","w"),indent=2)
+          print(json.dumps(receipt,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ministral3-3b-base-runtime-repair
+          path: receipts/runtime/ministral3-3b-base-repair.json
+          retention-days: 90
