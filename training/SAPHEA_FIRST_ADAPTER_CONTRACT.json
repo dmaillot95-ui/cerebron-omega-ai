@@ -1,0 +1,70 @@
+{
+  "schema": "cerebron-saphea-first-adapter-contract-v1",
+  "status": "READY_BLOCKED_BY_P03",
+  "scope": {
+    "wave": "01",
+    "colonies": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "artifact_type": "PEFT_LORA_OR_EQUIVALENT_REVERSIBLE_ADAPTER",
+    "base_model_policy": "IMMUTABLE_G0"
+  },
+  "teacher_input": {
+    "allowed": [
+      "GOLD_VALIDATED",
+      "RED_VALIDATED"
+    ],
+    "forbidden": [
+      "RAW_TASK_AGENT_OUTPUT",
+      "UNREVIEWED_FARM_OUTPUT",
+      "COLD_BENCHMARK_ANSWERS",
+      "PRIVATE_SECRETS"
+    ],
+    "required_metadata": [
+      "source_id",
+      "source_digest",
+      "provenance",
+      "license_or_internal_rights",
+      "audit_receipt",
+      "red_team_receipt",
+      "dependency_fingerprint"
+    ]
+  },
+  "execution": {
+    "real_training_required": true,
+    "synthetic_artifact_does_not_count_as_learning": true,
+    "private_storage": "HF_PRIVATE",
+    "github_storage": "METADATA_HASH_POINTER_ONLY",
+    "namespace_pattern": "colony/{COLONY_ID}/agents/{AGENT_ID}/adapters/{GENERATION}/"
+  },
+  "evaluation": {
+    "baseline": "G0_SEALED",
+    "candidate": "G1_ADAPTER",
+    "cold_benchmark": true,
+    "novel_transfer": true,
+    "ablation": true,
+    "regression_check": true,
+    "independent_audit": true
+  },
+  "promotion": {
+    "all_required": [
+      "P03_UNIFIED_RECALL_PASS",
+      "HF_ARTIFACT_WRITE_PASS",
+      "HF_AUTHENTICATED_READBACK_PASS",
+      "SHA256_PASS",
+      "COLD_GAIN_POSITIVE",
+      "TRANSFER_GAIN_POSITIVE",
+      "ABLATION_SUPPORTS_VALUE",
+      "NO_CRITICAL_REGRESSION",
+      "AUDIT_PASS",
+      "RED_TEAM_PASS"
+    ],
+    "failure_action": "ROLLBACK_AND_RETAIN_EVIDENCE"
+  },
+  "authority": {
+    "auto_self_promotion": false,
+    "afah_final_authority": true
+  },
+  "next_gate": "P03_UNIFIED_RECALL_PASS_THEN_SINGLE_SAPHEA_CANARY"
+}
