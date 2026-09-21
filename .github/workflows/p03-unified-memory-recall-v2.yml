@@ -4,6 +4,7 @@ on:
     paths:
       - 'config/p03-unified-recall-v2-trigger.txt'
       - '.github/workflows/p03-unified-memory-recall-v2.yml'
+      - 'config/p03-recall-heartbeat.json'
 permissions:
   contents: write
 jobs:
