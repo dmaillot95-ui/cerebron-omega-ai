@@ -1,0 +1,55 @@
+{
+  "schema": "cerebron-four-ai-adapter-hparams-v1",
+  "status": "CANARY_DEFAULTS_REQUIRE_EMPIRICAL_TUNING",
+  "base_model": {
+    "policy": "PIN_EXACT_MODEL_AND_REVISION",
+    "immutable": true
+  },
+  "lora": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": "AUTO_DISCOVER_LINEAR_PROJECTIONS_THEN_FREEZE_MANIFEST"
+  },
+  "optimizer": {
+    "name": "adamw_torch",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01
+  },
+  "schedule": {
+    "type": "cosine",
+    "warmup_ratio": 0.03
+  },
+  "batch": {
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 16
+  },
+  "training": {
+    "epochs": 1,
+    "max_grad_norm": 1,
+    "precision": "bf16_if_supported_else_fp16",
+    "gradient_checkpointing": true,
+    "seed": 3407,
+    "save_strategy": "steps",
+    "logging_steps": 10
+  },
+  "reproducibility": [
+    "PIN_BASE_REVISION",
+    "PIN_DATASET_MANIFEST_SHA256",
+    "PIN_CODE_COMMIT",
+    "RECORD_SEED",
+    "RECORD_LIBRARY_VERSIONS",
+    "RECORD_EFFECTIVE_BATCH",
+    "RECORD_CONTEXT_LENGTH",
+    "RECORD_HARDWARE_CLASS"
+  ],
+  "safety": [
+    "NO_BLIND_TEST_IN_TRAIN",
+    "NO_BASE_WEIGHT_OVERWRITE",
+    "SINGLE_CANARY_FIRST",
+    "STOP_ON_NAN_OR_CRITICAL_REGRESSION"
+  ],
+  "note": "These are conservative canary defaults, not validated optimal hyperparameters. Promotion depends on cold benchmark, transfer and ablation."
+}
