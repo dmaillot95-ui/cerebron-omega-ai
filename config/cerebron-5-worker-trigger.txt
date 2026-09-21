@@ -1,0 +1,2 @@
+trigger=2026-09-21T10:35Z
+purpose=launch-five-real-ai-workers-canary
