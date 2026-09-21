@@ -1,5 +1,5 @@
 {
-  "schema": "cerebron-compute-inventory-receipt-v1",
+  "schema": "cerebron-compute-inventory-receipt-v2",
   "status": "OBSERVED",
   "runner": {
     "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
@@ -9,17 +9,19 @@
   },
   "accelerators": {
     "nvidia": {
+      "binary_present": false,
       "available": false,
       "detail": "UNAVAILABLE"
     },
     "rocm": {
-      "available": true,
-      "detail": "/bin/sh: 1: rocminfo: not found"
+      "binary_present": false,
+      "available": false,
+      "detail": "UNAVAILABLE"
     }
   },
   "capability": {
     "cpu_worker": true,
-    "gpu_worker": true
+    "gpu_worker": false
   },
-  "claim_limit": "Observed resources on this GitHub-hosted runner only; not a claim about other providers or future runs."
+  "claim_limit": "Observed resources on this GitHub-hosted runner only; GPU availability requires a present accelerator tool and successful hardware query."
 }
