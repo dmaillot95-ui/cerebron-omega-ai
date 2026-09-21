@@ -1,0 +1,48 @@
+name: Wave01 SIGMA Independent Admission Audit
+on:
+  push:
+    paths:
+      - 'config/wave01-sigma-audit-trigger.json'
+      - '.github/workflows/wave01-sigma-independent-admission-audit.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit candidate admission metadata
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("training/WAVE01_SIGMA_LESSON_ADMISSION.json")
+          x=json.loads(p.read_text())
+          checks={}
+          checks["candidate_count"]=len(x.get("candidates",[]))==2
+          checks["digest_gate"]=x.get("provenance",{}).get("central_digest")=="PASS"
+          checks["not_training_eligible"]=x.get("training_eligible") is False
+          checks["distinct_source_farms"]=len({c["source_farm"] for c in x["candidates"]})==2
+          checks["distinct_source_digests"]=len({c["source_digest"] for c in x["candidates"]})==2
+          checks["benchmark_exclusion_declared"]="benchmark_exclusion_pass" in x["required_before_validated"]
+          checks["dependency_gate_declared"]="dependency_fingerprint" in x["required_before_validated"]
+          checks["red_team_gate_declared"]="independent_red_team_pass" in x["required_before_validated"]
+          # Dependency finding: both candidates share Wave01/Collatz framing, so source diversity
+          # alone cannot establish independent reproduction.
+          dependency={"shared_problem_lineage":True,"independence_status":"NOT_ESTABLISHED","reason":"F01 and F09 use related Wave01 Collatz framing; no clean reproducer receipt is attached."}
+          status="HOLD" if all(checks.values()) else "FAIL"
+          rec={"schema":"cerebron-wave01-sigma-independent-admission-audit-v1","status":status,"checks":checks,"dependency_fingerprint":dependency,"red_team":{"status":"HOLD","finding":"Do not upgrade correlated farm packets to independent evidence."},"clean_reproduction":"MISSING","training_admission":"DENY","next_gate":"REAL_CLEAN_REPRODUCER_OR_EQUIVALENT_INDEPENDENT_EVIDENCE","claim_limit":"Metadata audit only; does not validate mathematical truth or authorize training."}
+          Path("receipts/colonies").mkdir(parents=True,exist_ok=True)
+          Path("receipts/colonies/wave01-sigma-independent-admission-audit.json").write_text(json.dumps(rec,indent=2)+"\n")
+          if status=="FAIL": raise SystemExit(1)
+          PY
+      - name: Persist receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/colonies/wave01-sigma-independent-admission-audit.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Wave01 SIGMA independent admission audit receipt"
+          git pull --rebase origin main
+          git push
