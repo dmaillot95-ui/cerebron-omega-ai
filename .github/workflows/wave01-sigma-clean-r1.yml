@@ -1,0 +1,43 @@
+name: Wave01 SIGMA Clean R1
+on:
+  push:
+    paths:
+      - 'config/wave01-sigma-clean-r1-trigger.json'
+      - '.github/workflows/wave01-sigma-clean-r1.yml'
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enforce blind execution gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          spec=json.loads(Path("benchmarks/WAVE01-SIGMA-CLEAN-REPRODUCTION.json").read_text())
+          rec={
+            "schema":"cerebron-wave01-sigma-clean-r1-execution-v1",
+            "status":"HOLD_NO_REAL_REASONING_RESOURCE_BOUND",
+            "task_id":spec["input"]["task_id"],
+            "blind_input_frozen":True,
+            "raw_model_output_present":False,
+            "sha256_present":False,
+            "independent_reasoning_established":False,
+            "training_admission":"DENY",
+            "next_gate":"BIND_REAL_MODEL_OR_AGENT_THAT_HAS_NOT_SEEN_F01_F09_OUTPUTS",
+            "claim_limit":"This workflow proves the blind challenge is frozen and refuses to fabricate a clean reproduction. It is not a model execution."
+          }
+          Path("receipts/colonies").mkdir(parents=True,exist_ok=True)
+          Path("receipts/colonies/wave01-sigma-clean-r1.json").write_text(json.dumps(rec,indent=2)+"\n")
+          PY
+      - name: Persist hold receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/colonies/wave01-sigma-clean-r1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "SIGMA clean R1 blind gate receipt"
+          git pull --rebase origin main
+          git push
