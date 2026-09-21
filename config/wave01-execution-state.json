@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-wave01-execution-state-v1",
   "wave": 1,
-  "status": "REAL_FARM_CODE_EXECUTION_4_OF_4_VERIFIED_AUDIT_PENDING",
+  "status": "REAL_FARM_CODE_EXECUTION_4_OF_4_VERIFIED_DIGEST_RECOMPUTE_PENDING",
   "preflight": {
     "status": "PASS",
     "receipt": "receipts/colonies/wave01-seed-colony-preflight.json",
@@ -43,7 +43,7 @@
     "AGORA_SYNTHESIS"
   ],
   "claim_limit": "Four deterministic GitHub farm code executions are verified in their source repositories. This is not autonomous SAPHEA reasoning, proof, independent audit completion, or training-data admission.",
-  "next_gate": "VERIFY_OUTPUT_DIGESTS_THEN_INDEPENDENT_AUDIT_RED_TEAM_DEPENDENCY_FINGERPRINT",
+  "next_gate": "EXECUTABLE_SHA256_RECOMPUTE_OF_FOUR_RAW_RESULTS",
   "execution_evidence": {
     "F01": {
       "repo": "dmaillot95-ui/cerebron-collatz-theory-farm",
@@ -64,6 +64,16 @@
       "repo": "dmaillot95-ui/cerebron-farm-34-formal-audit",
       "task": "W01-ARGUS-F34",
       "sha256": "a9c330987ed5e2314da8350329acf92ee1ef4dd3d68e5bd06b9c466d0478fa91"
+    }
+  },
+  "digest_verification": {
+    "status": "REQUIRES_EXECUTABLE_BYTE_HASH_VERIFICATION",
+    "reason": "Source receipts contain expected SHA256, but current connector cannot independently hash fetched result bytes; do not self-certify from stored digest.",
+    "expected": {
+      "F01": "a8e512e50c345efcc691f24908096495629f777e333fbe07be91016c0fe1a606",
+      "F09": "ececf84a7c7313c8c28d456932ac2f664b73260902f592262f969691c37e3f12",
+      "F06": "193fb245b9e72b91d9d2a0c2ae3f1db483689e61ef4b6e70729a5b23951269bc",
+      "F34": "a9c330987ed5e2314da8350329acf92ee1ef4dd3d68e5bd06b9c466d0478fa91"
     }
   }
 }
