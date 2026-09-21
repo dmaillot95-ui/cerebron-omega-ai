@@ -1,0 +1,103 @@
+{
+  "schema": "cerebron-three-master-ai-core-v1",
+  "date": "2026-09-21",
+  "status": "DESIGNED_BENCHMARK_GATED",
+  "architecture": "3_MASTER_AI_PLUS_74_FARMS_PLUS_0_TO_20_DYNAMIC_AGENTS",
+  "masters": [
+    {
+      "id": "M1",
+      "name": "SAPHEA",
+      "role": "EXECUTION_LEARNING_SPECIALIST",
+      "candidate_g0": "HuggingFaceTB/SmolLM3-3B",
+      "state": "RUNTIME_COMPATIBLE_QUALITY_HOLD",
+      "duties": [
+        "farm execution",
+        "routine reasoning",
+        "validated procedure learning",
+        "tool use"
+      ],
+      "promotion": "cold benchmark + transfer + ablation + audit"
+    },
+    {
+      "id": "M2",
+      "name": "FRONTIER_OPEN",
+      "role": "HARD_REASONING_CONSTRUCTION",
+      "candidate_pool": [
+        "Qwen/Qwen3-4B",
+        "Qwen/Qwen3-8B",
+        "other open candidates admitted by benchmark"
+      ],
+      "state": "UNSELECTED",
+      "duties": [
+        "hard reasoning",
+        "candidate solutions",
+        "cross-domain synthesis"
+      ],
+      "selection": "CEREBRON benchmark; no brand-based selection"
+    },
+    {
+      "id": "M3",
+      "name": "AFAH",
+      "role": "VALIDATED_EVOLVING_LINEAGE",
+      "candidate_g0": "TBD_AFTER_G0_BENCHMARK",
+      "state": "LINEAGE_DESIGNED_NOT_TRAINED",
+      "evolution": "G0->G1->G2->...",
+      "learning_source": "SAPHÉIDE GOLD/RED only",
+      "duties": [
+        "final validated synthesis",
+        "cross-farm integration",
+        "long-term capability accumulation"
+      ]
+    }
+  ],
+  "infrastructure": {
+    "farms": {
+      "count": 74,
+      "policy": "PRESERVE_ALL_ROUTE_ONLY_NEEDED"
+    },
+    "agents": {
+      "range": "0..20",
+      "policy": "DYNAMIC_ONLY_WHEN_PARALLELISM_MEASURABLY_HELPS"
+    },
+    "memory": {
+      "private_payload": "Hugging Face private",
+      "catalog": "F74",
+      "index": "F66",
+      "control": "GitHub"
+    },
+    "router": "CEREBRON"
+  },
+  "execution_flow": [
+    "TASK",
+    "CEREBRON_ROUTE",
+    "M1_M2_OR_BOTH",
+    "SELECT_FARMS",
+    "OPTIONAL_0_TO_20_AGENTS",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "SAPHÉIDE_GOLD_RED",
+    "AFAH_IF_VALIDATED",
+    "MEMORY"
+  ],
+  "independence": [
+    "M1_AND_M2_SHARED_SOURCE_OR_DATA_NOT_AUTOMATICALLY_INDEPENDENT",
+    "AGENT_COUNT_NOT_EVIDENCE_COUNT",
+    "AFAH_MUST_NOT_TRAIN_ON_UNAUDITED_OUTPUT"
+  ],
+  "gates": [
+    "REAL_EXECUTION_ONLY",
+    "CLAIM_LE_EVIDENCE",
+    "WORKFLOW_SUCCESS_NOT_MODEL_SUCCESS",
+    "BENCHMARK_BEFORE_BINDING",
+    "ABLATION_BEFORE_SCALING",
+    "CRISTAL_PRESERVE",
+    "ROLLBACK_REQUIRED"
+  ],
+  "next": [
+    "benchmark M1 versus M2 candidates",
+    "select M2",
+    "select immutable AFAH G0",
+    "run 3-master end-to-end canary",
+    "only then begin AFAH G1 dataset admission"
+  ]
+}
