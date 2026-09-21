@@ -1,0 +1,71 @@
+{
+  "schema": "cerebron-glive-cristal-vector-index-v1",
+  "status": "DESIGNED_READY_FOR_CANARY",
+  "purpose": "Address validated civilization knowledge without duplicating heavy/private payloads in GitHub.",
+  "invariants": [
+    "CRISTAL_MUST_NOT_BREAK",
+    "HF_PRIVATE_IS_DURABLE_PAYLOAD_STORE",
+    "GITHUB_IS_CONTROL_PLANE_ONLY",
+    "F66_IS_VECTOR_SEMANTIC_INDEX",
+    "F74_IS_VERSIONED_HISTORY",
+    "CONTENT_SHA256_REQUIRED",
+    "MONOTONIC_GENERATION_REQUIRED",
+    "NO_CROSS_COLONY_STATE_MERGE",
+    "RAW_OUTPUT_IS_NOT_TRAINING_TRUTH"
+  ],
+  "record": {
+    "glive_id": "GLIVE:<canonical_colony_id>:<generation>:<content_sha256-prefix>",
+    "canonical_colony_id": "required",
+    "generation": "required_nonnegative_integer",
+    "state_version": "required",
+    "parent_state_sha256": "required_except_G0",
+    "content_sha256": "required",
+    "embedding_digest": "required_when_vectorized",
+    "provenance": "required",
+    "evidence_class": [
+      "GOLD",
+      "RED",
+      "HOLD"
+    ],
+    "hf_private_pointer": "opaque_pointer_only",
+    "f66_vector_pointer": "required_when_indexed",
+    "f74_history_pointer": "required",
+    "seed_farm_links": "required"
+  },
+  "route": [
+    "VALIDATED_DATA",
+    "CLASSIFY_GOLD_RED",
+    "HASH",
+    "WRITE_HF_PRIVATE",
+    "READ_BACK",
+    "VERIFY_SHA256",
+    "VECTORIZE",
+    "INDEX_F66",
+    "REGISTER_F74",
+    "WRITE_GITHUB_OPAQUE_MANIFEST_LAST"
+  ],
+  "checkerboard_fingerprint": {
+    "role": "OPTIONAL_OFFLINE_OR_PHYSICAL_RECOVERY_FINGERPRINT",
+    "payload": [
+      "glive_id",
+      "content_sha256",
+      "generation",
+      "opaque_recovery_pointer",
+      "error_correction_metadata"
+    ],
+    "restriction": "NEVER_STORE_PRIVATE_PAYLOAD_OR_SECRET_IN_VISUAL_CODE",
+    "density_claim": "UNBENCHMARKED_NO_100X_CLAIM"
+  },
+  "colony_creation_gate": [
+    "SEED_FARM_LINK_PASS",
+    "G0_IMMUTABLE_REVISION_PASS",
+    "HF_PRIVATE_ROUTE_PASS",
+    "HF_WRITE_READBACK_PASS",
+    "SHA256_PASS",
+    "MONOTONIC_PARENT_CHAIN_PASS",
+    "F74_REGISTER_PASS",
+    "F66_INDEX_PASS",
+    "GITHUB_MANIFEST_LAST_PASS"
+  ],
+  "failure_policy": "ANY_GATE_FAILURE=>HOLD_NO_OVERWRITE_NO_AUTO_ROLLBACK"
+}
