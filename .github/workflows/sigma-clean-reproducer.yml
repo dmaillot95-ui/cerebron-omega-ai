@@ -1,0 +1,57 @@
+name: SIGMA Clean Reproducer Gate
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/sigma-clean-reproducer.yml'
+permissions:
+  contents: write
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Install pinned inference runtime
+        run: pip install -q "transformers>=4.53,<5" "torch>=2.3" "accelerate>=1,<2" "safetensors>=0.4"
+      - name: Independent clean reproduction
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,time,datetime,torch
+          from pathlib import Path
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          model_id="HuggingFaceTB/SmolLM3-3B"
+          revision="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          prompt="""Work only from this prompt; do not consult repository result files. For the accelerated odd Collatz map T(x)=(3x+1)/2^{v2(3x+1)} on positive odd integers, state a self-contained specification of a positive cycle of exact odd period N. Define x_i and a_i, enforce a_i>=1, positivity, oddness, distinctness for exact period, closure and quantifiers. Derive the exact iterated cycle identity. Separate necessary from sufficient conditions. List at least six reasons finite/local/correlated checks cannot establish an arbitrary-N theorem. Do not claim Collatz is solved."""
+          prompt_sha=hashlib.sha256(prompt.encode()).hexdigest()
+          t=time.time()
+          tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=os.environ.get("HF_TOKEN"))
+          model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=os.environ.get("HF_TOKEN"),torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          x=tok(prompt,return_tensors="pt")
+          with torch.no_grad():
+            y=model.generate(**x,max_new_tokens=1400,do_sample=False)
+          out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+          out_sha=hashlib.sha256(out.encode()).hexdigest()
+          record={"schema":"cerebron-sigma-clean-reproducer-v1","task_id":"W01-SIGMA-CLEAN-R3","executor_type":"REAL_LOCAL_HF_INFERENCE","model_id":model_id,"immutable_revision":revision,"prompt_sha256":prompt_sha,"output_sha256":out_sha,"generated_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"seconds":round(time.time()-t,3),"isolation":{"repository_result_files_read_by_inference":False,"f01_f09_answers_in_prompt":False},"prompt":prompt,"output":out}
+          Path("results/colonies").mkdir(parents=True,exist_ok=True)
+          Path("receipts/colonies").mkdir(parents=True,exist_ok=True)
+          Path("results/colonies/wave01-sigma-clean-r3.json").write_text(json.dumps(record,indent=2)+"\n")
+          receipt={"schema":"cerebron-sigma-clean-reproducer-receipt-v1","status":"PASS","task_id":record["task_id"],"model_id":model_id,"immutable_revision":revision,"prompt_sha256":prompt_sha,"output_sha256":out_sha,"isolation":record["isolation"],"claim_scope":"Real clean inference execution and provenance only; mathematical correctness and training admission still require independent audit and red-team."}
+          Path("receipts/colonies/wave01-sigma-clean-r3.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print("CLEAN_REPRODUCER_EXECUTION=PASS")
+          print("OUTPUT_SHA256="+out_sha)
+          PY
+      - name: Persist result and receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add results/colonies/wave01-sigma-clean-r3.json receipts/colonies/wave01-sigma-clean-r3.json
+          git diff --cached --quiet && exit 0
+          git commit -m "training: SIGMA clean reproducer R3"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
