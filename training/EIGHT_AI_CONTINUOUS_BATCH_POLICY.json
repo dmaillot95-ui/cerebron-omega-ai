@@ -1,0 +1,125 @@
+{
+  "schema": "cerebron-eight-ai-continuous-batch-policy-v1",
+  "status": "ACTIVE_POLICY",
+  "objective": "Allow eight real AI workers to produce continuously while batching expensive training and limiting GitHub/HF storage growth.",
+  "workers": {
+    "target_count": 8,
+    "rule": "ONLY_REAL_EXECUTIONS_COUNT",
+    "production": "continuous_when_available",
+    "training_trigger": "BATCHED_NOT_PER_RESPONSE"
+  },
+  "ingress": {
+    "required": [
+      "task_id",
+      "worker_id",
+      "target_ai",
+      "result_digest",
+      "provenance",
+      "dependency_fingerprint",
+      "agent6_status"
+    ],
+    "dedup_before_storage": true
+  },
+  "batching": {
+    "min_new_validated_lessons": 32,
+    "max_new_validated_lessons": 256,
+    "max_wait_hours": 24,
+    "trigger": "FIRST_OF_THRESHOLD_OR_MAX_WAIT",
+    "single_training_canary_at_a_time": true,
+    "note": "Initial conservative policy; tune only from measured throughput, quota and benchmark evidence."
+  },
+  "storage": {
+    "github": {
+      "store": [
+        "code",
+        "configs",
+        "manifests",
+        "sha256",
+        "receipts",
+        "opaque_hf_pointers"
+      ],
+      "forbid": [
+        "model_weights",
+        "large_datasets",
+        "training_checkpoints"
+      ]
+    },
+    "huggingface_private": {
+      "store": [
+        "versioned_gold_red_datasets",
+        "promoted_adapters",
+        "promoted_generation_checkpoints",
+        "rejected_artifact_metadata_when_needed"
+      ],
+      "rules": [
+        "REFERENCE_BASE_MODEL_DO_NOT_DUPLICATE",
+        "CONTENT_ADDRESS_BY_SHA256",
+        "DEDUP_DATASET_RECORDS",
+        "IMMUTABLE_PROMOTED_GENERATIONS"
+      ]
+    },
+    "intermediate_checkpoints": {
+      "default_retention": "EPHEMERAL_UNLESS_REQUIRED_FOR_DEBUG_OR_RECOVERY",
+      "never_delete": [
+        "PROMOTED_GENERATION",
+        "G0_ROLLBACK_BASELINE",
+        "AUDIT_EVIDENCE_REQUIRED_FOR_REPRODUCIBILITY"
+      ]
+    }
+  },
+  "lifecycle": [
+    "8_AI_RESULTS",
+    "DEDUP",
+    "AGENT6_VALIDATION",
+    "AUDIT_COUNTER_AUDIT",
+    "GOLD_RED",
+    "TARGET_ROUTING",
+    "BATCH",
+    "DATASET_SEAL",
+    "TRAIN_ONE_CANARY",
+    "HF_PRIVATE_WRITE_READ_SHA",
+    "COLD_BENCHMARK",
+    "TRANSFER",
+    "ABLATION",
+    "RED_TEAM",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "target_routing": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "AFAH",
+    "TRANSVERSAL"
+  ],
+  "quota_controls": {
+    "github": "Do not create one commit/workflow per model response; aggregate receipts/manifests.",
+    "huggingface": "Do not upload base-model copies or every intermediate checkpoint.",
+    "training": "Do not train after every lesson; batch validated lessons.",
+    "backpressure": [
+      "QUEUE_VALIDATED_LESSONS",
+      "PAUSE_TRAINING_NOT_INGRESS",
+      "RESUME_AFTER_QUOTA_OR_CAPACITY_RECOVERS"
+    ]
+  },
+  "metrics": [
+    "validated_lessons_per_hour",
+    "dedup_ratio",
+    "github_commits_per_generation",
+    "hf_bytes_per_generation",
+    "training_runs_per_generation",
+    "cold_gain",
+    "transfer_gain",
+    "regression_rate",
+    "rollback_rate"
+  ],
+  "rules": [
+    "MEMORY_NE_LEARNING",
+    "TRAINING_LOSS_NE_CAPABILITY_GAIN",
+    "AGENT_COUNT_NE_INTELLIGENCE",
+    "NO_GAIN_CLAIM_WITHOUT_G0_G1",
+    "NO_OVERWRITE_VERIFIED_HISTORY",
+    "NO_COLD_TEST_LEAKAGE",
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE"
+  ]
+}
