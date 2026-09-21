@@ -1,0 +1,48 @@
+{
+  "schema": "cerebron-colony-binding-state-v1",
+  "date": "2026-09-21",
+  "wave": "01",
+  "status": "REAL_INFERENCE_CANARY_RUNNING",
+  "colonies": [
+    {
+      "id": "C03-SIGMA",
+      "seed_farms": [
+        "F01",
+        "F09"
+      ],
+      "model_slots": 1,
+      "bound_model": null,
+      "binding_status": "DENY_PENDING_COLD_MATRIX",
+      "lineage_generation": "G0_PENDING"
+    },
+    {
+      "id": "C12-ARGUS",
+      "seed_farms": [
+        "F06",
+        "F34"
+      ],
+      "model_slots": 1,
+      "bound_model": null,
+      "binding_status": "DENY_PENDING_COLD_MATRIX",
+      "lineage_generation": "G0_PENDING"
+    }
+  ],
+  "model_bank_size": 6,
+  "active_canary": {
+    "model": "G0-SMOLLM3-3B",
+    "workflow_run_id": 35564575024,
+    "status": "IN_PROGRESS",
+    "prior_failed_run": 35564472385,
+    "prior_failure_class": "WORKFLOW_ENVIRONMENT_BUG_NOT_MODEL_FAILURE",
+    "fix_commit": "831ddaf04dbcd24d28305e3ac2c9eafb229368ca"
+  },
+  "invariants": [
+    "ONE_COLONY_ONE_MODEL",
+    "SEED_FARM_LINK_PERMANENT",
+    "NO_BINDING_WITHOUT_REAL_RECEIPT",
+    "FAILED_RUNS_PRESERVED",
+    "G0_IMMUTABLE",
+    "PRIVATE_DERIVED_WEIGHTS"
+  ],
+  "next_gate": "CANARY_PASS_THEN_EXPAND_IDENTICAL_COLD_TASKS"
+}
