@@ -1,0 +1,25 @@
+{
+  "schema": "cerebron-compute-inventory-receipt-v1",
+  "status": "OBSERVED",
+  "runner": {
+    "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "cpu_logical": 4,
+    "memory_gib": 15.61,
+    "disk_free_gib": 86.07
+  },
+  "accelerators": {
+    "nvidia": {
+      "available": false,
+      "detail": "UNAVAILABLE"
+    },
+    "rocm": {
+      "available": true,
+      "detail": "/bin/sh: 1: rocminfo: not found"
+    }
+  },
+  "capability": {
+    "cpu_worker": true,
+    "gpu_worker": true
+  },
+  "claim_limit": "Observed resources on this GitHub-hosted runner only; not a claim about other providers or future runs."
+}
