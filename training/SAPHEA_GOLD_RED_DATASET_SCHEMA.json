@@ -1,0 +1,82 @@
+{
+  "schema": "cerebron-saphea-gold-red-dataset-v1",
+  "status": "FROZEN",
+  "purpose": "Training-set admission schema for real SAPHEA adapter learning",
+  "record": {
+    "required": [
+      "lesson_id",
+      "class",
+      "domain",
+      "input_digest",
+      "target_digest",
+      "source_refs",
+      "provenance",
+      "rights",
+      "audit",
+      "red_team",
+      "dependency_fingerprint",
+      "benchmark_exclusion",
+      "colony",
+      "seed_farm_links"
+    ],
+    "class": [
+      "GOLD",
+      "RED"
+    ],
+    "target_storage": "HF_PRIVATE"
+  },
+  "admission": {
+    "gold": [
+      "correctness_validated",
+      "scope_explicit",
+      "clean_reproduction_or_equivalent",
+      "audit_pass",
+      "red_team_pass"
+    ],
+    "red": [
+      "failure_verified",
+      "failure_mode_labeled",
+      "corrective_signal_present",
+      "audit_pass"
+    ],
+    "reject": [
+      "raw_agent_consensus",
+      "unverified_model_answer",
+      "benchmark_answer_leakage",
+      "missing_provenance",
+      "secret_or_unauthorized_data",
+      "self-certified lesson"
+    ]
+  },
+  "splits": {
+    "train": "validated lessons only",
+    "validation": "disjoint lineage where possible",
+    "cold_test": "sealed; never exposed to teacher/training worker",
+    "transfer": "novel tasks, sealed"
+  },
+  "anti_contamination": [
+    "hash every record",
+    "record ancestry",
+    "deduplicate semantic/source lineage",
+    "exclude cold benchmark digests",
+    "same lineage is not independent evidence"
+  ],
+  "wave01": {
+    "C03_SIGMA": {
+      "seed_farms": [
+        "F01",
+        "F09"
+      ],
+      "training_records": 0
+    },
+    "C12_ARGUS": {
+      "seed_farms": [
+        "F06",
+        "F34"
+      ],
+      "training_records": 0
+    }
+  },
+  "claim_limit": "Schema readiness is not a dataset and not training.",
+  "next": "populate only from audited task-agent lessons after P03 PASS"
+}
