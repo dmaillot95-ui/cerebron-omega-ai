@@ -1,6 +1,6 @@
 {
   "schema": "cerebron-saphea-first-adapter-contract-v1",
-  "status": "READY_BLOCKED_BY_P03",
+  "status": "READY_FOR_DATASET_ADMISSION",
   "scope": {
     "wave": "01",
     "colonies": [
@@ -66,5 +66,10 @@
     "auto_self_promotion": false,
     "afah_final_authority": true
   },
-  "next_gate": "P03_UNIFIED_RECALL_PASS_THEN_SINGLE_SAPHEA_CANARY"
+  "next_gate": "ADMIT_FIRST_AUDITED_GOLD_RED_LESSONS_THEN_SINGLE_SAPHEA_CANARY",
+  "p03_evidence": {
+    "status": "PASS",
+    "run_id": 35554346451,
+    "receipt": "receipts/p03/unified-memory-recall-v2.json"
+  }
 }
