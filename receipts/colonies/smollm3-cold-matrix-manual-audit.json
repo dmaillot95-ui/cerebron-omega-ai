@@ -1,0 +1,76 @@
+{
+  "schema": "cerebron-cold-matrix-manual-audit-v1",
+  "audit_type": "CONSERVATIVE_VISIBLE_OUTPUT_ONLY",
+  "source": {
+    "run_id": 35565394558,
+    "artifact_id": 10623492931,
+    "artifact_digest": "sha256:b6d8e74f11490a5b0f609e8f1cdc679ea67e80318d5d54c0fe3d9e7ab92e1845"
+  },
+  "model": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "real_inference": true,
+  "rubric": "COLONY_COLD_TASKS_V1; 5 points/task; award only claims visible before truncation",
+  "tasks": [
+    {
+      "id": "SIGMA-01",
+      "score": 2,
+      "max": 5,
+      "audit": "Correct odd representation n=2k+1 visible; required completed algebraic derivation and final parity answer absent due truncation."
+    },
+    {
+      "id": "SIGMA-02",
+      "score": 1,
+      "max": 5,
+      "audit": "Recognizes counterexample method, but no completed counterexample and no visible INVALID verdict."
+    },
+    {
+      "id": "SIGMA-03",
+      "score": 2,
+      "max": 5,
+      "audit": "Correct lowest-terms contradiction setup and squaring visible; contradiction/irrational conclusion absent due truncation."
+    },
+    {
+      "id": "ARGUS-01",
+      "score": 5,
+      "max": 5,
+      "audit": "Correctly identifies division by x as invalid when x=0 and explains the dependency."
+    },
+    {
+      "id": "ARGUS-02",
+      "score": 5,
+      "max": 5,
+      "audit": "Explicit NO and correct shared-lineage dependency explanation."
+    },
+    {
+      "id": "ARGUS-03",
+      "score": 3,
+      "max": 5,
+      "audit": "Correctly identifies finite-to-universal inference issue in visible text; response is truncated and requested concise conclusion is not fully completed."
+    }
+  ],
+  "colony_scores": {
+    "C03_SIGMA": {
+      "score": 5,
+      "max": 15
+    },
+    "C12_ARGUS": {
+      "score": 13,
+      "max": 15
+    }
+  },
+  "total": {
+    "score": 18,
+    "max": 30,
+    "ratio": 0.6
+  },
+  "truncation_observed": true,
+  "interpretation": "Runtime compatibility proven. Audit shows stronger ARGUS behavior than SIGMA on this frozen matrix, but this is one candidate only and does not select a winner.",
+  "binding": "DENY_PENDING_SIX_MODEL_COMPARISON_AND_RED_TEAM",
+  "training_admission": "DENY_RAW_BENCHMARK_OUTPUT_IS_HOLDOUT",
+  "rules": [
+    "CLAIM<=EVIDENCE",
+    "COLD_HOLDOUT_NEVER_TRAIN",
+    "NO_WINNER_FROM_SINGLE_MODEL",
+    "FAILED_OR_TRUNCATED_REQUIREMENTS_RECEIVE_NO_UNSEEN_CREDIT"
+  ]
+}
