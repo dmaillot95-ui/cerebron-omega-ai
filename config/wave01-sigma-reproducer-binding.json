@@ -1,0 +1,41 @@
+{
+  "schema": "cerebron-wave01-sigma-reproducer-binding-v1",
+  "status": "PROVISIONAL_BINDING_PENDING_COLD_BASELINE",
+  "canonical_colony_id": "C03-SIGMA",
+  "historical_workspace_alias": "C01-SIGMA",
+  "saphea_id": "SIGMA-REPRODUCER",
+  "purpose": "blind clean reproduction for W01-SIGMA-CLEAN-R1",
+  "binding": {
+    "provider": "huggingface",
+    "model_id": "HuggingFaceTB/SmolLM3-3B",
+    "immutable_revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "family": "SmolLM3",
+    "generation": "G0",
+    "mode": "ISOLATED_REPRODUCER_CANARY",
+    "memory_recall": "DISABLED_FOR_R1",
+    "forbidden_context": [
+      "F01 Wave01 output",
+      "F09 Wave01 output",
+      "WARM lesson candidates",
+      "comparison receipts containing candidate content"
+    ]
+  },
+  "evidence": {
+    "runtime_canary_status": "PASS_PREVIOUSLY_RECORDED",
+    "runtime_note": "Real CPU load/inference was previously observed; this file does not re-execute inference.",
+    "gateway_private_auth": "PASS",
+    "cold_baseline_for_this_binding": "PENDING"
+  },
+  "independence": {
+    "different_model_family_from_farm_code_packets": "NOT_APPLICABLE_FARM_PACKETS_ARE_CODE_EXECUTIONS",
+    "independent_reasoning": "PENDING_REAL_R1_INFERENCE",
+    "same_problem_prompt": "YES_DISCLOSED"
+  },
+  "promotion": {
+    "binding_scope": "R1_ONLY",
+    "permanent_binding": false,
+    "training_eligible": false
+  },
+  "next_gate": "EXECUTE_SEALED_COLD_BASELINE_THEN_REAL_R1_INFERENCE",
+  "claim_limit": "Provisional routing binding only. It is not evidence that R1 has been executed and does not qualify a model for training."
+}
