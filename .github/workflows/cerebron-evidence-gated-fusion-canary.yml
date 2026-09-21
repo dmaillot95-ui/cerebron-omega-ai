@@ -1,0 +1,64 @@
+name: CEREBRON Evidence-Gated Fusion Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/cerebron-evidence-gated-fusion-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute gated cognitive chain
+        shell: python
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        run: |
+          import os,json,time,hashlib,pathlib,torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          problem="A reasoning system gets 90 percent accuracy on 100 internal tests. Should it scale from 5 workers to 20? Build an evidence-gated decision procedure."
+          roles=[
+            ("SAPHEA","Give a concrete procedure. Separate observed facts from assumptions."),
+            ("SPIRALION","Generate alternative explanations and discriminating evidence. Do not invent measurements."),
+            ("ETHERION","R&D analysis: assumptions, model only if justified, falsification test, next experiment. Never assume a scaling law without evidence.")
+          ]
+          def infer(p,n=150):
+            x=tok(p,return_tensors="pt")
+            with torch.no_grad(): y=model.generate(**x,max_new_tokens=n,do_sample=False)
+            return tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+          receipt={"real_execution":True,"llm_inference":True,"model_id":mid,"revision":rev,"problem":problem,"stages":[]}
+          proposals=[]
+          for role,inst in roles:
+            out=infer(inst+"\nProblem: "+problem+"\nBe concise.")
+            proposals.append({"role":role,"output":out})
+            receipt["stages"].append({"stage":role,"sha256":hashlib.sha256(out.encode()).hexdigest()})
+          bundle="\n\n".join(x["role"]+": "+x["output"] for x in proposals)
+          red=infer("RED TEAM: attack unsupported claims in these proposals. Mark any invented scaling law or unsupported causal claim REJECT.\n"+bundle,180)
+          audit=infer("AUDITOR: using the proposals and red-team report, list only claims supported by the stated evidence; mark unsupported claims REJECT.\n"+bundle+"\nREDTEAM: "+red,180)
+          fusion=infer("FUSION: produce a final evidence-gated procedure using only claims surviving audit. Do not claim 5-to-20 scaling is justified by 90/100 internal tests alone. State required external/transfer/ablation evidence.\nAUDIT: "+audit,180)
+          for stage,out in [("REDTEAM",red),("AUDITOR",audit),("FUSION",fusion)]:
+            receipt["stages"].append({"stage":stage,"sha256":hashlib.sha256(out.encode()).hexdigest()})
+          receipt["outputs"]={"proposals":proposals,"redteam":red,"audit":audit,"fusion":fusion}
+          receipt["guard_checks"]={
+            "fusion_mentions_external_or_transfer": any(w in fusion.lower() for w in ["external","transfer","generaliz"]),
+            "fusion_rejects_internal_only_scaling": any(w in fusion.lower() for w in ["not enough","insufficient","cannot","do not","alone"])
+          }
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True).encode()).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/evidence-gated-fusion.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps({"llm_inference":True,"guard_checks":receipt["guard_checks"],"receipt_sha256":receipt["receipt_sha256"]}))
+          if not all(receipt["guard_checks"].values()): raise SystemExit(3)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-gated-fusion-receipt
+          path: artifacts/evidence-gated-fusion.json
