@@ -1,0 +1,126 @@
+{
+  "schema": "cerebron-civilization-storage-routing-master-v1",
+  "date": "2026-09-21",
+  "authority": "AFAH",
+  "status": "MASTER_ARCHITECTURE_FROZEN",
+  "purpose": "One coherent routing/storage architecture for the whole civilization. GitHub is control plane; Hugging Face private is durable payload/weight/memory plane; seed farms remain permanently connected.",
+  "layers": {
+    "github": {
+      "role": "CONTROL_PLANE_ONLY",
+      "stores": [
+        "registries",
+        "workflows",
+        "opaque manifests",
+        "hashes",
+        "receipts",
+        "routing",
+        "policies"
+      ],
+      "forbidden": [
+        "large private memory payloads",
+        "private weights",
+        "secrets"
+      ]
+    },
+    "hugging_face_private": {
+      "role": "DURABLE_DATA_AND_MODEL_PLANE",
+      "stores": [
+        "validated colony memory",
+        "GOLD_RED datasets",
+        "adapters",
+        "derived weights",
+        "large artifacts",
+        "versioned colony state"
+      ],
+      "write_rule": "WRITE->AUTH_READBACK->SHA256_VERIFY"
+    },
+    "f66": {
+      "role": "VECTOR_KNOWLEDGE_INDEX",
+      "stores": [
+        "opaque index",
+        "retrieval metadata",
+        "lineage pointers"
+      ]
+    },
+    "f74": {
+      "role": "SESSION_MEMORY_ENCYCLOPEDIA",
+      "stores": [
+        "versioned opaque catalog",
+        "generation history",
+        "rollback pointers"
+      ]
+    }
+  },
+  "permanent_seed_farm_rule": {
+    "required": true,
+    "statement": "Every colony keeps its seed farm(s) permanently linked across all generations. A seed farm is never replaced by SAPHEA, SAPHEIDE, HF storage, or a newer colony generation.",
+    "broken_link_action": "HOLD"
+  },
+  "colony_state_identity": [
+    "canonical_colony_id",
+    "seed_farm_ids",
+    "model_id",
+    "immutable_base_revision",
+    "generation",
+    "parent_sha256",
+    "content_sha256"
+  ],
+  "write_order": [
+    "COLONY_VALIDATION",
+    "SAPHÉIDE_GOLD_RED",
+    "HF_PRIVATE_WRITE",
+    "HF_AUTH_READBACK",
+    "SHA256_VERIFY",
+    "F74_REGISTER",
+    "F66_INDEX",
+    "GITHUB_MANIFEST_LAST"
+  ],
+  "read_order": [
+    "GITHUB_MANIFEST",
+    "F66_LOOKUP",
+    "F74_HISTORY_CHECK",
+    "HF_PRIVATE_READ",
+    "CANONICAL_COLONY_VERIFY",
+    "SEED_FARM_LINK_VERIFY",
+    "MONOTONIC_GENERATION_VERIFY",
+    "PARENT_CHAIN_VERIFY",
+    "SHA256_VERIFY",
+    "LOAD"
+  ],
+  "routing": {
+    "shared_services": {
+      "hf_ai_gateway": [
+        "F44"
+      ],
+      "web_research": [
+        "F08",
+        "F47",
+        "F48"
+      ],
+      "video": [
+        "F46"
+      ],
+      "image_cad_visual": [
+        "F49",
+        "F50"
+      ]
+    },
+    "colony_rule": "Domain farms are mapped as permanent COLONY_SEED capabilities; shared-service farms remain transversal.",
+    "first_wave": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "batch_size": 2
+  },
+  "invariants": [
+    "CRISTAL_PRESERVE",
+    "NO_CROSS_COLONY_STATE_LOAD",
+    "NO_OLDER_STATE_AUTO_RESTORE",
+    "NO_RAW_OUTPUT_AUTO_TRAIN",
+    "NO_REPO_DELETE",
+    "NO_FORCE_PUSH",
+    "NO_HISTORY_REWRITE",
+    "FAILED_GATE=>HOLD"
+  ],
+  "next_gate": "IMPLEMENT_AND_TEST_THIS_ROUTE_END_TO_END_ON_C03_AND_C12_BEFORE_EXPANSION"
+}
