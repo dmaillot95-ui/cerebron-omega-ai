@@ -1,0 +1,51 @@
+name: Colony SmolLM3 Cold Matrix
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/colony-smollm3-cold-matrix.yml'
+jobs:
+  cold-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime
+        run: pip install -q "transformers>=4.53,<5" "torch>=2.3" "accelerate>=1,<2" "safetensors>=0.4"
+      - name: Run real frozen cold matrix
+        run: |
+          python - <<'PY'
+          import json,os,time,hashlib,torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          model_id="HuggingFaceTB/SmolLM3-3B"
+          revision="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          tasks=json.load(open("benchmarks/COLONY_COLD_TASKS_V1.json"))["tasks"]
+          token=os.environ.get("HF_TOKEN")
+          t0=time.time()
+          tok=AutoTokenizer.from_pretrained(model_id,revision=revision,token=token)
+          model=AutoModelForCausalLM.from_pretrained(model_id,revision=revision,token=token,dtype=torch.float32,low_cpu_mem_usage=True)
+          results=[]
+          for task in tasks:
+              p=task["prompt"]
+              x=tok(p,return_tensors="pt")
+              t=time.time()
+              with torch.no_grad():
+                  y=model.generate(**x,max_new_tokens=96,do_sample=False)
+              out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+              results.append({"task_id":task["id"],"colony":task["colony"],"seconds":round(time.time()-t,3),"output":out,"sha256":hashlib.sha256(out.encode()).hexdigest()})
+              print("TASK="+task["id"]); print("OUTPUT_BEGIN"); print(out); print("OUTPUT_END")
+          receipt={"schema":"cerebron-real-cold-matrix-v1","model":model_id,"revision":revision,"real_inference":True,"total_seconds":round(time.time()-t0,3),"results":results,"scoring":"NOT_SELF_SCORED_REQUIRES_AUDIT","binding":"DENY_PENDING_AUDIT"}
+          os.makedirs("receipts/runtime",exist_ok=True)
+          json.dump(receipt,open("receipts/runtime/smollm3-cold-matrix.json","w"),indent=2)
+          print("REAL_COLD_MATRIX=PASS")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smollm3-cold-matrix
+          path: receipts/runtime/smollm3-cold-matrix.json
+          if-no-files-found: error
