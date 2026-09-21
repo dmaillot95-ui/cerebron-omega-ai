@@ -1,0 +1,49 @@
+{
+  "schema": "cerebron-model-runtime-admission-v1",
+  "date": "2026-09-21",
+  "status": "ACTIVE",
+  "scope": "SIX_MODEL_BANK_TO_62_COLONIES",
+  "principle": "A candidate model is not colony-bindable until a real runtime receipt exists on an approved compute class.",
+  "failure_classes": {
+    "INFRA_BUG": "does not count against model quality",
+    "RESOURCE_FAILURE": "records incompatibility with that compute class only",
+    "MODEL_LOAD_FAILURE": "candidate unavailable on tested runtime until repaired",
+    "INFERENCE_FAILURE": "real model/runtime failure",
+    "QUALITY_FAILURE": "runtime works but cold benchmark fails"
+  },
+  "required_receipt": [
+    "model_id",
+    "immutable_revision",
+    "runtime_class",
+    "load_success",
+    "inference_success",
+    "elapsed_seconds",
+    "task_id",
+    "raw_output_digest"
+  ],
+  "resource_policy": {
+    "parallel_model_loads": 1,
+    "paid_fallback": false,
+    "gpu_claim_requires_verified_gpu": true,
+    "oom": "record RESOURCE_FAILURE; do not hide or silently substitute another model"
+  },
+  "binding_policy": {
+    "requires": [
+      "runtime PASS",
+      "cold matrix",
+      "audit",
+      "red-team"
+    ],
+    "winner_before_receipts": false
+  },
+  "current": {
+    "smollm3_run": 35564707263,
+    "status": "IN_PROGRESS",
+    "previous_runs": [
+      35564472385,
+      35564575024
+    ],
+    "previous_classification": "INFRA_BUG"
+  },
+  "next_gate": "REAL_RUNTIME_RECEIPT"
+}
