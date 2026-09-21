@@ -1,0 +1,14 @@
+{
+  "schema": "cerebron-wave01-sigma-smollm-r2-v1",
+  "status": "EXECUTED_UNREVIEWED",
+  "execution_kind": "REAL_LOCAL_MODEL_INFERENCE_GITHUB_RUNNER",
+  "task_id": "W01-SIGMA-CLEAN-R2",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "immutable_revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "input_sha256": "a228cd313aaa451d7f6c95f5a980c2940f5c94695d8aa26bd3ceff3061067d07",
+  "output_sha256": "4220ba5a9f027d131802bba0fc0f8de70fe3384c938cd1a2c812cfa1fae65a28",
+  "record_sha256": "9f4580770fb240c33a8abde99dbfdc6ad94fb4868bb890c3d9a65b58d3f07a5d",
+  "latency_seconds": 488.388,
+  "training_admission": "DENY_PENDING_AUDIT",
+  "claim_limit": "Real blind inference only; not mathematical proof."
+}
