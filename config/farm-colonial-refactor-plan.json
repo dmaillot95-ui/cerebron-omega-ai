@@ -1,0 +1,96 @@
+{
+  "schema": "cerebron-farm-colonial-refactor-plan-v1",
+  "date": "2026-09-21",
+  "status": "FROZEN_PLAN_NO_DESTRUCTIVE_RENAME",
+  "authority": "AFAH",
+  "principle": "Reuse the 74 farms. Preserve visual/research/shared infrastructure farms. Reclassify remaining domain farms as permanent colony seed farms. Do not delete or rename repositories until aliases and dependency checks pass.",
+  "preserved_shared_services": [
+    {
+      "farms": [
+        "F46"
+      ],
+      "role": "VIDEO_RESEARCH"
+    },
+    {
+      "farms": [
+        "F49",
+        "F50"
+      ],
+      "role": "IMAGE_CAD_TECHNICAL_VISUAL"
+    },
+    {
+      "farms": [
+        "F08",
+        "F47",
+        "F48"
+      ],
+      "role": "WEB_AND_LITERATURE_RESEARCH"
+    },
+    {
+      "farms": [
+        "F44"
+      ],
+      "role": "HF_AI_GATEWAY",
+      "target_parallel_responses": 20,
+      "note": "20 is an orchestration target, not a guaranteed provider concurrency entitlement"
+    },
+    {
+      "farms": [
+        "F19",
+        "F40",
+        "F59",
+        "F66",
+        "F67",
+        "F68",
+        "F71",
+        "F72",
+        "F73",
+        "F74"
+      ],
+      "role": "CIVILIZATION_SHARED_CONTROL_MEMORY_EVIDENCE"
+    }
+  ],
+  "colonialization": {
+    "mode": "MAP_EXISTING_FARMS_TO_COLONIES_WITHOUT_DELETING_HISTORY",
+    "repo_rename_policy": "DEFER_RENAME_USE_LOGICAL_ALIAS_FIRST",
+    "permanent_seed_link": true,
+    "one_colony_one_weight_model_at_a_time": true,
+    "saphea_inside_colony": true,
+    "sapheide_cross_colony_validated_learning": true
+  },
+  "request_flow": [
+    "AGORA_REQUEST",
+    "ROUTER_F44_HF_AI_GATEWAY",
+    "SELECT_UP_TO_20_REAL_MODEL_CALLS_WITH_QUOTA_AND_COST_GATES",
+    "OPTIONAL_F46_VIDEO",
+    "OPTIONAL_F08_F47_F48_WEB_RESEARCH",
+    "ROUTE_RESULTS_TO_TARGET_COLONY",
+    "SAPHEA_TEAM",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "SYNTHESIS",
+    "SAPHÉIDE_GOLD_RED",
+    "HF_PRIVATE",
+    "F74",
+    "F66",
+    "AGORA"
+  ],
+  "rollout": {
+    "batch_size": 2,
+    "first": [
+      "C03-SIGMA",
+      "C12-ARGUS"
+    ],
+    "expansion": "ONLY_AFTER_E2E_PASS"
+  },
+  "safeguards": [
+    "NO_REPO_DELETE",
+    "NO_FORCE_PUSH",
+    "NO_HISTORY_REWRITE",
+    "NO_SECRET_IN_GITHUB",
+    "NO_FAKE_AGENT",
+    "NO_FAKE_20_RESPONSES",
+    "FAILED_GATE=>HOLD",
+    "CRISTAL_PRESERVE"
+  ]
+}
