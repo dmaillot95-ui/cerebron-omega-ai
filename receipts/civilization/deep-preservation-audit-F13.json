@@ -1,0 +1,28 @@
+{
+  "schema": "cerebron-deep-preservation-audit-v1",
+  "farm_id": 13,
+  "repository": "dmaillot95-ui/cerebron-farm-13-engineering-systems",
+  "status": "PRESENT_STRUCTURED",
+  "tree_sha": "d94c85b16da5623dc9a8fcf67c6d701b6b36f2d4",
+  "tree_truncated": false,
+  "file_count": 9,
+  "observed_critical": {
+    "contract": "CEREBRON-C42.1-CONTRACT.md",
+    "registry": "CEREBRON_REGISTRY.json",
+    "mission": "MISSION.md",
+    "trigger": "mission/TRIGGER-2026-09-17.md",
+    "workers": [
+      "worker/agent.py",
+      "worker/farm_worker.py"
+    ],
+    "spiralix": "tools/spiralix_adapter.py",
+    "workflows": [
+      ".github/workflows/engineering-systems-farm.yml",
+      ".github/workflows/spiralix-interop.yml"
+    ]
+  },
+  "observation": "F13 uses the F11/F12 local contract blob. Both specialist agent and common farm worker are present.",
+  "loss_signal": "NONE_CONFIRMED_CURRENT_TREE",
+  "historical_check": "PENDING",
+  "mutation": "NONE"
+}
