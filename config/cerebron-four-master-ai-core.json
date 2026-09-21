@@ -1,0 +1,91 @@
+{
+  "schema": "cerebron-four-master-ai-core-v1",
+  "date": "2026-09-21",
+  "status": "DESIGNED_EXECUTION_GATED",
+  "objective": "Build the strongest evidence-bounded CEREBRON architecture from four complementary master AIs without multiplying permanent agent layers.",
+  "masters": [
+    {
+      "id": "M1",
+      "name": "SAPHEA",
+      "role": "EXECUTION_SPECIALIZATION",
+      "mission": "Execute specialist work, use farms/tools, learn validated procedures.",
+      "state": "BASELINE_RUNTIME_EVIDENCE_EXISTS_QUALITY_HOLD"
+    },
+    {
+      "id": "M2",
+      "name": "SPIRALION",
+      "role": "ITERATIVE_REASONING_ORCHESTRATION",
+      "mission": "Explore, connect disciplines, iterate Alpha-to-Omega, challenge and refine candidate solutions.",
+      "state": "ARCHITECTURE_DESIGNED_MODEL_G0_UNSELECTED"
+    },
+    {
+      "id": "M3",
+      "name": "ETHERION",
+      "role": "COMPLEX_R_AND_D_SPECIALIST",
+      "mission": "Attack high-complexity R&D questions using science, engineering, mathematics, invention, modeling and falsification.",
+      "state": "NEW_LINEAGE_DESIGNED_MODEL_G0_UNSELECTED"
+    },
+    {
+      "id": "M4",
+      "name": "AFAH",
+      "role": "FINAL_VALIDATED_CONVERGENCE",
+      "mission": "Integrate only audited/validated outputs and accumulate long-term validated capability.",
+      "state": "LINEAGE_DESIGNED_NOT_TRAINED"
+    }
+  ],
+  "infrastructure": {
+    "farms": 74,
+    "task_agents_external": 20,
+    "total_named_assistants_if_counted_with_task_agents": 24,
+    "rule": "task agents remain separate; four master AIs are the CEREBRON core"
+  },
+  "flow": [
+    "USER_TASK",
+    "CEREBRON_ROUTE",
+    "SAPHEA_AND_OR_SPIRALION",
+    "ETHERION_IF_COMPLEX_R_AND_D",
+    "SELECT_REQUIRED_FARMS",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "SAPHÉIDE_GOLD_RED",
+    "AFAH_VALIDATED_CONVERGENCE",
+    "MEMORY"
+  ],
+  "etherion_gate": {
+    "trigger": [
+      "novel R&D",
+      "hard scientific or engineering design",
+      "multi-model physical reasoning",
+      "high uncertainty invention",
+      "formal model plus simulation plus falsification"
+    ],
+    "mandatory_outputs": [
+      "assumptions",
+      "known_vs_derived_vs_conjectural",
+      "models/equations with domains",
+      "failure modes",
+      "test plan",
+      "evidence gaps",
+      "next experiment"
+    ],
+    "evolution": "E0 idea -> E1 architecture -> E2 calculation -> E3 verified simulation -> E4 bench/HIL -> E5 subsystem -> E6 demonstrator -> E7 representative test -> E8 operational history"
+  },
+  "model_policy": {
+    "principle": "Do not assign a model by reputation alone.",
+    "candidates": "Use admitted open models and future HF candidates only after runtime + cold benchmark + audit.",
+    "separate_g0_allowed": true,
+    "shared_g0_allowed": true,
+    "rule": "Shared G0 does not imply independent evidence."
+  },
+  "invariants": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=MODEL_SUCCESS",
+    "NO_SIMULATED_AGENTS",
+    "CRISTAL_PRESERVE",
+    "NO_DESTRUCTIVE_FARM_CHANGE"
+  ]
+}
