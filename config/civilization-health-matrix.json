@@ -1,0 +1,77 @@
+{
+  "schema": "cerebron-civilization-health-matrix-v1",
+  "status": "BASELINE_RECONCILED",
+  "scope": "CEREBRON_ALPHA_OMEGA",
+  "observed": {
+    "seed_farms": {
+      "registered": 74,
+      "registry": "config/farms.json",
+      "health": "REGISTERED_NOT_ALL_RUNTIME_VERIFIED"
+    },
+    "colonies": {
+      "registered": 62,
+      "health": "MOSTLY_INACTIVE_OR_EXPERIMENTAL",
+      "active_claim": false
+    },
+    "compute_fabric": {
+      "health": "DESIGNED_NOT_YET_RESOURCE_ENUMERATED",
+      "gpu": "UNVERIFIED",
+      "cpu": "GITHUB_RUNNER_OBSERVED_FOR_CANARIES"
+    },
+    "memory": {
+      "p03": "PASS",
+      "route": [
+        "F66",
+        "F74",
+        "HF_PRIVATE"
+      ],
+      "health": "VERIFIED_FOR_CANARY_NOT_ALL_COLONIES"
+    },
+    "model_gateway": {
+      "health": "HF_PRIVATE_AUTHENTICATED",
+      "bound_models": 0,
+      "bound_adapters": 0
+    },
+    "wave01": {
+      "farm_code_routes": "4_OF_4_VERIFIED",
+      "digest": "PASS",
+      "clean_reproduction": "R1_EXECUTED_BUT_CONTENT_FAILED; R2_RUNNING_OR_PENDING_TERMINAL_RECONCILIATION"
+    },
+    "governance": {
+      "afah": "HUMAN_FINAL_AUTHORITY",
+      "guardian": "POLICY_PRESENT",
+      "critical_auto_promotion": "BLOCKED_UNTIL_GATES"
+    }
+  },
+  "health_vector": {
+    "seed_farm_link_integrity": "PARTIAL_WAVE01_VERIFIED",
+    "colony_chief_binding": "NOT_ESTABLISHED_GLOBALLY",
+    "compute_availability": "PARTIAL_CPU_OBSERVED_GPU_UNVERIFIED",
+    "memory_read_write_integrity": "PASS_CANARY_SCOPE",
+    "audit_coverage": "PARTIAL",
+    "red_team_coverage": "PARTIAL",
+    "reproduction_coverage": "PARTIAL",
+    "learning_admission_quality": "HOLD_NO_GOLD_RED_ADMISSION_YET",
+    "cross_colony_transfer": "NOT_YET_VERIFIED",
+    "rollback_readiness": "PARTIAL_PRESENT",
+    "security_state": "CONTROLLED_BUT_BRANCH_PROTECTION_NOT_CERTIFIED"
+  },
+  "civilization_bottlenecks": [
+    "GLOBAL_COLONY_TO_SEED_FARM_MAPPING_INCOMPLETE",
+    "REAL_COMPUTE_RESOURCE_INVENTORY_MISSING",
+    "COLONY_CHIEFS_NOT_BOUND",
+    "NO_GLOBAL_COLD_BENCHMARK_BASELINE",
+    "CROSS_COLONY_TRANSFER_NOT_VERIFIED",
+    "PARAMETRIC_TRAINING_LOOP_NOT_VERIFIED_END_TO_END"
+  ],
+  "priority_order": [
+    "ENUMERATE_REAL_COMPUTE_RESOURCES",
+    "VERIFY_ALL_COLONY_SEED_LINKS",
+    "BIND_AND_BENCHMARK_TWO_COLONY_CHIEFS",
+    "VERIFY_CROSS_COLONY_ROUTING",
+    "VALIDATE_FIRST_GOLD_RED_LESSONS",
+    "RUN_REVERSIBLE_G1_CANARY",
+    "EXPAND_2_COLONIES_PER_WAVE"
+  ],
+  "claim_limit": "Civilization baseline from current registries and verified receipts; it does not mark inactive colonies or unverified resources operational."
+}
