@@ -1,0 +1,61 @@
+name: SAPHEA Bidirectional Dialogue Canary
+on:
+  workflow_dispatch:
+    inputs:
+      question:
+        description: "Question sent to SAPHEA"
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  ask-saphea:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SAPHEA runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute real SAPHEA inference
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+          QUESTION: ${{ inputs.question }}
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,hashlib,time
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid,rev,q=os.environ["MODEL_ID"],os.environ["REVISION"],os.environ["QUESTION"]
+          t=time.time()
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          prompt="You are SAPHEA, a CEREBRON specialist assistant. Answer the user's question accurately and concisely. If uncertain, say so.\nUSER: "+q+"\nSAPHEA:"
+          x=tok(prompt,return_tensors="pt")
+          with torch.no_grad():
+              y=model.generate(**x,max_new_tokens=192,do_sample=False,pad_token_id=tok.eos_token_id)
+          ans=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+          receipt={
+            "schema":"cerebron-saphea-dialogue-v1",
+            "assistant":"SAPHEA",
+            "model_id":mid,
+            "revision":rev,
+            "question":q,
+            "question_sha256":hashlib.sha256(q.encode()).hexdigest(),
+            "answer":ans,
+            "answer_sha256":hashlib.sha256(ans.encode()).hexdigest(),
+            "latency_ms":round((time.time()-t)*1000),
+            "execution":"REAL_MODEL_INFERENCE"
+          }
+          Path("out/saphea-dialogue.json").write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps({"assistant":"SAPHEA","model_id":mid,"revision":rev,"answer_sha256":receipt["answer_sha256"],"answer":ans},ensure_ascii=False))
+          PY
+      - name: Upload dialogue receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: saphea-dialogue-receipt
+          path: out/saphea-dialogue.json
+          retention-days: 7
