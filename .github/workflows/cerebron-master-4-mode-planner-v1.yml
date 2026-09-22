@@ -1,0 +1,97 @@
+name: CEREBRON Master 4 Mode Planner V1
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: "Mission or question"
+        required: true
+        type: string
+      requested_mode:
+        description: "AUTO | AUGMENTATION | BOOK | RD_FRONT | FUNNEL"
+        required: false
+        default: "AUTO"
+        type: string
+      section_count:
+        description: "Optional section/candidate count"
+        required: false
+        default: "0"
+        type: string
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build deterministic campaign plan
+        env:
+          REQUEST: ${{ inputs.request }}
+          REQUESTED_MODE: ${{ inputs.requested_mode }}
+          SECTION_COUNT: ${{ inputs.section_count }}
+        run: |
+          python - <<'PY'
+          import os,json,re,hashlib,datetime,pathlib
+          req=os.environ["REQUEST"].strip()
+          asked=os.environ.get("REQUESTED_MODE","AUTO").upper().strip()
+          raw=int(os.environ.get("SECTION_COUNT","0") or 0)
+          s=req.lower()
+          if asked!="AUTO":
+              modes=[asked]
+          else:
+              modes=[]
+              if any(x in s for x in ["livre","apprendre","cartograph","domaine"]): modes.append("BOOK")
+              if any(x in s for x in ["2000","entonnoir","candidat","produit","sélection","selection"]): modes.append("FUNNEL")
+              if any(x in s for x in ["recherche","r&d","résoudre","resoudre","preuve","500 section","checkpoint"]): modes.append("RD_FRONT")
+              if not modes or any(x in s for x in ["réponse","reponse","question","amélior","amelior"]): modes.append("AUGMENTATION")
+          modes=list(dict.fromkeys(modes))
+          defaults={"BOOK":1000,"RD_FRONT":500,"FUNNEL":2000,"AUGMENTATION":1}
+          sections=raw if raw>0 else max(defaults[m] for m in modes)
+          batch="5-10" if "RD_FRONT" in modes else "adaptive"
+          plan={
+            "schema":"CEREBRON_CAMPAIGN_PLAN_V1",
+            "request":req,
+            "modes":modes,
+            "section_or_candidate_count":sections,
+            "batch_per_real_resource":batch,
+            "blind_fraction":"20-30%" if "AUGMENTATION" in modes else "N/A",
+            "execution_policy":{
+              "real_resources_only":True,
+              "no_simulated_agents":True,
+              "nonoverlap_assignment":True,
+              "dependency_check":True,
+              "audit":True,
+              "counteraudit":True,
+              "regression_guard":"required_for_AUGMENTATION",
+              "checkpoint_after_cycle":True
+            },
+            "state":"PLANNED_NOT_EXECUTED"
+          }
+          canonical=json.dumps(plan,sort_keys=True,separators=(",",":")).encode()
+          plan["plan_sha256"]=hashlib.sha256(canonical).hexdigest()
+          pathlib.Path("out").mkdir()
+          pathlib.Path("out/campaign-plan.json").write_text(json.dumps(plan,indent=2,ensure_ascii=False)+"\n")
+          pathlib.Path("out/checkpoint.json").write_text(json.dumps({
+            "plan_sha256":plan["plan_sha256"],
+            "state":"PLANNED_NOT_EXECUTED",
+            "completed_units":[],
+            "open_units":list(range(1,sections+1)) if sections<=2000 else [],
+            "note":"Planner does not claim farm/model execution."
+          },indent=2)+"\n")
+          print(json.dumps({"modes":modes,"units":sections,"sha":plan["plan_sha256"]}))
+          PY
+      - name: Validate plan invariants
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("out/campaign-plan.json"))
+          assert p["state"]=="PLANNED_NOT_EXECUTED"
+          assert p["execution_policy"]["real_resources_only"] is True
+          assert p["execution_policy"]["no_simulated_agents"] is True
+          assert set(p["modes"]) <= {"AUGMENTATION","BOOK","RD_FRONT","FUNNEL"}
+          print("PLAN_INVARIANTS=PASS")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-campaign-plan-v1
+          path: out/
+          if-no-files-found: error
