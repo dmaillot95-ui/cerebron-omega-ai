@@ -32,6 +32,22 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python tools/global_ai_router.py
+      - name: Expose provider reality summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          p='out/provider-reality-manifest.json'
+          if not os.path.exists(p):
+              print('PROVIDER_REALITY_SUMMARY=MANIFEST_MISSING')
+          else:
+              j=json.load(open(p,encoding='utf-8'))
+              print('PROVIDER_REALITY_SUMMARY configured=%s executed=%s success=%s failure=%s quality=%s' % (
+                  j.get('configured_count'),j.get('executed_count'),j.get('success_count'),j.get('failure_count'),j.get('quality_pass_count')))
+              for r in j.get('providers',[]):
+                  print('PROVIDER_STATE provider=%s configured=%s success=%s http=%s failure_class=%s model=%s' % (
+                      r.get('provider'),r.get('configured'),r.get('success'),r.get('http_status'),r.get('failure_class'),r.get('model')))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
