@@ -1,0 +1,70 @@
+name: R0 R1 Transfer Independent Counteraudit V1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/r0-r1-transfer-independent-counteraudit-v1.yml'
+jobs:
+  judge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      actions: read
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q "transformers>=4.46" torch accelerate sentencepiece
+      - name: Download frozen generation artifacts
+        run: |
+          mkdir -p /tmp/frozen
+          gh run download 35722683134 -D /tmp/frozen
+          find /tmp/frozen -type f -maxdepth 3 -print
+      - name: Independent semantic counteraudit
+        run: |
+          cat > /tmp/judge.py <<'PY'
+          import json,glob,os,re,torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          bench=json.load(open("benchmarks/r0-r1-transfer-hard-v3.json"))
+          cases={c["id"]:c for c in bench["cases"]}
+          files=glob.glob("/tmp/frozen/**",recursive=True)
+          payload={}
+          for p in files:
+            if os.path.isfile(p):
+              try:
+                d=json.load(open(p))
+                if d.get("id") in cases: payload[d["id"]]=d
+              except: pass
+          assert len(payload)==12,(len(payload),list(payload))
+          model_id="Qwen/Qwen2.5-3B-Instruct"
+          tok=AutoTokenizer.from_pretrained(model_id)
+          mdl=AutoModelForCausalLM.from_pretrained(model_id,torch_dtype="auto",device_map="cpu")
+          out={"judge_model":model_id,"source_run":35722683134,"method":"independent model semantic criterion audit; generation hidden; PASS/FAIL/REVIEW_REQUIRED with evidence quote","cases":[]}
+          for cid in sorted(payload):
+            c=cases[cid]; d=payload[cid]; row={"id":cid}
+            for side in ("r0","r1"):
+              prompt=f"""You are an independent benchmark auditor. Score ONLY the answer against each frozen criterion. Do not reward intent. PASS only if semantically established; FAIL if absent/wrong; REVIEW_REQUIRED if genuinely ambiguous. Return strict JSON array of 4 objects with keys criterion,status,evidence,reason. Evidence must quote a short exact span from ANSWER or be empty if absent.\nQUESTION: {c['prompt']}\nCRITERIA: {json.dumps(c['checks'])}\nANSWER: {d[side]}"""
+              msgs=[{"role":"system","content":"Audit strictly. Output JSON only."},{"role":"user","content":prompt}]
+              text=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+              inp=tok(text,return_tensors="pt")
+              with torch.no_grad():
+                gen=mdl.generate(**inp,max_new_tokens=900,do_sample=False)
+              ans=tok.decode(gen[0][inp["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+              try:
+                a=ans[ans.index("["):ans.rindex("]")+1]; scores=json.loads(a)
+              except Exception:
+                scores=[{"criterion":x,"status":"REVIEW_REQUIRED","evidence":"","reason":"judge_parse_failure"} for x in c["checks"]]
+              row[side]=scores
+            out["cases"].append(row)
+          os.makedirs("out",exist_ok=True)
+          json.dump(out,open("out/independent-counteraudit.json","w"),indent=2)
+          PY
+          python /tmp/judge.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r0-r1-transfer-independent-counteraudit-v1
+          path: out/independent-counteraudit.json
