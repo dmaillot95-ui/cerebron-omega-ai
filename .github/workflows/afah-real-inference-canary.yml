@@ -1,0 +1,51 @@
+name: AFAH Real Inference Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/afah-real-inference-canary.yml'
+permissions:
+  contents: read
+jobs:
+  inference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Run real AFAH inference
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,time,hashlib
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+          system="""You are AFAH, CEREBRON's final evidence-gated audit and fusion AI. Preserve contradictions, dependency information and uncertainty. Never turn agreement into proof. Fuse only claims supported by their evidence."""
+          q="""Three reports address the same claim: R1 and R2 agree but use the same underlying dataset; R3 independently disagrees and has a representative physical test. Produce a compact evidence-gated fusion. Preserve the contradiction and state what can and cannot be concluded."""
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          msgs=[{"role":"system","content":system},{"role":"user","content":q}]
+          p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False) if getattr(tok,"chat_template",None) else system+"\nUSER: "+q+"\nAFAH:"
+          x=tok(p,return_tensors="pt"); t=time.time()
+          with torch.no_grad(): y=mdl.generate(input_ids=x["input_ids"],attention_mask=x.get("attention_mask"),max_new_tokens=256,do_sample=False,pad_token_id=tok.eos_token_id)
+          a=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip(); bad="<think>" in a.lower()
+          r={"schema":"afah-real-inference-v1","identity":"AFAH","model_id":mid,"revision":rev,"execution":"REAL_MODEL_INFERENCE",
+             "question_sha256":hashlib.sha256(q.encode()).hexdigest(),"answer_sha256":hashlib.sha256(a.encode()).hexdigest(),
+             "answer":a,"latency_ms":round((time.time()-t)*1000),"tainted_internal_reasoning":bad,
+             "claim_scope":"real base-model inference under AFAH policy; not evidence of independent trained weights or neural learning"}
+          Path("out/afah-real-inference.json").write_text(json.dumps(r,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps({k:r[k] for k in ["identity","model_id","revision","execution","answer_sha256","tainted_internal_reasoning","latency_ms"]}))
+          if not a or bad: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afah-real-inference
+          path: out/afah-real-inference.json
+          retention-days: 14
