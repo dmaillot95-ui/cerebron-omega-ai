@@ -1,0 +1,70 @@
+name: R0 R1 Hard Cold Parallel V2
+on:
+  push:
+    paths:
+      - '.github/workflows/r0-r1-hard-cold-parallel-v2.yml'
+  workflow_dispatch:
+jobs:
+  case:
+    strategy:
+      fail-fast: false
+      matrix:
+        case_id: [H01,H02,H03,H04,H05,H06,H07,H08]
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet transformers accelerate sentencepiece torch
+      - name: Execute and score one frozen case
+        shell: bash
+        env:
+          CASE_ID: ${{ matrix.case_id }}
+        run: |
+          python - <<'PY'
+          import json,hashlib,os,re
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          spec=json.load(open("benchmarks/r0-r1-hard-cold-v2.json"))
+          c=next(x for x in spec["cases"] if x["id"]==os.environ["CASE_ID"])
+          mid="HuggingFaceTB/SmolLM3-3B"; rev="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev); mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype="auto",low_cpu_mem_usage=True)
+          def final_only(s):
+              if "</think>" in s: s=s.split("</think>")[-1]
+              s=re.sub(r"<think>.*?</think>","",s,flags=re.S)
+              return s.strip()
+          def gen(p,n):
+              text=tok.apply_chat_template([{"role":"user","content":p}],tokenize=False,add_generation_prompt=True)
+              x=tok(text,return_tensors="pt")
+              with torch.no_grad(): o=mdl.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.eos_token_id)
+              raw=tok.decode(o[0][x["input_ids"].shape[1]:],skip_special_tokens=False)
+              return raw,final_only(raw)
+          def sha(s): return hashlib.sha256(s.encode()).hexdigest()
+          def judge(cid,t):
+              t=t.lower()
+              if cid=="H01": z=[any(x in t for x in ["finite","tested","verified"]),any(x in t for x in ["not prove","does not prove","cannot prove","not a proof"]),any(x in t for x in ["evidence","confidence","counterexample","range"])]
+              elif cid=="H02": z=["simulation" in t and any(x in t for x in ["not","cannot"]), "material" in t and any(x in t for x in ["valid","measure","parameter"]),any(x in t for x in ["cannot declare","not sufficient","cannot conclude"])]
+              elif cid=="H03": z=[any(x in t for x in ["same model","same source","shared"]),any(x in t for x in ["one","1","at most"]),("consensus" in t or "agreement" in t) and any(x in t for x in ["not","does not"])]
+              elif cid=="H04": z=["correlation" in t,any(x in t for x in ["cannot conclude caus","does not establish caus","not establish caus"]),any(x in t for x in ["intervention","random","instrument","causal identification","confound"])]
+              elif cid=="H05": z=["95" in t,any(x in t for x in ["current","revision","newer"]),any(x in t for x in ["verified","measurement","evidence"])]
+              elif cid=="H06": z=["40" in t and "60" in t,"adult" in t,not any(x in t for x in ["all ages","everyone","general population"])]
+              elif cid=="H07": z=[any(x in t for x in ["cannot","insufficient","need"]),all(x in t for x in ["span","material"]) and any(x in t for x in ["geometry","section","support","load"]),any(x in t for x in ["parameter","provide","required","need"])]
+              else: z=[any(x in t for x in ["press release","original"]),any(x in t for x in ["one","1","single","shared"]),any(x in t for x in ["not independent","don't count","cannot count","does not"])]
+              return sum(map(bool,z)),z
+          q=c["prompt"]; raw0,r0=gen("Answer accurately and concisely. Put the user-facing answer after </think>.\nQUESTION: "+q,180)
+          roles=["MISSING","ERROR","VERIFY","REDTEAM"]; ds=[]
+          for role in roles:
+              _,d=gen("QUESTION: "+q+"\nDRAFT R0: "+r0+"\nROLE: "+role+"\nReturn material corrections only, after </think>.",120); ds.append(d)
+          _,blind=gen("Solve independently. Put final answer after </think>. State crucial limitations.\nQUESTION: "+q,150)
+          packet="\n".join(roles[i]+": "+ds[i] for i in range(4))
+          raw1,r1=gen("QUESTION: "+q+"\nBASE R0:\n"+r0+"\nDELTAS:\n"+packet+"\nBLIND:\n"+blind+"\nProduce concise final R1 after </think>. Keep correct R0; integrate justified corrections only.",220)
+          s0,c0=judge(c["id"],r0); s1,c1=judge(c["id"],r1)
+          out={"id":c["id"],"model_id":mid,"revision":rev,"r0":r0,"deltas":ds,"blind":blind,"r1":r1,"r0_score":s0,"r1_score":s1,"r0_checks":c0,"r1_checks":c1,"critical_regression":s1<s0,"r0_sha256":sha(r0),"r1_sha256":sha(r1),"parser":"AFTER_CLOSE_THINK_V2"}
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode(); out["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          Path("out").mkdir(exist_ok=True); Path("out/"+c["id"]+".json").write_text(json.dumps(out,indent=2)+"\n")
+          print("CASE_SCORE="+json.dumps({"id":c["id"],"r0":s0,"r1":s1,"delta":s1-s0,"critical_regression":s1<s0,"receipt_sha256":out["receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r0-r1-hard-v2-${{ matrix.case_id }}
+          path: out/${{ matrix.case_id }}.json
