@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_HYBRID_LESSON_ROUTER_V2",
+  "status": "CONFIGURED_NOT_EXECUTED",
+  "objective": "Combine semantic embedding retrieval with domain/intent classification and complementary multi-lesson selection without tuning on V01-V06.",
+  "stages": [
+    {
+      "n": 1,
+      "name": "CLASSIFY",
+      "rule": "Infer one or more plausible domains and question types before semantic ranking."
+    },
+    {
+      "n": 2,
+      "name": "EMBED",
+      "rule": "Rank all lessons by semantic similarity; similarity is a routing signal only."
+    },
+    {
+      "n": 3,
+      "name": "HYBRID_SCORE",
+      "rule": "Combine semantic score with domain/type compatibility; explicit intent outranks lexical similarity."
+    },
+    {
+      "n": 4,
+      "name": "COMPLEMENT",
+      "rule": "Select a small set of non-redundant lessons covering distinct useful roles."
+    },
+    {
+      "n": 5,
+      "name": "DEPENDENCY_DEDUP",
+      "rule": "Collapse duplicate or same-purpose strategies before injection."
+    },
+    {
+      "n": 6,
+      "name": "CONFLICT_GATE",
+      "rule": "Preserve incompatible assumptions and do not silently fuse them."
+    }
+  ],
+  "scoring": {
+    "semantic_weight": 0.65,
+    "domain_compatibility_weight": 0.2,
+    "type_compatibility_weight": 0.15,
+    "weights_status": "CANARY_HYPERPARAMETERS_NOT_VALIDATED"
+  },
+  "selection": {
+    "min_k": 1,
+    "max_k": 4,
+    "default_k": 3,
+    "require_nonredundancy": true,
+    "allow_multidomain": true
+  },
+  "complement_roles": [
+    "PRIMARY_METHOD",
+    "EVIDENCE_OR_VERIFICATION",
+    "FAILURE_OR_REDTEAM",
+    "SCOPE_OR_CALIBRATION"
+  ],
+  "safeguards": [
+    "VECTOR_SIMILARITY_IS_NOT_EVIDENCE",
+    "DOMAIN_AND_INTENT_CAN_OVERRIDE_VECTOR_FALSE_FRIEND",
+    "MULTIPLE_COMPATIBLE_LESSONS_ALLOWED",
+    "NO_RETROACTIVE_RESCORING_OF_V01_V06",
+    "NEW_COLD_SET_REQUIRED",
+    "NO_GOLD_PROMOTION_FROM_ROUTING"
+  ],
+  "evaluation": {
+    "next_set": "V07-V18",
+    "frozen_before_execution": true,
+    "metrics": [
+      "primary_relevant_at_1",
+      "any_relevant_at_3",
+      "coverage_of_expected_roles",
+      "irrelevant_injection_rate",
+      "conflict_preservation_rate"
+    ],
+    "baseline": "V1 pure embedding router",
+    "promotion_gate": "V2 must improve cold routing utility without increasing critical irrelevant injections."
+  }
+}
