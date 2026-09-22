@@ -1,0 +1,346 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B04",
+  "count": 10,
+  "status": "PARTIAL",
+  "domains": [
+    "invention_design",
+    "data_statistics"
+  ],
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "DEFERRED_TO_CROSS_BATCH_AUDIT"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D06-IDEATION-001",
+      "domain": "invention_design",
+      "question_type": "ideation",
+      "title": "Strategy for ideation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. ideation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Translate the need into functions and constraints, generate genuinely different principles rather than cosmetic variants, then eliminate concepts that violate hard constraints.",
+      "anti_patterns": [
+        "counting minor variants as separate inventions"
+      ],
+      "failure_or_counterexample_test": "Cluster concepts by underlying physical or logical principle and require distinct mechanisms.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D06-ARCHITECTURE-001",
+      "domain": "invention_design",
+      "question_type": "architecture",
+      "title": "Strategy for architecture",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. architecture. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define functions, interfaces, flows, states and failure boundaries before selecting components; make dependencies explicit and preserve replaceable modules.",
+      "anti_patterns": [
+        "component list mistaken for architecture"
+      ],
+      "failure_or_counterexample_test": "Remove or replace one module and verify interface and failure consequences.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D06-TRADEOFF-001",
+      "domain": "invention_design",
+      "question_type": "tradeoff",
+      "title": "Strategy for tradeoff",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. tradeoff. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define decision criteria, units, constraints and uncertainty; compare alternatives on the same assumptions and expose Pareto tradeoffs instead of hiding them in one score.",
+      "anti_patterns": [
+        "weighted score with arbitrary hidden weights"
+      ],
+      "failure_or_counterexample_test": "Vary weights and uncertain inputs and report whether the preferred region changes.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D06-NOVELTY-001",
+      "domain": "invention_design",
+      "question_type": "novelty",
+      "title": "Strategy for novelty",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. novelty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Decompose the concept into claims and combinations; distinguish technical novelty from usefulness and from patentability; search for prior mechanisms before claiming novelty.",
+      "anti_patterns": [
+        "new wording treated as new invention"
+      ],
+      "failure_or_counterexample_test": "Attempt to map every claimed novel element to known prior mechanisms or combinations.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D06-VALIDATION_PLAN-001",
+      "domain": "invention_design",
+      "question_type": "validation_plan",
+      "title": "Strategy for validation plan",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. validation_plan. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Map each critical claim to the cheapest decisive evidence step, ordered from analysis to simulation to bench to representative test; define pass/fail criteria in advance.",
+      "anti_patterns": [
+        "expensive prototype before critical-risk test"
+      ],
+      "failure_or_counterexample_test": "Identify the highest-risk assumption and design a smaller test capable of killing it early.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D07-MEASUREMENT-001",
+      "domain": "data_statistics",
+      "question_type": "measurement",
+      "title": "Strategy for measurement",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. measurement. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define measurand, instrument, calibration, sampling process, resolution and uncertainty budget before analysis.",
+      "anti_patterns": [
+        "precision digits mistaken for measurement accuracy"
+      ],
+      "failure_or_counterexample_test": "Repeat or cross-calibrate measurements and propagate dominant uncertainty sources.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D07-INFERENCE-001",
+      "domain": "data_statistics",
+      "question_type": "inference",
+      "title": "Strategy for inference",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. inference. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "State population, sampling mechanism, estimand, assumptions and uncertainty; distinguish descriptive sample statistics from population inference.",
+      "anti_patterns": [
+        "sample result generalized without sampling assumptions"
+      ],
+      "failure_or_counterexample_test": "Stress assumptions and check interval or conclusion under plausible alternative models.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D07-CORRELATION_CAUSATION-001",
+      "domain": "data_statistics",
+      "question_type": "correlation_causation",
+      "title": "Strategy for correlation causation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. correlation_causation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Quantify association while separately examining temporal order, confounding, selection effects and plausible intervention mechanisms.",
+      "anti_patterns": [
+        "correlation coefficient interpreted causally"
+      ],
+      "failure_or_counterexample_test": "Construct a confounder or selection mechanism capable of producing the observed association.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D07-FORECAST-001",
+      "domain": "data_statistics",
+      "question_type": "forecast",
+      "title": "Strategy for forecast",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. forecast. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define horizon, target, information cutoff and baseline; use backtesting or rolling validation, report calibration and degradation with horizon.",
+      "anti_patterns": [
+        "testing forecast on information unavailable at prediction time"
+      ],
+      "failure_or_counterexample_test": "Backtest strictly using only information available at each historical cutoff.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D07-ROBUSTNESS-001",
+      "domain": "data_statistics",
+      "question_type": "robustness",
+      "title": "Strategy for robustness",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. robustness. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Identify influential observations, assumptions and preprocessing choices; rerun reasonable alternatives and report conclusions that survive.",
+      "anti_patterns": [
+        "single specification treated as robust"
+      ],
+      "failure_or_counterexample_test": "Perform sensitivity, leave-one-group-out or specification-curve checks appropriate to the data.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
