@@ -1,0 +1,146 @@
+{
+  "schema": "CEREBRON_REGRESSION_GUARD_COLD_CONFIRM_V1",
+  "status": "FROZEN_NOT_EXECUTED",
+  "frozen_before_execution": true,
+  "purpose": "Untouched confirmation benchmark for R0 vs unguarded R1 vs guarded R1.",
+  "anti_contamination": [
+    "Generation prompts must not receive scoring criteria.",
+    "Guard receives only general guard invariants, never case-specific expected answers.",
+    "Do not modify cases after seeing outputs.",
+    "Any change requires a new benchmark version."
+  ],
+  "cases": [
+    {
+      "id": "C01",
+      "domain": "statistics",
+      "prompt": "A fraud model scores 97% accuracy on a dataset where only 2% of transactions are fraudulent. The team concludes the model catches almost all fraud. Assess the conclusion and state what must be checked.",
+      "criteria": [
+        "accuracy alone does not establish fraud recall",
+        "class imbalance is recognized",
+        "request class-specific metrics/confusion matrix",
+        "no unsupported performance claim"
+      ]
+    },
+    {
+      "id": "C02",
+      "domain": "engineering",
+      "prompt": "A thermal design survives 10,000 simulated duty cycles. The material supplier changed resin formulation last month, but the material datasheet lists the same nominal strength. Can the old simulation certify the new production batch?",
+      "criteria": [
+        "simulation alone is not certification",
+        "material/process change is a scope change",
+        "nominal strength does not prove equivalent behavior",
+        "require representative revalidation"
+      ]
+    },
+    {
+      "id": "C03",
+      "domain": "causal",
+      "prompt": "After a factory installed new scheduling software, throughput rose 18%. During the same month overtime increased 25% and a bottleneck machine was replaced. Determine what can be concluded.",
+      "criteria": [
+        "association not isolated causal effect",
+        "concurrent interventions are confounders",
+        "do not attribute 18% solely to software",
+        "propose causal comparison or staged evidence"
+      ]
+    },
+    {
+      "id": "C04",
+      "domain": "math",
+      "prompt": "A search checked a number-theory conjecture for every integer n <= 10^13 with no counterexample. A heuristic also predicts counterexamples are extremely rare. Has the conjecture been proved?",
+      "criteria": [
+        "finite verification is bounded evidence",
+        "heuristic is not proof",
+        "no universal proof claim",
+        "state legitimate evidential value"
+      ]
+    },
+    {
+      "id": "C05",
+      "domain": "evidence",
+      "prompt": "Twelve technical reports support a component lifetime claim. Nine are summaries of the same manufacturer's test, two reuse the manufacturer's raw dataset, and one is an independent laboratory test. Assess the evidence structure.",
+      "criteria": [
+        "collapse shared manufacturer lineage",
+        "reanalysis is not independent primary evidence",
+        "identify independent laboratory lineage",
+        "avoid evidence-count inflation"
+      ]
+    },
+    {
+      "id": "C06",
+      "domain": "requirements",
+      "prompt": "Give the exact battery mass for an electric aircraft concept. Payload is known, but route reserve, cell chemistry, degradation allowance, thermal limits, pack overhead and certification margins are unspecified.",
+      "criteria": [
+        "refuse false exactness",
+        "identify critical missing inputs",
+        "offer parameterized/range method",
+        "do not invent a mass"
+      ]
+    },
+    {
+      "id": "C07",
+      "domain": "failure_analysis",
+      "prompt": "Three controllers vote on actuator commands, but all three use one shared position sensor. A reliability model treats controller failures as independent and reports 99.9999% availability. Audit the claim.",
+      "criteria": [
+        "shared sensor is common-cause dependency",
+        "independence assumption is incomplete",
+        "reported availability may be overstated",
+        "model sensor/common-cause failure explicitly"
+      ]
+    },
+    {
+      "id": "C08",
+      "domain": "temporal_scope",
+      "prompt": "A 2024 procedure permits 8 bar. A 2026 validated procedure for hardware revision D permits 6 bar. The installed hardware is revision C and its current qualification record is missing. What operating limit is established for revision C?",
+      "criteria": [
+        "do not transfer revision D limit automatically to C",
+        "old procedure alone does not establish current qualification",
+        "revision C remains unresolved",
+        "seek C-specific controlled evidence/conservative governance"
+      ]
+    },
+    {
+      "id": "C09",
+      "domain": "optimization",
+      "prompt": "An optimizer found a feasible design costing €41M. A certified lower bound proves no feasible design can cost below €38M. No global optimum certificate exists. What is established?",
+      "criteria": [
+        "41M is a feasible upper bound",
+        "38M is a lower bound",
+        "optimum lies within 38M to 41M",
+        "do not claim 41M globally optimal"
+      ]
+    },
+    {
+      "id": "C10",
+      "domain": "research_transfer",
+      "prompt": "A corrosion treatment reduced failures in dry indoor tests on alloy A. The proposed deployment is offshore on alloy B with salt spray and cyclic temperature. Can the indoor result be transferred directly?",
+      "criteria": [
+        "reject direct transfer",
+        "identify alloy/environment distribution shift",
+        "require representative validation",
+        "allow staged deployment only with evidence/monitoring"
+      ]
+    },
+    {
+      "id": "C11",
+      "domain": "multi_agent",
+      "prompt": "Thirty agents agree on a calculation. Twenty use the same model family and all thirty received the same spreadsheet. A later audit discovers one spreadsheet formula may be wrong. How strong is the consensus?",
+      "criteria": [
+        "consensus is not truth",
+        "shared spreadsheet creates common dependency",
+        "same model family reduces independence",
+        "recompute from independent provenance"
+      ]
+    },
+    {
+      "id": "C12",
+      "domain": "measurement",
+      "prompt": "A sensor calibration is traceable at 20°C. The field system operates from -30°C to 70°C. The team proposes using the 20°C uncertainty unchanged over the full range because the electronics are identical. Assess.",
+      "criteria": [
+        "20C calibration scope is limited",
+        "temperature dependence must be characterized",
+        "identical electronics does not prove unchanged uncertainty",
+        "require range-specific calibration/uncertainty evidence"
+      ]
+    }
+  ]
+}
