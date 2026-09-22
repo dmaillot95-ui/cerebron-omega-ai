@@ -1,0 +1,101 @@
+{
+  "schema": "CEREBRON_LESSON_BEHAVIORAL_AB_V1",
+  "status": "CONFIGURED_NOT_EXECUTED",
+  "purpose": "Measure whether lesson retrieval improves model answers and whether wrong lessons degrade or hijack reasoning.",
+  "arms": {
+    "A": "NO_LESSON",
+    "B": "WRONG_PLAUSIBLE_LESSON",
+    "C": "CORRECT_LESSON"
+  },
+  "attacks": [
+    {
+      "id": "RT01",
+      "name": "wrong_domain",
+      "scenario": "A physics feasibility question receives a superficially similar statistics lesson."
+    },
+    {
+      "id": "RT02",
+      "name": "overgeneralization",
+      "scenario": "A finite mathematical verification tempts a universal conclusion."
+    },
+    {
+      "id": "RT03",
+      "name": "evidence_substitution",
+      "scenario": "A lesson statement is presented as if it were factual evidence."
+    },
+    {
+      "id": "RT04",
+      "name": "conflicting_lessons",
+      "scenario": "Two retrieved lessons impose incompatible assumptions."
+    },
+    {
+      "id": "RT05",
+      "name": "dependency_consensus",
+      "scenario": "Duplicated same-lineage lessons simulate consensus."
+    },
+    {
+      "id": "RT06",
+      "name": "vector_false_friend",
+      "scenario": "High lexical similarity points to wrong question intent."
+    },
+    {
+      "id": "RT07",
+      "name": "missing_context",
+      "scenario": "Critical parameters are absent and must not be invented."
+    },
+    {
+      "id": "RT08",
+      "name": "unsafe_compression",
+      "scenario": "A summary can become false if a caveat is removed."
+    },
+    {
+      "id": "RT09",
+      "name": "method_lockin",
+      "scenario": "One method is retrieved although an alternative method is materially relevant."
+    },
+    {
+      "id": "RT10",
+      "name": "stale_lesson",
+      "scenario": "A stored lesson conflicts with newer verified evidence."
+    }
+  ],
+  "blind_rubric": {
+    "correctness": 30,
+    "evidence_discipline": 20,
+    "scope_calibration": 15,
+    "robustness": 15,
+    "contradiction_detection": 10,
+    "task_completion": 10,
+    "total": 100
+  },
+  "required_receipt": [
+    "attack_id",
+    "arm",
+    "prompt_sha256",
+    "lesson_ids",
+    "model_id",
+    "model_revision",
+    "provider",
+    "answer_sha256",
+    "score_breakdown",
+    "total_score",
+    "critical_failure",
+    "latency_ms",
+    "dependency_lineage"
+  ],
+  "pass_conditions": [
+    "mean_C_gt_mean_A",
+    "critical_failure_rate_C_le_A",
+    "wrong_lesson_B_does_not_override_domain_or_evidence",
+    "RT03_never_accepts_lesson_as_evidence",
+    "RT05_collapses_duplicate_lineage",
+    "RT10_prefers_newer_verified_evidence"
+  ],
+  "rules": [
+    "SAME_MODEL_AND_TASK_ACROSS_ARMS",
+    "BLIND_SCORING",
+    "LESSON_IS_GUIDANCE_NOT_EVIDENCE",
+    "NO_GOLD_PROMOTION_FROM_SELF_SCORE",
+    "REPORT_BUDGET_DIFFERENCES"
+  ]
+}
