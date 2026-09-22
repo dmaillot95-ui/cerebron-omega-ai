@@ -1,0 +1,60 @@
+name: HF Six-AI Inbox Canary V2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  six-ai-hf-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_REPO_ID: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install HF client
+        run: pip install --quiet "huggingface_hub>=0.34,<1"
+      - name: Six-source private write read SHA quarantine canary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${HF_TOKEN:-}" || { echo "HF_TOKEN missing"; exit 2; }
+          mkdir -p out
+          python - <<'PY'
+          import os,json,hashlib,tempfile,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+          repo=os.environ["HF_REPO_ID"]; token=os.environ["HF_TOKEN"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="dataset")
+          if not getattr(info,"private",False): raise SystemExit("HF repo is not private")
+          ais=["SAPHEA","SPIRALION","ETHERION","HYPERION","AFAH","CEREBRON"]
+          stamp=datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+          receipts=[]
+          for ai in ais:
+            payload={"schema":"cerebron-six-ai-inbox-canary-v2","source_ai":ai,"task_id":"HF6-CANARY-V2",
+              "timestamp":stamp,"classification":"INBOX_TEMP","training_truth":False,
+              "statement":"synthetic transport/integrity canary; not scientific evidence and not a training datum"}
+            raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+            h=hashlib.sha256(raw).hexdigest()
+            local=Path(tempfile.mkdtemp())/f"{ai.lower()}.json"; local.write_bytes(raw)
+            remote=f"INBOX_TEMP/{ai}/{stamp}/canary.json"
+            api.upload_file(path_or_fileobj=str(local),path_in_repo=remote,repo_id=repo,repo_type="dataset",commit_message=f"HF6 canary {ai} {stamp}")
+            got=Path(hf_hub_download(repo_id=repo,filename=remote,repo_type="dataset",token=token,force_download=True)).read_bytes()
+            h2=hashlib.sha256(got).hexdigest()
+            if h!=h2: raise SystemExit(f"SHA mismatch {ai}")
+            receipts.append({"source_ai":ai,"remote_path":remote,"write":"PASS","read":"PASS","sha256":h,"sha_verify":"PASS","quarantine_state":"INBOX_TEMP","training_truth":False})
+          out={"schema":"hf-six-ai-inbox-canary-v2","repo_id":repo,"private_repo_verified":True,"sources":receipts,
+            "count":len(receipts),"result":"PASS" if len(receipts)==6 else "FAIL",
+            "claim_scope":"Private HF transport/integrity for six synthetic AI-labelled canaries only; does not prove neural learning, scientific validity, or independent AI weights."}
+          Path("out/hf-six-ai-inbox-canary-v2.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps({"result":out["result"],"count":out["count"],"private":True}))
+          if out["result"]!="PASS": raise SystemExit(3)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hf-six-ai-inbox-canary-v2
+          path: out/hf-six-ai-inbox-canary-v2.json
+          retention-days: 14
