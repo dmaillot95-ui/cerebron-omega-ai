@@ -1,0 +1,342 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B01",
+  "count": 10,
+  "status": "PARTIAL",
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "PENDING_VECTOR_STAGE"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D00-DEFINITION-001",
+      "domain": "universal_reasoning",
+      "question_type": "definition",
+      "title": "Strategy for definition",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. definition. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Fix the term, scope, context and boundary cases before explaining it.",
+      "anti_patterns": [
+        "definition by circular synonym"
+      ],
+      "failure_or_counterexample_test": "Test whether the definition separates close concepts.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D00-COMPARISON-001",
+      "domain": "universal_reasoning",
+      "question_type": "comparison",
+      "title": "Strategy for comparison",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Normalize the comparison criteria and populations before contrasting items.",
+      "anti_patterns": [
+        "comparing unlike scopes"
+      ],
+      "failure_or_counterexample_test": "Swap presentation order and check conclusion stability.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D00-ESTIMATION-001",
+      "domain": "universal_reasoning",
+      "question_type": "estimation",
+      "title": "Strategy for estimation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. estimation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "State assumptions, units and order-of-magnitude model; compute a range before a point estimate.",
+      "anti_patterns": [
+        "false precision"
+      ],
+      "failure_or_counterexample_test": "Perturb dominant assumptions and report sensitivity.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D00-CAUSAL_ANALYSIS-001",
+      "domain": "universal_reasoning",
+      "question_type": "causal_analysis",
+      "title": "Strategy for causal analysis",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. causal_analysis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Separate association, temporal order, mechanism and interventions; enumerate confounders.",
+      "anti_patterns": [
+        "correlation implies causation"
+      ],
+      "failure_or_counterexample_test": "Search for a confounder or reverse-causality explanation.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D00-DECISION_UNDER_UNCERTAINTY-001",
+      "domain": "universal_reasoning",
+      "question_type": "decision_under_uncertainty",
+      "title": "Strategy for decision under uncertainty",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. decision_under_uncertainty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Separate knowns, distributions, unknowns and utilities; compare robust options across plausible states.",
+      "anti_patterns": [
+        "single-scenario certainty"
+      ],
+      "failure_or_counterexample_test": "Stress-test the choice under adverse assumptions.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D01-PROOF-001",
+      "domain": "math_proof",
+      "question_type": "proof",
+      "title": "Strategy for proof",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. proof. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Write quantifiers and target; derive lemmas; distinguish necessary/sufficient conditions; close every universal step.",
+      "anti_patterns": [
+        "finite verification as proof"
+      ],
+      "failure_or_counterexample_test": "Search for smallest counterexample and verify each implication.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D01-COUNTEREXAMPLE-001",
+      "domain": "math_proof",
+      "question_type": "counterexample",
+      "title": "Strategy for counterexample",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. counterexample. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Negate the claim precisely, identify the weakest constraint, construct the smallest admissible witness, verify all premises.",
+      "anti_patterns": [
+        "invalid witness outside domain"
+      ],
+      "failure_or_counterexample_test": "Check every premise and compute the contradicted conclusion.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D01-FINITE_VERIFICATION-001",
+      "domain": "math_proof",
+      "question_type": "finite_verification",
+      "title": "Strategy for finite verification",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. finite_verification. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define search domain and exact arithmetic; record coverage and limits; state only the finite result.",
+      "anti_patterns": [
+        "finite range generalized universally"
+      ],
+      "failure_or_counterexample_test": "Re-run boundary cases and state untested complement.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D01-OPTIMIZATION-001",
+      "domain": "math_proof",
+      "question_type": "optimization",
+      "title": "Strategy for optimization",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. optimization. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define objective, feasible set and constraints; distinguish local/global optimum; prove bound or certificate when possible.",
+      "anti_patterns": [
+        "best sampled point called optimum"
+      ],
+      "failure_or_counterexample_test": "Compare against lower/upper bound and adversarial feasible points.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D01-CONJECTURE-001",
+      "domain": "math_proof",
+      "question_type": "conjecture",
+      "title": "Strategy for conjecture",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. conjecture. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Separate empirical pattern from theorem; seek invariants, obstructions and counterexamples before proof attempts.",
+      "anti_patterns": [
+        "pattern frequency as theorem"
+      ],
+      "failure_or_counterexample_test": "Actively search structured exceptional families.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
