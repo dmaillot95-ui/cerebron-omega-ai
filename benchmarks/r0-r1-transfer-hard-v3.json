@@ -1,0 +1,147 @@
+{
+  "version": "3.0",
+  "status": "FROZEN_NOT_EXECUTED",
+  "created_for": "CEREBRON message 111",
+  "contamination_rule": "Do not expose these cases or expected propositions to lesson memory, training, retrieval, or optimization before benchmark completion.",
+  "purpose": "Hard transfer benchmark designed to create genuine headroom for R0 while testing whether R0+specialist deltas+blind branch+fusion improves semantic correctness.",
+  "scoring": {
+    "criteria_per_case": 4,
+    "semantic": true,
+    "ambiguous": "REVIEW_REQUIRED",
+    "promotion": "mean_R1 > mean_R0 AND critical_regressions=0; confirmation required on a second untouched set"
+  },
+  "cases": [
+    {
+      "id": "T01",
+      "domain": "math_proof",
+      "prompt": "A program exhaustively checked a Diophantine claim for every integer pair |x|,|y| <= 10^9 and found no counterexample. A heuristic argument says counterexamples should be rare. Write the strongest justified conclusion in at most two sentences.",
+      "checks": [
+        "bounded verification only",
+        "heuristic is not proof",
+        "no universal conclusion",
+        "state legitimate evidential value"
+      ]
+    },
+    {
+      "id": "T02",
+      "domain": "engineering",
+      "prompt": "A composite pressure vessel digital twin passes nominal and 1.5x pressure simulations. Mesh convergence is demonstrated, but bond-line defects, cure variability and impact damage were not physically characterized. Management asks whether production units are certified safe. Answer and name the next evidence needed.",
+      "checks": [
+        "simulation not certification",
+        "identify uncharacterized physical failure factors",
+        "refuse safety certification",
+        "request representative physical validation"
+      ]
+    },
+    {
+      "id": "T03",
+      "domain": "evidence",
+      "prompt": "Six papers report the same effect. Four reuse the same public dataset, one is a meta-analysis containing those four, and one uses a new independently collected dataset. How many clearly independent primary-data lineages are established, and what should the synthesis avoid?",
+      "checks": [
+        "collapse four shared-dataset papers",
+        "meta-analysis not new primary lineage",
+        "identify two primary-data lineages",
+        "avoid vote/count inflation"
+      ]
+    },
+    {
+      "id": "T04",
+      "domain": "statistics",
+      "prompt": "A model achieves 94% accuracy under random train/test splitting on patient records. Several visits from the same patient can appear in both sets. A second model gets 89% using patient-level splitting. Which result better estimates performance on unseen patients and why?",
+      "checks": [
+        "prefer patient-level split for target",
+        "identify leakage/dependence",
+        "do not equate higher score with better generalization",
+        "state target population/scope"
+      ]
+    },
+    {
+      "id": "T05",
+      "domain": "causal",
+      "prompt": "After a factory introduced predictive maintenance, downtime fell 30%. During the same quarter it also replaced two production lines and demand fell 20%. Can the 30% reduction be attributed to predictive maintenance? Give a defensible next analysis.",
+      "checks": [
+        "no causal attribution from before-after",
+        "identify concurrent changes/confounding",
+        "propose causal comparison/design",
+        "preserve uncertainty"
+      ]
+    },
+    {
+      "id": "T06",
+      "domain": "orchestration",
+      "prompt": "Twenty agents return matching calculations. Ten are prompts of model A, five are prompts of model B trained from the same base family, and five are model C but all agents used the same possibly erroneous input table. Explain what agreement establishes and what independent check is still required.",
+      "checks": [
+        "agreement not truth",
+        "shared input is common dependency",
+        "model-family dependence limits independence",
+        "require independent provenance/recalculation"
+      ]
+    },
+    {
+      "id": "T07",
+      "domain": "requirements",
+      "prompt": "Calculate the exact orbital propellant required for a new cargo vehicle. Known: dry mass 18 t and payload 12 t. Unknown: initial/final orbit, propulsion Isp, maneuver sequence, reserves and losses. The customer insists on one exact number.",
+      "checks": [
+        "refuse false precision",
+        "identify rocket-equation/mission dependencies",
+        "name missing critical inputs",
+        "offer parameterized/bounded calculation"
+      ]
+    },
+    {
+      "id": "T08",
+      "domain": "temporal_evidence",
+      "prompt": "An internal engineering lesson from 2025 says a component limit is 140°C. A 2026 qualification report for revision C measures a 110°C qualified limit. The installed hardware is revision B, whose qualification report is unavailable. What limit should be used for revision B?",
+      "checks": [
+        "do not transfer revision C limit automatically",
+        "do not blindly use old lesson as evidence",
+        "state revision B remains unresolved",
+        "seek B-specific evidence/conservative governed rule"
+      ]
+    },
+    {
+      "id": "T09",
+      "domain": "failure_analysis",
+      "prompt": "A redundant spacecraft has two computers and two power buses, but both computers depend on one timing source. Reliability analysis treats the computers as independent. Identify the modeling error and its consequence.",
+      "checks": [
+        "identify common-cause dependency",
+        "independence assumption invalid",
+        "reliability overstated",
+        "model timing-source failure/dependency"
+      ]
+    },
+    {
+      "id": "T10",
+      "domain": "research",
+      "prompt": "A search finds 40 webpages saying a material is superconducting at room temperature. Thirty-eight copy the same press release; two are independent laboratories, one confirming and one failing to replicate. Summarize the evidence without counting webpages as votes.",
+      "checks": [
+        "collapse press-release copies",
+        "separate independent labs",
+        "represent conflicting replication",
+        "no consensus-by-count"
+      ]
+    },
+    {
+      "id": "T11",
+      "domain": "optimization",
+      "prompt": "An optimizer evaluated 5 million candidate factory layouts and found one costing €82M. It cannot prove global optimality and a lower bound says no solution can cost below €79M. State exactly what is known about the optimum.",
+      "checks": [
+        "82M feasible upper bound",
+        "79M lower bound",
+        "optimum bracket 79-82M",
+        "no global-optimum claim"
+      ]
+    },
+    {
+      "id": "T12",
+      "domain": "scope_transfer",
+      "prompt": "A battery-control policy reduced degradation in laboratory cycling at 25°C on one cell chemistry. Should it be deployed unchanged across a mixed fleet operating from -20°C to 50°C? Give the evidence-based decision path.",
+      "checks": [
+        "reject unsupported direct transfer",
+        "identify temperature/chemistry distribution shift",
+        "require representative validation",
+        "allow staged/monitored deployment only after evidence"
+      ]
+    }
+  ]
+}
