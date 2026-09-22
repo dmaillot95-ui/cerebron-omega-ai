@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        case: [C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12]
+        case_id: [C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12]
     runs-on: ubuntu-latest
     timeout-minutes: 90
     permissions:
@@ -22,7 +22,7 @@ jobs:
         run: pip -q install "transformers>=4.56" torch accelerate sentencepiece
       - name: Run R0, specialist deltas, unguarded R1 and guarded R1
         env:
-          CASE_ID: ${{ matrix.case }}
+          CASE_ID: ${{ matrix.case_id }}
           HF_HUB_DISABLE_TELEMETRY: "1"
         run: |
           cat > /tmp/run.py <<'PY'
@@ -77,6 +77,6 @@ Return a corrected final answer only. If candidate R1 is unsafe and cannot be re
           python /tmp/run.py
       - uses: actions/upload-artifact@v4
         with:
-          name: regression-guard-cold-${{ matrix.case }}
+          name: regression-guard-cold-${{ matrix.case_id }}
           path: out/result.json
           if-no-files-found: error
