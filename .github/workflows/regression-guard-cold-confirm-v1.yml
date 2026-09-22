@@ -9,31 +9,63 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        case_id:
-          - C01
-          - C02
-          - C03
-          - C04
-          - C05
-          - C06
-          - C07
-          - C08
-          - C09
-          - C10
-          - C11
-          - C12
+        case_id: [C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12]
     runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
-      - name: Validate frozen case exists
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install inference stack
+        run: pip -q install "transformers>=4.56" torch accelerate sentencepiece
+      - name: Execute frozen case
         env:
           CASE_ID: ${{ matrix.case_id }}
+          HF_HUB_DISABLE_TELEMETRY: "1"
         run: |
-          python - <<'PY'
-          import json, os
+          cat > /tmp/cold.py <<'PY'
+          import json,os,re,pathlib,torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
           b=json.load(open("benchmarks/regression-guard-cold-confirm-v1.json"))
-          ids={x["id"] for x in b["cases"]}
-          cid=os.environ["CASE_ID"]
-          assert cid in ids, cid
-          print("PRECHECK_PASS",cid)
+          c=next(x for x in b["cases"] if x["id"]==os.environ["CASE_ID"])
+          model_id="HuggingFaceTB/SmolLM3-3B"
+          tok=AutoTokenizer.from_pretrained(model_id)
+          mdl=AutoModelForCausalLM.from_pretrained(model_id,torch_dtype=torch.float32)
+          def ask(sys,user,n):
+            msgs=[{"role":"system","content":sys},{"role":"user","content":user}]
+            try: ids=tok.apply_chat_template(msgs,tokenize=True,add_generation_prompt=True,enable_thinking=False,return_tensors="pt")
+            except TypeError: ids=tok.apply_chat_template(msgs,tokenize=True,add_generation_prompt=True,return_tensors="pt")
+            with torch.no_grad(): out=mdl.generate(ids,max_new_tokens=n,do_sample=False,pad_token_id=tok.eos_token_id)
+            s=tok.decode(out[0][ids.shape[-1]:],skip_special_tokens=True)
+            return re.sub(r"(?s)^.*?</think>\\s*","",s).strip()
+          r0=ask("Answer accurately and concisely. Separate established facts from uncertainty. Do not invent evidence.",c["prompt"],420)
+          specs=[
+            ("ERROR","Find factual, logical, causal, scope, bound, certainty or transfer errors."),
+            ("EVIDENCE","Find missing evidence, provenance, dependency, validation and uncertainty."),
+            ("REDTEAM","Seek counterexamples, hidden assumptions, common causes and failure modes."),
+            ("ALTERNATIVE","Independently seek a better reasoning path or missing conclusion.")
+          ]
+          ds=[]
+          for role,mission in specs:
+            ds.append({"role":role,"text":ask("Specialist reviewer. "+mission+" Return only useful corrections.","TASK:\n"+c["prompt"]+"\n\nR0:\n"+r0,300)})
+          blind=ask("Solve independently without seeing another answer. Focus on traps, dependencies, scope, evidence and uncertainty.",c["prompt"],360)
+          packet="\n\n".join("["+d["role"]+"] "+d["text"] for d in ds)+"\n\n[BLIND] "+blind
+          r1u=ask("Improve R0 from specialist findings. Preserve correct claims. Do not mention the review process.","TASK:\n"+c["prompt"]+"\n\nR0:\n"+r0+"\n\nSPECIALISTS:\n"+packet,480)
+          guard="""Act as a regression guard. Compare R0 and candidate R1. Detect polarity, causal or bound reversal; unsupported scope/revision/population transfer; certainty escalation; erased dependency/common cause; unsupported new claim; or lost constraint/uncertainty. Preserve supported R0 unless stronger evidence in the task or packet justifies replacement. Consensus is not evidence. Ambiguous critical changes fail closed. Return only the safest corrected final answer; fall back to R0 if necessary."""
+          r1g=ask(guard,"TASK:\n"+c["prompt"]+"\n\nR0:\n"+r0+"\n\nCANDIDATE R1:\n"+r1u+"\n\nPACKET:\n"+packet,520)
+          taint=lambda x:"<think>" in x.lower() or "</think>" in x.lower()
+          result={"case":c["id"],"model":model_id,"r0":r0,"deltas":ds,"blind":blind,"r1_unguarded":r1u,"r1_guarded":r1g,
+          "tainted":{"r0":taint(r0),"r1_unguarded":taint(r1u),"r1_guarded":taint(r1g)},"criteria_exposed_to_generation":False,"real_inference_calls":8}
+          pathlib.Path("out").mkdir(exist_ok=True)
+          open("out/result.json","w").write(json.dumps(result,indent=2,ensure_ascii=False)+"\n")
+          print(json.dumps({"case":c["id"],"calls":8,"tainted":result["tainted"]}))
           PY
+          python /tmp/cold.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: regression-guard-cold-${{ matrix.case_id }}
+          path: out/result.json
+          if-no-files-found: error
