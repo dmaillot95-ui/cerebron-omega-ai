@@ -1,0 +1,147 @@
+{
+  "schema": "CEREBRON_LESSON_INDEX_V1",
+  "status": "SEED_CONFIGURED_NOT_VALIDATED",
+  "domains": [
+    {
+      "id": "D00",
+      "domain": "universal_reasoning",
+      "question_types": [
+        "definition",
+        "comparison",
+        "estimation",
+        "causal_analysis",
+        "decision_under_uncertainty"
+      ]
+    },
+    {
+      "id": "D01",
+      "domain": "math_proof",
+      "question_types": [
+        "proof",
+        "counterexample",
+        "finite_verification",
+        "optimization",
+        "conjecture"
+      ]
+    },
+    {
+      "id": "D02",
+      "domain": "code_compute",
+      "question_types": [
+        "implementation",
+        "debugging",
+        "algorithm",
+        "testing",
+        "performance"
+      ]
+    },
+    {
+      "id": "D03",
+      "domain": "physics_engineering",
+      "question_types": [
+        "derivation",
+        "dimensioning",
+        "simulation",
+        "feasibility",
+        "failure_analysis"
+      ]
+    },
+    {
+      "id": "D04",
+      "domain": "science_rd",
+      "question_types": [
+        "hypothesis",
+        "experiment_design",
+        "literature_synthesis",
+        "model_comparison",
+        "falsification"
+      ]
+    },
+    {
+      "id": "D05",
+      "domain": "research_evidence",
+      "question_types": [
+        "fact_retrieval",
+        "source_comparison",
+        "provenance",
+        "uncertainty",
+        "synthesis"
+      ]
+    },
+    {
+      "id": "D06",
+      "domain": "invention_design",
+      "question_types": [
+        "ideation",
+        "architecture",
+        "tradeoff",
+        "novelty",
+        "validation_plan"
+      ]
+    },
+    {
+      "id": "D07",
+      "domain": "data_statistics",
+      "question_types": [
+        "measurement",
+        "inference",
+        "correlation_causation",
+        "forecast",
+        "robustness"
+      ]
+    },
+    {
+      "id": "D08",
+      "domain": "writing_communication",
+      "question_types": [
+        "explanation",
+        "summary",
+        "technical_document",
+        "translation",
+        "audience_adaptation"
+      ]
+    },
+    {
+      "id": "D09",
+      "domain": "planning_operations",
+      "question_types": [
+        "decomposition",
+        "scheduling",
+        "risk",
+        "resource_allocation",
+        "checkpointing"
+      ]
+    },
+    {
+      "id": "D10",
+      "domain": "audit_redteam",
+      "question_types": [
+        "contradiction",
+        "dependency",
+        "adversarial_test",
+        "failure_mode",
+        "claim_evidence"
+      ]
+    },
+    {
+      "id": "D11",
+      "domain": "multi_agent_orchestration",
+      "question_types": [
+        "routing",
+        "parallelization",
+        "deduplication",
+        "fusion",
+        "consensus_control"
+      ]
+    }
+  ],
+  "routing_rules": [
+    "CLASSIFY_BEFORE_RETRIEVE",
+    "MULTI_DOMAIN_ALLOWED",
+    "TOP_K_3_TO_8",
+    "PREFER_VALIDATED_OVER_SIMILAR",
+    "DEDUP_DEPENDENT_LESSONS",
+    "UNKNOWN_TYPE_GOES_TO_OPEN"
+  ],
+  "target_seed_lessons": 60
+}
