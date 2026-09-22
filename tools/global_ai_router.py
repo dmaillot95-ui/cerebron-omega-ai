@@ -14,7 +14,7 @@ def post(url, headers, payload):
         r=requests.post(url,headers=headers,json=payload,timeout=TIMEOUT)
         return r.status_code, r.text[:20000], round(time.time()-t,3)
     except Exception as e:
-        return 0, repr(e), round(time.time()-t,3)
+        return 0, type(e).__name__ + ": " + str(e)[:500], round(time.time()-t,3)
 
 
 def quality_gate(text):
@@ -38,6 +38,16 @@ def openai_compat(name,url,key,model):
     code,text,lat=post(url,{'Authorization':f'Bearer {key}','Content-Type':'application/json'},
                        {'model':model,'messages':[{'role':'user','content':PROMPT}],'temperature':0.1,'max_tokens':MAX_TOKENS})
     out={'provider':name,'http_status':code,'latency_seconds':lat,'model':model}
+    if code==0:
+        err=(text or '').lower()
+        if 'timeout' in err: out['failure_class']='TIMEOUT'
+        elif 'ssl' in err or 'certificate' in err: out['failure_class']='TLS_ERROR'
+        elif 'name resolution' in err or 'dns' in err: out['failure_class']='DNS_ERROR'
+        elif 'connection' in err: out['failure_class']='CONNECTION_ERROR'
+        else: out['failure_class']='CLIENT_NETWORK_ERROR'
+    elif code in (401,403): out['failure_class']='AUTH_OR_PERMISSION_FAIL'
+    elif code==429: out['failure_class']='RATE_LIMIT'
+    elif code>=500: out['failure_class']='PROVIDER_ERROR'
     try:
         j=json.loads(text); resp=j['choices'][0]['message']['content']; out['response']=resp; out['success']=bool(resp.strip())
     except Exception:
@@ -124,6 +134,6 @@ def main():
     with open('out/global-ai-provider-probe.json','w',encoding='utf-8') as f:
         json.dump(out,f,ensure_ascii=False,indent=2)
     print(json.dumps({'configured_count':len(configured),'success_count':len(successes),'quality_pass_count':len(quality),
-                      'providers':[{'provider':r.get('provider'),'success':r.get('success'),'status':r.get('status'),'http_status':r.get('http_status'),'quality':(r.get('quality') or {}).get('pass')} for r in results]}))
+                      'providers':[{'provider':r.get('provider'),'success':r.get('success'),'status':r.get('status'),'http_status':r.get('http_status'),'failure_class':r.get('failure_class'),'quality':(r.get('quality') or {}).get('pass')} for r in results]}))
 
 if __name__=='__main__': main()
