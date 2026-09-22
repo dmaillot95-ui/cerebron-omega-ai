@@ -1,0 +1,346 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B05",
+  "count": 10,
+  "status": "PARTIAL",
+  "domains": [
+    "writing_communication",
+    "planning_operations"
+  ],
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "DEFERRED_TO_CROSS_BATCH_AUDIT"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D08-EXPLANATION-001",
+      "domain": "writing_communication",
+      "question_type": "explanation",
+      "title": "Strategy for explanation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. explanation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Identify the audience's prior knowledge and exact question; lead with the answer, define only necessary concepts, then build the causal or logical chain with one useful example.",
+      "anti_patterns": [
+        "adding complexity without explanatory value"
+      ],
+      "failure_or_counterexample_test": "Remove each paragraph in turn and verify every remaining paragraph contributes to understanding the target question.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D08-SUMMARY-001",
+      "domain": "writing_communication",
+      "question_type": "summary",
+      "title": "Strategy for summary",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. summary. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Preserve the source's main claims, evidence, uncertainty and important exceptions while compressing repetition; distinguish source content from added interpretation.",
+      "anti_patterns": [
+        "shortening by deleting critical caveats"
+      ],
+      "failure_or_counterexample_test": "Compare the summary against the source claim-by-claim and check that no material conclusion changed.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D08-TECHNICAL_DOCUMENT-001",
+      "domain": "writing_communication",
+      "question_type": "technical_document",
+      "title": "Strategy for technical document",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. technical_document. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define purpose, reader, scope, terminology and acceptance criteria; structure requirements, assumptions, methods, results and limitations so claims are traceable.",
+      "anti_patterns": [
+        "polished document with untraceable claims"
+      ],
+      "failure_or_counterexample_test": "Select material claims at random and trace each to data, formula, source or explicit assumption.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D08-TRANSLATION-001",
+      "domain": "writing_communication",
+      "question_type": "translation",
+      "title": "Strategy for translation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. translation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Preserve meaning, modality, technical terms, numbers and uncertainty before optimizing fluency; flag genuinely ambiguous source text instead of silently choosing.",
+      "anti_patterns": [
+        "fluent rewrite that changes technical meaning"
+      ],
+      "failure_or_counterexample_test": "Back-check critical propositions, quantities and negations against the source.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D08-AUDIENCE_ADAPTATION-001",
+      "domain": "writing_communication",
+      "question_type": "audience_adaptation",
+      "title": "Strategy for audience adaptation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. audience_adaptation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Keep factual content invariant while changing vocabulary, depth, examples and pacing for the audience; do not simplify away conditions that change truth.",
+      "anti_patterns": [
+        "simplification that changes the claim"
+      ],
+      "failure_or_counterexample_test": "Compare expert and adapted versions for invariant facts, quantities and qualifications.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D09-DECOMPOSITION-001",
+      "domain": "planning_operations",
+      "question_type": "decomposition",
+      "title": "Strategy for decomposition",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. decomposition. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Convert the objective into deliverables, dependencies, interfaces and verifiable completion criteria; split until work units can be independently checked.",
+      "anti_patterns": [
+        "task list without dependency structure"
+      ],
+      "failure_or_counterexample_test": "Remove a work package and test whether the objective can still be demonstrated complete.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D09-SCHEDULING-001",
+      "domain": "planning_operations",
+      "question_type": "scheduling",
+      "title": "Strategy for scheduling",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. scheduling. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Build schedule from dependencies, durations, resource constraints and uncertainty; identify critical path and buffers rather than assigning dates by wish.",
+      "anti_patterns": [
+        "calendar dates without dependency logic"
+      ],
+      "failure_or_counterexample_test": "Delay each critical activity and measure downstream impact.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D09-RISK-001",
+      "domain": "planning_operations",
+      "question_type": "risk",
+      "title": "Strategy for risk",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. risk. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Describe risk as cause-event-consequence with likelihood/evidence, exposure, trigger, mitigation and contingency; separate known risks from unknowns.",
+      "anti_patterns": [
+        "risk register containing vague labels only"
+      ],
+      "failure_or_counterexample_test": "For each high risk, identify an observable trigger and executable contingency.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D09-RESOURCE_ALLOCATION-001",
+      "domain": "planning_operations",
+      "question_type": "resource_allocation",
+      "title": "Strategy for resource allocation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. resource_allocation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Map scarce resources to constrained work, compare marginal value and bottlenecks, reserve capacity for uncertainty, and make opportunity costs explicit.",
+      "anti_patterns": [
+        "allocating everything at 100 percent utilization"
+      ],
+      "failure_or_counterexample_test": "Inject a credible disruption and verify critical work retains recovery capacity.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D09-CHECKPOINTING-001",
+      "domain": "planning_operations",
+      "question_type": "checkpointing",
+      "title": "Strategy for checkpointing",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. checkpointing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Checkpoint only reproducible state: completed evidence, hashes, residual blockers and exact next action; distinguish progress narrative from resumable state.",
+      "anti_patterns": [
+        "checkpoint that cannot reproduce continuation"
+      ],
+      "failure_or_counterexample_test": "Attempt continuation using only the checkpoint and referenced artifacts.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
