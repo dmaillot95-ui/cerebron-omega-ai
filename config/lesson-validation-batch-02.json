@@ -1,0 +1,346 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B02",
+  "count": 10,
+  "status": "PARTIAL",
+  "domains": [
+    "code_compute",
+    "physics_engineering"
+  ],
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "DEFERRED_TO_CROSS_BATCH_AUDIT"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D02-IMPLEMENTATION-001",
+      "domain": "code_compute",
+      "question_type": "implementation",
+      "title": "Strategy for implementation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. implementation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define interface, invariants, error behavior and acceptance tests before implementation; build the smallest correct path, then cover boundaries.",
+      "anti_patterns": [
+        "implementation before contract"
+      ],
+      "failure_or_counterexample_test": "Verify valid, boundary and invalid inputs against the stated contract.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D02-DEBUGGING-001",
+      "domain": "code_compute",
+      "question_type": "debugging",
+      "title": "Strategy for debugging",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. debugging. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Reproduce deterministically, minimize the failing case, isolate the violated assumption, patch the smallest cause, then add regression coverage.",
+      "anti_patterns": [
+        "large rewrite before reproduction"
+      ],
+      "failure_or_counterexample_test": "Show the regression fails before the patch and passes after it.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D02-ALGORITHM-001",
+      "domain": "code_compute",
+      "question_type": "algorithm",
+      "title": "Strategy for algorithm",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. algorithm. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define computational model, input scale, invariant, termination and complexity; compare alternatives under the real constraint set.",
+      "anti_patterns": [
+        "complexity without computational model"
+      ],
+      "failure_or_counterexample_test": "Use adversarial inputs and verify correctness invariant plus complexity bound.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D02-TESTING-001",
+      "domain": "code_compute",
+      "question_type": "testing",
+      "title": "Strategy for testing",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. testing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Map requirements to observable assertions; combine boundary, negative, property and regression tests; record uncovered behavior.",
+      "anti_patterns": [
+        "happy-path-only testing"
+      ],
+      "failure_or_counterexample_test": "Inject representative faults and confirm the suite detects them.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D02-PERFORMANCE-001",
+      "domain": "code_compute",
+      "question_type": "performance",
+      "title": "Strategy for performance",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. performance. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Measure a reproducible baseline, profile the dominant bottleneck, change one factor, rerun equivalent workload and quantify tradeoffs.",
+      "anti_patterns": [
+        "optimization without profiling"
+      ],
+      "failure_or_counterexample_test": "Compare repeated before/after measurements including variance and resource cost.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D03-DERIVATION-001",
+      "domain": "physics_engineering",
+      "question_type": "derivation",
+      "title": "Strategy for derivation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. derivation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "State physical assumptions, coordinate/sign conventions and governing laws; derive symbolically, check units and limiting cases before numerical substitution.",
+      "anti_patterns": [
+        "equation manipulation without assumptions"
+      ],
+      "failure_or_counterexample_test": "Check dimensions and recover known limiting regimes.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D03-DIMENSIONING-001",
+      "domain": "physics_engineering",
+      "question_type": "dimensioning",
+      "title": "Strategy for dimensioning",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. dimensioning. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define loads, duty cycle, safety factors, materials and environmental bounds; size from worst credible cases and identify governing constraint.",
+      "anti_patterns": [
+        "nominal-only sizing"
+      ],
+      "failure_or_counterexample_test": "Recalculate at min/max loads and credible degraded conditions.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D03-SIMULATION-001",
+      "domain": "physics_engineering",
+      "question_type": "simulation",
+      "title": "Strategy for simulation",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. simulation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define model equations, boundary/initial conditions, solver tolerances and validation target; distinguish numerical convergence from physical validation.",
+      "anti_patterns": [
+        "simulation presented as experiment"
+      ],
+      "failure_or_counterexample_test": "Perform mesh/time-step or tolerance convergence and compare with an independent reference.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D03-FEASIBILITY-001",
+      "domain": "physics_engineering",
+      "question_type": "feasibility",
+      "title": "Strategy for feasibility",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. feasibility. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Close mass, energy, power, thermal, structural and operational budgets at consistent assumptions; compare margins with component limits.",
+      "anti_patterns": [
+        "ignoring coupled losses or margins"
+      ],
+      "failure_or_counterexample_test": "Stress dominant assumptions and identify which constraint fails first.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D03-FAILURE_ANALYSIS-001",
+      "domain": "physics_engineering",
+      "question_type": "failure_analysis",
+      "title": "Strategy for failure analysis",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. failure_analysis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Enumerate failure modes, triggers, propagation, detectability and recovery; rank by consequence and evidence rather than intuition.",
+      "anti_patterns": [
+        "single-point nominal reasoning"
+      ],
+      "failure_or_counterexample_test": "Inject each critical failure and verify containment, detection or safe-state behavior.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
