@@ -1,0 +1,56 @@
+name: SPIRALION Real Inference Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/spiralion-real-inference-canary.yml'
+permissions:
+  contents: read
+jobs:
+  inference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Run real SPIRALION inference
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,time,hashlib
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+          system="""You are SPIRALION, CEREBRON's cumulative reasoning AI. Continue from verified checkpoints instead of restarting. Separate facts, hypotheses, contradictions and open residuals. Compress before accumulation. Never claim validation without evidence."""
+          q="""A research program has a verified checkpoint, two contradictory new results, and one unverified simulation. Produce a compact continuation plan that preserves the checkpoint, isolates the contradiction, and states what must be verified next. Do not invent evidence."""
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          msgs=[{"role":"system","content":system},{"role":"user","content":q}]
+          if getattr(tok,"chat_template",None):
+            p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+          else:p=system+"\nUSER: "+q+"\nSPIRALION:"
+          x=tok(p,return_tensors="pt"); t=time.time()
+          with torch.no_grad():
+            y=mdl.generate(input_ids=x["input_ids"],attention_mask=x.get("attention_mask"),max_new_tokens=256,do_sample=False,pad_token_id=tok.eos_token_id)
+          a=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+          bad="<think>" in a.lower()
+          r={"schema":"spiralion-real-inference-v1","identity":"SPIRALION","model_id":mid,"revision":rev,
+             "execution":"REAL_MODEL_INFERENCE","question_sha256":hashlib.sha256(q.encode()).hexdigest(),
+             "answer_sha256":hashlib.sha256(a.encode()).hexdigest(),"answer":a,"latency_ms":round((time.time()-t)*1000),
+             "tainted_internal_reasoning":bad,
+             "claim_scope":"real base-model inference under SPIRALION policy; not evidence of independent trained weights or neural learning"}
+          Path("out/spiralion-real-inference.json").write_text(json.dumps(r,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps({k:r[k] for k in ["identity","model_id","revision","execution","answer_sha256","tainted_internal_reasoning","latency_ms"]}))
+          if not a or bad: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spiralion-real-inference
+          path: out/spiralion-real-inference.json
+          retention-days: 14
