@@ -7,7 +7,42 @@ on:
 permissions:
   contents: read
 jobs:
+  hf-gate:
+    runs-on: ubuntu-latest
+    outputs:
+      available: ${{ steps.probe.outputs.available }}
+      reason: ${{ steps.probe.outputs.reason }}
+    steps:
+      - id: probe
+        name: Preflight HF inference permission
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error
+          token=os.environ.get("HF_TOKEN","")
+          body=json.dumps({"model":"Qwen/Qwen3-4B","messages":[{"role":"user","content":"Reply exactly OK"}],"max_tokens":5,"temperature":0}).encode()
+          req=urllib.request.Request("https://router.huggingface.co/v1/chat/completions",data=body,headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"})
+          available="false"; reason="UNKNOWN"
+          if not token:
+              reason="MISSING_SECRET"
+          else:
+              try:
+                  with urllib.request.urlopen(req,timeout=60) as r:
+                      available="true" if 200 <= r.status < 300 else "false"
+                      reason="PASS" if available=="true" else "OTHER_FAIL"
+              except urllib.error.HTTPError as e:
+                  reason="AUTH_OR_PERMISSION_FAIL" if e.code in (401,403) else ("RATE_LIMIT" if e.code==429 else ("PROVIDER_ERROR" if e.code>=500 else "OTHER_FAIL"))
+              except Exception:
+                  reason="PROVIDER_ERROR"
+          with open(os.environ["GITHUB_OUTPUT"],"a") as g:
+              g.write("available="+available+"\n")
+              g.write("reason="+reason+"\n")
+          print("HF20_PREFLIGHT="+reason)
+          PY
   council:
+    needs: hf-gate
+    if: needs.hf-gate.outputs.available == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -75,7 +110,7 @@ jobs:
 
   reality-manifest:
     if: always()
-    needs: council
+    needs: [hf-gate, council]
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -100,6 +135,8 @@ jobs:
           manifest={
             "schema":"CEREBRON_HF20_REALITY_V1",
             "configured_count":20,
+            "preflight_available":"${{ needs.hf-gate.outputs.available }}",
+            "preflight_reason":"${{ needs.hf-gate.outputs.reason }}",
             "receipt_count":len(rows),
             "executed_count":sum(r.get("real_call") is True for r in rows),
             "success_count":len(ok),
