@@ -1,0 +1,61 @@
+name: R0 Augmentation Real Canary
+on:
+  push:
+    paths:
+      - '.github/workflows/r0-augmentation-real-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute real R0 delta blind R1
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import json,time,hashlib,torch
+          from pathlib import Path
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid="HuggingFaceTB/SmolLM3-3B"; rev="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          q="A program verified a conjecture for every integer n from 1 through 10^9. Has the universal conjecture been proved? Explain precisely."
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          def ask(p,n=220):
+            x=tok(p,return_tensors="pt")
+            t=time.time()
+            with torch.no_grad(): y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.eos_token_id)
+            a=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+            return a,round((time.time()-t)*1000)
+          r0,t0=ask("Answer accurately and concisely. QUESTION: "+q+"\nANSWER:")
+          roles=[
+            ("MISSING","List only important missing distinctions or caveats in R0."),
+            ("ERROR","Find concrete errors or unjustified claims in R0."),
+            ("VERIFY","Independently verify the logical status of the conclusion."),
+            ("REDTEAM","Give the strongest counterexample to any overgeneralization in R0.")
+          ]
+          deltas=[]; td=0
+          for role,mission in roles:
+            a,t=ask(f"QUESTION: {q}\nR0: {r0}\nROLE {role}: {mission}\nReturn concise delta only.",120)
+            deltas.append({"role":role,"answer":a,"sha256":hashlib.sha256(a.encode()).hexdigest()}); td+=t
+          blind,tb=ask("Solve independently without seeing another answer. QUESTION: "+q+"\nANSWER:",180)
+          bundle="\n".join(d["role"]+": "+d["answer"] for d in deltas)
+          r1,t1=ask(f"QUESTION: {q}\nR0: {r0}\nSPECIALIST DELTAS:\n{bundle}\nBLIND INDEPENDENT: {blind}\nProduce R1. Keep R0 unless a delta is logically justified. Do not use vote counts as evidence.",240)
+          def judge(a):
+            z=a.lower()
+            finite=("finite" in z or "10^9" in z or "tested" in z or "verified" in z)
+            notproof=("not" in z and ("proof" in z or "proved" in z)) or ("does not prove" in z)
+            universal=("universal" in z or "all integer" in z or "all cases" in z)
+            return {"finite_scope":finite,"rejects_universal_proof":notproof,"universal_scope":universal,"score":sum([finite,notproof,universal])}
+          rec={"schema":"CEREBRON_R0_AUGMENTATION_REAL_CANARY_V1","execution":"REAL_MODEL_INFERENCE","model_id":mid,"revision":rev,"question_sha256":hashlib.sha256(q.encode()).hexdigest(),"r0":{"answer":r0,"sha256":hashlib.sha256(r0.encode()).hexdigest(),"latency_ms":t0,"judge":judge(r0)},"deltas":deltas,"blind":{"answer":blind,"sha256":hashlib.sha256(blind.encode()).hexdigest(),"latency_ms":tb},"r1":{"answer":r1,"sha256":hashlib.sha256(r1.encode()).hexdigest(),"latency_ms":t1,"judge":judge(r1)},"delta_latency_ms":td,"limitations":["All branches use the same model revision; executions are real but not independent model evidence.","Deterministic rule judge is a canary, not a blind human-quality score."]}
+          Path("out/r0-augmentation-real-canary.json").write_text(json.dumps(rec,ensure_ascii=False,indent=2)+"\n")
+          print("R0_AUGMENT="+json.dumps({"r0_score":rec["r0"]["judge"]["score"],"r1_score":rec["r1"]["judge"]["score"],"delta":rec["r1"]["judge"]["score"]-rec["r0"]["judge"]["score"],"model":mid,"real_executions":7},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r0-augmentation-real-canary-${{ github.run_id }}
+          path: out/r0-augmentation-real-canary.json
