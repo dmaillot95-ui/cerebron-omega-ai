@@ -409,6 +409,18 @@
       "domain": "central-orchestration-chatgpt-interface",
       "identity": "CEREBRON",
       "status": "EXPERIMENTAL"
+    },
+    {
+      "id": 77,
+      "repo": "cerebron-farm-77-humanoid-robotics-lab",
+      "domain": "humanoid-robotics-digital-twin-simulation-rl-sim2real",
+      "status": "EXPERIMENTAL"
+    },
+    {
+      "id": 78,
+      "repo": "cerebron-farm-78-architecton-space-robotics",
+      "domain": "architecton-space-robotics-digital-twin-microgravity-assembly-simulation",
+      "status": "EXPERIMENTAL"
     }
   ]
 }
