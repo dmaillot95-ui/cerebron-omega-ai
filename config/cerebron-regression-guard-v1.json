@@ -1,0 +1,137 @@
+{
+  "version": "1.0",
+  "name": "CEREBRON_REGRESSION_GUARD_V1",
+  "status": "ACTIVE_GUARD_SPEC_NOT_YET_BENCHMARK_VALIDATED",
+  "purpose": "Prevent R1 from degrading supported R0 claims while allowing evidence-backed corrections.",
+  "invariants": [
+    "PRESERVE_SUPPORTED_R0_UNLESS_STRONGER_EVIDENCE",
+    "REPLACEMENT_REQUIRES_PROVENANCE",
+    "AMBIGUOUS_CRITICAL_CHANGE_FAILS_CLOSED",
+    "CONSENSUS_IS_NOT_EVIDENCE",
+    "SAME_SOURCE_IS_NOT_INDEPENDENT",
+    "CLAIM_LE_EVIDENCE"
+  ],
+  "detectors": [
+    {
+      "id": "G01",
+      "type": "POLARITY_REVERSAL",
+      "examples": [
+        "increase<->decrease",
+        "valid<->invalid",
+        "safe<->unsafe"
+      ]
+    },
+    {
+      "id": "G02",
+      "type": "CAUSAL_DIRECTION_REVERSAL",
+      "examples": [
+        "A causes B<->B causes A",
+        "underestimate<->overestimate consequence"
+      ]
+    },
+    {
+      "id": "G03",
+      "type": "BOUND_DIRECTION_REVERSAL",
+      "examples": [
+        "upper<->lower",
+        "at_most<->at_least"
+      ]
+    },
+    {
+      "id": "G04",
+      "type": "SCOPE_TRANSFER",
+      "examples": [
+        "population A->B",
+        "revision C->B",
+        "lab->field"
+      ]
+    },
+    {
+      "id": "G05",
+      "type": "CERTAINTY_ESCALATION",
+      "examples": [
+        "suggests->proves",
+        "finite check->universal claim",
+        "simulation->certification"
+      ]
+    },
+    {
+      "id": "G06",
+      "type": "DEPENDENCY_ERASURE",
+      "examples": [
+        "shared source treated independent",
+        "common cause omitted"
+      ]
+    },
+    {
+      "id": "G07",
+      "type": "UNSUPPORTED_NEW_CLAIM",
+      "examples": [
+        "new numeric value without source",
+        "new mechanism without derivation"
+      ]
+    },
+    {
+      "id": "G08",
+      "type": "CONSTRAINT_LOSS",
+      "examples": [
+        "drops operating range",
+        "drops assumptions",
+        "drops uncertainty"
+      ]
+    }
+  ],
+  "delta_contract": {
+    "required": [
+      "delta_id",
+      "target_claim",
+      "operation",
+      "proposed_text",
+      "evidence",
+      "provenance",
+      "dependencies",
+      "confidence",
+      "criticality"
+    ],
+    "operation": [
+      "ADD",
+      "CLARIFY",
+      "REPLACE",
+      "DELETE"
+    ],
+    "criticality": [
+      "LOW",
+      "MEDIUM",
+      "HIGH",
+      "CRITICAL"
+    ]
+  },
+  "decision": {
+    "ACCEPT": "No detected regression and evidence sufficient.",
+    "ACCEPT_WITH_WARNING": "Noncritical uncertainty remains explicit.",
+    "REJECT_DELTA": "Regression or unsupported replacement detected.",
+    "REVIEW_REQUIRED": "Critical/ambiguous semantic change; fail closed.",
+    "FALLBACK_R0": "No safe R1 can be formed."
+  },
+  "pipeline": [
+    "CLAIM_DIFF_R0_R1",
+    "DETECT_REVERSALS_AND_SCOPE",
+    "CHECK_EVIDENCE_PROVENANCE",
+    "CHECK_DEPENDENCIES",
+    "INDEPENDENT_GUARD_WHEN_AVAILABLE",
+    "DECIDE_PER_DELTA",
+    "ASSEMBLE_SAFE_R1",
+    "POST_FUSION_RESCAN",
+    "RECEIPT"
+  ],
+  "benchmark_policy": {
+    "forbidden": "Do not expose frozen benchmark criteria to production generation/guard prompts.",
+    "next_test": "Use a new untouched confirmation benchmark after guard is frozen.",
+    "promotion": [
+      "R1_GT_R0",
+      "ZERO_CRITICAL_REGRESSION",
+      "TRANSFER_GAIN",
+      "ABLATION_SUPPORT"
+    ]
+  }
+}
