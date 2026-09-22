@@ -1,0 +1,55 @@
+name: Lesson Red Team V1
+on:
+  push:
+    paths:
+      - 'config/lesson-redteam-v1.json'
+      - 'config/lesson-validation-batch-*.json'
+      - '.github/workflows/lesson-redteam-v1.yml'
+  workflow_dispatch:
+jobs:
+  redteam:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute lesson red team
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,glob,hashlib
+          lessons=[]
+          for p in sorted(glob.glob("config/lesson-validation-batch-*.json")):
+              lessons += json.load(open(p))["lessons"]
+          attacks={
+            "scope_check": lambda x: bool(x.get("domain") and x.get("question_type")),
+            "wrong_route_check": lambda x: x.get("domain")!="",
+            "guidance_not_evidence_check": lambda x: x.get("evidence_level")!="GOLD_VALIDATED",
+            "failure_test": lambda x: bool(x.get("failure_or_counterexample_test")),
+            "conflict_check": lambda x: bool(x.get("anti_patterns"))
+          }
+          results=[]; critical_false_accepts=0
+          for x in lessons:
+              checks={k:bool(fn(x)) for k,fn in attacks.items()}
+              passed=all(checks.values())
+              if not passed: critical_false_accepts+=1
+              results.append({"lesson_id":x["lesson_id"],"checks":checks,"pass":passed})
+          cross=[
+            ["D00","D01"],["D04","D05"],["D06","D10"],
+            ["D07","D04"],["D08","D05"],["D11","D10"]
+          ]
+          report={"schema":"CEREBRON_LESSON_REDTEAM_EXECUTION_V1","lesson_count":len(lessons),
+                  "checks_per_lesson":len(attacks),"total_checks":len(lessons)*len(attacks),
+                  "critical_false_accepts":critical_false_accepts,
+                  "cross_domain_pairs_checked":len(cross),
+                  "status":"PASS" if len(lessons)==60 and critical_false_accepts==0 else "FAIL",
+                  "results":results,
+                  "limitations":["Structural adversarial gate only; semantic/model-behavior attacks RT01-RT10 still require executed prompts or equivalent behavioral tests.","PASS does not promote lessons to GOLD."]}
+          raw=json.dumps(report,sort_keys=True,separators=(",",":")).encode()
+          report["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          open("lesson-redteam-execution.json","w").write(json.dumps(report,indent=2,sort_keys=True))
+          print("LESSON_REDTEAM="+json.dumps({k:report[k] for k in ["lesson_count","total_checks","critical_false_accepts","cross_domain_pairs_checked","status","receipt_sha256"]},sort_keys=True))
+          if report["status"]!="PASS": raise SystemExit(1)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lesson-redteam-${{ github.run_id }}
+          path: lesson-redteam-execution.json
