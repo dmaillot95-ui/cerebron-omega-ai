@@ -1,0 +1,151 @@
+{
+  "schema": "CEREBRON_HYBRID_ROUTER_COLD_SET_V2",
+  "status": "FROZEN_NOT_EXECUTED",
+  "contamination_rule": "V07-V18 benchmark only; exclude from lesson memory/training/retrieval corpus until scoring is complete.",
+  "cases": [
+    {
+      "id": "V07",
+      "prompt": "A numerical optimizer found the best value among 10000 sampled designs. Can I call it the global optimum?",
+      "acceptable_targets": [
+        "math_proof/optimization"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    },
+    {
+      "id": "V08",
+      "prompt": "Two studies disagree, but one sampled children and the other older adults. How should I reconcile them?",
+      "acceptable_targets": [
+        "research_evidence/source_comparison",
+        "research_evidence/synthesis"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    },
+    {
+      "id": "V09",
+      "prompt": "Our prototype works nominally. What should we test to know whether one fault can cascade through the system?",
+      "acceptable_targets": [
+        "physics_engineering/failure_analysis",
+        "audit_redteam/failure_mode"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "FAILURE_OR_REDTEAM"
+      ]
+    },
+    {
+      "id": "V10",
+      "prompt": "I have three invention concepts that differ only in enclosure shape. Are these genuinely diverse ideas?",
+      "acceptable_targets": [
+        "invention_design/ideation",
+        "invention_design/novelty"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    },
+    {
+      "id": "V11",
+      "prompt": "A forecast model scores well with a random train-test split on ten years of monthly data. Is that enough?",
+      "acceptable_targets": [
+        "data_statistics/forecast",
+        "data_statistics/robustness"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "EVIDENCE_OR_VERIFICATION"
+      ]
+    },
+    {
+      "id": "V12",
+      "prompt": "Rewrite this technical result for beginners but do not lose the conditions under which it is true.",
+      "acceptable_targets": [
+        "writing_communication/audience_adaptation",
+        "writing_communication/explanation"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    },
+    {
+      "id": "V13",
+      "prompt": "We have five teams producing nearly identical answers from the same database. How should the final synthesis count them?",
+      "acceptable_targets": [
+        "multi_agent_orchestration/deduplication",
+        "audit_redteam/dependency",
+        "multi_agent_orchestration/fusion"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "EVIDENCE_OR_VERIFICATION"
+      ]
+    },
+    {
+      "id": "V14",
+      "prompt": "The project plan assigns every engineer at 100 percent capacity. What happens if a critical task slips?",
+      "acceptable_targets": [
+        "planning_operations/resource_allocation",
+        "planning_operations/scheduling",
+        "planning_operations/risk"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "FAILURE_OR_REDTEAM"
+      ]
+    },
+    {
+      "id": "V15",
+      "prompt": "A hypothesis explains the observation, but what result would actually count against it?",
+      "acceptable_targets": [
+        "science_rd/falsification",
+        "science_rd/hypothesis"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "EVIDENCE_OR_VERIFICATION"
+      ]
+    },
+    {
+      "id": "V16",
+      "prompt": "A measurement reports 12.345678 units. Does that many digits establish accuracy?",
+      "acceptable_targets": [
+        "data_statistics/measurement"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    },
+    {
+      "id": "V17",
+      "prompt": "A report cites twenty webpages that all repeat one original press release. Is that twenty independent sources?",
+      "acceptable_targets": [
+        "audit_redteam/dependency",
+        "research_evidence/provenance",
+        "research_evidence/source_comparison"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "EVIDENCE_OR_VERIFICATION"
+      ]
+    },
+    {
+      "id": "V18",
+      "prompt": "We need to resume a complex project next week without this chat. What must the saved state contain?",
+      "acceptable_targets": [
+        "planning_operations/checkpointing"
+      ],
+      "expected_roles": [
+        "PRIMARY_METHOD",
+        "SCOPE_OR_CALIBRATION"
+      ]
+    }
+  ]
+}
