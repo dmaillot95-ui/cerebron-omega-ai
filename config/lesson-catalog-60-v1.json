@@ -1,0 +1,1087 @@
+{
+  "schema": "CEREBRON_LESSON_CATALOG_60_V1",
+  "count": 60,
+  "status": "UNVALIDATED_SEEDS",
+  "lessons": [
+    {
+      "lesson_id": "D00-DEFINITION-001",
+      "domain": "universal_reasoning",
+      "question_type": "definition",
+      "title": "Strategy for definition",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. definition. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D00-COMPARISON-001",
+      "domain": "universal_reasoning",
+      "question_type": "comparison",
+      "title": "Strategy for comparison",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D00-ESTIMATION-001",
+      "domain": "universal_reasoning",
+      "question_type": "estimation",
+      "title": "Strategy for estimation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. estimation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D00-CAUSAL_ANALYSIS-001",
+      "domain": "universal_reasoning",
+      "question_type": "causal_analysis",
+      "title": "Strategy for causal analysis",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. causal_analysis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D00-DECISION_UNDER_UNCERTAINTY-001",
+      "domain": "universal_reasoning",
+      "question_type": "decision_under_uncertainty",
+      "title": "Strategy for decision under uncertainty",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "universal_reasoning. decision_under_uncertainty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D01-PROOF-001",
+      "domain": "math_proof",
+      "question_type": "proof",
+      "title": "Strategy for proof",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. proof. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D01-COUNTEREXAMPLE-001",
+      "domain": "math_proof",
+      "question_type": "counterexample",
+      "title": "Strategy for counterexample",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. counterexample. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D01-FINITE_VERIFICATION-001",
+      "domain": "math_proof",
+      "question_type": "finite_verification",
+      "title": "Strategy for finite verification",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. finite_verification. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D01-OPTIMIZATION-001",
+      "domain": "math_proof",
+      "question_type": "optimization",
+      "title": "Strategy for optimization",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. optimization. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D01-CONJECTURE-001",
+      "domain": "math_proof",
+      "question_type": "conjecture",
+      "title": "Strategy for conjecture",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "math_proof. conjecture. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D02-IMPLEMENTATION-001",
+      "domain": "code_compute",
+      "question_type": "implementation",
+      "title": "Strategy for implementation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. implementation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D02-DEBUGGING-001",
+      "domain": "code_compute",
+      "question_type": "debugging",
+      "title": "Strategy for debugging",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. debugging. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D02-ALGORITHM-001",
+      "domain": "code_compute",
+      "question_type": "algorithm",
+      "title": "Strategy for algorithm",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. algorithm. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D02-TESTING-001",
+      "domain": "code_compute",
+      "question_type": "testing",
+      "title": "Strategy for testing",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. testing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D02-PERFORMANCE-001",
+      "domain": "code_compute",
+      "question_type": "performance",
+      "title": "Strategy for performance",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "code_compute. performance. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D03-DERIVATION-001",
+      "domain": "physics_engineering",
+      "question_type": "derivation",
+      "title": "Strategy for derivation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. derivation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D03-DIMENSIONING-001",
+      "domain": "physics_engineering",
+      "question_type": "dimensioning",
+      "title": "Strategy for dimensioning",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. dimensioning. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D03-SIMULATION-001",
+      "domain": "physics_engineering",
+      "question_type": "simulation",
+      "title": "Strategy for simulation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. simulation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D03-FEASIBILITY-001",
+      "domain": "physics_engineering",
+      "question_type": "feasibility",
+      "title": "Strategy for feasibility",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. feasibility. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D03-FAILURE_ANALYSIS-001",
+      "domain": "physics_engineering",
+      "question_type": "failure_analysis",
+      "title": "Strategy for failure analysis",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "physics_engineering. failure_analysis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D04-HYPOTHESIS-001",
+      "domain": "science_rd",
+      "question_type": "hypothesis",
+      "title": "Strategy for hypothesis",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. hypothesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D04-EXPERIMENT_DESIGN-001",
+      "domain": "science_rd",
+      "question_type": "experiment_design",
+      "title": "Strategy for experiment design",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. experiment_design. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D04-LITERATURE_SYNTHESIS-001",
+      "domain": "science_rd",
+      "question_type": "literature_synthesis",
+      "title": "Strategy for literature synthesis",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. literature_synthesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D04-MODEL_COMPARISON-001",
+      "domain": "science_rd",
+      "question_type": "model_comparison",
+      "title": "Strategy for model comparison",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. model_comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D04-FALSIFICATION-001",
+      "domain": "science_rd",
+      "question_type": "falsification",
+      "title": "Strategy for falsification",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. falsification. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D05-FACT_RETRIEVAL-001",
+      "domain": "research_evidence",
+      "question_type": "fact_retrieval",
+      "title": "Strategy for fact retrieval",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. fact_retrieval. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D05-SOURCE_COMPARISON-001",
+      "domain": "research_evidence",
+      "question_type": "source_comparison",
+      "title": "Strategy for source comparison",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. source_comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D05-PROVENANCE-001",
+      "domain": "research_evidence",
+      "question_type": "provenance",
+      "title": "Strategy for provenance",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. provenance. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D05-UNCERTAINTY-001",
+      "domain": "research_evidence",
+      "question_type": "uncertainty",
+      "title": "Strategy for uncertainty",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. uncertainty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D05-SYNTHESIS-001",
+      "domain": "research_evidence",
+      "question_type": "synthesis",
+      "title": "Strategy for synthesis",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. synthesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D06-IDEATION-001",
+      "domain": "invention_design",
+      "question_type": "ideation",
+      "title": "Strategy for ideation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. ideation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D06-ARCHITECTURE-001",
+      "domain": "invention_design",
+      "question_type": "architecture",
+      "title": "Strategy for architecture",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. architecture. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D06-TRADEOFF-001",
+      "domain": "invention_design",
+      "question_type": "tradeoff",
+      "title": "Strategy for tradeoff",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. tradeoff. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D06-NOVELTY-001",
+      "domain": "invention_design",
+      "question_type": "novelty",
+      "title": "Strategy for novelty",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. novelty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D06-VALIDATION_PLAN-001",
+      "domain": "invention_design",
+      "question_type": "validation_plan",
+      "title": "Strategy for validation plan",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "invention_design. validation_plan. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D07-MEASUREMENT-001",
+      "domain": "data_statistics",
+      "question_type": "measurement",
+      "title": "Strategy for measurement",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. measurement. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D07-INFERENCE-001",
+      "domain": "data_statistics",
+      "question_type": "inference",
+      "title": "Strategy for inference",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. inference. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D07-CORRELATION_CAUSATION-001",
+      "domain": "data_statistics",
+      "question_type": "correlation_causation",
+      "title": "Strategy for correlation causation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. correlation_causation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D07-FORECAST-001",
+      "domain": "data_statistics",
+      "question_type": "forecast",
+      "title": "Strategy for forecast",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. forecast. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D07-ROBUSTNESS-001",
+      "domain": "data_statistics",
+      "question_type": "robustness",
+      "title": "Strategy for robustness",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "data_statistics. robustness. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D08-EXPLANATION-001",
+      "domain": "writing_communication",
+      "question_type": "explanation",
+      "title": "Strategy for explanation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. explanation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D08-SUMMARY-001",
+      "domain": "writing_communication",
+      "question_type": "summary",
+      "title": "Strategy for summary",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. summary. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D08-TECHNICAL_DOCUMENT-001",
+      "domain": "writing_communication",
+      "question_type": "technical_document",
+      "title": "Strategy for technical document",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. technical_document. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D08-TRANSLATION-001",
+      "domain": "writing_communication",
+      "question_type": "translation",
+      "title": "Strategy for translation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. translation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D08-AUDIENCE_ADAPTATION-001",
+      "domain": "writing_communication",
+      "question_type": "audience_adaptation",
+      "title": "Strategy for audience adaptation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "writing_communication. audience_adaptation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D09-DECOMPOSITION-001",
+      "domain": "planning_operations",
+      "question_type": "decomposition",
+      "title": "Strategy for decomposition",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. decomposition. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D09-SCHEDULING-001",
+      "domain": "planning_operations",
+      "question_type": "scheduling",
+      "title": "Strategy for scheduling",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. scheduling. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D09-RISK-001",
+      "domain": "planning_operations",
+      "question_type": "risk",
+      "title": "Strategy for risk",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. risk. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D09-RESOURCE_ALLOCATION-001",
+      "domain": "planning_operations",
+      "question_type": "resource_allocation",
+      "title": "Strategy for resource allocation",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. resource_allocation. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D09-CHECKPOINTING-001",
+      "domain": "planning_operations",
+      "question_type": "checkpointing",
+      "title": "Strategy for checkpointing",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "planning_operations. checkpointing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D10-CONTRADICTION-001",
+      "domain": "audit_redteam",
+      "question_type": "contradiction",
+      "title": "Strategy for contradiction",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. contradiction. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D10-DEPENDENCY-001",
+      "domain": "audit_redteam",
+      "question_type": "dependency",
+      "title": "Strategy for dependency",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. dependency. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D10-ADVERSARIAL_TEST-001",
+      "domain": "audit_redteam",
+      "question_type": "adversarial_test",
+      "title": "Strategy for adversarial test",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. adversarial_test. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D10-FAILURE_MODE-001",
+      "domain": "audit_redteam",
+      "question_type": "failure_mode",
+      "title": "Strategy for failure mode",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. failure_mode. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D10-CLAIM_EVIDENCE-001",
+      "domain": "audit_redteam",
+      "question_type": "claim_evidence",
+      "title": "Strategy for claim evidence",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. claim_evidence. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D11-ROUTING-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "routing",
+      "title": "Strategy for routing",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. routing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D11-PARALLELIZATION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "parallelization",
+      "title": "Strategy for parallelization",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. parallelization. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D11-DEDUPLICATION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "deduplication",
+      "title": "Strategy for deduplication",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. deduplication. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D11-FUSION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "fusion",
+      "title": "Strategy for fusion",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. fusion. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    },
+    {
+      "lesson_id": "D11-CONSENSUS_CONTROL-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "consensus_control",
+      "title": "Strategy for consensus control",
+      "status": "SEED_PENDING_VALIDATION",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. consensus_control. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED"
+    }
+  ]
+}
