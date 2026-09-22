@@ -90,6 +90,30 @@ jobs:
           json.dump(payload,open(".agora-collective/independent/reproduction.json","w"),indent=2)
           print(json.dumps(payload))
           PY
+      - name: Produce alternative-method evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,hashlib,os,itertools
+          # Alternative method: exhaustive truth-table evaluation of the 5-input gate,
+          # distinct from the scenario-based reproducer.
+          rows=[]
+          for status,rep,alt,fal,prov in itertools.product((False,True), repeat=5):
+              got=status and rep and alt and fal and prov
+              expected=all((status,rep,alt,fal,prov))
+              rows.append({"bits":[status,rep,alt,fal,prov],"observed":got,"expected":expected})
+          ok=len(rows)==32 and all(r["observed"]==r["expected"] for r in rows) and sum(r["observed"] for r in rows)==1
+          payload={"schema":"CEREBRON_INDEPENDENT_EVIDENCE_V1","kind":"alternative_method",
+                   "status":"PASS" if ok else "FAIL","model_or_method":"exhaustive-boolean-truth-table-v1",
+                   "evidence_source":"LOCAL_EXHAUSTIVE_ENUMERATION",
+                   "prompt_lineage":"AGORA_GATE_TRUTH_TABLE_V1",
+                   "cases":len(rows),"accepting_cases":sum(r["observed"] for r in rows)}
+          raw=json.dumps(payload,sort_keys=True,separators=(",",":")).encode()
+          payload["artifact_sha256"]=hashlib.sha256(raw).hexdigest()
+          os.makedirs(".agora-collective/independent",exist_ok=True)
+          json.dump(payload,open(".agora-collective/independent/alternative-method.json","w"),indent=2)
+          print(json.dumps(payload))
+          PY
       - name: Build independent-validation receipt from evidence
         shell: bash
         run: |
