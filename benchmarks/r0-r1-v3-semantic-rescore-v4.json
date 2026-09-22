@@ -1,0 +1,127 @@
+{
+  "version": "4.0-rescore-1",
+  "source_run": 35713023275,
+  "source_model": "HuggingFaceTB/SmolLM3-3B",
+  "source_revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "judge_commit": "71c68ada3c8105e7928a787c3b8396eb3b387776",
+  "method": "Manual semantic audit of frozen V3 user-facing R0/R1 against frozen V4 propositions; no new model inference.",
+  "cases": [
+    {
+      "id": "H01",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H02",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H03",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H04",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H05",
+      "r0": [
+        "PASS",
+        "REVIEW_REQUIRED",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "REVIEW_REQUIRED",
+        "PASS"
+      ],
+      "note": "Both select newer verified 95C evidence, but neither explicitly preserves the phrase/current-revision scope strongly enough for an unambiguous semantic PASS."
+    },
+    {
+      "id": "H06",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H07",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "H08",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    }
+  ],
+  "totals": {
+    "r0_pass": 23,
+    "r1_pass": 23,
+    "r0_review_required": 1,
+    "r1_review_required": 1,
+    "r0_fail": 0,
+    "r1_fail": 0,
+    "demonstrated_delta": 0,
+    "critical_regressions": 0
+  },
+  "verdict": "NO_DEMONSTRATED_R1_GAIN_ON_V4_SEMANTIC_RESCORE",
+  "caveat": "This rescoring corrects lexical false negatives; it does not establish generalization or neural learning."
+}
