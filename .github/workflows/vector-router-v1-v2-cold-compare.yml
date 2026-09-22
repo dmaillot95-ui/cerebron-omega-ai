@@ -1,0 +1,57 @@
+name: Vector Router V1 vs V2 Cold Compare
+on:
+  push:
+    paths:
+      - '.github/workflows/vector-router-v1-v2-cold-compare.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet sentence-transformers
+      - name: Compare frozen cold set
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,glob,hashlib
+          from pathlib import Path
+          from sentence_transformers import SentenceTransformer
+          lessons=[]
+          for f in sorted(glob.glob("config/lesson-validation-batch-*.json")):
+              lessons += json.load(open(f)).get("lessons",[])
+          assert len(lessons)==60
+          cold=json.load(open("benchmarks/vector-router-cold-v2.json"))
+          model=SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+          def key(x): return x.get("domain","")+"/"+x.get("question_type","")
+          def txt(x): return " | ".join(str(x.get(k,"")) for k in ["domain","question_type","strategy_summary","anti_patterns"])
+          L=model.encode([txt(x) for x in lessons],normalize_embeddings=True)
+          Q=model.encode([c["prompt"] for c in cold["cases"]],normalize_embeddings=True)
+          domains=sorted(set(x.get("domain","") for x in lessons)); types=sorted(set(x.get("question_type","") for x in lessons))
+          def compat(prompt,label):
+              p=set(prompt.lower().replace("-"," ").split()); z=set(label.lower().replace("_"," ").replace("-"," ").split())
+              return len(p&z)/max(1,len(z))
+          rows=[]; a1=a3=b1=b3=0
+          for c,q in zip(cold["cases"],Q):
+              sims=L@q; acc=set(c["acceptable_targets"])
+              o1=sorted(range(len(lessons)),key=lambda i:float(sims[i]),reverse=True)
+              ds={d:compat(c["prompt"],d) for d in domains}; ts={t:compat(c["prompt"],t) for t in types}
+              o2=[i for _,i in sorted([(.65*float(sims[i])+.20*ds.get(x.get("domain",""),0)+.15*ts.get(x.get("question_type",""),0),i) for i,x in enumerate(lessons)],reverse=True)]
+              k1=[key(lessons[i]) for i in o1[:3]]; k2=[]; seen=set()
+              for i in o2:
+                  kk=key(lessons[i])
+                  if kk not in seen: seen.add(kk); k2.append(kk)
+                  if len(k2)==3: break
+              x1=k1[0] in acc; x3=any(x in acc for x in k1); y1=k2[0] in acc; y3=any(x in acc for x in k2)
+              a1+=x1; a3+=x3; b1+=y1; b3+=y3
+              rows.append({"id":c["id"],"acceptable":sorted(acc),"v1_top3":k1,"v2_top3":k2,"v1_at1":x1,"v1_at3":x3,"v2_at1":y1,"v2_at3":y3})
+          report={"schema":"CEREBRON_VECTOR_ROUTER_V1_V2_COLD_RESULT","n":len(rows),"v1":{"at1":a1,"at3":a3},"v2":{"at1":b1,"at3":b3},"delta":{"at1":b1-a1,"at3":b3-a3},"rows":rows,"limitations":["V2 compatibility classifier is lexical and deterministic, not trained.","Twelve cold cases are a canary, not generalization proof.","Routing relevance is not factual evidence.","No GOLD promotion."]}
+          raw=json.dumps(report,sort_keys=True,separators=(",",":")).encode(); report["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          Path("out").mkdir(exist_ok=True); Path("out/vector-router-v1-v2-cold-result.json").write_text(json.dumps(report,indent=2)+"\n")
+          print("ROUTER_COMPARE="+json.dumps({"n":len(rows),"v1_at1":a1,"v1_at3":a3,"v2_at1":b1,"v2_at3":b3,"delta_at1":b1-a1,"delta_at3":b3-a3,"receipt_sha256":report["receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vector-router-v1-v2-cold-RUNID
+          path: out/vector-router-v1-v2-cold-result.json
