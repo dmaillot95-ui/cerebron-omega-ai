@@ -133,7 +133,24 @@ def main():
     os.makedirs('out',exist_ok=True)
     with open('out/global-ai-provider-probe.json','w',encoding='utf-8') as f:
         json.dump(out,f,ensure_ascii=False,indent=2)
-    print(json.dumps({'configured_count':len(configured),'success_count':len(successes),'quality_pass_count':len(quality),
-                      'providers':[{'provider':r.get('provider'),'success':r.get('success'),'status':r.get('status'),'http_status':r.get('http_status'),'failure_class':r.get('failure_class'),'quality':(r.get('quality') or {}).get('pass')} for r in results]}))
+    reality={
+      'schema':'cerebron-provider-reality-v1',
+      'configured_count':len(configured),
+      'executed_count':sum(r.get('status')!='SKIPPED_NO_KEY' for r in results),
+      'success_count':len(successes),
+      'quality_pass_count':len(quality),
+      'failure_count':sum(r.get('status')!='SKIPPED_NO_KEY' and not r.get('success') for r in results),
+      'providers':[{'provider':r.get('provider'),'configured':r.get('status')!='SKIPPED_NO_KEY',
+                    'success':bool(r.get('success')),'status':r.get('status'),
+                    'http_status':r.get('http_status'),'failure_class':r.get('failure_class'),
+                    'latency_seconds':r.get('latency_seconds'),'model':r.get('model'),
+                    'quality_pass':(r.get('quality') or {}).get('pass')} for r in results],
+      'rules':['WORKFLOW_SUCCESS!=PROVIDER_SUCCESS','HTTP_SUCCESS!=VALIDATED_RESULT','MISSING_KEY!=PROVIDER_FAILURE']
+    }
+    raw=json.dumps(reality,sort_keys=True,indent=2).encode()
+    import hashlib
+    with open('out/provider-reality-manifest.json','wb') as f: f.write(raw)
+    print('PROVIDER_REALITY='+json.dumps(reality,separators=(',',':')))
+    print('PROVIDER_MANIFEST_SHA256='+hashlib.sha256(raw).hexdigest())
 
 if __name__=='__main__': main()
