@@ -1,0 +1,40 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_V1",
+  "status": "CONFIGURED",
+  "input": "SEED_PENDING_VALIDATION",
+  "stages": [
+    "SCHEMA_CHECK",
+    "NORMALIZE",
+    "SEMANTIC_DEDUP",
+    "DEPENDENCY_CHECK",
+    "COUNTEREXAMPLE_TEST",
+    "DOMAIN_AUDIT",
+    "RED_TEAM",
+    "TRANSFER_TEST",
+    "PROMOTION_DECISION"
+  ],
+  "dedup": {
+    "exact_hash": true,
+    "semantic_candidate_threshold": 0.92,
+    "rule": "SIMILARITY_FLAGS_REVIEW_NOT_AUTOMATIC_MERGE"
+  },
+  "validation_required": [
+    "strategy_is_actionable",
+    "scope_is_explicit",
+    "anti_patterns_present",
+    "no_claim_beyond_evidence",
+    "counterexample_or_failure_test",
+    "provenance_complete"
+  ],
+  "promotion": {
+    "pass": "GOLD_VALIDATED",
+    "fail": "RED_VALIDATED_OR_REJECT",
+    "uncertain": "OPEN"
+  },
+  "rules": [
+    "VECTOR_IS_REPRESENTATION_NOT_PROOF",
+    "SEED_IS_NOT_GOLD",
+    "DEPENDENT_REVIEWS_DO_NOT_COUNT_AS_INDEPENDENT",
+    "TRANSFER_BEFORE_GENERALITY"
+  ]
+}
