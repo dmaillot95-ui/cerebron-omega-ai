@@ -1,0 +1,346 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B03",
+  "count": 10,
+  "status": "PARTIAL",
+  "domains": [
+    "science_rd",
+    "research_evidence"
+  ],
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "DEFERRED_TO_CROSS_BATCH_AUDIT"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D04-HYPOTHESIS-001",
+      "domain": "science_rd",
+      "question_type": "hypothesis",
+      "title": "Strategy for hypothesis",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. hypothesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "State the observation, proposed mechanism and discriminating prediction; list plausible alternatives and what evidence would separate them.",
+      "anti_patterns": [
+        "hypothesis presented as established mechanism"
+      ],
+      "failure_or_counterexample_test": "Construct an alternative mechanism that explains the same observation and identify a discriminating test.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D04-EXPERIMENT_DESIGN-001",
+      "domain": "science_rd",
+      "question_type": "experiment_design",
+      "title": "Strategy for experiment design",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. experiment_design. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define hypothesis, primary endpoint, controls, confounders, measurement uncertainty and stopping/analysis plan before observing outcomes.",
+      "anti_patterns": [
+        "changing endpoint after seeing results"
+      ],
+      "failure_or_counterexample_test": "Check whether controls and measurements can distinguish the target effect from major confounders.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D04-LITERATURE_SYNTHESIS-001",
+      "domain": "science_rd",
+      "question_type": "literature_synthesis",
+      "title": "Strategy for literature synthesis",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. literature_synthesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define question and inclusion scope; prioritize primary evidence; normalize populations, methods and dates; map agreement, conflicts and uncertainty.",
+      "anti_patterns": [
+        "citation counting as evidence weighting"
+      ],
+      "failure_or_counterexample_test": "Remove the most influential source and test whether the synthesis materially changes.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D04-MODEL_COMPARISON-001",
+      "domain": "science_rd",
+      "question_type": "model_comparison",
+      "title": "Strategy for model comparison",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. model_comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Specify competing models, shared data, likelihood or scoring rule, complexity assumptions and out-of-sample test; compare predictions rather than narratives.",
+      "anti_patterns": [
+        "judging models on different datasets"
+      ],
+      "failure_or_counterexample_test": "Evaluate models on the same held-out observations and report uncertainty.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D04-FALSIFICATION-001",
+      "domain": "science_rd",
+      "question_type": "falsification",
+      "title": "Strategy for falsification",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "science_rd. falsification. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Translate the claim into observable consequences and define outcomes that would count against it; seek high-information tests rather than confirmations.",
+      "anti_patterns": [
+        "unfalsifiable success criteria"
+      ],
+      "failure_or_counterexample_test": "Precommit at least one result that would weaken or reject the claim.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D05-FACT_RETRIEVAL-001",
+      "domain": "research_evidence",
+      "question_type": "fact_retrieval",
+      "title": "Strategy for fact retrieval",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. fact_retrieval. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Resolve entity, date, jurisdiction and requested fact; prefer authoritative or primary sources; preserve exact scope and freshness.",
+      "anti_patterns": [
+        "answering a current fact from stale memory"
+      ],
+      "failure_or_counterexample_test": "Cross-check the fact against a second suitable source or explicitly report single-source status.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D05-SOURCE_COMPARISON-001",
+      "domain": "research_evidence",
+      "question_type": "source_comparison",
+      "title": "Strategy for source comparison",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. source_comparison. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Compare sources on claim, date, population, definitions, methodology and evidence chain; explain conflicts without averaging incompatible statements.",
+      "anti_patterns": [
+        "source-count voting"
+      ],
+      "failure_or_counterexample_test": "Trace each conflicting claim to its underlying evidence and definitions.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D05-PROVENANCE-001",
+      "domain": "research_evidence",
+      "question_type": "provenance",
+      "title": "Strategy for provenance",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. provenance. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Record source identity, retrieval date, transformation steps and evidence-to-claim mapping; keep inference distinct from quoted or measured facts.",
+      "anti_patterns": [
+        "orphan claim without source lineage"
+      ],
+      "failure_or_counterexample_test": "Attempt to reconstruct every material claim from its recorded provenance.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D05-UNCERTAINTY-001",
+      "domain": "research_evidence",
+      "question_type": "uncertainty",
+      "title": "Strategy for uncertainty",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. uncertainty. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Separate measurement error, sampling uncertainty, model uncertainty and unknown unknowns; report intervals or scenarios appropriate to evidence.",
+      "anti_patterns": [
+        "single confidence number hiding different uncertainties"
+      ],
+      "failure_or_counterexample_test": "Perturb dominant uncertainty sources and test conclusion stability.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D05-SYNTHESIS-001",
+      "domain": "research_evidence",
+      "question_type": "synthesis",
+      "title": "Strategy for synthesis",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "research_evidence. synthesis. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Decompose the question, collect evidence by subclaim, deduplicate shared sources, reconcile compatible results and preserve unresolved contradictions.",
+      "anti_patterns": [
+        "smooth narrative that hides disagreement"
+      ],
+      "failure_or_counterexample_test": "Build the synthesis after removing duplicate/dependent evidence and verify contradictions remain visible.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
