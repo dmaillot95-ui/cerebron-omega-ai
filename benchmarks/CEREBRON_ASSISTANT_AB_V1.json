@@ -1,0 +1,67 @@
+{
+  "schema": "CEREBRON_ASSISTANT_AB_V1",
+  "purpose": "Measure response-quality gain from CEREBRON augmentation without confusing orchestration with intelligence.",
+  "protocol": {
+    "arms": {
+      "A": "baseline_single_execution",
+      "B": "cerebron_augmented"
+    },
+    "blind_scoring": true,
+    "same_tasks": true,
+    "comparable_budget": "REQUIRED_OR_REPORT_DIFFERENCE",
+    "contamination_rule": "Tasks used for training/memory promotion are excluded from cold evaluation.",
+    "minimum_cold_tasks": 12,
+    "domains": [
+      "math_proof",
+      "code_compute",
+      "science_rd",
+      "research_synthesis"
+    ],
+    "tasks_per_domain": 3
+  },
+  "rubric": {
+    "correctness": 30,
+    "evidence_quality": 20,
+    "calibration": 15,
+    "robustness": 15,
+    "contradiction_detection": 10,
+    "task_completion": 10,
+    "total": 100
+  },
+  "required_receipt": [
+    "task_id",
+    "arm",
+    "answer_sha256",
+    "model_or_method",
+    "prompt_lineage",
+    "data_sources",
+    "latency_ms",
+    "compute_or_token_budget",
+    "score_breakdown",
+    "total_score",
+    "grader_id",
+    "grader_method",
+    "grader_independence",
+    "timestamp"
+  ],
+  "gates": [
+    "NO_SELF_REPORTED_GAIN",
+    "NO_TRAINING_DATA_IN_COLD_SET",
+    "SAME_TASKS_BOTH_ARMS",
+    "BLIND_GRADING",
+    "DEPENDENCY_FINGERPRINT_REQUIRED",
+    "REPORT_BUDGET_DIFFERENCE",
+    "CLAIM_GAIN_ONLY_FROM_PAIRED_SCORES"
+  ],
+  "metrics": [
+    "mean_score_A",
+    "mean_score_B",
+    "paired_delta_B_minus_A",
+    "win_tie_loss",
+    "critical_error_rate_A",
+    "critical_error_rate_B",
+    "latency_ratio_B_over_A",
+    "budget_ratio_B_over_A"
+  ],
+  "status": "PROTOCOL_CONFIGURED_NOT_EXECUTED"
+}
