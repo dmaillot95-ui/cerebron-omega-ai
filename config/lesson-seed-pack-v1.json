@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_LESSON_SEED_PACK_V1",
+  "status": "SEED_PENDING_VALIDATION",
+  "lessons": [
+    {
+      "lesson_id": "L-U-001",
+      "domain": "universal_reasoning",
+      "subdomain": "epistemics",
+      "question_type": "decision_under_uncertainty",
+      "strategy_summary": "Separate established facts, derivations, assumptions, hypotheses and unknowns before composing the answer. Calibrate wording to evidence strength; unresolved evidence remains unresolved.",
+      "apply_when": "Claims mix different evidence levels.",
+      "anti_patterns": [
+        "coherence presented as truth",
+        "unknown converted to fact"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    },
+    {
+      "lesson_id": "L-M-001",
+      "domain": "math_proof",
+      "subdomain": "proof_logic",
+      "question_type": "proof",
+      "strategy_summary": "Write quantifiers and target statement first. Separate necessary from sufficient conditions. Seek a counterexample before universalization. Finite computation can support exploration but cannot establish an unrestricted theorem.",
+      "apply_when": "A universal mathematical claim or proof is requested.",
+      "anti_patterns": [
+        "finite verification implies universal proof",
+        "necessary condition treated as sufficient"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    },
+    {
+      "lesson_id": "L-C-001",
+      "domain": "code_compute",
+      "subdomain": "debugging",
+      "question_type": "debugging",
+      "strategy_summary": "Reproduce the failure, minimize the case, isolate the failing assumption, patch the smallest responsible component, then run a regression test that would fail under the old behavior.",
+      "apply_when": "Software behavior is incorrect or inconsistent.",
+      "anti_patterns": [
+        "large rewrite before reproduction",
+        "fix without regression test"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    },
+    {
+      "lesson_id": "L-P-001",
+      "domain": "physics_engineering",
+      "subdomain": "feasibility",
+      "question_type": "feasibility",
+      "strategy_summary": "Define system boundary and units, compute conservation and scaling constraints, identify dominant losses and loads, compare against realistic component limits, then separate calculated feasibility from experimentally demonstrated performance.",
+      "apply_when": "Assessing whether a physical architecture can work.",
+      "anti_patterns": [
+        "ignoring losses",
+        "simulation presented as test"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    },
+    {
+      "lesson_id": "L-R-001",
+      "domain": "research_evidence",
+      "subdomain": "provenance",
+      "question_type": "source_comparison",
+      "strategy_summary": "Prefer primary and authoritative sources for factual claims, record date and population or scope, distinguish source statements from inference, and surface meaningful conflicts rather than averaging incompatible claims.",
+      "apply_when": "Multiple sources support or contest a factual answer.",
+      "anti_patterns": [
+        "source-count voting",
+        "mixing populations or time periods"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    },
+    {
+      "lesson_id": "L-A-001",
+      "domain": "audit_redteam",
+      "subdomain": "claim_evidence",
+      "question_type": "claim_evidence",
+      "strategy_summary": "Decompose each material claim into evidence requirements. Test provenance, independence, alternative explanations and falsifying cases. Reduce or block the claim when evidence does not meet its required level.",
+      "apply_when": "Auditing a result before promotion.",
+      "anti_patterns": [
+        "workflow success treated as result validity",
+        "dependent repetitions treated as independent evidence"
+      ],
+      "evidence_level": "SEED_PENDING_VALIDATION"
+    }
+  ]
+}
