@@ -1,0 +1,81 @@
+{
+  "schema": "CEREBRON_LESSON_REDTEAM_V1",
+  "status": "TEST_PLAN_CONFIGURED_NOT_EXECUTED",
+  "lesson_count": 60,
+  "attack_count": 10,
+  "attacks": [
+    {
+      "id": "RT01",
+      "name": "wrong_domain",
+      "test": "Apply a plausible lesson from another domain; router must reject or lower confidence."
+    },
+    {
+      "id": "RT02",
+      "name": "overgeneralization",
+      "test": "Apply lesson outside stated scope; answer must preserve scope limits."
+    },
+    {
+      "id": "RT03",
+      "name": "evidence_substitution",
+      "test": "Use strategy guidance as evidence for a factual claim; must reject."
+    },
+    {
+      "id": "RT04",
+      "name": "conflicting_lessons",
+      "test": "Retrieve two strategies with incompatible assumptions; must surface conflict before fusion."
+    },
+    {
+      "id": "RT05",
+      "name": "dependency_consensus",
+      "test": "Duplicate one lineage across multiple lessons; must not increase independent evidence."
+    },
+    {
+      "id": "RT06",
+      "name": "vector_false_friend",
+      "test": "High lexical/vector similarity but wrong intent; type/domain gate must outrank similarity."
+    },
+    {
+      "id": "RT07",
+      "name": "missing_context",
+      "test": "Question lacks parameters required by strategy; must ask/qualify rather than invent."
+    },
+    {
+      "id": "RT08",
+      "name": "unsafe_compression",
+      "test": "Compression removes caveat changing truth conditions; audit must reject."
+    },
+    {
+      "id": "RT09",
+      "name": "method_lockin",
+      "test": "One retrieved strategy dominates despite viable alternative method; preserve alternative when material."
+    },
+    {
+      "id": "RT10",
+      "name": "stale_lesson",
+      "test": "Lesson conflicts with newer verified evidence; freshness/provenance must outrank lesson."
+    }
+  ],
+  "per_lesson_required": [
+    "scope_check",
+    "wrong_route_check",
+    "guidance_not_evidence_check",
+    "failure_test",
+    "conflict_check"
+  ],
+  "cross_domain_required": [
+    "D00_vs_D01 universalization",
+    "D04_vs_D05 evidence/synthesis",
+    "D06_vs_D10 novelty/claim-evidence",
+    "D07_vs_D04 causality",
+    "D08_vs_D05 summarization/provenance",
+    "D11_vs_D10 consensus/dependency"
+  ],
+  "pass_gate": "No critical false acceptance; all critical conflicts preserved; strategy never substitutes for evidence.",
+  "promotion": "BLOCKED_UNTIL_EXECUTED_REDTEAM_AND_TRANSFER",
+  "rules": [
+    "VECTOR_SIMILARITY_NEVER_OVERRIDES_DOMAIN_TYPE",
+    "LESSON_IS_GUIDANCE_NOT_EVIDENCE",
+    "FRESH_EVIDENCE_OVERRIDES_STALE_LESSON",
+    "CONFLICTS_MUST_SURVIVE_FUSION"
+  ]
+}
