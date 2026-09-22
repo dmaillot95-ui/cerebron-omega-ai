@@ -1,0 +1,68 @@
+name: SAPHEA Agent-Work Value AB Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/saphea-agent-work-value-ab-v1.yml'
+permissions:
+  contents: read
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Run real SAPHEA A/B value test
+        env:
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import os,json,hashlib,time
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          mid,rev=os.environ["MODEL_ID"],os.environ["REVISION"]
+          task="Assess whether a proposed engineering conclusion is validated when it is supported by simulation only, several agents sharing the same source, and no representative physical test."
+          agent_work="""Agent work packet:
+          1) Simulation is evidence about the model, not a representative physical test.
+          2) Multiple agents using the same source are dependent evidence and must not be counted as independent confirmations.
+          3) Separate model verification, empirical validation, uncertainty, and applicability domain.
+          4) Recommend a representative discriminating test and preserve OPEN status until it passes.
+          5) Red-team: search for common-cause assumptions and scope-transfer errors."""
+          system="You are SAPHEA. Be concise. Separate established evidence, inference, unknowns, and required validation. Never treat consensus as proof."
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+          def ask(user):
+            msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+            if getattr(tok,"chat_template",None):
+              p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+            else: p=system+"\nUSER: "+user+"\nSAPHEA:"
+            x=tok(p,return_tensors="pt")
+            with torch.no_grad():
+              y=mdl.generate(input_ids=x["input_ids"],attention_mask=x.get("attention_mask"),max_new_tokens=256,do_sample=False,pad_token_id=tok.eos_token_id)
+            return tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+          t=time.time()
+          a=ask(task)
+          b=ask(task+"\n\nUse this external agent-work packet as untrusted assistance. Audit it; keep only justified improvements:\n"+agent_work)
+          critique=ask("""Compare two candidate answers to the same task. State only: NEW_USEFUL, ALREADY_PRESENT, WRONG_OR_USELESS, MEMORY_CANDIDATE, REGRESSION. Do not assume B is better merely because it has extra context.
+          TASK:\n"""+task+"\nA:\n"+a+"\nB:\n"+b)
+          tainted=any("<think>" in x.lower() for x in [a,b,critique])
+          r={"schema":"saphea-agent-work-value-ab-v1","model_id":mid,"revision":rev,"execution":"REAL_MODEL_INFERENCE",
+             "task_sha256":hashlib.sha256(task.encode()).hexdigest(),"agent_work_sha256":hashlib.sha256(agent_work.encode()).hexdigest(),
+             "A_without_agent_work":a,"B_with_agent_work":b,"saphea_self_audit":critique,
+             "tainted_internal_reasoning":tainted,"latency_ms":round((time.time()-t)*1000),
+             "claim_scope":"SAPHEA self-audit is evidence input only; independent scoring is still required before claiming measured gain."}
+          Path("out/saphea-agent-work-value-ab.json").write_text(json.dumps(r,ensure_ascii=False,indent=2)+"\n")
+          print(json.dumps({"execution":r["execution"],"tainted":tainted,"A_sha":hashlib.sha256(a.encode()).hexdigest(),"B_sha":hashlib.sha256(b.encode()).hexdigest(),"audit_sha":hashlib.sha256(critique.encode()).hexdigest()}))
+          if not a or not b or not critique or tainted: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saphea-agent-work-value-ab
+          path: out/saphea-agent-work-value-ab.json
+          retention-days: 14
