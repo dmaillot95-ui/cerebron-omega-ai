@@ -1,0 +1,108 @@
+{
+  "schema": "cerebron-six-ai-learning-pipeline-v2",
+  "version": "2.0",
+  "status": "READY_FOR_SIX_AI_VALIDATED_INGRESS",
+  "supersedes": "training/FOUR_AI_AGENT6_LEARNING_PIPELINE.json",
+  "mode": "NON_DESTRUCTIVE_REVERSIBLE",
+  "base": {
+    "model_id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "generation": "G0",
+    "immutable": true
+  },
+  "targets": {
+    "SAPHEA": {
+      "role": "specialized execution and skills",
+      "adaptation": "PEFT_LORA_OR_EQUIVALENT_WHEN_TRAINABLE"
+    },
+    "SPIRALION": {
+      "role": "cumulative reasoning, representation, compression and reuse",
+      "adaptation": "POLICY_MEMORY_ROUTING_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "ETHERION": {
+      "role": "hard R&D, invention, models and discriminating experiments",
+      "adaptation": "POLICY_TOOL_ROUTING_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "HYPERION": {
+      "role": "exploration, divergence, alternatives and blind spots",
+      "adaptation": "EXPLORATION_POLICY_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "AFAH": {
+      "role": "evidence fusion, dependency preservation, contradiction audit",
+      "adaptation": "FUSION_POLICY_AND_ADAPTER_WHEN_TRAINABLE"
+    },
+    "CEREBRON": {
+      "role": "classification, routing, planning, execution accounting and checkpoint resume",
+      "adaptation": "ROUTING_POLICY_AND_ADAPTER_WHEN_TRAINABLE",
+      "hard_boundary": "Execution accounting remains deterministic and cannot be authored by model output."
+    }
+  },
+  "ingress_gate": [
+    "INDEPENDENT_REPRODUCTION_WHEN_APPLICABLE",
+    "ALTERNATIVE_METHOD",
+    "FALSIFICATION",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "F72_REALITY_EVIDENCE",
+    "DEPENDENCY_FINGERPRINT",
+    "PROVENANCE",
+    "NO_BENCHMARK_LEAKAGE"
+  ],
+  "dataset": {
+    "splits": [
+      "TRAIN",
+      "VALIDATION",
+      "BLIND_TEST",
+      "TRANSFER",
+      "ADVERSARIAL"
+    ],
+    "rules": [
+      "BLIND_TEST_IMMUTABLE",
+      "BLIND_TEST_ANSWERS_NEVER_TRAIN",
+      "HASH_EVERY_RECORD",
+      "DEDUP_BY_LINEAGE",
+      "VERSION_EVERY_DATASET",
+      "SOURCE_AI_RECORDED"
+    ]
+  },
+  "training": {
+    "default": "LoRA_or_reversible_adapter_before_full_weight_training",
+    "base": "IMMUTABLE_G0",
+    "generation": "G0_TO_G1_TO_G2",
+    "rollback": true,
+    "parallelism": 1
+  },
+  "evaluation": [
+    "G0_BASELINE",
+    "G1_COLD",
+    "TRANSFER",
+    "ADVERSARIAL",
+    "ABLATION_WITHOUT_ADAPTER",
+    "REGRESSION",
+    "AUDIT",
+    "RED_TEAM"
+  ],
+  "promotion": {
+    "requires": [
+      "REAL_ARTIFACT",
+      "HF_PRIVATE_WRITE_READ_SHA_PASS",
+      "COLD_GAIN_POSITIVE",
+      "TRANSFER_GAIN_POSITIVE",
+      "ABLATION_SUPPORTS_CAUSAL_VALUE",
+      "NO_CRITICAL_REGRESSION",
+      "AUDIT_PASS",
+      "RED_TEAM_PASS",
+      "F72_PASS"
+    ],
+    "failure": "ROLLBACK_RETAIN_EVIDENCE"
+  },
+  "rules": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "MEMORY_NE_LEARNING",
+    "CONSENSUS_NE_PROOF",
+    "SAME_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "NO_REAL_EXECUTION_NON_EXECUTED"
+  ]
+}
