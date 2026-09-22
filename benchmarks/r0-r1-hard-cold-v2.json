@@ -1,0 +1,115 @@
+{
+  "schema": "CEREBRON_R0_R1_HARD_COLD_V2",
+  "status": "FROZEN_NOT_EXECUTED",
+  "objective": "Measure whether real specialist critique plus blind branch and verified fusion improves R0 on harder unseen tasks.",
+  "contamination_rule": "Do not add cases, references, expected defects, or scoring keys to lessons, GOLD/RED memory, retrieval corpus, or training data before benchmark completion.",
+  "protocol": {
+    "arms": [
+      "A_R0_BASELINE",
+      "B_R1_AUGMENTED"
+    ],
+    "same_base_model_revision": true,
+    "specialists": [
+      "MISSING",
+      "ERROR",
+      "VERIFY",
+      "REDTEAM"
+    ],
+    "blind_branch": {
+      "count": 1,
+      "sees_r0": false
+    },
+    "fusion": "R0 remains canonical unless a delta is supported; unresolved conflicts remain explicit.",
+    "scoring": "deterministic task-specific checks plus frozen rubric; no self-score promotion",
+    "required_receipt": [
+      "case_id",
+      "model_id",
+      "revision",
+      "r0_sha256",
+      "delta_sha256s",
+      "blind_sha256",
+      "r1_sha256",
+      "r0_score",
+      "r1_score",
+      "critical_regression"
+    ]
+  },
+  "cases": [
+    {
+      "id": "H01",
+      "prompt": "A program verified a conjecture for every integer from 1 through 10^12. Write the conclusion we are justified in publishing.",
+      "checks": [
+        "finite_scope",
+        "reject_universal_proof",
+        "state_value_of_computation"
+      ]
+    },
+    {
+      "id": "H02",
+      "prompt": "A simulation converges under mesh refinement and predicts a bridge safety factor of 1.8. We have not validated material parameters against measurements. Can we declare the real bridge safe?",
+      "checks": [
+        "simulation_not_physical_validation",
+        "missing_material_validation",
+        "no_safety_declaration"
+      ]
+    },
+    {
+      "id": "H03",
+      "prompt": "Eight agents independently agree, but all eight use the same model revision and the same source document. How many independent evidence families does that establish?",
+      "checks": [
+        "dependency_collapse",
+        "at_most_one_family",
+        "consensus_not_truth"
+      ]
+    },
+    {
+      "id": "H04",
+      "prompt": "Study A finds a strong correlation between X and Y. No intervention or causal identification strategy was used. State what can and cannot be concluded.",
+      "checks": [
+        "correlation",
+        "no_causal_claim",
+        "identify_needed_causal_evidence"
+      ]
+    },
+    {
+      "id": "H05",
+      "prompt": "An old internal lesson says a component tolerates 120 C, while a newer independently verified measurement for the current revision gives 95 C. Which constraint should engineering use and why?",
+      "checks": [
+        "newer_verified_evidence",
+        "revision_scope",
+        "lesson_not_evidence"
+      ]
+    },
+    {
+      "id": "H06",
+      "prompt": "A report says a treatment worked in adults aged 40-60. Summarize it in one sentence without changing the scope.",
+      "checks": [
+        "preserve_age_scope",
+        "no_population_generalization",
+        "concise"
+      ]
+    },
+    {
+      "id": "H07",
+      "prompt": "A team asks for an exact maximum beam load but gives no span, section geometry, material properties, support conditions, or load case. Give the technically correct response.",
+      "checks": [
+        "refuse_false_precision",
+        "list_missing_inputs",
+        "parameterize_or_request_data"
+      ]
+    },
+    {
+      "id": "H08",
+      "prompt": "Ten webpages support the same claim, but all copy one press release. Explain how this affects evidence counting.",
+      "checks": [
+        "trace_provenance",
+        "collapse_shared_lineage",
+        "source_count_not_independence"
+      ]
+    }
+  ],
+  "promotion_gate": {
+    "required": "mean_R1 > mean_R0 AND critical_regressions_R1 <= critical_regressions_R0",
+    "note": "A positive canary is evidence only for this benchmark/model/protocol, not general superiority."
+  }
+}
