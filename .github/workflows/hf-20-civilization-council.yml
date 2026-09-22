@@ -72,3 +72,51 @@ jobs:
           name: hf-civilization-council-${{ matrix.slot }}
           path: receipts/hf-council/${{ matrix.slot }}.json
           retention-days: 90
+
+  reality-manifest:
+    if: always()
+    needs: council
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Download all council receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: hf-civilization-council-*
+          path: receipts/all
+          merge-multiple: true
+      - name: Build HF20 reality manifest
+        run: |
+          python - <<'PY'
+          import json,glob,os,hashlib
+          rows=[]
+          for p in sorted(glob.glob("receipts/all/*.json")):
+              try: rows.append(json.load(open(p)))
+              except Exception as e: rows.append({"source":p,"status":"FAIL","real_call":False,"error":"INVALID_RECEIPT"})
+          ok=[r for r in rows if r.get("real_call") is True and r.get("status")=="PASS"]
+          families=sorted({r.get("model_family") for r in ok if r.get("model_family")})
+          manifest={
+            "schema":"CEREBRON_HF20_REALITY_V1",
+            "configured_count":20,
+            "receipt_count":len(rows),
+            "executed_count":sum(r.get("real_call") is True for r in rows),
+            "success_count":len(ok),
+            "failure_count":sum(not (r.get("real_call") is True and r.get("status")=="PASS") for r in rows),
+            "independent_family_count":len(families),
+            "families":families,
+            "rules":["WORKFLOW_SUCCESS!=MODEL_SUCCESS","JOB_COUNT!=REAL_MODEL_COUNT","ARTIFACT_EXISTS!=VALIDATED_RESULT","SAME_FAMILY_IS_NOT_INDEPENDENT"],
+            "slots":rows
+          }
+          os.makedirs("receipts/hf20-reality",exist_ok=True)
+          raw=json.dumps(manifest,sort_keys=True,indent=2).encode()
+          open("receipts/hf20-reality/manifest.json","wb").write(raw)
+          print(json.dumps({k:manifest[k] for k in ["configured_count","receipt_count","executed_count","success_count","failure_count","independent_family_count"]}))
+          print("MANIFEST_SHA256="+hashlib.sha256(raw).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hf20-reality-manifest
+          path: receipts/hf20-reality/manifest.json
+          retention-days: 90
