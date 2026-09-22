@@ -1,6 +1,9 @@
 name: HF Six-AI Inbox Canary V2
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/hf-six-ai-inbox-canary-v2.yml'
 permissions:
   contents: read
 jobs:
