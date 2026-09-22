@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/global_ai_router.py'
       - '.github/workflows/global-ai-provider-probe.yml'
+      - 'config/provider-probe-trigger.txt'
 
 permissions:
   contents: read
