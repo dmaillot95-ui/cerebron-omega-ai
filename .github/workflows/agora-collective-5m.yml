@@ -187,6 +187,25 @@ jobs:
           json.dump(receipt,open(".agora-collective/local-independent-validation.json","w"),indent=2)
           print(json.dumps(receipt))
           PY
+      - name: Negative-path regression test
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,copy
+          p=".agora-collective/local-independent-validation.json"
+          r=json.load(open(p))
+          tests={}
+          for field in ("independent_reproduction","alternative_method","falsification","provenance_complete"):
+              x=copy.deepcopy(r); x[field]=False
+              ok=(x.get("status")=="PASS" and x.get("independent_reproduction") is True
+                  and x.get("alternative_method") is True and x.get("falsification") is True
+                  and x.get("provenance_complete") is True)
+              tests[field]={"scientific_ok":ok,"promotion":"ELIGIBLE" if ok else "BLOCKED_PENDING_INDEPENDENT_VALIDATION",
+                            "memory_write":"ELIGIBLE" if ok else "BLOCKED_PENDING_INDEPENDENT_VALIDATION"}
+          passed=all(not v["scientific_ok"] and v["promotion"].startswith("BLOCKED") and v["memory_write"].startswith("BLOCKED") for v in tests.values())
+          print("NEGATIVE_PATH="+json.dumps({"status":"PASS" if passed else "FAIL","tests":tests},sort_keys=True))
+          if not passed: raise SystemExit(1)
+          PY
       - name: Compile gated collective state
         shell: bash
         run: |
