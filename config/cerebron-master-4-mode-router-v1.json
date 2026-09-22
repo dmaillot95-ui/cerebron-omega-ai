@@ -1,0 +1,185 @@
+{
+  "version": "1.0",
+  "name": "CEREBRON_MASTER_4_MODE_ROUTER",
+  "status": "ACTIVE_ARCHITECTURE_NOT_YET_PERFORMANCE_VALIDATED",
+  "invariants": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "CONSENSUS!=TRUTH",
+    "AGENT_COUNT!=INTELLIGENCE",
+    "MEMORY!=LEARNING",
+    "SIMULATION!=TEST"
+  ],
+  "modes": {
+    "AUGMENTATION": {
+      "purpose": "Improve a complete base answer R0 without silently degrading correct claims.",
+      "trigger": [
+        "single_question",
+        "analysis_request",
+        "decision_support",
+        "technical_answer"
+      ],
+      "pipeline": [
+        "R0",
+        "ROUTE_SPECIALISTS",
+        "SEE_R0_BRANCHES",
+        "BLIND_BRANCHES_20_30_PERCENT",
+        "DELTA_ONLY_OUTPUTS",
+        "DEDUP",
+        "DEPENDENCY_CHECK",
+        "VERIFY",
+        "REDTEAM",
+        "REGRESSION_GUARD",
+        "FUSE_R1",
+        "SCORE_R0_VS_R1"
+      ],
+      "output": [
+        "R1",
+        "verified_deltas",
+        "rejected_deltas",
+        "remaining_weaknesses",
+        "gain_receipt"
+      ]
+    },
+    "BOOK": {
+      "purpose": "Rapidly map and learn a broad domain through structured documentary acquisition.",
+      "trigger": [
+        "learn_domain",
+        "map_subject",
+        "book_campaign",
+        "large_knowledge_acquisition"
+      ],
+      "parameters": {
+        "books": "1-9",
+        "sections_per_book": "up_to_1000",
+        "worker_batch_sections": "adaptive"
+      },
+      "pipeline": [
+        "DEFINE_SCOPE",
+        "BUILD_BOOK_TREE",
+        "ASSIGN_SECTIONS",
+        "PARALLEL_STUDY",
+        "EXTRACT_FACTS_METHODS_EQUATIONS_EVIDENCE_CONTRADICTIONS_UNKNOWNS",
+        "PROVENANCE",
+        "AUDIT",
+        "COUNTERAUDIT",
+        "FUSION",
+        "VALIDATED_DOMAIN_MAP"
+      ],
+      "note": "Produces validated documentary memory; does not by itself prove neural learning."
+    },
+    "RD_FRONT": {
+      "purpose": "Advance a structured research front cumulatively without restarting.",
+      "trigger": [
+        "deep_research",
+        "open_problem",
+        "500_section_campaign",
+        "continue_checkpoint"
+      ],
+      "parameters": {
+        "typical_sections": 500,
+        "sections_per_resource_per_cycle": "5-10"
+      },
+      "section_states": [
+        "OPEN",
+        "PROGRESS",
+        "BLOCKED",
+        "CLOSED",
+        "REJECTED",
+        "REOPENED"
+      ],
+      "pipeline": [
+        "LOAD_LAST_CHECKPOINT",
+        "ASSIGN_NONOVERLAPPING_SECTIONS",
+        "RESEARCH_CALCULATE_SIMULATE_INVENT_PROVE",
+        "REDTEAM",
+        "AUDIT",
+        "COUNTERAUDIT",
+        "FUSION",
+        "UPDATE_SECTION_STATES",
+        "CHECKPOINT"
+      ]
+    },
+    "FUNNEL": {
+      "purpose": "Generate, eliminate, merge and deeply validate a large candidate population.",
+      "trigger": [
+        "2000_candidates",
+        "invention_selection",
+        "product_selection",
+        "solution_search",
+        "hypothesis_selection"
+      ],
+      "default_stages": [
+        2000,
+        1000,
+        500,
+        250,
+        100,
+        50,
+        25,
+        12,
+        6,
+        3
+      ],
+      "rules": [
+        "NO_VOTE_AS_TRUTH",
+        "TRACE_EVERY_ELIMINATION",
+        "KEEP_REJECTION_REASON",
+        "ALLOW_REPECHAGE_IF_ASSUMPTION_CHANGES",
+        "PATENTABILITY_NE_FTO",
+        "CLAIM<=EVIDENCE"
+      ],
+      "candidate_fields": [
+        "id",
+        "claim",
+        "evidence",
+        "assumptions",
+        "dependencies",
+        "E_level",
+        "uncertainty",
+        "value",
+        "risk",
+        "rejection_reason",
+        "repechage_condition"
+      ]
+    }
+  },
+  "chaining_examples": [
+    [
+      "BOOK",
+      "FUNNEL",
+      "RD_FRONT",
+      "AUGMENTATION"
+    ],
+    [
+      "AUGMENTATION"
+    ],
+    [
+      "FUNNEL",
+      "RD_FRONT"
+    ],
+    [
+      "BOOK",
+      "RD_FRONT"
+    ]
+  ],
+  "router": {
+    "principle": "Choose the minimum sufficient mode set; escalate only when complexity/evidence need justifies it.",
+    "simple_answer": "AUGMENTATION",
+    "broad_new_domain": "BOOK",
+    "persistent_open_research": "RD_FRONT",
+    "large_candidate_space": "FUNNEL",
+    "combined_program": "chain_modes"
+  },
+  "central_fusion": {
+    "role": "ChatGPT coordinator performs synthesis/counteraudit from real executed outputs only.",
+    "forbidden": [
+      "simulate_unexecuted_agents",
+      "count_shared_sources_as_independent",
+      "promote_on_consensus_only",
+      "overwrite_correct_R0_without_regression_check"
+    ]
+  }
+}
