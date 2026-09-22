@@ -402,6 +402,13 @@
       "domain": "exploration-discovery",
       "identity": "HYPERION",
       "status": "EXPERIMENTAL"
+    },
+    {
+      "id": 76,
+      "repo": "cerebron-farm-76-cerebron-core",
+      "domain": "central-orchestration-chatgpt-interface",
+      "identity": "CEREBRON",
+      "status": "EXPERIMENTAL"
     }
   ]
 }
