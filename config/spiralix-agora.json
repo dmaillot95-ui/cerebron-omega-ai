@@ -24,5 +24,57 @@
     "COLLAPSE != VALIDATION",
     "CLAIM <= EVIDENCE",
     "VERIFY BEFORE COMMIT"
-  ]
+  ],
+  "hyperion_bridge": {
+    "farm_id": 75,
+    "identity": "HYPERION",
+    "status": "EXPERIMENTAL",
+    "agora_role": "concave exploration and blind alternative generation",
+    "eligible_modes": [
+      "BOOK",
+      "RD_FRONT",
+      "AUGMENTATION",
+      "FUNNEL"
+    ],
+    "input": [
+      "problem",
+      "constraints",
+      "optional_R0"
+    ],
+    "output_contract": [
+      "candidate",
+      "novelty_rationale",
+      "assumptions",
+      "evidence_needed",
+      "dependencies",
+      "confidence",
+      "criticality"
+    ],
+    "blind_branch_policy": "retain independent branches without R0 when requested",
+    "routes_to_farms": [
+      32,
+      33,
+      34,
+      35,
+      38,
+      39,
+      42,
+      59,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73
+    ],
+    "promotion_gate": 72,
+    "final_fusion": "AFAH",
+    "rules": [
+      "HYPERION_OUTPUT_IS_CANDIDATE_NOT_FACT",
+      "NO_AUTO_GOLD",
+      "NO_AUTO_MEMORY_PROMOTION",
+      "NO_AUTO_TRAINING"
+    ]
+  }
 }
