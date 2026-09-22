@@ -77,7 +77,8 @@ jobs:
               if x.get("resource","").endswith("72-reality-evidence-gate"): gates["reality"]=x.get("reality_gate","PENDING")
               if x.get("resource","").endswith("59-verified-learning"):
                   gates["ablation"]=x.get("ablation","PENDING"); gates["transfer"]=x.get("transfer","PENDING")
-          scientific_ok=False\n          imported_gate_summary=all(gates[k]=="PASS" for k in ["reproduction","reality","ablation","transfer"])
+          scientific_ok=False
+          imported_gate_summary=all(gates[k]=="PASS" for k in ["reproduction","reality","ablation","transfer"])
           cyber_ok=gates["cyber_vigie"] in ("PASS","NORMAL")
           eligible=scientific_ok and cyber_ok
           quarantine = gates["cyber_vigie"] not in ("PASS","NORMAL","PENDING")
