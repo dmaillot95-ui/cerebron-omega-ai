@@ -1,0 +1,94 @@
+{
+  "schema": "CEREBRON_R0_AUGMENTATION_TEST_V1",
+  "status": "CONFIGURED_NOT_EXECUTED",
+  "objective": "Test whether specialist delta-review of a strong baseline answer R0 improves final answer R1 more efficiently than full independent rewrites.",
+  "flow": [
+    "QUESTION -> BASE_MODEL -> R0",
+    "R0+QUESTION -> DELTA_SPECIALISTS",
+    "QUESTION -> BLIND_INDEPENDENT_BRANCHES",
+    "DEDUP -> DEPENDENCY_CHECK -> VERIFY -> RED_TEAM -> FUSE_VALIDATED_DELTAS -> R1",
+    "BLIND_SCORE R0 VS R1"
+  ],
+  "specialist_roles": [
+    {
+      "id": "S1",
+      "mission": "MISSING",
+      "output": "Only important missing facts, constraints, cases or implications."
+    },
+    {
+      "id": "S2",
+      "mission": "ERROR",
+      "output": "Only concrete errors, contradictions or unjustified claims in R0."
+    },
+    {
+      "id": "S3",
+      "mission": "EVIDENCE",
+      "output": "Evidence/provenance needed to strengthen or weaken material claims."
+    },
+    {
+      "id": "S4",
+      "mission": "VERIFY",
+      "output": "Recompute or independently verify calculations, logic and invariants."
+    },
+    {
+      "id": "S5",
+      "mission": "ALTERNATIVE",
+      "output": "Alternative method or solution that materially changes confidence or result."
+    },
+    {
+      "id": "S6",
+      "mission": "ASSUMPTIONS",
+      "output": "Hidden assumptions, missing parameters and scope limits."
+    },
+    {
+      "id": "S7",
+      "mission": "REDTEAM",
+      "output": "Strongest counterexample, failure mode or adversarial challenge."
+    },
+    {
+      "id": "S8",
+      "mission": "COMPRESSION",
+      "output": "Remove redundancy and improve clarity without changing truth conditions."
+    }
+  ],
+  "blind_branch": {
+    "target_fraction": "20-30%",
+    "sees_R0": false,
+    "purpose": "Reduce anchoring and discover solutions suppressed by R0."
+  },
+  "delta_schema": [
+    "KEEP",
+    "ADD",
+    "CORRECT",
+    "CHALLENGE",
+    "EVIDENCE",
+    "NOVEL",
+    "CONFIDENCE",
+    "DEPENDENCY"
+  ],
+  "fusion_rules": [
+    "R0 remains canonical until a delta passes verification.",
+    "No majority vote.",
+    "Same lineage is one evidence family.",
+    "Conflicts remain OPEN unless resolved by evidence.",
+    "A specialist suggestion is not evidence by itself.",
+    "R1 may be worse than R0; benchmark must allow negative delta."
+  ],
+  "benchmark": {
+    "arms": {
+      "A": "R0 baseline",
+      "B": "R1 augmented"
+    },
+    "primary_metric": "paired blind quality delta B-A",
+    "secondary": [
+      "critical_error_delta",
+      "latency_ratio",
+      "token_or_compute_ratio",
+      "validated_delta_yield",
+      "duplicate_delta_rate"
+    ],
+    "pass": "Positive cold paired quality gain with no critical-error regression; resource differences reported.",
+    "contamination": "Use frozen cold tasks; do not write test answers into lesson/training memory before scoring."
+  },
+  "execution_gate": "Requires real callable model/worker executions. Do not simulate unavailable specialists."
+}
