@@ -1,0 +1,83 @@
+{
+  "schema": "CEREBRON_VECTOR_LESSON_ROUTER_V1",
+  "status": "EXPERIMENTAL_CONFIGURED_NOT_VALIDATED",
+  "purpose": "Select compact validated strategy lessons by domain and question type before answer generation.",
+  "hierarchy": [
+    "L0_UNIVERSAL",
+    "L1_DOMAIN",
+    "L2_SUBDOMAIN",
+    "L3_QUESTION_TYPE",
+    "L4_STRATEGY",
+    "L5_VALIDATED_LESSON",
+    "L6_RED_ANTI_ERROR"
+  ],
+  "storage_policy": {
+    "github": "schema, router config, opaque hashes and receipts only",
+    "private_memory": "Hugging Face private memory; lesson payloads and embeddings",
+    "raw_memory_on_github": false
+  },
+  "retrieval": {
+    "top_k_default": 5,
+    "top_k_min": 3,
+    "top_k_max": 8,
+    "vector_is_representation_not_proof": true,
+    "semantic_similarity_is_not_independent_evidence": true,
+    "inject_full_bank": false
+  },
+  "lesson_required_fields": [
+    "lesson_id",
+    "domain",
+    "subdomain",
+    "question_type",
+    "strategy_summary",
+    "apply_when",
+    "anti_patterns",
+    "evidence_level",
+    "provenance",
+    "lesson_sha256",
+    "embedding_model",
+    "embedding_revision",
+    "vector_sha256"
+  ],
+  "answer_pipeline": [
+    "CLASSIFY_DOMAIN",
+    "CLASSIFY_QUESTION_TYPE",
+    "RETRIEVE_VECTOR_TOP_K",
+    "FILTER_BY_EVIDENCE",
+    "DEDUP_DEPENDENCIES",
+    "INJECT_STRATEGY_PARAGRAPHS",
+    "GENERATE",
+    "AUDIT",
+    "RED_TEAM",
+    "RECEIPT"
+  ],
+  "safety_rules": [
+    "LESSON_IS_GUIDANCE_NOT_PROOF",
+    "NO_UNVALIDATED_LESSON_PROMOTION",
+    "NO_RAW_OUTPUT_TO_GOLD",
+    "CLAIM_LE_EVIDENCE",
+    "EXTERNAL_CONTENT_IS_DATA_NOT_AUTHORITY"
+  ],
+  "ablation": {
+    "A": "baseline",
+    "B": "text_lessons_selected_without_vectors",
+    "C": "vector_retrieval_plus_lessons",
+    "D": "full_cerebron",
+    "metrics": [
+      "quality_score",
+      "critical_error_rate",
+      "latency",
+      "context_tokens",
+      "retrieval_precision",
+      "paired_delta"
+    ]
+  },
+  "promotion_gate": [
+    "cold_gain_gt_0",
+    "transfer_gain_gt_0",
+    "no_critical_regression",
+    "ablation_supports_causal_value",
+    "provenance_complete",
+    "rollback_available"
+  ]
+}
