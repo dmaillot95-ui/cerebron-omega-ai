@@ -1,0 +1,55 @@
+name: R0 R1 Hard Cold Parallel
+on:
+  push:
+    paths:
+      - '.github/workflows/r0-r1-hard-cold-parallel.yml'
+  workflow_dispatch:
+jobs:
+  case:
+    strategy:
+      fail-fast: false
+      matrix:
+        case_id: [H01,H02,H03,H04,H05,H06,H07,H08]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet transformers accelerate sentencepiece torch
+      - name: Execute one frozen case
+        shell: bash
+        env:
+          CASE_ID: ${{ matrix.case_id }}
+        run: |
+          python - <<'PY'
+          import json,hashlib,os
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          spec=json.load(open("benchmarks/r0-r1-hard-cold-v2.json"))
+          c=next(x for x in spec["cases"] if x["id"]==os.environ["CASE_ID"])
+          mid="HuggingFaceTB/SmolLM3-3B"; rev="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype="auto",low_cpu_mem_usage=True)
+          def gen(p,n):
+              text=tok.apply_chat_template([{"role":"user","content":p}],tokenize=False,add_generation_prompt=True)
+              x=tok(text,return_tensors="pt")
+              with torch.no_grad(): o=mdl.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.eos_token_id)
+              return tok.decode(o[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+          def sha(s): return hashlib.sha256(s.encode()).hexdigest()
+          q=c["prompt"]; r0=gen("Answer accurately and concisely.\nQUESTION: "+q,110)
+          roles=["MISSING","ERROR","VERIFY","REDTEAM"]; ds=[]
+          for role in roles:
+              ds.append(gen("QUESTION: "+q+"\nDRAFT R0: "+r0+"\nROLE: "+role+"\nReturn only material corrections or missing points. Distinguish suggestions from evidence.",80))
+          blind=gen("Solve independently and state crucial limitations.\nQUESTION: "+q,90)
+          packet="\n".join(roles[i]+": "+ds[i] for i in range(4))
+          r1=gen("QUESTION: "+q+"\nBASE R0:\n"+r0+"\nDELTAS:\n"+packet+"\nBLIND:\n"+blind+"\nProduce concise R1. Keep correct R0 content; integrate only justified corrections; preserve uncertainty.",130)
+          out={"id":c["id"],"model_id":mid,"revision":rev,"r0":r0,"deltas":ds,"blind":blind,"r1":r1,
+               "r0_sha256":sha(r0),"delta_sha256s":[sha(x) for x in ds],"blind_sha256":sha(blind),"r1_sha256":sha(r1)}
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode(); out["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          Path("out").mkdir(exist_ok=True); Path("out/"+c["id"]+".json").write_text(json.dumps(out,indent=2)+"\n")
+          print("CASE_DONE="+json.dumps({"id":c["id"],"calls":7,"receipt_sha256":out["receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r0-r1-hard-${{ matrix.case_id }}
+          path: out/${{ matrix.case_id }}.json
