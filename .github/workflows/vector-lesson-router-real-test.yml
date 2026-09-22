@@ -1,0 +1,62 @@
+name: Vector Lesson Router Real Test
+on:
+  push:
+    paths:
+      - '.github/workflows/vector-lesson-router-real-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  vector-router:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install embedding runtime
+        run: pip install --quiet sentence-transformers
+      - name: Execute real semantic routing test
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import json,glob,hashlib
+          from pathlib import Path
+          from sentence_transformers import SentenceTransformer
+          import torch
+          lessons=[]
+          for p in sorted(glob.glob("config/lesson-validation-batch-*.json")):
+              lessons += json.load(open(p,encoding="utf-8"))["lessons"]
+          assert len(lessons)==60
+          # Cold routing probes: not copied from lesson wording.
+          probes=[
+            {"id":"V01","q":"I checked a number theory statement by computer for a billion inputs. Can I call it a theorem now?","expected_domain":"math_proof","expected_type":"finite_verification"},
+            {"id":"V02","q":"My simulation gets the same answer after refining the mesh. Does that prove the physical device will work?","expected_domain":"physics_engineering","expected_type":"simulation"},
+            {"id":"V03","q":"Ten assistants all used the same model and sources and agree. Is that ten independent confirmations?","expected_domain":"multi_agent_orchestration","expected_type":"consensus_control"},
+            {"id":"V04","q":"A correlation is strong. What would I need before saying one variable causes the other?","expected_domain":"data_statistics","expected_type":"correlation_causation"},
+            {"id":"V05","q":"How do I compress a report without accidentally deleting a limitation that changes the conclusion?","expected_domain":"writing_communication","expected_type":"summary"},
+            {"id":"V06","q":"Before building an expensive prototype, how should I decide which risky assumption to test first?","expected_domain":"invention_design","expected_type":"validation_plan"}
+          ]
+          mid="sentence-transformers/all-MiniLM-L6-v2"
+          model=SentenceTransformer(mid)
+          texts=[f"{x['domain']} {x['question_type']} {x['strategy_summary']} {' '.join(x.get('anti_patterns',[]))}" for x in lessons]
+          le=model.encode(texts,normalize_embeddings=True,convert_to_tensor=True)
+          results=[]; top1=0; top5=0
+          for p in probes:
+              qv=model.encode(p["q"],normalize_embeddings=True,convert_to_tensor=True)
+              scores=torch.mv(le,qv)
+              idx=torch.argsort(scores,descending=True)[:5].tolist()
+              ranked=[{"rank":r+1,"lesson_id":lessons[i]["lesson_id"],"domain":lessons[i]["domain"],"question_type":lessons[i]["question_type"],"score":round(float(scores[i]),6)} for r,i in enumerate(idx)]
+              hit=[x for x in ranked if x["domain"]==p["expected_domain"] and x["question_type"]==p["expected_type"]]
+              if hit and hit[0]["rank"]==1: top1+=1
+              if hit: top5+=1
+              results.append({**p,"ranked":ranked,"expected_rank":hit[0]["rank"] if hit else None})
+          report={"schema":"CEREBRON_VECTOR_ROUTER_REAL_TEST_V1","execution":"REAL_EMBEDDING_INFERENCE","embedding_model":mid,"lesson_count":len(lessons),"probe_count":len(probes),"top1_exact":top1,"top5_exact":top5,"top1_rate":top1/len(probes),"top5_rate":top5/len(probes),"results":results,"limitations":["Six routing probes are a canary, not proof of generalization.","Embedding similarity is routing evidence, not factual evidence or lesson validation.","No lesson is promoted to GOLD by this test."]}
+          raw=json.dumps(report,sort_keys=True,separators=(",",":")).encode()
+          report["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          Path("out/vector-router-real-test.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          print("VECTOR_ROUTER="+json.dumps({"top1_exact":top1,"top5_exact":top5,"probes":len(probes),"receipt_sha256":report["receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vector-router-real-test-${{ github.run_id }}
+          path: out/vector-router-real-test.json
