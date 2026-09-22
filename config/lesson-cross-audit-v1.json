@@ -1,0 +1,33 @@
+{
+  "schema": "CEREBRON_LESSON_CROSS_AUDIT_V1",
+  "status": "PARTIAL",
+  "lesson_count": 60,
+  "batches": 6,
+  "structural_checks": {
+    "unique_ids": true,
+    "missing_strategy": 0,
+    "missing_anti_pattern": 0,
+    "missing_failure_test": 0
+  },
+  "exact_duplicate_strategy_count": 0,
+  "lexical_similarity_review": {
+    "method": "Jaccard token overlap; screening only, not semantic proof",
+    "threshold": 0.35,
+    "candidate_pairs": []
+  },
+  "contradiction_screen": {
+    "count": 0,
+    "status": "NO_AUTOMATIC_CONTRADICTION_DETECTED_MANUAL_REDTEAM_REQUIRED"
+  },
+  "dependency": {
+    "common_provenance": "LOCAL_CURATED_SEED_V1",
+    "independence_claim": false,
+    "note": "All 60 lessons share one construction lineage; they are not independent validations of one another."
+  },
+  "decision": "READY_FOR_MANUAL_REDTEAM_AND_TRANSFER_TEST_NOT_GOLD",
+  "rules": [
+    "SIMILARITY_IS_REVIEW_SIGNAL_NOT_PROOF",
+    "COMMON_LINEAGE_IS_DEPENDENCY",
+    "NO_VECTOR_PROMOTION_BEFORE_REDTEAM_AND_TRANSFER"
+  ]
+}
