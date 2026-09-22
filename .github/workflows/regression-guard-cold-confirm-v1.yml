@@ -1,5 +1,5 @@
 name: Regression Guard Cold Confirm V1
-on:
+"on":
   push:
     paths:
       - ".github/workflows/regression-guard-cold-confirm-v1.yml"
