@@ -44,13 +44,18 @@ jobs:
           SLOT: ${{ matrix.slot }}
         run: |
           python - <<'PY'
-          import os,json,urllib.request,urllib.error,time,hashlib
+          import os,json,urllib.request,urllib.error,time,hashlib,re
           model=os.environ["MODEL_ID"]; token=os.environ.get("HF_TOKEN",""); slot=os.environ["SLOT"]
+          family=model.split("/",1)[-1].lower()
+          family=re.sub(r"[-_](instruct|it|chat).*$","",family)
+          prompt_lineage="CEREBRON_ARCH_REVIEW_V1"
+          data_source="CEREBRON_ARCHITECTURE_PROMPT"
+          evidence_source="HF_ROUTER_REAL_CALL"
           prompt="""You are an independent architecture reviewer. Review CEREBRON AO: 24 Greek-function AI colonies; each colony has CHIEF, parallel EXECUTORS, AUDITOR, COUNTER-AUDITOR, SYNTHESIZER. Central CEREBRON cross-audits colony syntheses, then PSI-AGORA collective debate and OMEGA-AFAH final convergence. Durable private memory is on Hugging Face, provenance/index via F74/F66, GitHub is control plane. SAPHEA is worker/runtime colony; SAPHEIDE converts only validated GOLD/RED lessons into learning. No simulated agents; same lineage is not independent evidence; promotion requires cold benchmarks, ablation, transfer, audit and rollback. Goal: evolve this into a powerful reliable AI civilization-like collective system. Give: (1) three strongest architectural ideas, (2) five biggest weaknesses/failure modes, (3) five concrete improvements, (4) what should be tested before scaling, (5) one architecture change you would prioritize. Be critical, concise, no flattery."""
           url="https://router.huggingface.co/v1/chat/completions"
           body=json.dumps({"model":model,"messages":[{"role":"user","content":prompt}],"max_tokens":700,"temperature":0.3}).encode()
           req=urllib.request.Request(url,data=body,headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"})
-          rec={"slot":slot,"model":model,"real_call":False}
+          rec={"slot":slot,"model":model,"model_revision":"UNRESOLVED_BY_ROUTER","provider":"huggingface-router","model_family":family,"prompt_lineage":prompt_lineage,"data_source":data_source,"evidence_source":evidence_source,"dependency_lineage":"SAME_FAMILY_IS_NOT_INDEPENDENT","real_call":False}
           try:
             with urllib.request.urlopen(req,timeout=120) as r:
               data=json.loads(r.read()); out=data["choices"][0]["message"]["content"]
