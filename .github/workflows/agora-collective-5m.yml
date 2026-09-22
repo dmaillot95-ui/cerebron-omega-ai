@@ -61,6 +61,44 @@ jobs:
                   status[str(fid)]="UNAVAILABLE"
           json.dump(status,open(".agora-collective/ingress-status.json","w"),indent=2)
           PY
+      - name: Build independent-validation receipt from evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,glob,os,hashlib
+          # Fail closed: only explicit evidence objects with distinct provenance may satisfy the gate.
+          evidence=[]
+          for p in glob.glob(".agora-collective/ingress/*.json"):
+              try:
+                  x=json.load(open(p))
+                  if isinstance(x.get("independent_validation_evidence"),dict):
+                      e=dict(x["independent_validation_evidence"]); e["_source"]=p; evidence.append(e)
+              except Exception: pass
+          def valid(kind):
+              xs=[e for e in evidence if e.get("kind")==kind and e.get("status")=="PASS"
+                  and e.get("artifact_sha256") and e.get("model_or_method")
+                  and e.get("evidence_source") and e.get("prompt_lineage")]
+              return xs
+          rep,alt,fal=valid("independent_reproduction"),valid("alternative_method"),valid("falsification")
+          selected=(rep[:1]+alt[:1]+fal[:1])
+          lineages={(e.get("model_or_method"),e.get("evidence_source"),e.get("prompt_lineage")) for e in selected}
+          provenance_complete=len(selected)==3 and len(lineages)==3
+          receipt={
+            "schema":"CEREBRON_LOCAL_INDEPENDENT_VALIDATION_V1",
+            "status":"PASS" if provenance_complete else "MISSING",
+            "independent_reproduction":bool(rep),
+            "alternative_method":bool(alt),
+            "falsification":bool(fal),
+            "provenance_complete":provenance_complete,
+            "evidence_count":len(evidence),
+            "selected":[{k:e.get(k) for k in ("kind","artifact_sha256","model_or_method","evidence_source","prompt_lineage","_source")} for e in selected],
+            "rules":["THREE_DISTINCT_LINEAGES_REQUIRED","IMPORTED_STATUS_ALONE_IS_NOT_EVIDENCE","ARTIFACT_SHA256_REQUIRED"]
+          }
+          raw=json.dumps(receipt,sort_keys=True,indent=2).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          json.dump(receipt,open(".agora-collective/local-independent-validation.json","w"),indent=2)
+          print(json.dumps(receipt))
+          PY
       - name: Compile gated collective state
         shell: bash
         run: |
