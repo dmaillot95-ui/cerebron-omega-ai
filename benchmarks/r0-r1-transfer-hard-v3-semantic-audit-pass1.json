@@ -1,0 +1,213 @@
+{
+  "version": "1.0",
+  "source_run": 35722683134,
+  "benchmark": "benchmarks/r0-r1-transfer-hard-v3.json",
+  "method": "First-pass semantic audit of frozen user-facing R0/R1 outputs. Criterion-level PASS/FAIL; no lexical matching. No rerun and no training/memory update.",
+  "taint": "12/12 false",
+  "cases": [
+    {
+      "id": "T01",
+      "r0": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "note": "R1 explicitly limits finite verification and rejects certainty outside the checked range."
+    },
+    {
+      "id": "T02",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "T03",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "note": "Both retain confusing/inaccurate wording about the four shared-dataset papers; no clean vote-inflation warning."
+    },
+    {
+      "id": "T04",
+      "r0": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "note": "Both incorrectly describe patient-level splitting as splitting each patient's data across train/test rather than separating patients."
+    },
+    {
+      "id": "T05",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "T06",
+      "r0": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "FAIL",
+        "PASS",
+        "PASS"
+      ],
+      "note": "Both misread the prompt by assigning the erroneous input table to model C instead of recognizing the common table dependency across all agents."
+    },
+    {
+      "id": "T07",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "note": "R1 more clearly offers a formula/parameterized route despite truncation."
+    },
+    {
+      "id": "T08",
+      "r0": [
+        "FAIL",
+        "FAIL",
+        "FAIL",
+        "FAIL"
+      ],
+      "r1": [
+        "FAIL",
+        "PASS",
+        "FAIL",
+        "FAIL"
+      ],
+      "note": "Critical weakness. R0 proposes 140C/possibly C; R1 wrongly transfers revision C's 110C to revision B. B remains unresolved."
+    },
+    {
+      "id": "T09",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "FAIL",
+        "PASS"
+      ],
+      "note": "R1 correctly says actual reliability is lower but later says this causes underestimation of reliability; required consequence is overestimation by the independence model. Criterion-level regression."
+    },
+    {
+      "id": "T10",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "T11",
+      "r0": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "r1": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "id": "T12",
+      "r0": [
+        "FAIL",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "r1": [
+        "FAIL",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "note": "Temperature shift and validation path recognized, but chemistry transfer and staged/monitored deployment are not adequately covered in truncated outputs."
+    }
+  ],
+  "totals": {
+    "r0_pass": 37,
+    "r1_pass": 39,
+    "total": 48,
+    "r0_pct": 77.08,
+    "r1_pct": 81.25,
+    "delta_pass": 2,
+    "delta_percentage_points": 4.17,
+    "case_improvements": 3,
+    "case_ties": 8,
+    "case_regressions": 1,
+    "critical_regressions": 1
+  },
+  "promotion_gate": "FAIL",
+  "verdict": "SIGNAL_OF_GAIN_BUT_NOT_PROMOTABLE",
+  "reason": "Mean semantic score improves, but frozen promotion gate requires critical_regressions=0. T09 contains a criterion-level regression. Independent counter-audit is still required before treating exact scores as final."
+}
