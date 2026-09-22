@@ -39,7 +39,15 @@ jobs:
             "max_tokens":20,"temperature":0
           })
           # Never persist token; retain only diagnostic response.
-          rec={"schema":"cerebron-hf-gate-auth-canary-v1","token_present":bool(token),"identity":who,"inference":infer,
+          def classify(x):
+            h=x.get("http")
+            if h in (401,403): return "AUTH_OR_PERMISSION_FAIL"
+            if h==429: return "RATE_LIMIT"
+            if h and h>=500: return "PROVIDER_ERROR"
+            if x.get("ok"): return "PASS"
+            return "OTHER_FAIL"
+          rec={"schema":"cerebron-hf-gate-auth-canary-v2","token_present":bool(token),"identity":who,"inference":infer,
+               "identity_class":classify(who),"inference_class":classify(infer),
                "gate":"PASS" if who.get("ok") and infer.get("ok") else "HOLD"}
           os.makedirs("receipts/hf-gate",exist_ok=True)
           json.dump(rec,open("receipts/hf-gate/auth-canary.json","w"),indent=2)
