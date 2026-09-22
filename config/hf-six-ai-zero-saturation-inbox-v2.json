@@ -1,0 +1,88 @@
+{
+  "schema": "CEREBRON_HF_SIX_AI_ZERO_SATURATION_INBOX_V2",
+  "version": "2.0",
+  "status": "ACTIVE_POLICY",
+  "supersedes": "config/hf-four-ai-zero-saturation-inbox-v1.json",
+  "purpose": "Quarantined transient private HF ingress for six CEREBRON AI streams; raw output is never training truth.",
+  "invariants": [
+    "RAW_OUTPUT_NEVER_GITHUB_MEMORY",
+    "RAW_OUTPUT_NEVER_DIRECT_GOLD_RED",
+    "CLAIM_LE_EVIDENCE",
+    "VERIFY_BEFORE_PROMOTE",
+    "MEMORY_NE_LEARNING",
+    "SAME_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "NO_AUTO_TRAINING"
+  ],
+  "writers": {
+    "SAPHEA": "INBOX_TEMP/SAPHEA",
+    "SPIRALION": "INBOX_TEMP/SPIRALION",
+    "ETHERION": "INBOX_TEMP/ETHERION",
+    "HYPERION": "INBOX_TEMP/HYPERION",
+    "AFAH": "INBOX_TEMP/AFAH",
+    "CEREBRON": "INBOX_TEMP/CEREBRON"
+  },
+  "ingress_required": [
+    "result_id",
+    "source_ai",
+    "task_id",
+    "timestamp",
+    "sha256",
+    "provenance",
+    "dependency_fingerprint",
+    "payload_pointer",
+    "change_type"
+  ],
+  "change_type": [
+    "MEMORY",
+    "CONTEXT_REUSE",
+    "POLICY_ROUTING",
+    "ADAPTER_WEIGHTS",
+    "OTHER"
+  ],
+  "pipeline": [
+    "INGEST",
+    "HASH",
+    "DEDUP",
+    "PROVENANCE_CHECK",
+    "DEPENDENCY_CHECK",
+    "QUARANTINE",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "RED_TEAM",
+    "CLEAN_REPRODUCTION",
+    "F72_REALITY_EVIDENCE",
+    "CLASSIFY",
+    "COMPRESS",
+    "PROMOTE_OR_REJECT",
+    "PURGE_EXPIRED_RAW"
+  ],
+  "classifications": [
+    "GOLD_VALIDATED",
+    "RED_VALIDATED",
+    "SILVER",
+    "OPEN",
+    "REJECT"
+  ],
+  "promotion": {
+    "GOLD_VALIDATED": [
+      "audit_pass",
+      "counter_audit_pass",
+      "clean_reproduction_pass",
+      "f72_pass",
+      "provenance_pass",
+      "dependency_pass"
+    ],
+    "direct_raw_promotion": false
+  },
+  "zones": [
+    "INBOX_TEMP",
+    "QUARANTINE",
+    "GOLD",
+    "RED",
+    "DATASETS",
+    "ADAPTERS",
+    "GENERATIONS"
+  ],
+  "training_boundary": "Only versioned GOLD_VALIDATED/RED_VALIDATED records explicitly selected into a dataset manifest may enter training. HF storage or AGORA activity alone is not learning.",
+  "rollback": "Never overwrite G0 or promoted history."
+}
