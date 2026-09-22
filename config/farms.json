@@ -395,6 +395,13 @@
       "repo": "cerebron-farm-74-session-memory-encyclopedia",
       "domain": "session-memory-encyclopedia",
       "status": "PLANNED"
+    },
+    {
+      "id": 75,
+      "repo": "cerebron-farm-75-hyperion-exploration",
+      "domain": "exploration-discovery",
+      "identity": "HYPERION",
+      "status": "EXPERIMENTAL"
     }
   ]
 }
