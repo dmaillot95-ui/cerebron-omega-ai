@@ -77,13 +77,23 @@ jobs:
               if x.get("resource","").endswith("72-reality-evidence-gate"): gates["reality"]=x.get("reality_gate","PENDING")
               if x.get("resource","").endswith("59-verified-learning"):
                   gates["ablation"]=x.get("ablation","PENDING"); gates["transfer"]=x.get("transfer","PENDING")
-          scientific_ok=False
           imported_gate_summary=all(gates[k]=="PASS" for k in ["reproduction","reality","ablation","transfer"])
+          # Local validation must be an explicit, separately-produced receipt. Imported farm PASS values never satisfy it.
+          validation_path=".agora-collective/local-independent-validation.json"
+          local_validation={"status":"MISSING","independent_reproduction":False,"alternative_method":False,"falsification":False,"provenance_complete":False}
+          if os.path.exists(validation_path):
+              try: local_validation.update(json.load(open(validation_path)))
+              except Exception: local_validation["status"]="INVALID"
+          scientific_ok=(local_validation.get("status")=="PASS"
+              and local_validation.get("independent_reproduction") is True
+              and local_validation.get("alternative_method") is True
+              and local_validation.get("falsification") is True
+              and local_validation.get("provenance_complete") is True)
           cyber_ok=gates["cyber_vigie"] in ("PASS","NORMAL")
           eligible=scientific_ok and cyber_ok
           quarantine = gates["cyber_vigie"] not in ("PASS","NORMAL","PENDING")
           manual=json.load(open(".agora-collective/manual-bootstrap.json"))
-          state={"schema":"CEREBRON_AGORA_COLLECTIVE_V2","civilization_manual":manual,"state_id":"COLLECTIVE:"+os.environ["GITHUB_RUN_ID"],"packets_ingested":len(packets),"ingress_status":json.load(open(".agora-collective/ingress-status.json")),"gates":gates,"security_state":"QUARANTINE" if quarantine else ("NORMAL" if cyber_ok else "HOLD"),"promotion":"BLOCKED_PENDING_INDEPENDENT_VALIDATION","memory_write":"BLOCKED_PENDING_INDEPENDENT_VALIDATION","imported_gate_summary_pass":imported_gate_summary,"rollback":"REQUIRED" if quarantine else "NOT_REQUIRED","mentor_egress":"READY_FOR_REVIEW","nextlock":"ROLLBACK_TO_LAST_VALIDATED" if quarantine else "INDEPENDENT_REPRODUCTION_AND_VALIDATION","rules":["CLAIM<=EVIDENCE","CONSENSUS!=PROOF","IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION","IMPORTED_PASS!=LOCAL_PASS","NO_PROMOTION_FROM_IMPORTED_STATUS"]}
+          state={"schema":"CEREBRON_AGORA_COLLECTIVE_V2","civilization_manual":manual,"state_id":"COLLECTIVE:"+os.environ["GITHUB_RUN_ID"],"packets_ingested":len(packets),"ingress_status":json.load(open(".agora-collective/ingress-status.json")),"gates":gates,"security_state":"QUARANTINE" if quarantine else ("NORMAL" if cyber_ok else "HOLD"),"promotion":"BLOCKED_PENDING_INDEPENDENT_VALIDATION","memory_write":"BLOCKED_PENDING_INDEPENDENT_VALIDATION","imported_gate_summary_pass":imported_gate_summary,"local_independent_validation":local_validation,"scientific_ok":scientific_ok,"rollback":"REQUIRED" if quarantine else "NOT_REQUIRED","mentor_egress":"READY_FOR_REVIEW","nextlock":"ROLLBACK_TO_LAST_VALIDATED" if quarantine else "INDEPENDENT_REPRODUCTION_AND_VALIDATION","rules":["CLAIM<=EVIDENCE","CONSENSUS!=PROOF","IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION","IMPORTED_PASS!=LOCAL_PASS","NO_PROMOTION_FROM_IMPORTED_STATUS","LOCAL_VALIDATION_RECEIPT_REQUIRED"]}
           json.dump(state,open(".agora-collective/state.json","w"),indent=2)
           PY
           cat .agora-collective/state.json
