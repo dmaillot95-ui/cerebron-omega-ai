@@ -36,5 +36,7 @@ jobs:
         if: always()
         with:
           name: global-ai-provider-probe
-          path: out/global-ai-provider-probe.json
+          path: |
+            out/global-ai-provider-probe.json
+            out/provider-reality-manifest.json
           retention-days: 14
