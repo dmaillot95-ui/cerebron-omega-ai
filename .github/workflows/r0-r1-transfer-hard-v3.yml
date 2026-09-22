@@ -1,0 +1,59 @@
+name: R0 R1 Transfer Hard V3
+on:
+  push:
+    paths: ['.github/workflows/r0-r1-transfer-hard-v3.yml']
+  workflow_dispatch:
+jobs:
+  case:
+    strategy:
+      fail-fast: false
+      matrix:
+        case_id: [T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11,T12]
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet transformers accelerate sentencepiece torch
+      - name: Execute frozen transfer benchmark
+        env: { CASE_ID: "${{ matrix.case_id }}" }
+        run: |
+          python - <<'PY'
+          import json,hashlib,os
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+          spec=json.load(open("benchmarks/r0-r1-transfer-hard-v3.json"))
+          c=next(x for x in spec["cases"] if x["id"]==os.environ["CASE_ID"])
+          mid="HuggingFaceTB/SmolLM3-3B"; rev="a07cc9a04f16550a088caea529712d1d335b0ac1"
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype="auto",low_cpu_mem_usage=True)
+          def gen(p,n):
+            try: txt=tok.apply_chat_template([{"role":"user","content":p}],tokenize=False,add_generation_prompt=True,enable_thinking=False)
+            except TypeError: txt=tok.apply_chat_template([{"role":"user","content":p+"\nReturn ONLY the final answer. Never emit <think> tags."}],tokenize=False,add_generation_prompt=True)
+            x=tok(txt,return_tensors="pt")
+            with torch.no_grad(): o=mdl.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.eos_token_id)
+            s=tok.decode(o[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+            return s,("<think" in s.lower() or "</think" in s.lower())
+          q=c["prompt"]
+          r0,t0=gen("Answer accurately and concisely. QUESTION: "+q,180)
+          ds=[]; taint=t0
+          roles=[
+            ("MISSING","Find important missing conditions or scope. Return corrections only."),
+            ("ERROR","Find factual/logical errors or overclaims. Return corrections only."),
+            ("VERIFY","Verify reasoning, quantities, dependencies and evidence. Return corrections only."),
+            ("REDTEAM","Try to falsify the draft and expose hidden assumptions. Return corrections only.")
+          ]
+          for role,mission in roles:
+            d,td=gen("QUESTION: "+q+"\nDRAFT R0: "+r0+"\nROLE: "+role+"\nMISSION: "+mission,120)
+            ds.append({"role":role,"text":d}); taint|=td
+          blind,tb=gen("Solve independently without seeing another answer. State the strongest justified conclusion and crucial limitations. QUESTION: "+q,160); taint|=tb
+          r1,t1=gen("QUESTION: "+q+"\nBASE R0:\n"+r0+"\nSPECIALIST DELTAS:\n"+"\n".join(x["role"]+": "+x["text"] for x in ds)+"\nBLIND INDEPENDENT BRANCH:\n"+blind+"\nProduce concise final R1. Preserve correct R0 material; integrate only justified corrections; do not invent evidence.",220); taint|=t1
+          out={"id":c["id"],"model_id":mid,"revision":rev,"thinking_disabled":True,"tainted":taint,"r0":r0,"deltas":ds,"blind":blind,"r1":r1,"checks_hidden_from_generation":True}
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode(); out["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          Path("out").mkdir(exist_ok=True); Path("out/"+c["id"]+".json").write_text(json.dumps(out,indent=2)+"\n")
+          print("CASE_EXEC="+json.dumps({"id":c["id"],"tainted":taint,"real_executions":7,"receipt":out["receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r0-r1-transfer-v3-${{ matrix.case_id }}
+          path: out/${{ matrix.case_id }}.json
