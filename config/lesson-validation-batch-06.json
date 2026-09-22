@@ -1,0 +1,346 @@
+{
+  "schema": "CEREBRON_LESSON_VALIDATION_BATCH_V1",
+  "batch": "B06",
+  "count": 10,
+  "status": "PARTIAL",
+  "domains": [
+    "audit_redteam",
+    "multi_agent_orchestration"
+  ],
+  "dedup": {
+    "exact_duplicates": 0,
+    "semantic_review": "READY_FOR_CROSS_BATCH_AUDIT"
+  },
+  "lessons": [
+    {
+      "lesson_id": "D10-CONTRADICTION-001",
+      "domain": "audit_redteam",
+      "question_type": "contradiction",
+      "title": "Strategy for contradiction",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. contradiction. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Extract claims into explicit propositions, compare definitions, scope, dates and states, then distinguish genuine contradiction from context change or compatible uncertainty.",
+      "anti_patterns": [
+        "calling different scopes contradictory"
+      ],
+      "failure_or_counterexample_test": "Normalize scope and definitions, then test whether both propositions can be true simultaneously.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D10-DEPENDENCY-001",
+      "domain": "audit_redteam",
+      "question_type": "dependency",
+      "title": "Strategy for dependency",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. dependency. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Fingerprint model, provider, prompt lineage, data and evidence sources before counting corroboration; collapse dependent outputs into one evidence family.",
+      "anti_patterns": [
+        "multiple executions counted as independent evidence"
+      ],
+      "failure_or_counterexample_test": "Remove all outputs sharing a dependency lineage and recompute evidential support.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D10-ADVERSARIAL_TEST-001",
+      "domain": "audit_redteam",
+      "question_type": "adversarial_test",
+      "title": "Strategy for adversarial test",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. adversarial_test. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Define the claim's acceptance boundary, generate attacks targeting assumptions and edge cases, and record false accepts/false rejects rather than only successful examples.",
+      "anti_patterns": [
+        "red team made of easy nominal tests"
+      ],
+      "failure_or_counterexample_test": "Construct attacks specifically against every prerequisite of the acceptance rule.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D10-FAILURE_MODE-001",
+      "domain": "audit_redteam",
+      "question_type": "failure_mode",
+      "title": "Strategy for failure mode",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. failure_mode. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Map initiating fault, propagation path, detection, containment, recovery and residual consequence; include common-cause and degraded-state behavior.",
+      "anti_patterns": [
+        "isolated component failure with no propagation analysis"
+      ],
+      "failure_or_counterexample_test": "Inject a common-cause fault and verify system response through recovery or safe state.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D10-CLAIM_EVIDENCE-001",
+      "domain": "audit_redteam",
+      "question_type": "claim_evidence",
+      "title": "Strategy for claim evidence",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "audit_redteam. claim_evidence. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Decompose material claims, assign required evidence level, trace provenance and independence, and downgrade or block claims whose support is weaker than wording.",
+      "anti_patterns": [
+        "confidence substituted for evidence"
+      ],
+      "failure_or_counterexample_test": "For each strong claim, remove its strongest evidence and test whether the claim must be weakened.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D11-ROUTING-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "routing",
+      "title": "Strategy for routing",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. routing. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Classify task requirements and route only to workers with demonstrated relevant capability and availability; preserve fallback when routing confidence is low.",
+      "anti_patterns": [
+        "routing by agent name or claimed specialty alone"
+      ],
+      "failure_or_counterexample_test": "Compare routed worker performance with a baseline or alternate worker on representative tasks.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D11-PARALLELIZATION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "parallelization",
+      "title": "Strategy for parallelization",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. parallelization. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Parallelize separable hypotheses, subtasks or methods with explicit interfaces; avoid duplicating the same dependency under different worker labels.",
+      "anti_patterns": [
+        "fan-out mistaken for independent reasoning"
+      ],
+      "failure_or_counterexample_test": "Fingerprint each branch and collapse branches sharing model, prompt, data and method lineage.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D11-DEDUPLICATION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "deduplication",
+      "title": "Strategy for deduplication",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. deduplication. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Canonicalize claims and evidence, cluster semantic duplicates, preserve the strongest provenance, and retain meaningful disagreements separately.",
+      "anti_patterns": [
+        "majority vote over duplicate answers"
+      ],
+      "failure_or_counterexample_test": "Collapse duplicates before computing agreement and check whether consensus survives.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D11-FUSION-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "fusion",
+      "title": "Strategy for fusion",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. fusion. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Fuse only compatible claims after provenance and dependency checks; preserve unresolved contradictions, uncertainty and minority evidence that survives audit.",
+      "anti_patterns": [
+        "smoothing disagreement into one confident narrative"
+      ],
+      "failure_or_counterexample_test": "Reconstruct fused claims back to contributing evidence and verify no contradiction was silently removed.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    },
+    {
+      "lesson_id": "D11-CONSENSUS_CONTROL-001",
+      "domain": "multi_agent_orchestration",
+      "question_type": "consensus_control",
+      "title": "Strategy for consensus control",
+      "status": "VALIDATION_CANDIDATE",
+      "strategy_template": [
+        "DEFINE_TARGET",
+        "IDENTIFY_EVIDENCE_AND_CONSTRAINTS",
+        "SELECT_METHOD",
+        "EXECUTE_MINIMAL_CHECKS",
+        "SEEK_FAILURE_OR_COUNTEREXAMPLE",
+        "CALIBRATE_CLAIM",
+        "AUDIT_OUTPUT"
+      ],
+      "vector_text": "multi_agent_orchestration. consensus_control. Define the target and constraints; use evidence appropriate to the claim; test failure cases; distinguish verified results from assumptions; calibrate the final claim.",
+      "evidence_level": "UNVALIDATED_SEED",
+      "strategy_summary": "Treat consensus as a signal, not truth; weight independence, evidence quality and method diversity, and require external or alternative validation for high-impact claims.",
+      "anti_patterns": [
+        "agent count used as confidence score"
+      ],
+      "failure_or_counterexample_test": "Recompute decision after collapsing dependent agents and introducing a credible dissenting method.",
+      "validation": {
+        "schema_check": true,
+        "specific_strategy": true,
+        "anti_pattern_present": true,
+        "failure_test_present": true,
+        "provenance": "LOCAL_CURATED_SEED_V1",
+        "independent_domain_audit": false,
+        "red_team": false,
+        "transfer_test": false
+      }
+    }
+  ]
+}
