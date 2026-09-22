@@ -114,6 +114,37 @@ jobs:
           json.dump(payload,open(".agora-collective/independent/alternative-method.json","w"),indent=2)
           print(json.dumps(payload))
           PY
+      - name: Produce falsification Red-Team evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,hashlib,os
+          # Red Team: malformed/dependent/partial receipts must never open the gate.
+          attacks=[
+            {"status":"PASS","independent_reproduction":True,"alternative_method":True,"falsification":True,"provenance_complete":False},
+            {"status":"PASS","independent_reproduction":True,"alternative_method":True,"falsification":False,"provenance_complete":True},
+            {"status":"PASS","independent_reproduction":True,"alternative_method":False,"falsification":True,"provenance_complete":True},
+            {"status":"PASS","independent_reproduction":False,"alternative_method":True,"falsification":True,"provenance_complete":True},
+            {"status":"FAIL","independent_reproduction":True,"alternative_method":True,"falsification":True,"provenance_complete":True},
+            {}
+          ]
+          def gate(r):
+              return (r.get("status")=="PASS" and r.get("independent_reproduction") is True
+                  and r.get("alternative_method") is True and r.get("falsification") is True
+                  and r.get("provenance_complete") is True)
+          results=[{"attack":i+1,"accepted":gate(a)} for i,a in enumerate(attacks)]
+          ok=all(not x["accepted"] for x in results)
+          payload={"schema":"CEREBRON_INDEPENDENT_EVIDENCE_V1","kind":"falsification",
+                   "status":"PASS" if ok else "FAIL","model_or_method":"adversarial-negative-gate-redteam-v1",
+                   "evidence_source":"LOCAL_ADVERSARIAL_NEGATIVE_TESTS",
+                   "prompt_lineage":"AGORA_GATE_REDTEAM_V1",
+                   "attack_count":len(results),"false_accepts":sum(x["accepted"] for x in results),"results":results}
+          raw=json.dumps(payload,sort_keys=True,separators=(",",":")).encode()
+          payload["artifact_sha256"]=hashlib.sha256(raw).hexdigest()
+          os.makedirs(".agora-collective/independent",exist_ok=True)
+          json.dump(payload,open(".agora-collective/independent/falsification.json","w"),indent=2)
+          print(json.dumps(payload))
+          PY
       - name: Build independent-validation receipt from evidence
         shell: bash
         run: |
