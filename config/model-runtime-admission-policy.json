@@ -2,7 +2,7 @@
   "schema": "cerebron-model-runtime-admission-v1",
   "date": "2026-09-21",
   "status": "ACTIVE",
-  "scope": "SIX_MODEL_BANK_TO_62_COLONIES",
+  "scope": "MODEL_BANK_AND_NATIVE_AI",
   "principle": "A candidate model is not colony-bindable until a real runtime receipt exists on an approved compute class.",
   "failure_classes": {
     "INFRA_BUG": "does not count against model quality",
@@ -37,13 +37,24 @@
     "winner_before_receipts": false
   },
   "current": {
-    "smollm3_run": 35564707263,
-    "status": "IN_PROGRESS",
-    "previous_runs": [
-      35564472385,
-      35564575024
+    "status": "SCOPED_RUNTIME_PASS",
+    "workflow": "ELYSION Base Runtime Canary",
+    "run_id": 35917498487,
+    "models": [
+      {
+        "model_id": "Qwen/Qwen3-4B",
+        "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+        "job_id": 107372744306,
+        "status": "PASS"
+      },
+      {
+        "model_id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+        "job_id": 107372743907,
+        "status": "PASS"
+      }
     ],
-    "previous_classification": "INFRA_BUG"
+    "claim_scope": "runtime load + inference only; no quality winner"
   },
-  "next_gate": "REAL_RUNTIME_RECEIPT"
+  "next_gate": "COMPLETE_COLD_M6_BASELINE_THEN_AUDIT_REDTEAM_BEFORE_BINDING"
 }
