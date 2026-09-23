@@ -54,6 +54,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        if path == "/api/control-plane":
+            cfg = load_json(ROOT / "config/platform-control-plane-v1.json")
+            return self._json({"control_plane": cfg, "runtime": {"bind_policy": "LOOPBACK_ONLY", "farm_count_effect": 0}})
         if path == "/api/health":
             farms = load_json(ROOT / "config/farms.json")["farms"]
             return self._json({"status": "healthy", "time": time.time(), "farm_count": len(farms),
@@ -126,6 +129,8 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8787)
     args = parser.parse_args()
+    if args.host not in {"127.0.0.1", "localhost", "::1"}:
+        raise SystemExit("REMOTE_BIND_BLOCKED: authentication/RBAC/isolation are not implemented; use loopback only")
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"CÉRÉBRON AI Platform: http://{args.host}:{args.port}")
     server.serve_forever()
