@@ -1,0 +1,24 @@
+name: AGORA Cross-Run Retrieval V2
+on:
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download prior AGORA memory artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: agora-memory-learning-e2e-v1
+          path: prior
+          run-id: 35874397482
+          github-token: ${{ github.token }}
+      - name: ASTRION retrieves and transfers lesson
+        run: python runtime/agora_crossrun_retrieval_v2.py --source prior/agora/capsules.jsonl --expected-sha b7a077098a53553ff4bf4e52204d3d09ceac96547d8c92a0b837df91c5e4972f
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-crossrun-retrieval-v2
+          path: artifacts/agora_crossrun_retrieval_v2.json
