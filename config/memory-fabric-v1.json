@@ -22,7 +22,12 @@
     "MODELS",
     "COLD_BENCHMARK",
     "EVIDENCE",
-    "SIGMA"
+    "SIGMA",
+    "NATIVE_AI",
+    "HUMAN_INTERACTION",
+    "EMBODIED_REPLAY",
+    "ELYSION",
+    "ELYSIUM"
   ],
   "classes": {
     "M0": {
@@ -87,7 +92,9 @@
         "NO_M6_TRAINING_DATA",
         "SHA256_AND_PROVENANCE_REQUIRED",
         "DEDUP_BEFORE_WRITE",
-        "NO_SECRETS_IN_GITHUB"
+        "NO_SECRETS_IN_GITHUB",
+        "NO_BLIND_CROSS_AI_MEMORY_COPY",
+        "PLANNED_AI_NAMESPACE_RESERVED_NOT_ACTIVE"
       ],
       "status": "CONNECTED_VERIFIED_PRIVATE",
       "account": "cerebron-omega",
@@ -141,5 +148,34 @@
     "created_at",
     "replay_recipe",
     "epistemic"
-  ]
+  ],
+  "native_ai": {
+    "binding_manifest": "config/cerebron-civilization-memory-bindings-v1.json",
+    "active": [
+      "CEREBRON",
+      "SIGMA",
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "AELYS",
+      "ELYRA",
+      "SAPHEA_MICRO",
+      "ELYSION",
+      "ELYSIUM"
+    ],
+    "planned_not_active": [
+      "SAELION",
+      "ALPHA",
+      "OMEGA",
+      "DELTA",
+      "NEXUS"
+    ],
+    "namespace_pattern": "native-ai/{AI_ID}",
+    "backend": "cerebron-omega/cerebron-private-memory",
+    "rule": "PER_AI_NAMESPACE_SHARED_BACKEND_NO_BLIND_CROSS_COPY"
+  }
 }
