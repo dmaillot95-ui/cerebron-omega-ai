@@ -21,4 +21,6 @@ jobs:
       - name: Compile routing code
         run: python -m compileall -q platform/specialist_tools.py platform/tests/test_specialist_tools.py
       - name: Run specialist routing tests
-        run: python -m unittest platform.tests.test_specialist_tools -v
+        env:
+          PYTHONPATH: platform
+        run: python -m unittest discover -s platform/tests -p 'test_specialist_tools.py' -v
