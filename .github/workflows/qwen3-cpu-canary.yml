@@ -1,0 +1,39 @@
+name: CEREBRON Qwen3 CPU Canary
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tasks/dispatch/qwen3-cpu-canary-v1.json'
+
+permissions:
+  contents: read
+
+jobs:
+  qwen-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TRANSFORMERS_VERBOSITY: error
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install bounded CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir "torch>=2.4,<3" "transformers>=4.51,<5" "safetensors>=0.4,<1"
+      - name: Run Qwen3 0.6B CPU canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/qwen3_cpu_canary
+          /usr/bin/time -v -o artifacts/qwen3_cpu_canary/resources.txt           python benchmarks/qwen3_cpu_canary.py > artifacts/qwen3_cpu_canary/result.json
+          sha256sum artifacts/qwen3_cpu_canary/* > artifacts/qwen3_cpu_canary/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qwen3-06b-cpu-canary
+          path: artifacts/qwen3_cpu_canary/
+          retention-days: 3
