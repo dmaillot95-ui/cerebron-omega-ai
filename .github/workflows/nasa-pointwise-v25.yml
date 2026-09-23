@@ -1,0 +1,37 @@
+name: METRION NASA Pointwise V25
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/nasa_pointwise_v25.py"
+      - "external/nasa_nesc/occ06c_time_history.csv"
+      - ".github/workflows/nasa-pointwise-v25.yml"
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/nasa_pointwise_v25.py
+      - name: Evidence decision
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/nasa_pointwise_v25.json"))
+          allowed={"BLOCKED_RAW_NASA_TIME_HISTORY_MISSING","BLOCKED_SCHEMA_MISMATCH","BLOCKED_DATA_QUALITY","READY_FOR_PROPAGATOR_POINTWISE_RESIDUALS"}
+          assert d["decision"] in allowed
+          if d["decision"]=="READY_FOR_PROPAGATOR_POINTWISE_RESIDUALS":
+              assert d["rows"]>0 and len(d["dataset_sha256"])==64
+              assert all(d["quality"].values())
+          else:
+              assert d["g03_status"]!="CLOSED"
+          print("NASA_POINTWISE_V25",d["decision"],d["g03_status"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nasa-pointwise-v25
+          path: artifacts/nasa_pointwise_v25.json
+          retention-days: 30
