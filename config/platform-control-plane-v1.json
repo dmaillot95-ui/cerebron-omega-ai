@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "CONTROL_PLANE_MVP_LOCAL_FAIL_CLOSED",
+  "status": "CONTROL_PLANE_OPERATIONAL_SCOPED_REMOTE_BLOCKED",
   "role": "CEREBRON_CONTROL_PLANE_NOT_A_FARM",
   "farm_count_effect": 0,
   "farm_cap": 144,
@@ -32,8 +32,9 @@
   },
   "security": {
     "default_bind": "127.0.0.1",
-    "remote_bind_requires_env": "CEREBRON_API_TOKEN",
-    "public_deployment": "BLOCKED_UNTIL_AUTH_RBAC_ISOLATION",
+    "auth_rbac_isolation": "IMPLEMENTED_LOCAL_V1",
+    "remote_bind": "BLOCKED_BY_SERVER",
+    "public_deployment": "BLOCKED_PENDING_TLS_PROXY_SECRET_AND_HARDENING_REVIEW",
     "zero_paid_overage": true
   },
   "execution_claims": {

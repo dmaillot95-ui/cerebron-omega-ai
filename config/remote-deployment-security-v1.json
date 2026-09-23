@@ -1,0 +1,29 @@
+{
+  "schema": "CEREBRON_REMOTE_DEPLOYMENT_SECURITY_V1",
+  "status": "REMOTE_DEPLOYMENT_BLOCKED",
+  "local_operational": true,
+  "remote_exposure_authorized": false,
+  "verified_controls": {
+    "loopback_default": true,
+    "remote_bind_fail_closed": true,
+    "hashed_bearer_auth": true,
+    "rbac": true,
+    "owner_isolation": true,
+    "origin_check": true,
+    "rate_limit": true,
+    "request_body_limit": true,
+    "security_audit_log": true
+  },
+  "blockers": {
+    "tls_termination": "REQUIRED_NOT_PROVISIONED",
+    "reverse_proxy_trust_boundary": "REQUIRED_NOT_VALIDATED",
+    "deployment_secret_backend": "REQUIRED_NOT_VALIDATED",
+    "security_headers": "INCOMPLETE",
+    "durable_tamper_evident_audit": "NOT_IMPLEMENTED",
+    "deployment_isolation": "NOT_VALIDATED",
+    "remote_rate_limit_store": "IN_MEMORY_ONLY",
+    "credential_rotation": "NOT_VALIDATED"
+  },
+  "rule": "REMOTE_BIND_MUST_REMAIN_BLOCKED_UNTIL_ALL_REQUIRED_BLOCKERS_PASS",
+  "claim_ceiling": "LOCAL_CONTROL_PLANE_SECURITY_V1_NOT_PUBLIC_DEPLOYMENT_READY"
+}

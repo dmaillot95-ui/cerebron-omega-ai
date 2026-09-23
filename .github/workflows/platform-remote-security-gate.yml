@@ -1,0 +1,38 @@
+name: CEREBRON Remote Deployment Security Gate
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/platform-control-plane-v1.json'
+      - 'config/remote-deployment-security-v1.json'
+      - 'platform/security.py'
+      - 'platform/server.py'
+      - 'platform/deployment_security_audit.py'
+      - '.github/workflows/platform-remote-security-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify remote bind fails closed
+        run: |
+          set +e
+          output=$(python platform/server.py --host 0.0.0.0 --port 8788 2>&1)
+          code=$?
+          set -e
+          test "$code" -ne 0
+          echo "$output" | grep -q "REMOTE_BIND_BLOCKED"
+          echo "REMOTE_BIND_FAIL_CLOSED_OK"
+      - name: Audit local controls and deployment blockers
+        run: python platform/deployment_security_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-remote-deployment-security-audit-v1
+          path: platform/artifacts/remote-deployment-security-audit-v1.json
