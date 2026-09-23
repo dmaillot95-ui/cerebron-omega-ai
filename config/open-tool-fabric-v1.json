@@ -705,6 +705,30 @@
       "BENCHMARK",
       "ARTIFACT_SHA"
     ],
-    "farm_count_effect": 0
+    "farm_count_effect": 0,
+    "detector_evidence": {
+      "run_id": 35872591064,
+      "job_id": 107220224030,
+      "artifact_id": 10755144094,
+      "artifact_digest": "sha256:5dcadce4ceb5602c3b81d7b40be09a6fe768bda2349bf646dbe82d4aa9e1496c",
+      "profile_sha256": "01d20c1142858a32a51e9e2f4f037865fa7a5ad450b339f3d992a54d789764a1",
+      "observed": {
+        "rocm": false,
+        "hipcc": false,
+        "amd_smi": false,
+        "amd_gpu_visible": false,
+        "lemonade": false,
+        "gaia": false,
+        "device_nodes": [
+          "/dev/dri"
+        ]
+      },
+      "routing": {
+        "gpu_compute": false,
+        "local_ai": false,
+        "npu_inference": false
+      },
+      "interpretation": "NEGATIVE_CAPABILITY_TEST_PASSED_FAIL_CLOSED"
+    }
   }
 }
