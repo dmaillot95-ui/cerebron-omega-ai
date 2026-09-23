@@ -1,9 +1,15 @@
 import json
+import hashlib
+import json
 import os
 import pathlib
 import sys
+import threading
 import time
 import unittest
+import urllib.error
+import urllib.request
+from http.server import ThreadingHTTPServer
 from unittest import mock
 
 PLATFORM = pathlib.Path(__file__).resolve().parents[1]
@@ -13,6 +19,7 @@ from mission_engine import ARTIFACTS, create_mission, rows, sha256_bytes
 from model_router import MODEL_REVISION, infer
 from farm_bridge import FarmBridgeError, PILOTS, submit
 from security import SecurityError, authenticate, check_origin, rate_limit, reset_rate_limits, require
+from server import Handler
 
 
 class PlatformTests(unittest.TestCase):
@@ -117,6 +124,89 @@ class PlatformTests(unittest.TestCase):
                 break
             time.sleep(0.03)
         self.assertEqual(mission["owner_id"], "owner-test")
+
+
+    def test_http_auth_rbac_and_owner_isolation(self):
+        admin_token = "admin-unit-secret"
+        viewer_token = "viewer-unit-secret"
+        operator_token = "operator-unit-secret"
+        cfg = json.dumps([
+            {"user_id": "admin", "token_sha256": hashlib.sha256(admin_token.encode()).hexdigest(), "roles": ["admin"]},
+            {"user_id": "viewer", "token_sha256": hashlib.sha256(viewer_token.encode()).hexdigest(), "roles": ["viewer"]},
+            {"user_id": "operator", "token_sha256": hashlib.sha256(operator_token.encode()).hexdigest(), "roles": ["operator"]},
+        ])
+        reset_rate_limits()
+        with mock.patch.dict(os.environ, {"CEREBRON_RBAC_TOKENS_JSON": cfg}, clear=False):
+            server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f"http://127.0.0.1:{server.server_address[1]}"
+            try:
+                with urllib.request.urlopen(base + "/", timeout=2) as response:
+                    self.assertEqual(response.status, 200)
+
+                with self.assertRaises(urllib.error.HTTPError) as unauth:
+                    urllib.request.urlopen(base + "/api/missions", timeout=2)
+                self.assertEqual(unauth.exception.code, 401)
+
+                req = urllib.request.Request(
+                    base + "/api/missions",
+                    headers={"Authorization": "Bearer " + viewer_token},
+                )
+                with urllib.request.urlopen(req, timeout=2) as response:
+                    self.assertEqual(response.status, 200)
+
+                body = json.dumps({"prompt": "owner isolation test"}).encode()
+                req = urllib.request.Request(
+                    base + "/api/missions",
+                    data=body,
+                    method="POST",
+                    headers={"Authorization": "Bearer " + viewer_token, "Content-Type": "application/json"},
+                )
+                with self.assertRaises(urllib.error.HTTPError) as forbidden:
+                    urllib.request.urlopen(req, timeout=2)
+                self.assertEqual(forbidden.exception.code, 403)
+
+                req = urllib.request.Request(
+                    base + "/api/missions",
+                    data=body,
+                    method="POST",
+                    headers={"Authorization": "Bearer " + operator_token, "Content-Type": "application/json"},
+                )
+                with urllib.request.urlopen(req, timeout=2) as response:
+                    created = json.loads(response.read())
+                mission_id = created["mission_id"]
+
+                req = urllib.request.Request(
+                    base + "/api/missions/" + mission_id,
+                    headers={"Authorization": "Bearer " + viewer_token},
+                )
+                with self.assertRaises(urllib.error.HTTPError) as isolated:
+                    urllib.request.urlopen(req, timeout=2)
+                self.assertEqual(isolated.exception.code, 404)
+
+                req = urllib.request.Request(
+                    base + "/api/missions/" + mission_id,
+                    headers={"Authorization": "Bearer " + operator_token},
+                )
+                with urllib.request.urlopen(req, timeout=2) as response:
+                    owned = json.loads(response.read())
+                self.assertEqual(owned["owner_id"], "operator")
+
+                req = urllib.request.Request(
+                    base + "/api/missions",
+                    headers={
+                        "Authorization": "Bearer " + operator_token,
+                        "Origin": "https://evil.example",
+                    },
+                )
+                with self.assertRaises(urllib.error.HTTPError) as origin:
+                    urllib.request.urlopen(req, timeout=2)
+                self.assertEqual(origin.exception.code, 403)
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=2)
 
 
 if __name__ == "__main__":

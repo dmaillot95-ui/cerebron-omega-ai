@@ -77,6 +77,17 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        if not path.startswith("/api/"):
+            target = STATIC / ("index.html" if path == "/" else path.lstrip("/"))
+            if not target.exists() or STATIC not in target.resolve().parents:
+                return self._json({"error": "not found"}, 404)
+            payload = target.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", mimetypes.guess_type(target.name)[0] or "application/octet-stream")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+            return
         try:
             principal = self._guard("read", "read", 120)
         except SecurityError as exc:
@@ -174,16 +185,6 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(payload)
             return
-        target = STATIC / ("index.html" if path == "/" else path.lstrip("/"))
-        if not target.exists() or STATIC not in target.resolve().parents:
-            return self._json({"error": "not found"}, 404)
-        payload = target.read_bytes()
-        self.send_response(200)
-        self.send_header("Content-Type", mimetypes.guess_type(target.name)[0] or "application/octet-stream")
-        self.send_header("Content-Length", str(len(payload)))
-        self.end_headers()
-        self.wfile.write(payload)
-
     def log_message(self, fmt, *args):
         print(json.dumps({"time": time.time(), "client": self.client_address[0], "message": fmt % args}))
 
