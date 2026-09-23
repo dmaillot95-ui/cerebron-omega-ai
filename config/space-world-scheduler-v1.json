@@ -1,0 +1,47 @@
+{
+  "version": "SPACE_WORLD_SCHEDULER_V1",
+  "status": "POLICY_ONLY_NOT_ACTIVE",
+  "heartbeat_minutes": 5,
+  "activation_gate": "E2E_PASS_AND_QUOTA_GUARD",
+  "lanes": {
+    "LEARNING": {
+      "priority": "protected",
+      "resources": "five AI learning/evaluation tasks",
+      "rule": "never preempt active validated training"
+    },
+    "SPACE_WORLD": {
+      "resources": "F101-F110 simulation",
+      "rule": "run deterministic farms without AI unless reasoning event is raised"
+    },
+    "AI_REASONING": {
+      "resources": "five AI / CEREBRON coalition",
+      "rule": "event-driven only; do not invoke all AI every simulation tick"
+    }
+  },
+  "policy": [
+    "PARALLEL_IF_CAPACITY",
+    "ALTERNATE_HEAVY_LOADS_IF_CONTENTION",
+    "QUEUE_IF_SATURATED",
+    "NO_OVERLAPPING_SPACE_CYCLE",
+    "IDEMPOTENT_CYCLE_ID",
+    "BACKPRESSURE_HOLD_OR_SKIP",
+    "AI_ONLY_ON_REASONING_EVENT",
+    "QUOTA_GUARD_BEFORE_RECURRING"
+  ],
+  "events_requiring_ai": [
+    "contradiction",
+    "failed_invariant",
+    "novel_design_request",
+    "optimization_plateau",
+    "failure_recovery",
+    "unknown_above_threshold",
+    "candidate_gold_episode"
+  ],
+  "events_not_requiring_ai": [
+    "deterministic_state_propagation",
+    "routine_inventory_update",
+    "routine_energy_balance",
+    "unchanged_replay"
+  ],
+  "note": "GitHub cron cadence is best-effort and not hard real-time."
+}
