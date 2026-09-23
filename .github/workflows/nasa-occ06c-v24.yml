@@ -1,0 +1,34 @@
+name: METRION NASA OCC06C Seed V24
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/nasa_occ06c_seed_v24.py"
+      - ".github/workflows/nasa-occ06c-v24.yml"
+permissions:
+  contents: read
+jobs:
+  nasa-seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/nasa_occ06c_seed_v24.py
+      - name: Provenance gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/nasa_occ06c_seed_v24.json"))
+          assert d["decision"]=="EXTERNAL_INITIAL_STATE_INGESTED"
+          assert d["source"]["case"]=="Orbital Check Case 06C"
+          assert len(d["sha256"])==64
+          assert d["g03_status"]=="PARTIAL_EXTERNAL_INITIAL_CONDITION"
+          assert "NO_RAW_TIME_HISTORY_INGESTED_YET" in d["limits"]
+          print("NASA_OCC06C_V24",d["derived_two_body_diagnostics"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nasa-occ06c-seed-v24
+          path: artifacts/nasa_occ06c_seed_v24.json
+          retention-days: 30
