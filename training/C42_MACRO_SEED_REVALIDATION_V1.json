@@ -1,0 +1,70 @@
+{
+  "schema": "cerebron-c42-macro-seed-revalidation-v1",
+  "version": "1.0",
+  "status": "ACTIVE_REVALIDATION_CONTRACT",
+  "registry": "training/C42_MACRO_SEED_REGISTRY_V1.json",
+  "scope": {
+    "mother_seeds": [
+      "SEED-A",
+      "SEED-B",
+      "SEED-OMEGA"
+    ],
+    "macrograins": [
+      "MG-01",
+      "MG-02",
+      "MG-03",
+      "MG-04",
+      "MG-05",
+      "MG-06",
+      "MG-07",
+      "MG-08",
+      "MG-09",
+      "MG-10",
+      "MG-11",
+      "MG-12"
+    ]
+  },
+  "stages": [
+    "IDENTITY_AND_SHA",
+    "SEMANTIC_SCOPE",
+    "REDUNDANCY_AND_CONTRADICTION",
+    "COUNTEREXAMPLE_SEARCH",
+    "TRANSFER_TEST_DESIGN",
+    "DEPENDENCY_FINGERPRINT",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "F72",
+    "AFAH",
+    "CURRICULUM_ELIGIBILITY"
+  ],
+  "decisions": [
+    "REVALIDATED",
+    "REVISE",
+    "MERGE",
+    "SPLIT",
+    "OPEN",
+    "REJECT"
+  ],
+  "requirements": {
+    "REVALIDATED": [
+      "provenance_complete",
+      "scope_explicit",
+      "no_unresolved_critical_contradiction",
+      "counterexample_boundary_defined",
+      "transfer_test_defined",
+      "dependency_fingerprint_complete",
+      "audit_pass",
+      "counter_audit_pass",
+      "f72_pass",
+      "afah_pass"
+    ]
+  },
+  "invariants": [
+    "RECOVERED_NE_VALIDATED",
+    "CONSENSUS_NE_TRUTH",
+    "NO_AUTO_GOLD",
+    "NO_TRAINING_BEFORE_REVALIDATION",
+    "G0_IMMUTABLE"
+  ],
+  "output_rule": "Only REVALIDATED items may enter macro-seed curriculum instantiation; revalidation itself does not release training."
+}
