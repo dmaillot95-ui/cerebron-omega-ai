@@ -1,0 +1,20 @@
+{
+  "schema":"CEREBRON_DISPATCH_V1",
+  "status":"QUEUED_NOT_EXECUTED",
+  "mission_id":"OPEN_SOURCE_COLLECTIVE_SEARCH_V1",
+  "source_task":"tasks/open-source-collective-search-v1.json",
+  "memory_policy":{
+    "max_task_bytes":65536,
+    "max_inline_chars":24000,
+    "raw_outputs":"ARTIFACT_ONLY",
+    "hot_memory":"DEDUP_SUMMARY_SHA_ONLY",
+    "benchmark":"DENY_TRAINING",
+    "overflow":"FAIL_CLOSED"
+  },
+  "execution_policy":{
+    "real_agents_only":true,
+    "no_simulated_outputs":true,
+    "require_trace_and_artifact":true,
+    "farm_cap":144
+  }
+}
