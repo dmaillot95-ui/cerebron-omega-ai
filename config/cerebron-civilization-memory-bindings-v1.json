@@ -1,0 +1,187 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MEMORY_BINDINGS_V1",
+  "date": "2026-09-23",
+  "status": "CURRENT_AI_BOUND_PLANNED_AI_RESERVED_NOT_ACTIVE",
+  "runtime_modified": false,
+  "common_private_repo": "cerebron-omega/cerebron-private-memory",
+  "model_asset_repo": "cerebron-omega/cerebron-sigma-memory",
+  "github_role": "CONTROL_PLANE_ONLY",
+  "recall_route": [
+    "AI",
+    "CEREBRON_ROUTER",
+    "F66_INDEX",
+    "F74_POINTER_HISTORY",
+    "HF_PRIVATE",
+    "SHA256_VERIFY",
+    "MINIMUM_RELEVANT_CONTEXT"
+  ],
+  "write_route": [
+    "AI_CANDIDATE",
+    "CLASSIFY",
+    "PROVENANCE",
+    "AUDIT",
+    "COMPRESS",
+    "HASH",
+    "HF_PRIVATE_WRITE",
+    "AUTH_READBACK",
+    "SHA256_VERIFY",
+    "F74_REGISTER",
+    "F66_INDEX",
+    "RECALL_TEST"
+  ],
+  "current_ai": [
+    {
+      "ai_id": "CEREBRON",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/CEREBRON",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SIGMA",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/SIGMA",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/SAPHEA",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/SPIRALION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ETHERION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/ETHERION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "HYPERION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/HYPERION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ASTRION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/ASTRION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "METRION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/METRION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "AFAH",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/AFAH",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "AELYS",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/AELYS",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYRA",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/ELYRA",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/SAPHEA_MICRO",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYSION",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/ELYSION",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "status": "BOUND_BY_COMMON_POLICY",
+      "namespace": "native-ai/ELYSIUM",
+      "durable_backend": "cerebron-omega/cerebron-private-memory",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    }
+  ],
+  "planned_ai": [
+    {
+      "ai_id": "SAELION",
+      "status": "PLANNED_NOT_BOUND",
+      "namespace_reserved": "native-ai/SAELION",
+      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+    },
+    {
+      "ai_id": "ALPHA",
+      "status": "PLANNED_NOT_BOUND",
+      "namespace_reserved": "native-ai/ALPHA",
+      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+    },
+    {
+      "ai_id": "OMEGA",
+      "status": "PLANNED_NOT_BOUND",
+      "namespace_reserved": "native-ai/OMEGA",
+      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+    },
+    {
+      "ai_id": "DELTA",
+      "status": "PLANNED_NOT_BOUND",
+      "namespace_reserved": "native-ai/DELTA",
+      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+    },
+    {
+      "ai_id": "NEXUS",
+      "status": "PLANNED_NOT_BOUND",
+      "namespace_reserved": "native-ai/NEXUS",
+      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+    }
+  ],
+  "hard_rules": [
+    "MEMORY!=LEARNING",
+    "PROMPT!=TRAINING",
+    "M6_NEVER_IN_TRAIN",
+    "NO_RAW_AGORA_AUTO_GOLD",
+    "SHA256_AND_PROVENANCE_REQUIRED",
+    "NO_SECRET_IN_GITHUB",
+    "NO_BLIND_CROSS_AI_MEMORY_COPY"
+  ]
+}
