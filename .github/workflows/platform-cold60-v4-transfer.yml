@@ -1,0 +1,39 @@
+name: CEREBRON Cold 60 V4 Transfer
+on:
+  push:
+    branches: ['feat/tool-generalization-v1']
+    paths:
+      - 'platform/specialist_tools.py'
+      - 'platform/cold60_v4_transfer.py'
+      - '.github/workflows/platform-cold60-v4-transfer.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_TRANSFER_V4_SEED: ${{ github.run_id }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Compile generalized tools
+        run: python -m compileall -q platform
+      - name: Run new V4 transfer holdout
+        run: python platform/cold60_v4_transfer.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-cold60-v4-transfer
+          path: |
+            platform/artifacts/cold60-v4-transfer-dataset.json
+            platform/artifacts/cold60-v4-transfer-result.json
