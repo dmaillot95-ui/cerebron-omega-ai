@@ -1,0 +1,80 @@
+{
+  "schema": "cerebron-robot-learning-transfer-v1",
+  "version": "1.0",
+  "status": "RESEARCH_SYNTHESIS_ARCHITECTURE_NOT_YET_BENCHMARK_VALIDATED",
+  "finding": "Robot learning suggests a high-throughput loop: parallel experience generation, controlled variation, explicit objective/reward, policy update, held-out evaluation, sim-to-real/transfer validation, and continual collection of failure cases.",
+  "sources": [
+    {
+      "name": "OpenAI Dactyl",
+      "mechanisms": [
+        "reinforcement_learning",
+        "simulation",
+        "domain_randomization",
+        "sim_to_real"
+      ]
+    },
+    {
+      "name": "NVIDIA Isaac Lab",
+      "mechanisms": [
+        "massively_parallel_environments",
+        "reinforcement_learning",
+        "imitation_learning",
+        "domain_randomization",
+        "policy_evaluation"
+      ]
+    },
+    {
+      "name": "Hugging Face LeRobot",
+      "mechanisms": [
+        "teleoperate",
+        "record_dataset",
+        "train_policy",
+        "deploy",
+        "evaluate"
+      ]
+    },
+    {
+      "name": "Google DeepMind RT-2",
+      "mechanisms": [
+        "web_plus_robot_data",
+        "vision_language_action",
+        "generalization"
+      ]
+    }
+  ],
+  "cerebron_translation": {
+    "environment": "Problem/task generator + real historical tasks + adversarial variants",
+    "observation": "Prompt, context, evidence state, dependencies, tool availability",
+    "action": "Routing, decomposition, tool choice, hypothesis, experiment, answer delta",
+    "reward": "Deterministic measured task score; never self-reported confidence",
+    "policy": "Six-AI adapters/routing policies",
+    "parallel_simulation": "Many cheap synthetic task variants and counterfactuals, clearly tagged synthetic",
+    "domain_randomization": "Vary wording, domain, missing information, distractors, tool availability, contradiction patterns and dependency structure",
+    "demonstrations": "Validated expert trajectories and successful audited CEREBRON traces",
+    "failure_replay": "RED/OPEN/REJECT and regression cases become negative/correction curriculum after validation",
+    "sim_to_real": "Synthetic curriculum -> cold real held-out tasks -> transfer domains -> production shadow evaluation",
+    "update": "LoRA/reversible adapter batch update",
+    "promotion": "Cold no-RAG + transfer no-RAG + ablation + regression + F72 + AFAH"
+  },
+  "fast_loop": [
+    "GENERATE_PARALLEL_EXPERIENCE",
+    "SCORE",
+    "SELECT_FAILURES_AND_SUCCESSES",
+    "AUDIT",
+    "BUILD_CURRICULUM",
+    "TRAIN_ADAPTER",
+    "COLD_EVAL",
+    "TRANSFER_EVAL",
+    "ABLATE",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "invariants": [
+    "SYNTHETIC_NE_REAL",
+    "SIMULATION_NE_TEST",
+    "REWARD_NE_TRUTH",
+    "SELF_SCORE_NE_EVIDENCE",
+    "G0_IMMUTABLE",
+    "NO_BENCHMARK_LEAKAGE"
+  ],
+  "next_experiment": "Build a small CEREBRON learning simulator with parallel task variants and deterministic rewards, then compare G0 vs reversible G1 adapter."
+}
