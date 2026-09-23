@@ -1,0 +1,61 @@
+{
+  "schema": "cerebron-six-ai-g1-dataset-manifest-v1",
+  "version": "1.0.0",
+  "status": "EMPTY_LOCKED_AWAITING_VALIDATED_MACRO_SEED_EXAMPLES",
+  "base_generation": "G0",
+  "target_generation": "G1",
+  "base_model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "immutable": true
+  },
+  "target_ais": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "AFAH",
+    "CEREBRON"
+  ],
+  "curriculum_types": [
+    "APPLY",
+    "DO_NOT_APPLY",
+    "COUNTEREXAMPLE",
+    "TRANSFER",
+    "ADVERSARIAL",
+    "ABLATION_CONTROL"
+  ],
+  "records": [],
+  "splits": {
+    "TRAIN": [],
+    "VALIDATION": [],
+    "BLIND_TEST": [],
+    "TRANSFER": [],
+    "ADVERSARIAL": [],
+    "ABLATION_CONTROL": []
+  },
+  "admission_requirements": [
+    "VALIDATED_MACRO_SEED",
+    "EXAMPLE_STRUCTURALLY_ELIGIBLE",
+    "AUDIT_PASS",
+    "COUNTER_AUDIT_PASS",
+    "F72_PASS",
+    "AFAH_PASS",
+    "PROVENANCE_COMPLETE",
+    "DEPENDENCY_FINGERPRINT_COMPLETE",
+    "NO_BENCHMARK_LEAKAGE",
+    "SHA256_PRESENT"
+  ],
+  "release": {
+    "training_released": false,
+    "reason": "No validated macro-seed training examples admitted yet."
+  },
+  "invariants": [
+    "BLIND_TEST_NEVER_TRAIN",
+    "TRANSFER_NEVER_TRAIN",
+    "ABLATION_CONTROL_NEVER_TRAIN",
+    "G0_IMMUTABLE",
+    "NO_SYNTHETIC_CANARY_AS_TRAINING_TRUTH",
+    "NO_AUTO_PROMOTION"
+  ]
+}
