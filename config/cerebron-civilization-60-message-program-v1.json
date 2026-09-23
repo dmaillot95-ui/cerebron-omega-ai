@@ -1,0 +1,83 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_PROGRAM_V1",
+  "status": "ACTIVE_MESSAGE_1_OF_60",
+  "runtime_change": false,
+  "objective": "Connect memory first, then organize collective learning, then group-reasoning evaluation.",
+  "phases": [
+    {
+      "messages": "1-10",
+      "name": "FOUNDATION",
+      "goals": [
+        "registry consistency",
+        "memory bindings",
+        "routing",
+        "dual-core contracts",
+        "provenance"
+      ]
+    },
+    {
+      "messages": "11-20",
+      "name": "INDIVIDUAL_BASELINES",
+      "goals": [
+        "cold benchmarks",
+        "role baselines",
+        "failure maps"
+      ]
+    },
+    {
+      "messages": "21-30",
+      "name": "PAIRWISE_LEARNING",
+      "goals": [
+        "dual-core ablations",
+        "cross-critique",
+        "fusion"
+      ]
+    },
+    {
+      "messages": "31-40",
+      "name": "COLLECTIVE_SCHOOL",
+      "goals": [
+        "AGORA curriculum",
+        "GOLD/RED transfer",
+        "specialist teaching"
+      ]
+    },
+    {
+      "messages": "41-50",
+      "name": "TRAINING_GATES",
+      "goals": [
+        "dataset lineage",
+        "adapters where justified",
+        "regression",
+        "rollback"
+      ]
+    },
+    {
+      "messages": "51-59",
+      "name": "CIVILIZATION_REHEARSAL",
+      "goals": [
+        "coalition routing",
+        "stress tests",
+        "red team",
+        "reproduction"
+      ]
+    },
+    {
+      "messages": "60",
+      "name": "CIVILIZATION_MEASURE",
+      "goals": [
+        "single hard question",
+        "individual answers",
+        "parallel coalition",
+        "fusion",
+        "ablation",
+        "evidence report"
+      ]
+    }
+  ],
+  "current_message": {
+    "number": 1,
+    "action": "INSTALL_AND_VERIFY_COMMON_MEMORY_ROUTING_FOR_ALL_CURRENT_AI; RESERVE_FUTURE_AI_WITHOUT_SIMULATION"
+  },
+  "chatgpt_task_schedule_unchanged": true
+}
