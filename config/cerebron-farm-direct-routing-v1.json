@@ -71,9 +71,13 @@
   "compatibility": {
     "greek24": "routing vocabulary only; not mandatory persistent colonies",
     "legacy62": "preserved reserve/archive",
-    "farms74": "preserved; unmapped farms remain available through registry"
+    "farms146": "current verified registry snapshot; future farms admitted only after repository verification"
   },
   "current_blockers": [
-    "HF inference provider permission 403 affects F44 provider path only; other GitHub farm/control functions remain available"
-  ]
+    "HF slots remain runtime-gated; provider failures are route-specific and do not invalidate farm identity"
+  ],
+  "registry_snapshot": {
+    "count": 146,
+    "max_id": 146
+  }
 }
