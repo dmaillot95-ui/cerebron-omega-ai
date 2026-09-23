@@ -66,6 +66,8 @@ def _extract_expression(prompt: str):
             expr=m.group(1).strip()
             expr=re.split(r"\b(?:reply|return|answer)\b",expr,flags=re.I)[0].strip()
             return expr.rstrip(" .")
+    if "python" in prompt.lower() and "expression" in prompt.lower() and ":" in prompt:
+        return prompt.rsplit(":",1)[-1].strip().rstrip(" .")
     return None
 
 
@@ -181,7 +183,7 @@ def _option_sequences(prompt: str):
         end=matches[i+1].start() if i+1<len(matches) else len(prompt)
         chunk=prompt[start:end]
         chunk=re.split(r"[.;]\s*(?:constraints?|choose|reply|answer)\b",chunk,flags=re.I)[0]
-        items=[x.strip(" .") for x in re.split(r"\s*(?:>|→|,|/)\s*",chunk) if x.strip(" .")]
+        items=[x.strip(" .|") for x in re.split(r"\s*(?:>|→|,|/|\\|)\s*",chunk) if x.strip(" .|")]
         if 2 <= len(items) <= 8:
             opts[m.group(1).lower()]=items
     return opts
