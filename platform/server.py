@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import pathlib
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -10,6 +11,7 @@ from urllib.parse import urlparse
 
 from mission_engine import ARTIFACTS, ROOT, create_mission, rows
 from model_router import catalog, infer
+from farm_bridge import PILOTS
 
 HERE = pathlib.Path(__file__).resolve().parent
 STATIC = HERE / "static"
@@ -59,12 +61,25 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"control_plane": cfg, "runtime": {"bind_policy": "LOOPBACK_ONLY", "farm_count_effect": 0}})
         if path == "/api/health":
             farms = load_json(ROOT / "config/farms.json")["farms"]
+            token_ready = bool(os.getenv("CEREBRON_GITHUB_TOKEN", "").strip())
+            bridge_state = "READY" if token_ready else "CONFIGURED_TOKEN_REQUIRED"
             return self._json({"status": "healthy", "time": time.time(), "farm_count": len(farms),
-                               "model": catalog()[0], "database": "sqlite", "cost_policy": "ZERO_PAID_OVERAGE_DEFAULT"})
+                               "model": catalog()[0], "database": "sqlite", "cost_policy": "ZERO_PAID_OVERAGE_DEFAULT",
+                               "farm_bridge": bridge_state})
         if path == "/api/farms":
             farms = load_json(ROOT / "config/farms.json")["farms"]
-            enriched = [{**farm, "farm_id": f"F{farm['id']:03d}", "worker": "UNAVAILABLE",
-                         "health": "DECLARED", "engine": None} for farm in farms]
+            token_ready = bool(os.getenv("CEREBRON_GITHUB_TOKEN", "").strip())
+            enriched = []
+            for farm in farms:
+                pilot = farm["id"] in PILOTS
+                enriched.append({
+                    **farm,
+                    "farm_id": f"F{farm['id']:03d}",
+                    "status": "BRIDGE_PILOT_CONFIGURED" if pilot else farm.get("status", "DECLARED"),
+                    "worker": "github-actions-farm-worker" if pilot else "UNAVAILABLE",
+                    "health": ("READY" if token_ready else "CREDENTIAL_REQUIRED") if pilot else "DECLARED",
+                    "engine": "CEREBRON_FARM_BRIDGE_V1" if pilot else None,
+                })
             return self._json({"count": len(enriched), "farms": enriched})
         if path == "/api/models":
             return self._json({"models": catalog()})

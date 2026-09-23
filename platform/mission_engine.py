@@ -10,6 +10,7 @@ import time
 import uuid
 
 from model_router import infer
+from farm_bridge import FarmBridgeError, collect as farm_collect, submit as farm_submit
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PLATFORM = pathlib.Path(__file__).resolve().parent
@@ -103,6 +104,48 @@ def _task(mission_id: str, farm_id: int, role: str, worker: str, model: str | No
         raise
 
 
+def _farm_bridge_task(mission_id: str, farm_id: int, operation: str, payload: dict) -> dict:
+    task_id = f"task_{uuid.uuid4().hex[:12]}"
+    start = time.time()
+    input_sha = canonical_sha({"mission_id": mission_id, "task_id": task_id, "farm_id": farm_id,
+                               "operation": operation, "payload": payload})
+    with connect() as con:
+        con.execute("""INSERT INTO tasks(task_id,mission_id,farm_id,role,worker,model,tool,status,start_time,input_sha,cost)
+                       VALUES(?,?,?,?,?,?,?,?,?,?,0)""",
+                    (task_id, mission_id, farm_id, "REAL_FARM_BRIDGE", "github-actions-farm-worker",
+                     None, "CEREBRON_FARM_BRIDGE_V1", "RUNNING", start, input_sha))
+    emit(mission_id, "Farm Bridge démarré", {"farm_id": farm_id, "task_id": task_id, "operation": operation})
+    try:
+        request = farm_submit(farm_id, operation, payload, mission_id, task_id)
+        emit(mission_id, "Requête Farm Bridge commitée",
+             {"farm_id": farm_id, "task_id": task_id, "request_commit_sha": request["request_commit_sha"]})
+        result = farm_collect(farm_id, request["request_commit_sha"])
+        proof = {"request": request, "result": result}
+        output_sha = canonical_sha(proof)
+        artifact_sha = str(result["artifact_sha"]).removeprefix("sha256:")
+        source = f"github://{request['repo']}/actions/runs/{result['run_id']}/artifacts/{result['artifact_id']}"
+        with connect() as con:
+            con.execute("UPDATE tasks SET status='COMPLETED',end_time=?,output_sha=?,evidence=? WHERE task_id=?",
+                        (time.time(), output_sha, json.dumps(proof, ensure_ascii=False), task_id))
+            con.execute("INSERT INTO evidence VALUES(?,?,?,?,?,?,?,?)",
+                        (f"ev_{uuid.uuid4().hex[:12]}", mission_id, "REAL_FARM_EXECUTION", source,
+                         artifact_sha, json.dumps(proof, ensure_ascii=False), "S5_ARTIFACT_PLUS_SHA", time.time()))
+        emit(mission_id, "Farm Bridge vérifié",
+             {"farm_id": farm_id, "task_id": task_id, "run_id": result["run_id"], "job_id": result["job_id"],
+              "artifact_id": result["artifact_id"], "artifact_sha": result["artifact_sha"]})
+        return result
+    except FarmBridgeError as exc:
+        error = str(exc)
+        state = "ROUTED_ONLY" if error in {"GITHUB_TOKEN_UNAVAILABLE", "FARM_BRIDGE_NOT_CONFIGURED", "OPERATION_NOT_ALLOWED"} else "NON_EXECUTED"
+        with connect() as con:
+            con.execute("UPDATE tasks SET status=?,end_time=?,errors=? WHERE task_id=?",
+                        (state, time.time(), error, task_id))
+        emit(mission_id, "Farm Bridge non exécuté",
+             {"farm_id": farm_id, "task_id": task_id, "status": state, "error": error}, "WARNING")
+        return {"protocol": "CEREBRON_FARM_BRIDGE_V1", "farm_id": farm_id, "status": state, "error": error,
+                "limitations": ["No FARM_EXECUTED claim without run/job/artifact/SHA."]}
+
+
 def rover_calculation() -> dict:
     mass_kg = 180.0
     slope_deg = 15.0
@@ -135,9 +178,15 @@ def execute(mission_id: str) -> None:
         route = _task(mission_id, 42, "CHEF_DE_COLONIE", "local-router-worker", "CEREBRON-ROUTER-NN-V1", None,
                       lambda: infer(mission["prompt"]))
         domain = route["label"]
-        farms = DOMAIN_FARMS[domain]
+        prompt_lower = mission["prompt"].lower()
+        bridge_requested = domain == "space" and any(
+            token in prompt_lower for token in ("hohmann", "transfert orbital", "orbite", "orbital", "f123")
+        )
+        farms = list(DOMAIN_FARMS[domain])
+        if bridge_requested and 123 not in farms:
+            farms.append(123)
         emit(mission_id, "Coalition minimale sélectionnée", {"domain": domain, "farms": farms})
-        if domain == "space" or "rover" in mission["prompt"].lower():
+        if domain == "space" or "rover" in prompt_lower:
             concept = _task(mission_id, 15, "SPECIALIST", "deterministic-concept-worker", None, "engineering-rules-v1",
                             lambda: {"concept": "Rover lunaire 6 roues, bogie articulé, navigation autonome supervisée",
                                      "assumptions": ["masse 180 kg", "pente cible 15°", "vitesse 0.45 m/s"]})
@@ -148,7 +197,15 @@ def execute(mission_id: str) -> None:
             audit = _task(mission_id, 34, "AUDITOR", "evidence-audit-worker", None, "sha256",
                           lambda: {"checks": ["inputs hashed", "calculation reproducible", "limitations explicit"],
                                    "claim_ceiling": "E2_CALCULATION"})
+            bridge = None
+            if bridge_requested:
+                bridge = _farm_bridge_task(
+                    mission_id, 123, "hohmann_reference",
+                    {"mu_m3_s2": 3.986004418e14, "r1_m": 6.778e6, "r2_m": 4.2164e7},
+                )
             result = {"route": route, "farms": farms, "concept": concept, "calculation": calc, "red_team": red, "audit": audit}
+            if bridge is not None:
+                result["farm_bridge"] = bridge
             artifact = ARTIFACTS / f"{mission_id}-rover.json"
             payload = json.dumps(result, ensure_ascii=False, indent=2).encode()
             artifact.write_bytes(payload)
