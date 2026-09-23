@@ -4,6 +4,11 @@ on:
     branches: ['feat/cerebron-ai-platform-mvp']
     paths:
       - 'platform/cold60_adaptive_coalition.py'
+      - 'platform/cold60_single_model.py'
+      - 'platform/coalition.py'
+      - 'platform/generative_backend.py'
+      - 'platform/model_router.py'
+      - 'config/saphea-micro-v1.json'
       - '.github/workflows/platform-cold60-adaptive-coalition.yml'
   workflow_dispatch:
 permissions:
