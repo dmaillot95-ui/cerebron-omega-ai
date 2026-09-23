@@ -13,7 +13,9 @@
     "AELYS",
     "ELYRA",
     "SAPHEA_MICRO",
-    "SIGMA"
+    "SIGMA",
+    "ELYSION",
+    "ELYSIUM"
   ],
   "ASTRION": {
     "farm": 121,
@@ -176,14 +178,15 @@
     "AGORA_TRANSFER_REQUIRES_MEASURED_GAIN",
     "COLD_BENCHMARK_DENY_TRAINING",
     "ROUTE_MINIMAL_USEFUL_COALITION",
-    "FARM_CAP_144",
-    "NO_FARM_ABOVE_144",
     "SCAFFOLDED_NE_EXECUTED",
     "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
     "SHARED_BASE_MODEL_IS_CORRELATED_DEPENDENCY",
     "SCOPED_PROMOTION_ONLY",
     "CEREBRON_MODE_REQUIRED",
-    "HF_PRIVATE_MEMORY_DEFAULT_DURABLE_BACKEND"
+    "HF_PRIVATE_MEMORY_DEFAULT_DURABLE_BACKEND",
+    "REGISTRY_COUNT_IS_DYNAMIC_VERIFIED_STATE",
+    "NEW_FARM_REQUIRES_VERIFIED_REPOSITORY_BEFORE_REGISTRY_INSERT",
+    "F145_F146_ARE_REGISTERED_REAL_REPOSITORIES"
   ],
   "AELYS": {
     "mission": "HUMAN_DIALOGUE_COORDINATION",
@@ -287,5 +290,31 @@
     "common_private_repo": "cerebron-omega/cerebron-private-memory",
     "sigma_private_repo": "cerebron-omega/cerebron-sigma-memory",
     "github": "POINTERS_AND_RECEIPTS_ONLY"
+  },
+  "ELYSION": {
+    "mission": "NATIVE_DUAL_CORE_REASONING_GENERATION_INVENTION",
+    "status": "REGISTERED_F145_ARCHITECTURE_AND_BENCHMARK_PHASE_NO_TRAINED_NATIVE_WEIGHTS_YET",
+    "farm_id": 145,
+    "memory_namespace": "ELYSION",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "QWEN3_4B_AND_SMOLLM3_3B_PARALLEL_THEN_FUSION_SUBJECT_TO_ABLATION",
+    "rules": [
+      "M6_NEVER_IN_TRAIN",
+      "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+      "FUSION_NOT_CONSENSUS_PROOF"
+    ]
+  },
+  "ELYSIUM": {
+    "mission": "NATIVE_DUAL_CORE_VERIFICATION_RED_TEAM_OPTIMIZATION",
+    "status": "REGISTERED_F146_REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
+    "farm_id": 146,
+    "memory_namespace": "ELYSIUM",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "SHARED_BASE_FAMILY_ALLOWED_SPECIALIZATION_REQUIRES_OWN_ADAPTER_OR_TRAINING_EVIDENCE",
+    "rules": [
+      "M6_NEVER_IN_TRAIN",
+      "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+      "AUDIT_OUTPUT_NOT_AUTO_GOLD"
+    ]
   }
 }
