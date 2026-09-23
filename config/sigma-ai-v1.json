@@ -141,7 +141,28 @@
     "council_seats": 8,
     "default_mode": "MINIMAL_USEFUL_COALITION",
     "full_mode": "FULL_COUNCIL_8",
-    "general_neural_independence_current": 1
+    "general_neural_independence_current": 1,
+    "full_council_e2e": {
+      "status": "EXECUTED_VERIFIED",
+      "run_id": 35912363315,
+      "job_id": 107355132277,
+      "artifact_id": 10773053770,
+      "artifact_digest": "sha256:3b3ea28d56a0df53fc945e447882a3534195a820465faec5ed07cf7e12beaeb7",
+      "roles": [
+        "SAPHEA",
+        "SPIRALION",
+        "ETHERION",
+        "HYPERION",
+        "ASTRION",
+        "METRION",
+        "AFAH",
+        "AELYS"
+      ],
+      "fusion_sha256": "9a209dc96476a0a51109f6e3acd8a5277d885c9fc7da3a530f0df90b75c7a43b",
+      "result_sha256": "b4cecebd05e2fb6737adf0d52eb92152482c781644e9d81ac02b2a7f20d1d9a0",
+      "independent_general_neural_models": 1,
+      "independence_note": "Eight role executions were real but shared the same Qwen base model; they are correlated."
+    }
   },
   "huggingface_connector": {
     "implementation": "platform/huggingface_memory.py",
