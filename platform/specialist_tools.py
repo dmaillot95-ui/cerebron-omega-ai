@@ -298,6 +298,19 @@ def solve_math(prompt: str) -> dict | None:
         return legacy
     p = prompt.strip()
 
+    m = re.search(r"(?:evaluate|calculate)(?:\s+the)?(?:\s+value\s+of)?\s*[:\-]?\s*([-+0-9*/(). ^×]+)", p, re.I)
+    if m:
+        expr=m.group(1).strip().replace("×","*")
+        if re.search(r"[+*/^\-]",expr):
+            try:
+                return {"unit":"SM02","method":"semantic-safe-expression","answer":_fmt(safe_eval(expr))}
+            except (ToolWorkerError,ValueError,SyntaxError):
+                pass
+
+    m = re.search(r"(?:numeric(?:al)?\s+)?product(?:\s+please)?\s*[:\-]?\s*([-+]?\d+(?:\.\d+)?)\s*[x×]\s*([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m:
+        return {"unit":"SM02","method":"semantic-product-symbol","answer":_fmt(float(m.group(1))*float(m.group(2)))}
+
     m = re.search(r"(?:multiply|product of)\s+([-+]?\d+(?:\.\d+)?)\s+(?:by|and)\s+([-+]?\d+(?:\.\d+)?)", p, re.I)
     if m:
         return {"unit":"SM02","method":"semantic-product","answer":_fmt(float(m.group(1))*float(m.group(2)))}
@@ -314,7 +327,7 @@ def solve_math(prompt: str) -> dict | None:
         if a != 0:
             return {"unit":"SM02","method":"semantic-linear-equation","answer":_fmt((c-b)/a)}
 
-    m = re.search(r"greatest common divisor of\s+(\d+)\s+(?:and|,)\s*(\d+)", p, re.I)
+    m = re.search(r"(?:greatest common divisor|gcd)\s+(?:of\s+)?(\d+)\s*(?:and|,|\s)\s*(\d+)", p, re.I)
     if m:
         return {"unit":"SM02","method":"semantic-gcd","answer":str(math.gcd(int(m.group(1)),int(m.group(2))))}
 
@@ -344,7 +357,7 @@ def solve_math(prompt: str) -> dict | None:
             if max(d)-min(d) < 1e-9:
                 return {"unit":"SM02","method":"semantic-arithmetic-sequence","answer":_fmt(vals[-1]+d[-1])}
 
-    m = re.search(r"([-+]?\d+(?:\.\d+)?)\s+(?:raised to the power|to the power)\s+([-+]?\d+(?:\.\d+)?)", p, re.I)
+    m = re.search(r"([-+]?\d+(?:\.\d+)?)\s+(?:(?:raised\s+)?to the power\s+|to the\s+)([-+]?\d+(?:\.\d+)?)(?:\s+power)?", p, re.I)
     if m:
         return {"unit":"SM02","method":"semantic-power","answer":_fmt(float(m.group(1))**float(m.group(2)))}
     return None
@@ -355,7 +368,7 @@ def solve_code(prompt: str) -> dict | None:
     if legacy is not None:
         return legacy
     m = re.search(
-        r"(?:safe\s+python\s+expression|python\s+expression|restricted\s+(?:python\s+)?evaluator)\s*:\s*(.+?)(?:\.\s*(?:respond|reply|return)\b|$)",
+        r"(?:safe\s+python\s+expression|python\s+expression|restricted\s+(?:python\s+)?evaluator|python\s+(?:evaluate\s+for|value))\s*:\s*(.+?)(?:\.\s*(?:respond|reply|return)\b|$)",
         prompt, re.I,
     )
     if not m:
@@ -400,15 +413,15 @@ def solve_research(prompt: str) -> dict | None:
     pairs={}
     for key,value in re.findall(r"\b([A-Za-z][A-Za-z0-9_-]*)\s*[:=]\s*([-+]?\d+(?:\.\d+)?|[A-Za-z][A-Za-z0-9_.-]*)",prompt):
         pairs[key.lower()]=value
-    m=re.search(r"(?:value\s+(?:for|of)|provide\s+the\s+value\s+for|return only)\s+([A-Za-z][A-Za-z0-9_-]*)",prompt,re.I)
-    if m and m.group(1).lower() in pairs and re.search(r"(?:reference|data|source|based solely|strictly)",prompt,re.I):
+    m=re.search(r"(?:value\s+(?:for|of)|provide\s+the\s+value\s+for|return only|query\s*[:=])\s+([A-Za-z][A-Za-z0-9_-]*)",prompt,re.I)
+    if m and m.group(1).lower() in pairs and re.search(r"(?:reference|data|source|facts|based solely|strictly)",prompt,re.I):
         return {"unit":"SM11","method":"semantic-source-key-extraction","answer":pairs[m.group(1).lower()]}
     return None
 
 
 def _planning_options(prompt: str) -> dict[str,list[str]]:
     options={}
-    for label,seq in re.findall(r"\b([A-Z0-9])\s*[:=]\s*([A-Za-z0-9_-]+(?:\s*(?:>|,)\s*[A-Za-z0-9_-]+){1,8})",prompt):
+    for label,seq in re.findall(r"\b([A-Z0-9])\s*[:=)]\s*([A-Za-z0-9_-]+(?:\s*(?:>|,)\s*[A-Za-z0-9_-]+){1,8})",prompt):
         parts=[x.strip() for x in re.split(r"\s*(?:>|,)\s*",seq) if x.strip()]
         if len(parts)>=2:
             options[label.upper()]=parts
