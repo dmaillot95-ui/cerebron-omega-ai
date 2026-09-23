@@ -39,6 +39,7 @@ def main():
     out={
         "schema":"CEREBRON_COLD_60_RESULT_V1",
         "mode":"ADAPTIVE_COALITION",
+        "coalition_semantics":"MINIMAL_V2_NO_UNSELECTED_MEMORY_BASE_GENERATOR_SEPARATE",
         "dataset_schema":"CEREBRON_COLD_60_V1",
         "dataset_sha":DATASET_SHA,
         "memory_class":"M6_COLD_BENCHMARK",
