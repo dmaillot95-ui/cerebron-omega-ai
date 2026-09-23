@@ -23,9 +23,10 @@ $$('.nav').forEach(button => button.addEventListener('click', async () => {
 
 async function loadHealth(){
   try{
-    const h=await api('/api/health');
+    const [h,g]=await Promise.all([api('/api/health'),api('/api/gates')]);
     $('#healthDot').className='dot ok'; $('#healthLabel').textContent='Système opérationnel'; $('#farmCount').textContent=h.farm_count;
-    $('#healthGrid').innerHTML=[['API','HEALTHY'],['Registre',`${h.farm_count} FERMES`],['Base','SQLITE ACTIVE'],['Modèle',h.model.status],['Coût',h.cost_policy]].map(([a,b])=>`<article class="health-card"><small>${esc(a)}</small><h3>${esc(b)}</h3></article>`).join('');
+    $('#healthGrid').innerHTML=[['API','HEALTHY'],['État',h.operational_status],['Registre',`${h.farm_count} FERMES`],['Base','SQLITE ACTIVE'],['Modèle',h.model.status],['Farm Bridge',h.farm_bridge],['Distant',h.remote_deployment],['Coût',h.cost_policy]].map(([a,b])=>`<article class='health-card'><small>${esc(a)}</small><h3>${esc(b)}</h3></article>`).join('');
+    $('#gateGrid').innerHTML=Object.entries(g.gates).map(([id,v])=>`<article class='health-card'><small>${esc(id)}</small><h3>${esc(v.status)}</h3><p>${esc(v.scope)}</p></article>`).join('');
   }catch(e){ $('#healthDot').className='dot bad'; $('#healthLabel').textContent='Indisponible'; }
 }
 async function loadFarms(){
@@ -34,13 +35,13 @@ async function loadFarms(){
 }
 function renderFarms(query){
   const q=query.toLowerCase();
-  $('#farmGrid').innerHTML=farmCache.filter(f=>`${f.farm_id} ${f.domain} ${f.repo}`.toLowerCase().includes(q)).map(f=>`<article class="farm-card"><header><b>${f.farm_id}</b><small>${esc(f.status||'DECLARED')}</small></header><p>${esc(f.domain)}</p><small>${esc(f.repo)}</small><div class="unavailable">WORKER · UNAVAILABLE</div></article>`).join('');
+  $('#farmGrid').innerHTML=farmCache.filter(f=>`${f.farm_id} ${f.domain} ${f.repo}`.toLowerCase().includes(q)).map(f=>`<article class='farm-card'><header><b>${f.farm_id}</b><small>${esc(f.status||'DECLARED')}</small></header><p>${esc(f.domain)}</p><small>${esc(f.repo)}</small><div class='${f.health==='READY'?'':'unavailable'}'>WORKER · ${esc(f.worker||'UNAVAILABLE')} · ${esc(f.health||'DECLARED')}</div></article>`).join('');
 }
 $('#farmSearch').addEventListener('input',e=>renderFarms(e.target.value));
 async function loadModels(){
   const [{models},{roles}]=await Promise.all([api('/api/models'),api('/api/roles')]);
   $('#modelGrid').innerHTML=models.map(m=>`<article class="model-card ${m.status==='ACTIVE_WORKER'?'real':''}"><span class="tag ${m.status==='UNAVAILABLE'?'unavailable':''}">${esc(m.status)}</span><h3>${esc(m.model_id||m.provider)}</h3><small>${esc(m.provider)} · ${esc(m.runtime)}</small><p class="meta">revision ${esc(m.revision||'—')}</p><p>${esc((m.capabilities||[]).join(' · ')||'Aucune capacité active')}</p></article>`).join('');
-  $('#roleGrid').innerHTML=roles.map(r=>`<article class="role-card"><span class="tag unavailable">${r.type}</span><h3>${esc(r.name)}</h3><small>MODEL · ${esc(r.model||'UNBOUND')}</small></article>`).join('');
+  $('#roleGrid').innerHTML=roles.map(r=>`<article class='role-card'><span class='tag ${String(r.status).includes('UNAVAILABLE')?'unavailable':''}'>${esc(r.type)}</span><h3>${esc(r.name)}</h3><small>STATUS · ${esc(r.status)}</small><p class='meta'>MODEL · ${esc(r.evidence?.policy||r.generative_backend?.model_id||'UNBOUND')}</p></article>`).join('');
 }
 async function loadAgora(){
   const {capsules}=await api('/api/agora');
@@ -65,7 +66,7 @@ $('#missionForm').addEventListener('submit',async e=>{
 async function pollMission(){
   if(!activeMission)return; const m=await api(`/api/missions/${activeMission}`);
   const state=m.status.toLowerCase(); $('#missionStatus').textContent=m.status; $('#missionStatus').className=`state ${state}`; $('#missionDomain').textContent=m.domain||'Routage…'; $('#taskCount').textContent=m.tasks.length; $('#evidenceCount').textContent=m.evidence.length;
-  const done=m.tasks.filter(t=>['COMPLETED','FAILED'].includes(t.status)).length; $('#progressBar').style.width=`${m.status==='COMPLETED'?100:Math.min(92,10+done*16)}%`;
+  const done=m.tasks.filter(t=>['COMPLETED','FAILED','ROUTED_ONLY','NON_EXECUTED'].includes(t.status)).length; $('#progressBar').style.width=`${m.status==='COMPLETED'?100:Math.min(92,10+done*16)}%`;
   const farms=[...new Set(m.tasks.map(t=>t.farm_id).filter(Boolean))]; $('#coalition').textContent=`${farms.length} FERME${farms.length>1?'S':''}`;
   $('#tasks').innerHTML=m.tasks.length?m.tasks.map(t=>`<article class="task ${t.status.toLowerCase()}"><strong>${esc(t.role)}</strong><small>F${String(t.farm_id).padStart(3,'0')} · ${esc(t.worker)}</small><small>${esc(t.model||t.tool||'—')}</small><code>${esc((t.output_sha||t.input_sha||'').slice(0,16))}…</code></article>`).join(''):'<div class="empty">Décomposition en cours…</div>';
   $('#eventLog').innerHTML=m.events.map(ev=>`<p><time>${new Date(ev.time*1000).toLocaleTimeString('fr-FR')}</time> ${esc(ev.message)}</p>`).join(''); $('#eventLog').scrollTop=$('#eventLog').scrollHeight;
