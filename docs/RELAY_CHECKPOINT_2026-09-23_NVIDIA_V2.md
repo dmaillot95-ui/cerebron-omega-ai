@@ -422,3 +422,21 @@ Decision:
 - record V3 as RED/negative curriculum: brittle surface-trigger routing.
 - do NOT train on the sealed V3 answers.
 - next exact technical objective: semantic tool-contract routing that recognizes intent despite paraphrase, followed by rerun of the unchanged V3 holdout.
+
+
+## RED TEAM UPDATE — COLD-60 V3 PARAPHRASE HOLDOUT
+
+- Workflow run 35903871389 = SUCCESS; job 107326523159.
+- Artifact 10770252341; digest sha256:c84d347d8dc4788b21b28b4801ef8ad9f0c4af113a7612318a0323760283067e.
+- Dataset SHA256: 9d97a2b371d18574c81e64460651075e27ee65e15018fc6157d983c9a7fbfcec.
+- Result SHA256: 82bbe8cc93069e6a039c837a630f89d5bf87242f4ccf8487a88f17eb1ce3e0f2.
+- Baseline Qwen: 23/60.
+- Adaptive coalition: 23/60.
+- Deterministic specialist tool hits: 0/60.
+- Domains improved: 0/6.
+- criterion_4_of_6=false.
+- Interpretation: V2's 60/60 gain does NOT transfer to substantially different surface forms with the current trigger/parser layer.
+- Root cause class: brittle syntactic dispatch / parser-pattern dependence, not failure of the bounded solvers themselves.
+- Preserve this failure. Do not tune against V3 and then call V3 cold again.
+- Revised claim ceiling: STRUCTURED_TEMPLATE_FAMILY_TOOL_AUGMENTATION_GAIN_ONLY.
+- Generalized coalition superiority remains UNPROVEN.

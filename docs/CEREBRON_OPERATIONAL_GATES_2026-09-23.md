@@ -107,3 +107,10 @@ Interpretation:
 - This is a router/parser generalization failure, not a failure of the entire CEREBRON architecture.
 - Next gate is to replace brittle surface-pattern routing with semantic/tool-contract routing and then rerun V3 unchanged.
 - V3 remains sealed and deny_training=true. Do not train on its answers.
+
+## Red Team V3 paraphrase holdout
+- run 35903871389; job 107326523159; artifact 10770252341; digest sha256:c84d347d8dc4788b21b28b4801ef8ad9f0c4af113a7612318a0323760283067e.
+- dataset SHA256 9d97a2b371d18574c81e64460651075e27ee65e15018fc6157d983c9a7fbfcec.
+- baseline 23/60; adaptive 23/60; deterministic tool hits 0/60; domains improved 0/6.
+- V2 gains are therefore bounded to the structured/template family until semantic dispatch transfers across unseen surface forms.
+- General G4/G10 superiority claim remains blocked.
