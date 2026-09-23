@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.01",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -421,6 +421,78 @@
       "repo": "cerebron-farm-78-architecton-space-robotics",
       "domain": "architecton-space-robotics-digital-twin-microgravity-assembly-simulation",
       "status": "EXPERIMENTAL"
+    },
+    {
+      "id": 79,
+      "repo": "cerebron-farm-79-aircraft-aerodynamics",
+      "domain": "aircraft-aerodynamics-flight-physics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 80,
+      "repo": "cerebron-farm-80-aircraft-propulsion",
+      "domain": "aircraft-propulsion-engine-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 81,
+      "repo": "cerebron-farm-81-drone-vtol",
+      "domain": "drone-vtol-autopilot-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 82,
+      "repo": "cerebron-farm-82-drone-swarm",
+      "domain": "drone-swarm-multi-agent-coordination",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 83,
+      "repo": "cerebron-farm-83-flight-simulation-digital-twin",
+      "domain": "flight-simulation-digital-twin-sil-hil",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 84,
+      "repo": "cerebron-farm-84-future-aircraft-rd",
+      "domain": "future-aircraft-rd-architecture",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 85,
+      "repo": "cerebron-farm-85-spacecraft-orbital-simulation",
+      "domain": "spacecraft-orbital-flight-rendezvous-docking-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 86,
+      "repo": "cerebron-farm-86-space-propulsion-simulation",
+      "domain": "space-propulsion-engine-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 87,
+      "repo": "cerebron-farm-87-space-robotics-swarm",
+      "domain": "space-robotics-swarm-assembly-maintenance",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 88,
+      "repo": "cerebron-farm-88-truck-vehicle-swarm",
+      "domain": "truck-vehicle-swarm-logistics-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 89,
+      "repo": "cerebron-farm-89-construction-earthmoving-simulation",
+      "domain": "construction-earthmoving-machine-site-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 90,
+      "repo": "cerebron-farm-90-universal-multi-agent-simulation",
+      "domain": "universal-multi-agent-co-simulation",
+      "status": "SCAFFOLDED"
     }
   ]
 }
