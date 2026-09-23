@@ -1,0 +1,108 @@
+{
+  "schema": "cerebron-six-ai-quarantine-dataset-gate-v1",
+  "version": "1.0",
+  "status": "ACTIVE_CONTRACT_NOT_YET_RUNTIME_VERIFIED",
+  "upstream": [
+    "config/hf-six-ai-zero-saturation-inbox-v2.json",
+    "training/SIX_AI_LEARNING_PIPELINE_V2.json"
+  ],
+  "sources": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "AFAH",
+    "CEREBRON"
+  ],
+  "state_machine": {
+    "INBOX_TEMP": [
+      "QUARANTINE",
+      "REJECT"
+    ],
+    "QUARANTINE": [
+      "AUDIT_REQUIRED",
+      "REJECT"
+    ],
+    "AUDIT_REQUIRED": [
+      "COUNTER_AUDIT_REQUIRED",
+      "REJECT"
+    ],
+    "COUNTER_AUDIT_REQUIRED": [
+      "F72_REQUIRED",
+      "REJECT"
+    ],
+    "F72_REQUIRED": [
+      "GOLD_VALIDATED",
+      "RED_VALIDATED",
+      "SILVER",
+      "OPEN",
+      "REJECT"
+    ],
+    "GOLD_VALIDATED": [
+      "DATASET_CANDIDATE"
+    ],
+    "RED_VALIDATED": [
+      "DATASET_CANDIDATE"
+    ],
+    "SILVER": [],
+    "OPEN": [],
+    "REJECT": [],
+    "DATASET_CANDIDATE": [
+      "DATASET_VERSIONED"
+    ]
+  },
+  "required_record": [
+    "record_id",
+    "source_ai",
+    "task_id",
+    "payload_sha256",
+    "provenance",
+    "dependency_fingerprint",
+    "state",
+    "audit_receipts",
+    "f72_receipt",
+    "created_at"
+  ],
+  "hard_denies": [
+    "INBOX_TEMP_TO_DATASET",
+    "QUARANTINE_TO_DATASET",
+    "SILVER_TO_DATASET",
+    "OPEN_TO_DATASET",
+    "REJECT_TO_DATASET",
+    "MISSING_PROVENANCE",
+    "MISSING_DEPENDENCY_FINGERPRINT",
+    "MISSING_AUDIT",
+    "MISSING_COUNTER_AUDIT",
+    "MISSING_F72",
+    "BENCHMARK_LEAKAGE",
+    "RAW_OUTPUT_AS_TRAINING_TRUTH"
+  ],
+  "dataset_manifest_required": [
+    "dataset_id",
+    "version",
+    "created_at",
+    "record_ids",
+    "record_sha256s",
+    "source_lineages",
+    "dedup_receipt",
+    "split_manifest_sha256",
+    "approval_receipts"
+  ],
+  "split_rules": {
+    "TRAIN": "eligible validated records only",
+    "VALIDATION": "disjoint lineage where possible",
+    "BLIND_TEST": "immutable; answers forbidden from training",
+    "TRANSFER": "fresh domain/task distribution",
+    "ADVERSARIAL": "red-team generated then independently validated"
+  },
+  "independence": "Outputs sharing model, source, prompt lineage, dataset lineage or evidence dependency must not be counted as independent confirmations.",
+  "training_release": "DENY unless DATASET_VERSIONED and every selected record is GOLD_VALIDATED or RED_VALIDATED with complete receipts.",
+  "invariants": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "MEMORY_NE_LEARNING",
+    "CONSENSUS_NE_TRUTH",
+    "WORKFLOW_SUCCESS_NE_SCIENTIFIC_PASS"
+  ]
+}
