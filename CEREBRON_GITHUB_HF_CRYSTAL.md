@@ -116,3 +116,11 @@ GITHUB = MINIMUM CONTROL STATE.
 HUGGING FACE PRIVATE = DURABLE PRIVATE MEMORY + APPROVED TRAINING ARTIFACTS.
 AGENT CONTEXT = MINIMUM RELEVANT RECALL.
 CRISTAL = TRACE + HASH + AUDIT + ROLLBACK.
+
+## 16. Current verified civilization snapshot
+As of 2026-09-23, the master registry contains 146 verified farm entries through F146. F145 ELYSION and F146 ELYSIUM are registered repositories. Future IDs are not active until the repository exists and is verified before insertion into the registry.
+
+Current native/logical AI memory rule:
+- all currently existing CÉRÉBRON AI roles and model projects use the verified private Hugging Face memory plane through isolated namespaces;
+- planned AI names remain PLANNED_NOT_BOUND until a real repository/model project and memory canary exist;
+- dual-core native AI architecture does not change the rule MEMORY != LEARNING and does not make two correlated cores independent evidence.
