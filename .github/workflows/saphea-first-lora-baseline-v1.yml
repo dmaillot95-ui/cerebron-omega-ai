@@ -1,0 +1,53 @@
+name: SAPHEA First LoRA V1 Baseline
+on:
+  push:
+    branches: ['feat/saphea-first-lora-v1']
+    paths:
+      - 'platform/saphea_epistemic_dataset_v1.py'
+      - 'platform/saphea_epistemic_baseline_v1.py'
+      - '.github/workflows/saphea-first-lora-baseline-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Build scoped GOLD and sealed M6
+        run: python platform/saphea_epistemic_dataset_v1.py
+      - name: Run pre-LoRA M6 baseline
+        run: python platform/saphea_epistemic_baseline_v1.py
+      - name: Verify data separation
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          g=json.loads((root/"saphea-epistemic-gold-v1.json").read_text())
+          m=json.loads((root/"saphea-epistemic-m6-v1.json").read_text())
+          b=json.loads((root/"saphea-epistemic-baseline-v1.json").read_text())
+          assert g["training_eligible"] is True
+          assert m["deny_training"] is True
+          assert len(g["records"])==180
+          assert len(m["records"])==60
+          assert {r["id"] for r in g["records"]}.isdisjoint({r["id"] for r in m["records"]})
+          assert b["m6_dataset_sha256"]==m["dataset_sha256"]
+          print("SAPHEA_BASELINE_SEALED",b["score"],b["max_score"],g["dataset_sha256"],m["dataset_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saphea-first-lora-baseline-v1
+          path: |
+            platform/artifacts/saphea-epistemic-gold-v1.json
+            platform/artifacts/saphea-epistemic-m6-v1.json
+            platform/artifacts/saphea-epistemic-baseline-v1.json
