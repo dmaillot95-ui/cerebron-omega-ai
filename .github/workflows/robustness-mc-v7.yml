@@ -1,0 +1,34 @@
+name: ASTRION METRION Robustness MC V7
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/robustness_mc_v7.py"
+      - ".github/workflows/robustness-mc-v7.yml"
+permissions:
+  contents: read
+jobs:
+  monte-carlo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/robustness_mc_v7.py
+      - name: METRION robustness audit
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/robustness_mc_v7.json"))
+          assert d["samples"]==200 and 0<=d["pass_rate"]<=1
+          assert sum(d["failure_counts"].values())>=d["samples"]-d["pass_count"]
+          assert "UNCERTAINTY_MODEL_NOT_CALIBRATED" in d["epistemic"]
+          assert d["seed"]==720122
+          print("ROBUSTNESS_MC_V7",d["pass_rate"],d["failure_counts"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robustness-mc-v7
+          path: artifacts/robustness_mc_v7.json
+          if-no-files-found: error
+          retention-days: 7
