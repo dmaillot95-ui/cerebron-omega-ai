@@ -729,6 +729,25 @@
         "npu_inference": false
       },
       "interpretation": "NEGATIVE_CAPABILITY_TEST_PASSED_FAIL_CLOSED"
+    },
+    "free_cloud_2026_09": {
+      "status": "APPLICATION_REQUIRED_NOT_CONNECTED",
+      "program": "AMD AI Developer Program",
+      "advertised_credit_usd": 100,
+      "hardware": "AMD Instinct MI300X",
+      "gpu_memory_gb": 192,
+      "approx_hours_claimed_by_amd_guides": 50,
+      "credit_expiry_days": 30,
+      "storage_credit": false,
+      "persistence_warning": "VM/data may be lost when credit expires or is exhausted; attached/object/backup storage not complimentary",
+      "billing_guard": "DO_NOT_ADD_PAYMENT_METHOD_OR_ENABLE_PAYG_FOR_CEREBRON_ZERO_COST_POLICY",
+      "recommended_use": [
+        "SAPHEA_MICRO benchmark",
+        "open-model inference",
+        "short fine-tuning experiments",
+        "ROCm compatibility tests"
+      ],
+      "evidence_date": "2026-09-23"
     }
   }
 }
