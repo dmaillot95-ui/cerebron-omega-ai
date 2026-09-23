@@ -1,0 +1,15 @@
+name: CEREBRON Space World fault gate
+on:
+  push:
+    paths: ["runtime/space_world_fault_gate.py", ".github/workflows/space-world-fault-gate.yml"]
+  workflow_dispatch:
+jobs:
+  fault-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/space_world_fault_gate.py
+      - uses: actions/upload-artifact@v4
+        with: {name: space-world-fault-gate, path: artifacts/space-world-fault-gate/result.json}
