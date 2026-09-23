@@ -1,5 +1,5 @@
 {
-  "version": "2.12",
+  "version": "2.13",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -735,7 +735,16 @@
       "id": 126,
       "repo": "cerebron-farm-126-spacecraft-digital-twin",
       "domain": "spacecraft-digital-twin-nos3-sil-hil",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35848908984,
+        "job_id": 107141643872,
+        "artifact_id": 10744632579,
+        "result_sha256": "5e136d37015ea2796c8da4350787ec43fbc9761824258363ab32f4e022551b69",
+        "engine": "python-spacecraft-sil-digital-twin",
+        "engine_version": "3.12.14",
+        "scope": "sil-digital-twin-canary-not-hil-or-physical-validation"
+      }
     },
     {
       "id": 127,
