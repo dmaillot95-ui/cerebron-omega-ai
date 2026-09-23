@@ -1,0 +1,113 @@
+{
+  "schema": "cerebron-six-ai-learning-cashflow-v1",
+  "version": "1.0",
+  "status": "ACTIVE_POLICY_NOT_YET_RUNTIME_VERIFIED",
+  "purpose": "Continuously accumulate validated lessons, select high-value parameter-training candidates, train reversible adapters in batches, and promote only after causal validation.",
+  "sources": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "AFAH",
+    "CEREBRON"
+  ],
+  "lesson_format": [
+    "lesson_id",
+    "source_ai",
+    "summary",
+    "chapter",
+    "concepts",
+    "procedure",
+    "examples",
+    "counterexamples",
+    "failure_modes",
+    "relations",
+    "provenance",
+    "evidence",
+    "dependency_fingerprint",
+    "f72_status",
+    "payload_sha256"
+  ],
+  "memory_routes": {
+    "VECTOR_RAG": "Validated reusable knowledge requiring retrieval, detail, provenance or frequent updates.",
+    "PARAMETER_CANDIDATE": "Stable generalizable behavior or skill worth testing for parametric incorporation.",
+    "HOLD": "Insufficient evidence, novelty, stability or utility.",
+    "REJECT": "Invalid, contaminated, contradictory without resolution, or unsafe."
+  },
+  "curator": {
+    "owner": "AGORA_M5_COACH",
+    "checks_by": [
+      "AGORA_M3_RED_TEAM",
+      "F72",
+      "AFAH"
+    ],
+    "dimensions": [
+      "evidence_strength",
+      "generalization",
+      "reuse_frequency",
+      "novelty",
+      "stability",
+      "transfer_value",
+      "compression_value",
+      "regression_risk",
+      "dependency_independence"
+    ],
+    "rule": "Selection creates PARAMETER_CANDIDATE only; it never authorizes training or promotion by itself."
+  },
+  "batches": {
+    "policy": "ACCUMULATE_THEN_TRAIN",
+    "minimum_records": 1,
+    "trigger": "MANUAL_OR_VALIDATED_THRESHOLD",
+    "generation_pattern": "G{major}.{minor}",
+    "reversible_adapter_first": true
+  },
+  "cerebron_parameter_scope": {
+    "allowed": [
+      "problem_classification",
+      "specialist_selection",
+      "routing_strategy",
+      "gate_order",
+      "execution_planning",
+      "checkpoint_resume_strategy",
+      "tool_selection_policy"
+    ],
+    "forbidden": [
+      "execution_count_truth",
+      "ATTEMPTED_SUCCEEDED_FAILED_truth",
+      "artifact_hash_truth",
+      "provenance_truth",
+      "F72_verdict_truth",
+      "external_action_success_truth"
+    ],
+    "rule": "Learn decisions; certify reality deterministically."
+  },
+  "release_chain": [
+    "LESSON_VALIDATED",
+    "CURATOR_SELECT",
+    "RED_TEAM",
+    "F72",
+    "AFAH",
+    "DATASET_VERSIONED",
+    "TRAIN_ADAPTER",
+    "COLD_NO_RAG",
+    "TRANSFER_NO_RAG",
+    "WITH_RAG",
+    "ABLATION",
+    "REGRESSION",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "proof_of_parametric_learning": "A gain must persist on fresh cold/transfer tests with vector retrieval disabled and be causally reduced by adapter ablation.",
+  "anti_forgetting": [
+    "G0_IMMUTABLE",
+    "REPLAY_VALIDATED_CORE",
+    "REGRESSION_SUITE",
+    "ROLLBACK_ON_CRITICAL_REGRESSION"
+  ],
+  "invariants": [
+    "MEMORY_NE_LEARNING",
+    "STORAGE_NE_TRAINING",
+    "SELECTION_NE_PROMOTION",
+    "WORKFLOW_SUCCESS_NE_SCIENTIFIC_PASS",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
