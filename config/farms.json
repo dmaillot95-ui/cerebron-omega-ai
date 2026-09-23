@@ -1,5 +1,5 @@
 {
-  "version": "2.14",
+  "version": "2.15",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -765,7 +765,16 @@
       "id": 128,
       "repo": "cerebron-farm-128-electric-plasma-propulsion",
       "domain": "electric-plasma-space-propulsion",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35850788723,
+        "job_id": 107147706027,
+        "artifact_id": 10745014944,
+        "result_sha256": "c77c5cb4444de90cd3d4162e37a75a895ef681f0244efd8830a09b26920cb0a2",
+        "engine": "python-electric-ion-propulsion-canary",
+        "engine_version": "3.12.14",
+        "scope": "ideal-ion-engineering-canary-not-pic-hall-thruster-or-hardware-validation"
+      }
     },
     {
       "id": 129,
