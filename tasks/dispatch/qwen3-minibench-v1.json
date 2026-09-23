@@ -1,0 +1,19 @@
+{
+  "schema": "CEREBRON_DISPATCH_V1",
+  "mission_id": "QWEN3_MINIBENCH_V1",
+  "status": "QUEUED_NOT_EXECUTED",
+  "cases": 8,
+  "categories": [
+    "math",
+    "reasoning",
+    "code",
+    "factuality",
+    "red_team"
+  ],
+  "model": "Qwen/Qwen3-0.6B",
+  "claim_policy": "SMALL_PROBE_NOT_GENERAL_VALIDATION",
+  "memory_policy": {
+    "raw_outputs": "EPHEMERAL_ARTIFACT",
+    "hot_memory": "SCORES_SHA_ONLY"
+  }
+}
