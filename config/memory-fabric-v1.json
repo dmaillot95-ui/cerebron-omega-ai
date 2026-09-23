@@ -1,6 +1,6 @@
 {
   "schema_version": "CEREBRON_MEMORY_FABRIC_V1",
-  "status": "CONTROL_PLANE_ACTIVE_EXTERNAL_DATA_PLANES_NOT_CONNECTED",
+  "status": "CONTROL_PLANE_ACTIVE_HUGGINGFACE_PRIVATE_CONNECTED",
   "principles": [
     "CONTENT_ADDRESSABLE",
     "DOMAIN_ISOLATION",
@@ -88,9 +88,11 @@
         "DEDUP_BEFORE_WRITE",
         "NO_SECRETS_IN_GITHUB"
       ],
-      "status": "AUTHENTICATED_ACCOUNT_CONFIRMED_PRIVATE_REPO_BOOTSTRAP_PENDING",
+      "status": "CONNECTED_VERIFIED_PRIVATE",
       "account": "cerebron-omega",
-      "default_sigma_repo": "cerebron-omega/cerebron-sigma-memory"
+      "default_sigma_repo": "cerebron-omega/cerebron-sigma-memory",
+      "bootstrap_run_id": 35912062787,
+      "first_object_sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66"
     },
     "r2_candidate": {
       "role": "HOT_WARM_OBJECT_DATA",
