@@ -179,14 +179,14 @@ def execute(mission_id: str) -> None:
                       lambda: infer(mission["prompt"]))
         domain = route["label"]
         prompt_lower = mission["prompt"].lower()
-        bridge_requested = domain == "space" and any(
+        bridge_requested = any(
             token in prompt_lower for token in ("hohmann", "transfert orbital", "orbite", "orbital", "f123")
         )
         farms = list(DOMAIN_FARMS[domain])
         if bridge_requested and 123 not in farms:
             farms.append(123)
         emit(mission_id, "Coalition minimale sélectionnée", {"domain": domain, "farms": farms})
-        if domain == "space" or "rover" in prompt_lower:
+        if domain == "space" or "rover" in prompt_lower or bridge_requested:
             concept = _task(mission_id, 15, "SPECIALIST", "deterministic-concept-worker", None, "engineering-rules-v1",
                             lambda: {"concept": "Rover lunaire 6 roues, bogie articulé, navigation autonome supervisée",
                                      "assumptions": ["masse 180 kg", "pente cible 15°", "vitesse 0.45 m/s"]})
