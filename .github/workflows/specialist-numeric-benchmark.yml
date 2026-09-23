@@ -1,0 +1,33 @@
+name: Specialist Numeric Cold Benchmark
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/specialist_numeric_v1.py"
+      - ".github/workflows/specialist-numeric-benchmark.yml"
+permissions:
+  contents: read
+jobs:
+  numeric:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/specialist_numeric_v1.py
+      - name: Verify
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/specialist_numeric_benchmark.json"))
+          assert len(d["cases"])==5 and d["score"]==1
+          assert all(x["pass"] for x in d["cases"])
+          assert "NO_HARDWARE_VALIDATION" in d["limits"]
+          print("NUMERIC_BENCHMARK_VERIFIED",d["score"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: specialist-numeric-cold
+          path: artifacts/specialist_numeric_benchmark.json
+          if-no-files-found: error
+          retention-days: 7
