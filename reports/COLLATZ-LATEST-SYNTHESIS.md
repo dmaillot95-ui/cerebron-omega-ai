@@ -16,17 +16,17 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## État des fermes au dernier cycle
 
-- Fermes configurées : 90
-- Derniers workflows en succès : 73
+- Fermes configurées : 100
+- Derniers workflows en succès : 75
 - Derniers workflows en échec : 2
-- Fermes avec au moins un artefact sur leur dernier run : 69
+- Fermes avec au moins un artefact sur leur dernier run : 70
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35810012986 status=queued conclusion=None artifacts=15
-- Farm 02 collatz-dynamics: run=35809214606 status=completed conclusion=success artifacts=21
+- Farm 01 collatz-theory: run=35810012986 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35810382570 status=queued conclusion=None artifacts=20
 - Farm 03 collatz-adic: run=35809805186 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35810060858 status=queued conclusion=None artifacts=14
+- Farm 04 collatz-counterexample: run=35810060858 status=completed conclusion=success artifacts=21
 - Farm 05 collatz-literature: run=35809414750 status=completed conclusion=success artifacts=22
 - Farm 06 collatz-formal-audit: run=35809876084 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35809458950 status=completed conclusion=success artifacts=22
@@ -93,7 +93,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 68 autonomous-experiment-orchestrator: run=35809828370 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=35809898872 status=completed conclusion=success artifacts=1
-- Farm 71 scientific-reproduction: run=35810278708 status=in_progress conclusion=None artifacts=0
+- Farm 71 scientific-reproduction: run=35810278708 status=completed conclusion=success artifacts=1
 - Farm 72 reality-evidence-gate: run=35810043078 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
 - Farm 74 session-memory-encyclopedia: run=35810059945 status=completed conclusion=success artifacts=1
@@ -113,3 +113,13 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 88 truck-vehicle-swarm-logistics-simulation: run=None status=None conclusion=None artifacts=0
 - Farm 89 construction-earthmoving-machine-site-simulation: run=None status=None conclusion=None artifacts=0
 - Farm 90 universal-multi-agent-co-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 91 intelligence-scaling-emergence-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 92 cold-benchmark-capability-transfer-ablation: run=None status=None conclusion=None artifacts=0
+- Farm 93 multiphysics-coupling-co-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 94 multiobjective-optimization-design-search: run=None status=None conclusion=None artifacts=0
+- Farm 95 failure-cascade-degraded-mode-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 96 synthetic-world-scenario-generation: run=None status=None conclusion=None artifacts=0
+- Farm 97 causal-intervention-experiment-design: run=None status=None conclusion=None artifacts=0
+- Farm 98 autonomous-scientific-loop: run=None status=None conclusion=None artifacts=0
+- Farm 99 invention-prior-art-patent-candidate-discovery: run=None status=None conclusion=None artifacts=0
+- Farm 100 grand-challenge-generalization-arena: run=None status=None conclusion=None artifacts=0
