@@ -56,6 +56,10 @@ def solve_math_semantic(prompt: str):
 
 def _extract_expression(prompt: str):
     candidates = [
+        # Instruction text may appear between "expression" and the delimiter.
+        # Prefer the payload after ':' so prose such as "and answer only..." is
+        # never passed to safe_eval.
+        r"(?:evaluate|compute)\s+(?:this\s+)?(?:python\s+)?expression\b[^:\n]{0,100}:\s*(.+)",
         r"(?:python\s+)?expression\s*[:=]\s*(.+)",
         r"(?:evaluate|compute)\s+(?:this\s+)?(?:python\s+)?expression\s*[:=]?\s*(.+)",
         r"(?:result|value)\s+of\s+(?:the\s+)?(?:python\s+)?expression\s*[:=]?\s*(.+)",
