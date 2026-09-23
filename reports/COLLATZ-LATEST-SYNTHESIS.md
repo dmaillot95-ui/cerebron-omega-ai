@@ -19,14 +19,14 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Fermes configurées : 112
 - Derniers workflows en succès : 106
 - Derniers workflows en échec : 2
-- Fermes avec au moins un artefact sur leur dernier run : 102
+- Fermes avec au moins un artefact sur leur dernier run : 103
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=35820506595 status=queued conclusion=None artifacts=8
-- Farm 02 collatz-dynamics: run=35820540878 status=queued conclusion=None artifacts=0
-- Farm 03 collatz-adic: run=35820537478 status=queued conclusion=None artifacts=1
-- Farm 04 collatz-counterexample: run=35820226648 status=completed conclusion=success artifacts=21
+- Farm 01 collatz-theory: run=35820506595 status=queued conclusion=None artifacts=20
+- Farm 02 collatz-dynamics: run=35820540878 status=queued conclusion=None artifacts=10
+- Farm 03 collatz-adic: run=35820537478 status=queued conclusion=None artifacts=20
+- Farm 04 collatz-counterexample: run=35820768186 status=queued conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=35820169861 status=completed conclusion=success artifacts=22
 - Farm 06 collatz-formal-audit: run=35820386059 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35820192794 status=completed conclusion=success artifacts=22
@@ -94,7 +94,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=35820386149 status=completed conclusion=success artifacts=1
 - Farm 71 scientific-reproduction: run=35820326005 status=completed conclusion=success artifacts=1
-- Farm 72 reality-evidence-gate: run=35820239795 status=completed conclusion=success artifacts=1
+- Farm 72 reality-evidence-gate: run=35820812508 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
 - Farm 74 session-memory-encyclopedia: run=35820578022 status=completed conclusion=success artifacts=1
 - Farm 75 exploration-discovery: run=35750096709 status=completed conclusion=success artifacts=1
@@ -134,4 +134,4 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 109 space-logistics-supply-chain-simulation: run=35819245423 status=completed conclusion=success artifacts=1
 - Farm 110 space-civilization-system-simulation: run=35819253539 status=completed conclusion=success artifacts=1
 - Farm 111 humanoid-head-face-ocular-expression-mechatronics-simulation: run=35820571148 status=completed conclusion=success artifacts=1
-- Farm 112 cognitive-process-working-memory-hypothesis-planning-audit-simulation: run=35820662858 status=queued conclusion=None artifacts=0
+- Farm 112 cognitive-process-working-memory-hypothesis-planning-audit-simulation: run=35820662858 status=completed conclusion=success artifacts=1
