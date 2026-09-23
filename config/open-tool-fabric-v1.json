@@ -395,7 +395,7 @@
       "license": "Apache-2.0",
       "owner": "METRION",
       "priority": "P0",
-      "status": "DISCOVERED",
+      "status": "BENCHMARKED",
       "target_farms": [
         "F52",
         "F53",
@@ -415,7 +415,7 @@
           "package": "physicsnemo"
         },
         "corrected_package": "nvidia-physicsnemo",
-        "current_status": "RUNTIME_VERIFIED_MODEL_V2_IN_PROGRESS"
+        "current_status": "MODEL_EXECUTION_VERIFIED"
       },
       "verified_runtime": {
         "farm": 127,
@@ -427,6 +427,25 @@
         "result_sha256": "c262668e75bba6cf3c483d95eb540a01961e310ab5863aa4b7a7b01b144dfca0",
         "status": "IMPORT_OK",
         "scope": "RUNTIME_AVAILABILITY_CANARY_NOT_PHYSICS_MODEL_OR_VALIDATION"
+      },
+      "verified_model": {
+        "farm": 127,
+        "run_id": 35865674566,
+        "job_id": 107196506466,
+        "artifact_id": 10751648203,
+        "version": "2.2.2",
+        "torch": "2.14.0+cu130",
+        "test": "DETERMINISTIC_SURROGATE_FORWARD_PASS",
+        "input_shape": [
+          3,
+          4
+        ],
+        "output_shape": [
+          3,
+          2
+        ],
+        "result_sha256": "60b9d813e8f098e64d753f6696e6a7566e6337ec454d8cb92efce97c4cdaf1db",
+        "scope": "REAL_PHYSICSNEMO_MODEL_FORWARD_PASS_SYNTHETIC_NORMALIZED_INPUT_NOT_TRAINED_CFD_SURROGATE_NOT_PHYSICAL_VALIDATION"
       }
     },
     {
