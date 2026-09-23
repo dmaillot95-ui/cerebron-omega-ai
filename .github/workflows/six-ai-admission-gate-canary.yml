@@ -1,0 +1,46 @@
+name: Six-AI Admission Gate Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'runtime/six_ai_admission_gate.py'
+      - '.github/workflows/six-ai-admission-gate-canary.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test deny and admit paths
+        run: |
+          set -euo pipefail
+          mkdir -p tmp out
+          python - <<'PY'
+          import json
+          base={"record_id":"SYNTHETIC-CANARY","source_ai":"SAPHEA","task_id":"CANARY","payload_sha256":"a"*64,
+          "provenance":{"kind":"synthetic"},"dependency_fingerprint":"b"*64,
+          "audit_receipts":{"audit_pass":True,"counter_audit_pass":True,"clean_reproduction_pass":True},
+          "f72_receipt":{"pass":True},"requested_classification":"GOLD_VALIDATED","benchmark_leakage":False}
+          open("tmp/good.json","w").write(json.dumps(base))
+          bad=dict(base); bad["record_id"]="SYNTHETIC-BAD"; bad["audit_receipts"]=dict(base["audit_receipts"]); bad["audit_receipts"]["counter_audit_pass"]=False
+          open("tmp/bad.json","w").write(json.dumps(bad))
+          PY
+          python runtime/six_ai_admission_gate.py --candidate tmp/good.json --out out/good.json
+          if python runtime/six_ai_admission_gate.py --candidate tmp/bad.json --out out/bad.json; then echo "BAD candidate incorrectly admitted"; exit 9; else test "$?" -eq 3; fi
+          python - <<'PY'
+          import json
+          g=json.load(open("out/good.json")); b=json.load(open("out/bad.json"))
+          assert g["admitted"] is True and g["decision"]=="GOLD_VALIDATED"
+          assert b["admitted"] is False and b["decision"]=="REJECT"
+          receipt={"schema":"six-ai-admission-canary-v1","positive_path":"PASS","negative_path":"PASS","result":"PASS",
+          "claim_scope":"Synthetic deterministic admission logic only; no real scientific record promoted."}
+          open("out/canary.json","w").write(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: six-ai-admission-gate-canary
+          path: out/
+          retention-days: 14
