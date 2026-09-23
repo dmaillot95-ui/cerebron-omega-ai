@@ -1,0 +1,36 @@
+name: ASTRION METRION OCC06C Solar Ablation V30
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ablation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - run: python runtime/solar_interpolation_v29.py
+      - run: python benchmarks/occ06c_solar_ablation_v30.py
+      - name: METRION external ablation gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/occ06c_solar_ablation_v30.json"))
+          if d["ready"]:
+              assert d["decision"]=="ABLATION_COMPUTED"
+              assert d["g03_status"]=="EXTERNAL_TIME_HISTORY_ABLATION_COMPUTED"
+              assert all(v>=0 for v in d["earth_only"].values())
+              assert all(v>=0 for v in d["earth_plus_sun"].values())
+          else:
+              assert d["decision"].startswith("BLOCKED_")
+          assert "IMPROVEMENT_MEASURED_NOT_ASSUMED" in d["epistemic"]
+          assert "F72_REMAINS_BLOCKED_PENDING_THRESHOLDS_AND_REVIEW" in d["epistemic"]
+          print("OCC06C_SOLAR_V30",d["decision"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: occ06c-solar-ablation-v30
+          path: artifacts/
+          retention-days: 30
