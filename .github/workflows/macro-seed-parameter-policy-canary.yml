@@ -1,0 +1,37 @@
+name: Macro-Seed Parameter Policy Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'training/MACRO_SEED_PARAMETER_POLICY_V1.json'
+      - '.github/workflows/macro-seed-parameter-policy-canary.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify macro-seed parameter boundary
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("training/MACRO_SEED_PARAMETER_POLICY_V1.json"); c=json.loads(p.read_text()); f=[]
+          req={"APPLY","DO_NOT_APPLY","COUNTEREXAMPLE","TRANSFER","ADVERSARIAL","ABLATION_CONTROL"}
+          if not req.issubset(set(c["conversion"]["required_examples"])): f.append("curriculum_missing")
+          gates={"F72_VALIDATED","AFAH_APPROVED","GENERALIZABLE","STABLE","NO_BENCHMARK_LEAKAGE"}
+          if not gates.issubset(set(c["eligibility"])): f.append("gate_missing")
+          for x in ["COLD_NO_RAG","TRANSFER_NO_RAG","ABLATION","REGRESSION","PROMOTE_OR_ROLLBACK"]:
+            if x not in c["release_chain"]: f.append("release:"+x)
+          if c["base_rule"]!="G0 remains immutable.": f.append("g0")
+          out={"schema":"macro-seed-parameter-policy-canary-v1","contract_sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"failures":f,"result":"PASS" if not f else "FAIL","claim_scope":"Policy test only; no weights or adapter changed."}
+          Path("out").mkdir(exist_ok=True);Path("out/macro-seed-policy-canary.json").write_text(json.dumps(out,indent=2)+"\n");print(json.dumps(out))
+          if f: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macro-seed-parameter-policy-canary
+          path: out/macro-seed-policy-canary.json
+          retention-days: 14
