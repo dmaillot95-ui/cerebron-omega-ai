@@ -30,7 +30,7 @@ jobs:
           from huggingface_hub import HfApi,hf_hub_download
           repo=os.environ["HF_REPO_ID"]; token=os.environ["HF_TOKEN"]
           api=HfApi(token=token)
-          info=api.repo_info(repo_id=repo,repo_type="dataset")
+          info=api.repo_info(repo_id=repo,repo_type="model")
           if not getattr(info,"private",False): raise SystemExit("HF repo is not private")
           ais=["SAPHEA","SPIRALION","ETHERION","HYPERION","AFAH","CEREBRON"]
           stamp=datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -43,8 +43,8 @@ jobs:
             h=hashlib.sha256(raw).hexdigest()
             local=Path(tempfile.mkdtemp())/f"{ai.lower()}.json"; local.write_bytes(raw)
             remote=f"INBOX_TEMP/{ai}/{stamp}/canary.json"
-            api.upload_file(path_or_fileobj=str(local),path_in_repo=remote,repo_id=repo,repo_type="dataset",commit_message=f"HF6 canary {ai} {stamp}")
-            got=Path(hf_hub_download(repo_id=repo,filename=remote,repo_type="dataset",token=token,force_download=True)).read_bytes()
+            api.upload_file(path_or_fileobj=str(local),path_in_repo=remote,repo_id=repo,repo_type="model",commit_message=f"HF6 canary {ai} {stamp}")
+            got=Path(hf_hub_download(repo_id=repo,filename=remote,repo_type="model",token=token,force_download=True)).read_bytes()
             h2=hashlib.sha256(got).hexdigest()
             if h!=h2: raise SystemExit(f"SHA mismatch {ai}")
             receipts.append({"source_ai":ai,"remote_path":remote,"write":"PASS","read":"PASS","sha256":h,"sha_verify":"PASS","quarantine_state":"INBOX_TEMP","training_truth":False})
