@@ -1,0 +1,34 @@
+name: METRION External Reference V21
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/external_reference_v21.py"
+      - ".github/workflows/external-reference-v21.yml"
+permissions:
+  contents: read
+jobs:
+  nasa-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/external_reference_v21.py
+      - name: External reference gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/external_reference_v21.json"))
+          assert d["pass"] is True
+          assert all(v["pass"] for v in d["comparison"].values())
+          assert d["g03_status"]=="PARTIAL_EXTERNAL_CONSTANT_REFERENCE"
+          assert "NOT_TRAJECTORY_REFERENCE" in d["limits"]
+          print("EXTERNAL_REFERENCE_V21",d["comparison"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: external-reference-v21
+          path: artifacts/external_reference_v21.json
+          if-no-files-found: error
+          retention-days: 30
