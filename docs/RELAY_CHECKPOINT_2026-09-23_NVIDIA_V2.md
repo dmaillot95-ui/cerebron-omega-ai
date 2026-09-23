@@ -39,3 +39,12 @@ OTF025 Newton and OTF026 NVIDIA Isaac Lab remain DISCOVERED only. Do not claim e
 
 ## Relay rule
 Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log/artifact evidence exists. Preserve failed attempts as evidence. Use minimal useful coalition, not all 144 farms by default.
+
+## Progress after checkpoint creation
+- PhysicsNeMo runtime corrected and verified: run 35864199488 SUCCESS, version 2.2.2, artifact 10752545024, result SHA c262668e75bba6cf3c483d95eb540a01961e310ab5863aa4b7a7b01b144dfca0.
+- PhysicsNeMo real model forward pass V2: run 35865674566 SUCCESS, artifact 10751648203, result SHA 60b9d813e8f098e64d753f6696e6a7566e6337ec454d8cb92efce97c4cdaf1db.
+- PhysicsNeMo compressible-flow V3: run 35866592008 SUCCESS; 257 Mach points 0-5, 1200 epochs, MAE 5.223882e-4, MSE 5.570676e-7, max abs error 0.00444126; artifact 10751544524; SHA e9351fd14144a72619dea6c6da24fc6324643c368f31d395080f37b472644354.
+- OTF024 PhysicsNeMo is BENCHMARKED, not VALIDATED.
+- Warp V3: run 35866776553 SUCCESS; 4096 x 1000 = 4,096,000 updates; x error 9.09517e-6 m, v error 3.30877e-9 m/s vs analytic oscillator; artifact 10751879409; SHA 1d0abd62991cbfdcf794e5785812b1df5fde38d5533a58abe028e3e459f2c78c.
+- PhysicsNeMo V4 normal-shock Rankine-Hugoniot benchmark launched: code commit 6d9155b1e88e836cda6bb5b242f061700cef572f, workflow commit 783b9df8657bbea895a782c5fa2771933e1882a8, run 35867031558 IN PROGRESS at this update. Verify before claim.
+- Tool Fabric evidence consolidation commit: 772fde763ff980fe1605a1b62f20594c7ccfdf81.
