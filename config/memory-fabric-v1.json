@@ -87,7 +87,10 @@
         "SHA256_AND_PROVENANCE_REQUIRED",
         "DEDUP_BEFORE_WRITE",
         "NO_SECRETS_IN_GITHUB"
-      ]
+      ],
+      "status": "AUTHENTICATED_ACCOUNT_CONFIRMED_PRIVATE_REPO_BOOTSTRAP_PENDING",
+      "account": "cerebron-omega",
+      "default_sigma_repo": "cerebron-omega/cerebron-sigma-memory"
     },
     "r2_candidate": {
       "role": "HOT_WARM_OBJECT_DATA",
