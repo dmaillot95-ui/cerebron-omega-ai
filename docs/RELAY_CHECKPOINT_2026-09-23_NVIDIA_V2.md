@@ -535,3 +535,32 @@ Decision:
 3. Add remote deployment security review; do not expose publicly until PASS.
 4. Audit full platform-vs-main diff before any merge.
 5. If merged, preserve 144-farm ceiling and all scientific/memory data.
+
+
+## UPDATE 2026-09-23 — ELYRA INDEPENDENT AUDIT
+
+Independent-codepath audit of the exact promoted ELYRA weights completed successfully.
+
+Evidence:
+- branch feat/elyra-independent-audit-v1
+- commit 2a2587e4731511d70b26e39d5e9290252c52bbb9
+- run 35905952407 = SUCCESS
+- job 107333575202
+- artifact 10771082547
+- artifact digest sha256:76366e5db41d992d044b4aa3111b43b50368c75eac3d767378ef32c83740f91d
+- source weights SHA256 b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601 verified before audit
+- audit seed 35905952407
+- 240 shifted-distribution episodes
+- random baseline success 0.0
+- trained policy success 0.5083333333333333
+- teacher success 0.525
+- random action MSE 0.46132373809814453
+- trained action MSE 0.002533255610615015
+- MSE gain ratio 182.10706261345098
+- audit result SHA c2e063c1b6f9bb78a996ea2e848ad8e4c2f0e4d11a1d1d0d7b05be6c5b639108
+
+Decision:
+- retain G6 PASS_SCOPED_ELYRA.
+- retain G7 PASS_SCOPED_ELYRA with stronger fresh-distribution evidence.
+- claim ceiling remains SYNTHETIC_IMITATION_GENERALIZES_WITHIN_SHIFTED_SIMULATOR_DISTRIBUTION.
+- this does NOT validate lunar physics, real-robot behavior, RL, a language-model LoRA, or general intelligence.
