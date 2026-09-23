@@ -120,3 +120,114 @@ The next AI must distinguish four levels on every claim: ARCHITECTURE / CONFIGUR
 - Farm result: engine python-stdlib-orbital-mechanics; total Hohmann delta-v 3854.0094595864553 m/s for r1=6,778,000 m and r2=42,164,000 m; output SHA 04c4d7c40b65d7385b563d9b0d663a826e6a98547bc760cb4039da88a6a0e4bf. Scope: two-body circular coplanar reference only; NOT mission validation or physical test.
 - Platform-side fail-closed GitHub bridge client added on feat/cerebron-ai-platform-mvp: platform/farm_bridge.py commit 59c69052bae4bcc6e7ce8c6128f57112d4e3b8a4. It requires CEREBRON_GITHUB_TOKEN at runtime; no secret is hard-coded. F123 is the only allowed pilot and hohmann_reference the only allowed operation in V1.
 - This closes the first proof that a Control Plane-style request can cause a REAL farm repository workflow to execute and return run/job/artifact/SHA evidence. Next: wire farm_bridge.py into mission_engine/server UI and add CI tests without exposing secrets.
+
+
+============================================================
+UPDATE VERIFIED — FARM BRIDGE / GENERATIVE / SECURITY / F139 GOLD
+DATE : 23 SEPTEMBRE 2026
+============================================================
+
+SOURCE OF TRUTH AT UPDATE START
+main HEAD observed before this checkpoint commit: 88c3c79b71cf76c5e86706f4df89e97b955defd0
+platform branch: feat/cerebron-ai-platform-mvp
+platform HEAD: 95c882453c5533809f0afa1203920055ae7aee32
+
+REAL FARM BRIDGE V1
+- Pilot: F123 mission-design/navigation.
+- Farm-level real execution already proven:
+  run 35897592604
+  job 107305284787
+  artifact 10767830799
+  artifact digest sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75
+  worker output SHA 04c4d7c40b65d7385b563d9b0d663a826e6a98547bc760cb4039da88a6a0e4bf
+- Control Plane integration commits:
+  99f2176c64437256f1abf35c3b0e65b2c60436a5 = first integration, CI failure preserved.
+  13e676d6fc572c11a0103a91102f8f6437f394ac = routing fix.
+  CI run 35898994230 = SUCCESS.
+- FARM_EXECUTED remains forbidden without run+job+logs+artifact+artifact SHA+output SHA.
+- Local Control Plane still requires CEREBRON_GITHUB_TOKEN for live bridge calls; otherwise ROUTED_ONLY.
+
+GENERATIVE MODEL
+- SmolLM2-135M-Instruct executed but failed its semantic smoke request; do not promote.
+  run 35899264850, job 107310943240, artifact 10768537977.
+- Cold candidate benchmark corrected after an oracle bug was detected and preserved.
+- Selected compact candidate:
+  Qwen/Qwen2.5-0.5B-Instruct
+  revision ec7ddfa904d4d447eedd0b7f126df16957734abb
+  license apache-2.0
+- Corrected cold smoke:
+  run 35900280586
+  job 107314375062
+  artifact 10768374456
+  digest sha256:f72fc7ab80f1f893ec29990c78796b3a18558d6ca4db4f4007676df78eabad5a
+  score 5/5
+  scope = FIVE_TINY_DETERMINISTIC_TASKS_NOT_GENERAL_CAPABILITY
+- Control Plane backend E2E:
+  run 35900659814
+  job 107315704063
+  artifact 10768767916
+  digest sha256:445345517fe417dd0e5da2a749e3613b44452d392a62546dc11ed1a061cd4a9e
+  generated READY through platform/generative_backend.py
+  backend output SHA 2a02c416e07489b6c18840d8bac7a266333abffa160242cdfaaba267c8625d13
+- Backend is fail-closed and disabled by default.
+  Activation requires CEREBRON_ENABLE_LOCAL_GENERATIVE=1 and real torch/transformers runtime.
+- Model output claim ceiling remains MODEL_OUTPUT_UNVERIFIED until separately checked.
+
+SECURITY PLANE V1
+- Commit 10dbc7813202dffd89265ab3528ae10f1134db3d:
+  hashed-token auth configuration, RBAC, owner isolation, rate limiting, origin check, audit log.
+- Commit db766729bc45edfa9016ecae9d79b8335ad5355d:
+  HTTP 401/403/404 tenant-isolation tests and static cockpit loading fix.
+- CI run 35900394896 = SUCCESS.
+- REMOTE_BIND remains BLOCKED.
+- No public deployment claim is allowed yet.
+
+F139 FREE GRANULAR COLLAPSE V6
+- F139 commit d0b62e5d9c9530cade466a52c568dd167b52a5cd.
+- run 35899534732 completed successfully and was rerun as attempt 2.
+- attempt-2 job 107313115371.
+- attempt-1 artifact 10767758851 digest sha256:6dcf42b7a4302975a90223c39f3e55fe03ee5c38060c538c7776e59ebdc0c9b1.
+- attempt-2 artifact 10768518399 digest sha256:8b06209061b1839bade7084dc8f04990dae1020337f87e30d938568a71b4ac28.
+- Internal numerical result SHA is identical in both attempts:
+  e5beddcd3609538d4dc9ef882f3c26af6bc62427b83a4773eb05b199f9a9ee4a
+- dynamic discrimination proxy = 0.387336969872355.
+- V5 comparison: constrained spread Earth/Lunar was exactly identical at 0.31200000643730164 m and zmax ratio 0.9997954504606014.
+- V6 is therefore materially more discriminating as a numerical benchmark.
+- Still NOT calibrated regolith physics and NOT physical validation.
+
+AGORA M4 GOLD
+- Scoped AFAH promotion workflow:
+  run 35900931011
+  job 107316650968
+  artifact 10768788069
+  digest sha256:5e8f33672c0305e3b3b771e925c7ff1c49e2c02b25a73012daa5f3f6c93744c5
+- Source capsule: AGORA:b7a077098a53553ff4bf
+- State promoted: VALIDATED / M4_GOLD.
+- AFAH verdict: ACCEPT_SCOPED_POLICY_LESSON.
+- Claim ceiling:
+  VALIDATED_EXPERIMENT_SELECTION_POLICY_NOT_PHYSICAL_MODEL_VALIDATION.
+- gold_eligible=true
+- training_eligible=true
+- training_triggered=false
+- weights_changed=false
+- result SHA:
+  0b65fb8c29297555191936928d4804606e801d83672c998b5f9cd7d4847cedb7
+
+NEURAL TRAINING
+- Still NOT EXECUTED.
+- One scoped GOLD lesson is not considered a sufficient training corpus.
+- First LoRA remains blocked until enough validated GOLD traces exist and an M6 baseline is sealed.
+
+NEXT EXACT PROGRAM
+1. Build cold benchmark campaign toward 60 missions.
+2. Implement Search-Generate-Verify execution graph.
+3. Activate seven SAPHEA MICRO worker contracts without pretending they are seven independent neural models.
+4. Measure adaptive coalition vs single-model/tool baselines and ablations.
+5. Build ELYRA rover LAB state-action-episode-replay.
+6. Accumulate validated GOLD traces.
+7. Only then consider first LoRA with baseline M6, adapter artifact SHA, post-train M6, Red Team/F72/AFAH.
+8. Keep REMOTE_BIND blocked until security review is complete.
+
+============================================================
+END UPDATE VERIFIED
+============================================================
