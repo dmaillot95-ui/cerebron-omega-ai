@@ -1,0 +1,37 @@
+name: F72 Counter Audit V33
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  counter-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - run: python runtime/solar_interpolation_v29.py
+      - run: python benchmarks/occ06c_solar_ablation_v30.py
+      - run: python runtime/frozen_acceptance_v31.py
+      - run: python runtime/f72_review_packet_v32.py
+      - run: python runtime/f72_counter_audit_v33.py
+      - name: Counter-audit integrity
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/f72_counter_audit_v33.json"))
+          assert d["independent_review"] is False
+          assert d["independence_class"]=="SEPARATE_CODE_PATH_SAME_REPOSITORY_AND_EVIDENCE"
+          assert "COUNTER_AUDIT_NOT_NEW_EVIDENCE" in d["epistemic"]
+          if d["counter_audit_pass_for_afah_review"]:
+              assert d["decision"]=="COUNTER_AUDIT_PASS_TO_AFAH_REVIEW"
+          else:
+              assert d["decision"]=="COUNTER_AUDIT_BLOCK"
+          print("F72_COUNTER_AUDIT_V33",d["decision"],d.get("findings"),d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f72-counter-audit-v33
+          path: artifacts/
+          retention-days: 30
