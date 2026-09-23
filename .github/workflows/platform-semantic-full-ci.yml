@@ -1,0 +1,38 @@
+name: CEREBRON Semantic Branch Full Platform CI
+on:
+  push:
+    branches: ['feat/cerebron-semantic-tool-routing-v2']
+    paths:
+      - 'platform/**'
+      - 'config/platform-control-plane-v1.json'
+      - 'config/saphea-micro-v1.json'
+      - '.github/workflows/platform-semantic-full-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile Python
+        run: python -m compileall -q platform
+      - name: Run all platform tests
+        env:
+          PYTHONPATH: platform
+        run: python -m unittest discover -s platform/tests -v
+      - name: Verify control-plane invariants
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          cfg=json.loads(pathlib.Path('config/platform-control-plane-v1.json').read_text())
+          farms=json.loads(pathlib.Path('config/farms.json').read_text())['farms']
+          micro=json.loads(pathlib.Path('config/saphea-micro-v1.json').read_text())
+          assert cfg['farm_count_effect']==0
+          assert cfg['farm_cap']==144
+          assert len(farms)==144
+          assert len(micro['units'])==20
+          assert sum(1 for u in micro['units'] if u.get('status')!='PLANNED_UNAVAILABLE')==7
+          print('SEMANTIC_BRANCH_FULL_GATES_OK',len(farms),len(micro['units']))
+          PY
