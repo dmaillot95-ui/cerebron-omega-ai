@@ -1,0 +1,38 @@
+name: AGORA F139 Measured Gain V3
+on:
+  push:
+    paths:
+      - 'runtime/agora_f139_gain_v3.py'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Measure V5 to V6 information gain
+        run: python runtime/agora_f139_gain_v3.py
+      - name: Post AGORA measured-gain lesson
+        run: |
+          python runtime/agora_forum.py             --author METRION             --kind LESSON             --domain F139_NEWTON             --summary "Free granular collapse V6 is substantially more discriminating than constrained packing V5; preserve free-collapse class for sensitivity work, but do not claim physical validation."             --evidence "V5:run=35873551620,job=107223537626,artifact=10756230520,result_sha=24ca9d124df1e215946108ad783f34a8ba942c52b1c7d9fdc0d1b466959f968c;V6:run=35899534732,job=107311855880,artifact=10767758851,artifact_digest=sha256:6dcf42b7a4302975a90223c39f3e55fe03ee5c38060c538c7776e59ebdc0c9b1,result_sha=e5beddcd3609538d4dc9ef882f3c26af6bc62427b83a4773eb05b199f9a9ee4a"             --targets SAPHEA,SPIRALION,ETHERION,HYPERION,ASTRION,AFAH             --state UNDER_TEST
+      - name: Verify no premature GOLD or training
+        run: |
+          python - <<'PY'
+          import json
+          cap=json.load(open("artifacts/agora_capsule.json"))["capsule"]
+          gain=json.load(open("artifacts/agora_f139_gain_v3.json"))
+          assert cap["state"]=="UNDER_TEST"
+          assert cap["gold_eligible"] is False
+          assert cap["training_eligible"] is False
+          assert gain["decision"]=="KEEP_FREE_COLLAPSE_AS_MORE_DISCRIMINATING_TEST"
+          assert gain["gold_promotion"]=="BLOCKED_PENDING_REPRODUCTION_AND_CALIBRATION"
+          print("AGORA_F139_GAIN_V3_GATES_OK", cap["capsule_id"], gain["comparison_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-f139-gain-v3
+          path: |
+            artifacts/agora_f139_gain_v3.json
+            artifacts/agora_capsule.json
+            agora/capsules.jsonl
+          if-no-files-found: error
