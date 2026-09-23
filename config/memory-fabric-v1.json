@@ -1,0 +1,123 @@
+{
+  "schema_version": "CEREBRON_MEMORY_FABRIC_V1",
+  "status": "CONTROL_PLANE_ACTIVE_EXTERNAL_DATA_PLANES_NOT_CONNECTED",
+  "principles": [
+    "CONTENT_ADDRESSABLE",
+    "DOMAIN_ISOLATION",
+    "DEDUP_BEFORE_WRITE",
+    "REPLAY_OVER_RAW",
+    "BENCHMARK_DENY_TRAINING",
+    "FAIL_CLOSED",
+    "ZERO_PAID_OVERAGE"
+  ],
+  "namespaces": [
+    "COLLATZ",
+    "AGORA_TASKS",
+    "SIX_AI",
+    "SIMULATION",
+    "SPACE_WORLD",
+    "AELYS_ELYRA",
+    "GOLD",
+    "MODELS",
+    "COLD_BENCHMARK",
+    "EVIDENCE"
+  ],
+  "classes": {
+    "M0": {
+      "name": "EPHEMERAL",
+      "retention": "RUN",
+      "persist": false
+    },
+    "M1": {
+      "name": "TRACE",
+      "retention": "LONG_COMPACT",
+      "persist": true
+    },
+    "M2": {
+      "name": "REPLAY",
+      "retention": "LONG",
+      "persist": true
+    },
+    "M3": {
+      "name": "WARM",
+      "retention": "ROLLING",
+      "persist": true
+    },
+    "M4": {
+      "name": "GOLD",
+      "retention": "DURABLE",
+      "persist": true
+    },
+    "M5": {
+      "name": "MODEL",
+      "retention": "VERSIONED",
+      "persist": true
+    },
+    "M6": {
+      "name": "COLD_BENCHMARK",
+      "retention": "SEALED",
+      "persist": true,
+      "deny_training": true
+    },
+    "M7": {
+      "name": "EVIDENCE",
+      "retention": "DURABLE",
+      "persist": true
+    }
+  },
+  "storage_targets": {
+    "github": {
+      "role": "CONTROL_PLANE_CODE_MANIFESTS_SMALL_EVIDENCE",
+      "bulk": false
+    },
+    "huggingface_private": {
+      "role": "GOLD_MODELS_CURATED_DATA",
+      "budget_gb": 90,
+      "hard_external_limit_gb": 100,
+      "headroom_gb": 10
+    },
+    "r2_candidate": {
+      "role": "HOT_WARM_OBJECT_DATA",
+      "budget_gb": 8,
+      "free_tier_gb_month": 10,
+      "status": "CANDIDATE_REQUIRES_ACCOUNT_SECRET_AND_COST_GUARD"
+    },
+    "b2_candidate": {
+      "role": "SECONDARY_REPLAY_ARCHIVE",
+      "budget_gb": 8,
+      "free_storage_gb": 10,
+      "status": "CANDIDATE_REQUIRES_ACCOUNT_SECRET_AND_COST_GUARD"
+    }
+  },
+  "write_gate": [
+    "NAMESPACE",
+    "SCHEMA",
+    "SHA256",
+    "DEDUP",
+    "PROVENANCE",
+    "RETENTION_CLASS",
+    "BUDGET",
+    "CONTAMINATION"
+  ],
+  "emergency": {
+    "soft_pct": 70,
+    "compress_pct": 80,
+    "raw_stop_pct": 90,
+    "freeze_pct": 95
+  },
+  "freeze": "DRAIN_CHECKPOINT_VERIFY_READ_ONLY",
+  "pointer_schema": [
+    "memory_id",
+    "namespace",
+    "class",
+    "sha256",
+    "bytes",
+    "backend",
+    "object_key",
+    "producer",
+    "cycle_id",
+    "created_at",
+    "replay_recipe",
+    "epistemic"
+  ]
+}
