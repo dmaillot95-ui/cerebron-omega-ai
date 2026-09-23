@@ -5,7 +5,9 @@
   "scope": {
     "colonies": 62,
     "model_bank": 6,
-    "afah_lineage": "SEPARATE"
+    "afah_lineage": "SEPARATE",
+    "registered_farms": 146,
+    "highest_farm_id": 146
   },
   "routing": {
     "unit": "COLONY",
@@ -13,7 +15,9 @@
     "shared_base_allowed": true,
     "shared_colony_state_forbidden": true,
     "simultaneous_colony_limit": 20,
-    "rollout_batch": 2
+    "rollout_batch": 2,
+    "native_ai_policy": "DUAL_CORE_ALLOWED_AND_PREFERRED_WHEN_ABLATION_SHOWS_GAIN",
+    "native_ai_double_core_does_not_change_colony_model_rule": true
   },
   "identity": [
     "canonical_colony_id",
@@ -43,7 +47,7 @@
     "never auto-promote raw AGORA output",
     "never merge incompatible weights"
   ],
-  "civilization_flow": "74 SEED FARMS -> 62 COLONIES -> CHIEFS -> AGORA -> CEREBRON -> AFAH",
+  "civilization_flow": "VERIFIED_REGISTERED_FARMS -> SELECTED_SEED_CAPABILITIES -> COLONIES/NATIVE_AI -> AGORA -> CEREBRON -> AFAH",
   "current_wave": {
     "colonies": [
       "C03-SIGMA",
@@ -51,5 +55,5 @@
     ],
     "binding": "DENY_PENDING_REAL_COLD_EVIDENCE"
   },
-  "next_gate": "FIRST_REAL_MODEL_RUNTIME_PASS"
+  "next_gate": "VERIFY_NATIVE_AI_MEMORY_BINDINGS_AND_DUAL_CORE_ABLATION_WITHOUT_RUNTIME_MUTATION"
 }
