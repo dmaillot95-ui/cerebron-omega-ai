@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "ARCHITECTURE_REGISTERED_TRAINING_NOT_YET_EXECUTED",
+  "status": "TRAINING_EXECUTED_SCOPED_G6_G7_ELYRA",
   "name": "CEREBRON Neural Training Fabric",
   "principles": [
     "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
@@ -58,11 +58,13 @@
     },
     "AELYS": {
       "target": "dialogue coordination human interaction",
-      "training": "dialogue/coordination SFT"
+      "training": "dialogue/coordination SFT",
+      "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
     },
     "ELYRA": {
       "target": "embodied perception and action",
-      "training": "simulation trajectories imitation learning; RL only after validated simulator"
+      "training": "simulation trajectories imitation learning; RL only after validated simulator",
+      "status": "SCOPED_NEURAL_POLICY_TRAINED_AND_M6_PROMOTED"
     },
     "SAPHEA_MICRO": {
       "target": "population of compact specialists",
@@ -86,5 +88,45 @@
     "MEMORY_RETRIEVAL_EQUALS_NEURAL_TRAINING",
     "ROLE_NAME_EQUALS_INDEPENDENT_MODEL",
     "SIMULATOR_SUCCESS_EQUALS_REAL_WORLD_VALIDATION"
-  ]
+  ],
+  "last_verified_training": {
+    "role": "ELYRA",
+    "type": "SUPERVISED_IMITATION_LEARNING",
+    "scope": "SYNTHETIC_TEACHER_POLICY_IMITATION_ONLY",
+    "weights_changed": true,
+    "g6_neural_training_verified": true,
+    "g7_post_m6_promoted": true,
+    "run_a": {
+      "run_id": 35904919982,
+      "job_id": 107330075394,
+      "artifact_id": 10770647209,
+      "artifact_digest": "sha256:74a95dac7ac585cfc42ada5d6ca639d5fc159c3195b57451f6625f39488ce673",
+      "m6_dataset_sha256": "1eb5ea9e94a9de777865eb0cf1b2fccf8e40c82760505e657f8bffc89bf1bdcf",
+      "weights_sha256": "f44cbc85b3c6b60363abf21bd759faa956efad99e9622c19a397d6830933201a",
+      "baseline_m6_mse": 0.4573424459,
+      "posttrain_m6_mse": 0.0037131347,
+      "teacher_success_rate": 0.5666667,
+      "trained_success_rate": 0.5666667
+    },
+    "run_b": {
+      "run_id": 35904950828,
+      "job_id": 107330182533,
+      "artifact_id": 10770497581,
+      "artifact_digest": "sha256:fe342b4403902c3643165e5b617b8d1dbf61d716c2af217e64f2634f8c9a8717",
+      "m6_dataset_sha256": "386e76f4b93d685e34732015a6303bc11ef54a27df9283f3fb2e745e36950d51",
+      "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+      "baseline_m6_mse": 0.4504657388,
+      "posttrain_m6_mse": 0.0039337175,
+      "teacher_success_rate": 0.6,
+      "trained_success_rate": 0.5416667
+    },
+    "claim_ceiling": "NEURAL_LEARNING_VERIFIED_FOR_SYNTHETIC_ELYRA_POLICY_IMITATION",
+    "limitations": [
+      "not a language-model LoRA/QLoRA",
+      "synthetic teacher and simulator",
+      "no physical lunar rover validation",
+      "no real-robot validation",
+      "no RL claim"
+    ]
+  }
 }
