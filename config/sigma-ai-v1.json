@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_SIGMA_AI_V1",
+  "name": "SIGMA",
+  "identity": "PLATFORM_NATIVE_AI",
+  "farm_id": 74,
+  "farm_repo": "dmaillot95-ui/cerebron-farm-74-session-memory-encyclopedia",
+  "status": "ARCHITECTURE_CONFIGURED_TRAINING_NOT_YET_EXECUTED",
+  "mission": "Create a custom platform-native model that learns from validated outputs of CEREBRON, its specialist roles, farms, tools and AGORA while preserving evidence boundaries.",
+  "teachers": {
+    "general": [
+      "QWEN_ACTIVE_GENERATIVE_BASE"
+    ],
+    "specialist_roles": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "AELYS",
+      "ELYRA"
+    ],
+    "tools": "ONLY_REAL_EXECUTED_TOOLS_AND_FARMS",
+    "correlation_rule": "Teachers sharing one base model are correlated and must not be counted as independent votes."
+  },
+  "pipeline": [
+    "MISSION",
+    "AGORA_MULTI_ROLE_PROPOSALS",
+    "REAL_TOOL_OR_FARM_EXECUTION",
+    "RED_TEAM",
+    "AFAH_FILTER",
+    "M4_GOLD",
+    "SIGMA_DATASET_BUILD",
+    "BASELINE_M6",
+    "DISTILLATION_OR_SFT",
+    "LORA_QLORA_IF_BASE_COMPATIBLE",
+    "WEIGHTS_ARTIFACT_SHA",
+    "POSTTRAIN_M6",
+    "TRANSFER_TEST",
+    "RED_TEAM",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "parameter_strategy": {
+    "direct_merge": "ONLY_FOR_SAME_ARCHITECTURE_AND_COMPATIBLE_CHECKPOINT_LINEAGE",
+    "heterogeneous_models": "USE_OUTPUT_DISTILLATION_NOT_WEIGHT_AVERAGING",
+    "adapters": "MODEL_SOUP_ONLY_AFTER_ABLATION_PROVES_GAIN",
+    "search": "HYPERPARAMETER_AND_ADAPTER_SEARCH_WITH_FIXED_M6_HOLDOUT"
+  },
+  "agora": {
+    "enabled": true,
+    "participants": [
+      "CEREBRON",
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "AELYS",
+      "ELYRA",
+      "SIGMA"
+    ],
+    "forum_goal": "Generate disagreements, falsifiable hypotheses, training candidates and negative-memory records before promotion."
+  },
+  "training_gates": {
+    "gold_required": true,
+    "baseline_m6_required": true,
+    "weights_changed_required": true,
+    "artifact_sha_required": true,
+    "posttrain_m6_required": true,
+    "transfer_required": true,
+    "red_team_required": true,
+    "afah_required": true
+  },
+  "target_claim": "INTELLIGENCE_COLLECTIVE_ORCHESTREE_A_CAPACITE_MESUREE",
+  "prohibited_claims": [
+    "AGI",
+    "ASI",
+    "SUPERINTELLIGENCE_SOLVED"
+  ],
+  "next_action": "BUILD_SIGMA_GOLD_DATASET_V1_FROM_VALIDATED_CEREBRON_TRACES"
+}
