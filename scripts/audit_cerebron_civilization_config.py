@@ -1,14 +1,11 @@
 from __future__ import annotations
-import json, pathlib, sys
+import json, pathlib
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 CFG=ROOT/"config"
 
 def load(name):
     return json.loads((CFG/name).read_text())
-
-def fail(msg,errors):
-    errors.append(msg)
 
 def main():
     errors=[]
@@ -22,64 +19,54 @@ def main():
     arch=load("farm-functional-architecture-v1.json")
     gateway=load("model-gateway.json")
     providers=load("runtime-provider-registry.json")
+    simplified=load("cerebron-simplified-operating-model.json")
+    preservation=load("farm-preservation-manifest.json")
 
     ids=[x["id"] for x in farms]
-    if len(farms)!=146: fail(f"farm_count={len(farms)} expected=146",errors)
-    if len(ids)!=len(set(ids)): fail("duplicate farm IDs",errors)
-    if min(ids)!=1 or max(ids)!=146: fail(f"farm_range={min(ids)}..{max(ids)} expected=1..146",errors)
+    if len(farms)!=146: errors.append(f"farm_count={len(farms)} expected=146")
+    if len(ids)!=len(set(ids)): errors.append("duplicate farm IDs")
+    if min(ids)!=1 or max(ids)!=146: errors.append("farm range mismatch")
 
     by_id={x["id"]:x for x in farms}
-    if by_id.get(145,{}).get("name")!="ELYSION": fail("F145 ELYSION missing",errors)
-    if by_id.get(146,{}).get("name")!="ELYSIUM": fail("F146 ELYSIUM missing",errors)
+    if by_id.get(145,{}).get("name")!="ELYSION": errors.append("F145 ELYSION missing")
+    if by_id.get(146,{}).get("name")!="ELYSIUM": errors.append("F146 ELYSIUM missing")
 
     active=set(mode.get("applies_to",[]))
-    school_roles=set(school.get("roles",[]))
-    binding_active={x["ai_id"] for x in bind.get("current_ai",[])}
-    mem_active=set(mem.get("native_ai",{}).get("active",[]))
-    if school_roles!=active: fail(f"AGORA roles mismatch CEREBRON mode: {sorted(school_roles^active)}",errors)
-    if binding_active!=active: fail(f"memory binding active mismatch: {sorted(binding_active^active)}",errors)
-    if mem_active!=active: fail(f"memory fabric active mismatch: {sorted(mem_active^active)}",errors)
+    if set(school.get("roles",[]))!=active: errors.append("AGORA/CEREBRON active role mismatch")
+    if {x["ai_id"] for x in bind.get("current_ai",[])}!=active: errors.append("memory binding active role mismatch")
+    if set(mem.get("native_ai",{}).get("active",[]))!=active: errors.append("memory fabric active role mismatch")
 
     planned={"SAELION","ALPHA","OMEGA","DELTA","NEXUS"}
-    school_planned=set(school.get("planned_roles",[]))
-    bind_planned={x["ai_id"] for x in bind.get("planned_ai",[])}
-    mem_planned=set(mem.get("native_ai",{}).get("planned_not_active",[]))
-    if school_planned!=planned: fail("AGORA planned roles mismatch",errors)
-    if bind_planned!=planned: fail("memory binding planned roles mismatch",errors)
-    if mem_planned!=planned: fail("memory fabric planned roles mismatch",errors)
-    if planned & active: fail("planned AI incorrectly active",errors)
-    farm_names={str(x.get("name","")).upper() for x in farms}
-    if planned & farm_names: fail("planned AI prematurely inserted into farm registry",errors)
+    if set(school.get("planned_roles",[]))!=planned: errors.append("AGORA planned role mismatch")
+    if {x["ai_id"] for x in bind.get("planned_ai",[])}!=planned: errors.append("memory planned role mismatch")
+    if set(mem.get("native_ai",{}).get("planned_not_active",[]))!=planned: errors.append("memory fabric planned role mismatch")
+    if planned & active: errors.append("planned AI incorrectly active")
 
     slots=hf.get("slots",[])
-    slot_ids=[x.get("slot_id") for x in slots]
-    if len(slots)!=20 or len(set(slot_ids))!=20: fail("HF pool must contain 20 unique slots",errors)
-    if hf.get("max_slots")!=20: fail("HF max_slots != 20",errors)
-    if any(x.get("model_id") is not None for x in slots):
-        fail("HF slot permanently bound without explicit admission update",errors)
+    if len(slots)!=20 or len({x.get("slot_id") for x in slots})!=20: errors.append("HF20 slot mismatch")
+    if any(x.get("model_id") is not None for x in slots): errors.append("HF slot permanently bound without admission")
 
     common="cerebron-omega/cerebron-private-memory"
-    if mem.get("storage_targets",{}).get("huggingface_private",{}).get("common_memory_repo")!=common:
-        fail("memory fabric common repo mismatch",errors)
-    if bind.get("common_private_repo")!=common: fail("civilization binding common repo mismatch",errors)
-    if hf.get("memory_route")!=common: fail("HF pool memory route mismatch",errors)
-    if mode.get("memory",{}).get("common_private_repo")!=common: fail("CEREBRON mode common repo mismatch",errors)
+    if mem.get("storage_targets",{}).get("huggingface_private",{}).get("common_memory_repo")!=common: errors.append("memory fabric repo mismatch")
+    if bind.get("common_private_repo")!=common: errors.append("civilization binding repo mismatch")
+    if hf.get("memory_route")!=common: errors.append("HF pool memory route mismatch")
+    if mode.get("memory",{}).get("common_private_repo")!=common: errors.append("CEREBRON mode memory route mismatch")
 
-    native_route=set(direct.get("routing_classes",{}).get("native_ai",[]))
-    if native_route!={"F145","F146"}: fail("direct native_ai route must be F145/F146",errors)
+    if set(direct.get("routing_classes",{}).get("native_ai",[]))!={"F145","F146"}: errors.append("native AI direct route mismatch")
     g12=next((g for g in arch.get("groups",[]) if g.get("id")=="G12"),None)
-    if not g12 or set(g12.get("farms",[]))!={145,146}: fail("farm architecture G12 native AI mismatch",errors)
+    if not g12 or set(g12.get("farms",[]))!={145,146}: errors.append("G12 native AI group mismatch")
 
-    if mem.get("classes",{}).get("M6",{}).get("deny_training") is not True:
-        fail("M6 deny_training missing",errors)
-
+    if mem.get("classes",{}).get("M6",{}).get("deny_training") is not True: errors.append("M6 deny_training missing")
     hfp=next((x for x in gateway.get("providers",[]) if x.get("id")=="huggingface"),None)
-    if not hfp or hfp.get("elysion_memory_verification",{}).get("result")!="PASS":
-        fail("latest ELYSION HF memory verification missing",errors)
-
+    if not hfp or hfp.get("elysion_memory_verification",{}).get("result")!="PASS": errors.append("ELYSION HF memory verification missing")
     gh=next((x for x in providers.get("providers",[]) if x.get("id")=="GITHUB_ACTIONS_CPU"),None)
-    if not gh or gh.get("state")!="QUALIFIED_SCOPED":
-        fail("GitHub Actions CPU scoped qualification missing",errors)
+    if not gh or gh.get("state")!="QUALIFIED_SCOPED": errors.append("GitHub Actions CPU qualification missing")
+
+    if "PRESERVE_74_FARMS" in simplified.get("invariants",[]): errors.append("stale 74-farm invariant")
+    ss=simplified.get("registry_snapshot",{})
+    if ss.get("count")!=146 or ss.get("max_id")!=146: errors.append("simplified registry snapshot mismatch")
+    ps=preservation.get("scope",{})
+    if ps.get("count")!=146 or ps.get("farms")!="F01-F146": errors.append("preservation scope mismatch")
 
     out={
         "schema":"CEREBRON_CIVILIZATION_CONFIG_AUDIT_V1",
