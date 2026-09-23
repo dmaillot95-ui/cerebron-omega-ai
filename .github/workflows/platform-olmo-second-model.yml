@@ -1,0 +1,34 @@
+name: CEREBRON OLMo Second Model Benchmark
+on:
+  push:
+    branches: ['feat/olmo-second-model']
+    paths:
+      - 'platform/olmo_second_model_benchmark.py'
+      - '.github/workflows/platform-olmo-second-model.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute independent OLMo benchmark
+        run: |
+          python platform/olmo_second_model_benchmark.py \
+            --name olmo2-0425-1b-instruct \
+            --model-id allenai/OLMo-2-0425-1B-Instruct \
+            --revision d8d4a33
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-olmo-second-model-benchmark
+          path: platform/artifacts/olmo-second-model-benchmark.json
