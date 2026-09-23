@@ -582,6 +582,93 @@
         "F126"
       ],
       "notes": "SHARED_TOOL_NOT_NEW_FARM"
+    },
+    {
+      "id": "OTF027",
+      "name": "AMD ROCm",
+      "vendor": "AMD",
+      "license": "OPEN_SOURCE_COMPONENTS_LICENSE_CHECK_REQUIRED",
+      "state": "DISCOVERED",
+      "role": "GPU_COMPUTE_AI_RUNTIME",
+      "targets": [
+        "SAPHEA_MICRO",
+        "MODEL_TRAINING",
+        "INFERENCE",
+        "SIMULATION"
+      ],
+      "farm_count_effect": 0,
+      "priority": "P0",
+      "rules": [
+        "NO_NEW_FARM",
+        "LICENSE_BEFORE_INTEGRATION",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "HARDWARE_DETECTION_REQUIRED",
+        "NO_TOOL_EQUALS_EVIDENCE"
+      ]
+    },
+    {
+      "id": "OTF028",
+      "name": "AMD Lemonade",
+      "vendor": "AMD",
+      "license": "OPEN_SOURCE_LICENSE_VERIFY_BEFORE_INTEGRATION",
+      "state": "DISCOVERED",
+      "role": "LOCAL_AI_OPENAI_COMPATIBLE_ROUTER",
+      "targets": [
+        "SAPHEA_MICRO",
+        "LOCAL_LLM",
+        "LOCAL_MULTIMODAL"
+      ],
+      "farm_count_effect": 0,
+      "priority": "P0",
+      "rules": [
+        "NO_NEW_FARM",
+        "LICENSE_BEFORE_INTEGRATION",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "NO_PAID_OVERAGE",
+        "NO_TOOL_EQUALS_EVIDENCE"
+      ]
+    },
+    {
+      "id": "OTF029",
+      "name": "AMD GAIA",
+      "vendor": "AMD",
+      "license": "OPEN_SOURCE_LICENSE_VERIFY_BEFORE_INTEGRATION",
+      "state": "DISCOVERED",
+      "role": "LOCAL_AGENT_RAG_FRAMEWORK",
+      "targets": [
+        "CEREBRON",
+        "SAPHEA_MICRO",
+        "LOCAL_RAG"
+      ],
+      "farm_count_effect": 0,
+      "priority": "P1",
+      "rules": [
+        "NO_NEW_FARM",
+        "LICENSE_BEFORE_INTEGRATION",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "NO_TOOL_EQUALS_EVIDENCE"
+      ]
+    },
+    {
+      "id": "OTF030",
+      "name": "AMD Ryzen AI Software",
+      "vendor": "AMD",
+      "license": "MIXED_COMPONENTS_VERIFY",
+      "state": "DISCOVERED",
+      "role": "NPU_IGPU_LOCAL_INFERENCE",
+      "targets": [
+        "SAPHEA_MICRO",
+        "LOCAL_INFERENCE"
+      ],
+      "farm_count_effect": 0,
+      "priority": "P1",
+      "rules": [
+        "NO_NEW_FARM",
+        "SUPPORTED_HARDWARE_REQUIRED",
+        "LICENSE_BEFORE_INTEGRATION",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "NO_TOOL_EQUALS_EVIDENCE"
+      ]
     }
   ],
   "integration_strategy": {
@@ -607,5 +694,17 @@
     "claim": "Cross-simulator agreement is not physical validation.",
     "farm_cap": 144,
     "nvidia_policy": "NO_NEW_FARM; shared engines routed to existing capability farms"
+  },
+  "amd_shared_compute": {
+    "policy": "LOCAL_FIRST_ZERO_API_COST_WHEN_REAL_COMPATIBLE_WORKER_EXISTS",
+    "cloud_policy": "CREDITS_ARE_TEMPORARY_NOT_PERMANENT_FREE_COMPUTE",
+    "storage_policy": "DO_NOT_TREAT_AMD_CLOUD_AS_FREE_PERSISTENT_MEMORY",
+    "worker_gate": [
+      "REAL_HARDWARE_OR_RUNNER_DETECTED",
+      "ENGINE_EXECUTION_TRACE",
+      "BENCHMARK",
+      "ARTIFACT_SHA"
+    ],
+    "farm_count_effect": 0
   }
 }
