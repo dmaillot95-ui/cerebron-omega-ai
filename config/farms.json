@@ -1,5 +1,5 @@
 {
-  "version": "2.19",
+  "version": "2.20",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1037,6 +1037,78 @@
   "policy": {
     "farm_cap": 144,
     "no_farm_above_144": true,
-    "route_minimal_useful_coalition": true
+    "route_minimal_useful_coalition": true,
+    "shared_tool_fabric": true,
+    "tools_are_not_farms": true
+  },
+  "shared_engines": {
+    "NVIDIA": {
+      "status": "REGISTERED_DISCOVERED",
+      "farm_count_effect": 0,
+      "tools": [
+        {
+          "tool_id": "OTF023",
+          "name": "NVIDIA Warp",
+          "target_farms": [
+            49,
+            52,
+            53,
+            56,
+            78,
+            87,
+            93,
+            94,
+            124,
+            127,
+            140
+          ]
+        },
+        {
+          "tool_id": "OTF024",
+          "name": "NVIDIA PhysicsNeMo",
+          "target_farms": [
+            51,
+            52,
+            53,
+            93,
+            94,
+            127,
+            132,
+            133,
+            140
+          ]
+        },
+        {
+          "tool_id": "OTF025",
+          "name": "Newton",
+          "target_farms": [
+            78,
+            87,
+            107,
+            124,
+            136,
+            139,
+            140
+          ]
+        },
+        {
+          "tool_id": "OTF026",
+          "name": "NVIDIA Isaac Lab",
+          "target_farms": [
+            78,
+            87,
+            107,
+            124,
+            126
+          ]
+        }
+      ],
+      "rules": [
+        "NO_NEW_FARM",
+        "LICENSE_BEFORE_INTEGRATION",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "NO_TOOL_EQUALS_EVIDENCE"
+      ]
+    }
   }
 }
