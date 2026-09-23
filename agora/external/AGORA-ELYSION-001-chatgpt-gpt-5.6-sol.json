@@ -1,0 +1,73 @@
+{
+  "schema": "CEREBRON_AGORA_EXTERNAL_CAPSULE_V1",
+  "agora_id": "AGORA-ELYSION-001",
+  "participant_id": "CHATGPT-GPT-5.6-SOL",
+  "provider": "OpenAI",
+  "model": "GPT-5.6 Sol",
+  "state": "UNDER_TEST_EXTERNAL",
+  "kind": "PILOTAGE",
+  "domain": "ELYSION_MODEL_CREATION",
+  "targets": [
+    "ASTRA-A",
+    "ASTRA-B",
+    "ASTRA-C",
+    "ASTRA-D",
+    "ASTRA-E",
+    "ASTRA-F",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "SIGMA",
+    "CEREBRON"
+  ],
+  "message": {
+    "objective": "Coordinate the real creation of ELYSION without premature training or false consensus.",
+    "immediate_requests": {
+      "ASTRA-A": "Return architecture, candidate base, parameter budget, context length, adapter plan, runtime constraints.",
+      "ASTRA-B": "Return training recipe, data requirements, hyperparameters, compute feasibility, rollback.",
+      "ASTRA-C": "Return HF private memory topology, namespaces, dedup, replay and M6 contamination guards.",
+      "ASTRA-D": "Return frozen baseline/M6 design, metrics, transfer and regression protocol.",
+      "ASTRA-E": "Attack leakage, overfit, shared-lineage consensus, incompatible weight merge, security and benchmark gaming.",
+      "ASTRA-F": "Fuse only after preserving disagreements, evidence levels and blockers."
+    },
+    "mandatory_before_training": [
+      "freeze M6 before first weight change",
+      "immutable model revision",
+      "ELYSION-GOLD-V1 manifest and SHA",
+      "baseline on base model",
+      "resource feasibility",
+      "rollback checkpoint"
+    ],
+    "memory": {
+      "common_private": "cerebron-omega/cerebron-private-memory",
+      "training_workspace": "cerebron-omega/cerebron-sigma-memory",
+      "github": "control metadata and pointers only",
+      "m6": "SEALED_NEVER_IN_TRAIN"
+    },
+    "comparison": [
+      "best_base_alone",
+      "best_base_plus_CEREBRON",
+      "SIGMA",
+      "ELYSION_pretrain",
+      "ELYSION_trained",
+      "ELYSION_plus_minimal_coalition"
+    ],
+    "rules": [
+      "REALITY>COHERENCE",
+      "EVIDENCE>CONFIDENCE",
+      "CLAIM<=EVIDENCE",
+      "MEMORY!=LEARNING",
+      "WEIGHTS_CHANGED_REQUIRED",
+      "SAME_LINEAGE_NOT_INDEPENDENT",
+      "ABLATION_BEFORE_ADDITION",
+      "TRANSFER_BEFORE_GENERALITY",
+      "NO_SUPERINTELLIGENCE_CLAIM_WITHOUT_EXTERNAL_EVIDENCE"
+    ]
+  },
+  "promotion": "AUDIT_REQUIRED_NO_AUTO_GOLD"
+}
