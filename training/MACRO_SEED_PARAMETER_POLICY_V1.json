@@ -1,0 +1,68 @@
+{
+  "schema": "cerebron-macro-seed-parameter-policy-v1",
+  "version": "1.0",
+  "status": "ACTIVE_POLICY_NOT_YET_PARAMETRICALLY_VALIDATED",
+  "purpose": "Prioritize validated macro-seeds as generalizable parameter-training candidates while preserving detailed evidence in vector memory.",
+  "macro_seed_class": "MACRO_SEED_PARAMETER_CANDIDATE",
+  "parameter_targets": [
+    "general reasoning invariants",
+    "problem decomposition",
+    "relation discovery",
+    "blocker identification",
+    "hypothesis generation",
+    "falsification strategy",
+    "verification discipline",
+    "compression",
+    "transfer",
+    "routing strategy",
+    "tool-chain strategy"
+  ],
+  "vector_memory_keeps": [
+    "full chapters",
+    "sources",
+    "proofs",
+    "artifacts",
+    "case-specific results",
+    "examples",
+    "experiment history",
+    "checkpoints"
+  ],
+  "conversion": {
+    "rule": "Never train mere recitation of a macro-seed. Expand each validated macro-seed into diverse application tasks, counterexamples, negative cases, transfer tasks and adversarial variants.",
+    "required_examples": [
+      "APPLY",
+      "DO_NOT_APPLY",
+      "COUNTEREXAMPLE",
+      "TRANSFER",
+      "ADVERSARIAL",
+      "ABLATION_CONTROL"
+    ],
+    "target": "Behavioral application of the invariant on unseen tasks without retrieval."
+  },
+  "eligibility": [
+    "F72_VALIDATED",
+    "AFAH_APPROVED",
+    "GENERALIZABLE",
+    "STABLE",
+    "PROVENANCE_COMPLETE",
+    "DEPENDENCY_FINGERPRINT_COMPLETE",
+    "NO_BENCHMARK_LEAKAGE"
+  ],
+  "release_chain": [
+    "MACRO_SEED",
+    "EXPAND_CURRICULUM",
+    "RED_TEAM",
+    "F72",
+    "AFAH",
+    "DATASET_VERSIONED",
+    "TRAIN_REVERSIBLE_ADAPTER",
+    "COLD_NO_RAG",
+    "TRANSFER_NO_RAG",
+    "ABLATION",
+    "REGRESSION",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "proof": "Parametric incorporation requires fresh no-RAG gain, transfer gain, adapter ablation evidence and no critical regression.",
+  "base_rule": "G0 remains immutable.",
+  "priority": "Macro-seeds may receive higher curation priority than case-specific lessons, but priority never bypasses evidence gates."
+}
