@@ -1,0 +1,35 @@
+name: ASTRION METRION Constrained Guidance V6
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/guidance_constrained_v6.py"
+      - ".github/workflows/guidance-constrained-v6.yml"
+permissions:
+  contents: read
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/guidance_constrained_v6.py
+      - name: METRION constraints audit
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/guidance_constrained_v6.json"));b=d["best"]
+          assert d["evaluated"]>=80
+          assert set(b["constraints"])=={"max_q","max_g","structure"}
+          assert b["objective"]>=b["orbital_score"]
+          assert "SEARCH_NOT_GLOBAL_OPTIMUM" in d["epistemic"]
+          assert "NO_AEROELASTICITY" in d["epistemic"]
+          print("GUIDANCE_V6",d["evaluated"],b,d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: guidance-constrained-v6
+          path: artifacts/guidance_constrained_v6.json
+          if-no-files-found: error
+          retention-days: 7
