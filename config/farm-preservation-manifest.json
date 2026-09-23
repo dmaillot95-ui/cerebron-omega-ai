@@ -1,16 +1,10 @@
 {
   "schema": "cerebron-farm-preservation-manifest-v1",
-  "status": "FREEZE_BEFORE_DEEP_AUDIT",
+  "status": "PRESERVATION_EXTENDED_TO_CURRENT_REGISTRY",
   "scope": {
-    "farms": "F01-F74",
-    "count": 74
-  },
-  "verified_baseline": {
-    "all_registry_repositories_present": true,
-    "missing_repositories": 0,
-    "archived_repositories": 0,
-    "default_branch_main": 74,
-    "push_access": 74
+    "farms": "F01-F146",
+    "count": 146,
+    "source": "config/farms.json"
   },
   "preserve": [
     "repository identity",
@@ -23,7 +17,8 @@
     "evidence artifacts",
     "F66 pointers",
     "F74 catalog entries",
-    "HF private opaque references"
+    "HF private opaque references",
+    "all future verified farm IDs after registry insertion"
   ],
   "mutation_policy": {
     "delete": "FORBIDDEN_DURING_AUDIT",
@@ -84,6 +79,37 @@
         "digest identity",
         "rollback heads"
       ]
+    },
+    {
+      "phase": 6,
+      "target": "F75-F100",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions"
+      ]
+    },
+    {
+      "phase": 7,
+      "target": "F101-F124",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions"
+      ]
+    },
+    {
+      "phase": 8,
+      "target": "F125-F146",
+      "checks": [
+        "tree inventory",
+        "critical files",
+        "workflows",
+        "recent deletions",
+        "native AI repository scrutiny F145-F146"
+      ]
     }
   ],
   "loss_classification": [
@@ -94,5 +120,19 @@
     "DURABLE_COPY_ON_HF",
     "UNRESOLVED"
   ],
-  "claim_limit": "This preservation freeze prevents destructive repair while the deep content/history audit determines whether any essential work is actually missing."
+  "claim_limit": "Historical F01-F74 audit facts remain historical; current preservation scope follows the verified registry through F146 without claiming unperformed repository audits.",
+  "historical_baseline_f01_f74": {
+    "all_registry_repositories_present": true,
+    "missing_repositories": 0,
+    "archived_repositories": 0,
+    "default_branch_main": 74,
+    "push_access": 74
+  },
+  "current_registry_snapshot": {
+    "count": 146,
+    "max_id": 146,
+    "registry_file": "config/farms.json",
+    "repository_presence_claim": "NOT_REASSERTED_BY_THIS_MANIFEST",
+    "rule": "PRESERVE_REGISTERED_IDENTITIES_WITHOUT_INVENTING_EXECUTION_OR_REPOSITORY_AUDIT_EVIDENCE"
+  }
 }
