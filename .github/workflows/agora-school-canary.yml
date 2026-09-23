@@ -1,0 +1,44 @@
+name: AGORA Adaptive School Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/adaptive_school.py"
+      - "config/agora-school-v1.json"
+      - ".github/workflows/agora-school-canary.yml"
+permissions:
+  contents: read
+jobs:
+  school-canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: ASTRION failure lesson
+        run: python runtime/adaptive_school.py --ai ASTRION --domain ORBITAL_MECHANICS --result FAIL --difficulty 0.7 --evidence CANARY-1
+      - name: ASTRION recovery
+        run: python runtime/adaptive_school.py --ai ASTRION --domain ORBITAL_MECHANICS --result PASS --difficulty 0.6 --evidence CANARY-2
+      - name: METRION contradiction
+        run: python runtime/adaptive_school.py --ai METRION --domain VALIDATION --result CONTRADICTION --difficulty 0.8 --evidence CANARY-3
+      - name: Verify isolation and adaptation
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("agora/learning_profiles.json"))["profiles"]
+          assert "ASTRION" in p and "METRION" in p
+          assert p["ASTRION"]["ORBITAL_MECHANICS"]["attempts"]==2
+          assert p["METRION"]["VALIDATION"]["contradictions"]==1
+          l=json.load(open("artifacts/adaptive_lesson.json"))
+          assert l["student"]=="METRION" and l["kind"]=="RED_TEAM_RECONCILIATION"
+          assert "UNAIDED_RETEST_REQUIRED" in l["rules"]
+          print("AGORA_ADAPTIVE_SCHOOL_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-adaptive-school-canary
+          path: |
+            agora/learning_profiles.json
+            artifacts/adaptive_lesson.json
+          if-no-files-found: error
+          retention-days: 7
