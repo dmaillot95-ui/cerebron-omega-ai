@@ -1,0 +1,69 @@
+name: CEREBRON Main Integration Gate
+on:
+  push:
+    branches: ['feat/cerebron-main-integration-v1']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: platform
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile platform
+        run: python -m compileall -q platform
+      - name: Run complete platform test suite
+        run: python -m unittest discover -s platform/tests -v
+      - name: Verify preserved scientific and memory state
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          must_exist=[
+            "docs/RELAY_CHECKPOINT_2026-09-23_NVIDIA_V2.md",
+            "docs/CEREBRON_OPERATIONAL_GATES_2026-09-23.md",
+            "runtime/agora_f139_gain_v3.py",
+            "runtime/agora_gold_promotion_f139_v3.py",
+            ".github/workflows/agora-f139-gain-v3.yml",
+            ".github/workflows/agora-gold-promotion-f139-v3.yml",
+            "agora/validation/RED-COLD60-V3-TRANSFER-001.json",
+            "reports/COLLATZ-LATEST-SYNTHESIS.md",
+            "platform/farm_bridge.py",
+            "platform/generative_backend.py",
+            "platform/security.py",
+            "platform/semantic_tools.py",
+            "platform/elyra_imitation_train_v1.py",
+            "platform/elyra_independent_audit_v1.py",
+            "platform/bounded_autonomy_v1.py",
+          ]
+          missing=[p for p in must_exist if not pathlib.Path(p).exists()]
+          assert not missing, missing
+          farms=json.loads(pathlib.Path("config/farms.json").read_text())["farms"]
+          micro=json.loads(pathlib.Path("config/saphea-micro-v1.json").read_text())
+          control=json.loads(pathlib.Path("config/platform-control-plane-v1.json").read_text())
+          training=json.loads(pathlib.Path("config/neural-training-fabric-v1.json").read_text())
+          specialist=json.loads(pathlib.Path("config/specialist-ai-v1.json").read_text())
+          assert len(farms)==144
+          assert max(f["id"] for f in farms)==144
+          assert len(micro["units"])==20
+          active=sum(1 for u in micro["units"] if u.get("status")!="PLANNED_UNAVAILABLE")
+          assert active==7
+          assert control["farm_count_effect"]==0
+          assert control["farm_cap"]==144
+          assert training["roles"]["ELYRA"]["status"]=="SCOPED_NEURAL_POLICY_TRAINED_AND_M6_PROMOTED"
+          assert specialist["ELYRA"]["neural_policy"]["weights_changed"] is True
+          print("INTEGRATION_STATE_OK",len(farms),len(micro["units"]),active)
+          PY
+      - name: Verify remote exposure remains blocked
+        run: |
+          python - <<'PY'
+          import pathlib
+          text=pathlib.Path("platform/server.py").read_text()
+          assert "0.0.0.0" not in text or "ALLOW" in text or "REMOTE" in text
+          checkpoint=pathlib.Path("docs/RELAY_CHECKPOINT_2026-09-23_NVIDIA_V2.md").read_text()
+          assert "BLOCKED" in checkpoint
+          print("REMOTE_PUBLIC_DEPLOYMENT_NOT_PROMOTED")
+          PY
