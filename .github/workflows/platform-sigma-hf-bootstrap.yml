@@ -1,0 +1,32 @@
+name: SIGMA Hugging Face Private Memory Bootstrap
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/huggingface_memory.py'
+      - 'platform/sigma_hf_bootstrap.py'
+      - '.github/workflows/platform-sigma-hf-bootstrap.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      CEREBRON_HF_SIGMA_REPO: ${{ vars.CEREBRON_HF_SIGMA_REPO }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned Hugging Face Hub client
+        run: python -m pip install --disable-pip-version-check --no-cache-dir huggingface_hub==0.35.3
+      - name: Create/probe private SIGMA memory repository
+        run: python platform/sigma_hf_bootstrap.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sigma-hf-bootstrap-v1
+          path: platform/artifacts/sigma-hf-bootstrap-v1.json
