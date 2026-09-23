@@ -1,5 +1,5 @@
 {
-  "version": "2.04",
+  "version": "2.05",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -624,6 +624,12 @@
       "id": 112,
       "repo": "cerebron-farm-112-cognitive-thought-simulator",
       "domain": "cognitive-process-working-memory-hypothesis-planning-audit-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 113,
+      "repo": "cerebron-farm-113-elyra-embodied-digital-humanoid",
+      "domain": "embodied-digital-humanoid-sim-to-real-agent",
       "status": "SCAFFOLDED"
     }
   ]
