@@ -1,0 +1,40 @@
+name: ASTRION METRION Solar Interpolation V29
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/solar_interpolation_v29.py"
+      - "external/nasa_nesc/occ06c_ephemeris.json"
+      - "external/nasa_nesc/occ06c_sun_ephemeris.csv"
+      - ".github/workflows/solar-interpolation-v29.yml"
+permissions:
+  contents: read
+jobs:
+  interpolate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - run: python runtime/solar_interpolation_v29.py
+      - name: METRION synchronized-data gate
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open("artifacts/ephemeris_alignment_v28.json"))
+          d=json.load(open("artifacts/solar_interpolation_v29.json"))
+          if d["ready"]:
+              assert a["alignment_ready"] is True
+              assert d["decision"]=="READY_FOR_SYNCHRONIZED_SOLAR_PROPAGATION"
+              assert all(d["checks"].values())
+          else:
+              assert d["decision"].startswith("BLOCKED_")
+          assert "NO_EXTRAPOLATION_AUTHORIZED" in d["epistemic"]
+          print("SOLAR_INTERPOLATION_V29",d["decision"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solar-interpolation-v29
+          path: artifacts/
+          retention-days: 30
