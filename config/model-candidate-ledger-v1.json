@@ -1,0 +1,80 @@
+{
+  "schema": "CEREBRON_MODEL_CANDIDATE_LEDGER_V1",
+  "date": "2026-09-23",
+  "rule": "DO_NOT_PROMOTE_OR_RETEST_REJECTED_CANDIDATE_WITHOUT_NEW_VERSION_OR_NEW_EVIDENCE",
+  "qualified": [
+    {
+      "id": "QWEN25_05B_INSTRUCT",
+      "role": "GENERAL_GENERATIVE_BACKEND",
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "license": "apache-2.0",
+      "status": "QUALIFIED_SCOPED",
+      "evidence": {
+        "run_id": 35900280586,
+        "job_id": 107314375062,
+        "artifact_id": 10768374456,
+        "score": "5/5"
+      },
+      "limitation": "tiny deterministic smoke benchmark; not general capability"
+    },
+    {
+      "id": "ELYRA_IMITATION_POLICY_V1",
+      "role": "EMBODIED_NEURAL_POLICY",
+      "model_id": "CEREBRON/ELYRA-IMITATION-POLICY-V1",
+      "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+      "status": "QUALIFIED_SCOPED_G6_G7",
+      "evidence": {
+        "training_run": 35904950828,
+        "independent_shift_audit_run": 35905952407,
+        "runtime_e2e_run": 35908555554
+      },
+      "limitation": "synthetic rover policy; not a language model and not physical rover validation"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "OLMO2_0425_1B_INSTRUCT",
+      "model_id": "allenai/OLMo-2-0425-1B-Instruct",
+      "status": "REJECTED_CANDIDATE",
+      "evidence": {
+        "run_id": 35906141609,
+        "job_id": 107334206947,
+        "artifact_id": 10771008125,
+        "score": "7/12"
+      },
+      "reason": "below predeclared 8/12 qualification threshold"
+    },
+    {
+      "id": "SMOLLM2_17B_INSTRUCT",
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "status": "REJECTED_CANDIDATE",
+      "evidence": {
+        "run_id": 35906985193,
+        "job_id": 107336998633,
+        "artifact_id": 10771159778,
+        "score": "5/12"
+      },
+      "reason": "below predeclared 8/12 qualification threshold"
+    },
+    {
+      "id": "GRANITE33_2B_INSTRUCT",
+      "model_id": "ibm-granite/granite-3.3-2b-instruct",
+      "revision": "b6554dcbaf706fbda853b88f7a8e940a685d293c",
+      "status": "REJECTED_CANDIDATE",
+      "evidence": {
+        "run_id": 35907328339,
+        "job_id": 107338156071,
+        "artifact_id": 10771981206,
+        "score": "6/12"
+      },
+      "reason": "below predeclared 8/12 qualification threshold"
+    }
+  ],
+  "independence": {
+    "qualified_distinct_neural_models": 2,
+    "qualified_distinct_generative_models": 1,
+    "note": "Qwen generative backend and ELYRA policy are distinct neural models with different purposes. SAPHEA role calls sharing Qwen remain correlated and do not count as independent models."
+  }
+}
