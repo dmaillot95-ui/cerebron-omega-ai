@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_OPERATIONAL_STATUS_V1",
-  "status": "OPERATIONAL_SCOPED_LOCAL",
+  "status": "OPERATIONAL_SCOPED_LOCAL_VERIFIED",
   "terminology": "INTELLIGENCE_COLLECTIVE_ORCHESTREE_A_CAPACITE_MESUREE",
   "farm_cap": 144,
   "control_plane_is_farm": false,
@@ -63,15 +63,16 @@
       "artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75"
     },
     "semantic_v5": {
-      "run_id": 35905965573,
-      "job_id": 107333615532,
-      "artifact_id": 10770908796,
-      "artifact_digest": "sha256:639eb214cfdbb8513f0076b2e3c3980b88887df83c7aa4649e244a74d6cb4f2b",
-      "baseline_score": 17,
-      "adaptive_score": 54,
-      "tool_hits": 50,
+      "run_id": 35908728793,
+      "job_id": 107342873067,
+      "artifact_id": 10772427564,
+      "artifact_digest": "sha256:4f5716ec7e229729e1500a14481631a30a6ea25bbbc2122b391f7aed8500db7c",
+      "dataset_sha256": "ce3b1e7d79bb0c1ec2aaec969ce6f1da2d10b7866583d766cbd5d6d512e9bfd2",
+      "baseline_score": 13,
+      "adaptive_score": 53,
+      "tool_hits": 51,
       "domains_improved": 6,
-      "result_sha256": "ff83c11102ed1724194c17dbf30a1a5869bf34e06b794d4f53ee65b2ea686eb5"
+      "result_sha256": "52549d78fb0d0e43f7a0551d3126d24a3a0ca5e52ae0aca2ffbafa3199e5de28"
     },
     "elyra_neural": {
       "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
@@ -90,10 +91,64 @@
       "artifact_digest": "sha256:2c2e4f3924ab492ff8d7098625bd254d6806522c6f17545b8195e3c118bae39e"
     },
     "remote_security": {
-      "run_id": 35906185960,
-      "artifact_id": 10770579187,
-      "artifact_digest": "sha256:6e8b8588592b7bbc5a5948948d79016818761828f14e14885671bbf8f298d7c9",
-      "status": "REMOTE_DEPLOYMENT_BLOCKED_AS_DESIGNED"
+      "run_id": 35908555502,
+      "artifact_id": 10772521074,
+      "artifact_digest": "sha256:d956ca5b73cc16880999bbf6edd0d85e68bfba9731118e95b71ea3b0e85976d4",
+      "status": "REMOTE_DEPLOYMENT_BLOCKED_AS_DESIGNED",
+      "note": "Local hardening verified; public exposure remains blocked pending TLS/proxy/secret backend/deployment isolation/multi-instance controls."
+    },
+    "operational_acceptance": {
+      "run_id": 35908728772,
+      "artifact_id": 10771717736,
+      "artifact_digest": "sha256:193ea60238b69f100c9a5d8ec68aa51390f3998caf3871278799a2b7cba7165f",
+      "status": "ACCEPTED_100_PERCENT_SCOPED_LOCAL",
+      "passed": 15,
+      "total": 15,
+      "score_percent": 100
+    },
+    "elyra_runtime": {
+      "e2e_run_id": 35908555554,
+      "status": "SUCCESS",
+      "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+      "direct_output_sha256": "b3c19e27316067c043e75b17c8c58c3bc3acbf5507c6cf762b8ebcdd742e4aff",
+      "http_output_sha256": "4746f40e2de53f003db094437ebb93dec4de38020b273f50206a611823024457",
+      "endpoint": "/api/elyra/action",
+      "claim_ceiling": "E3_SIMULATION_POLICY_NOT_PHYSICAL_VALIDATION"
+    },
+    "generative_backend": {
+      "e2e_run_id": 35908555461,
+      "status": "SUCCESS",
+      "note": "Qwen generative backend real CPU inference verified; logical specialist calls sharing this base remain correlated."
     }
-  }
+  },
+  "last_verified_code_head": "c654efdea6b0faa03a39bf4854128ae2c488250c",
+  "model_candidate_evaluations": {
+    "qwen": "ACTIVE_GENERATIVE_BASE_VERIFIED",
+    "olmo2_1b": {
+      "score": 7,
+      "max_score": 12,
+      "status": "REJECTED_CANDIDATE",
+      "run_id": 35906141609
+    },
+    "smollm2_1_7b": {
+      "score": 5,
+      "max_score": 12,
+      "status": "REJECTED_CANDIDATE",
+      "run_id": 35906985193
+    },
+    "granite_3_3_2b": {
+      "score": 6,
+      "max_score": 12,
+      "status": "REJECTED_CANDIDATE",
+      "run_id": 35907328339
+    }
+  },
+  "open_limits": [
+    "PUBLIC_REMOTE_DEPLOYMENT_BLOCKED",
+    "G11_OPEN_NO_EXTERNAL_SUPERINTELLIGENCE_EVALUATION",
+    "ELYRA_NO_PHYSICAL_ROBOT_VALIDATION",
+    "AELYS_NO_DEDICATED_TRAINED_MODEL",
+    "ONLY_ONE_QUALIFIED_GENERAL_GENERATIVE_BASE_MODEL_QWEN",
+    "SAPHEA_MICRO_SHARED_BASE_CALLS_ARE_CORRELATED"
+  ]
 }
