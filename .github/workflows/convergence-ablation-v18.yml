@@ -1,0 +1,33 @@
+name: METRION Ablation V18
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/convergence_ablation_v18.py"
+      - ".github/workflows/convergence-ablation-v18.yml"
+permissions:
+  contents: read
+jobs:
+  ablation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/convergence_ablation_v18.py
+      - name: METRION ablation gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/convergence_ablation_v18.json"))
+          assert d["pass"] is True and all(d["ablation_audit"].values())
+          assert "NOT_CAUSAL_ATTRIBUTION_TO_J2_ALONE" in d["epistemic"]
+          assert d["reality_gap"]=="G02_DYNAMICS_FIDELITY_PARTIAL"
+          print("ABLATION_V18",d["comparison"]["terminal_delta_v17_minus_v16"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: convergence-ablation-v18
+          path: artifacts/convergence_ablation_v18.json
+          if-no-files-found: error
+          retention-days: 14
