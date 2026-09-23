@@ -183,5 +183,14 @@
     "SHA256_AND_PROVENANCE_REQUIRED",
     "NO_SECRET_IN_GITHUB",
     "NO_BLIND_CROSS_AI_MEMORY_COPY"
-  ]
+  ],
+  "hf_agent_pool": {
+    "config": "config/hf-20-agent-pool-v1.json",
+    "max_slots": 20,
+    "identity": "EXECUTION_CAPACITY_NOT_PERMANENT_NEURAL_IDENTITIES",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "namespace_pattern": "agent-run/{execution_id}/{slot_id}",
+    "durable_promotion": "ONLY_AFTER_AUDIT_PROVENANCE_DEDUP_AND_MEMORY_CLASSIFICATION",
+    "rule": "HF_SLOT_OUTPUT_DOES_NOT_AUTO_ENTER_NATIVE_AI_MEMORY_OR_TRAINING"
+  }
 }
