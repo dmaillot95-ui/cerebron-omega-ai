@@ -128,7 +128,7 @@ def solve_engineering_semantic(prompt: str):
     compact=re.sub(r"\s+","",p)
 
     m=_assigned(prompt,"m") or _unit_value(prompt,r"mass","kg")
-    a=_assigned(prompt,"a") or _unit_value(prompt,r"acceleration|accelerates?\s+at","m/s\^?2|m/s2")
+    a=_assigned(prompt,"a") or _unit_value(prompt,r"acceleration|accelerates?\s+at",r"m/s\^?2|m/s2")
     f=_assigned(prompt,"f") or _unit_value(prompt,r"force","n|newtons?")
     v=_assigned(prompt,"v") or _unit_value(prompt,r"speed|velocity|motion\s+at","m/s")
     t=_assigned(prompt,"t") or _unit_value(prompt,r"time|duration|period","s|seconds?")
