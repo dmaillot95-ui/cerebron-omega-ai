@@ -1,0 +1,34 @@
+name: ASTRION METRION Solar Perturbation V27
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/solar_perturbation_v27.py"
+      - ".github/workflows/solar-perturbation-v27.yml"
+permissions:
+  contents: read
+jobs:
+  solar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/solar_perturbation_v27.py
+      - name: METRION epistemic gate
+        run: |
+          python - <<'PY'
+          import json,math
+          d=json.load(open("artifacts/solar_perturbation_v27.json"))
+          assert math.isfinite(d["solar_acceleration_norm_m_s2"])
+          assert d["solar_acceleration_norm_m_s2"]>0
+          assert "FIXED_SUN_VECTOR_CANARY_ONLY" in d["epistemic"]
+          assert "NOT_NASA_EPHEMERIS" in d["epistemic"]
+          assert d["g02_status"]=="PARTIAL" and d["g03_status"]=="PARTIAL"
+          print("SOLAR_V27",d["solar_acceleration_norm_m_s2"],d["decision"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solar-perturbation-v27
+          path: artifacts/solar_perturbation_v27.json
+          retention-days: 30
