@@ -31,6 +31,9 @@ def main():
         "owner_isolation_present": "owner_id" in server,
         "origin_check_present": "check_origin" in security and "check_origin(" in server,
         "rate_limit_present": "rate_limit" in security and "rate_limit(" in server,
+        "persistent_local_rate_limit": "sqlite3" in security and "RATE_DB" in security,
+        "tamper_evident_local_audit": "verify_audit_chain" in security and "previous_hash" in security,
+        "credential_validity_windows": "not_before" in security and "expires_at" in security,
         "body_limit_present": "1_000_000" in server,
         "base_security_headers_present": (
             "X-Content-Type-Options" in server
