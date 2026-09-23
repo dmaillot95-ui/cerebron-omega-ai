@@ -1,0 +1,35 @@
+name: F72 Reality Gap V13
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/reality_gap_v13.py"
+      - ".github/workflows/reality-gap-v13.yml"
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/reality_gap_v13.py
+      - name: Verify frozen closure plan
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/reality_gap_v13.json"))
+          assert d["blocking_count"]==6
+          assert [x["priority"] for x in d["gaps"][:3]]==["P0","P0","P0"]
+          assert all(x["closure"] for x in d["gaps"])
+          assert d["promotion_policy"]["AFAH"]=="BLOCKED"
+          assert "PLAN_NOT_EVIDENCE" in d["epistemic"]
+          print("REALITY_GAP_V13",d["next_executable"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reality-gap-v13
+          path: artifacts/reality_gap_v13.json
+          if-no-files-found: error
+          retention-days: 30
