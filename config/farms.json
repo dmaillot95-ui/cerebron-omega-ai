@@ -1,5 +1,5 @@
 {
-  "version": "2.10",
+  "version": "2.11",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -705,7 +705,16 @@
       "id": 124,
       "repo": "cerebron-farm-124-spacecraft-gnc-attitude",
       "domain": "spacecraft-gnc-attitude-dynamics",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35847561325,
+        "job_id": 107137291703,
+        "artifact_id": 10743584931,
+        "result_sha256": "f3f120fb078f525cdae29d8c41875e8b4e42ce3b0ed8722aab01d212ec9bbe97",
+        "engine": "python-rigid-body-attitude-canary",
+        "engine_version": "3.12.14",
+        "scope": "analytic-rigid-body-canary-not-hardware-validation"
+      }
     },
     {
       "id": 125,
