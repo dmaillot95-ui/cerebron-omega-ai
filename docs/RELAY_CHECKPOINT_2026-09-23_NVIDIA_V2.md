@@ -110,3 +110,13 @@ Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log
 
 ## HANDOFF RULE
 The next AI must distinguish four levels on every claim: ARCHITECTURE / CONFIGURED / EXECUTED / VALIDATED. If no run/log/artifact/SHA exists, say NON_EXECUTED. If a workflow ran but only a toy/reference case passed, do not promote scientific validity.
+
+## REAL FARM BRIDGE V1 — F123 PILOT — 2026-09-23
+- Pilot farm selected: F123 mission-design-navigation because it already had real orbital-engine evidence and is outside protected Collatz farms.
+- F123 bridge worker added: bridge/worker_v1.py commit fe72d76f0284831604559a011dcc325793694436.
+- F123 bridge workflow added: .github/workflows/control-plane-bridge-v1.yml commit 9ae5f8fe0f31e82696463651d96e749d6007c399. Its first self-trigger on workflow creation failed because no request existed; preserve that failure as orchestration evidence.
+- Real bridge request committed to F123: bridge/requests/bridge_pilot_20260923.json, commit 6264778e9de372471bfc2a9ba9b7caf48612fcfd, input SHA e37e42af4b3aa140d3a2040e210e339adb9797c1554af668a9bbb4c949b8b682.
+- REAL FARM EXECUTION VERIFIED: workflow run 35897592604 SUCCESS; job 107305284787; artifact 10767830799; GitHub artifact digest sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75.
+- Farm result: engine python-stdlib-orbital-mechanics; total Hohmann delta-v 3854.0094595864553 m/s for r1=6,778,000 m and r2=42,164,000 m; output SHA 04c4d7c40b65d7385b563d9b0d663a826e6a98547bc760cb4039da88a6a0e4bf. Scope: two-body circular coplanar reference only; NOT mission validation or physical test.
+- Platform-side fail-closed GitHub bridge client added on feat/cerebron-ai-platform-mvp: platform/farm_bridge.py commit 59c69052bae4bcc6e7ce8c6128f57112d4e3b8a4. It requires CEREBRON_GITHUB_TOKEN at runtime; no secret is hard-coded. F123 is the only allowed pilot and hohmann_reference the only allowed operation in V1.
+- This closes the first proof that a Control Plane-style request can cause a REAL farm repository workflow to execute and return run/job/artifact/SHA evidence. Next: wire farm_bridge.py into mission_engine/server UI and add CI tests without exposing secrets.
