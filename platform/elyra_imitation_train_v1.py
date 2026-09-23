@@ -17,12 +17,12 @@ ROOT.mkdir(parents=True, exist_ok=True)
 
 TRAIN_SEED = 26092301
 M6_SEED = int(os.getenv("ELYRA_M6_SEED", "26092391"))
-TRAIN_SAMPLES = 24000
-M6_SAMPLES = 5000
+TRAIN_SAMPLES = 36000
+M6_SAMPLES = 6000
 EVAL_EPISODES = 120
-EPOCHS = 45
+EPOCHS = 70
 BATCH = 512
-LR = 2e-3
+LR = 1.5e-3
 
 GOAL_X = 28.0
 GOAL_Y = 0.0
@@ -119,13 +119,21 @@ def make_dataset(seed: int, count: int):
     features = []
     targets = []
     dual_max = 0.0
-    for _ in range(count):
+    for i in range(count):
+        # Oversample controller discontinuities so the neural policy learns the
+        # obstacle/slip regime boundaries that matter in closed-loop rollouts.
+        if i % 3 == 0:
+            d = rng.choice([rng.uniform(0.62, 0.98), rng.uniform(2.25, 2.72)])
+            slip = rng.uniform(0.23, 0.34)
+        else:
+            d = rng.uniform(-0.4, 5.0)
+            slip = rng.uniform(0.0, 0.62)
         row = [
             rng.uniform(-math.pi, math.pi),
-            rng.uniform(-0.4, 5.0),
+            d,
             rng.choice([-1.0, 1.0]),
-            float(rng.random() < 0.80),
-            rng.uniform(0.0, 0.62),
+            float(rng.random() < 0.82),
+            slip,
             rng.uniform(0.0, 1.2),
             rng.uniform(0.05, 0.35),
             rng.uniform(0.0, 0.18),
@@ -144,11 +152,13 @@ class Policy(nn.Module):
     def __init__(self):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(8, 48),
+            nn.Linear(8, 64),
             nn.Tanh(),
-            nn.Linear(48, 48),
+            nn.Linear(64, 64),
             nn.Tanh(),
-            nn.Linear(48, 2),
+            nn.Linear(64, 32),
+            nn.Tanh(),
+            nn.Linear(32, 2),
         )
 
     def forward(self, x):
@@ -162,7 +172,12 @@ def action_from_model(model: Policy, features):
     x = torch.tensor([features], dtype=torch.float32)
     with torch.no_grad():
         pred = denorm_actions(model(norm_features(x)))[0]
-    return {"throttle": clamp(float(pred[0]), 0.0, 1.0), "steer": clamp(float(pred[1]), -0.8, 0.8)}
+    raw_throttle = clamp(float(pred[0]), 0.0, 1.0)
+    # The teacher has three discrete drive modes. Quantizing only the actuator
+    # mode prevents tiny regression errors around thresholds from accumulating
+    # into a different trajectory; steering remains fully neural/continuous.
+    throttle = min((0.32, 0.52, 0.78), key=lambda v: abs(v - raw_throttle))
+    return {"throttle": throttle, "steer": clamp(float(pred[1]), -0.8, 0.8)}
 
 
 def terrain(seed):
@@ -330,7 +345,7 @@ def main():
     torch.save({
         "schema":"ELYRA_IMITATION_POLICY_V1",
         "model_state_dict":model.state_dict(),
-        "architecture":{"input":8,"hidden":[48,48],"output":2},
+        "architecture":{"input":8,"hidden":[64,64,32],"output":2},
         "train_dataset_sha256":train_sha,
         "m6_dataset_sha256":m6_sha,
         "train_seed":TRAIN_SEED,
