@@ -1,0 +1,191 @@
+{
+  "version": "1.0",
+  "status": "ROUTING_TAXONOMY_NOT_MATURITY_CLAIM",
+  "registry_sha": "126cd92fe340dad1c99cc41fcb79076ce4175df1",
+  "rules": [
+    "Farm IDs and repositories are immutable under this reorganization.",
+    "Group membership is routing metadata, not evidence of execution.",
+    "F01-F07 Collatz are protected.",
+    "Simulation != test; workflow success != scientific validation.",
+    "F72/AFAH required for validated promotion."
+  ],
+  "groups": [
+    {
+      "id": "G01",
+      "name": "CORE_ORCHESTRATION",
+      "purpose": "routing, agents, orchestration, system control",
+      "farms": [
+        18,
+        60,
+        63,
+        64,
+        72,
+        75,
+        76
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "RESEARCH_EVIDENCE",
+      "purpose": "research, literature, replication, experiment, reality gates",
+      "farms": [
+        8,
+        33,
+        35,
+        37,
+        48,
+        59,
+        69,
+        71
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "MEMORY_LEARNING",
+      "purpose": "memory, compression, knowledge transfer, learning",
+      "farms": [
+        28,
+        40,
+        74
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "COLLATZ",
+      "purpose": "protected Collatz research corpus",
+      "farms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "ROBOTICS_SPACE",
+      "purpose": "humanoid and space robotics",
+      "farms": [
+        77,
+        78,
+        87
+      ]
+    },
+    {
+      "id": "G06",
+      "name": "AVIATION_DRONES",
+      "purpose": "aircraft, propulsion, drones, flight digital twins",
+      "farms": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "id": "G07",
+      "name": "SPACE_SIMULATION",
+      "purpose": "spacecraft, orbital and propulsion simulation",
+      "farms": [
+        85,
+        86
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "GROUND_INDUSTRIAL_SIMULATION",
+      "purpose": "vehicle swarms and construction machinery",
+      "farms": [
+        88,
+        89
+      ]
+    },
+    {
+      "id": "G09",
+      "name": "UNIVERSAL_SIMULATION_DESIGN",
+      "purpose": "co-simulation, multiphysics, optimization, failure and synthetic worlds",
+      "farms": [
+        90,
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "META_INTELLIGENCE",
+      "purpose": "intelligence scaling, benchmarks, causal experiments, autonomous science, invention, grand challenges",
+      "farms": [
+        91,
+        92,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "DOMAIN_SPECIALISTS",
+      "purpose": "existing specialist farms retained in place; routing by registry domain",
+      "farms": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        34,
+        36,
+        38,
+        39,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        61,
+        62,
+        65,
+        66,
+        67,
+        68,
+        70,
+        73
+      ]
+    }
+  ]
+}
