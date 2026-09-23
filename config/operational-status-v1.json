@@ -119,6 +119,16 @@
       "e2e_run_id": 35908555461,
       "status": "SUCCESS",
       "note": "Qwen generative backend real CPU inference verified; logical specialist calls sharing this base remain correlated."
+    },
+    "sigma_huggingface": {
+      "status": "CONNECTED_VERIFIED_PRIVATE",
+      "account": "cerebron-omega",
+      "repo_id": "cerebron-omega/cerebron-sigma-memory",
+      "run_id": 35912062787,
+      "job_id": 107354114117,
+      "artifact_id": 10773831499,
+      "artifact_digest": "sha256:f09eb8bc030e74e4cf1180883e594ed104f2a2fb7d6863503fd95dc4b64c0a5e",
+      "bootstrap_object_sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66"
     }
   },
   "last_verified_code_head": "c654efdea6b0faa03a39bf4854128ae2c488250c",
