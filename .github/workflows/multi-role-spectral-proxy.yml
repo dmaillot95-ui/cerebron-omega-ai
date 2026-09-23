@@ -1,0 +1,20 @@
+name: Multi Role Spectral Compression Batch
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/multi_role_spectral_proxy.py','.github/workflows/multi-role-spectral-proxy.yml']
+permissions:
+  contents: read
+jobs:
+  batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python experiments/multi_role_spectral_proxy.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: multi-role-spectral-proxy
+          path: artifacts/multi_role_spectral_proxy.json
+          retention-days: 30
