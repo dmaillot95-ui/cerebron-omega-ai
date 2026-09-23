@@ -49,7 +49,8 @@ def initialize() -> None:
         CREATE TABLE IF NOT EXISTS missions(
           mission_id TEXT PRIMARY KEY, session_id TEXT NOT NULL, prompt TEXT NOT NULL,
           status TEXT NOT NULL, domain TEXT, created_at REAL NOT NULL, updated_at REAL NOT NULL,
-          input_sha TEXT NOT NULL, output_sha TEXT, result_json TEXT, error TEXT
+          input_sha TEXT NOT NULL, output_sha TEXT, result_json TEXT, error TEXT,
+          owner_id TEXT NOT NULL DEFAULT 'local-owner'
         );
         CREATE TABLE IF NOT EXISTS tasks(
           task_id TEXT PRIMARY KEY, mission_id TEXT NOT NULL, parent_task_id TEXT,
@@ -72,6 +73,9 @@ def initialize() -> None:
           maturity TEXT NOT NULL, created_at REAL NOT NULL
         );
         """)
+        cols = {row["name"] for row in con.execute("PRAGMA table_info(missions)").fetchall()}
+        if "owner_id" not in cols:
+            con.execute("ALTER TABLE missions ADD COLUMN owner_id TEXT NOT NULL DEFAULT 'local-owner'")
 
 
 def emit(mission_id: str, message: str, data=None, level="INFO") -> None:
@@ -235,13 +239,15 @@ def execute(mission_id: str) -> None:
         emit(mission_id, "Mission échouée", {"error": str(exc)}, "ERROR")
 
 
-def create_mission(prompt: str, session_id: str | None = None) -> dict:
+def create_mission(prompt: str, session_id: str | None = None, owner_id: str = "local-owner") -> dict:
     mission_id = f"mis_{uuid.uuid4().hex[:12]}"
     session_id = session_id or f"ses_{uuid.uuid4().hex[:10]}"
     now = time.time()
     with connect() as con:
-        con.execute("INSERT INTO missions VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-                    (mission_id, session_id, prompt, "QUEUED", None, now, now, canonical_sha(prompt), None, None, None))
+        con.execute("""INSERT INTO missions(
+                      mission_id,session_id,prompt,status,domain,created_at,updated_at,input_sha,output_sha,result_json,error,owner_id
+                      ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (mission_id, session_id, prompt, "QUEUED", None, now, now, canonical_sha(prompt), None, None, None, owner_id))
     emit(mission_id, "Mission créée", {"session_id": session_id})
     threading.Thread(target=execute, args=(mission_id,), daemon=True).start()
     return {"mission_id": mission_id, "session_id": session_id, "status": "QUEUED"}

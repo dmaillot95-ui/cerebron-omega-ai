@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 from mission_engine import ARTIFACTS, ROOT, create_mission, rows
 from model_router import catalog, infer
 from farm_bridge import PILOTS
+from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
 STATIC = HERE / "static"
@@ -39,23 +40,47 @@ class Handler(BaseHTTPRequestHandler):
             raise ValueError("payload too large")
         return json.loads(self.rfile.read(size) or b"{}")
 
+    def _principal(self):
+        return authenticate(self.headers.get("Authorization"))
+
+    def _guard(self, permission: str, bucket: str, limit: int):
+        principal = self._principal()
+        require(principal, permission)
+        check_origin(self.headers.get("Origin"), self.headers.get("Host"))
+        rate_limit(principal, bucket, limit)
+        return principal
+
+    def _security_error(self, exc: SecurityError):
+        security_audit(None, self.command + " " + self.path, exc.code)
+        return self._json({"error": exc.code}, exc.status)
+
     def do_POST(self):
+        principal = None
         try:
+            principal = self._guard("mission:create" if self.path == "/api/missions" else "model:infer", "write", 20)
             if self.path == "/api/missions":
                 data = self._body()
                 prompt = str(data.get("prompt", "")).strip()
                 if not prompt:
                     return self._json({"error": "prompt required"}, 400)
-                return self._json(create_mission(prompt, data.get("session_id")), 202)
+                created = create_mission(prompt, data.get("session_id"), principal.user_id)
+                security_audit(principal, "mission:create", "ALLOW", {"mission_id": created["mission_id"]})
+                return self._json(created, 202)
             if self.path == "/api/models/infer":
                 data = self._body()
                 return self._json(infer(str(data.get("text", ""))))
             return self._json({"error": "not found"}, 404)
+        except SecurityError as exc:
+            return self._security_error(exc)
         except (ValueError, json.JSONDecodeError) as exc:
             return self._json({"error": str(exc)}, 400)
 
     def do_GET(self):
         path = urlparse(self.path).path
+        try:
+            principal = self._guard("read", "read", 120)
+        except SecurityError as exc:
+            return self._security_error(exc)
         if path == "/api/control-plane":
             cfg = load_json(ROOT / "config/platform-control-plane-v1.json")
             return self._json({"control_plane": cfg, "runtime": {"bind_policy": "LOOPBACK_ONLY", "farm_count_effect": 0}})
@@ -87,13 +112,20 @@ class Handler(BaseHTTPRequestHandler):
             names = ["CÉRÉBRON", "SAPHEA", "SPIRALION", "ETHERION", "HYPERION", "ASTRION", "METRION", "AFAH", "AÉLYS", "ELYRA", "SAPHEA MICRO"]
             return self._json({"roles": [{"name": n, "type": "LOGICAL_ROLE", "model": None, "status": "UNAVAILABLE"} for n in names]})
         if path == "/api/missions":
-            return self._json({"missions": rows("SELECT * FROM missions ORDER BY created_at DESC LIMIT 50")})
+            if principal.is_admin:
+                missions = rows("SELECT * FROM missions ORDER BY created_at DESC LIMIT 50")
+            else:
+                missions = rows("SELECT * FROM missions WHERE owner_id=? ORDER BY created_at DESC LIMIT 50", (principal.user_id,))
+            return self._json({"missions": missions})
         if path.startswith("/api/missions/"):
             mission_id = path.split("/")[3]
             mission = rows("SELECT * FROM missions WHERE mission_id=?", (mission_id,))
             if not mission:
                 return self._json({"error": "not found"}, 404)
             data = mission[0]
+            if not principal.is_admin and data.get("owner_id") != principal.user_id:
+                security_audit(principal, "mission:read", "DENY", {"mission_id": mission_id})
+                return self._json({"error": "not found"}, 404)
             if data.get("result_json"):
                 data["result"] = json.loads(data.pop("result_json"))
             data["tasks"] = rows("SELECT * FROM tasks WHERE mission_id=? ORDER BY start_time", (mission_id,))
@@ -102,9 +134,19 @@ class Handler(BaseHTTPRequestHandler):
             data["agora"] = rows("SELECT * FROM agora WHERE mission_id=?", (mission_id,))
             return self._json(data)
         if path == "/api/agora":
-            return self._json({"capsules": rows("SELECT * FROM agora ORDER BY created_at DESC LIMIT 100")})
+            if principal.is_admin:
+                capsules = rows("SELECT * FROM agora ORDER BY created_at DESC LIMIT 100")
+            else:
+                capsules = rows("""SELECT a.* FROM agora a JOIN missions m ON m.mission_id=a.mission_id
+                                  WHERE m.owner_id=? ORDER BY a.created_at DESC LIMIT 100""", (principal.user_id,))
+            return self._json({"capsules": capsules})
         if path == "/api/evidence":
-            return self._json({"evidence": rows("SELECT * FROM evidence ORDER BY created_at DESC LIMIT 100")})
+            if principal.is_admin:
+                evidence = rows("SELECT * FROM evidence ORDER BY created_at DESC LIMIT 100")
+            else:
+                evidence = rows("""SELECT e.* FROM evidence e JOIN missions m ON m.mission_id=e.mission_id
+                                 WHERE m.owner_id=? ORDER BY e.created_at DESC LIMIT 100""", (principal.user_id,))
+            return self._json({"evidence": evidence})
         if path == "/api/memory":
             cfg = load_json(ROOT / "config/memory-fabric-v1.json")
             return self._json({"config": cfg, "levels": [
@@ -117,6 +159,13 @@ class Handler(BaseHTTPRequestHandler):
             target = ARTIFACTS / name
             if not target.exists() or target.parent != ARTIFACTS:
                 return self._json({"error": "not found"}, 404)
+            if not principal.is_admin:
+                allowed = rows("""SELECT e.evidence_id FROM evidence e JOIN missions m ON m.mission_id=e.mission_id
+                                 WHERE m.owner_id=? AND e.source LIKE ? LIMIT 1""",
+                               (principal.user_id, "%" + name))
+                if not allowed:
+                    security_audit(principal, "artifact:read", "DENY", {"artifact": name})
+                    return self._json({"error": "not found"}, 404)
             payload = target.read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")

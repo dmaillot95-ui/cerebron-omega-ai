@@ -12,6 +12,7 @@ sys.path.insert(0, str(PLATFORM))
 from mission_engine import ARTIFACTS, create_mission, rows, sha256_bytes
 from model_router import MODEL_REVISION, infer
 from farm_bridge import FarmBridgeError, PILOTS, submit
+from security import SecurityError, authenticate, check_origin, rate_limit, reset_rate_limits, require
 
 
 class PlatformTests(unittest.TestCase):
@@ -72,6 +73,50 @@ class PlatformTests(unittest.TestCase):
         bridge_tasks = rows("SELECT * FROM tasks WHERE mission_id=? AND farm_id=123", (created["mission_id"],))
         self.assertEqual(len(bridge_tasks), 1)
         self.assertEqual(bridge_tasks[0]["status"], "ROUTED_ONLY")
+
+
+    def test_security_local_mode_is_admin(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_RBAC_TOKENS_JSON": ""}, clear=False):
+            principal = authenticate(None)
+        self.assertTrue(principal.is_admin)
+        require(principal, "mission:create")
+
+    def test_security_token_hash_and_rbac(self):
+        import hashlib
+        token = "unit-test-secret"
+        cfg = json.dumps([{
+            "user_id": "alice",
+            "token_sha256": hashlib.sha256(token.encode()).hexdigest(),
+            "roles": ["viewer"],
+        }])
+        with mock.patch.dict(os.environ, {"CEREBRON_RBAC_TOKENS_JSON": cfg}, clear=False):
+            principal = authenticate("Bearer " + token)
+            self.assertEqual(principal.user_id, "alice")
+            require(principal, "read")
+            with self.assertRaises(SecurityError):
+                require(principal, "mission:create")
+            with self.assertRaises(SecurityError):
+                authenticate("Bearer wrong")
+
+    def test_security_origin_and_rate_limit_fail_closed(self):
+        check_origin("http://127.0.0.1:8787", "127.0.0.1:8787")
+        with self.assertRaises(SecurityError):
+            check_origin("https://evil.example", "127.0.0.1:8787")
+        reset_rate_limits()
+        with mock.patch.dict(os.environ, {"CEREBRON_RBAC_TOKENS_JSON": ""}, clear=False):
+            principal = authenticate(None)
+        rate_limit(principal, "test", 1, 60)
+        with self.assertRaises(SecurityError):
+            rate_limit(principal, "test", 1, 60)
+
+    def test_mission_owner_is_persisted(self):
+        created = create_mission("simple request", owner_id="owner-test")
+        for _ in range(100):
+            mission = rows("SELECT * FROM missions WHERE mission_id=?", (created["mission_id"],))[0]
+            if mission["status"] in {"COMPLETED", "FAILED"}:
+                break
+            time.sleep(0.03)
+        self.assertEqual(mission["owner_id"], "owner-test")
 
 
 if __name__ == "__main__":
