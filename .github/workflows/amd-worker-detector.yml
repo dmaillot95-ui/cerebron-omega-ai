@@ -1,0 +1,19 @@
+name: AMD Worker Detector
+on:
+  workflow_dispatch:
+  push:
+    paths: ['runtime/amd_worker_detector.py','.github/workflows/amd-worker-detector.yml']
+permissions:
+  contents: read
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python runtime/amd_worker_detector.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amd-worker-detector
+          path: artifacts/amd_worker_detector.json
