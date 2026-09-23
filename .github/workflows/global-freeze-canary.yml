@@ -1,0 +1,49 @@
+name: CEREBRON Global Freeze Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/global_freeze.py"
+      - ".github/workflows/global-freeze-canary.yml"
+permissions:
+  contents: read
+jobs:
+  freeze-resume-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Freeze
+        run: python runtime/global_freeze.py freeze
+      - name: Verify frozen
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/global_state.json"))
+          assert d["state"]=="FROZEN" and d["read_only"] is True
+          assert all(v is False for v in d["writes"].values())
+          assert d["checkpoint_sha256"]
+          print("GLOBAL_FREEZE_VERIFIED",d["checkpoint_sha256"])
+          PY
+      - name: Resume
+        run: python runtime/global_freeze.py resume
+      - name: Verify resumed
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/global_state.json"))
+          assert d["state"]=="RUN" and d["read_only"] is False
+          assert all(v is True for v in d["writes"].values())
+          assert d["resume_from_checkpoint_sha256"]
+          print("GLOBAL_RESUME_VERIFIED",d["resume_from_checkpoint_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-global-freeze-canary
+          path: |
+            runtime/global_state.json
+            artifacts/global_freeze_state.json
+          if-no-files-found: error
+          retention-days: 7
