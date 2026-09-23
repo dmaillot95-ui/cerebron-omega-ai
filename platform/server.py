@@ -14,6 +14,7 @@ from model_router import catalog, infer
 from farm_bridge import PILOTS
 from generative_backend import GenerativeBackendError, generate as generative_generate
 from coalition import execute as coalition_execute, registry as coalition_registry
+from role_runtime import runtime_roles
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -143,8 +144,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/saphea-micro":
             return self._json(coalition_registry())
         if path == "/api/roles":
-            names = ["CÉRÉBRON", "SAPHEA", "SPIRALION", "ETHERION", "HYPERION", "ASTRION", "METRION", "AFAH", "AÉLYS", "ELYRA", "SAPHEA MICRO"]
-            return self._json({"roles": [{"name": n, "type": "LOGICAL_ROLE", "model": None, "status": "UNAVAILABLE"} for n in names]})
+            return self._json(runtime_roles())
         if path == "/api/missions":
             if principal.is_admin:
                 missions = rows("SELECT * FROM missions ORDER BY created_at DESC LIMIT 50")
@@ -186,7 +186,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"config": cfg, "levels": [
                 {"id": "M0", "name": "EPHEMERAL", "status": "ACTIVE"}, {"id": "M1", "name": "TRACE", "status": "ACTIVE"},
                 {"id": "M2", "name": "REPLAY", "status": "CONFIGURED"}, {"id": "M3", "name": "WARM", "status": "CONFIGURED"},
-                {"id": "M4", "name": "GOLD", "status": "GATED"}, {"id": "M5", "name": "MODEL", "status": "UNAVAILABLE"},
+                {"id": "M4", "name": "GOLD", "status": "GATED"}, {"id": "M5", "name": "MODEL", "status": "SCOPED_ELYRA_MODEL_ARTIFACT_VERIFIED"},
                 {"id": "M6", "name": "COLD BENCHMARK", "status": "CONFIGURED"}, {"id": "M7", "name": "EVIDENCE", "status": "ACTIVE"}]})
         if path.startswith("/api/artifacts/"):
             name = pathlib.Path(path).name
