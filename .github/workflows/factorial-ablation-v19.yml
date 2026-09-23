@@ -1,0 +1,35 @@
+name: METRION Factorial Ablation V19
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/factorial_ablation_v19.py"
+      - ".github/workflows/factorial-ablation-v19.yml"
+permissions:
+  contents: read
+jobs:
+  factorial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/factorial_ablation_v19.py
+      - name: Verify factorial decomposition
+        run: |
+          python - <<'PY'
+          import json,math
+          d=json.load(open("artifacts/factorial_ablation_v19.json"))
+          assert set(d["design"])=={"A_fixed_noJ2","B_dynamic_noJ2","C_fixed_J2","D_dynamic_J2"}
+          for m,e in d["effects"].items():
+              assert all(math.isfinite(v) for v in e.values())
+          assert "INTERACTION_REPORTED" in d["epistemic"]
+          assert d["reality_gap"]=="G02_DYNAMICS_FIDELITY_PARTIAL"
+          print("FACTORIAL_V19",d["effects"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: factorial-ablation-v19
+          path: artifacts/factorial_ablation_v19.json
+          if-no-files-found: error
+          retention-days: 14
