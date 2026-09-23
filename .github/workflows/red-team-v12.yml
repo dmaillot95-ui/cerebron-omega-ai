@@ -1,0 +1,35 @@
+name: F72 Red Team V12
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/red_team_v12.py"
+      - ".github/workflows/red-team-v12.yml"
+permissions:
+  contents: read
+jobs:
+  red-team:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/red_team_v12.py
+      - name: F72 blocker gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/red_team_v12.json"))
+          assert len(d["tests"])==10
+          assert sum(d["counts"].values())==10
+          assert d["decision"]=="BLOCK_PROMOTION"
+          assert len(d["blocking_findings"])>0
+          assert "NO_NEW_PHYSICAL_EVIDENCE" in d["epistemic"]
+          print("RED_TEAM_V12",d["counts"],d["blocking_findings"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: red-team-v12
+          path: artifacts/red_team_v12.json
+          if-no-files-found: error
+          retention-days: 14
