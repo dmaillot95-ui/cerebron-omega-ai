@@ -1,0 +1,47 @@
+name: SIGMA Council and Hugging Face Probe
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/sigma_manager.py'
+      - 'platform/huggingface_memory.py'
+      - 'platform/server.py'
+      - 'config/sigma-ai-v1.json'
+      - 'config/sigma-executive-council-v1.json'
+      - 'platform/tests/test_sigma_manager.py'
+      - 'platform/tests/test_huggingface_memory.py'
+      - '.github/workflows/platform-sigma-hf-council-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      CEREBRON_HF_SIGMA_REPO: ${{ vars.CEREBRON_HF_SIGMA_REPO }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Hugging Face client
+        run: python -m pip install --disable-pip-version-check --no-cache-dir huggingface_hub==0.35.3
+      - name: Run SIGMA and HF connector tests
+        run: |
+          python -m unittest discover -s platform/tests -p 'test_sigma_manager.py' -v
+          python -m unittest discover -s platform/tests -p 'test_huggingface_memory.py' -v
+      - name: Probe Hugging Face connection without exposing token
+        run: |
+          PYTHONPATH=platform python - <<'PY'
+          import json
+          import huggingface_memory as hf
+          result=hf.probe()
+          safe={k:v for k,v in result.items() if k not in {"token"}}
+          print("SIGMA_HF_PROBE",json.dumps(safe,sort_keys=True))
+          if result["probe"]=="NOT_EXECUTED":
+              print("SIGMA_HF_CONNECTION_NOT_YET_ACTIVE")
+          else:
+              print("SIGMA_HF_AUTHENTICATION_CONFIRMED")
+          PY

@@ -16,6 +16,7 @@ from generative_backend import GenerativeBackendError, generate as generative_ge
 from coalition import execute as coalition_execute, registry as coalition_registry
 from role_runtime import runtime_roles
 from elyra_policy_runtime import ElyraPolicyError, infer as elyra_infer, status as elyra_status
+from sigma_manager import execute as sigma_execute, status as sigma_status
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -108,6 +109,18 @@ class Handler(BaseHTTPRequestHandler):
                     "weights_sha": result["weights_sha256"],
                 })
                 return self._json(result)
+            if self.path == "/api/sigma/execute":
+                data = self._body()
+                prompt = str(data.get("prompt", "")).strip()
+                if not prompt:
+                    return self._json({"error": "prompt required"}, 400)
+                result = sigma_execute(prompt, bool(data.get("full_council", False)))
+                security_audit(principal, "sigma:execute", "ALLOW", {
+                    "mode": result["mode"],
+                    "roles": result["selected_roles"],
+                    "result_sha256": result["result_sha256"],
+                })
+                return self._json(result)
             if self.path == "/api/coalition/execute":
                 data = self._body()
                 prompt = str(data.get("prompt", "")).strip()
@@ -178,6 +191,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(coalition_registry())
         if path == "/api/roles":
             return self._json(runtime_roles())
+        if path == "/api/sigma/status":
+            return self._json(sigma_status())
         if path == "/api/missions":
             if principal.is_admin:
                 missions = rows("SELECT * FROM missions ORDER BY created_at DESC LIMIT 50")

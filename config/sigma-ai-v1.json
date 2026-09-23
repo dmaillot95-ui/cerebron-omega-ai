@@ -130,5 +130,35 @@
     "direct_parameter_union": false,
     "explanation": "SIGMA may query multiple models and tools during inference, but heterogeneous neural parameters are not concatenated or averaged into one network. Their validated outputs can supervise SIGMA training.",
     "compatible_weight_merge": "ONLY_AFTER_ARCHITECTURE_LINEAGE_COMPATIBILITY_CHECK_AND_ABLATION"
+  },
+  "platform_management": {
+    "status": "CONFIGURED_EXECUTABLE_WHEN_GENERATIVE_BACKEND_ENABLED",
+    "endpoints": [
+      "GET /api/sigma/status",
+      "POST /api/sigma/execute"
+    ],
+    "council_config": "config/sigma-executive-council-v1.json",
+    "council_seats": 8,
+    "default_mode": "MINIMAL_USEFUL_COALITION",
+    "full_mode": "FULL_COUNCIL_8",
+    "general_neural_independence_current": 1
+  },
+  "huggingface_connector": {
+    "implementation": "platform/huggingface_memory.py",
+    "status": "CREDENTIAL_PROBE_REQUIRED",
+    "token_env": [
+      "HF_TOKEN",
+      "HUGGING_FACE_HUB_TOKEN"
+    ],
+    "repo_env": "CEREBRON_HF_SIGMA_REPO",
+    "write_classes": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M7"
+    ],
+    "training_forbidden_class": "M6"
   }
 }

@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_SIGMA_EXECUTIVE_COUNCIL_V1",
+  "name": "SIGMA_EXECUTIVE_COUNCIL",
+  "manager": "SIGMA",
+  "orchestrator": "CEREBRON",
+  "seat_count": 8,
+  "selection_policy": "MINIMAL_USEFUL_COALITION_BY_DEFAULT_FULL_COUNCIL_ON_REQUEST",
+  "delegates": [
+    {
+      "seat": "S1",
+      "role": "SAPHEA",
+      "mission": "specialist execution and capability selection",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S2",
+      "role": "SPIRALION",
+      "mission": "checkpoint continuity and negative memory",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S3",
+      "role": "ETHERION",
+      "mission": "science mathematics and difficult R&D",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S4",
+      "role": "HYPERION",
+      "mission": "alternative hypotheses and divergence",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S5",
+      "role": "ASTRION",
+      "mission": "space and aerospace",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S6",
+      "role": "METRION",
+      "mission": "engineering calculation simulation validation",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S7",
+      "role": "AFAH",
+      "mission": "epistemic audit and claim ceiling",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    },
+    {
+      "seat": "S8",
+      "role": "AELYS",
+      "mission": "human dialogue coordination and decision presentation",
+      "neural_independence": "CORRELATED_IF_SHARED_QWEN"
+    }
+  ],
+  "non_voting_capabilities": [
+    {
+      "role": "ELYRA",
+      "type": "TRAINED_EMBODIED_POLICY",
+      "use": "simulation/action specialist"
+    },
+    {
+      "role": "SAPHEA_MICRO",
+      "type": "SPECIALIST_POPULATION",
+      "use": "tool/specialist execution"
+    }
+  ],
+  "rules": [
+    "ROLE_NAME_NE_INDEPENDENT_MODEL",
+    "SHARED_BASE_MODEL_COUNTS_AS_ONE_NEURAL_DEPENDENCY",
+    "FULL_COUNCIL_DOES_NOT_EQUAL_EIGHT_INDEPENDENT_PROOFS",
+    "MINIMAL_USEFUL_COALITION_DEFAULT",
+    "AFAH_CAN_LIMIT_OR_REJECT_BUT_IS_NOT_PROOF_BY_AUTHORITY"
+  ]
+}
