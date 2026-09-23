@@ -1,0 +1,37 @@
+name: F72 Review Packet V32
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - run: python runtime/solar_interpolation_v29.py
+      - run: python benchmarks/occ06c_solar_ablation_v30.py
+      - run: python runtime/frozen_acceptance_v31.py
+      - run: python runtime/f72_review_packet_v32.py
+      - name: Packet integrity gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/f72_review_packet_v32.json"))
+          assert len(d["artifacts"])==4
+          assert not d["missing"]
+          assert "PACKET_ASSEMBLY_NOT_INDEPENDENT_EVIDENCE" in d["epistemic"]
+          assert d["afah"]=="PENDING"
+          if d["candidate_for_f72_review"]:
+              assert d["decision"]=="F72_REVIEW_PACKET_READY"
+          else:
+              assert d["decision"]=="F72_BLOCKED"
+          print("F72_PACKET_V32",d["decision"],d["contradictions"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: f72-review-packet-v32
+          path: artifacts/
+          retention-days: 30
