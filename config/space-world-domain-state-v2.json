@@ -1,0 +1,170 @@
+{
+  "version": "SPACE_WORLD_DOMAIN_STATE_V2",
+  "status": "REDUCED_MODEL_CONTRACT_NOT_PHYSICALLY_CALIBRATED",
+  "cycle_order": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "states": {
+    "101": {
+      "produces": [
+        "environment"
+      ],
+      "required": [
+        "gravity_m_s2",
+        "solar_factor",
+        "terrain_cells"
+      ]
+    },
+    "102": {
+      "consumes": [
+        "environment"
+      ],
+      "produces": [
+        "construction"
+      ],
+      "required": [
+        "modules_planned",
+        "construction_units",
+        "estimated_build_hours"
+      ]
+    },
+    "103": {
+      "consumes": [
+        "environment",
+        "construction"
+      ],
+      "produces": [
+        "lunar_city"
+      ],
+      "required": [
+        "habitats",
+        "population_capacity",
+        "power_demand_kw"
+      ]
+    },
+    "104": {
+      "consumes": [
+        "environment",
+        "construction"
+      ],
+      "produces": [
+        "mars_city"
+      ],
+      "required": [
+        "habitats",
+        "population_capacity",
+        "power_demand_kw"
+      ]
+    },
+    "105": {
+      "consumes": [
+        "lunar_city",
+        "mars_city"
+      ],
+      "produces": [
+        "industry"
+      ],
+      "required": [
+        "feedstock_kg",
+        "product_kg",
+        "waste_kg"
+      ]
+    },
+    "106": {
+      "consumes": [
+        "industry",
+        "lunar_city",
+        "mars_city"
+      ],
+      "produces": [
+        "energy"
+      ],
+      "required": [
+        "generation_kw",
+        "load_kw",
+        "reserve_kw"
+      ]
+    },
+    "107": {
+      "consumes": [
+        "construction",
+        "industry",
+        "energy"
+      ],
+      "produces": [
+        "robots"
+      ],
+      "required": [
+        "robots",
+        "available",
+        "maintenance"
+      ]
+    },
+    "108": {
+      "consumes": [
+        "environment",
+        "energy",
+        "robots"
+      ],
+      "produces": [
+        "resources"
+      ],
+      "required": [
+        "excavated_kg",
+        "usable_kg",
+        "tailings_kg"
+      ]
+    },
+    "109": {
+      "consumes": [
+        "industry",
+        "robots",
+        "resources"
+      ],
+      "produces": [
+        "logistics"
+      ],
+      "required": [
+        "inventory_kg",
+        "allocated_kg",
+        "reserve_kg"
+      ]
+    },
+    "110": {
+      "consumes": [
+        "lunar_city",
+        "mars_city",
+        "industry",
+        "energy",
+        "robots",
+        "resources",
+        "logistics"
+      ],
+      "produces": [
+        "world_checkpoint"
+      ],
+      "required": [
+        "decision",
+        "residuals",
+        "next_requirements"
+      ]
+    }
+  },
+  "invariants": [
+    "feedstock_kg=product_kg+waste_kg",
+    "generation_kw=load_kw+reserve_kw",
+    "robots=available+maintenance",
+    "excavated_kg=usable_kg+tailings_kg",
+    "inventory_kg=allocated_kg+reserve_kg"
+  ],
+  "promotion": "No physical/scientific claim before reference cases, calibration, F72 and AFAH."
+}
