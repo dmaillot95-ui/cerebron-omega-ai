@@ -525,6 +525,22 @@
         "result_sha256": "0cd013b36efb4aa34623baf04d6b32376aab4cd8d0d5f62b23adff5583d5b543",
         "status": "IMPORT_OK",
         "scope": "RUNTIME_ONLY_NOT_GRANULAR_MODEL_OR_VALIDATION"
+      },
+      "state": "BENCHMARKED",
+      "verified_native_contact": {
+        "farm": 139,
+        "run_id": 35869399793,
+        "job_id": 107209199876,
+        "artifact_id": 10754476799,
+        "version": "1.6.0",
+        "solver": "SolverXPBD",
+        "collision": "Newton CollisionPipeline",
+        "steps": 720,
+        "max_rigid_contacts": 1,
+        "rest_height_abs_error_m": 1.7881393449270533e-9,
+        "result_sha256": "f82f3932548c022715ba1536def08b01a6eb0fd5f4a4bd2f03104cbdcb7ba4e8",
+        "status": "NATIVE_CONTACT_REFERENCE_OK",
+        "scope": "REAL_NEWTON_RIGID_CONTACT_DYNAMICS_REFERENCE_NOT_REGOLITH_GRANULAR_CALIBRATION_OR_PHYSICAL_VALIDATION"
       }
     },
     {
