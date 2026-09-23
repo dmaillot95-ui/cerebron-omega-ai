@@ -1,0 +1,47 @@
+{
+  "schema": "CEREBRON_MODE_V1",
+  "status": "MANDATORY_FOR_PLATFORM_CORE_ROLES",
+  "applies_to": [
+    "CEREBRON",
+    "SIGMA",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO"
+  ],
+  "pipeline": [
+    "LOAD_LAST_VERIFIED_CHECKPOINT",
+    "CLASSIFY_MISSION",
+    "SELECT_MINIMAL_USEFUL_COALITION",
+    "RETRIEVE_RELEVANT_HF_PRIVATE_MEMORY",
+    "EXECUTE_REAL_MODELS_FARMS_TOOLS",
+    "AUDIT",
+    "COUNTER_AUDIT_OR_RED_TEAM_IF_REQUIRED",
+    "FUSE_WITHOUT_FALSE_CONSENSUS",
+    "WRITE_EVIDENCE_AND_POINTERS",
+    "PERSIST_VALIDATED_MEMORY_TO_HF_PRIVATE",
+    "RETURN_WITH_CLAIM_CEILING"
+  ],
+  "invariants": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "MEMORY!=NEURAL_LEARNING",
+    "PROMPT!=TRAINING",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_VALIDATION",
+    "SAME_LINEAGE!=INDEPENDENT_EVIDENCE",
+    "GITHUB_CONTROL_PLANE_NOT_BULK_MEMORY"
+  ],
+  "memory": {
+    "common_private_repo": "cerebron-omega/cerebron-private-memory",
+    "sigma_private_repo": "cerebron-omega/cerebron-sigma-memory",
+    "github_role": "CODE_CONFIG_SHA_POINTERS_SMALL_RECEIPTS"
+  }
+}
