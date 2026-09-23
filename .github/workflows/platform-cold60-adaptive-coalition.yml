@@ -1,0 +1,32 @@
+name: CEREBRON Cold 60 Adaptive Coalition
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/cold60_adaptive_coalition.py'
+      - '.github/workflows/platform-cold60-adaptive-coalition.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  coalition-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Run sealed M6 adaptive-coalition benchmark
+        run: python platform/cold60_adaptive_coalition.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-cold60-adaptive-coalition-v1
+          path: platform/artifacts/cold60-adaptive-coalition-v1.json
