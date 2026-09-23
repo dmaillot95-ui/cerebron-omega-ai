@@ -121,9 +121,13 @@ class Handler(BaseHTTPRequestHandler):
             farms = load_json(ROOT / "config/farms.json")["farms"]
             token_ready = bool(os.getenv("CEREBRON_GITHUB_TOKEN", "").strip())
             bridge_state = "READY" if token_ready else "CONFIGURED_TOKEN_REQUIRED"
+            op = load_json(ROOT / "config/operational-status-v1.json")
             return self._json({"status": "healthy", "time": time.time(), "farm_count": len(farms),
                                "model": catalog()[0], "database": "sqlite", "cost_policy": "ZERO_PAID_OVERAGE_DEFAULT",
-                               "farm_bridge": bridge_state})
+                               "farm_bridge": bridge_state, "operational_status": op["status"],
+                               "remote_deployment": op["public_remote_deployment"]})
+        if path == "/api/gates":
+            return self._json(load_json(ROOT / "config/operational-status-v1.json"))
         if path == "/api/farms":
             farms = load_json(ROOT / "config/farms.json")["farms"]
             token_ready = bool(os.getenv("CEREBRON_GITHUB_TOKEN", "").strip())
@@ -218,7 +222,7 @@ def main():
     parser.add_argument("--port", type=int, default=8787)
     args = parser.parse_args()
     if args.host not in {"127.0.0.1", "localhost", "::1"}:
-        raise SystemExit("REMOTE_BIND_BLOCKED: authentication/RBAC/isolation are not implemented; use loopback only")
+        raise SystemExit("REMOTE_BIND_BLOCKED: remote deployment security gate is not satisfied; use loopback only")
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"CÉRÉBRON AI Platform: http://{args.host}:{args.port}")
     server.serve_forever()

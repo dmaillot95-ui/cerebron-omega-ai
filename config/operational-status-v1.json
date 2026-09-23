@@ -1,0 +1,99 @@
+{
+  "schema": "CEREBRON_OPERATIONAL_STATUS_V1",
+  "status": "OPERATIONAL_SCOPED_LOCAL",
+  "terminology": "INTELLIGENCE_COLLECTIVE_ORCHESTREE_A_CAPACITE_MESUREE",
+  "farm_cap": 144,
+  "control_plane_is_farm": false,
+  "public_remote_deployment": "BLOCKED",
+  "gates": {
+    "G0": {
+      "status": "PASS",
+      "scope": "144-farm inventory"
+    },
+    "G1": {
+      "status": "PASS",
+      "scope": "real workflow/model/tool execution"
+    },
+    "G2": {
+      "status": "PASS_SCOPED",
+      "scope": "F139 software/run reproduction"
+    },
+    "G3": {
+      "status": "PASS_SCOPED",
+      "scope": "bounded specialist benchmarks"
+    },
+    "G4": {
+      "status": "PASS_SCOPED_SEMANTIC_TRANSFER",
+      "scope": "semantic holdout V5"
+    },
+    "G5": {
+      "status": "PASS_SCOPED",
+      "scope": "F139 experiment-selection M4 GOLD"
+    },
+    "G6": {
+      "status": "PASS_SCOPED_ELYRA",
+      "scope": "real synthetic-policy neural weight training"
+    },
+    "G7": {
+      "status": "PASS_SCOPED_ELYRA",
+      "scope": "post-M6 promotion plus shifted-distribution audit"
+    },
+    "G8": {
+      "status": "PASS_SCOPED_INTERNAL",
+      "scope": "bounded internal autonomy with human external-action gate"
+    },
+    "G9": {
+      "status": "PASS_SCOPED_GITHUB",
+      "scope": "authorized GitHub actions only"
+    },
+    "G10": {
+      "status": "PASS_SCOPED_HOLDOUT_ONLY",
+      "scope": "semantic benchmark, not general superiority"
+    },
+    "G11": {
+      "status": "OPEN",
+      "scope": "no external superintelligence evaluation"
+    }
+  },
+  "evidence": {
+    "farm_bridge": {
+      "run_id": 35897592604,
+      "job_id": 107305284787,
+      "artifact_id": 10767830799,
+      "artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75"
+    },
+    "semantic_v5": {
+      "run_id": 35905965573,
+      "job_id": 107333615532,
+      "artifact_id": 10770908796,
+      "artifact_digest": "sha256:639eb214cfdbb8513f0076b2e3c3980b88887df83c7aa4649e244a74d6cb4f2b",
+      "baseline_score": 17,
+      "adaptive_score": 54,
+      "tool_hits": 50,
+      "domains_improved": 6,
+      "result_sha256": "ff83c11102ed1724194c17dbf30a1a5869bf34e06b794d4f53ee65b2ea686eb5"
+    },
+    "elyra_neural": {
+      "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+      "promotion_run_id": 35904950828,
+      "independent_audit_run_id": 35905952407,
+      "independent_audit_artifact_id": 10771082547,
+      "independent_audit_digest": "sha256:76366e5db41d992d044b4aa3111b43b50368c75eac3d767378ef32c83740f91d",
+      "shifted_success_trained": 0.5083333333333333,
+      "shifted_success_teacher": 0.525,
+      "shifted_success_random": 0
+    },
+    "bounded_autonomy": {
+      "run_id": 35905066201,
+      "job_id": 107330573098,
+      "artifact_id": 10770652252,
+      "artifact_digest": "sha256:2c2e4f3924ab492ff8d7098625bd254d6806522c6f17545b8195e3c118bae39e"
+    },
+    "remote_security": {
+      "run_id": 35906185960,
+      "artifact_id": 10770579187,
+      "artifact_digest": "sha256:6e8b8588592b7bbc5a5948948d79016818761828f14e14885671bbf8f298d7c9",
+      "status": "REMOTE_DEPLOYMENT_BLOCKED_AS_DESIGNED"
+    }
+  }
+}
