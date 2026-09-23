@@ -1,5 +1,5 @@
 {
-  "version": "2.01",
+  "version": "2.02",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -492,6 +492,66 @@
       "id": 90,
       "repo": "cerebron-farm-90-universal-multi-agent-simulation",
       "domain": "universal-multi-agent-co-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 91,
+      "repo": "cerebron-farm-91-intelligence-scaling-emergence-simulator",
+      "domain": "intelligence-scaling-emergence-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 92,
+      "repo": "cerebron-farm-92-benchmark-capability-lab",
+      "domain": "cold-benchmark-capability-transfer-ablation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 93,
+      "repo": "cerebron-farm-93-multiphysics-coupling",
+      "domain": "multiphysics-coupling-co-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 94,
+      "repo": "cerebron-farm-94-optimization-design-search",
+      "domain": "multiobjective-optimization-design-search",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 95,
+      "repo": "cerebron-farm-95-failure-accident-simulator",
+      "domain": "failure-cascade-degraded-mode-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 96,
+      "repo": "cerebron-farm-96-synthetic-world-generator",
+      "domain": "synthetic-world-scenario-generation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 97,
+      "repo": "cerebron-farm-97-causal-experiment-lab",
+      "domain": "causal-intervention-experiment-design",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 98,
+      "repo": "cerebron-farm-98-autonomous-scientist",
+      "domain": "autonomous-scientific-loop",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 99,
+      "repo": "cerebron-farm-99-invention-patent-discovery",
+      "domain": "invention-prior-art-patent-candidate-discovery",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 100,
+      "repo": "cerebron-farm-100-grand-challenge-arena",
+      "domain": "grand-challenge-generalization-arena",
       "status": "SCAFFOLDED"
     }
   ]
