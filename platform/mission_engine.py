@@ -12,6 +12,7 @@ import uuid
 from model_router import infer
 from farm_bridge import FarmBridgeError, collect as farm_collect, submit as farm_submit
 from generative_backend import GenerativeBackendError, generate as generative_generate, status as generative_status
+from coalition_tools import execute as coalition_execute
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PLATFORM = pathlib.Path(__file__).resolve().parent
@@ -177,6 +178,67 @@ def _model_task(mission_id: str, prompt: str) -> dict:
         return {"status": "NON_EXECUTED", "error": str(exc)}
 
 
+def _coalition_task(mission_id: str, prompt: str) -> dict:
+    parent_id = f"task_{uuid.uuid4().hex[:12]}"
+    start = time.time()
+    input_sha = canonical_sha({"mission_id": mission_id, "mode": "adaptive-coalition-tools-v2", "prompt": prompt})
+    with connect() as con:
+        con.execute("""INSERT INTO tasks(task_id,mission_id,farm_id,role,worker,model,tool,status,start_time,input_sha,cost)
+                       VALUES(?,?,?,?,?,?,?,?,?,?,0)""",
+                    (parent_id, mission_id, None, "CEREBRON_COALITION", "adaptive-coalition-v2",
+                     None, "SEARCH_GENERATE_VERIFY", "RUNNING", start, input_sha))
+    emit(mission_id, "Coalition adaptative démarrée", {"task_id": parent_id})
+    try:
+        output = coalition_execute(prompt)
+        output_sha = canonical_sha(output)
+        workers = output.get("workers", {})
+        with connect() as con:
+            for unit_id, payload in workers.items():
+                child_id = f"task_{uuid.uuid4().hex[:12]}"
+                raw_status = str(payload.get("status", "EXECUTED"))
+                status = "COMPLETED" if raw_status in {"EXECUTED", "MODEL_EXECUTED"} else raw_status
+                worker_name = str(payload.get("method") or payload.get("runtime") or payload.get("unit") or "logical-worker")
+                model_name = payload.get("model_id")
+                tool_name = payload.get("method")
+                child_sha = canonical_sha(payload)
+                con.execute("""INSERT INTO tasks(
+                               task_id,mission_id,parent_task_id,farm_id,role,worker,model,tool,status,
+                               start_time,end_time,input_sha,output_sha,evidence,cost
+                               ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)""",
+                            (child_id, mission_id, parent_id, None, unit_id, worker_name, model_name, tool_name,
+                             status, start, time.time(), input_sha, child_sha,
+                             json.dumps(payload, ensure_ascii=False)))
+            con.execute("UPDATE tasks SET status=?,end_time=?,output_sha=?,evidence=? WHERE task_id=?",
+                        ("COMPLETED" if output.get("status") == "COMPLETED" else output.get("status", "ROUTED_ONLY"),
+                         time.time(), output_sha, json.dumps(output, ensure_ascii=False), parent_id))
+
+        if output.get("execution_mode") == "DETERMINISTIC_SPECIALIST_TOOL":
+            artifact = ARTIFACTS / f"{mission_id}-coalition-tool.json"
+            payload = json.dumps(output, ensure_ascii=False, indent=2).encode()
+            artifact.write_bytes(payload)
+            artifact_sha = sha256_bytes(payload)
+            with connect() as con:
+                con.execute("INSERT INTO evidence VALUES(?,?,?,?,?,?,?,?)",
+                            (f"ev_{uuid.uuid4().hex[:12]}", mission_id, "DETERMINISTIC_TOOL_EXECUTION",
+                             str(artifact.relative_to(PLATFORM)), artifact_sha,
+                             json.dumps({"claim_ceiling": output.get("claim_ceiling"),
+                                         "selected_units": output.get("plan", {}).get("selected_units", [])},
+                                        ensure_ascii=False),
+                             "E2_COMPUTATION", time.time()))
+            output["artifact"] = {"url": f"/api/artifacts/{artifact.name}", "sha": artifact_sha}
+
+        emit(mission_id, "Coalition adaptative terminée",
+             {"task_id": parent_id, "status": output.get("status"), "sha": output_sha,
+              "selected_units": output.get("plan", {}).get("selected_units", [])})
+        return output
+    except Exception as exc:
+        with connect() as con:
+            con.execute("UPDATE tasks SET status='FAILED',end_time=?,errors=? WHERE task_id=?",
+                        (time.time(), str(exc), parent_id))
+        emit(mission_id, "Coalition adaptative en échec", {"task_id": parent_id, "error": str(exc)}, "ERROR")
+        raise
+
+
 def rover_calculation() -> dict:
     mass_kg = 180.0
     slope_deg = 15.0
@@ -254,24 +316,20 @@ def execute(mission_id: str) -> None:
                              f"mission:{mission_id}", lesson_sha, time.time()))
             result["artifact"] = {"url": f"/api/artifacts/{artifact.name}", "sha": artifact_sha}
         else:
-            gen_status = generative_status()
-            if gen_status["status"] == "ACTIVE_WORKER":
-                generation = _model_task(mission_id, mission["prompt"])
-                result = {
-                    "route": route,
-                    "farms": farms,
-                    "status": "MODEL_EXECUTED" if generation.get("generation") else "ROUTED_ONLY",
-                    "generation": generation,
-                    "limitations": "Generative model output is unverified unless separate evidence tasks validate it.",
-                }
-            else:
-                result = {
-                    "route": route,
-                    "farms": farms,
-                    "status": "ROUTED_ONLY",
-                    "model_status": gen_status,
-                    "limitations": "Qualified generative model is registered but this runtime is not enabled/ready.",
-                }
+            coalition = _coalition_task(mission_id, mission["prompt"])
+            result = {
+                "route": route,
+                "farms": farms,
+                "status": coalition.get("status", "ROUTED_ONLY"),
+                "coalition": coalition,
+                "answer": coalition.get("answer"),
+                "claim_ceiling": coalition.get("claim_ceiling"),
+                "limitations": (
+                    "Deterministic tool results are bounded computations, not physical validation."
+                    if coalition.get("execution_mode") == "DETERMINISTIC_SPECIALIST_TOOL"
+                    else "Model fallback output remains unverified unless separate evidence tasks validate it."
+                ),
+            }
         output_sha = canonical_sha(result)
         with connect() as con:
             con.execute("UPDATE missions SET status='COMPLETED',domain=?,updated_at=?,output_sha=?,result_json=? WHERE mission_id=?",
