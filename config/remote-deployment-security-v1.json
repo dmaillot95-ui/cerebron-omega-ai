@@ -12,13 +12,14 @@
     "origin_check": true,
     "rate_limit": true,
     "request_body_limit": true,
-    "security_audit_log": true
+    "security_audit_log": true,
+    "base_security_headers": true
   },
   "blockers": {
     "tls_termination": "REQUIRED_NOT_PROVISIONED",
     "reverse_proxy_trust_boundary": "REQUIRED_NOT_VALIDATED",
     "deployment_secret_backend": "REQUIRED_NOT_VALIDATED",
-    "security_headers": "INCOMPLETE",
+    "security_headers": "PASS_LOCAL_BASE_HEADERS_HSTS_PENDING_REAL_TLS",
     "durable_tamper_evident_audit": "NOT_IMPLEMENTED",
     "deployment_isolation": "NOT_VALIDATED",
     "remote_rate_limit_store": "IN_MEMORY_ONLY",

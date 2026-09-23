@@ -146,6 +146,10 @@ class PlatformTests(unittest.TestCase):
             try:
                 with urllib.request.urlopen(base + "/", timeout=2) as response:
                     self.assertEqual(response.status, 200)
+                    self.assertEqual(response.headers.get("X-Content-Type-Options"), "nosniff")
+                    self.assertEqual(response.headers.get("X-Frame-Options"), "DENY")
+                    self.assertEqual(response.headers.get("Referrer-Policy"), "no-referrer")
+                    self.assertIn("default-src 'self'", response.headers.get("Content-Security-Policy", ""))
 
                 with self.assertRaises(urllib.error.HTTPError) as unauth:
                     urllib.request.urlopen(base + "/api/missions", timeout=2)

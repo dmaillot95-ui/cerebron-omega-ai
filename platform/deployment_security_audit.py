@@ -32,6 +32,12 @@ def main():
         "origin_check_present": "check_origin" in security and "check_origin(" in server,
         "rate_limit_present": "rate_limit" in security and "rate_limit(" in server,
         "body_limit_present": "1_000_000" in server,
+        "base_security_headers_present": (
+            "X-Content-Type-Options" in server
+            and "X-Frame-Options" in server
+            and "Content-Security-Policy" in server
+            and "Referrer-Policy" in server
+        ),
     }
     blockers={k:v for k,v in cfg["blockers"].items() if not str(v).startswith("PASS")}
     safe=all(controls.values()) and bool(blockers)

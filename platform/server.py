@@ -28,6 +28,20 @@ def load_json(path: pathlib.Path):
 class Handler(BaseHTTPRequestHandler):
     server_version = "CerebronMVP/1.0"
 
+    def end_headers(self):
+        # Safe on loopback today; compatible with a future TLS reverse proxy.
+        # HSTS is intentionally omitted until HTTPS termination is real.
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+        self.send_header(
+            "Content-Security-Policy",
+            "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; "
+            "script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+        )
+        super().end_headers()
+
     def _json(self, data, status=200):
         body = json.dumps(data, ensure_ascii=False).encode()
         self.send_response(status)
