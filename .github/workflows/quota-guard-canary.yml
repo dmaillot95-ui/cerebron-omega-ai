@@ -1,0 +1,61 @@
+name: MEMORY OMEGA Quota Guard Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/quota_guard.py"
+      - "config/memory-fabric-v1.json"
+      - ".github/workflows/quota-guard-canary.yml"
+permissions:
+  contents: read
+jobs:
+  quota-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Normal
+        run: python runtime/quota_guard.py --domain SIMULATION --persisted 69 --capacity-bytes 100
+      - name: Warning
+        run: python runtime/quota_guard.py --domain AGORA_TASKS --persisted 1 --capacity-bytes 100
+      - name: Compression
+        run: python runtime/quota_guard.py --domain MEMORY_MUTATIONS --persisted 10 --capacity-bytes 100
+      - name: Raw stop
+        run: python runtime/quota_guard.py --domain SPACE_WORLD --persisted 10 --capacity-bytes 100
+      - name: Verify 90 percent gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/quota_ledger.json"))
+          assert d["usage_pct"]==90.0
+          assert d["state"]=="RAW_STOP"
+          assert d["policy"]["allow_raw_write"] is False
+          assert d["policy"]["force_compression"] is True
+          assert d["policy"]["allow_new_cycles"] is True
+          print("QUOTA_RAW_STOP_VERIFIED")
+          PY
+      - name: Freeze must fail closed
+        run: |
+          set +e
+          python runtime/quota_guard.py --domain SIMULATION --persisted 5 --capacity-bytes 100
+          code=$?
+          test "$code" -eq 4
+      - name: Verify freeze
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("runtime/quota_ledger.json"))
+          assert d["usage_pct"]==95.0 and d["state"]=="FREEZE"
+          assert d["policy"]["allow_new_cycles"] is False
+          print("QUOTA_FREEZE_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: memory-omega-quota-canary
+          path: |
+            runtime/quota_ledger.json
+            artifacts/quota_state.json
+          if-no-files-found: error
+          retention-days: 7
