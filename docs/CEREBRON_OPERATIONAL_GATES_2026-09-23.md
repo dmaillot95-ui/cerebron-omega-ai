@@ -11,7 +11,7 @@ This file records measured gate status. "PASS_SCOPED" never means general capabi
 | G4 coalition > best single agent | PASS_SCOPED_SEMANTIC_TRANSFER | After V3 exposed template brittleness, semantic holdout V4 improved 16→41 with 36/60 tool hits and 4/6 domains improved; still synthetic and bounded |
 | G5 M4 GOLD | PASS_SCOPED | F139 experiment-selection policy accepted only within stated scope |
 | G6 neural training | PASS_SCOPED_ELYRA | Real ELYRA imitation policy weights trained and artifact-hashed; not an LLM/LoRA and not physical validation |
-| G7 post-M6 promotion | PASS_SCOPED_ELYRA | Two M6-seeded runs showed large action-MSE gain and closed-loop promotion under the predeclared gate |
+| G7 post-M6 promotion | PASS_SCOPED_ELYRA | Two M6-seeded promotions plus fresh shifted-distribution audit: trained 50.8% vs random 0%, teacher 52.5%; same promoted weights SHA |
 | G8 bounded autonomy | PASS_SCOPED_INTERNAL | Multi-step internal mission loop enforces step/tool/time budgets and stops at a human gate before external action |
 | G9 authorized external action | PASS_SCOPED_GITHUB | Authorized GitHub writes/workflows only; public deployment remains blocked |
 | G10 collective superiority | PASS_SCOPED_HOLDOUT_ONLY | Semantic V4 beats single-model baseline on a new synthetic holdout; general superiority remains unproven and G11 remains open |
@@ -202,3 +202,31 @@ Claim ceiling:
 - consolidated platform CI run 35905343265 = SUCCESS.
 - public/remote deployment remains BLOCKED.
 - G11 remains OPEN.
+
+
+## ELYRA independent shifted-distribution audit
+
+- Branch: feat/elyra-independent-audit-v1
+- Commit: 2a2587e4731511d70b26e39d5e9290252c52bbb9
+- Source promoted run: 35904950828
+- Source weights SHA256: b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601
+- Audit run: 35905952407 = SUCCESS
+- Audit job: 107333575202
+- Audit artifact: 10771082547
+- Audit artifact digest: sha256:76366e5db41d992d044b4aa3111b43b50368c75eac3d767378ef32c83740f91d
+- Fresh audit seed: 35905952407
+- Episodes: 240
+- Distribution: SHIFTED_SYNTHETIC_ROVER_V1
+- Random baseline success: 0.0
+- Trained policy success: 0.5083333333333333
+- Teacher success: 0.525
+- Random action MSE: 0.46132373809814453
+- Trained action MSE: 0.002533255610615015
+- MSE gain ratio: 182.10706261345098
+- Result SHA256: c2e063c1b6f9bb78a996ea2e848ad8e4c2f0e4d11a1d1d0d7b05be6c5b639108
+
+Interpretation:
+- the promoted neural policy retains nearly teacher-level closed-loop success under a shifted synthetic terrain distribution.
+- the audit used a separate evaluator code path and fresh seed, while loading the exact promoted weights artifact by SHA.
+- this strengthens scoped G7 evidence, but it is still the same repository and synthetic dynamics family.
+- no physical rover, external-organization, RL, language-model, AGI or superintelligence claim follows.
