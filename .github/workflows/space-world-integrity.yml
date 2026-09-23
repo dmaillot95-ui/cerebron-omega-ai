@@ -1,0 +1,15 @@
+name: CEREBRON Space World replay corruption gate
+on:
+  push:
+    paths: ["runtime/space_world_integrity.py", ".github/workflows/space-world-integrity.yml"]
+  workflow_dispatch:
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/space_world_integrity.py
+      - uses: actions/upload-artifact@v4
+        with: {name: space-world-integrity, path: artifacts/space-integrity/result.json}
