@@ -1,0 +1,30 @@
+name: CEREBRON Civilization Config Audit
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/farms.json'
+      - 'config/cerebron-mode-v1.json'
+      - 'config/agora-school-v1.json'
+      - 'config/memory-fabric-v1.json'
+      - 'config/cerebron-civilization-memory-bindings-v1.json'
+      - 'config/hf-20-agent-pool-v1.json'
+      - 'config/cerebron-farm-direct-routing-v1.json'
+      - 'config/farm-functional-architecture-v1.json'
+      - 'config/model-gateway.json'
+      - 'config/runtime-provider-registry.json'
+      - 'scripts/audit_cerebron_civilization_config.py'
+      - '.github/workflows/cerebron-civilization-config-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/audit_cerebron_civilization_config.py
