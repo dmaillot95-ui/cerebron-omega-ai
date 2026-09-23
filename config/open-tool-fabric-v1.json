@@ -325,6 +325,114 @@
       "owner": "ASTRION",
       "priority": "P0",
       "status": "DISCOVERED"
+    },
+    {
+      "id": "OTF023",
+      "name": "NVIDIA Warp",
+      "domain": [
+        "physics_simulation",
+        "GPU_compute",
+        "differentiable_simulation",
+        "robotics"
+      ],
+      "url": "https://github.com/NVIDIA/warp",
+      "license": "Apache-2.0",
+      "owner": "METRION",
+      "priority": "P0",
+      "status": "DISCOVERED",
+      "target_farms": [
+        "F49",
+        "F52",
+        "F53",
+        "F56",
+        "F78",
+        "F87",
+        "F93",
+        "F94",
+        "F124",
+        "F127",
+        "F140"
+      ],
+      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+    },
+    {
+      "id": "OTF024",
+      "name": "NVIDIA PhysicsNeMo",
+      "domain": [
+        "physics_ml",
+        "CFD",
+        "thermal",
+        "structures",
+        "PDE",
+        "surrogate_models"
+      ],
+      "url": "https://github.com/NVIDIA/physicsnemo",
+      "license": "Apache-2.0",
+      "owner": "METRION",
+      "priority": "P0",
+      "status": "DISCOVERED",
+      "target_farms": [
+        "F52",
+        "F53",
+        "F51",
+        "F93",
+        "F94",
+        "F127",
+        "F132",
+        "F133",
+        "F140"
+      ],
+      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+    },
+    {
+      "id": "OTF025",
+      "name": "Newton",
+      "domain": [
+        "robotics",
+        "rigid_body",
+        "deformable",
+        "granular",
+        "inverse_kinematics"
+      ],
+      "url": "https://github.com/newton-physics/newton",
+      "license": "Apache-2.0",
+      "owner": "SAPHEA",
+      "priority": "P1",
+      "status": "DISCOVERED",
+      "target_farms": [
+        "F78",
+        "F87",
+        "F107",
+        "F124",
+        "F136",
+        "F139",
+        "F140"
+      ],
+      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+    },
+    {
+      "id": "OTF026",
+      "name": "NVIDIA Isaac Lab",
+      "domain": [
+        "robotics",
+        "reinforcement_learning",
+        "simulation",
+        "sensors",
+        "control"
+      ],
+      "url": "https://github.com/isaac-sim/IsaacLab",
+      "license": "BSD-3-Clause_CODE_DEPENDENCIES_SEPARATE_CHECK",
+      "owner": "SAPHEA",
+      "priority": "P1",
+      "status": "DISCOVERED",
+      "target_farms": [
+        "F78",
+        "F87",
+        "F107",
+        "F124",
+        "F126"
+      ],
+      "notes": "SHARED_TOOL_NOT_NEW_FARM"
     }
   ],
   "integration_strategy": {
@@ -334,7 +442,9 @@
       "OTF021",
       "OTF022",
       "OTF001",
-      "OTF002"
+      "OTF002",
+      "OTF023",
+      "OTF024"
     ],
     "comparison_target": "CEREBRON_SPACE_CHAIN_V14_V35",
     "promotion_gate": [
@@ -345,6 +455,8 @@
       "CROSS_MODEL_ABLATION",
       "F72_REVIEW"
     ],
-    "claim": "Cross-simulator agreement is not physical validation."
+    "claim": "Cross-simulator agreement is not physical validation.",
+    "farm_cap": 144,
+    "nvidia_policy": "NO_NEW_FARM; shared engines routed to existing capability farms"
   }
 }
