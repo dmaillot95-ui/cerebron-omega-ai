@@ -1,0 +1,38 @@
+name: AFAH Epistemic Decision V34
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  afah:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - run: python runtime/solar_interpolation_v29.py
+      - run: python benchmarks/occ06c_solar_ablation_v30.py
+      - run: python runtime/frozen_acceptance_v31.py
+      - run: python runtime/f72_review_packet_v32.py
+      - run: python runtime/f72_counter_audit_v33.py
+      - run: python runtime/afah_decision_v34.py
+      - name: AFAH integrity gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/afah_decision_v34.json"))
+          assert d["decision"] in d["allowed_decisions"]
+          assert "NO_MAJORITY_VOTE" in d["epistemic"]
+          if d["promotion"]:
+              assert d["decision"]=="VALIDATED"
+              assert not d.get("open_gaps") and not d.get("contradictions")
+          else:
+              assert d["decision"]!="VALIDATED"
+          print("AFAH_V34",d["decision"],d["reason"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afah-decision-v34
+          path: artifacts/
+          retention-days: 30
