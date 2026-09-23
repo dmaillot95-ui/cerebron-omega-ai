@@ -1,0 +1,49 @@
+name: CEREBRON Cold 60 V4 Semantic Fuzz
+on:
+  push:
+    branches: ['feat/cerebron-semantic-tool-routing-v2']
+    paths:
+      - 'platform/cold60_v4_semantic_fuzz.py'
+      - 'platform/specialist_tools.py'
+      - 'platform/coalition_tools.py'
+      - '.github/workflows/platform-cold60-v4-semantic-fuzz.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_V4_SEED: ${{ github.run_id }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute fresh V4 semantic fuzz
+        run: python platform/cold60_v4_semantic_fuzz.py
+      - name: Verify V4 artifacts
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          d=json.loads((root/"cold60-v4-dataset.json").read_text())
+          r=json.loads((root/"cold60-v4-result.json").read_text())
+          assert d["deny_training"] is True and len(d["tasks"])==60
+          assert r["baseline"]["max_score"]==60 and r["adaptive"]["max_score"]==60
+          assert len(r["result_sha256"])==64
+          print("COLD60_V4_VERIFIED",r["baseline"]["score"],r["adaptive"]["score"],r["adaptive"]["tool_hits"],r["domains_improved_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-cold60-v4-semantic-fuzz
+          path: |
+            platform/artifacts/cold60-v4-dataset.json
+            platform/artifacts/cold60-v4-result.json
