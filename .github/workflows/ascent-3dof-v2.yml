@@ -1,0 +1,35 @@
+name: ASTRION 3DOF Ascent V2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/ascent_3dof_v2.py"
+      - ".github/workflows/ascent-3dof-v2.yml"
+permissions:
+  contents: read
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/ascent_3dof_v2.py
+      - name: METRION invariant gate
+        run: |
+          python - <<'PY'
+          import json,math
+          d=json.load(open("artifacts/ascent_3dof.json"));r=d["results"]
+          assert r["altitude_m"]>0 and r["max_q"]["q"]>0
+          assert r["gravity_loss_m_s_approx"]>=0 and r["drag_loss_m_s"]>=0
+          assert abs(r["speed_m_s"]-math.hypot(r["vr_m_s"],r["vt_m_s"]))<1e-8
+          assert "3DOF_POINT_MASS" in d["epistemic"]
+          assert "NO_HARDWARE_VALIDATION" in d["epistemic"]
+          print("3DOF_ASCENT_VERIFIED",r["altitude_m"],r["speed_m_s"],r["gravity_loss_m_s_approx"],r["drag_loss_m_s"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astrion-3dof-ascent-v2
+          path: artifacts/ascent_3dof.json
+          if-no-files-found: error
+          retention-days: 7
