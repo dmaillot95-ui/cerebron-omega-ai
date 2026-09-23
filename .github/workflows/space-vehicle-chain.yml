@@ -1,0 +1,37 @@
+name: Space Vehicle Chain Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/space_vehicle_chain_v1.py"
+      - ".github/workflows/space-vehicle-chain.yml"
+permissions:
+  contents: read
+jobs:
+  vehicle-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/space_vehicle_chain_v1.py
+      - name: METRION gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/space_vehicle_chain.json"))
+          r=d["results"]
+          assert abs(r["mass_closure_kg"]) < 1e-9
+          assert r["twr"] > 1
+          assert r["structural_margin"] >= 0
+          assert d["status"]=="ANALYTIC_CHAIN_PASS"
+          assert "HEATING_INDICATOR_NOT_CALIBRATED" in d["epistemic"]
+          assert "NO_HARDWARE_TEST" in d["epistemic"]
+          print("SPACE_VEHICLE_CHAIN_VERIFIED",d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: space-vehicle-chain-canary
+          path: artifacts/space_vehicle_chain.json
+          if-no-files-found: error
+          retention-days: 7
