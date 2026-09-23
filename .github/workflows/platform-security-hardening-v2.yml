@@ -1,0 +1,28 @@
+name: CEREBRON Security Hardening V2
+on:
+  push:
+    branches: ['feat/security-hardening-v2']
+    paths:
+      - 'platform/security.py'
+      - 'platform/tests/test_security_hardening.py'
+      - 'config/remote-deployment-security-v1.json'
+      - 'platform/deployment_security_audit.py'
+      - '.github/workflows/platform-security-hardening-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python -m compileall -q platform
+      - name: Hardening tests
+        run: python -m unittest discover -s platform/tests -p 'test_security_hardening.py' -v
+      - name: Deployment security audit remains fail-closed
+        run: python platform/deployment_security_audit.py
