@@ -316,3 +316,38 @@ END UPDATE VERIFIED
 - The coalition correctly reports independent_model_count=1 and warns that shared-base role calls are correlated.
 - Claim ceiling remains MODEL_OUTPUT_UNVERIFIED until separate evidence tasks validate the content.
 - This proves a real Search→Generate→Verify→Fusion path with minimal coalition selection; it does NOT yet prove coalition superiority over the best single model.
+
+
+## UPDATE 2026-09-23 — COLD-60 REPRODUCTION + ELYRA LAB
+
+### Cold-60 V2 — scoped collective gain, independently reseeded
+- Runtime-seeded M6 benchmark remains deny_training=true and separate from training data.
+- Run A: 35902694640 = SUCCESS; job 107322581138; artifact 10770076470; digest sha256:671dfcc378d6f9933246cae98f365cf77b1a19cdd95a2681e8e00677e9067275.
+- Run A dataset SHA: 813e096e25dbd0d04ed6acabe1b4f24f921f84e7fb9c72d9de91f2664e76be13.
+- Run A result SHA: 32bc458c8e4a8fde8d3f1ce3e74255d5efd699d11812d184dc296cb18fce3f7d.
+- Run A: single Qwen baseline 19/60; adaptive coalition/tools 60/60; improvement in 6/6 domains.
+- Independent runtime seed repeat Run B: 35903080344 = SUCCESS; job 107323872775; artifact 10770420450; digest sha256:5321a798f3971777d6e65d9cbd020ddf5fa7a9c32ef81cdc254cdef1a1c36198.
+- Run B dataset SHA: 409834982b8f6bf5e68abdd15947d06137e6ca230e831369209dd8b6bf4c2470.
+- Run B result SHA: 18cde656d8a5d17ae2814cb324714f0cbc5b3c33a9067da031797d59bef5d463.
+- Run B: single Qwen baseline 15/60; adaptive coalition/tools 60/60; improvement in 6/6 domains.
+- The initial criterion "adaptive CEREBRON improves at least 4 domains of 6" is therefore reproduced on this structured benchmark family.
+- Claim ceiling: SCOPED_COLLECTIVE_TOOL_AUGMENTATION_GAIN. This is NOT evidence of general superintelligence; the deterministic specialists are purpose-built tools and several SAPHEA MICRO roles share one Qwen base model.
+
+### ELYRA Rover LAB
+- ELYRA LAB V1 commit 830848ff6792d2c5b90b7047d8dcfbc8074e3d4a produced 500 replay episodes.
+- Initial run 35903015349 exposed an invalid horizon: success_rate=0.0 because the 28 m target was effectively unreachable in 90 steps. Preserve this as failure evidence.
+- Horizon fix commit dd5143fea2e8c14880754c75455112ee2b9230e3 increased MAX_STEPS to 180 without changing the target.
+- Corrected run 35903214571 = SUCCESS; job 107324310253; artifact 10769244578; digest sha256:9c56238f112fe3c32e2c744815c47a77b2a2314c5121fe390edd15cb6cb627b7.
+- Corrected run metrics: 500 episodes, 268 successes, success_rate=0.536, total_collisions=538, mean_final_distance_m=3.010377263040026.
+- Replay SHA256: db621917c0c28bc71ffc050ae19623042f6b5b20c7214d67cc1f66b18d922094.
+- Result SHA256: 79ce9027968b1aa8dae8e2d1626f6eefc83c1028c59679cb55c1fd37ea6be48f.
+- ELYRA state: E3_SIMULATION_VERIFIED environment; deterministic controller baseline only.
+- training_triggered=false; weights_changed=false; no imitation-learning or RL claim yet.
+- Replay remains candidate data until separate validation/GOLD gates.
+
+### Updated next locks
+1. Record the Cold-60 result as scoped G4/G10 evidence only; do not generalize beyond the benchmark family.
+2. Add explicit AFAH/Red-Team review for Cold-60 tool leakage/template specialization before any broader superiority claim.
+3. Validate ELYRA replay/data schema and controller baseline, then create an imitation-learning dataset only through the GOLD gate.
+4. Neural training remains blocked until a sufficient scoped GOLD corpus exists; any first trained adapter/model must include weights artifact SHA and before/after cold benchmark.
+5. Keep public deployment blocked until remote TLS/proxy/secret/deployment review is explicit.
