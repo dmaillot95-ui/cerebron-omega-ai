@@ -231,3 +231,68 @@ NEXT EXACT PROGRAM
 ============================================================
 END UPDATE VERIFIED
 ============================================================
+
+
+## UPDATE 2026-09-23 — FARM BRIDGE + GENERATIVE + F139 GAIN/GOLD
+
+### Real Farm Bridge integrated into Control Plane
+- Platform integration commit: 99f2176c64437256f1abf35c3b0e65b2c60436a5; routing fix: 13e676d6fc572c11a0103a91102f8f6437f394ac.
+- CI run 35898933595 failed because the local router did not classify the explicit Hohmann/F123 request as space; preserve this failure.
+- Fix decoupled explicit F123 bridge intent from classifier output.
+- Corrected CI run 35898994230 = SUCCESS.
+- F123 real bridge proof remains: run 35897592604; job 107305284787; artifact 10767830799; artifact digest sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75; farm output SHA 04c4d7c40b65d7385b563d9b0d663a826e6a98547bc760cb4039da88a6a0e4bf.
+- Runtime behavior is fail-closed: without CEREBRON_GITHUB_TOKEN => ROUTED_ONLY/NON_EXECUTED, never FARM_EXECUTED.
+
+### Security Plane V1
+- Local Security Plane commit: 10dbc7813202dffd89265ab3528ae10f1134db3d.
+- HTTP security/tenant-isolation tests commit: db766729bc45edfa9016ecae9d79b8335ad5355d.
+- Features now include hashed bearer tokens via env configuration, viewer/operator/admin RBAC, mission ownership isolation, origin checks, rate limiting and append-only security audit log.
+- Platform CI remained green, including run 35900659980 on later backend integration.
+- Public/remote bind remains deliberately blocked. Do NOT claim public deployment readiness yet.
+
+### Generative model selection and backend
+- SmolLM2-135M real smoke run 35899264850 executed successfully but failed the requested semantic task; do not qualify it as main backend.
+- Corrected cold benchmark run 35900280586:
+  - Qwen/Qwen2.5-0.5B-Instruct revision ec7ddfa904d4d447eedd0b7f126df16957734abb: 5/5 on the five tiny deterministic smoke tasks; job 107314375062; artifact 10768374456; digest sha256:f72fc7ab80f1f893ec29990c78796b3a18558d6ca4db4f4007676df78eabad5a.
+  - SmolLM2-360M: 2/5. Do not treat the 5-task benchmark as general capability evidence.
+- Qwen Control Plane backend commit: 95c882453c5533809f0afa1203920055ae7aee32.
+- Backend is fail-closed by default and requires CEREBRON_ENABLE_LOCAL_GENERATIVE=1 plus torch/transformers runtime dependencies.
+- Generative backend E2E run 35900659814 = SUCCESS; job 107315704063; artifact 10768767916; digest sha256:445345517fe417dd0e5da2a749e3613b44452d392a62546dc11ed1a061cd4a9e.
+- E2E generation = READY; output SHA 2a02c416e07489b6c18840d8bac7a266333abffa160242cdfaaba267c8625d13.
+- Claim ceiling stays MODEL_OUTPUT_UNVERIFIED until separate evidence tasks validate content.
+
+### F139 Newton free granular collapse V6
+- F139 commit d0b62e5d9c9530cade466a52c568dd167b52a5cd.
+- Run 35899534732 completed successfully and was rerun as attempt 2.
+- Repeat job 107313115371 = SUCCESS.
+- Attempt 1 artifact 10767758851, digest sha256:6dcf42b7a4302975a90223c39f3e55fe03ee5c38060c538c7776e59ebdc0c9b1.
+- Attempt 2 artifact 10768518399, digest sha256:8b06209061b1839bade7084dc8f04990dae1020337f87e30d938568a71b4ac28.
+- Both attempts produced result SHA e5beddcd3609538d4dc9ef882f3c26af6bc62427b83a4773eb05b199f9a9ee4a.
+- V6 dynamic discrimination index = 0.387336969872355.
+- At 0.5 s, lunar-vs-Earth relative deltas: spread 0.4045518557; height 0.5958988388; COM-z 0.6344948596.
+- V5 constrained packing final zmax relative delta was only 0.0002045495 and spread delta 0.
+- Interpretation: V6 is substantially more discriminating for the numerical gravity-sensitivity question, but this is NOT calibrated regolith DEM and NOT physical validation.
+
+### AGORA measured gain V3
+- Workflow/script commits: fa7f7fdaaca40c64be25d87ae46303a4d1729884 and 1588897c532e4d6424cb9f2aec1e317f6ac7a1b3.
+- Run 35900889137 = SUCCESS; job 107316502593; artifact 10769645110; digest sha256:6166a2077a929b5d1dca2f1e97cdcfda2cc4d4643839d2406f8201114ae9c858.
+- Comparison SHA: ccf94d9f0a4fd074e333400e55bec4be309366688c6cabf742448009b0e09440.
+- New measured-gain capsule: AGORA:d307be8c702a6944e59b, SHA d307be8c702a6944e59ba338fb6d08cbe70559510c754b51254ef8e3fb2ab24d.
+- This capsule remains UNDER_TEST, training_eligible=false, gold_eligible=false.
+
+### Scoped AFAH M4 GOLD policy
+- Commit 88c3c79b71cf76c5e86706f4df89e97b955defd0 adds a scoped AFAH gate for the ORIGINAL F139 experiment-selection lesson.
+- Run 35900931011 = SUCCESS; job 107316650968; artifact 10768788069; digest sha256:5e8f33672c0305e3b3b771e925c7ff1c49e2c02b25a73012daa5f3f6c93744c5.
+- Result SHA: 0b65fb8c29297555191936928d4804606e801d83672c998b5f9cd7d4847cedb7.
+- Accepted lesson scope ONLY: for the current F139 Newton benchmark family, prefer free transient granular collapse over constrained packing when testing gravity sensitivity.
+- memory_class=M4_GOLD; training_eligible=true; training_triggered=false; weights_changed=false; physical_validation=false.
+- Limitations remain explicit: repeat used same code/engine/configuration; no independent experimental calibration; no claim that Newton reproduces real lunar regolith.
+- Do not generalize this scoped policy GOLD into validation of F139 physics.
+
+### Current next locks
+1. Keep public deployment blocked until remote security/TLS/deployment review is explicit.
+2. Build adaptive coalition execution using the minimal useful subset of real model/tool workers; do not simulate the 20 SAPHEA MICRO.
+3. Register 7 initial SAPHEA MICRO contracts only when each maps to a real worker/tool/model; keep remaining 13 PLANNED_UNAVAILABLE.
+4. Build the 60-mission cold benchmark and ablations before claiming coalition superiority.
+5. First LoRA/QLoRA only after a sufficient GOLD dataset exists; one scoped policy lesson is not enough by itself.
+6. Any future neural-learning claim still requires changed weights/adapter artifact + SHA + M6 before/after + regression test + rollback path.
