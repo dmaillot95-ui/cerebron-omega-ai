@@ -1,5 +1,5 @@
 {
-  "version": "2.11",
+  "version": "2.12",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -720,7 +720,16 @@
       "id": 125,
       "repo": "cerebron-farm-125-flight-software",
       "domain": "space-flight-software-architecture",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35848407869,
+        "job_id": 107140024187,
+        "artifact_id": 10744069711,
+        "result_sha256": "bb864a953ddc85b3a3eb9db1f8c3aff14a2270b1aed961eed2e3fd5920a07b23",
+        "engine": "python-deterministic-flight-software-executive",
+        "engine_version": "3.12.14",
+        "scope": "software-executive-canary-not-flight-qualification"
+      }
     },
     {
       "id": 126,
