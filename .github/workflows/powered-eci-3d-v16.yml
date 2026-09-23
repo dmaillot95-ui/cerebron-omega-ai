@@ -1,0 +1,34 @@
+name: ASTRION METRION Powered ECI 3D V16
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/powered_eci_3d_v16.py"
+      - ".github/workflows/powered-eci-3d-v16.yml"
+permissions:
+  contents: read
+jobs:
+  launch3d:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/powered_eci_3d_v16.py
+      - name: METRION state audit
+        run: |
+          python - <<'PY'
+          import json,math
+          d=json.load(open("artifacts/powered_eci_3d_v16.json"));t=d["terminal"]
+          assert t["altitude_m"]>=0 and t["speed_m_s"]>0 and t["mass_kg"]>=d["config"]["mf"]
+          assert 0<=t["inclination_deg"]<=180 and t["max_q_pa"]>=0
+          assert d["reality_gap"]=="G02_DYNAMICS_FIDELITY_PARTIAL"
+          assert "FIXED_LOCAL_EAST_NORTH_BASIS_APPROXIMATION" in d["epistemic"]
+          print("POWERED_ECI_3D_V16",t,d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: powered-eci-3d-v16
+          path: artifacts/powered_eci_3d_v16.json
+          if-no-files-found: error
+          retention-days: 14
