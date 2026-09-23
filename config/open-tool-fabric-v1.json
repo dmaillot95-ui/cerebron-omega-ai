@@ -541,6 +541,22 @@
         "result_sha256": "f82f3932548c022715ba1536def08b01a6eb0fd5f4a4bd2f03104cbdcb7ba4e8",
         "status": "NATIVE_CONTACT_REFERENCE_OK",
         "scope": "REAL_NEWTON_RIGID_CONTACT_DYNAMICS_REFERENCE_NOT_REGOLITH_GRANULAR_CALIBRATION_OR_PHYSICAL_VALIDATION"
+      },
+      "verified_multigrain_v4": {
+        "farm": 139,
+        "run_id": 35870520172,
+        "job_id": 107213076521,
+        "artifact_id": 10755061421,
+        "grain_count": 100,
+        "steps": 1200,
+        "max_rigid_contacts": 3301,
+        "final_z_min_m": 0.03499778360128403,
+        "final_z_max_m": 0.24499006569385529,
+        "horizontal_spread_m": 0.31200000643730164,
+        "grains_below_3r": 50,
+        "result_sha256": "78a3313f6942cc9dfb3b8c3141af122a61eae6752c026b9048b0274312cb1d4a",
+        "status": "MULTIGRAIN_CONTACT_OK",
+        "scope": "REAL_NEWTON_MULTI_RIGID_GRAIN_CONTACT_SIMULATION_NOT_CALIBRATED_REGOLITH_DEM_OR_PHYSICAL_VALIDATION"
       }
     },
     {
