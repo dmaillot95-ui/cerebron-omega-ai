@@ -1,0 +1,15 @@
+name: CEREBRON Memory Fabric Canary
+on:
+  push:
+    paths: ["runtime/memory_fabric.py", "config/memory-fabric-v1.json", ".github/workflows/memory-fabric-canary.yml"]
+  workflow_dispatch:
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/memory_fabric.py
+      - uses: actions/upload-artifact@v4
+        with: {name: memory-fabric-canary, path: artifacts/memory_fabric.json, retention-days: 1}
