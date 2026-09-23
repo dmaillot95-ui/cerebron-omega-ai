@@ -1,0 +1,186 @@
+{
+  "version": "SPACE_WORLD_V1",
+  "status": "ARCHITECTURE_CONTRACT_NOT_RUNTIME_VALIDATED",
+  "cluster": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "cadence": {
+    "target_logical_minutes": 5,
+    "activate_only_after_e2e_pass": true,
+    "note": "GitHub scheduled execution may be delayed; cadence is logical, not hard real-time."
+  },
+  "state_packet_required": [
+    "schema_version",
+    "cycle_id",
+    "producer",
+    "logical_time",
+    "seed",
+    "parent_sha",
+    "inputs_sha",
+    "outputs_sha",
+    "status",
+    "epistemic",
+    "metrics",
+    "events",
+    "unknowns",
+    "contradictions"
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "CLAIM<=EVIDENCE",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=SCIENTIFIC_VALIDATION",
+    "DETERMINISTIC_SEED_REQUIRED",
+    "NO_VALIDATED_PROMOTION_WITHOUT_F72_AFAH"
+  ],
+  "routing": [
+    {
+      "farm": 101,
+      "role": "WORLD_CORE",
+      "consumes": [
+        "previous_cycle"
+      ],
+      "produces": [
+        "environment_state"
+      ]
+    },
+    {
+      "farm": 102,
+      "role": "ARCHITECT_CONSTRUCTION",
+      "consumes": [
+        "environment_state",
+        "requirements"
+      ],
+      "produces": [
+        "construction_plan",
+        "built_state"
+      ]
+    },
+    {
+      "farm": 103,
+      "role": "LUNAR_CITY",
+      "consumes": [
+        "environment_state",
+        "built_state"
+      ],
+      "produces": [
+        "lunar_state"
+      ]
+    },
+    {
+      "farm": 104,
+      "role": "MARS_CITY",
+      "consumes": [
+        "environment_state",
+        "built_state"
+      ],
+      "produces": [
+        "mars_state"
+      ]
+    },
+    {
+      "farm": 105,
+      "role": "SPACE_FACTORY",
+      "consumes": [
+        "lunar_state",
+        "mars_state",
+        "resources"
+      ],
+      "produces": [
+        "industrial_state"
+      ]
+    },
+    {
+      "farm": 106,
+      "role": "ENERGY_SYSTEM",
+      "consumes": [
+        "industrial_state",
+        "loads"
+      ],
+      "produces": [
+        "energy_state"
+      ]
+    },
+    {
+      "farm": 107,
+      "role": "ROBOT_WORKFORCE",
+      "consumes": [
+        "construction_plan",
+        "industrial_state",
+        "energy_state"
+      ],
+      "produces": [
+        "robot_state",
+        "maintenance_events"
+      ]
+    },
+    {
+      "farm": 108,
+      "role": "ISRU_MINING",
+      "consumes": [
+        "environment_state",
+        "energy_state",
+        "robot_state"
+      ],
+      "produces": [
+        "resource_state"
+      ]
+    },
+    {
+      "farm": 109,
+      "role": "SPACE_LOGISTICS",
+      "consumes": [
+        "resource_state",
+        "industrial_state",
+        "robot_state"
+      ],
+      "produces": [
+        "logistics_state"
+      ]
+    },
+    {
+      "farm": 110,
+      "role": "CIVILIZATION_FUSION",
+      "consumes": [
+        "lunar_state",
+        "mars_state",
+        "industrial_state",
+        "energy_state",
+        "robot_state",
+        "resource_state",
+        "logistics_state"
+      ],
+      "produces": [
+        "world_checkpoint",
+        "residuals",
+        "next_requirements"
+      ]
+    }
+  ],
+  "storage": {
+    "hot": "workflow artifacts/cache, disposable",
+    "warm": "versioned simulation packets/manifests",
+    "gold": "validated selected episodes only",
+    "cold": "reproducible manifests/seeds/configs; regenerate bulky raw outputs when possible"
+  },
+  "gates": [
+    "schema",
+    "hash-chain",
+    "determinism",
+    "invariant-checks",
+    "cross-farm-dependency",
+    "failure-injection",
+    "replay",
+    "F72",
+    "AFAH"
+  ]
+}
