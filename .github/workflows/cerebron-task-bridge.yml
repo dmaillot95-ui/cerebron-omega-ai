@@ -20,30 +20,38 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Memory-safe mission gate
         shell: bash
         run: |
           set -euo pipefail
-          FILE=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^tasks/dispatch/.*\.json$' | head -n 1 || true)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            FILE=$(find tasks/dispatch -maxdepth 1 -type f -name '*.json' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2- || true)
+          else
+            FILE=$(git diff --name-only HEAD^ HEAD | grep '^tasks/dispatch/.*\.json$' | head -n1 || true)
+          fi
           test -n "$FILE"
           python - "$FILE" <<'PY'
-          import json,sys,os
+          import json,sys,os,hashlib
           p=sys.argv[1]
           MAX_TASK_BYTES=65536
           MAX_INLINE_CHARS=24000
           size=os.path.getsize(p)
           if size>MAX_TASK_BYTES:
               raise SystemExit(f"FAIL_CLOSED task too large: {size}")
-          d=json.load(open(p,encoding="utf-8"))
+          raw_bytes=open(p,'rb').read()
+          d=json.loads(raw_bytes)
           raw=json.dumps(d,ensure_ascii=False)
           if len(raw)>MAX_INLINE_CHARS:
               raise SystemExit("FAIL_CLOSED inline mission exceeds memory budget")
           if d.get("status") not in ("QUEUED","QUEUED_NOT_EXECUTED"):
               raise SystemExit("FAIL_CLOSED invalid task status")
-          print("MISSION_ACCEPTED",p,size)
+          print("MISSION_ACCEPTED",p,size,hashlib.sha256(raw_bytes).hexdigest())
           PY
-      - name: Architecture notice
+      - name: Execution boundary
         run: |
-          echo "This bridge validates and triggers queued missions."
-          echo "Heavy outputs MUST be artifacts; hot memory receives only deduplicated summaries + SHA."
-          echo "No external AI execution is claimed by this gate alone."
+          echo "BRIDGE_GATE_OK"
+          echo "This workflow validates a mission envelope only."
+          echo "External AI/model execution requires a separately configured real engine."
+          echo "Heavy outputs must remain artifacts; hot memory gets deduplicated summary + SHA only."
