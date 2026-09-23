@@ -1,13 +1,15 @@
 {
   "version": "1.0",
   "status": "ROUTING_TAXONOMY_NOT_MATURITY_CLAIM",
-  "registry_sha": "126cd92fe340dad1c99cc41fcb79076ce4175df1",
+  "registry_sha": "41c90858177e3076b4c1abf86af8be92990ae1cd",
   "rules": [
     "Farm IDs and repositories are immutable under this reorganization.",
     "Group membership is routing metadata, not evidence of execution.",
     "F01-F07 Collatz are protected.",
     "Simulation != test; workflow success != scientific validation.",
-    "F72/AFAH required for validated promotion."
+    "F72/AFAH required for validated promotion.",
+    "ALL_REGISTERED_FARMS_NOT_EXPLICITLY_GROUPED_ROUTE_BY_REGISTRY_DOMAIN",
+    "NEW_FARM_ID_IS_ROUTABLE_ONLY_AFTER_VERIFIED_REPOSITORY_AND_REGISTRY_INSERT"
   ],
   "groups": [
     {
@@ -187,5 +189,21 @@
         73
       ]
     }
-  ]
+  ],
+  "registry_snapshot": {
+    "count": 146,
+    "max_id": 146,
+    "date": "2026-09-23"
+  },
+  "dynamic_fallback": {
+    "applies_to": "ANY_REGISTERED_FARM_NOT_LISTED_IN_STATIC_GROUPS",
+    "route_by": [
+      "domain",
+      "role",
+      "status",
+      "evidence"
+    ],
+    "current_range": "F101-F146_AND_FUTURE_VERIFIED",
+    "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY"
+  }
 }
