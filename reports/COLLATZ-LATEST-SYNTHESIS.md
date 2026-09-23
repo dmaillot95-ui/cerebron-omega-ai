@@ -16,15 +16,15 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## État des fermes au dernier cycle
 
-- Fermes configurées : 120
-- Derniers workflows en succès : 118
+- Fermes configurées : 122
+- Derniers workflows en succès : 117
 - Derniers workflows en échec : 2
-- Fermes avec au moins un artefact sur leur dernier run : 112
+- Fermes avec au moins un artefact sur leur dernier run : 111
 
 ## Détail technique
 
 - Farm 01 collatz-theory: run=35826578651 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35826537890 status=completed conclusion=success artifacts=21
+- Farm 02 collatz-dynamics: run=35827450742 status=completed conclusion=success artifacts=21
 - Farm 03 collatz-adic: run=35826782913 status=completed conclusion=success artifacts=21
 - Farm 04 collatz-counterexample: run=35827225425 status=completed conclusion=success artifacts=21
 - Farm 05 collatz-literature: run=35826018033 status=completed conclusion=success artifacts=22
@@ -69,7 +69,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 44 ai-platform-routing: run=35420094884 status=completed conclusion=success artifacts=21
 - Farm 45 agent-runtime: run=35420391067 status=completed conclusion=success artifacts=21
 - Farm 46 global-video-research: run=35823858556 status=completed conclusion=success artifacts=1
-- Farm 47 global-country-web-intelligence: run=35822560454 status=completed conclusion=success artifacts=21
+- Farm 47 global-country-web-intelligence: run=35827480003 status=completed conclusion=success artifacts=21
 - Farm 48 global-scientific-literature-intelligence: run=35309608719 status=completed conclusion=success artifacts=0
 - Farm 49 engineering-cad-digital-twin: run=35309609848 status=completed conclusion=success artifacts=0
 - Farm 50 technical-visual-engineering-documentation: run=35420137822 status=completed conclusion=success artifacts=1
@@ -89,12 +89,12 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 64 hardware-reliability-safety: run=35314709831 status=completed conclusion=success artifacts=0
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
 - Farm 66 knowledge-graph-vector-index: run=35827300715 status=completed conclusion=success artifacts=1
-- Farm 67 cross-farm-communication: run=35826205164 status=completed conclusion=success artifacts=1
-- Farm 68 autonomous-experiment-orchestrator: run=35826070513 status=completed conclusion=success artifacts=1
+- Farm 67 cross-farm-communication: run=35827685859 status=queued conclusion=None artifacts=0
+- Farm 68 autonomous-experiment-orchestrator: run=35827446554 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=35826822180 status=completed conclusion=success artifacts=1
 - Farm 71 scientific-reproduction: run=35826533705 status=completed conclusion=success artifacts=1
-- Farm 72 reality-evidence-gate: run=35825952088 status=completed conclusion=success artifacts=1
+- Farm 72 reality-evidence-gate: run=35827457547 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
 - Farm 74 session-memory-encyclopedia: run=35827078008 status=completed conclusion=success artifacts=1
 - Farm 75 exploration-discovery: run=35750096709 status=completed conclusion=success artifacts=1
@@ -143,3 +143,5 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 118 gold-knowledge-library: run=35823886197 status=completed conclusion=success artifacts=1
 - Farm 119 evidence-scientific-archive: run=35823893070 status=completed conclusion=success artifacts=1
 - Farm 120 memory-governor-freeze: run=35823897087 status=completed conclusion=success artifacts=1
+- Farm 121 spatial-intelligence: run=None status=None conclusion=None artifacts=0
+- Farm 122 engineering-validation: run=None status=None conclusion=None artifacts=0
