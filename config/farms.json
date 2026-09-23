@@ -1,5 +1,5 @@
 {
-  "version": "2.15",
+  "version": "2.16",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -780,25 +780,65 @@
       "id": 129,
       "repo": "cerebron-farm-129-space-communications",
       "domain": "space-rf-optical-communications",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35853569573,
+        "job_id": 107156687267,
+        "artifact_id": 10746965104,
+        "result_sha256": "f18220d5a3ff524f7e2b3bfa36589fad1de7378c703e5d7827e06468b2130bdb",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "RF_LINK_BUDGET",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 130,
       "repo": "cerebron-farm-130-space-traffic-ssa",
       "domain": "space-traffic-ssa-debris-conjunction",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35853579840,
+        "job_id": 107156720399,
+        "artifact_id": 10746347346,
+        "result_sha256": "5e7eb3837088c12d822bfd83469ad2d37b555b4a0ccc4e000f6c378f15139598",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "CONJUNCTION_LINEAR",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 131,
       "repo": "cerebron-farm-131-space-radiation-shielding",
       "domain": "space-radiation-shielding",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35853590465,
+        "job_id": 107156754609,
+        "artifact_id": 10746184855,
+        "result_sha256": "b8b55a7fee0172316569cd6ef05e53ecce1c6a5a82f73f934ec1c1dd4a12859d",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "SHIELD_ATTENUATION",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 132,
       "repo": "cerebron-farm-132-space-weather-environment",
       "domain": "space-weather-space-environment",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35853599523,
+        "job_id": 107156784644,
+        "artifact_id": 10746772062,
+        "result_sha256": "608c6b5a8393005f1fafdad7600f89d7c50ee9102d45e214768a5276faa806d2",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "SOLAR_WIND_PRESSURE",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 133,
