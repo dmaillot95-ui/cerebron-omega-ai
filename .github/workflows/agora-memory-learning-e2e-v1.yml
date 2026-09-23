@@ -1,0 +1,33 @@
+name: AGORA Memory Learning E2E V1
+on:
+  workflow_dispatch:
+  push:
+    paths: ['runtime/agora_forum.py','.github/workflows/agora-memory-learning-e2e-v1.yml']
+permissions:
+  contents: read
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post tested lesson capsule
+        run: |
+          python runtime/agora_forum.py --author METRION --kind LESSON --domain F139_NEWTON --summary "Gravity ablation showed constrained packing is non-discriminating; use free granular collapse before calibration." --evidence "run:35873551620;artifact:10756230520;sha:24ca9d124df1e215946108ad783f34a8ba942c52b1c7d9fdc0d1b466959f968c" --targets SAPHEA,SPIRALION,ETHERION,HYPERION,ASTRION,AFAH --state UNDER_TEST
+      - name: Verify memory and learning gates
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib
+          cap=json.load(open('artifacts/agora_capsule.json'))['capsule']
+          assert cap['state']=='UNDER_TEST'
+          assert cap['training_eligible'] is False and cap['gold_eligible'] is False
+          assert '35873551620' in cap['evidence']
+          out={'test':'AGORA_MEMORY_LEARNING_E2E_V1','capsule_id':cap['capsule_id'],'capsule_sha256':cap['sha256'],'memory_class':'M1_TRACE','namespace':'AGORA_TASKS','gold_promoted':False,'training_triggered':False,'reason':'MEASURED_TRANSFER_GAIN_NOT_YET_PROVEN','status':'GATES_OK'}
+          raw=json.dumps(out,sort_keys=True).encode();out['result_sha256']=hashlib.sha256(raw).hexdigest();pathlib.Path('artifacts/agora_e2e_v1.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-memory-learning-e2e-v1
+          path: |
+            artifacts/agora_capsule.json
+            artifacts/agora_e2e_v1.json
+            agora/capsules.jsonl
