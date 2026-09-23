@@ -25,7 +25,9 @@
     "github_farms": {
       "purpose": "preserved callable roots selected by task as in original CEREBRON routing",
       "preserve_all_existing": true,
-      "selection": "route only required farms"
+      "selection": "route only required farms",
+      "current_registry_count": 146,
+      "highest_farm_id": 146
     },
     "providers": {
       "purpose": "interchangeable execution backends",
@@ -48,7 +50,7 @@
     "MEMORY"
   ],
   "invariants": [
-    "PRESERVE_74_FARMS",
+    "PRESERVE_ALL_REGISTERED_FARMS_DYNAMICALLY",
     "NO_MASS_RENAME_OR_DELETE",
     "NO_SIMULATED_AGENTS",
     "REAL_EXECUTION_RECEIPTS",
@@ -66,5 +68,11 @@
     "agent_fanout": "1..20 permanent-agent capacity",
     "beyond_20": "external/runtime workers only after measured need and available quota",
     "gate": "benchmark + ablation + cost/resource + reliability"
+  },
+  "registry_snapshot": {
+    "count": 146,
+    "max_id": 146,
+    "source": "config/farms.json",
+    "rule": "DYNAMIC_VERIFIED_STATE_NOT_HARDCODED_LIMIT"
   }
 }
