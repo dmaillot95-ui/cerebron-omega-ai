@@ -17,6 +17,8 @@ from coalition import execute as coalition_execute, registry as coalition_regist
 from role_runtime import runtime_roles
 from elyra_policy_runtime import ElyraPolicyError, infer as elyra_infer, status as elyra_status
 from sigma_manager import execute as sigma_execute, status as sigma_status
+from hf_agent_pool import select as hf_agent_select, status as hf_agent_status
+from agora_external import admit as agora_external_admit
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -109,6 +111,17 @@ class Handler(BaseHTTPRequestHandler):
                     "weights_sha": result["weights_sha256"],
                 })
                 return self._json(result)
+            if self.path == "/api/agora/external":
+                data = self._body()
+                receipt = agora_external_admit(data)
+                security_audit(principal, "agora:external", "ALLOW", {
+                    "participant_id": receipt["participant_id"],
+                    "content_sha256": receipt["content_sha256"],
+                })
+                return self._json(receipt, 202)
+            if self.path == "/api/hf-agents/select":
+                data = self._body()
+                return self._json(hf_agent_select(data.get("farm_ids"), data.get("requested_agents", 1)))
             if self.path == "/api/sigma/execute":
                 data = self._body()
                 prompt = str(data.get("prompt", "")).strip()
@@ -193,6 +206,15 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(runtime_roles())
         if path == "/api/sigma/status":
             return self._json(sigma_status())
+        if path == "/api/hf-agents":
+            return self._json(hf_agent_status())
+        if path == "/api/agora/external/status":
+            return self._json({
+                "status":"READY_FOR_AUTHORIZED_EXTERNAL_CAPSULES",
+                "initial_state":"UNDER_TEST_EXTERNAL",
+                "memory_backend":"cerebron-omega/cerebron-private-memory",
+                "auto_gold":False,
+            })
         if path == "/api/missions":
             if principal.is_admin:
                 missions = rows("SELECT * FROM missions ORDER BY created_at DESC LIMIT 50")
