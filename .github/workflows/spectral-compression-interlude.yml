@@ -1,0 +1,21 @@
+name: Spectral Compression Interlude
+on:
+  workflow_dispatch:
+  push:
+    paths: ['experiments/spectral_compression_interlude.py','.github/workflows/spectral-compression-interlude.yml']
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python experiments/spectral_compression_interlude.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spectral-compression-interlude
+          path: artifacts/spectral_compression_interlude.json
+          retention-days: 30
