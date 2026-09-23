@@ -55,10 +55,6 @@ def solve_math_semantic(prompt: str):
 
 
 def _extract_expression(prompt: str):
-    if "python" in prompt.lower() and "expression" in prompt.lower() and ":" in prompt:
-        tail=prompt.rsplit(":",1)[-1].strip().rstrip(" .")
-        if tail:
-            return tail
     candidates = [
         r"(?:python\s+)?expression\s*[:=]\s*(.+)",
         r"(?:evaluate|compute)\s+(?:this\s+)?(?:python\s+)?expression\s*[:=]?\s*(.+)",
@@ -68,8 +64,14 @@ def _extract_expression(prompt: str):
         m=re.search(pat,prompt,re.I)
         if m:
             expr=m.group(1).strip()
-            expr=re.split(r"\b(?:reply|return|answer)\b",expr,flags=re.I)[0].strip()
-            return expr.rstrip(" .")
+            # Remove natural-language output instructions after the expression,
+            # regardless of whether they follow a period or question mark.
+            expr=re.split(
+                r"(?:[.?;]\s*)?\b(?:reply|return|answer|give|output|respond)\b",
+                expr,
+                flags=re.I,
+            )[0].strip()
+            return expr.rstrip(" .?;")
     return None
 
 
@@ -245,7 +247,9 @@ def solve_planning_semantic(prompt: str):
 
 
 def _claims(prompt: str):
-    matches=list(re.finditer(r"\b([ABC])\s*[:.)]\s*",prompt,re.I))
+    # Claim labels are bounded to ':' or ')' forms. A period is intentionally
+    # excluded so ordinary prose such as "A, B, or C." cannot create a fake claim.
+    matches=list(re.finditer(r"\b([ABC])\s*[:)]\s*",prompt,re.I))
     out=[]
     for i,m in enumerate(matches):
         start=m.end(); end=matches[i+1].start() if i+1<len(matches) else len(prompt)
