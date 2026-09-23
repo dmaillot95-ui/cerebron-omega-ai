@@ -20,6 +20,13 @@ def _repo() -> str:
     return os.getenv("CEREBRON_HF_SIGMA_REPO","").strip()
 
 
+def _derived_repo(account: str) -> str:
+    safe=str(account).strip()
+    if not safe:
+        raise HuggingFaceMemoryError("HF_ACCOUNT_UNAVAILABLE")
+    return f"{safe}/cerebron-sigma-memory"
+
+
 def status() -> dict:
     token=bool(_token())
     repo=_repo()
@@ -54,14 +61,36 @@ def probe() -> dict:
     from huggingface_hub import HfApi
     api=HfApi(token=_token())
     me=api.whoami()
-    result={**st,"probe":"AUTHENTICATED","account":me.get("name") or me.get("fullname") or "AUTHENTICATED_USER"}
-    if st["repo_id"]:
-        try:
-            info=api.repo_info(repo_id=st["repo_id"],repo_type="dataset")
-            result.update({"probe":"AUTHENTICATED_REPO_ACCESSIBLE","repo_sha":getattr(info,"sha",None)})
-        except Exception as exc:
-            result.update({"probe":"AUTHENTICATED_REPO_UNAVAILABLE","repo_error":type(exc).__name__})
+    account=me.get("name") or me.get("fullname") or "AUTHENTICATED_USER"
+    repo_id=st["repo_id"] or _derived_repo(account)
+    result={**st,"probe":"AUTHENTICATED","account":account,"resolved_repo_id":repo_id}
+    try:
+        info=api.repo_info(repo_id=repo_id,repo_type="dataset")
+        result.update({"probe":"AUTHENTICATED_REPO_ACCESSIBLE","repo_sha":getattr(info,"sha",None)})
+    except Exception as exc:
+        result.update({"probe":"AUTHENTICATED_REPO_UNAVAILABLE","repo_error":type(exc).__name__})
     return result
+
+
+def ensure_private_sigma_repo() -> dict:
+    st=status()
+    if not st["token_present"]:
+        raise HuggingFaceMemoryError("HF_TOKEN_MISSING")
+    if not st["dependencies_available"]:
+        raise HuggingFaceMemoryError("HUGGINGFACE_HUB_DEPENDENCY_MISSING")
+    from huggingface_hub import HfApi
+    api=HfApi(token=_token())
+    me=api.whoami()
+    account=me.get("name") or me.get("fullname")
+    repo_id=st["repo_id"] or _derived_repo(account)
+    api.create_repo(repo_id=repo_id,repo_type="dataset",private=True,exist_ok=True)
+    info=api.repo_info(repo_id=repo_id,repo_type="dataset")
+    return {
+        "status":"PRIVATE_REPO_READY",
+        "account":account,
+        "repo_id":repo_id,
+        "repo_sha":getattr(info,"sha",None),
+    }
 
 
 def push_json(relative_path: str, payload: dict, memory_class: str, provenance: dict) -> dict:
@@ -70,12 +99,16 @@ def push_json(relative_path: str, payload: dict, memory_class: str, provenance: 
     if memory_class not in {"M1","M2","M3","M4","M5","M7"}:
         raise HuggingFaceMemoryError("MEMORY_CLASS_NOT_ALLOWED")
     st=status()
-    if st["status"]!="READY_TO_PROBE":
-        raise HuggingFaceMemoryError(st["status"])
+    if not st["token_present"]:
+        raise HuggingFaceMemoryError("HF_TOKEN_MISSING")
+    if not st["dependencies_available"]:
+        raise HuggingFaceMemoryError("HUGGINGFACE_HUB_DEPENDENCY_MISSING")
     if not provenance or not provenance.get("sha256"):
         raise HuggingFaceMemoryError("PROVENANCE_SHA_REQUIRED")
     from huggingface_hub import HfApi
     api=HfApi(token=_token())
+    me=api.whoami()
+    repo_id=st["repo_id"] or _derived_repo(me.get("name") or me.get("fullname"))
     body={
         "schema":"CEREBRON_SIGMA_MEMORY_OBJECT_V1",
         "memory_class":memory_class,
@@ -90,8 +123,8 @@ def push_json(relative_path: str, payload: dict, memory_class: str, provenance: 
     api.upload_file(
         path_or_fileobj=str(tmp),
         path_in_repo=relative_path,
-        repo_id=_repo(),
+        repo_id=repo_id,
         repo_type="dataset",
         commit_message=f"SIGMA memory {memory_class} {sha[:12]}",
     )
-    return {"status":"WRITTEN","repo_id":_repo(),"path":relative_path,"sha256":sha,"memory_class":memory_class}
+    return {"status":"WRITTEN","repo_id":repo_id,"path":relative_path,"sha256":sha,"memory_class":memory_class}
