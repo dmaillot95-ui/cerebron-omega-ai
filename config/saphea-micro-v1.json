@@ -25,7 +25,7 @@
       "model_id": "CEREBRON-ROUTER-NN-V1",
       "worker": "local-cpu-router",
       "independent_model": false,
-      "dependency": "Qwen/Qwen2.5-0.5B-Instruct"
+      "dependency": null
     },
     {
       "id": "SM01",

@@ -18,8 +18,9 @@ PRIMARY_BY_ROUTE = {
     "software": "SM05",
     "space": "SM08",
     "simulation": "SM08",
-    "general": "SM18",
+    "general": None,
 }
+BASE_GENERATOR = "BASE_QWEN"
 MEMORY_HINTS = {"memory", "mémoire", "remember", "checkpoint", "agora", "previous", "précédent", "rappel"}
 ROLE_INSTRUCTIONS = {
     "SM02": "Act as a math/logic specialist. Separate proof from heuristic and calculation from proof. Obey any explicit output-format constraint exactly; if the user requests only one number, token, or word, output only that.",
@@ -105,11 +106,11 @@ def fusion(prompt: str, route: dict, generation: dict | None, memory: dict, audi
 
 def plan(prompt: str, route: dict | None = None) -> dict:
     route = route or infer(prompt)
-    primary = PRIMARY_BY_ROUTE.get(route["label"], "SM18")
+    primary = PRIMARY_BY_ROUTE.get(route["label"])
     selected = ["SM00"]
     if _words(prompt) & MEMORY_HINTS:
         selected.append("SM11")
-    if primary not in selected:
+    if primary and primary not in selected:
         selected.append(primary)
     selected.extend(["SM15", "SM18"])
     selected = list(dict.fromkeys(selected))
@@ -118,21 +119,22 @@ def plan(prompt: str, route: dict | None = None) -> dict:
     readiness = {}
     for uid in selected:
         unit = units[uid]
-        if unit.get("model_id"):
-            ready = gen["status"] == "ACTIVE_WORKER"
-            readiness[uid] = "READY" if ready else "RUNTIME_GATED"
+        if unit.get("model_id") == "Qwen/Qwen2.5-0.5B-Instruct":
+            readiness[uid] = "READY" if gen["status"] == "ACTIVE_WORKER" else "RUNTIME_GATED"
         else:
             readiness[uid] = "READY"
+    model_needed = primary is not None or route["label"] == "general"
     return {
         "schema": "CEREBRON_COALITION_PLAN_V1",
         "strategy": "SEARCH_GENERATE_VERIFY_MINIMAL_USEFUL_COALITION",
         "route": route,
-        "primary": primary,
+        "primary": primary or BASE_GENERATOR,
         "selected_units": selected,
         "readiness": readiness,
+        "base_generator_readiness": "READY" if gen["status"] == "ACTIVE_WORKER" else "RUNTIME_GATED",
         "logical_unit_count": len(selected),
-        "independent_model_count": 1 if any(units[u].get("model_id") for u in selected) and gen["status"] == "ACTIVE_WORKER" else 0,
-        "shared_dependencies": ["Qwen/Qwen2.5-0.5B-Instruct"] if any(units[u].get("model_id") for u in selected) else [],
+        "independent_model_count": 1 if model_needed and gen["status"] == "ACTIVE_WORKER" else 0,
+        "shared_dependencies": ["Qwen/Qwen2.5-0.5B-Instruct"] if model_needed else [],
         "warning": "Multiple role calls to the same base model are correlated and must not be counted as independent evidence.",
     }
 
@@ -148,34 +150,53 @@ def _generate_for_unit(unit_id: str, prompt: str) -> dict:
         return {"unit": unit_id, "status": "NON_EXECUTED", "error": str(exc)}
 
 
+def _generate_base(prompt: str) -> dict:
+    if generative_status()["status"] != "ACTIVE_WORKER":
+        return {"unit": BASE_GENERATOR, "status": "NON_EXECUTED", "error": generative_status()["status"]}
+    try:
+        result = generative_generate(prompt)
+        return {"unit": BASE_GENERATOR, "status": "MODEL_EXECUTED", **result}
+    except GenerativeBackendError as exc:
+        return {"unit": BASE_GENERATOR, "status": "NON_EXECUTED", "error": str(exc)}
+
+
 def execute(prompt: str) -> dict:
     prompt = str(prompt).strip()
     if not prompt:
         raise ValueError("prompt required")
 
-    # Two genuinely distinct local workers can run concurrently: routing and memory retrieval.
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        route_future = pool.submit(infer, prompt)
-        memory_future = pool.submit(memory_retrieve, prompt)
-        route = route_future.result()
-        memory = memory_future.result()
-
+    route = infer(prompt)
     coalition = plan(prompt, route=route)
     primary = coalition["primary"]
-    generation = _generate_for_unit(primary, prompt)
+    memory_selected = "SM11" in coalition["selected_units"]
+
+    generator = _generate_base if primary == BASE_GENERATOR else lambda value: _generate_for_unit(primary, value)
+    if memory_selected:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            memory_future = pool.submit(memory_retrieve, prompt)
+            generation_future = pool.submit(generator, prompt)
+            memory = memory_future.result()
+            generation = generation_future.result()
+    else:
+        memory = {"unit": "SM11", "status": "NOT_SELECTED", "matches": []}
+        generation = generator(prompt)
+
     audit = red_team(generation if generation.get("generation") else None)
     fused = fusion(prompt, route, generation if generation.get("generation") else None, memory, audit)
+    workers = {
+        "SM00": {"unit": "SM00", "status": "EXECUTED", "result": route},
+        primary: generation,
+        "SM15": audit,
+        "SM18": fused,
+    }
+    if memory_selected:
+        workers["SM11"] = memory
+
     return {
         "schema": "CEREBRON_COALITION_EXECUTION_V1",
         "status": "COMPLETED" if fused.get("answer") else "ROUTED_ONLY",
         "plan": coalition,
-        "workers": {
-            "SM00": {"unit": "SM00", "status": "EXECUTED", "result": route},
-            "SM11": memory,
-            primary: generation,
-            "SM15": audit,
-            "SM18": fused,
-        },
+        "workers": workers,
         "answer": fused.get("answer"),
         "claim_ceiling": fused["claim_ceiling"],
     }

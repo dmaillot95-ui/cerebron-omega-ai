@@ -247,6 +247,25 @@ class PlatformTests(unittest.TestCase):
         self.assertEqual(result["claim_ceiling"], "NO_MODEL_OUTPUT")
 
 
+    def test_memory_worker_is_not_executed_when_not_selected(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            result = coalition_execute("Démontrer une équation mathématique")
+        self.assertNotIn("SM11", result["workers"])
+        self.assertNotIn("SM11", result["plan"]["selected_units"])
+
+    def test_memory_hint_selects_sm11(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            plan = coalition_plan("Rappelle le checkpoint mémoire AGORA précédent")
+        self.assertIn("SM11", plan["selected_units"])
+
+    def test_general_route_uses_base_generator_not_fusion_as_generator(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            plan = coalition_plan("Bonjour, explique simplement ce sujet")
+        if plan["route"]["label"] == "general":
+            self.assertEqual(plan["primary"], "BASE_QWEN")
+            self.assertIn("SM18", plan["selected_units"])
+
+
 if __name__ == "__main__":
     unittest.main()
 
