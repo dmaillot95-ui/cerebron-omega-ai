@@ -113,7 +113,7 @@ def main():
     gates.append(gate(
         "farm_bridge_contract",
         123 in PILOTS and "hohmann_reference" in PILOTS[123]["operations"],
-        {"pilot_farm":123,"workflow":PILOTS[123]["workflow"],"operations":PILOTS[123]["operations"]},
+        {"pilot_farm":123,"workflow":PILOTS[123]["workflow"],"operations":sorted(PILOTS[123]["operations"])},
     ))
 
     gen=generative_status()
