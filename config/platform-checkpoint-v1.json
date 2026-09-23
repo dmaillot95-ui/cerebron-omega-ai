@@ -1,0 +1,97 @@
+{
+  "schema": "CEREBRON_PLATFORM_CHECKPOINT_V1",
+  "date": "2026-09-23",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "status": "OPERATIONAL_SCOPED_LOCAL_VERIFIED",
+  "validated_code_head": "c654efdea6b0faa03a39bf4854128ae2c488250c",
+  "registry_sync_head": "ae7322c7b8704fb8acdafad3a88e4c9dd397550f",
+  "human_checkpoint_commit": "f53031469d9e6a4690f3d85662623cefdb6f7b37",
+  "merge_to_main": false,
+  "acceptance": {
+    "run_id": 35908728772,
+    "status": "SUCCESS",
+    "score": "15/15",
+    "scope": "SCOPED_LOCAL",
+    "artifact_id": 10771717736,
+    "artifact_digest": "sha256:193ea60238b69f100c9a5d8ec68aa51390f3998caf3871278799a2b7cba7165f"
+  },
+  "semantic_v5": {
+    "run_id": 35908728793,
+    "status": "SUCCESS",
+    "baseline_score": 13,
+    "adaptive_score": 53,
+    "tool_hits": 51,
+    "domains_improved": 6,
+    "artifact_id": 10772427564,
+    "artifact_digest": "sha256:4f5716ec7e229729e1500a14481631a30a6ea25bbbc2122b391f7aed8500db7c",
+    "dataset_sha256": "ce3b1e7d79bb0c1ec2aaec969ce6f1da2d10b7866583d766cbd5d6d512e9bfd2",
+    "result_sha256": "52549d78fb0d0e43f7a0551d3126d24a3a0ca5e52ae0aca2ffbafa3199e5de28"
+  },
+  "generative_backend": {
+    "base_model": "Qwen",
+    "e2e_run_id": 35908555461,
+    "status": "SUCCESS",
+    "independent_general_model_count": 1
+  },
+  "elyra": {
+    "runtime_e2e_run_id": 35908555554,
+    "status": "ACTIVE_SCOPED_WHEN_ENABLED",
+    "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+    "endpoint": "/api/elyra/action",
+    "scope": "SYNTHETIC_ROVER_POLICY_ONLY",
+    "claim_ceiling": "E3_SIMULATION_POLICY_NOT_PHYSICAL_VALIDATION"
+  },
+  "security": {
+    "run_id": 35908555502,
+    "status": "REMOTE_DEPLOYMENT_BLOCKED_AS_DESIGNED",
+    "artifact_id": 10772521074,
+    "artifact_digest": "sha256:d956ca5b73cc16880999bbf6edd0d85e68bfba9731118e95b71ea3b0e85976d4",
+    "public_remote_deployment": false
+  },
+  "rejected_general_model_candidates": [
+    {
+      "model": "OLMo-2-0425-1B-Instruct",
+      "score": 7,
+      "max_score": 12,
+      "threshold": 8,
+      "run_id": 35906141609
+    },
+    {
+      "model": "SmolLM2-1.7B-Instruct",
+      "score": 5,
+      "max_score": 12,
+      "threshold": 8,
+      "run_id": 35906985193
+    },
+    {
+      "model": "Granite-3.3-2B-Instruct",
+      "score": 6,
+      "max_score": 12,
+      "threshold": 8,
+      "run_id": 35907328339
+    }
+  ],
+  "open_limits": [
+    "G11_OPEN",
+    "PUBLIC_REMOTE_DEPLOYMENT_BLOCKED",
+    "NO_PHYSICAL_ROBOT_VALIDATION_FOR_ELYRA",
+    "AELYS_NO_DEDICATED_TRAINED_MODEL",
+    "ONLY_ONE_QUALIFIED_GENERAL_GENERATIVE_BASE_MODEL",
+    "SHARED_QWEN_SPECIALIST_CALLS_ARE_CORRELATED"
+  ],
+  "resume_order": [
+    "docs/CEREBRON_PLATFORM_CHECKPOINT_2026-09-23.md",
+    "config/platform-checkpoint-v1.json",
+    "config/operational-status-v1.json",
+    "config/specialist-ai-v1.json",
+    "config/neural-training-fabric-v1.json"
+  ],
+  "rules": [
+    "DO_NOT_REBUILD_FROM_ZERO",
+    "DO_NOT_SIMULATE_AGENTS_OR_FARMS",
+    "CLAIM_LE_EVIDENCE",
+    "SIMULATION_NE_PHYSICAL_VALIDATION",
+    "SHARED_BASE_NE_INDEPENDENT_MODEL",
+    "KEEP_REMOTE_BIND_BLOCKED_UNTIL_ALL_DEPLOYMENT_BLOCKERS_PASS"
+  ]
+}
