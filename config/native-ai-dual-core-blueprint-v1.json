@@ -1,0 +1,112 @@
+{
+  "schema": "CEREBRON_NATIVE_AI_DUAL_CORE_BLUEPRINT_V1",
+  "date": "2026-09-23",
+  "status": "ACTIVE_POLICY_CURRENT_AI_PLANNED_AI_RESERVED",
+  "runtime_modified": false,
+  "principle": "DUAL_CORE_WHEN_ABLATION_SHOWS_MEASURED_GAIN_SINGLE_CORE_ALLOWED_FOR_SIMPLE_TASKS",
+  "common_flow": [
+    "INPUT",
+    "CEREBRON_ROUTE",
+    "CORE_A_AND_CORE_B_INDEPENDENT_OR_COMPLEMENTARY",
+    "CROSS_CRITIQUE_IF_REQUIRED",
+    "FUSION",
+    "AUDIT",
+    "VALIDATED_MEMORY"
+  ],
+  "common_memory": {
+    "backend": "cerebron-omega/cerebron-private-memory",
+    "namespace_pattern": "native-ai/{AI_ID}",
+    "rules": [
+      "M6_NEVER_IN_TRAIN",
+      "NO_RAW_AGORA_AUTO_GOLD",
+      "NO_BLIND_CROSS_AI_COPY",
+      "SHA256_AND_PROVENANCE_REQUIRED"
+    ]
+  },
+  "current": [
+    {
+      "ai_id": "ELYSION",
+      "farm_id": 145,
+      "status": "ACTIVE_PROJECT_BENCHMARK_PHASE",
+      "mission": "reasoning_generation_invention_solution_search",
+      "core_a": "construct_solution_reasoning_invention",
+      "core_b": "independent_alternative_critique",
+      "fusion": "evidence_aware_solution_fusion",
+      "initial_candidate_pair": [
+        "Qwen/Qwen3-4B",
+        "HuggingFaceTB/SmolLM3-3B"
+      ],
+      "binding": "SUBJECT_TO_COLD_M6_AND_ABLATION"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "farm_id": 146,
+      "status": "REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
+      "mission": "verification_red_team_optimization_validation",
+      "core_a": "verification_reproduction",
+      "core_b": "counteraudit_adversarial_search",
+      "fusion": "validated_error_corrected_judgment",
+      "initial_candidate_pair": [
+        "Qwen/Qwen3-4B",
+        "HuggingFaceTB/SmolLM3-3B"
+      ],
+      "binding": "SUBJECT_TO_OWN_BENCHMARK_AND_ABLATION"
+    }
+  ],
+  "planned": [
+    {
+      "ai_id": "SAELION",
+      "status": "PLANNED_NOT_ACTIVE",
+      "mission": "exploration_learning_compression",
+      "core_a": "exploration_learning_candidate_generation",
+      "core_b": "selection_compression_retention",
+      "fusion": "validated_compact_learning",
+      "activation": "REAL_PROJECT_OR_REPOSITORY_PLUS_MEMORY_CANARY_PLUS_BENCHMARK"
+    },
+    {
+      "ai_id": "ALPHA",
+      "status": "PLANNED_NOT_ACTIVE",
+      "mission": "divergence_creation_new_hypotheses",
+      "core_a": "wide_divergent_search",
+      "core_b": "constructive_hypothesis_formation",
+      "fusion": "novel_candidate_set_with_assumptions",
+      "activation": "REAL_PROJECT_OR_REPOSITORY_PLUS_MEMORY_CANARY_PLUS_BENCHMARK"
+    },
+    {
+      "ai_id": "OMEGA",
+      "status": "PLANNED_NOT_ACTIVE",
+      "mission": "proof_audit_falsification",
+      "core_a": "proof_verification",
+      "core_b": "counterproof_falsification",
+      "fusion": "claim_evidence_closure",
+      "activation": "REAL_PROJECT_OR_REPOSITORY_PLUS_MEMORY_CANARY_PLUS_BENCHMARK"
+    },
+    {
+      "ai_id": "DELTA",
+      "status": "PLANNED_NOT_ACTIVE",
+      "mission": "scientific_modeling_simulation_validation",
+      "core_a": "model_equations_prediction",
+      "core_b": "simulation_sensitivity_failure_modes",
+      "fusion": "model_vs_simulation_evidence_synthesis",
+      "activation": "REAL_PROJECT_OR_REPOSITORY_PLUS_MEMORY_CANARY_PLUS_BENCHMARK"
+    },
+    {
+      "ai_id": "NEXUS",
+      "status": "PLANNED_NOT_ACTIVE",
+      "mission": "knowledge_connection_orchestration",
+      "core_a": "knowledge_graph_connection_retrieval",
+      "core_b": "resource_orchestration_route_optimization",
+      "fusion": "connected_actionable_context",
+      "activation": "REAL_PROJECT_OR_REPOSITORY_PLUS_MEMORY_CANARY_PLUS_BENCHMARK"
+    }
+  ],
+  "hard_rules": [
+    "DOUBLE_CORE_IS_ARCHITECTURE_NOT_TWO_INDEPENDENT_PROOFS_BY_DEFAULT",
+    "SHARED_BASE_LINEAGE_IS_CORRELATED",
+    "ACTIVATE_SECOND_CORE_ONLY_IF_VALUE_OR_RISK_JUSTIFIES_COST",
+    "PLANNED_AI_IS_NOT_EXECUTED_AI",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "TRANSFER_BEFORE_GENERALITY",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
