@@ -1,0 +1,207 @@
+name: ELYSION M6 Cold Baseline Qwen vs Smol
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - '.github/workflows/elysion-m6-cold-baseline.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - slug: qwen3-4b
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - slug: smollm3-3b
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_PRIVATE_REPO: cerebron-omega/cerebron-private-memory
+      M6_PATH: elysion/M6/ELYSION-M6-V1.json
+      M6_SHA256: bc2324c1afffe780c3deb3cc25e70f9838f86253bb4ea27f88fec0cb209b59f6
+      MODEL_ID: ${{ matrix.model_id }}
+      MODEL_REVISION: ${{ matrix.revision }}
+      MODEL_SLUG: ${{ matrix.slug }}
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install CPU inference runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors huggingface_hub
+      - name: Execute private M6 baseline
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import os,re,json,time,hashlib,resource,tempfile
+          from pathlib import Path
+          import torch
+          from huggingface_hub import HfApi,hf_hub_download
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          token=os.environ["HF_TOKEN"]
+          priv=os.environ["HF_PRIVATE_REPO"]
+          m6_path=os.environ["M6_PATH"]
+          expected_sha=os.environ["M6_SHA256"]
+          mid=os.environ["MODEL_ID"]; rev=os.environ["MODEL_REVISION"]; slug=os.environ["MODEL_SLUG"]
+
+          # Cold dataset: private read, exact SHA, no other memory/RAG.
+          fn=hf_hub_download(repo_id=priv,filename=m6_path,repo_type="model",token=token,force_download=True)
+          raw=Path(fn).read_bytes()
+          got_sha=hashlib.sha256(raw).hexdigest()
+          if got_sha != expected_sha:
+              raise SystemExit(f"M6_SHA_MISMATCH:{got_sha}")
+          m6=json.loads(raw)
+          if not m6.get("deny_training") or m6.get("classification")!="M6_COLD_BENCHMARK_SEALED":
+              raise SystemExit("M6_CLASSIFICATION_FAIL")
+          tasks=m6["tasks"]
+          if len(tasks)!=100: raise SystemExit("M6_COUNT_FAIL")
+
+          info=HfApi().model_info(mid,revision=rev)
+          if info.sha != rev: raise SystemExit("REVISION_MISMATCH")
+          t0=time.time()
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          if tok.pad_token_id is None:
+              tok.pad_token_id=tok.eos_token_id
+          model=AutoModelForCausalLM.from_pretrained(
+              mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True
+          )
+          model.eval()
+
+          tools={"CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"}
+          def normalize(text, expected):
+              s=text.strip()
+              e=str(expected).strip()
+              if e in {"A","B","C","D"}:
+                  m=re.search(r"\b([ABCD])\b",s.upper())
+                  return m.group(1) if m else ""
+              if e in tools:
+                  up=s.upper()
+                  for x in ["CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"]:
+                      if re.search(rf"\b{x}\b",up):
+                          return x
+                  return ""
+              m=re.search(r"[-+]?\d+",s.replace(",",""))
+              return m.group(0) if m else s.split()[0] if s.split() else ""
+
+          results=[]
+          domain={}
+          for idx,task in enumerate(tasks,1):
+              messages=[
+                  {"role":"system","content":"Answer the user's benchmark question directly. Return only the requested short answer. /no_think"},
+                  {"role":"user","content":task["prompt"]}
+              ]
+              try:
+                  rendered=tok.apply_chat_template(
+                      messages,tokenize=False,add_generation_prompt=True,enable_thinking=False
+                  )
+              except TypeError:
+                  rendered=tok.apply_chat_template(messages,tokenize=False,add_generation_prompt=True)
+              inputs=tok(rendered,return_tensors="pt")
+              with torch.inference_mode():
+                  out=model.generate(
+                      **inputs,max_new_tokens=12,do_sample=False,
+                      pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id
+                  )
+              new=out[0][inputs["input_ids"].shape[-1]:]
+              text=tok.decode(new,skip_special_tokens=True).strip()
+              norm=normalize(text,task["expected"])
+              correct=(norm==str(task["expected"]).strip())
+              d=domain.setdefault(task["domain"],{"correct":0,"total":0})
+              d["total"]+=1; d["correct"]+=int(correct)
+              results.append({
+                  "id":task["id"],"domain":task["domain"],
+                  "expected":str(task["expected"]),"normalized":norm,"correct":correct,
+                  "output":text,"output_sha256":hashlib.sha256(text.encode()).hexdigest()
+              })
+              if idx%10==0:
+                  print(f"PROGRESS {slug} {idx}/100 correct={sum(int(x['correct']) for x in results)}",flush=True)
+
+          correct=sum(int(x["correct"]) for x in results)
+          elapsed=time.time()-t0
+          for d in domain.values():
+              d["accuracy"]=d["correct"]/d["total"]
+          public_rows=[{"id":x["id"],"correct":x["correct"],"output_sha256":x["output_sha256"]} for x in results]
+          aggregate_sha=hashlib.sha256(json.dumps(public_rows,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          summary={
+              "schema":"ELYSION_M6_BASELINE_SUMMARY_V1","status":"PASS",
+              "model_id":mid,"revision":rev,"m6_sha256":expected_sha,
+              "thinking":False,"rag":False,"tools":False,"agents":False,"cerebron":False,
+              "task_count":100,"correct":correct,"accuracy":correct/100.0,
+              "domain":domain,"elapsed_s":round(elapsed,3),
+              "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+              "public_result_fingerprint_sha256":aggregate_sha,
+              "weights_changed":False
+          }
+          private_result={
+              "schema":"ELYSION_M6_BASELINE_PRIVATE_V1",
+              "summary":summary,
+              "results":results
+          }
+          private_raw=(json.dumps(private_result,indent=2,ensure_ascii=False)+"\n").encode()
+          private_sha=hashlib.sha256(private_raw).hexdigest()
+          private_file=f"/tmp/{slug}-m6-result.json"
+          Path(private_file).write_bytes(private_raw)
+          private_path=f"elysion/M6-results/{os.environ.get('GITHUB_RUN_ID','run')}/{slug}.json"
+          api=HfApi(token=token)
+          api.upload_file(
+              path_or_fileobj=private_file,path_in_repo=private_path,repo_id=priv,repo_type="model",
+              commit_message=f"ELYSION M6 baseline {slug}"
+          )
+          summary["private_result_path"]=private_path
+          summary["private_result_sha256"]=private_sha
+          Path(f"receipts/elysion/{slug}-m6-summary.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(summary,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysion-m6-${{ matrix.slug }}-summary
+          path: receipts/elysion/${{ matrix.slug }}-m6-summary.json
+          if-no-files-found: error
+
+  compare:
+    needs: baseline
+    if: always() && needs.baseline.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: elysion-m6-*-summary
+          path: summaries
+          merge-multiple: true
+      - name: Compare without premature promotion
+        run: |
+          python - <<'PY'
+          import json,glob,hashlib
+          from pathlib import Path
+          rows=[json.load(open(p)) for p in sorted(glob.glob("summaries/*.json"))]
+          rows=sorted(rows,key=lambda x:x["model_id"])
+          best=max(r["accuracy"] for r in rows)
+          tied=[r["model_id"] for r in rows if r["accuracy"]==best]
+          out={
+            "schema":"ELYSION_M6_BASELINE_COMPARISON_V1",
+            "status":"COMPLETE",
+            "m6_sha256":rows[0]["m6_sha256"],
+            "models":rows,
+            "highest_accuracy":best,
+            "highest_accuracy_models":tied,
+            "selection_decision":"NO_FINAL_BASE_SELECTION_UNTIL_REDTEAM_AND_RESOURCE_ABLATION",
+            "weights_changed":False
+          }
+          raw=(json.dumps(out,indent=2)+"\n")
+          Path("elysion-m6-comparison.json").write_text(raw)
+          print(raw)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysion-m6-baseline-comparison
+          path: elysion-m6-comparison.json
+          if-no-files-found: error
