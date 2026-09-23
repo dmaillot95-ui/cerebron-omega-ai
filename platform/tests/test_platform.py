@@ -21,6 +21,7 @@ from farm_bridge import FarmBridgeError, PILOTS, submit
 from security import SecurityError, authenticate, check_origin, rate_limit, reset_rate_limits, require
 from server import Handler
 from generative_backend import MODEL_ID as GENERATIVE_MODEL_ID, REVISION as GENERATIVE_REVISION, status as generative_status
+from coalition import execute as coalition_execute, plan as coalition_plan, registry as coalition_registry
 
 
 class PlatformTests(unittest.TestCase):
@@ -217,6 +218,33 @@ class PlatformTests(unittest.TestCase):
         self.assertEqual(st["revision"], GENERATIVE_REVISION)
         self.assertEqual(st["benchmark_evidence"]["score"], 5)
         self.assertEqual(st["status"], "CONFIGURED_DISABLED")
+
+
+    def test_saphea_micro_registry_has_20_units_and_only_7_implemented_initially(self):
+        reg = coalition_registry()
+        self.assertEqual(len(reg["units"]), 20)
+        self.assertEqual(
+            set(reg["implemented_initial"]),
+            {"SM00", "SM02", "SM05", "SM08", "SM11", "SM15", "SM18"},
+        )
+        planned = [u for u in reg["units"] if u["status"] == "PLANNED_UNAVAILABLE"]
+        self.assertEqual(len(planned), 13)
+
+    def test_minimal_coalition_does_not_launch_20_units(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            plan = coalition_plan("Démontrer une équation mathématique")
+        self.assertIn("SM02", plan["selected_units"])
+        self.assertIn("SM15", plan["selected_units"])
+        self.assertIn("SM18", plan["selected_units"])
+        self.assertLess(len(plan["selected_units"]), 20)
+        self.assertEqual(plan["independent_model_count"], 0)
+
+    def test_coalition_fails_closed_when_generative_runtime_disabled(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            result = coalition_execute("Démontrer une équation mathématique")
+        self.assertEqual(result["status"], "ROUTED_ONLY")
+        self.assertIsNone(result["answer"])
+        self.assertEqual(result["claim_ceiling"], "NO_MODEL_OUTPUT")
 
 
 if __name__ == "__main__":

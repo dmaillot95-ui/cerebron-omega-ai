@@ -13,6 +13,7 @@ from mission_engine import ARTIFACTS, ROOT, create_mission, rows
 from model_router import catalog, infer
 from farm_bridge import PILOTS
 from generative_backend import GenerativeBackendError, generate as generative_generate
+from coalition import execute as coalition_execute, registry as coalition_registry
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -78,6 +79,17 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({"error": str(exc)}, 503)
                 security_audit(principal, "model:generate", "ALLOW", {"output_sha": result["output_sha"]})
                 return self._json(result)
+            if self.path == "/api/coalition/execute":
+                data = self._body()
+                prompt = str(data.get("prompt", "")).strip()
+                if not prompt:
+                    return self._json({"error": "prompt required"}, 400)
+                result = coalition_execute(prompt)
+                security_audit(principal, "coalition:execute", "ALLOW", {
+                    "status": result["status"],
+                    "units": result["plan"]["selected_units"],
+                })
+                return self._json(result)
             return self._json({"error": "not found"}, 404)
         except SecurityError as exc:
             return self._security_error(exc)
@@ -128,6 +140,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"count": len(enriched), "farms": enriched})
         if path == "/api/models":
             return self._json({"models": catalog()})
+        if path == "/api/saphea-micro":
+            return self._json(coalition_registry())
         if path == "/api/roles":
             names = ["CÉRÉBRON", "SAPHEA", "SPIRALION", "ETHERION", "HYPERION", "ASTRION", "METRION", "AFAH", "AÉLYS", "ELYRA", "SAPHEA MICRO"]
             return self._json({"roles": [{"name": n, "type": "LOGICAL_ROLE", "model": None, "status": "UNAVAILABLE"} for n in names]})

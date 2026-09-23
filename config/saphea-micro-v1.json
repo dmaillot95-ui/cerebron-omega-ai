@@ -1,0 +1,202 @@
+{
+  "version": "1.0",
+  "schema": "CEREBRON_SAPHEA_MICRO_V1",
+  "rules": [
+    "MINIMAL_USEFUL_COALITION",
+    "ROLE_NAME_IS_NOT_INDEPENDENT_MODEL",
+    "SHARED_BASE_MODEL_IS_CORRELATED_DEPENDENCY",
+    "NON_EXECUTED_IF_RUNTIME_UNAVAILABLE",
+    "SEVEN_IMPLEMENTED_THIRTEEN_PLANNED_UNAVAILABLE"
+  ],
+  "implemented_initial": [
+    "SM00",
+    "SM02",
+    "SM05",
+    "SM08",
+    "SM11",
+    "SM15",
+    "SM18"
+  ],
+  "units": [
+    {
+      "id": "SM00",
+      "domain": "routing-planning",
+      "status": "IMPLEMENTED",
+      "model_id": "CEREBRON-ROUTER-NN-V1",
+      "worker": "local-cpu-router",
+      "independent_model": false,
+      "dependency": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "id": "SM01",
+      "domain": "routing-planning",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM02",
+      "domain": "math-logic-proof",
+      "status": "IMPLEMENTED_RUNTIME_GATED",
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "worker": "shared-local-generative",
+      "independent_model": false,
+      "dependency": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "id": "SM03",
+      "domain": "math-logic-proof",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM04",
+      "domain": "math-logic-proof",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM05",
+      "domain": "code-tests-calculation",
+      "status": "IMPLEMENTED_RUNTIME_GATED",
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "worker": "shared-local-generative",
+      "independent_model": false,
+      "dependency": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "id": "SM06",
+      "domain": "code-tests-calculation",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM07",
+      "domain": "code-tests-calculation",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM08",
+      "domain": "physics-engineering-simulation",
+      "status": "IMPLEMENTED_RUNTIME_GATED",
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "worker": "shared-local-generative",
+      "independent_model": false,
+      "dependency": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "id": "SM09",
+      "domain": "physics-engineering-simulation",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM10",
+      "domain": "physics-engineering-simulation",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM11",
+      "domain": "research-rag-provenance",
+      "status": "IMPLEMENTED",
+      "model_id": null,
+      "worker": "local-sqlite-agora-retrieval",
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM12",
+      "domain": "research-rag-provenance",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM13",
+      "domain": "invention-hyperion-hypotheses",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM14",
+      "domain": "invention-hyperion-hypotheses",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM15",
+      "domain": "reproduction-audit-redteam",
+      "status": "IMPLEMENTED",
+      "model_id": null,
+      "worker": "deterministic-redteam-v1",
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM16",
+      "domain": "reproduction-audit-redteam",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM17",
+      "domain": "reproduction-audit-redteam",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM18",
+      "domain": "fusion-no-false-consensus",
+      "status": "IMPLEMENTED",
+      "model_id": null,
+      "worker": "deterministic-fusion-v1",
+      "independent_model": null,
+      "dependency": null
+    },
+    {
+      "id": "SM19",
+      "domain": "communication-aelys",
+      "status": "PLANNED_UNAVAILABLE",
+      "model_id": null,
+      "worker": null,
+      "independent_model": null,
+      "dependency": null
+    }
+  ]
+}
