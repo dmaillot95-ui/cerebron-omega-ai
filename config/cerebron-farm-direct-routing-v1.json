@@ -15,7 +15,9 @@
     "MAX_20_DYNAMIC_AGENT_SLOTS",
     "NO_AGENT_WRAPPER_FOR_SIMPLE_SPECIALIST_MODEL_CALL",
     "FAILED_PROVIDER_DOES_NOT_DISABLE_FARM_IDENTITY",
-    "REAL_EXECUTION_RECEIPT_REQUIRED"
+    "REAL_EXECUTION_RECEIPT_REQUIRED",
+    "NATIVE_AI_DUAL_CORE_REQUIRES_ABLATION_GAIN",
+    "NATIVE_AI_MEMORY_USES_PER_AI_NAMESPACE"
   ],
   "routing_classes": {
     "proof": [
@@ -61,12 +63,17 @@
     ],
     "integration": [
       "F73"
+    ],
+    "native_ai": [
+      "F145",
+      "F146"
     ]
   },
   "dispatch": {
     "simple": "TASK -> best specialist IA/farm -> audit if needed -> synthesis",
     "hard": "TASK -> SAPHEA + FRONTIER_OPEN -> selected farms -> optional agents -> audit/counter-audit -> synthesis",
-    "validated_learning": "validated result -> SAPHEIDE -> private memory -> benchmark/ablation -> AFAH lineage admission"
+    "validated_learning": "validated result -> SAPHEIDE -> private memory -> benchmark/ablation -> AFAH lineage admission",
+    "native_ai": "TASK -> CEREBRON -> native AI single-core or dual-core policy -> optional farms/tools -> audit -> fusion -> validated memory"
   },
   "compatibility": {
     "greek24": "routing vocabulary only; not mandatory persistent colonies",
