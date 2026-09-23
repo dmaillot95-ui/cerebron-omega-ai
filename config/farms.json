@@ -1,5 +1,5 @@
 {
-  "version": "2.07",
+  "version": "2.08",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -685,6 +685,144 @@
       "repo": "cerebron-farm-122-metrion-engineering-validation",
       "domain": "engineering-validation",
       "status": "SCAFFOLDED"
+    },
+    {
+      "id": 123,
+      "repo": "cerebron-farm-123-mission-design-navigation",
+      "domain": "space-mission-design-interplanetary-navigation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 124,
+      "repo": "cerebron-farm-124-spacecraft-gnc-attitude",
+      "domain": "spacecraft-gnc-attitude-dynamics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 125,
+      "repo": "cerebron-farm-125-flight-software",
+      "domain": "space-flight-software-architecture",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 126,
+      "repo": "cerebron-farm-126-spacecraft-digital-twin",
+      "domain": "spacecraft-digital-twin-nos3-sil-hil",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 127,
+      "repo": "cerebron-farm-127-hypersonics-reentry",
+      "domain": "hypersonics-reentry-rarefied-aerothermodynamics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 128,
+      "repo": "cerebron-farm-128-electric-plasma-propulsion",
+      "domain": "electric-plasma-space-propulsion",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 129,
+      "repo": "cerebron-farm-129-space-communications",
+      "domain": "space-rf-optical-communications",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 130,
+      "repo": "cerebron-farm-130-space-traffic-ssa",
+      "domain": "space-traffic-ssa-debris-conjunction",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 131,
+      "repo": "cerebron-farm-131-space-radiation-shielding",
+      "domain": "space-radiation-shielding",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 132,
+      "repo": "cerebron-farm-132-space-weather-environment",
+      "domain": "space-weather-space-environment",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 133,
+      "repo": "cerebron-farm-133-cryogenic-propellant-fluids",
+      "domain": "cryogenic-propellant-fluid-management",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 134,
+      "repo": "cerebron-farm-134-eclss-closed-loop-habitats",
+      "domain": "eclss-closed-loop-habitat-systems",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 135,
+      "repo": "cerebron-farm-135-vacuum-contamination",
+      "domain": "vacuum-contamination-molecular-environment",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 136,
+      "repo": "cerebron-farm-136-space-mechanisms-tribology",
+      "domain": "space-mechanisms-tribology-lubrication",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 137,
+      "repo": "cerebron-farm-137-space-optics-photonics",
+      "domain": "space-optics-telescopes-photonics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 138,
+      "repo": "cerebron-farm-138-planetary-remote-sensing",
+      "domain": "planetary-science-remote-sensing",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 139,
+      "repo": "cerebron-farm-139-regolith-geotechnics",
+      "domain": "regolith-planetary-geotechnics-terrain",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 140,
+      "repo": "cerebron-farm-140-microgravity-manufacturing",
+      "domain": "microgravity-space-manufacturing-physics",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 141,
+      "repo": "cerebron-farm-141-spacecraft-environmental-qualification",
+      "domain": "spacecraft-environmental-qualification",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 142,
+      "repo": "cerebron-farm-142-ground-segment-mission-ops",
+      "domain": "space-ground-segment-mission-operations",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 143,
+      "repo": "cerebron-farm-143-space-systems-mbse",
+      "domain": "space-systems-engineering-mbse",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 144,
+      "repo": "cerebron-farm-144-independent-aerospace-verification",
+      "domain": "independent-aerospace-verification",
+      "status": "SCAFFOLDED"
     }
-  ]
+  ],
+  "max_farms": 144,
+  "policy": {
+    "farm_cap": 144,
+    "no_farm_above_144": true,
+    "route_minimal_useful_coalition": true
+  }
 }
