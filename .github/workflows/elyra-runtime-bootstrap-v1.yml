@@ -1,0 +1,58 @@
+name: ELYRA Runtime Bootstrap V1
+on:
+  push:
+    branches: ['feat/elyra-runtime-v1']
+    paths:
+      - 'platform/elyra_policy_runtime.py'
+      - 'platform/tests/test_elyra_policy_runtime.py'
+      - '.github/workflows/elyra-runtime-bootstrap-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CEREBRON_ENABLE_ELYRA_POLICY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download verified promoted ELYRA artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/elyra-artifact platform/models
+          gh api /repos/${{ github.repository }}/actions/artifacts/10770497581/zip > /tmp/elyra.zip
+          unzip -o /tmp/elyra.zip -d /tmp/elyra-artifact
+          cp /tmp/elyra-artifact/elyra-imitation-policy-v1.pt platform/models/elyra-imitation-policy-v1.pt
+          echo "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601  platform/models/elyra-imitation-policy-v1.pt" | sha256sum -c -
+      - name: Install pinned torch
+        run: python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+      - name: Run policy runtime tests
+        run: |
+          python -m unittest discover -s platform/tests -p 'test_elyra_policy_runtime.py' -v
+          python platform/elyra_policy_runtime.py --features '[0.10,2.0,1.0,1.0,0.20,0.6,0.20,0.05]' | tee /tmp/elyra-runtime.json
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/elyra-runtime.json"))
+          assert d["weights_sha256"]=="b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601"
+          assert d["action"]["throttle"] in [0.32,0.52,0.78]
+          assert -0.8 <= d["action"]["steer"] <= 0.8
+          assert len(d["output_sha256"])==64
+          print("ELYRA_RUNTIME_REAL_INFERENCE_VERIFIED")
+          PY
+      - name: Commit only verified compact weights
+        run: |
+          if git ls-files --error-unmatch platform/models/elyra-imitation-policy-v1.pt >/dev/null 2>&1; then
+            echo "weights already tracked"
+            exit 0
+          fi
+          git config user.name "cerebron-bot"
+          git config user.email "cerebron-bot@users.noreply.github.com"
+          git add platform/models/elyra-imitation-policy-v1.pt
+          git commit -m "Add verified compact ELYRA policy weights"
+          git push origin HEAD:feat/elyra-runtime-v1
