@@ -440,3 +440,98 @@ Decision:
 - Preserve this failure. Do not tune against V3 and then call V3 cold again.
 - Revised claim ceiling: STRUCTURED_TEMPLATE_FAMILY_TOOL_AUGMENTATION_GAIN_ONLY.
 - Generalized coalition superiority remains UNPROVEN.
+
+
+## UPDATE 2026-09-23 — SEMANTIC TRANSFER + ELYRA G6/G7 + G8
+
+### Semantic dispatch after Red Team failure
+- Preserve V3 failure evidence:
+  - run 35903871389: baseline 23/60, adaptive 23/60, tool_hits 0.
+  - run 35903773988: baseline 25/60, adaptive 26/60, tool_hits 0.
+- Platform semantic layer commits:
+  - 4c024b3ddbd758cb77787a7986c394378bc6a501 add semantic normalization layer.
+  - 689a64ebf8b8dc5ce9a4213f6a2939e5fa0ea1 route specialist execution through semantic dispatch.
+  - 7278aec673db08e76e0ba2e3276c9f33809b1d1 harden expression/options.
+  - ad2203657aa12aea58bbffc03c2a6b9f25e567b2 semantic test commit; one CI failure is preserved.
+  - 12a3013375ac4eb3f8eef32c1f74c8b6e1c14ce3 fixes semantic Python expression extraction.
+  - 74846c7a7a41a841ef05d5e8b7c47ebd6acdf929 adds post-freeze semantic V4.
+  - cdc717e9933f6fba38dda3cfdf161aaacdce7a68 runs V4.
+- Semantic holdout V4:
+  - run 35904991179 SUCCESS
+  - job 107330319430
+  - artifact 10770927163
+  - digest sha256:8476bf54966a0814fa30888f397d30e0b1648c20caa0dfee632b7fcda2dfcc18
+  - baseline 16/60
+  - adaptive 41/60
+  - tool_hits 36/60
+  - domains improved 4/6: math, engineering, research_grounded, planning
+  - result SHA f5c516cd4da0f9898f07bea24c4ad2e61c20915109469c238d3d07d2201c81b9
+- Interpretation: semantic dispatch transfers beyond V2 templates, but code and error-detection remain open on this holdout.
+
+### ELYRA real neural learning
+- Branch: feat/elyra-imitation-v1.
+- First run 35904510366 trained real weights but failed the promotion gate; preserve rollback.
+  - baseline M6 MSE 0.4468966722
+  - post M6 MSE 0.0046996782
+  - trained closed-loop success 0.40 vs teacher 0.60
+  - promotion ROLLBACK
+  - artifact 10769869216 digest sha256:624923868c013b2a49517cd8416880d3355c0486de97c09563c7250deb476ede
+- Improvement commit 29d32ed3081a442a49eebed55a968068d9dadf11 strengthens learning around controller regime boundaries; the acceptance gate was NOT relaxed.
+- Scoped GOLD synthetic imitation dataset SHA:
+  daf914773d656965fa0f724df8b1a33b340958bf05f8c967bdce7c855f3a3247
+- Successful M6-seeded run A:
+  - run 35904919982
+  - job 107330075394
+  - artifact 10770647209
+  - digest sha256:74a95dac7ac585cfc42ada5d6ca639d5fc159c3195b57451f6625f39488ce673
+  - M6 SHA 1eb5ea9e94a9de777865eb0cf1b2fccf8e40c82760505e657f8bffc89bf1bdcf
+  - MSE 0.4573424459 -> 0.0037131347
+  - success 0.0 -> 0.5666667; teacher 0.5666667
+  - weights SHA f44cbc85b3c6b60363abf21bd759faa956efad99e9622c19a397d6830933201a
+  - PROMOTE_SCOPED_G7
+- Successful different-M6-seed run B:
+  - run 35904950828
+  - job 107330182533
+  - artifact 10770497581
+  - digest sha256:fe342b4403902c3643165e5b617b8d1dbf61d716c2af217e64f2634f8c9a8717
+  - M6 SHA 386e76f4b93d685e34732015a6303bc11ef54a27df9283f3fb2e745e36950d51
+  - MSE 0.4504657388 -> 0.0039337175
+  - success 0.0 -> 0.5416667; teacher 0.60
+  - weights SHA b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601
+  - PROMOTE_SCOPED_G7
+- G6 status: PASS_SCOPED_ELYRA.
+- G7 status: PASS_SCOPED_ELYRA.
+- Claim: NEURAL_LEARNING_VERIFIED_FOR_SYNTHETIC_ELYRA_POLICY_IMITATION.
+- NOT a language-model LoRA; NOT physical rover validation; NOT RL.
+
+### G8 bounded autonomy
+- Branch: feat/bounded-autonomy-v1.
+- run 35905066201 SUCCESS
+- job 107330573098
+- artifact 10770652252
+- digest sha256:2c2e4f3924ab492ff8d7098625bd254d6806522c6f17545b8195e3c118bae39e
+- result SHA 03fd9735d72e5fa4d1b97e109ca8cd0e797bfbd6b05482f785680c468c10a9fd
+- Internal mission executed 3 deterministic/tool-backed steps.
+- External GitHub-like action stopped at WAITING_HUMAN_APPROVAL.
+- Overflow mission stopped at BUDGET_EXHAUSTED.
+- external_action_executed=false.
+- G8 status: PASS_SCOPED_INTERNAL.
+
+### Consolidation
+- Platform integration commit:
+  f53be91f30f2f3168d201c5195083063f91b4904
+- Platform CI after integration:
+  run 35905343265 = SUCCESS.
+- Gate file update on main:
+  commit 86d78d2da63347184e99c3e72a49c109e05ff1e3.
+- Current correct status wording:
+  INTELLIGENCE COLLECTIVE ORCHESTRÉE À CAPACITÉ MESURÉE.
+- G11 remains OPEN.
+- Public/remote deployment remains BLOCKED pending explicit remote/TLS/proxy/secrets deployment review.
+
+### Next exact locks
+1. Harden semantic dispatch further for V4 weak domains: code and error_detection.
+2. Run a new post-fix holdout not reused for training.
+3. Add remote deployment security review; do not expose publicly until PASS.
+4. Audit full platform-vs-main diff before any merge.
+5. If merged, preserve 144-farm ceiling and all scientific/memory data.
