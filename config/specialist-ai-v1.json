@@ -181,7 +181,9 @@
     "SCAFFOLDED_NE_EXECUTED",
     "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
     "SHARED_BASE_MODEL_IS_CORRELATED_DEPENDENCY",
-    "SCOPED_PROMOTION_ONLY"
+    "SCOPED_PROMOTION_ONLY",
+    "CEREBRON_MODE_REQUIRED",
+    "HF_PRIVATE_MEMORY_DEFAULT_DURABLE_BACKEND"
   ],
   "AELYS": {
     "mission": "HUMAN_DIALOGUE_COORDINATION",
@@ -279,5 +281,11 @@
       "TRANSFER_BEFORE_GENERALITY",
       "CLAIM_LE_EVIDENCE"
     ]
+  },
+  "memory_policy": {
+    "mode": "CEREBRON_MODE",
+    "common_private_repo": "cerebron-omega/cerebron-private-memory",
+    "sigma_private_repo": "cerebron-omega/cerebron-sigma-memory",
+    "github": "POINTERS_AND_RECEIPTS_ONLY"
   }
 }
