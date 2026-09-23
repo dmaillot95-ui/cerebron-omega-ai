@@ -473,6 +473,21 @@
         "result_sha256": "e9351fd14144a72619dea6c6da24fc6324643c368f31d395080f37b472644354",
         "status": "REFERENCE_LEARNED_OK",
         "scope": "ANALYTIC_COMPRESSIBLE_FLOW_REFERENCE_NOT_CFD_OR_PHYSICAL_VALIDATION"
+      },
+      "verified_shock_v4": {
+        "farm": 127,
+        "run_id": 35867031558,
+        "artifact_id": 10753390427,
+        "mach_range": [
+          1.05,
+          8
+        ],
+        "training_points": 384,
+        "epochs": 1800,
+        "mean_relative_error": 0.0033813780173659325,
+        "max_relative_error": 0.08846152573823929,
+        "result_sha256": "d4adc1a8fc5bdd95e85d8256658ce97de3d12d5ac10c430e855617ab94320f58",
+        "status": "SHOCK_REFERENCE_LEARNED_OK"
       }
     },
     {
@@ -499,7 +514,18 @@
         "F139",
         "F140"
       ],
-      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+      "notes": "SHARED_TOOL_NOT_NEW_FARM",
+      "verified_runtime": {
+        "farm": 139,
+        "run_id": 35867267961,
+        "job_id": 107201940154,
+        "artifact_id": 10753005951,
+        "version": "1.6.0",
+        "warp_dependency": "1.17.0",
+        "result_sha256": "0cd013b36efb4aa34623baf04d6b32376aab4cd8d0d5f62b23adff5583d5b543",
+        "status": "IMPORT_OK",
+        "scope": "RUNTIME_ONLY_NOT_GRANULAR_MODEL_OR_VALIDATION"
+      }
     },
     {
       "id": "OTF026",
