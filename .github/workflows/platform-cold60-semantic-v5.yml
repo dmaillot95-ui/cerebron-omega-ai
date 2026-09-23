@@ -1,0 +1,39 @@
+name: CEREBRON Cold 60 Semantic Holdout V5
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/semantic_tools.py'
+      - 'platform/cold60_semantic_v5.py'
+      - '.github/workflows/platform-cold60-semantic-v5.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_V5_SEED: ${{ github.run_id }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Compile
+        run: python -m compileall -q platform
+      - name: Run new semantic holdout V5
+        run: python platform/cold60_semantic_v5.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-cold60-semantic-v5
+          path: |
+            platform/artifacts/cold60-semantic-v5-dataset.json
+            platform/artifacts/cold60-semantic-v5-result.json
