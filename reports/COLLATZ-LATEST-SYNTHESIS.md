@@ -16,8 +16,8 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## État des fermes au dernier cycle
 
-- Fermes configurées : 78
-- Derniers workflows en succès : 76
+- Fermes configurées : 90
+- Derniers workflows en succès : 74
 - Derniers workflows en échec : 2
 - Fermes avec au moins un artefact sur leur dernier run : 70
 
@@ -27,9 +27,9 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 02 collatz-dynamics: run=35809214606 status=completed conclusion=success artifacts=21
 - Farm 03 collatz-adic: run=35808439380 status=completed conclusion=success artifacts=21
 - Farm 04 collatz-counterexample: run=35809098446 status=completed conclusion=success artifacts=21
-- Farm 05 collatz-literature: run=35808024699 status=completed conclusion=success artifacts=22
+- Farm 05 collatz-literature: run=35809414750 status=in_progress conclusion=None artifacts=8
 - Farm 06 collatz-formal-audit: run=35808896551 status=completed conclusion=success artifacts=21
-- Farm 07 collatz-synthesis: run=35808048566 status=completed conclusion=success artifacts=22
+- Farm 07 collatz-synthesis: run=35809458950 status=queued conclusion=None artifacts=1
 - Farm 08 research-web: run=35806105920 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35533881788 status=completed conclusion=success artifacts=1
 - Farm 10 science-physics: run=35419826266 status=completed conclusion=success artifacts=21
@@ -101,3 +101,15 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 76 central-orchestration-chatgpt-interface: run=35759230595 status=completed conclusion=success artifacts=1
 - Farm 77 humanoid-robotics-digital-twin-simulation-rl-sim2real: run=35769750335 status=completed conclusion=success artifacts=1
 - Farm 78 architecton-space-robotics-digital-twin-microgravity-assembly-simulation: run=35769954958 status=completed conclusion=failure artifacts=1
+- Farm 79 aircraft-aerodynamics-flight-physics: run=None status=None conclusion=None artifacts=0
+- Farm 80 aircraft-propulsion-engine-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 81 drone-vtol-autopilot-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 82 drone-swarm-multi-agent-coordination: run=None status=None conclusion=None artifacts=0
+- Farm 83 flight-simulation-digital-twin-sil-hil: run=None status=None conclusion=None artifacts=0
+- Farm 84 future-aircraft-rd-architecture: run=None status=None conclusion=None artifacts=0
+- Farm 85 spacecraft-orbital-flight-rendezvous-docking-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 86 space-propulsion-engine-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 87 space-robotics-swarm-assembly-maintenance: run=None status=None conclusion=None artifacts=0
+- Farm 88 truck-vehicle-swarm-logistics-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 89 construction-earthmoving-machine-site-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 90 universal-multi-agent-co-simulation: run=None status=None conclusion=None artifacts=0
