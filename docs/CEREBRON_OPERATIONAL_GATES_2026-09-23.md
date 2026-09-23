@@ -8,13 +8,13 @@ This file records measured gate status. "PASS_SCOPED" never means general capabi
 | G1 real execution | PASS | Multiple real GitHub jobs/artifacts/SHA including F123 bridge and model workflows |
 | G2 reproduced | PASS_SCOPED | F139 V6 reproduced at software/run level; not an independent physical reference |
 | G3 specialized benchmark | PASS_SCOPED | Qwen and specialist tool workers benchmarked on bounded tasks |
-| G4 coalition > best single agent | PASS_SCOPED_REPRODUCED | Cold-60 V2 two runtime seeds: 19→60 and 15→60; 6/6 domains improved |
+| G4 coalition > best single agent | OPEN_OUTSIDE_TEMPLATE_FAMILY | Cold-60 V2 was 19→60 and 15→60, but transfer Red Team V3 was only 25→26 with 0 specialist-tool hits and 1/6 domains improved |
 | G5 M4 GOLD | PASS_SCOPED | F139 experiment-selection policy accepted only within stated scope |
 | G6 neural training | OPEN | No promoted LoRA/QLoRA or ELYRA learned policy yet |
 | G7 post-M6 promotion | OPEN | Requires trained weights plus before/after M6 |
 | G8 bounded autonomy | PARTIAL | Workflows/orchestration are bounded, but no general autonomy claim |
 | G9 authorized external action | PASS_SCOPED_GITHUB | Authorized GitHub writes/workflows only; public deployment remains blocked |
-| G10 collective superiority | PASS_SCOPED_BENCHMARK_ONLY | Demonstrated only on structured Cold-60 V2 with purpose-built deterministic tools |
+| G10 collective superiority | OPEN | V2 tool-template gain did not transfer under parser-unseen reformulations; no general collective-superiority claim is allowed |
 | G11 external superintelligence evaluation | OPEN | No such evidence; term must not be used as a system status |
 
 ## Cold-60 V2
@@ -82,3 +82,28 @@ Corrected run:
 - Cockpit coalition/evidence display commit c5d3347a725e59c9a43a11d6dd39d04be0167e01; CI 35903534095 SUCCESS.
 - Specialist safety/regression tests commit 4aaf0dad7dca4d395544cdbaa11cc96e85cdcd5d; CI 35903257778 SUCCESS.
 - Local core status: OPERATIONAL_SCOPED. Remote/public deployment: BLOCKED.
+
+
+## Cold-60 V3 Transfer Red Team — downgrade evidence
+
+- Dedicated branch: feat/cerebron-cold60-redteam-v3
+- Commit: eaf87cf87b5aa8f0de3a7cf35c1874dd18511fec
+- Run: 35903773988 = SUCCESS
+- Job: 107326190245
+- Artifact: 10770645736
+- Artifact digest: sha256:27a37328a6a9e09b27e2d733aa20c77b3f2c26787f6a6264bc68141f6fc9585e
+- Runtime seed: 35903773988
+- Single Qwen baseline: 25/60
+- Adaptive coalition: 26/60
+- Deterministic specialist-tool hits: 0/60
+- Domains improved: code only = 1/6
+- criterion_4_of_6 = false
+- Transfer gap from V2 adaptive 60/60 = 0.5666666666666667
+- Result SHA256: 9c01b869f09d265725517a219a2b5175c3ebbd76d34c57cb331337336a816ca8
+
+Interpretation:
+- V2 proves that CEREBRON can orchestrate purpose-built deterministic workers extremely well when task surface forms match their contracts.
+- V3 shows that the current trigger layer is brittle to semantically equivalent reformulation.
+- This is a router/parser generalization failure, not a failure of the entire CEREBRON architecture.
+- Next gate is to replace brittle surface-pattern routing with semantic/tool-contract routing and then rerun V3 unchanged.
+- V3 remains sealed and deny_training=true. Do not train on its answers.
