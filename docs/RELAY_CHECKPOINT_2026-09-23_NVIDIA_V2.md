@@ -564,3 +564,41 @@ Decision:
 - retain G7 PASS_SCOPED_ELYRA with stronger fresh-distribution evidence.
 - claim ceiling remains SYNTHETIC_IMITATION_GENERALIZES_WITHIN_SHIFTED_SIMULATOR_DISTRIBUTION.
 - this does NOT validate lunar physics, real-robot behavior, RL, a language-model LoRA, or general intelligence.
+
+
+## UPDATE 2026-09-23 — MAIN PLATFORM INTEGRATION + SEMANTIC V5
+
+### Semantic routing V5
+The modular semantic routing implementation passed repeated post-fix holdouts:
+- 35905721509: 12/60 -> 54/60, 52 tool hits, 6/6 domains improved.
+- 35905927548: 11/60 -> 52/60, 49 tool hits, 6/6 domains improved.
+- 35905965573: 17/60 -> 54/60, 50 tool hits, 6/6 domains improved.
+Claim ceiling remains internal synthetic semantic-transfer evidence. It is not external/general superiority.
+
+### Preserving integration into main
+A destructive branch merge was explicitly avoided because an earlier diff audit showed it would remove newer F139/AGORA/gate files from main.
+
+Preserving integration sequence:
+- source platform frozen at 00dde66c66ff0e4f599f786b2fdee2d630660093.
+- integration branch created from main f646dc39867f14ee69ff06aac5a87b733f8aa3e0.
+- overlay commit 7398fba1582c2916a649536c97231828ffe08107 copied platform/**, platform/ELYRA workflows, platform configs and independent ELYRA audit without deleting main science/memory files.
+- integration gate commit b841d94f117b54c8fd7db4d42583d39f23217dcb.
+- pre-main integration gate run 35906518363 = SUCCESS.
+- main fast-forwarded to b841d94f117b54c8fd7db4d42583d39f23217dcb.
+- persistent main-gate commit 8c39603b90434f78ff72ef4f4a0c62dfc6c6c23e.
+- main integration gate run 35906651512 = SUCCESS.
+- Omega Core run immediately after platform integration 35906619716 = SUCCESS.
+
+Verified preserved/integrated state:
+- farm count = 144; max farm ID = 144.
+- Control Plane farm_count_effect = 0.
+- SAPHEA MICRO registry = 20 units; 7 active initial capabilities; 13 remain PLANNED_UNAVAILABLE.
+- F139 AGORA gain and GOLD workflows/scripts remain present.
+- Collatz latest synthesis remains present.
+- RED Cold-60 V3 lesson remains present.
+- Farm Bridge, Qwen backend, Security Plane, semantic dispatch, ELYRA neural policy, independent ELYRA audit and bounded autonomy are present.
+- REMOTE/PUBLIC DEPLOYMENT remains BLOCKED.
+
+Current system wording:
+INTELLIGENCE COLLECTIVE ORCHESTRÉE À CAPACITÉ MESURÉE.
+Do not use SUPERINTELLIGENCE as current system status. G11 remains OPEN.
