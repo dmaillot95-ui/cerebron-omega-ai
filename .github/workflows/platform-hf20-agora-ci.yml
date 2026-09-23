@@ -1,0 +1,29 @@
+name: CEREBRON HF20 Mode and External AGORA CI
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/hf-20-agent-pool-v1.json'
+      - 'config/cerebron-mode-v1.json'
+      - 'config/agora-external-participant-v1.json'
+      - 'platform/hf_agent_pool.py'
+      - 'platform/agora_external.py'
+      - 'platform/server.py'
+      - 'platform/tests/test_hf20_external_agora.py'
+      - '.github/workflows/platform-hf20-agora-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m compileall -q platform
+      - run: python -m unittest discover -s platform/tests -p 'test_hf20_external_agora.py' -v
