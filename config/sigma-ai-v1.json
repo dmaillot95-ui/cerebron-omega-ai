@@ -145,7 +145,7 @@
   },
   "huggingface_connector": {
     "implementation": "platform/huggingface_memory.py",
-    "status": "CREDENTIAL_PROBE_REQUIRED",
+    "status": "AUTHENTICATED_ACCOUNT_CONFIRMED_PRIVATE_REPO_BOOTSTRAP_PENDING",
     "token_env": [
       "HF_TOKEN",
       "HUGGING_FACE_HUB_TOKEN"
@@ -159,6 +159,9 @@
       "M5",
       "M7"
     ],
-    "training_forbidden_class": "M6"
+    "training_forbidden_class": "M6",
+    "authenticated_account": "cerebron-omega",
+    "default_private_repo": "cerebron-omega/cerebron-sigma-memory",
+    "authentication_probe_run_id": 35911785348
   }
 }
