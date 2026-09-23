@@ -1,10 +1,45 @@
 {
   "schema": "CEREBRON_AGORA_SCHOOL_V1",
   "principle": "SHARE_BENEFIT_WITHOUT_MERGING_PRIVATE_WORK_TUNNELS",
-  "roles": ["SAPHEA","SPIRALION","ETHERION","HYPERION","ASTRION","METRION","AFAH","CEREBRON"],
-  "teacher_cycle": ["PEDAGOGUE","EXAMINER","RED_TEAM","CONNECTOR","SYNTHESIZER"],
-  "rotation": ["STUDENT","PROPOSER","CRITIC","REPRODUCER","IMPROVER"],
-  "capsule_kinds": ["QUESTION","METHOD","LESSON","CHALLENGE","CRITIQUE","CORRECTION","PILOTAGE"],
+  "roles": [
+    "CEREBRON",
+    "SIGMA",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO",
+    "ELYSION",
+    "ELYSIUM"
+  ],
+  "teacher_cycle": [
+    "PEDAGOGUE",
+    "EXAMINER",
+    "RED_TEAM",
+    "CONNECTOR",
+    "SYNTHESIZER"
+  ],
+  "rotation": [
+    "STUDENT",
+    "PROPOSER",
+    "CRITIC",
+    "REPRODUCER",
+    "IMPROVER"
+  ],
+  "capsule_kinds": [
+    "QUESTION",
+    "METHOD",
+    "LESSON",
+    "CHALLENGE",
+    "CRITIQUE",
+    "CORRECTION",
+    "PILOTAGE"
+  ],
   "promotion": [
     "PROPOSED",
     "INDEPENDENT_ATTEMPT",
@@ -24,6 +59,19 @@
     "NO_CONSENSUS_AS_TRUTH",
     "BENEFIT_MUST_BE_MEASURED",
     "COLD_BENCHMARK_DENY_TRAINING",
-    "FAIL_CLOSED_ON_PROVENANCE_OR_ID_CONFLICT"
-  ]
+    "FAIL_CLOSED_ON_PROVENANCE_OR_ID_CONFLICT",
+    "PLANNED_ROLE_NOT_EXECUTED_ROLE",
+    "HF_SLOT_NOT_INDEPENDENT_AI",
+    "M6_NEVER_IN_TRAIN"
+  ],
+  "planned_roles": [
+    "SAELION",
+    "ALPHA",
+    "OMEGA",
+    "DELTA",
+    "NEXUS"
+  ],
+  "planned_role_policy": "PLANNED_NOT_ACTIVE_UNTIL_REAL_PROJECT_OR_REPOSITORY_EXISTS_AND_MEMORY_CANARY_PASSES",
+  "memory_binding_manifest": "config/cerebron-civilization-memory-bindings-v1.json",
+  "hf_agent_pool": "config/hf-20-agent-pool-v1.json"
 }
