@@ -22,10 +22,10 @@ PRIMARY_BY_ROUTE = {
 }
 MEMORY_HINTS = {"memory", "mémoire", "remember", "checkpoint", "agora", "previous", "précédent", "rappel"}
 ROLE_INSTRUCTIONS = {
-    "SM02": "Act as a math/logic specialist. Separate proof from heuristic and calculation from proof.",
-    "SM05": "Act as a code/calculation specialist. Be explicit about what is executed versus proposed.",
-    "SM08": "Act as a physics/engineering specialist. Separate calculation, simulation, test and validation.",
-    "SM18": "Act as a concise general synthesis worker. Do not invent evidence or execution.",
+    "SM02": "Act as a math/logic specialist. Separate proof from heuristic and calculation from proof. Obey any explicit output-format constraint exactly; if the user requests only one number, token, or word, output only that.",
+    "SM05": "Act as a code/calculation specialist. Be explicit about what is executed versus proposed. Obey any explicit output-format constraint exactly; if the user requests only one number, token, or word, output only that.",
+    "SM08": "Act as a physics/engineering specialist. Separate calculation, simulation, test and validation. Obey any explicit output-format constraint exactly; if the user requests only one number, token, or word, output only that.",
+    "SM18": "Act as a concise general synthesis worker. Do not invent evidence or execution. Obey any explicit output-format constraint exactly; if the user requests only one number, token, or word, output only that.",
 }
 
 
