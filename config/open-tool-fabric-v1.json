@@ -339,7 +339,7 @@
       "license": "Apache-2.0",
       "owner": "METRION",
       "priority": "P0",
-      "status": "DISCOVERED",
+      "status": "BENCHMARKED",
       "target_farms": [
         "F49",
         "F52",
@@ -353,7 +353,19 @@
         "F127",
         "F140"
       ],
-      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+      "notes": "SHARED_TOOL_NOT_NEW_FARM",
+      "verified": {
+        "version": "1.17.0",
+        "execution": "CPU_GITHUB_ACTIONS",
+        "farm": 140,
+        "run_id": 35863323220,
+        "job_id": 107188616725,
+        "artifact_id": 10751212890,
+        "result_sha256": "a5694ce0079b8bf64dc5fc9f5c7d980dc89dd11fafe511d4008e30f73009565a",
+        "absolute_delta": 3.363109270237974e-11,
+        "scope": "REAL_WARP_KERNEL_EXECUTION_NOT_MULTIPHASE_CFD_OR_PHYSICAL_VALIDATION",
+        "gpu_available": false
+      }
     },
     {
       "id": "OTF024",
