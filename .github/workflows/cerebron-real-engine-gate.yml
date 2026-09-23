@@ -1,0 +1,35 @@
+name: CEREBRON Real Engine Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tasks/dispatch/**.json'
+
+permissions:
+  contents: read
+
+jobs:
+  engine-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Locate mission
+        id: mission
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=$(git diff --name-only HEAD^ HEAD | grep '^tasks/dispatch/.*\.json$' | head -n1 || true)
+          test -n "$FILE"
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+      - name: Audit real AI bindings
+        run: python runtime/real_engine_gate.py "${{ steps.mission.outputs.file }}"
+      - name: Upload bounded audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-engine-binding-audit
+          path: artifacts/task_bridge/**/engine-binding-audit.json
+          retention-days: 7
