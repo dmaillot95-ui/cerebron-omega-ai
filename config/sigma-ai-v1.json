@@ -80,5 +80,55 @@
     "ASI",
     "SUPERINTELLIGENCE_SOLVED"
   ],
-  "next_action": "BUILD_SIGMA_GOLD_DATASET_V1_FROM_VALIDATED_CEREBRON_TRACES"
+  "next_action": "CONNECT_HUGGINGFACE_PRIVATE_BACKEND_OR_BUILD_LOCAL_SIGMA_GOLD_DATASET_V1",
+  "learning_bus": {
+    "status": "CONFIGURED_NOT_YET_EXECUTED",
+    "inputs": [
+      "SAPHEA_VALIDATED_LEARNING",
+      "SPIRALION_VALIDATED_LEARNING",
+      "ETHERION_VALIDATED_LEARNING",
+      "HYPERION_VALIDATED_LEARNING",
+      "ASTRION_VALIDATED_LEARNING",
+      "METRION_VALIDATED_LEARNING",
+      "AFAH_VALIDATED_AUDIT",
+      "AELYS_VALIDATED_DIALOGUE",
+      "ELYRA_VALIDATED_POLICY_TRACES",
+      "SAPHEA_MICRO_VALIDATED_SPECIALIST_TRACES",
+      "CEREBRON_ROUTING_TRACES"
+    ],
+    "admission": [
+      "PROVENANCE",
+      "SHA256",
+      "M4_GOLD_OR_EQUIVALENT_SCOPED_ACCEPTANCE",
+      "DEDUP",
+      "NO_M6_CONTAMINATION",
+      "AFAH_OR_ROLE_SPECIFIC_AUDIT"
+    ],
+    "outputs": [
+      "SIGMA_TRAIN_DATASET",
+      "SIGMA_VALIDATION_DATASET",
+      "NEGATIVE_MEMORY",
+      "TEACHER_ENSEMBLE_CACHE"
+    ]
+  },
+  "memory": {
+    "control_plane_namespace": "SIGMA",
+    "external_target": "huggingface_private",
+    "status": "PLANNED_BACKEND_NOT_YET_CONNECTED",
+    "allowed_classes": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M7"
+    ],
+    "forbidden_training_class": "M6"
+  },
+  "parameter_inference": {
+    "mode": "TEACHER_ENSEMBLE_AND_DISTILLATION",
+    "direct_parameter_union": false,
+    "explanation": "SIGMA may query multiple models and tools during inference, but heterogeneous neural parameters are not concatenated or averaged into one network. Their validated outputs can supervise SIGMA training.",
+    "compatible_weight_merge": "ONLY_AFTER_ARCHITECTURE_LINEAGE_COMPATIBILITY_CHECK_AND_ABLATION"
+  }
 }
