@@ -197,8 +197,14 @@ def solve_research(prompt: str) -> dict | None:
         return None
     source = prompt.split("SOURCE:", 1)[1].split("Using only the source", 1)[0]
     pairs = {}
-    for key, value in re.findall(r"([A-Za-z][A-Za-z0-9_-]*)\s*=\s*([^;,.]+)", source):
-        pairs[key.lower()] = value.strip()
+    for field in source.split(";"):
+        if "=" not in field:
+            continue
+        key, value = field.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip(".")
+        if re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", key):
+            pairs[key.lower()] = value
     m = re.search(r"return only\s+([A-Za-z][A-Za-z0-9_-]*)", prompt, re.I)
     if m and m.group(1).lower() in pairs:
         return {"unit": "SM11", "method": "source-key-extraction", "answer": pairs[m.group(1).lower()]}
@@ -234,12 +240,21 @@ def solve_planning(prompt: str) -> dict | None:
                 a,b = m.group(1).strip(),m.group(2).strip()
                 if a not in pos or b not in pos or pos[a] != pos[b]+1: return False
                 continue
-            m = re.fullmatch(r"(.+?)\s+first", c, re.I)
-            if m and (m.group(1).strip() not in pos or pos[m.group(1).strip()] != 0): return False
-            m = re.fullmatch(r"(.+?)\s+last", c, re.I)
-            if m and (m.group(1).strip() not in pos or pos[m.group(1).strip()] != len(seq)-1): return False
             m = re.fullmatch(r"(.+?)\s+not first", c, re.I)
-            if m and (m.group(1).strip() not in pos or pos[m.group(1).strip()] == 0): return False
+            if m:
+                item = m.group(1).strip()
+                if item not in pos or pos[item] == 0: return False
+                continue
+            m = re.fullmatch(r"(.+?)\s+first", c, re.I)
+            if m:
+                item = m.group(1).strip()
+                if item not in pos or pos[item] != 0: return False
+                continue
+            m = re.fullmatch(r"(.+?)\s+last", c, re.I)
+            if m:
+                item = m.group(1).strip()
+                if item not in pos or pos[item] != len(seq)-1: return False
+                continue
         return True
 
     valid = [label for label, seq in options.items() if ok(seq)]
