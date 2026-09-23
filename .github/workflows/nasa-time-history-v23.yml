@@ -1,0 +1,37 @@
+name: METRION NASA Time History Gate V23
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/nasa_time_history_gate_v23.py"
+      - "external/nasa_nesc/time_history.csv"
+      - ".github/workflows/nasa-time-history-v23.yml"
+permissions:
+  contents: read
+jobs:
+  evidence-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/nasa_time_history_gate_v23.py
+      - name: Audit evidence state
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/nasa_time_history_gate_v23.json"))
+          assert "NO_SYNTHETIC_NASA_STATE_VECTORS" in d["epistemic"]
+          if not d["dataset"]["present"]:
+              assert d["decision"]=="BLOCKED_EXTERNAL_DATASET_NOT_INGESTED"
+              assert d["g03_status"]=="PARTIAL_EXTERNAL_REFERENCE"
+          else:
+              assert len(d["dataset"]["sha256"])==64
+              assert d["decision"]=="READY_FOR_POINTWISE_COMPARISON"
+          print("NASA_TIME_HISTORY_V23",d["decision"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nasa-time-history-gate-v23
+          path: artifacts/nasa_time_history_gate_v23.json
+          retention-days: 30
