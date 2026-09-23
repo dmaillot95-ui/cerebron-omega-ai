@@ -48,3 +48,9 @@ Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log
 - Warp V3: run 35866776553 SUCCESS; 4096 x 1000 = 4,096,000 updates; x error 9.09517e-6 m, v error 3.30877e-9 m/s vs analytic oscillator; artifact 10751879409; SHA 1d0abd62991cbfdcf794e5785812b1df5fde38d5533a58abe028e3e459f2c78c.
 - PhysicsNeMo V4 normal-shock Rankine-Hugoniot benchmark launched: code commit 6d9155b1e88e836cda6bb5b242f061700cef572f, workflow commit 783b9df8657bbea895a782c5fa2771933e1882a8, run 35867031558 IN PROGRESS at this update. Verify before claim.
 - Tool Fabric evidence consolidation commit: 772fde763ff980fe1605a1b62f20594c7ccfdf81.
+
+## Newton F139 progress
+- Newton 1.6.0 runtime canary SUCCESS: run 35867267961, job 107201940154, artifact 10753005951, result SHA 0cd013b36efb4aa34623baf04d6b32376aab4cd8d0d5f62b23adff5583d5b543. Runtime only.
+- Newton+Warp lunar ballistic V2 SUCCESS: run 35868432958, artifact 10753332014, 4,096,000 updates, position error 0.003291378 m after 2s, velocity error 2.78598e-5 m/s, result SHA 2a1ba8a56265ee46d93156f7a3d0b17c7f14cf1644ac77d658c49211be71ff52. This is NOT native Newton contact evidence.
+- Newton API probe SUCCESS: run 35868628617; exposed Model, ModelBuilder, Contacts, CollisionPipeline-compatible API path and solvers.
+- Native Newton contact V3 created: code commit 764dafe0f0682be04c2dedb896a2d43b27f44f2a; workflow commit b6991ee0075903aaccd8524908884320eba3168b; run 35869399793 IN PROGRESS at this update. Verify before claim or Tool Fabric promotion.
