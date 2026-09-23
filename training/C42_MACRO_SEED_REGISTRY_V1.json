@@ -1,0 +1,137 @@
+{
+  "schema": "cerebron-c42-macro-seed-registry-v1",
+  "version": "1.0",
+  "status": "RECOVERED_FROM_PRIOR_CEREBRON_WORK_AWAITING_FORMAL_F72_AFAH_REVALIDATION",
+  "hierarchy": "mother_seeds -> root_macrograins -> disciplines -> super_disciplines -> supra_layers -> temporary_cognitive_programs",
+  "mother_seeds": [
+    {
+      "id": "SEED-A",
+      "name": "COMPRENDRE",
+      "chain": [
+        "Distinction",
+        "Relation",
+        "Structure",
+        "Reality",
+        "Root Question",
+        "Gap",
+        "Unknown",
+        "Contradiction",
+        "Constraint",
+        "Bottleneck",
+        "Representation Shift"
+      ]
+    },
+    {
+      "id": "SEED-B",
+      "name": "TRANSFORMER",
+      "chain": [
+        "Lever",
+        "Minimum Sufficient Change",
+        "Action",
+        "Tool",
+        "Experiment",
+        "Counterexample",
+        "Falsification",
+        "Ablation",
+        "Causal Credit"
+      ]
+    },
+    {
+      "id": "SEED-OMEGA",
+      "name": "EVOLUER",
+      "chain": [
+        "Residual",
+        "Experience",
+        "Scar",
+        "Compression",
+        "Boundary",
+        "Transfer",
+        "Future Utility",
+        "Capability",
+        "Routing Update",
+        "Anti-Bloat",
+        "Recompile"
+      ]
+    }
+  ],
+  "root_macrograins": [
+    {
+      "id": "MG-01",
+      "name": "Root Diagnostic",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-02",
+      "name": "Reality Contract",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-03",
+      "name": "Representation Escape",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-04",
+      "name": "Minimum Sufficient Change",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-05",
+      "name": "Dispute to Discriminator",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-06",
+      "name": "Causal Credit",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-07",
+      "name": "Residual Learning",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-08",
+      "name": "Verified Transfer",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-09",
+      "name": "Experience Compression",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-10",
+      "name": "Regret-Bounded Routing",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-11",
+      "name": "Verified Self-Improvement",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    },
+    {
+      "id": "MG-12",
+      "name": "Cognitive Economics",
+      "status": "RECOVERED_NOT_YET_REVALIDATED"
+    }
+  ],
+  "meta_core": [
+    "SENSE",
+    "UNDERSTAND",
+    "TRANSFORM",
+    "VERIFY",
+    "LEARN",
+    "EVOLVE"
+  ],
+  "provenance": {
+    "source": "prior_CEREBRON_C42_work",
+    "recovered": true,
+    "github_source_previously_absent": true
+  },
+  "parameter_policy": {
+    "priority_class": "MACRO_SEED_PARAMETER_CANDIDATE",
+    "training_released": false,
+    "rule": "Recovery is not validation. F72+AFAH revalidation and curriculum gates remain mandatory."
+  }
+}
