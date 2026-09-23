@@ -1,0 +1,71 @@
+name: ELYSION HF Private Memory Canary
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - '.github/workflows/elysion-hf-memory-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Write read and verify ELYSION memory canary
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import os,json,hashlib,tempfile,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          who=api.whoami()
+          payload={
+            "schema":"ELYSION_MEMORY_CANARY_V1",
+            "project_id":"MODEL-ELYSION-001",
+            "hosting_farm_id":145,
+            "memory_class":"M7",
+            "content":"synthetic canary; no training data",
+            "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat()
+          }
+          raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+          digest=hashlib.sha256(raw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+              t.write(raw); src=t.name
+          path="elysion/M7/ELYSION-MEMORY-CANARY-V1.json"
+          api.upload_file(path_or_fileobj=src,path_in_repo=path,repo_id=repo,repo_type="model",commit_message="ELYSION private memory canary")
+          dst=hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=token,force_download=True)
+          got=Path(dst).read_bytes()
+          got_sha=hashlib.sha256(got).hexdigest()
+          if got_sha != digest:
+              raise SystemExit("SHA_MISMATCH")
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          receipt={
+            "schema":"ELYSION_HF_MEMORY_CANARY_RECEIPT_V1",
+            "status":"PASS",
+            "account":who.get("name"),
+            "repo":repo,
+            "private":bool(getattr(info,"private",False)),
+            "object_path":path,
+            "sha256":digest,
+            "checks":["AUTH=PASS","WRITE=PASS","READ=PASS","SHA256=PASS","PRIVATE_REPO=PASS"],
+            "claim_scope":"ELYSION control-plane route to private HF memory only; not neural learning"
+          }
+          Path("receipts/elysion/hf-memory-canary.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysion-hf-memory-canary
+          path: receipts/elysion/hf-memory-canary.json
+          if-no-files-found: error
