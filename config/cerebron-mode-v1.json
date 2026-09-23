@@ -13,7 +13,9 @@
     "AFAH",
     "AELYS",
     "ELYRA",
-    "SAPHEA_MICRO"
+    "SAPHEA_MICRO",
+    "ELYSION",
+    "ELYSIUM"
   ],
   "pipeline": [
     "LOAD_LAST_VERIFIED_CHECKPOINT",
@@ -42,6 +44,9 @@
   "memory": {
     "common_private_repo": "cerebron-omega/cerebron-private-memory",
     "sigma_private_repo": "cerebron-omega/cerebron-sigma-memory",
-    "github_role": "CODE_CONFIG_SHA_POINTERS_SMALL_RECEIPTS"
+    "github_role": "CODE_CONFIG_SHA_POINTERS_SMALL_RECEIPTS",
+    "native_ai_default_repo": "cerebron-omega/cerebron-private-memory",
+    "training_asset_repo": "cerebron-omega/cerebron-sigma-memory",
+    "rule": "PER_AI_NAMESPACE_SHARED_BACKEND_NO_BLIND_CROSS_COPY"
   }
 }
