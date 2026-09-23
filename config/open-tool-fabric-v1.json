@@ -1,0 +1,30 @@
+{
+  "schema": "CEREBRON_OPEN_TOOL_FABRIC_V1",
+  "date": "2026-09-23",
+  "policy": {
+    "states": ["DISCOVERED","LICENSE_CHECKED","BENCHMARKED","INTEGRATED","VALIDATED"],
+    "rules": ["NO_TOOL_EQUALS_EVIDENCE","LICENSE_BEFORE_INTEGRATION","BENCHMARK_BEFORE_PROMOTION","PIN_VERSION_AND_SHA","FAIL_CLOSED_ON_UNKNOWN_LICENSE","NO_PAID_OVERAGE"]
+  },
+  "tools": [
+    {"id":"OTF001","name":"NASA Trick","domain":["simulation","HIL","space"],"url":"https://github.com/nasa/trick","license":"NASA Open Source Agreement 1.3","owner":"ASTRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF002","name":"NASA JEOD","domain":["orbital_dynamics","environment","space"],"url":"https://github.com/nasa/jeod","license":"NASA Open Source Agreement 1.3","owner":"ASTRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF003","name":"NASA CML","domain":["spacecraft_models","verification"],"url":"https://github.com/nasa/cml","license":"CHECK_REPOSITORY_LICENSE","owner":"METRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF004","name":"GMAT","domain":["mission_design","orbit","optimization"],"url":"https://software.nasa.gov","license":"CHECK_RELEASE_LICENSE","owner":"ASTRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF005","name":"SU2","domain":["CFD","aerodynamics","optimization","multiphysics"],"url":"https://github.com/su2code/SU2","license":"CHECK_REPOSITORY_LICENSE","owner":"METRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF006","name":"OpenFOAM","domain":["CFD","thermal","fluids","reacting_flow"],"url":"https://openfoam.org","license":"GPL","owner":"METRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF007","name":"Code_Aster","domain":["FEA","structures","thermal","dynamics"],"url":"https://code-aster.org","license":"GPL","owner":"METRION","priority":"P0","status":"DISCOVERED"},
+    {"id":"OTF008","name":"FreeCAD","domain":["CAD","parametric_design"],"url":"https://www.freecad.org","license":"CHECK_RELEASE_LICENSE","owner":"METRION","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF009","name":"Blender","domain":["3D","render","animation","visualization"],"url":"https://www.blender.org","license":"GPL","owner":"ELYRA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF010","name":"ParaView","domain":["scientific_visualization","postprocessing"],"url":"https://www.paraview.org","license":"CHECK_RELEASE_LICENSE","owner":"METRION","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF011","name":"ROS 2","domain":["robotics","middleware","control"],"url":"https://github.com/ros2","license":"MULTI_PACKAGE_CHECK","owner":"SAPHEA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF012","name":"Gazebo","domain":["robotics","physics_simulation","sensors"],"url":"https://github.com/gazebosim","license":"MULTI_PACKAGE_CHECK","owner":"SAPHEA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF013","name":"MuJoCo","domain":["robotics","dynamics","control"],"url":"https://github.com/google-deepmind/mujoco","license":"Apache-2.0","owner":"SAPHEA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF014","name":"JSBSim","domain":["flight_dynamics","control"],"url":"https://github.com/JSBSim-Team/jsbsim","license":"LGPL-2.1","owner":"ASTRION","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF015","name":"KiCad","domain":["electronics","PCB","EDA"],"url":"https://www.kicad.org","license":"GPL","owner":"METRION","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF016","name":"ComfyUI","domain":["AI_image","AI_video","AI_audio","workflow"],"url":"https://github.com/comfyanonymous/ComfyUI","license":"CHECK_REPOSITORY_LICENSE","owner":"ELYRA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF017","name":"LTX Video","domain":["AI_video","image_to_video","audio_video"],"url":"https://github.com/Lightricks/LTX-Video","license":"CODE_AND_WEIGHTS_SEPARATE_CHECK","owner":"ELYRA","priority":"P1","status":"DISCOVERED"},
+    {"id":"OTF018","name":"Wan Video","domain":["AI_video"],"url":"https://github.com/Wan-Video","license":"CODE_AND_CHECKPOINT_SPECIFIC","owner":"ELYRA","priority":"P2","status":"DISCOVERED"},
+    {"id":"OTF019","name":"HunyuanVideo","domain":["AI_video"],"url":"https://github.com/Tencent-Hunyuan/HunyuanVideo","license":"CODE_AND_WEIGHTS_SEPARATE_CHECK","owner":"ELYRA","priority":"P2","status":"DISCOVERED"},
+    {"id":"OTF020","name":"OpenMDAO","domain":["multidisciplinary_optimization","engineering"],"url":"https://github.com/OpenMDAO/OpenMDAO","license":"CHECK_REPOSITORY_LICENSE","owner":"METRION","priority":"P1","status":"DISCOVERED"}
+  ]
+}
