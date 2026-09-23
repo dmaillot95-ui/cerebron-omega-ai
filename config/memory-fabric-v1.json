@@ -8,7 +8,8 @@
     "REPLAY_OVER_RAW",
     "BENCHMARK_DENY_TRAINING",
     "FAIL_CLOSED",
-    "ZERO_PAID_OVERAGE"
+    "ZERO_PAID_OVERAGE",
+    "HF_PRIVATE_DURABLE_MEMORY_GITHUB_POINTERS_ONLY"
   ],
   "namespaces": [
     "COLLATZ",
@@ -68,7 +69,7 @@
   },
   "storage_targets": {
     "github": {
-      "role": "CONTROL_PLANE_CODE_MANIFESTS_SMALL_EVIDENCE",
+      "role": "CONTROL_PLANE_CODE_CONFIG_SHA_POINTERS_SMALL_RECEIPTS_ONLY",
       "bulk": false
     },
     "huggingface_private": {
@@ -81,7 +82,7 @@
         "M5_SIGMA_MODELS_ADAPTERS",
         "CURATED_TRAIN_VALIDATION_DATASETS"
       ],
-      "sigma_status": "PLANNED_BACKEND_NOT_YET_CONNECTED",
+      "sigma_status": "CONNECTED_VERIFIED_PRIVATE",
       "rules": [
         "NO_M6_TRAINING_DATA",
         "SHA256_AND_PROVENANCE_REQUIRED",
@@ -92,7 +93,10 @@
       "account": "cerebron-omega",
       "default_sigma_repo": "cerebron-omega/cerebron-sigma-memory",
       "bootstrap_run_id": 35912062787,
-      "first_object_sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66"
+      "first_object_sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66",
+      "common_memory_repo": "cerebron-omega/cerebron-private-memory",
+      "sigma_model_repo": "cerebron-omega/cerebron-sigma-memory",
+      "routing_policy": "ALL_CORE_AI_VALIDATED_MEMORY_TO_COMMON_PRIVATE_REPO_SIGMA_TRAINING_ASSETS_TO_SIGMA_REPO"
     },
     "r2_candidate": {
       "role": "HOT_WARM_OBJECT_DATA",
