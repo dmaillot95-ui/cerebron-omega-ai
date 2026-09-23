@@ -393,3 +393,32 @@ Platform branch feat/cerebron-ai-platform-mvp:
 ### Current status wording
 Use: INTELLIGENCE COLLECTIVE ORCHESTRÉE À CAPACITÉ MESURÉE.
 Do not use SUPERINTELLIGENCE as a system status. G11 remains OPEN.
+
+
+## UPDATE 2026-09-23 — COLD-60 V3 TRANSFER RED TEAM
+
+A deliberately parser-unseen transfer set invalidated any broad superiority claim from Cold-60 V2.
+
+Evidence:
+- branch feat/cerebron-cold60-redteam-v3
+- commit eaf87cf87b5aa8f0de3a7cf35c1874dd18511fec
+- run 35903773988 = SUCCESS
+- job 107326190245
+- artifact 10770645736
+- artifact digest sha256:27a37328a6a9e09b27e2d733aa20c77b3f2c26787f6a6264bc68141f6fc9585e
+- result SHA 9c01b869f09d265725517a219a2b5175c3ebbd76d34c57cb331337336a816ca8
+
+Measured result:
+- single Qwen baseline = 25/60
+- adaptive CEREBRON = 26/60
+- specialist deterministic tool hits = 0/60
+- domains improved = [code] only
+- criterion 4_of_6 = false
+- transfer gap from V2 = 0.5666666666666667
+
+Decision:
+- downgrade G4/G10 outside the V2 template family.
+- preserve V2 as evidence of strong tool orchestration under matching contracts.
+- record V3 as RED/negative curriculum: brittle surface-trigger routing.
+- do NOT train on the sealed V3 answers.
+- next exact technical objective: semantic tool-contract routing that recognizes intent despite paraphrase, followed by rerun of the unchanged V3 holdout.
