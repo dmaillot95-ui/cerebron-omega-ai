@@ -12,7 +12,8 @@
     "AFAH",
     "AELYS",
     "ELYRA",
-    "SAPHEA_MICRO"
+    "SAPHEA_MICRO",
+    "SIGMA"
   ],
   "ASTRION": {
     "farm": 121,
@@ -241,5 +242,42 @@
       "SM18"
     ],
     "independence_note": "logical units may share the same Qwen base model; shared-base calls are correlated"
+  },
+  "SIGMA": {
+    "mission": "PLATFORM_NATIVE_META_SPECIALIST_MODEL",
+    "status": "ARCHITECTURE_CONFIGURED_TRAINING_NOT_YET_EXECUTED",
+    "farm_id": 74,
+    "farm_repo": "dmaillot95-ui/cerebron-farm-74-session-memory-encyclopedia",
+    "domains": [
+      "ORCHESTRATED_REASONING",
+      "TOOL_USE",
+      "SCIENCE_RND",
+      "PLANNING",
+      "AUDIT_AWARE_SYNTHESIS",
+      "AGORA_COLLABORATION",
+      "MODEL_DISTILLATION"
+    ],
+    "training_strategy": [
+      "TEACHER_ENSEMBLE",
+      "M4_GOLD_TRACE_FILTERING",
+      "DISTILLATION_OR_SFT",
+      "LORA_OR_QLORA_WHEN_COMPATIBLE",
+      "M6_COLD_BENCHMARK",
+      "RED_TEAM",
+      "AFAH_PROMOTE_OR_ROLLBACK"
+    ],
+    "weight_merge_policy": {
+      "heterogeneous_models": "FORBIDDEN_DIRECT_WEIGHT_AVERAGE",
+      "compatible_same_architecture_adapters": "ALLOWED_ONLY_AFTER_COMPATIBILITY_AND_ABLATION",
+      "preferred_cross_model_transfer": "DISTILLATION"
+    },
+    "goal": "MAXIMIZE_MEASURED_COLLECTIVE_CAPABILITY_WITHOUT_CLAIMING_SUPERINTELLIGENCE",
+    "rules": [
+      "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+      "M6_NEVER_IN_TRAIN",
+      "SHARED_TEACHERS_ARE_CORRELATED",
+      "TRANSFER_BEFORE_GENERALITY",
+      "CLAIM_LE_EVIDENCE"
+    ]
   }
 }
