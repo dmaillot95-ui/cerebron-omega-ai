@@ -1,0 +1,37 @@
+name: METRION Ephemeris Alignment V28
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/ephemeris_alignment_v28.py"
+      - "external/nasa_nesc/occ06c_ephemeris.json"
+      - ".github/workflows/ephemeris-alignment-v28.yml"
+permissions:
+  contents: read
+jobs:
+  alignment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/ephemeris_alignment_v28.py
+      - name: METRION alignment gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/ephemeris_alignment_v28.json"))
+          if d["alignment_ready"]:
+              assert d["decision"]=="READY_FOR_TIME_ALIGNED_SOLAR_PROPAGATION"
+              assert all(d["checks"].values())
+          else:
+              assert d["decision"] in {"BLOCKED_EPHEMERIS_NOT_INGESTED","BLOCKED_ALIGNMENT_METADATA"}
+          assert d["g02_status"]=="PARTIAL" and d["g03_status"]=="PARTIAL"
+          assert "NO_FAKE_EPHEMERIS" in d["epistemic"]
+          print("EPHEMERIS_V28",d["decision"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ephemeris-alignment-v28
+          path: artifacts/ephemeris_alignment_v28.json
+          retention-days: 30
