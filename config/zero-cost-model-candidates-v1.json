@@ -1,0 +1,17 @@
+{
+  "schema":"CEREBRON_ZERO_COST_MODEL_CANDIDATES_V1",
+  "date":"2026-09-23",
+  "policy":["ZERO_PAID_OVERAGE","NO_DEDICATED_PAID_ENDPOINT","FREE_CREDITS_NOT_RELIABLE_RUNTIME","OPEN_WEIGHT_PREFERRED","LICENSE_AND_MODEL_CARD_BEFORE_ACTIVATION","CANARY_BEFORE_PROMOTION"],
+  "routes":[
+    {"id":"ZR1","route":"HF_INFERENCE_PROVIDERS","cost_state":"LIMITED_FREE_CREDIT_THEN_BLOCK","use":"CANARY_ONLY","note":"Do not enable pay-as-you-go."},
+    {"id":"ZR2","route":"HF_SPACE_CPU","cost_state":"FREE_TIER_AVAILABLE","use":"SMALL_MODEL_OR_ROUTER_CANARY","note":"Subject to platform quotas and sleep."},
+    {"id":"ZR3","route":"GITHUB_ACTIONS_CPU","cost_state":"REPO_QUOTA_BOUND","use":"TINY_LOCAL_OPEN_WEIGHT_ONLY","note":"No assumption that large LLM fits runner memory/time."},
+    {"id":"ZR4","route":"EXISTING_EXTERNAL_PROVIDER_KEY","cost_state":"UNKNOWN_UNTIL_AUDITED","use":"DISABLED_BY_DEFAULT","note":"Activate only if verified zero-cost/no-overage."}
+  ],
+  "candidate_families":[
+    {"family":"Qwen compact open-weight","roles":["SAPHEA","SPIRALION","ETHERION"],"status":"DISCOVERED_REQUIRES_EXACT_MODEL_LICENSE_BENCHMARK"},
+    {"family":"SmolLM compact open-weight","roles":["SAPHEA","ROUTER"],"status":"DISCOVERED_REQUIRES_EXACT_MODEL_LICENSE_BENCHMARK"},
+    {"family":"other compact Transformers-compatible models","roles":["HYPERION","AFAH_CANARY"],"status":"DISCOVERED_ONLY"}
+  ],
+  "activation":"Select exact model by measured quality x memory x latency; never assign identity from model family name alone."
+}
