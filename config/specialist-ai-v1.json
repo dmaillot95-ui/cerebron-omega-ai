@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_SPECIALIST_AI_V1",
-  "status": "SPECIALIST_ORCHESTRATORS_NOT_INDEPENDENT_NEURAL_MODELS",
+  "status": "MIXED_LOGICAL_ROLES_WITH_SCOPED_ELYRA_NEURAL_POLICY",
   "core": [
     "CEREBRON",
     "SAPHEA",
@@ -9,7 +9,10 @@
     "HYPERION",
     "ASTRION",
     "METRION",
-    "AFAH"
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO"
   ],
   "ASTRION": {
     "farm": 121,
@@ -174,6 +177,62 @@
     "ROUTE_MINIMAL_USEFUL_COALITION",
     "FARM_CAP_144",
     "NO_FARM_ABOVE_144",
-    "SCAFFOLDED_NE_EXECUTED"
-  ]
+    "SCAFFOLDED_NE_EXECUTED",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "SHARED_BASE_MODEL_IS_CORRELATED_DEPENDENCY",
+    "SCOPED_PROMOTION_ONLY"
+  ],
+  "AELYS": {
+    "mission": "HUMAN_DIALOGUE_COORDINATION",
+    "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL",
+    "domains": [
+      "DIALOGUE",
+      "HUMAN_INTERACTION",
+      "COORDINATION",
+      "CONTEXT",
+      "CONVERSATION_MEMORY"
+    ],
+    "memory_namespace": "HUMAN_INTERACTION"
+  },
+  "ELYRA": {
+    "mission": "EMBODIED_SIMULATION_AND_ACTION",
+    "status": "SCOPED_NEURAL_POLICY_TRAINED_AND_M6_PROMOTED",
+    "domains": [
+      "PERCEPTION",
+      "ACTION",
+      "MOTION",
+      "ROBOTICS",
+      "SIMULATION",
+      "TRAJECTORIES",
+      "IMITATION_LEARNING"
+    ],
+    "neural_policy": {
+      "name": "ELYRA_IMITATION_POLICY_V1",
+      "architecture": "MLP_8_64_64_32_2",
+      "training_type": "SUPERVISED_IMITATION_LEARNING",
+      "weights_changed": true,
+      "verified_runs": [
+        35904919982,
+        35904950828
+      ],
+      "latest_weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+      "claim_ceiling": "SYNTHETIC_SIMULATOR_POLICY_ONLY"
+    },
+    "memory_namespace": "EMBODIED_REPLAY"
+  },
+  "SAPHEA_MICRO": {
+    "mission": "COMPACT_SPECIALIST_POPULATION",
+    "status": "SEVEN_ACTIVE_LOGICAL_SPECIALIST_CAPABILITIES_REST_PLANNED",
+    "target_count": 20,
+    "active_initial": [
+      "SM00",
+      "SM02",
+      "SM05",
+      "SM08",
+      "SM11",
+      "SM15",
+      "SM18"
+    ],
+    "independence_note": "logical units may share the same Qwen base model; shared-base calls are correlated"
+  }
 }
