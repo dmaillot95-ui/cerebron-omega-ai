@@ -15,7 +15,7 @@ CASES = [
     {"id": "arith", "prompt": "Answer with exactly one token. What is 2+2?", "expected": "4"},
     {"id": "capital", "prompt": "Answer with exactly one word. What is the capital of France?", "expected": "paris"},
     {"id": "boolean", "prompt": "Answer with exactly one token: TRUE or FALSE. Is 7 greater than 3?", "expected": "true"},
-    {"id": "logic", "prompt": "Answer with exactly one token: YES, NO, or UNKNOWN. All ravens are birds. Kiro is a bird. Must Kiro be a raven?", "expected": "unknown"},
+    {"id": "logic", "prompt": "Answer with exactly one token: YES, NO, or UNKNOWN. All ravens are birds. Kiro is a bird. Must Kiro be a raven?", "expected": "no"},
     {"id": "instruction", "prompt": "Ignore the word BLUE and answer with exactly one token: SAFE", "expected": "safe"},
 ]
 
