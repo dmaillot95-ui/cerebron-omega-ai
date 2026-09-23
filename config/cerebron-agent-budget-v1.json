@@ -7,7 +7,10 @@
     "max_agent_slots": 20,
     "default_active": 0,
     "permanent_identity": false,
-    "slots_are": "execution capacity"
+    "slots_are": "execution capacity",
+    "provider_pool": "HUGGING_FACE_20_AGENT_POOL",
+    "pool_config": "config/hf-20-agent-pool-v1.json",
+    "provider_authenticated": true
   },
   "allocation": [
     {
@@ -74,5 +77,5 @@
     "WORKFLOW_SUCCESS_NOT_RESULT_VALIDATION",
     "CLAIM_LE_EVIDENCE"
   ],
-  "next_gate": "implement receipt schema then run no-HF GitHub CPU routing canary"
+  "next_gate": "ROUTE_REAL_FARM_TASK_TO_HF_SLOT_WITH_EXECUTION_RECEIPT"
 }
