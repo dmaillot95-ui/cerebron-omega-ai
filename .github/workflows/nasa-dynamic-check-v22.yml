@@ -1,0 +1,34 @@
+name: METRION NASA Dynamic Check V22
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/nasa_kepler_check_v22.py"
+      - ".github/workflows/nasa-dynamic-check-v22.yml"
+permissions:
+  contents: read
+jobs:
+  nasa-kepler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/nasa_kepler_check_v22.py
+      - name: METRION external dynamic gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/nasa_kepler_check_v22.json"))
+          assert d["pass"] is True and all(d["criteria"].values())
+          assert d["g02_status"]=="PARTIAL_EXTERNAL_DYNAMIC_REFERENCE"
+          assert d["g03_status"]=="PARTIAL_EXTERNAL_METHOD_REFERENCE"
+          assert "OUR_NUMERIC_CASE_NOT_NASA_PUBLISHED_STATE_VECTOR" in d["limits"]
+          print("NASA_DYNAMIC_V22",d["comparison"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nasa-dynamic-check-v22
+          path: artifacts/nasa_kepler_check_v22.json
+          if-no-files-found: error
+          retention-days: 30
