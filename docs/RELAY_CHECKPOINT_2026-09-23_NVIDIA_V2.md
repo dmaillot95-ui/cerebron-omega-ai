@@ -71,3 +71,42 @@ Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log
 - METRION posted AGORA LESSON capsule AGORA:b7a077098a53553ff4bf with provenance to Newton gravity-ablation run 35873551620. Capsule SHA b7a077098a53553ff4bf4e52204d3d09ceac96547d8c92a0b837df91c5e4972f.
 - Gate result GATES_OK, result SHA 7ae9697c6e4d180038dd5d9a4bd2c451c2930c0c84c9724ff47aecb143b0d9d2. Stored as AGORA_TASKS/M1_TRACE in artifact; gold_promoted=false and training_triggered=false because measured transfer gain is not yet proven.
 - Important: this proves capsule creation + gate logic + artifact persistence for one run. It does NOT yet prove durable cross-run memory retrieval, autonomous recurring forum operation, GOLD promotion, model-weight training, or learning gain.
+
+## FINAL RELAY UPDATE — PLATFORM / AGORA / TRAINING — 2026-09-23
+- AGORA cross-run memory V2 is VERIFIED: run 35877276452 SUCCESS, job 107236349012, artifact 10757878416, artifact digest sha256:8951ab4cd33cd6a7771dc6ff78cf23e3e8cca44e7ea319a0deca90ddf78d05fb. ASTRION retrieved METRION capsule AGORA:b7a077098a53553ff4bf and changed the next experimental action to SELECT_FREE_GRANULAR_COLLAPSE_FOR_NEXT_F139_TEST. Result SHA 0b4a0151d123c32855656ada8be235c693015cc6e752f3b77ff08b9da2bf7395. This proves inter-run memory/policy transfer, NOT neural-weight learning.
+- Neural Training Fabric registered for SAPHEA, SPIRALION, ETHERION, HYPERION, ASTRION, METRION, AFAH, AÉLYS, ELYRA and SAPHEA MICRO: config/neural-training-fabric-v1.json, commit f9d2f176c338093e8bcf234f2395e7e3f861d655. Status is ARCHITECTURE_REGISTERED_TRAINING_NOT_YET_EXECUTED. Real neural learning requires actual weight/adapter artifact + dataset SHA + cold M6 benchmark + measured gain + rollback gate.
+- Fail-closed neural bootstrap added: runtime/neural_training_bootstrap_v1.py commit ecdf240ceb94b7f7ef66d20b274525ea83a676f8 and workflow commit f5d1de79c03fe2adb90eef6df624c13bd2f94948. It blocks training without M4 GOLD.
+- AÉLYS target: dialogue/human interaction/coordination. ELYRA target: embodied perception/action and simulation training. ELYRA simulator learning is NOT active yet; Newton/Warp/PhysicsNeMo are tools, not proof of ELYRA training.
+- Higgsfield plugin exists in ChatGPT and was suggested to the user; connection must be user-confirmed before claiming connected. Intended role: MEDIA/WEB FABRIC for image/video/site/web-app/browser-game generation.
+
+## CÉRÉBRON AI Platform MVP — VERIFIED BRANCH STATE
+- Branch feat/cerebron-ai-platform-mvp exists; remote HEAD e7498872307ae9605229acd5f22b4ae79fdf0e25 at initial MVP audit. All 9 MVP commits only ADDED files under platform/; no existing CÉRÉBRON files were deleted or overwritten by those commits.
+- MVP files include platform/server.py, mission_engine.py, model_router.py, static UI, tests and README.
+- 144 farm IDs are present and unique (1..144). Platform route IDs are local task associations; they are NOT proof that the corresponding farm repositories/workflows executed.
+- CEREBRON-ROUTER-NN-V1 is a real numeric softmax linear classifier with hard-coded/versioned weights. It is NOT a trained generative LLM and must not be described as one.
+- Rover demonstration performs real Python engineering calculation at E2_CALCULATION only. For current parameters: traction ~83.922 N, mechanical power ~37.765 W, electrical power ~48.416 W. Deterministic Red Team/audit rules are not independent neural agents.
+- No permanent generative LLM is connected to the MVP. No LoRA/QLoRA adapter has been produced. ELYRA imitation/RL remains inactive. No public deployment.
+- platform data/artifacts are gitignored; local artifact SHA claims are not remotely verifiable unless separately uploaded as GitHub Actions artifacts/evidence.
+
+## CONTROL PLANE HARDENING
+- Platform is explicitly registered as CEREBRON_CONTROL_PLANE_NOT_A_FARM, farm_count_effect=0, farm cap remains 144. Manifest: config/platform-control-plane-v1.json, commit 8b4b8ccbdf4f797ca27a26bab936686c4b754cdf on feat/cerebron-ai-platform-mvp.
+- server.py hardened to reject non-loopback bind until auth/RBAC/isolation exist; control-plane endpoint added. Commit 038f301e29ab2271067ef64f75633a4cd7907fa7.
+- CI workflow .github/workflows/platform-mvp-ci.yml added, commit f67d8c6c6f00194a4bca0739acdac7694af21d83.
+- CI run 35893178923, job 107290440154 SUCCESS: Python compile PASS, platform tests PASS, control-plane safety gates PASS.
+- Security state remains LOCAL/FAIL-CLOSED. Public deployment must remain BLOCKED until authentication, RBAC, multi-user isolation, secret handling and authorization are implemented and tested.
+- Current UI “live” updates use HTTP polling (~700 ms), not SSE/WebSocket.
+
+## NEXT SESSION — PRIORITY ORDER
+1. DO NOT RESTART. Read this relay and inspect current branch/main before writing.
+2. Preserve farm cap 144 and all existing science/Collatz/memory/tool evidence.
+3. Build a REAL farm-worker bridge from the Control Plane to at least one existing farm workflow/repository. Require run ID + job ID + artifact + SHA before claiming a farm executed.
+4. Connect one REAL generative model backend fail-closed (open/local preferred, zero paid overage). Record model_id/revision/license/runtime/health/cost. Do not fake availability.
+5. Add auth/RBAC/session isolation before any public deployment. Keep loopback-only until tests pass.
+6. Continue AGORA chain: selected F139 free granular-collapse experiment -> measure information/gain -> only then consider M4 GOLD promotion. Never train on UNDER_TEST capsules.
+7. For neural learning: first real LoRA/QLoRA should produce adapter/weight artifact + SHA, then M6 cold benchmark before/after; rollback on regression. Prompt/memory changes are NOT neural training.
+8. Treat AÉLYS and ELYRA separately: AÉLYS dialogue/coordination; ELYRA embodied simulator learning. Do not claim either has trained weights without artifacts.
+9. Keep platform as control plane/index/orchestrator, not bulk storage. Large datasets/models/videos/sim outputs stay in external artifact/data stores; store pointers, provenance and hashes.
+10. Merge the platform branch to main only after explicit review; do not assume merge authorization.
+
+## HANDOFF RULE
+The next AI must distinguish four levels on every claim: ARCHITECTURE / CONFIGURED / EXECUTED / VALIDATED. If no run/log/artifact/SHA exists, say NON_EXECUTED. If a workflow ran but only a toy/reference case passed, do not promote scientific validity.
