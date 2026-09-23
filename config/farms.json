@@ -1,5 +1,5 @@
 {
-  "version": "2.13",
+  "version": "2.14",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -750,7 +750,16 @@
       "id": 127,
       "repo": "cerebron-farm-127-hypersonics-reentry",
       "domain": "hypersonics-reentry-rarefied-aerothermodynamics",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35849942826,
+        "job_id": 107144972832,
+        "artifact_id": 10745167692,
+        "result_sha256": "9da7b9fdc6f7dea0ad8471cd772da5ac7c4b88623292ffc6d39b08df1f96d7c6",
+        "engine": "python-hypersonic-reentry-engineering-canary",
+        "engine_version": "3.12.14",
+        "scope": "engineering-correlation-canary-not-cfd-dsmc-or-flight-validation"
+      }
     },
     {
       "id": 128,
