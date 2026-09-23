@@ -1,5 +1,5 @@
 {
-  "version": "2.16",
+  "version": "2.17",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -844,25 +844,65 @@
       "id": 133,
       "repo": "cerebron-farm-133-cryogenic-propellant-fluids",
       "domain": "cryogenic-propellant-fluid-management",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854335181,
+        "job_id": 107159142504,
+        "artifact_id": 10746452797,
+        "result_sha256": "b278a0e1046974d2bf19e383814ae541b6d42139404782ad2e73d8ca496d873d",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "CRYO_BOILOFF",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 134,
       "repo": "cerebron-farm-134-eclss-closed-loop-habitats",
       "domain": "eclss-closed-loop-habitat-systems",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854342828,
+        "job_id": 107159167792,
+        "artifact_id": 10746413057,
+        "result_sha256": "51856982cee751b1aec694f7b47a7e7bc6bbb68b3de662f7ed262f2058956de3",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "CABIN_CO2_BALANCE",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 135,
       "repo": "cerebron-farm-135-vacuum-contamination",
       "domain": "vacuum-contamination-molecular-environment",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854349771,
+        "job_id": 107159191056,
+        "artifact_id": 10746308549,
+        "result_sha256": "340b3ab23c4618eff1e2c74f3754e2c11cf3585538c8c2d8e3fd51acffe970bd",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "MOLECULAR_DEPOSITION",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 136,
       "repo": "cerebron-farm-136-space-mechanisms-tribology",
       "domain": "space-mechanisms-tribology-lubrication",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854356837,
+        "job_id": 107159214673,
+        "artifact_id": 10746353512,
+        "result_sha256": "b924aee4b30596f7f400678ecd9624e030db8ff0dd83af8bfc1b8088e9e3c42d",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "BEARING_PV_LIFE_PROXY",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 137,
