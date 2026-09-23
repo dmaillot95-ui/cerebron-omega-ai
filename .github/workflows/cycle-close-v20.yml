@@ -1,0 +1,54 @@
+name: CEREBRON Cycle Close V20
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  close-cycle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Rebuild evidence chain
+        run: |
+          set -e
+          python simulations/space_vehicle_chain_v1.py
+          python simulations/ascent_3dof_v2.py
+          python simulations/orbit_target_v3.py
+          python simulations/orbit_insertion_v4.py
+          python simulations/guidance_search_v5.py
+          python simulations/guidance_constrained_v6.py
+          python simulations/robustness_mc_v7.py
+          python simulations/failure_injection_v8.py
+          python runtime/evidence_pack_v9.py
+          python benchmarks/independent_reproduction_v10.py
+          python benchmarks/cross_model_v11.py
+          python runtime/red_team_v12.py
+          python runtime/reality_gap_v13.py
+          python simulations/eci_dynamics_v14.py
+          python simulations/eci_3d_v15.py
+          python simulations/powered_eci_3d_v16.py
+          python simulations/powered_eci_j2_v17.py
+          python benchmarks/convergence_ablation_v18.py
+          python benchmarks/factorial_ablation_v19.py
+          python runtime/cycle_close_v20.py
+      - name: F72 maturity gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/cycle_close_v20.json"))
+          assert d["convergence_trend_pass"] is True
+          assert d["evidence_inventory"]["present"]==19
+          assert d["maturity"]["calibration"]=="BELOW_S8"
+          assert d["maturity"]["F72"]=="BLOCKED"
+          assert d["gaps"]["G01_uncertainty_calibration"]=="OPEN"
+          assert d["gaps"]["G03_independent_external_reference"]=="OPEN"
+          print("CYCLE_CLOSE_V20",d["decision"],d["maturity"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-cycle-v1-v20
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
