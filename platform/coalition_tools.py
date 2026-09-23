@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from coalition import execute as execute_model_coalition
 from model_router import infer
-from specialist_tools import try_solve
+from semantic_tools import semantic_try_solve
 
 
 def execute(prompt: str) -> dict:
@@ -10,7 +10,7 @@ def execute(prompt: str) -> dict:
     if not prompt:
         raise ValueError("prompt required")
 
-    tool = try_solve(prompt)
+    tool = semantic_try_solve(prompt)
     if not tool.get("handled"):
         result = execute_model_coalition(prompt)
         result["execution_mode"] = "MODEL_COALITION_FALLBACK"
