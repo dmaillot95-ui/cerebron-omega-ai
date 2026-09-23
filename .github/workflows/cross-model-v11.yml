@@ -1,0 +1,34 @@
+name: METRION Cross Model V11
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/cross_model_v11.py"
+      - ".github/workflows/cross-model-v11.yml"
+permissions:
+  contents: read
+jobs:
+  cross-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/cross_model_v11.py
+      - name: F72 dependency gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/cross_model_v11.json"))
+          assert d["pass"] is True and all(x["pass"] for x in d["checks"])
+          assert d["dependency_audit"]["independence_class"]=="IMPLEMENTATION_DIVERSITY_WITH_SHARED_PHYSICS_ASSUMPTIONS"
+          assert d["gates"]["F72"]=="PENDING_DEPENDENCY_REVIEW"
+          assert "NOT_FULLY_INDEPENDENT_EVIDENCE" in d["epistemic"]
+          print("CROSS_MODEL_V11",d["decision"],d["dependency_audit"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cross-model-v11
+          path: artifacts/cross_model_v11.json
+          if-no-files-found: error
+          retention-days: 14
