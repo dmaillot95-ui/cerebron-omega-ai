@@ -55,6 +55,10 @@ def solve_math_semantic(prompt: str):
 
 
 def _extract_expression(prompt: str):
+    if "python" in prompt.lower() and "expression" in prompt.lower() and ":" in prompt:
+        tail=prompt.rsplit(":",1)[-1].strip().rstrip(" .")
+        if tail:
+            return tail
     candidates = [
         r"(?:python\s+)?expression\s*[:=]\s*(.+)",
         r"(?:evaluate|compute)\s+(?:this\s+)?(?:python\s+)?expression\s*[:=]?\s*(.+)",
@@ -66,8 +70,6 @@ def _extract_expression(prompt: str):
             expr=m.group(1).strip()
             expr=re.split(r"\b(?:reply|return|answer)\b",expr,flags=re.I)[0].strip()
             return expr.rstrip(" .")
-    if "python" in prompt.lower() and "expression" in prompt.lower() and ":" in prompt:
-        return prompt.rsplit(":",1)[-1].strip().rstrip(" .")
     return None
 
 
