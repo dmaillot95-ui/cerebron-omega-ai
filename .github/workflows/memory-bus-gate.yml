@@ -1,0 +1,42 @@
+name: MEMORY OMEGA Bus Gate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/memory_bus_gate.py"
+      - "config/memory-fabric-v1.json"
+      - ".github/workflows/memory-bus-gate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  memory-bus-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Evaluate fail-closed memory bus
+        run: python runtime/memory_bus_gate.py
+      - name: Verify state artifact
+        run: |
+          test -s artifacts/memory_bus_state.json
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/memory_bus_state.json"))
+          assert d["schema"]=="CEREBRON_MEMORY_BUS_STATE_V1"
+          assert d["state"] in ("READY","DEGRADED","FREEZE")
+          if d["state"]!="READY":
+              assert d["write_mode"]=="READ_ONLY"
+          print("MEMORY_BUS",d["state"],d["write_mode"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: memory-omega-bus-state
+          path: artifacts/memory_bus_state.json
+          if-no-files-found: error
+          retention-days: 7
