@@ -1,0 +1,20 @@
+{
+  "schema":"CEREBRON_OPEN_SOURCE_COLLECTIVE_SEARCH_V1",
+  "status":"QUEUED_NOT_EXECUTED",
+  "blind":true,
+  "baseline_hidden":"config/open-tool-fabric-v1.json",
+  "mission":"Independently discover open-source/open-weight software, simulators, scientific engines and generative systems that can measurably improve CEREBRON. Do not read or reuse the baseline candidate list before freezing results.",
+  "workers":{
+    "SAPHEA":["robotics","execution","scientific software","developer tooling"],
+    "SPIRALION":["memory","RAG","knowledge graphs","orchestration","learning loops"],
+    "ETHERION":["NASA","ESA","physics","math","CFD","FEA","multiphysics","optimization"],
+    "HYPERION":["alternative tools","unusual high-value projects","image","video","3D","audio"],
+    "ASTRION":["spaceflight","mission design","orbital dynamics","GNC","spacecraft simulation"],
+    "METRION":["CAD","CAE","metrology","verification","digital twins","electronics"]
+  },
+  "required_output_per_candidate":["name","official_url","license","code_license","weights_license_if_any","domain","capability","hardware_requirements","integration_cost","evidence","risks","recommended_farm"],
+  "freeze_before_fusion":true,
+  "fusion":["DEDUP","LICENSE_GATE","DEPENDENCY_MAP","F72_COUNTER_AUDIT","AFAH_FUSION","DELTA_VS_BASELINE"],
+  "farm_constraint":{"current_registered":122,"absolute_max":144,"new_slots":"F123-F144","rule":"TOOLS_CAN_SHARE_A_FARM; DO_NOT CREATE REDUNDANT FARMS"},
+  "epistemic":["NO_SIMULATED_AGENT_OUTPUT","NO_EXECUTION_CLAIM_WITHOUT_TRACE","SAME_SOURCE_NOT_INDEPENDENT_EVIDENCE","WORKFLOW_SUCCESS_NOT_RESEARCH_QUALITY"]
+}
