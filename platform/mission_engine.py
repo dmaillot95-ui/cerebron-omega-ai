@@ -11,6 +11,7 @@ import uuid
 
 from model_router import infer
 from farm_bridge import FarmBridgeError, collect as farm_collect, submit as farm_submit
+from generative_backend import GenerativeBackendError, generate as generative_generate, status as generative_status
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PLATFORM = pathlib.Path(__file__).resolve().parent
@@ -150,6 +151,32 @@ def _farm_bridge_task(mission_id: str, farm_id: int, operation: str, payload: di
                 "limitations": ["No FARM_EXECUTED claim without run/job/artifact/SHA."]}
 
 
+def _model_task(mission_id: str, prompt: str) -> dict:
+    task_id = f"task_{uuid.uuid4().hex[:12]}"
+    start = time.time()
+    input_sha = canonical_sha({"mission_id": mission_id, "model": "Qwen/Qwen2.5-0.5B-Instruct", "prompt": prompt})
+    with connect() as con:
+        con.execute("""INSERT INTO tasks(task_id,mission_id,farm_id,role,worker,model,tool,status,start_time,input_sha,cost)
+                       VALUES(?,?,?,?,?,?,?,?,?,?,0)""",
+                    (task_id, mission_id, None, "GENERATIVE_MODEL", "local-transformers-worker",
+                     "Qwen/Qwen2.5-0.5B-Instruct", None, "RUNNING", start, input_sha))
+    emit(mission_id, "Modèle génératif démarré", {"task_id": task_id, "model": "Qwen/Qwen2.5-0.5B-Instruct"})
+    try:
+        output = generative_generate(prompt)
+        output_sha = canonical_sha(output)
+        with connect() as con:
+            con.execute("UPDATE tasks SET status='COMPLETED',end_time=?,output_sha=?,evidence=? WHERE task_id=?",
+                        (time.time(), output_sha, json.dumps(output, ensure_ascii=False), task_id))
+        emit(mission_id, "Modèle génératif terminé", {"task_id": task_id, "sha": output_sha})
+        return output
+    except GenerativeBackendError as exc:
+        with connect() as con:
+            con.execute("UPDATE tasks SET status='NON_EXECUTED',end_time=?,errors=? WHERE task_id=?",
+                        (time.time(), str(exc), task_id))
+        emit(mission_id, "Modèle génératif indisponible", {"task_id": task_id, "error": str(exc)}, "WARNING")
+        return {"status": "NON_EXECUTED", "error": str(exc)}
+
+
 def rover_calculation() -> dict:
     mass_kg = 180.0
     slope_deg = 15.0
@@ -227,7 +254,24 @@ def execute(mission_id: str) -> None:
                              f"mission:{mission_id}", lesson_sha, time.time()))
             result["artifact"] = {"url": f"/api/artifacts/{artifact.name}", "sha": artifact_sha}
         else:
-            result = {"route": route, "farms": farms, "status": "ROUTED", "limitations": "No generative model is connected."}
+            gen_status = generative_status()
+            if gen_status["status"] == "ACTIVE_WORKER":
+                generation = _model_task(mission_id, mission["prompt"])
+                result = {
+                    "route": route,
+                    "farms": farms,
+                    "status": "MODEL_EXECUTED" if generation.get("generation") else "ROUTED_ONLY",
+                    "generation": generation,
+                    "limitations": "Generative model output is unverified unless separate evidence tasks validate it.",
+                }
+            else:
+                result = {
+                    "route": route,
+                    "farms": farms,
+                    "status": "ROUTED_ONLY",
+                    "model_status": gen_status,
+                    "limitations": "Qualified generative model is registered but this runtime is not enabled/ready.",
+                }
         output_sha = canonical_sha(result)
         with connect() as con:
             con.execute("UPDATE missions SET status='COMPLETED',domain=?,updated_at=?,output_sha=?,result_json=? WHERE mission_id=?",

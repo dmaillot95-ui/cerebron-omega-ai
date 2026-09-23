@@ -20,6 +20,7 @@ from model_router import MODEL_REVISION, infer
 from farm_bridge import FarmBridgeError, PILOTS, submit
 from security import SecurityError, authenticate, check_origin, rate_limit, reset_rate_limits, require
 from server import Handler
+from generative_backend import MODEL_ID as GENERATIVE_MODEL_ID, REVISION as GENERATIVE_REVISION, status as generative_status
 
 
 class PlatformTests(unittest.TestCase):
@@ -207,6 +208,15 @@ class PlatformTests(unittest.TestCase):
                 server.shutdown()
                 server.server_close()
                 thread.join(timeout=2)
+
+
+    def test_qualified_generative_model_is_registered_but_fail_closed_by_default(self):
+        with mock.patch.dict(os.environ, {"CEREBRON_ENABLE_LOCAL_GENERATIVE": ""}, clear=False):
+            st = generative_status()
+        self.assertEqual(st["model_id"], GENERATIVE_MODEL_ID)
+        self.assertEqual(st["revision"], GENERATIVE_REVISION)
+        self.assertEqual(st["benchmark_evidence"]["score"], 5)
+        self.assertEqual(st["status"], "CONFIGURED_DISABLED")
 
 
 if __name__ == "__main__":

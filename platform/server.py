@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 from mission_engine import ARTIFACTS, ROOT, create_mission, rows
 from model_router import catalog, infer
 from farm_bridge import PILOTS
+from generative_backend import GenerativeBackendError, generate as generative_generate
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -69,6 +70,14 @@ class Handler(BaseHTTPRequestHandler):
             if self.path == "/api/models/infer":
                 data = self._body()
                 return self._json(infer(str(data.get("text", ""))))
+            if self.path == "/api/models/generate":
+                data = self._body()
+                try:
+                    result = generative_generate(str(data.get("prompt", "")))
+                except GenerativeBackendError as exc:
+                    return self._json({"error": str(exc)}, 503)
+                security_audit(principal, "model:generate", "ALLOW", {"output_sha": result["output_sha"]})
+                return self._json(result)
             return self._json({"error": "not found"}, 404)
         except SecurityError as exc:
             return self._security_error(exc)

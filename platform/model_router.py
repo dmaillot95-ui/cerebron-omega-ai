@@ -13,6 +13,8 @@ import math
 import os
 import time
 
+from generative_backend import status as generative_status
+
 
 LABELS = ("space", "math", "software", "simulation", "general")
 VOCAB = (
@@ -85,7 +87,14 @@ def catalog() -> list[dict]:
             "limitations": "Non-generative classifier; not an LLM.",
         },
         {
-            "provider": "huggingface",
+            **generative_status(),
+            "endpoint": "/api/models/generate",
+            "latency_ms": None,
+            "context": 32768,
+            "capabilities": ["text-generation", "compact-general-assistance"],
+        },
+        {
+            "provider": "huggingface-remote",
             "model_id": None,
             "revision": None,
             "license": None,
