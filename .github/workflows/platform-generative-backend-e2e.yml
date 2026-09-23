@@ -1,0 +1,47 @@
+name: CEREBRON Generative Backend E2E
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/generative_backend.py'
+      - 'platform/model_router.py'
+      - 'platform/mission_engine.py'
+      - 'platform/server.py'
+      - '.github/workflows/platform-generative-backend-e2e.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute the Control Plane generative backend code
+        run: |
+          python platform/generative_backend.py --prompt "Answer with exactly one token: READY" --max-new-tokens 12
+      - name: Verify model identity and response
+        run: |
+          python - <<'PY'
+          import json, pathlib, re
+          p=pathlib.Path("platform/artifacts/generative-backend-e2e.json")
+          d=json.loads(p.read_text())
+          assert d["model_id"]=="Qwen/Qwen2.5-0.5B-Instruct"
+          assert d["revision"]=="ec7ddfa904d4d447eedd0b7f126df16957734abb"
+          assert re.sub(r"[^a-z]+","",d["generation"].lower())=="ready"
+          assert len(d["output_sha"])==64
+          print("GENERATIVE_BACKEND_E2E_OK", d["output_sha"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-generative-backend-e2e
+          path: platform/artifacts/generative-backend-e2e.json

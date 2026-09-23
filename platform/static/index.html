@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b10">
+  <title>CÉRÉBRON ΑΩ</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23080b10'/%3E%3Cpath d='M7 10h18M7 16h12M7 22h18' stroke='%23b7ff4a' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="mark">ΑΩ</span><div><strong>CÉRÉBRON</strong><small>AI PLATFORM · EVIDENCE FIRST</small></div></div>
+    <div class="system"><span id="healthDot" class="dot"></span><span id="healthLabel">Vérification…</span><code id="clock"></code></div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" aria-label="Navigation principale">
+      <button class="nav active" data-view="cockpit">⌁ <span>Cockpit</span></button>
+      <button class="nav" data-view="farms">▦ <span>Fermes</span><b id="farmCount">—</b></button>
+      <button class="nav" data-view="models">◈ <span>IA & modèles</span></button>
+      <button class="nav" data-view="agora">◎ <span>AGORA</span></button>
+      <button class="nav" data-view="memory">≡ <span>Mémoire</span></button>
+      <button class="nav" data-view="evidence">✓ <span>Preuves</span></button>
+      <button class="nav" data-view="health">＋ <span>Santé</span></button>
+      <div class="policy"><span>POLITIQUE</span><strong>ZERO PAID OVERAGE</strong><small>Les composants non prouvés restent indisponibles.</small></div>
+    </nav>
+    <main>
+      <section id="cockpit" class="view active">
+        <div class="mission-head"><div><p class="eyebrow">MISSION CONTROL</p><h1>Que doit résoudre CÉRÉBRON ?</h1></div><span class="chip">MINIMAL USEFUL COALITION</span></div>
+        <div class="cockpit-grid">
+          <section class="console panel">
+            <div id="conversation" class="conversation">
+              <article class="message system-msg"><span>CÉRÉBRON</span><p>Décrivez une mission. Le routeur sélectionnera une coalition minimale, distinguera rôles, modèles et workers réels, puis enregistrera les preuves.</p></article>
+            </div>
+            <form id="missionForm" class="composer">
+              <label for="prompt">Mission</label>
+              <textarea id="prompt" required>Concevoir un concept de rover lunaire autonome et calculer la puissance de traction sur une pente de 15 degrés.</textarea>
+              <div><small>Le calcul est réel. Les capacités absentes seront marquées indisponibles.</small><button type="submit">Lancer la mission <span>↗</span></button></div>
+            </form>
+          </section>
+          <aside class="mission-rail">
+            <section class="panel status-card"><div class="panel-title"><span>MISSION ACTIVE</span><b id="missionStatus" class="state idle">IDLE</b></div><h2 id="missionId">Aucune mission</h2><div class="progress"><i id="progressBar"></i></div><dl><div><dt>Domaine</dt><dd id="missionDomain">—</dd></div><div><dt>Tâches</dt><dd id="taskCount">0</dd></div><div><dt>Preuves</dt><dd id="evidenceCount">0</dd></div></dl></section>
+            <section class="panel"><div class="panel-title"><span>JOURNAL TEMPS RÉEL</span><b>LIVE</b></div><div id="eventLog" class="event-log"><p>En attente d’une mission.</p></div></section>
+          </aside>
+        </div>
+        <section class="panel task-panel"><div class="panel-title"><span>GRAPHE D’EXÉCUTION</span><b id="coalition">0 FERME</b></div><div id="tasks" class="task-flow"><div class="empty">Les tâches apparaîtront ici avec worker, modèle, outil et SHA.</div></div></section>
+      </section>
+      <section id="farms" class="view"><header class="section-head"><div><p class="eyebrow">CAPABILITY REGISTRY</p><h1>Fermes F001—F144</h1></div><input id="farmSearch" placeholder="Filtrer par ID, domaine ou dépôt…"></header><div id="farmGrid" class="farm-grid"></div></section>
+      <section id="models" class="view"><header class="section-head"><div><p class="eyebrow">MODEL ROUTER</p><h1>Rôles, modèles et workers</h1></div></header><div class="legend"><span>LOGICAL ROLE</span><span>REAL MODEL</span><span>ACTIVE WORKER</span><span>UNAVAILABLE</span></div><div id="modelGrid" class="model-grid"></div><div id="roleGrid" class="role-grid"></div></section>
+      <section id="agora" class="view"><header class="section-head"><div><p class="eyebrow">COLLECTIVE SCHOOL</p><h1>AGORA</h1></div><span class="chip">VALIDATION BEFORE TRAINING</span></header><div id="agoraList" class="stack"></div></section>
+      <section id="memory" class="view"><header class="section-head"><div><p class="eyebrow">MEMORY FABRIC</p><h1>M0—M7</h1></div></header><div id="memoryGrid" class="memory-grid"></div></section>
+      <section id="evidence" class="view"><header class="section-head"><div><p class="eyebrow">CLAIM ≤ EVIDENCE</p><h1>Registre des preuves</h1></div></header><div id="evidenceList" class="stack"></div></section>
+      <section id="health" class="view"><header class="section-head"><div><p class="eyebrow">SYSTEM REALITY</p><h1>Santé du système</h1></div></header><div id="healthGrid" class="health-grid"></div></section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
+

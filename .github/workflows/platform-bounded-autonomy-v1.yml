@@ -1,0 +1,43 @@
+name: CEREBRON Bounded Autonomy V1
+on:
+  push:
+    branches: ['feat/bounded-autonomy-v1']
+    paths:
+      - 'platform/bounded_autonomy_v1.py'
+      - '.github/workflows/platform-bounded-autonomy-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bounded:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: platform
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile bounded autonomy runner
+        run: python -m compileall -q platform
+      - name: Execute bounded internal mission and gates
+        run: python platform/bounded_autonomy_v1.py
+      - name: Verify G8 scoped proof
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("platform/artifacts/bounded-autonomy-v1.json")
+          d=json.loads(p.read_text())
+          assert d["status"]=="G8_PASS_SCOPED_INTERNAL"
+          assert d["external_action_executed"] is False
+          assert d["human_approval_required"] is True
+          assert d["checks"]["step_budget_enforced"] is True
+          assert d["checks"]["external_step_human_gated"] is True
+          print("G8_BOUNDED_AUTONOMY_VERIFIED", d["result_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-bounded-autonomy-v1
+          path: platform/artifacts/bounded-autonomy-v1.json

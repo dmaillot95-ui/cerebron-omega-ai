@@ -1,0 +1,50 @@
+name: ELYRA Independent Audit V1
+on:
+  push:
+    branches: ['feat/elyra-independent-audit-v1']
+    paths:
+      - 'platform/elyra_independent_audit_v1.py'
+      - '.github/workflows/elyra-independent-audit-v1.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ELYRA_AUDIT_SEED: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU torch
+        run: python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+      - name: Download promoted ELYRA source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: elyra-neural-imitation-v1
+          path: platform/artifacts/source
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: 35904950828
+      - name: Audit on fresh shifted distribution
+        run: python platform/elyra_independent_audit_v1.py
+      - name: Verify audit receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          d=json.loads(pathlib.Path("platform/artifacts/elyra-independent-audit-v1.json").read_text())
+          assert d["status"]=="PASS_SCOPED_INDEPENDENT_CODEPATH"
+          assert d["weights_sha256"]=="b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601"
+          assert d["checks"]["action_mse_improves_10x"] is True
+          assert d["checks"]["closed_loop_improves_random_by_20pp"] is True
+          print("ELYRA_INDEPENDENT_AUDIT_PASS", d["trained_policy"]["success_rate"], d["teacher"]["success_rate"], d["result_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: elyra-independent-audit-v1
+          path: platform/artifacts/elyra-independent-audit-v1.json

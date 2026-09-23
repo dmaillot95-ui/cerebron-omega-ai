@@ -1,0 +1,30 @@
+name: CEREBRON Platform MVP CI
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/**'
+      - 'config/platform-control-plane-v1.json'
+      - '.github/workflows/platform-mvp-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile Python
+        run: python -m compileall -q platform
+      - name: Run platform tests
+        run: python -m unittest discover -s platform/tests -v
+      - name: Verify control-plane safety
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          cfg=json.loads(pathlib.Path('config/platform-control-plane-v1.json').read_text())
+          assert cfg['farm_count_effect']==0
+          assert cfg['farm_cap']==144
+          assert cfg['security']['public_deployment']=='BLOCKED_UNTIL_AUTH_RBAC_ISOLATION'
+          print('CONTROL_PLANE_GATES_OK')
+          PY
