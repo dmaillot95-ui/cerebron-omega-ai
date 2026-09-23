@@ -16,6 +16,7 @@
   "pipeline": [
     "AGORA_VALIDATED",
     "M4_GOLD",
+    "SIGMA_GOLD_AGGREGATION",
     "ROLE_DATASET_BUILD",
     "TRAIN_VALIDATION_SPLIT",
     "BASELINE_M6",
@@ -69,6 +70,24 @@
     "SAPHEA_MICRO": {
       "target": "population of compact specialists",
       "training": "per-domain LoRA/QLoRA"
+    },
+    "SIGMA": {
+      "target": "platform-native integrated reasoning/tool-use model",
+      "training": "M4 GOLD distillation/SFT plus LoRA/QLoRA on a compatible pinned base model",
+      "status": "ARCHITECTURE_CONFIGURED_TRAINING_NOT_YET_EXECUTED",
+      "sources": [
+        "VALIDATED_ROLE_TRACES",
+        "AGORA_VALIDATED",
+        "REAL_FARM_TOOL_ARTIFACTS",
+        "NEGATIVE_MEMORY",
+        "AFAH_ACCEPTED"
+      ],
+      "rules": [
+        "M6_NEVER_IN_TRAIN",
+        "HETEROGENEOUS_WEIGHTS_USE_DISTILLATION",
+        "DIRECT_WEIGHT_MERGE_ONLY_IF_ARCHITECTURE_AND_LINEAGE_COMPATIBLE",
+        "WEIGHTS_CHANGED_REQUIRED"
+      ]
     }
   },
   "promotion_requirements": {
