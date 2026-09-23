@@ -1090,11 +1090,15 @@
   ],
   "max_farms": 146,
   "policy": {
-    "farm_cap": 144,
-    "no_farm_above_144": true,
+    "farm_cap": 146,
+    "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
-    "tools_are_not_farms": true
+    "tools_are_not_farms": true,
+    "current_registered_farm_count": 146,
+    "current_highest_farm_id": 146,
+    "new_farm_admission": "REPOSITORY_MUST_EXIST_AND_BE_VERIFIED_BEFORE_REGISTRY_INSERT",
+    "future_ids_are_not_active_until_verified": true
   },
   "shared_engines": {
     "NVIDIA": {
