@@ -13,6 +13,8 @@ on:
       - 'config/farm-functional-architecture-v1.json'
       - 'config/model-gateway.json'
       - 'config/runtime-provider-registry.json'
+      - 'config/cerebron-simplified-operating-model.json'
+      - 'config/farm-preservation-manifest.json'
       - 'scripts/audit_cerebron_civilization_config.py'
       - '.github/workflows/cerebron-civilization-config-audit.yml'
   workflow_dispatch:
