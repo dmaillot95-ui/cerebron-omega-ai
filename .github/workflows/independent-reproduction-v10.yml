@@ -1,0 +1,36 @@
+name: METRION Independent Reproduction V10
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/independent_reproduction_v10.py"
+      - ".github/workflows/independent-reproduction-v10.yml"
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/independent_reproduction_v10.py
+      - name: F72 reproduction pre-gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/independent_reproduction_v10.json"))
+          assert len(d["cases"])==5
+          assert d["pass"] is True
+          assert all(x["pass"] for x in d["cases"])
+          assert d["maturity_candidate"]=="S7_REPRODUCED"
+          assert d["gates"]["F72"]=="PENDING" and d["gates"]["AFAH"]=="PENDING"
+          assert "NOT_INDEPENDENT_EXPERIMENT" in d["epistemic"]
+          print("REPRODUCTION_V10",d["maturity_candidate"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: independent-reproduction-v10
+          path: artifacts/independent_reproduction_v10.json
+          if-no-files-found: error
+          retention-days: 14
