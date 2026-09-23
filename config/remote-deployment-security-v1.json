@@ -13,17 +13,20 @@
     "rate_limit": true,
     "request_body_limit": true,
     "security_audit_log": true,
-    "base_security_headers": true
+    "base_security_headers": true,
+    "tamper_evident_audit_chain_local": true,
+    "persistent_rate_limit_local": true,
+    "credential_validity_windows": true
   },
   "blockers": {
     "tls_termination": "REQUIRED_NOT_PROVISIONED",
     "reverse_proxy_trust_boundary": "REQUIRED_NOT_VALIDATED",
     "deployment_secret_backend": "REQUIRED_NOT_VALIDATED",
     "security_headers": "PASS_LOCAL_BASE_HEADERS_HSTS_PENDING_REAL_TLS",
-    "durable_tamper_evident_audit": "NOT_IMPLEMENTED",
+    "durable_tamper_evident_audit": "LOCAL_HASH_CHAIN_IMPLEMENTED_EXTERNAL_DURABILITY_NOT_VALIDATED",
     "deployment_isolation": "NOT_VALIDATED",
-    "remote_rate_limit_store": "IN_MEMORY_ONLY",
-    "credential_rotation": "NOT_VALIDATED"
+    "remote_rate_limit_store": "LOCAL_SQLITE_SINGLE_NODE_MULTI_INSTANCE_NOT_VALIDATED",
+    "credential_rotation": "VALIDITY_WINDOWS_IMPLEMENTED_EXTERNAL_ROTATION_NOT_VALIDATED"
   },
   "rule": "REMOTE_BIND_MUST_REMAIN_BLOCKED_UNTIL_ALL_REQUIRED_BLOCKERS_PASS",
   "claim_ceiling": "LOCAL_CONTROL_PLANE_SECURITY_V1_NOT_PUBLIC_DEPLOYMENT_READY"
