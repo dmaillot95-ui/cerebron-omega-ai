@@ -68,5 +68,54 @@ class SpecialistToolTests(unittest.TestCase):
         self.assertEqual(result["status"], "NOT_APPLICABLE")
 
 
+    def test_semantic_math_transfer_forms(self):
+        self.assertEqual(solve_math("Multiply 17 by 23. Reply with the numeric answer and nothing else.")["answer"], "391")
+        self.assertEqual(solve_math("Which number x satisfies 3x + 5 = 29? Output x only.")["answer"], "8")
+        self.assertEqual(solve_math("Give only the greatest common divisor of 36 and 84.")["answer"], "12")
+        self.assertEqual(solve_math("Only the numeric value: 25% of 320.")["answer"], "80")
+
+    def test_semantic_code_transfer_form_stays_sandboxed(self):
+        self.assertEqual(
+            solve_code("Evaluate this safe Python expression: sorted([4,1,3])[1]. Respond only with its value.")["answer"],
+            "3",
+        )
+        self.assertIsNone(solve_code("Evaluate JavaScript: process.exit()."))
+
+    def test_semantic_engineering_transfer_forms(self):
+        self.assertEqual(
+            solve_engineering("A mass of 20 kg accelerates at 2.5 m/s^2. What force in newtons? Number only.")["answer"],
+            "50",
+        )
+        self.assertEqual(
+            solve_engineering("A force of 80 N acts while moving at 2.5 m/s. Mechanical power in watts? Number only.")["answer"],
+            "200",
+        )
+
+    def test_semantic_grounded_lookup_transfer_form(self):
+        r = solve_research(
+            "Reference data — alpha: 0.25 | beta: 0.75 | gamma: 1.50. "
+            "Based solely on that reference, provide the value for beta; output only the value."
+        )
+        self.assertEqual(r["answer"], "0.75")
+
+    def test_semantic_planning_transfer_form(self):
+        r = solve_planning(
+            "Scheduling rules — J must be first; K must come before L; M must be last. "
+            "Candidate orders — X: J > K > L > M / Y: K > J > L > M / Z: J > L > K > M."
+        )
+        self.assertEqual(r["answer"], "X")
+
+    def test_semantic_error_detection_transfer_form(self):
+        r = solve_error_detection(
+            "Exactly one statement is wrong. X) 2+2=4; Y) 3*3=8; Z) 10/2=5. Reply only X, Y, or Z."
+        )
+        self.assertEqual(r["answer"], "Y")
+
+    def test_semantic_contract_unknown_text_still_falls_back(self):
+        r = try_solve("Compare two philosophical interpretations of scientific realism.")
+        self.assertFalse(r["handled"])
+        self.assertEqual(r["status"], "NOT_APPLICABLE")
+
+
 if __name__ == "__main__":
     unittest.main()
