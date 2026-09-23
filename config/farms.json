@@ -1,5 +1,5 @@
 {
-  "version": "2.09",
+  "version": "2.10",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -690,7 +690,16 @@
       "id": 123,
       "repo": "cerebron-farm-123-mission-design-navigation",
       "domain": "space-mission-design-interplanetary-navigation",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35846015941,
+        "job_id": 107132249189,
+        "artifact_id": 10743192465,
+        "result_sha256": "99e4ba531849c92f4df02d391c7f9cd342b9ff1d8eb75019acd9401e3d521c6f",
+        "engine": "python-stdlib-orbital-mechanics",
+        "engine_version": "3.12.14",
+        "scope": "numerical-reference-canary-not-physical-validation"
+      }
     },
     {
       "id": 124,
