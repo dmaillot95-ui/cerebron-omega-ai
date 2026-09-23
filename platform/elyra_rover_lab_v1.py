@@ -10,7 +10,7 @@ import statistics
 import time
 
 EPISODES = 500
-MAX_STEPS = 90
+MAX_STEPS = 180
 DT = 0.25
 GOAL_X = 28.0
 GOAL_Y = 0.0
