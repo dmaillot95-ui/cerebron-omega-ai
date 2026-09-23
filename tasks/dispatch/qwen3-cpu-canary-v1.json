@@ -1,1 +1,18 @@
-{"schema":"CEREBRON_DISPATCH_V1","status":"QUEUED_NOT_EXECUTED","mission_id":"QWEN3_CPU_CANARY_V1","model":"Qwen/Qwen3-0.6B","limits":{"timeout_minutes":12,"max_new_tokens":32,"artifact_retention_days":3},"memory_policy":{"raw_outputs":"EPHEMERAL_ARTIFACT","hot_memory":"SUMMARY_SHA_ONLY"},"claim_policy":"CANARY_NOT_BENCHMARK"}
+{
+  "schema": "CEREBRON_DISPATCH_V1",
+  "status": "QUEUED_NOT_EXECUTED",
+  "mission_id": "QWEN3_CPU_CANARY_V1",
+  "model": "Qwen/Qwen3-0.6B",
+  "limits": {
+    "timeout_minutes": 12,
+    "max_new_tokens": 32,
+    "artifact_retention_days": 3
+  },
+  "memory_policy": {
+    "raw_outputs": "EPHEMERAL_ARTIFACT",
+    "hot_memory": "SUMMARY_SHA_ONLY"
+  },
+  "claim_policy": "CANARY_NOT_BENCHMARK",
+  "rerun": 2,
+  "canary_version": "V2_CHAT_TEMPLATE"
+}
