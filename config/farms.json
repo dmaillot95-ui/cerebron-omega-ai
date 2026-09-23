@@ -1,5 +1,5 @@
 {
-  "version": "2.06",
+  "version": "2.07",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -672,6 +672,18 @@
       "id": 120,
       "repo": "cerebron-farm-120-memory-governor-freeze",
       "domain": "memory-governor-freeze",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 121,
+      "repo": "cerebron-farm-121-astrion-spatial-intelligence",
+      "domain": "spatial-intelligence",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 122,
+      "repo": "cerebron-farm-122-metrion-engineering-validation",
+      "domain": "engineering-validation",
       "status": "SCAFFOLDED"
     }
   ]
