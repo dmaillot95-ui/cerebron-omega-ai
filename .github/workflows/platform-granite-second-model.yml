@@ -1,0 +1,33 @@
+name: CEREBRON Granite Second Model Benchmark
+on:
+  push:
+    branches: ['feat/granite-second-model']
+    paths:
+      - 'platform/granite_second_model_benchmark.py'
+      - '.github/workflows/platform-granite-second-model.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute Granite benchmark
+        run: |
+          python platform/granite_second_model_benchmark.py \
+            --model-id ibm-granite/granite-3.3-2b-instruct \
+            --revision b6554dcbaf706fbda853b88f7a8e940a685d293c
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-granite-second-model-benchmark
+          path: platform/artifacts/granite-second-model-benchmark.json
