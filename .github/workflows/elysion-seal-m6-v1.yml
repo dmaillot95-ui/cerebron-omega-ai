@@ -1,0 +1,176 @@
+name: ELYSION Seal M6 V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - '.github/workflows/elysion-seal-m6-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Generate cold M6 privately and verify readback
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import os,json,hashlib,tempfile,secrets,random,math,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
+          seed=secrets.token_hex(32)
+          rng=random.Random(int(seed,16))
+          tasks=[]
+
+          def add(domain,prompt,expected,scoring="normalized_exact"):
+              tasks.append({
+                  "id":f"M6-{len(tasks)+1:03d}",
+                  "domain":domain,
+                  "prompt":prompt,
+                  "expected":str(expected),
+                  "scoring":scoring
+              })
+
+          # 1 math_proof / arithmetic reasoning
+          for _ in range(10):
+              a=rng.randint(17,97); b=rng.randint(11,89); m=rng.randint(7,29)
+              add("math_proof",f"Compute (({a}*{b})+{a+b}) mod {m}. Return the integer only.",((a*b)+(a+b))%m)
+
+          # 2 code_debugging: exact output after a stated one-line correction
+          for _ in range(10):
+              n=rng.randint(5,15); k=rng.randint(2,5)
+              prompt=(
+                "A Python loop is intended to sum i*k for i from 1 through n inclusive, "
+                f"with n={n}, k={k}, but it uses range(1,n). After correcting only the range endpoint, "
+                "what integer should it return? Return the integer only."
+              )
+              add("code_debugging",prompt,k*n*(n+1)//2)
+
+          # 3 science_reasoning: F = m*a
+          for _ in range(10):
+              mass=rng.randint(2,50); acc=rng.randint(2,20)
+              add("science_reasoning",f"An object of mass {mass} kg has acceleration {acc} m/s^2. Using F=m*a, give the force in newtons as an integer only.",mass*acc)
+
+          # 4 engineering: power P=V*I
+          for _ in range(10):
+              v=rng.choice([12,24,48,110,230]); i=rng.randint(2,20)
+              add("engineering",f"An ideal DC load draws {i} A at {v} V. Using P=V*I, return power in watts as an integer only.",v*i)
+
+          # 5 research_grounding: choose exact synthetic source label
+          for _ in range(10):
+              labels=["A","B","C"]
+              target=rng.choice(labels)
+              vals={x:rng.randint(100,999) for x in labels}
+              q=(
+                f"Source A states code={vals['A']}. Source B states code={vals['B']}. Source C states code={vals['C']}. "
+                f"The query asks for code {vals[target]}. Which source directly supports it? Return A, B, or C only."
+              )
+              add("research_grounding",q,target)
+
+          # 6 planning: two parallel chains, makespan=max(chain sums)
+          for _ in range(10):
+              a1,a2,b1,b2=[rng.randint(1,9) for __ in range(4)]
+              ans=max(a1+a2,b1+b2)
+              add("planning",
+                  f"Two independent serial chains can run in parallel. Chain A durations are {a1} then {a2}; chain B durations are {b1} then {b2}. "
+                  "With unlimited workers and no delays, what is the minimum project makespan? Return integer only.",ans)
+
+          # 7 tool_selection: exact routing
+          tool_cases=[
+              ("Compute 987654321*123456789 exactly.","CALCULATOR"),
+              ("Find today's official exchange rate.","WEB"),
+              ("Run a numerical Monte Carlo simulation.","PYTHON"),
+              ("Inspect the latest commit in a repository.","GITHUB"),
+              ("Recall a verified private project checkpoint.","MEMORY")
+          ]
+          for _ in range(10):
+              scenario,answer=rng.choice(tool_cases)
+              add("tool_selection",scenario+" Choose exactly one: CALCULATOR, WEB, PYTHON, GITHUB, MEMORY.",answer)
+
+          # 8 memory_retrieval: synthetic key-value
+          for _ in range(10):
+              keys=[f"K{rng.randint(100,999)}" for __ in range(4)]
+              vals=[rng.randint(1000,9999) for __ in range(4)]
+              idx=rng.randrange(4)
+              recs="; ".join(f"{k}={v}" for k,v in zip(keys,vals))
+              add("memory_retrieval",f"Memory records: {recs}. What is the value for {keys[idx]}? Return integer only.",vals[idx])
+
+          # 9 error_detection: identify false equation index
+          for _ in range(10):
+              xs=[rng.randint(2,30) for __ in range(4)]
+              false=rng.randrange(4)
+              statements=[]
+              for idx,x in enumerate(xs):
+                  rhs=x*x + (1 if idx==false else 0)
+                  statements.append(f"{idx+1}) {x}^2={rhs}")
+              add("error_detection","Exactly one statement is false: "+"; ".join(statements)+". Return its index 1-4 only.",false+1)
+
+          # 10 invention_transfer: deterministic structural analogy
+          mappings=[
+              ("heat","temperature","charge","voltage","B"),
+              ("water_flow","pressure","electric_current","voltage","B"),
+              ("traffic_flow","road_capacity","data_flow","bandwidth","B"),
+              ("mechanical_damping","oscillation","rate_limiting","queue_oscillation","A")
+          ]
+          for _ in range(10):
+              a,b,c,d,answer=rng.choice(mappings)
+              if answer=="B":
+                  prompt=f"In analogy {a}:{b} :: {c}:?, choose A) mass B) {d} C) color D) latitude. Return A/B/C/D only."
+              else:
+                  prompt=f"To transfer the function of {a} reducing {b} into a queue-control system, choose A) {d} B) random duplication C) removing feedback D) increasing noise. Return A/B/C/D only."
+              add("invention_transfer",prompt,answer)
+
+          assert len(tasks)==100
+          domain_counts={}
+          for t in tasks: domain_counts[t["domain"]]=domain_counts.get(t["domain"],0)+1
+          doc={
+              "schema":"ELYSION_M6_V1",
+              "classification":"M6_COLD_BENCHMARK_SEALED",
+              "deny_training":True,
+              "project_id":"MODEL-ELYSION-001",
+              "hosting_farm_id":145,
+              "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "private_seed":seed,
+              "tasks":tasks
+          }
+          raw=(json.dumps(doc,sort_keys=True,separators=(",",":"))+"\n").encode()
+          digest=hashlib.sha256(raw).hexdigest()
+          seed_digest=hashlib.sha256(seed.encode()).hexdigest()
+          path="elysion/M6/ELYSION-M6-V1.json"
+          api=HfApi(token=token)
+          with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+              t.write(raw); src=t.name
+          api.upload_file(path_or_fileobj=src,path_in_repo=path,repo_id=repo,repo_type="model",commit_message="Seal ELYSION M6 V1")
+          dst=hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=token,force_download=True)
+          got=Path(dst).read_bytes()
+          if hashlib.sha256(got).hexdigest()!=digest:
+              raise SystemExit("M6_READBACK_SHA_MISMATCH")
+          receipt={
+              "schema":"ELYSION_M6_SEAL_RECEIPT_V1",
+              "status":"PASS",
+              "repo":repo,
+              "object_path":path,
+              "dataset_sha256":digest,
+              "private_seed_sha256":seed_digest,
+              "task_count":len(tasks),
+              "domain_counts":domain_counts,
+              "deny_training":True,
+              "checks":["GENERATE=PASS","PRIVATE_WRITE=PASS","PRIVATE_READ=PASS","SHA256=PASS","COUNT_100=PASS"],
+              "note":"Prompts, expected answers and raw seed remain private; public artifact contains metadata only."
+          }
+          Path("receipts/elysion/m6-seal.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysion-m6-seal-receipt
+          path: receipts/elysion/m6-seal.json
+          if-no-files-found: error
