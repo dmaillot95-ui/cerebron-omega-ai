@@ -1,5 +1,5 @@
 {
-  "version": "2.18",
+  "version": "2.19",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -972,25 +972,65 @@
       "id": 141,
       "repo": "cerebron-farm-141-spacecraft-environmental-qualification",
       "domain": "spacecraft-environmental-qualification",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35855282640,
+        "job_id": 107162174475,
+        "artifact_id": 10747142414,
+        "result_sha256": "1ced3bb4bb258ff2d39d6d01618a57a2f3854f5bcccc2854d15a23ebb23b695a",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "SINE_VIBRATION_LOAD",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 142,
       "repo": "cerebron-farm-142-ground-segment-mission-ops",
       "domain": "space-ground-segment-mission-operations",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35855511932,
+        "job_id": 107162917511,
+        "artifact_id": 10746949171,
+        "result_sha256": "30ff994637d54906bf1c9b2327d357c56bc680da601bf787adee1fccfa05fe14",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "CONTACT_WINDOW_CAPACITY",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 143,
       "repo": "cerebron-farm-143-space-systems-mbse",
       "domain": "space-systems-engineering-mbse",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35855939726,
+        "job_id": 107164298506,
+        "artifact_id": 10747436337,
+        "result_sha256": "72932d2fecdd063e710914123048e9d5aa9160f3c72705b67e4e7a42b8d2a6e1",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "MASS_MARGIN_ROLLUP",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 144,
       "repo": "cerebron-farm-144-independent-aerospace-verification",
       "domain": "independent-aerospace-verification",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35855958241,
+        "job_id": 107164359052,
+        "artifact_id": 10747039534,
+        "result_sha256": "b781e1fdb1e3b760c82a3fd3d13308a81aaba063749f8606b0cde200ffe992cd",
+        "engine": "python-independent-crosscheck-canary",
+        "engine_version": "3.12.14",
+        "test": "INDEPENDENT_ORBIT_CROSSCHECK",
+        "scope": "independent-formula-crosscheck-not-external-or-physical-validation"
+      }
     }
   ],
   "max_farms": 144,
