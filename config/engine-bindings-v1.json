@@ -1,0 +1,24 @@
+{
+  "schema":"CEREBRON_ENGINE_BINDINGS_V1",
+  "policy":{
+    "REAL_EXECUTION_ONLY":true,
+    "NO_SECRET_VALUES_IN_REPOSITORY":true,
+    "ENV_REFERENCES_ONLY":true,
+    "ZERO_PAID_OVERAGE":true,
+    "FAIL_CLOSED":true,
+    "MAX_FARMS":144,
+    "MAX_OUTPUT_CHARS_PER_WORKER":12000,
+    "RAW_OUTPUT":"EPHEMERAL_ARTIFACT",
+    "HOT_MEMORY":"DEDUP_SUMMARY_SHA_ONLY"
+  },
+  "bindings":{
+    "SAPHEA":{"provider":"UNBOUND","endpoint_env":null,"token_env":null,"model_env":null,"status":"INACTIVE"},
+    "SPIRALION":{"provider":"UNBOUND","endpoint_env":null,"token_env":null,"model_env":null,"status":"INACTIVE"},
+    "ETHERION":{"provider":"UNBOUND","endpoint_env":null,"token_env":null,"model_env":null,"status":"INACTIVE"},
+    "HYPERION":{"provider":"UNBOUND","endpoint_env":null,"token_env":null,"model_env":null,"status":"INACTIVE"},
+    "ASTRION":{"provider":"ORCHESTRATOR","farm":121,"status":"ACTIVE_ROUTER_NOT_NEURAL_MODEL"},
+    "METRION":{"provider":"ORCHESTRATOR","farm":122,"status":"ACTIVE_ROUTER_NOT_NEURAL_MODEL"},
+    "AFAH":{"provider":"UNBOUND","endpoint_env":null,"token_env":null,"model_env":null,"status":"INACTIVE"}
+  },
+  "activation_gate":["ENDPOINT_CONFIGURED","TOKEN_REFERENCE_CONFIGURED_IF_REQUIRED","MODEL_IDENTIFIER_CONFIGURED","CANARY_RESPONSE","TRACE_SHA","COLD_BENCHMARK"]
+}
