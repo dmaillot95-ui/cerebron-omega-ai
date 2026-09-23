@@ -1,0 +1,13 @@
+{
+  "schema":"CEREBRON_RESPONSE_BENCHMARK_V1",
+  "purpose":"Measure base assistant versus CEREBRON plus real connected AIs/tools on identical prompts",
+  "modes":{
+    "M0":{"name":"BASE_ASSISTANT","allowed":["same_prompt"],"forbidden":["CEREBRON_FARMS","EXTERNAL_AI"]},
+    "M1":{"name":"CEREBRON_INTERNAL","allowed":["same_prompt","CEREBRON_ROUTING","REAL_AVAILABLE_FARMS"],"require_traces":true},
+    "M2":{"name":"CEREBRON_PLUS_OUR_AI","allowed":["same_prompt","SAPHEA","SPIRALION","ETHERION","HYPERION","AFAH","ASTRION","METRION"],"require_real_execution":true}
+  },
+  "protocol":["freeze_prompt","freeze_sources_or_no_sources","run_M0_without_M1_M2_outputs","run_M1_without_M0_output","run_M2_without_M0_M1_outputs","freeze_all_outputs","blind_score","factual_audit","dependency_dedup","latency_cost_measure","ablation"],
+  "metrics":["correctness","evidence_quality","completeness","novelty","error_rate","contradictions","reproducibility","latency","compute_cost","useful_information_density"],
+  "scoring":{"scale":"0-100","winner_rule":"NO_WINNER_UNLESS_PREDECLARED_METRIC_IMPROVES_AND_ERRORS_DO_NOT_INCREASE","minimum_cases":30},
+  "epistemic":["SAME_MODEL_MULTIPLE_PROMPTS_NOT_INDEPENDENT_AI","SHARED_SOURCES_DISCLOSED","WORKFLOW_SUCCESS_NOT_ANSWER_QUALITY","NO_SIMULATED_AGENTS","COLD_PROMPTS_DENY_TRAINING"]
+}
