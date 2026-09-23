@@ -1,0 +1,25 @@
+name: CEREBRON Role Runtime CI
+on:
+  push:
+    branches: ['feat/runtime-role-status']
+    paths:
+      - 'platform/role_runtime.py'
+      - 'platform/server.py'
+      - 'platform/tests/test_role_runtime.py'
+      - '.github/workflows/platform-role-runtime-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python -m compileall -q platform
+      - name: Run role-runtime tests
+        run: python -m unittest platform.tests.test_role_runtime -v
