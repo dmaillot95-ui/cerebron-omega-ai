@@ -17,7 +17,8 @@ class RoleRuntimeTests(unittest.TestCase):
         self.assertEqual(by_name["CÉRÉBRON"]["status"], "ACTIVE")
         self.assertEqual(by_name["SAPHEA"]["status"], "ACTIVE_BOUNDED")
         self.assertEqual(by_name["AÉLYS"]["status"], "CONFIGURED_NO_DEDICATED_MODEL")
-        self.assertEqual(by_name["ELYRA"]["status"], "TRAINED_ARTIFACT_VERIFIED_NOT_LOADED_IN_CONTROL_PLANE")
+        self.assertEqual(by_name["ELYRA"]["status"], "TRAINED_WEIGHTS_VERIFIED_RUNTIME_DISABLED")
+        self.assertTrue(by_name["ELYRA"]["runtime"]["weights_valid"])
         self.assertEqual(by_name["SAPHEA MICRO"]["implemented_count"], 7)
         self.assertEqual(by_name["SAPHEA MICRO"]["planned_count"], 13)
 

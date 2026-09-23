@@ -15,6 +15,7 @@ from farm_bridge import PILOTS
 from generative_backend import GenerativeBackendError, generate as generative_generate
 from coalition import execute as coalition_execute, registry as coalition_registry
 from role_runtime import runtime_roles
+from elyra_policy_runtime import ElyraPolicyError, infer as elyra_infer, status as elyra_status
 from security import SecurityError, audit as security_audit, authenticate, check_origin, rate_limit, require
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -94,6 +95,19 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({"error": str(exc)}, 503)
                 security_audit(principal, "model:generate", "ALLOW", {"output_sha": result["output_sha"]})
                 return self._json(result)
+            if self.path == "/api/elyra/action":
+                data = self._body()
+                try:
+                    result = elyra_infer(data.get("features"))
+                except ElyraPolicyError as exc:
+                    code = str(exc)
+                    status = 400 if code.startswith("ELYRA_FEATURE_VECTOR_") else 503
+                    return self._json({"error": code, "elyra": elyra_status()}, status)
+                security_audit(principal, "elyra:action", "ALLOW", {
+                    "output_sha": result["output_sha256"],
+                    "weights_sha": result["weights_sha256"],
+                })
+                return self._json(result)
             if self.path == "/api/coalition/execute":
                 data = self._body()
                 prompt = str(data.get("prompt", "")).strip()
@@ -138,7 +152,8 @@ class Handler(BaseHTTPRequestHandler):
             op = load_json(ROOT / "config/operational-status-v1.json")
             return self._json({"status": "healthy", "time": time.time(), "farm_count": len(farms),
                                "model": catalog()[0], "database": "sqlite", "cost_policy": "ZERO_PAID_OVERAGE_DEFAULT",
-                               "farm_bridge": bridge_state, "operational_status": op["status"],
+                               "farm_bridge": bridge_state, "elyra": elyra_status(),
+                               "operational_status": op["status"],
                                "remote_deployment": op["public_remote_deployment"]})
         if path == "/api/gates":
             return self._json(load_json(ROOT / "config/operational-status-v1.json"))

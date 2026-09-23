@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from coalition import registry as coalition_registry
 from generative_backend import status as generative_status
+from elyra_policy_runtime import status as elyra_status
 
 ELYRA_EVIDENCE = {
     "policy": "ELYRA_IMITATION_POLICY_V1",
@@ -24,6 +25,7 @@ LOGICAL_ROLES = (
 
 def runtime_roles() -> dict:
     gen = generative_status()
+    elyra = elyra_status()
     micro = coalition_registry()
     implemented = list(micro.get("implemented_initial", []))
     units = micro.get("units", [])
@@ -58,9 +60,16 @@ def runtime_roles() -> dict:
         {
             "name": "ELYRA",
             "type": "SCOPED_TRAINED_POLICY",
-            "status": "TRAINED_ARTIFACT_VERIFIED_NOT_LOADED_IN_CONTROL_PLANE",
+            "status": (
+                "ACTIVE_WORKER"
+                if elyra["status"] == "ACTIVE_WORKER"
+                else "TRAINED_WEIGHTS_VERIFIED_RUNTIME_DISABLED"
+                if elyra.get("weights_valid")
+                else elyra["status"]
+            ),
             "dedicated_model": True,
-            "runtime_loaded": False,
+            "runtime_loaded": elyra["status"] == "ACTIVE_WORKER",
+            "runtime": elyra,
             "evidence": ELYRA_EVIDENCE,
         }
     )

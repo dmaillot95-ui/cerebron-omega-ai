@@ -1,0 +1,59 @@
+name: CEREBRON ELYRA Runtime E2E
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/elyra_policy_runtime.py'
+      - 'platform/models/elyra-imitation-policy-v1.pt'
+      - 'platform/role_runtime.py'
+      - 'platform/server.py'
+      - '.github/workflows/platform-elyra-runtime-e2e.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CEREBRON_ENABLE_ELYRA_POLICY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned torch
+        run: python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+      - name: Verify direct ELYRA inference
+        run: |
+          echo "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601  platform/models/elyra-imitation-policy-v1.pt" | sha256sum -c -
+          PYTHONPATH=platform python - <<'PY'
+          import elyra_policy_runtime as e
+          d=e.infer([0.10,2.0,1.0,1.0,0.20,0.6,0.20,0.05])
+          assert d["weights_sha256"]==e.WEIGHTS_SHA256
+          assert d["action"]["throttle"] in [0.32,0.52,0.78]
+          assert -0.8 <= d["action"]["steer"] <= 0.8
+          print("ELYRA_DIRECT_INFERENCE_OK",d["output_sha256"])
+          PY
+      - name: Verify secured HTTP ELYRA endpoint
+        run: |
+          PYTHONPATH=platform python - <<'PY'
+          import json, threading, urllib.request
+          from http.server import ThreadingHTTPServer
+          from server import Handler
+          server=ThreadingHTTPServer(("127.0.0.1",0),Handler)
+          thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+          try:
+              body=json.dumps({"features":[0.10,2.0,1.0,1.0,0.20,0.6,0.20,0.05]}).encode()
+              req=urllib.request.Request(
+                  f"http://127.0.0.1:{server.server_address[1]}/api/elyra/action",
+                  data=body,method="POST",headers={"Content-Type":"application/json"},
+              )
+              with urllib.request.urlopen(req,timeout=5) as r:
+                  d=json.loads(r.read())
+              assert d["weights_sha256"]=="b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601"
+              assert d["claim_ceiling"]=="E3_SIMULATION_POLICY_NOT_PHYSICAL_VALIDATION"
+              print("ELYRA_HTTP_ENDPOINT_OK",d["output_sha256"])
+          finally:
+              server.shutdown();server.server_close();thread.join(timeout=2)
+          PY
