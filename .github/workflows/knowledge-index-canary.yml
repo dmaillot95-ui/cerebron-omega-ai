@@ -1,0 +1,46 @@
+name: Encyclopedic Knowledge Index Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/knowledge_index.py"
+      - ".github/workflows/knowledge-index-canary.yml"
+permissions:
+  contents: read
+jobs:
+  index-canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Admit
+        run: python runtime/knowledge_index.py --domain SPACE --book PROPULSION --chapter VALIDATION --concept PILOTAGE --stable-id SPACE-PROP-00001 --summary "validated control strategy can be shared only after independent test" --source "CANARY"
+      - name: Exact dedup
+        run: python runtime/knowledge_index.py --domain SPACE --book PROPULSION --chapter VALIDATION --concept PILOTAGE --stable-id SPACE-PROP-00001 --summary "validated control strategy can be shared only after independent test" --source "CANARY"
+      - name: Stable-ID conflict must fail closed
+        run: |
+          set +e
+          python runtime/knowledge_index.py --domain SPACE --book PROPULSION --chapter VALIDATION --concept PILOTAGE --stable-id SPACE-PROP-00001 --summary "different claim under same stable identifier" --source "CANARY"
+          code=$?
+          test "$code" -eq 3
+      - name: Verify record
+        run: |
+          python - <<'PY'
+          import json
+          rows=[json.loads(x) for x in open("memory_index/encyclopedic_index.jsonl") if x.strip()]
+          assert len(rows)==1
+          r=rows[0]
+          assert len(r["sha256"])==64 and len(r["vector64"])==64
+          assert r["glyph"].startswith("Ω⟦SPACE:")
+          assert r["source"]=="CANARY"
+          print("KNOWLEDGE_INDEX_VERIFIED",r["canonical_id"],r["glyph"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encyclopedic-index-canary
+          path: |
+            memory_index/encyclopedic_index.jsonl
+            artifacts/knowledge_record.json
+          if-no-files-found: error
+          retention-days: 7
