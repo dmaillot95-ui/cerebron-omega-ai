@@ -1,0 +1,49 @@
+name: AGORA Pilotage Transfer Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "runtime/pilotage_transfer.py"
+      - ".github/workflows/pilotage-transfer-canary.yml"
+permissions:
+  contents: read
+jobs:
+  pilotage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Beneficial transfer
+        run: python runtime/pilotage_transfer.py --source ETHERION --target ASTRION --domain PROPULSION --method "invariant-first search" --evidence CANARY-E1 --baseline 0.62 --candidate 0.74 --independent-retest PASS
+      - name: Reject harmful transfer
+        run: |
+          set +e
+          python runtime/pilotage_transfer.py --source ASTRION --target METRION --domain VALIDATION --method "spatial heuristic" --evidence CANARY-E2 --baseline 0.80 --candidate 0.71 --independent-retest PASS
+          test "$?" -eq 5
+      - name: Reject unreproduced transfer
+        run: |
+          set +e
+          python runtime/pilotage_transfer.py --source METRION --target SAPHEA --domain ENGINEERING --method "tolerance decomposition" --evidence CANARY-E3 --baseline 0.50 --candidate 0.68 --independent-retest FAIL
+          test "$?" -eq 5
+      - name: Verify registry
+        run: |
+          python - <<'PY'
+          import json
+          r=[json.loads(x) for x in open("agora/pilotage_registry.jsonl") if x.strip()]
+          assert len(r)==3
+          assert sum(x["decision"]=="ACCEPT_FOR_TARGET" for x in r)==1
+          a=[x for x in r if x["decision"]=="ACCEPT_FOR_TARGET"][0]
+          assert a["source"]=="ETHERION" and a["target"]=="ASTRION"
+          assert a["requires"]==["F72","AFAH"]
+          assert all(x["gold_eligible"] is False and x["training_eligible"] is False for x in r)
+          print("PILOTAGE_TRANSFER_GATE_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agora-pilotage-transfer-canary
+          path: |
+            agora/pilotage_registry.jsonl
+            artifacts/pilotage_decision.json
+          if-no-files-found: error
+          retention-days: 7
