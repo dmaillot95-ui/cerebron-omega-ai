@@ -1,0 +1,49 @@
+name: CEREBRON Main Live E2E
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'platform/main_live_e2e.py'
+      - 'platform/coalition_tools.py'
+      - 'platform/semantic_tools.py'
+      - 'platform/generative_backend.py'
+      - 'platform/mission_engine.py'
+      - '.github/workflows/cerebron-main-live-e2e.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: platform
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU generative runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute main live Control Plane path
+        run: python platform/main_live_e2e.py
+      - name: Verify E2E artifact
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("platform/artifacts/main-live-e2e-v1.json")
+          d=json.loads(p.read_text())
+          assert d["status"]=="PASS"
+          assert d["backend_status"]=="ACTIVE_WORKER"
+          assert d["mission_status"]=="COMPLETED"
+          assert d["mission_answer"]=="486"
+          assert len(d["semantic_tool_checks"])==5
+          print("MAIN_LIVE_E2E_PASS",d["model_id"],d["mission_id"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-main-live-e2e-v1
+          path: platform/artifacts/main-live-e2e-v1.json
