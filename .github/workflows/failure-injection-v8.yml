@@ -1,0 +1,36 @@
+name: ASTRION METRION Failure Injection V8
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulations/failure_injection_v8.py"
+      - ".github/workflows/failure-injection-v8.yml"
+permissions:
+  contents: read
+jobs:
+  failure-injection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python simulations/failure_injection_v8.py
+      - name: METRION fail-closed audit
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/failure_injection_v8.json"))
+          assert len(d["scenarios"])==7
+          severe=[x for x in d["scenarios"] if x["id"] in ("THRUST_LOSS_25","EARLY_CUTOFF")]
+          assert all(x["decision"]=="ABORT" for x in severe)
+          sensor=[x for x in d["scenarios"] if x["id"]=="SENSOR_ALT_BIAS"][0]
+          assert sensor["decision"]=="HOLD_AND_REVALIDATE" and sensor["autonomous_resume"] is False
+          assert "NOT_FLIGHT_SOFTWARE" in d["epistemic"]
+          print("FAILURE_INJECTION_V8",d["counts"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: failure-injection-v8
+          path: artifacts/failure_injection_v8.json
+          if-no-files-found: error
+          retention-days: 7
