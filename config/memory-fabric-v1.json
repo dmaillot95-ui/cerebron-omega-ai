@@ -20,7 +20,8 @@
     "GOLD",
     "MODELS",
     "COLD_BENCHMARK",
-    "EVIDENCE"
+    "EVIDENCE",
+    "SIGMA"
   ],
   "classes": {
     "M0": {
@@ -74,7 +75,19 @@
       "role": "GOLD_MODELS_CURATED_DATA",
       "budget_gb": 90,
       "hard_external_limit_gb": 100,
-      "headroom_gb": 10
+      "headroom_gb": 10,
+      "sigma_use": [
+        "M4_GOLD_CURATED_TRACES",
+        "M5_SIGMA_MODELS_ADAPTERS",
+        "CURATED_TRAIN_VALIDATION_DATASETS"
+      ],
+      "sigma_status": "PLANNED_BACKEND_NOT_YET_CONNECTED",
+      "rules": [
+        "NO_M6_TRAINING_DATA",
+        "SHA256_AND_PROVENANCE_REQUIRED",
+        "DEDUP_BEFORE_WRITE",
+        "NO_SECRETS_IN_GITHUB"
+      ]
     },
     "r2_candidate": {
       "role": "HOT_WARM_OBJECT_DATA",
