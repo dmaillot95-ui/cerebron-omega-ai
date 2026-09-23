@@ -364,7 +364,20 @@
         "result_sha256": "a5694ce0079b8bf64dc5fc9f5c7d980dc89dd11fafe511d4008e30f73009565a",
         "absolute_delta": 3.363109270237974e-11,
         "scope": "REAL_WARP_KERNEL_EXECUTION_NOT_MULTIPHASE_CFD_OR_PHYSICAL_VALIDATION",
-        "gpu_available": false
+        "gpu_available": false,
+        "dynamic_benchmark": {
+          "farm": 140,
+          "run_id": 35863637690,
+          "job_id": 107189666494,
+          "artifact_id": 10750729687,
+          "warp_version": "1.17.0",
+          "device": "CPU",
+          "particles": 2048,
+          "steps": 500,
+          "total_updates": 1024000,
+          "result_sha256": "07517c81f3e595c8654d88e3e0095be00ba220103c33a009fc7a0b6023f5949f",
+          "scope": "DYNAMIC_WARP_PHYSICS_KERNEL_NOT_MULTIPHASE_CFD_OR_PHYSICAL_EXPERIMENT"
+        }
       }
     },
     {
@@ -394,7 +407,16 @@
         "F133",
         "F140"
       ],
-      "notes": "SHARED_TOOL_NOT_NEW_FARM"
+      "notes": "SHARED_TOOL_NOT_NEW_FARM",
+      "install_history": {
+        "first_attempt": {
+          "run_id": 35863721541,
+          "status": "FAILED_PACKAGE_SENTINEL",
+          "package": "physicsnemo"
+        },
+        "corrected_package": "nvidia-physicsnemo",
+        "current_status": "RETRY_IN_PROGRESS"
+      }
     },
     {
       "id": "OTF025",
