@@ -1,0 +1,44 @@
+name: CEREBRON Operational Acceptance V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/**'
+      - 'config/operational-status-v1.json'
+      - 'config/platform-control-plane-v1.json'
+      - '.github/workflows/platform-operational-acceptance-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: platform
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '0'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile operational core
+        run: python -m compileall -q platform
+      - name: Check cockpit JavaScript
+        run: node --check platform/static/app.js
+      - name: Verify non-loopback remains blocked
+        run: |
+          set +e
+          output=$(python platform/server.py --host 0.0.0.0 --port 8788 2>&1)
+          code=$?
+          set -e
+          test "$code" -ne 0
+          echo "$output" | grep -q "REMOTE_BIND_BLOCKED"
+      - name: Run scoped operational acceptance
+        run: python platform/operational_acceptance_v1.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-operational-acceptance-v1
+          path: platform/artifacts/operational-acceptance-v1.json
