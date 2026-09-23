@@ -1,7 +1,7 @@
 name: CEREBRON Main Integration Gate
 on:
   push:
-    branches: ['feat/cerebron-main-integration-v1']
+    branches: ['main', 'feat/cerebron-main-integration-v1']
   workflow_dispatch:
 permissions:
   contents: read
