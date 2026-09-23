@@ -1,0 +1,51 @@
+name: CEREBRON Cold 60 Semantic Holdout V4
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/cold60_semantic_v4.py'
+      - '.github/workflows/platform-cold60-semantic-v4.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_V4_SEED: ${{ github.run_id }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Compile frozen semantic stack and holdout
+        run: python -m compileall -q platform
+      - name: Run semantic holdout
+        run: python platform/cold60_semantic_v4.py
+      - name: Verify artifacts
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          d=json.loads((root/"cold60-semantic-v4-dataset.json").read_text())
+          r=json.loads((root/"cold60-semantic-v4-result.json").read_text())
+          assert d["deny_training"] is True
+          assert len(d["tasks"])==60
+          assert r["dataset_sha"]
+          assert 0 <= r["adaptive"]["tool_hits"] <= 60
+          assert len(r["result_sha256"])==64
+          print("SEMANTIC_V4_VERIFIED",r["baseline"]["score"],r["adaptive"]["score"],r["adaptive"]["tool_hits"],r["domains_improved_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-cold60-semantic-v4
+          path: |
+            platform/artifacts/cold60-semantic-v4-dataset.json
+            platform/artifacts/cold60-semantic-v4-result.json

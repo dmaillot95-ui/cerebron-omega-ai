@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "status": "CONTROL_PLANE_OPERATIONAL_SCOPED_REMOTE_BLOCKED",
+  "role": "CEREBRON_CONTROL_PLANE_NOT_A_FARM",
+  "farm_count_effect": 0,
+  "farm_cap": 144,
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "responsibilities": [
+    "mission_intake",
+    "minimal_useful_coalition_routing",
+    "farm_registry_view",
+    "model_registry_view",
+    "agora_view",
+    "memory_view",
+    "evidence_view",
+    "artifact_access",
+    "health_and_audit"
+  ],
+  "authority": {
+    "may_read": [
+      "config/farms.json",
+      "config/memory-fabric-v1.json",
+      "config/neural-training-fabric-v1.json",
+      "config/open-tool-fabric-v1.json"
+    ],
+    "may_write_runtime": [
+      "platform/data/**",
+      "platform/artifacts/**"
+    ],
+    "may_mutate_master_registries": false,
+    "may_create_farm_above_144": false
+  },
+  "security": {
+    "default_bind": "127.0.0.1",
+    "auth_rbac_isolation": "IMPLEMENTED_LOCAL_V1",
+    "remote_bind": "BLOCKED_BY_SERVER",
+    "public_deployment": "BLOCKED_PENDING_TLS_PROXY_SECRET_AND_HARDENING_REVIEW",
+    "zero_paid_overage": true
+  },
+  "execution_claims": {
+    "logical_role_is_not_model": true,
+    "routed_farm_id_is_not_remote_farm_execution": true,
+    "memory_is_not_training": true,
+    "simulation_is_not_physical_validation": true
+  }
+}

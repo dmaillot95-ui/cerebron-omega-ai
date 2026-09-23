@@ -1,0 +1,43 @@
+name: CEREBRON Generative Candidate Benchmark
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/generative_candidate_benchmark.py'
+      - '.github/workflows/platform-generative-candidates.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: smollm2-360m
+            model_id: HuggingFaceTB/SmolLM2-360M-Instruct
+            revision: c38281e01d0c0b0c36eac2f5bcb5b51fa2e803fc
+          - name: qwen2.5-0.5b
+            model_id: Qwen/Qwen2.5-0.5B-Instruct
+            revision: ec7ddfa904d4d447eedd0b7f126df16957734abb
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Benchmark real model
+        run: >-
+          python platform/generative_candidate_benchmark.py
+          --name "${{ matrix.name }}"
+          --model-id "${{ matrix.model_id }}"
+          --revision "${{ matrix.revision }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: generative-benchmark-${{ matrix.name }}
+          path: platform/artifacts/generative-benchmark-${{ matrix.name }}.json

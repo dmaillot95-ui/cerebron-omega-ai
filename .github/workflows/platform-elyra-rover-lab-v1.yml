@@ -1,0 +1,47 @@
+name: ELYRA Rover LAB V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/elyra_rover_lab_v1.py'
+      - '.github/workflows/platform-elyra-rover-lab-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ELYRA_LAB_SEED: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile ELYRA LAB
+        run: python -m compileall -q platform/elyra_rover_lab_v1.py
+      - name: Execute 500 cold rover episodes
+        run: python platform/elyra_rover_lab_v1.py
+      - name: Verify summary and replay
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root=pathlib.Path("platform/artifacts")
+          summary=json.loads((root/"elyra-rover-lab-v1.json").read_text())
+          replay=(root/"elyra-rover-replay-v1.jsonl").read_bytes()
+          assert summary["episodes"]==500
+          assert summary["status"]=="SIMULATION_EXECUTED_VERIFIED"
+          assert summary["maturity"]=="E3_SIMULATION_VERIFIED"
+          assert summary["training_triggered"] is False
+          assert summary["weights_changed"] is False
+          assert hashlib.sha256(replay).hexdigest()==summary["replay_sha256"]
+          assert len(summary["result_sha256"])==64
+          print("ELYRA_LAB_V1_VERIFIED", summary["metrics"]["success_rate"], summary["replay_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elyra-rover-lab-v1
+          path: |
+            platform/artifacts/elyra-rover-lab-v1.json
+            platform/artifacts/elyra-rover-replay-v1.jsonl

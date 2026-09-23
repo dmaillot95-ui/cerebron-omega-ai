@@ -1,0 +1,43 @@
+name: CEREBRON Generative SmolLM2 Smoke
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/generative_smollm2.py'
+      - '.github/workflows/platform-generative-smollm2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Run real generative model
+        run: |
+          python platform/generative_smollm2.py --prompt "State in one short sentence that 2 plus 2 equals 4."
+      - name: Verify generation artifact
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path("platform/artifacts/generative-smollm2-result.json")
+          d=json.loads(p.read_text())
+          assert d["model_id"]=="HuggingFaceTB/SmolLM2-135M-Instruct"
+          assert d["revision"]=="a91318be21aeaf0879874faa161dcb40c68847e9"
+          assert d["license"]=="apache-2.0"
+          assert d["generation"].strip()
+          assert len(d["output_sha"])==64
+          print("REAL_GENERATIVE_MODEL_EXECUTED", d["output_sha"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-generative-smollm2
+          path: platform/artifacts/generative-smollm2-result.json

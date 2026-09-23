@@ -1,0 +1,55 @@
+name: CEREBRON Adaptive Coalition E2E
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - '.github/workflows/platform-coalition-e2e.yml'
+      - 'platform/coalition.py'
+      - 'config/saphea-micro-v1.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  coalition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute adaptive coalition
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          from coalition import execute
+          result=execute("Résous ce calcul mathématique simple : 2+2. Donne une réponse courte.")
+          assert result["status"]=="COMPLETED"
+          assert result["answer"]
+          selected=result["plan"]["selected_units"]
+          assert "SM00" in selected and "SM02" in selected and "SM15" in selected and "SM18" in selected
+          assert len(selected) < 20
+          assert result["plan"]["independent_model_count"] == 1
+          assert result["workers"]["SM00"]["status"]=="EXECUTED"
+          assert result["workers"]["SM15"]["status"]=="EXECUTED"
+          assert "correlated" in result["plan"]["warning"].lower()
+          out=pathlib.Path("platform/artifacts/coalition-e2e.json")
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
+          print("COALITION_E2E_OK", selected, result["claim_ceiling"])
+          print(json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Compute result SHA
+        run: |
+          sha256sum platform/artifacts/coalition-e2e.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-adaptive-coalition-e2e
+          path: platform/artifacts/coalition-e2e.json
