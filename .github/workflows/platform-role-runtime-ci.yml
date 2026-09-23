@@ -22,4 +22,4 @@ jobs:
       - name: Compile
         run: python -m compileall -q platform
       - name: Run role-runtime tests
-        run: python -m unittest platform.tests.test_role_runtime -v
+        run: python -m unittest discover -s platform/tests -p 'test_role_runtime.py' -v
