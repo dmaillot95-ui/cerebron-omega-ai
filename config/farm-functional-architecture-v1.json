@@ -9,7 +9,8 @@
     "Simulation != test; workflow success != scientific validation.",
     "F72/AFAH required for validated promotion.",
     "ALL_REGISTERED_FARMS_NOT_EXPLICITLY_GROUPED_ROUTE_BY_REGISTRY_DOMAIN",
-    "NEW_FARM_ID_IS_ROUTABLE_ONLY_AFTER_VERIFIED_REPOSITORY_AND_REGISTRY_INSERT"
+    "NEW_FARM_ID_IS_ROUTABLE_ONLY_AFTER_VERIFIED_REPOSITORY_AND_REGISTRY_INSERT",
+    "F145_F146_ROUTE_AS_NATIVE_AI_NOT_GENERIC_FALLBACK"
   ],
   "groups": [
     {
@@ -188,6 +189,15 @@
         70,
         73
       ]
+    },
+    {
+      "id": "G12",
+      "name": "NATIVE_AI",
+      "purpose": "registered native AI model projects and specialized dual-core AI execution",
+      "farms": [
+        145,
+        146
+      ]
     }
   ],
   "registry_snapshot": {
@@ -204,7 +214,7 @@
       "status",
       "evidence"
     ],
-    "current_range": "F101-F146_AND_FUTURE_VERIFIED",
+    "current_range": "F101-F144_AND_FUTURE_VERIFIED_NOT_EXPLICITLY_GROUPED",
     "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY"
   }
 }
