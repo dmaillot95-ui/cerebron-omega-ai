@@ -44,6 +44,15 @@
         "evidence": "receipts/p03/unified-memory-recall-v2.json",
         "run_id": 35554346451,
         "scope": "authenticated private readback via F66→F74→HF route"
+      },
+      "elysion_memory_verification": {
+        "result": "PASS",
+        "workflow": "ELYSION HF Private Memory Canary",
+        "run_id": 35917403993,
+        "job_id": 107372423244,
+        "artifact_id": 10775791247,
+        "artifact_digest": "sha256:4836f3f60393fbd2a37c8f597e6000daf509bec43b1a3518b96561b817a9326f",
+        "scope": "authenticated private write/read/SHA for MODEL-ELYSION-001"
       }
     }
   ],
