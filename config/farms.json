@@ -1,5 +1,5 @@
 {
-  "version": "2.17",
+  "version": "2.18",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -908,25 +908,65 @@
       "id": 137,
       "repo": "cerebron-farm-137-space-optics-photonics",
       "domain": "space-optics-telescopes-photonics",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854564900,
+        "job_id": 107159876417,
+        "artifact_id": 10747190208,
+        "result_sha256": "c8e563eb905521b3a56ec8e9ad7249017bdfa83da9c2499ac320d65de12754a1",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "DIFFRACTION_LIMIT",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 138,
       "repo": "cerebron-farm-138-planetary-remote-sensing",
       "domain": "planetary-science-remote-sensing",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854579059,
+        "job_id": 107159921123,
+        "artifact_id": 10746932487,
+        "result_sha256": "52a0630b4e92269fc6adabe72b9518f60b37f42b6a5e4b55331ef303a1c70410",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "GROUND_SAMPLE_DISTANCE",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 139,
       "repo": "cerebron-farm-139-regolith-geotechnics",
       "domain": "regolith-planetary-geotechnics-terrain",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854588523,
+        "job_id": 107159952043,
+        "artifact_id": 10746594247,
+        "result_sha256": "2dc690ad585d2fe2c3108f4b92080c0569c0b3a69e8546b4542956e8bb2bba54",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "BEARING_PRESSURE",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 140,
       "repo": "cerebron-farm-140-microgravity-manufacturing",
       "domain": "microgravity-space-manufacturing-physics",
-      "status": "S3_WORKFLOW_EXECUTES"
+      "status": "S4_REAL_ENGINE_EXECUTES",
+      "evidence": {
+        "run_id": 35854598857,
+        "job_id": 107159983131,
+        "artifact_id": 10746539347,
+        "result_sha256": "7c706c9baa89e204ac1f05ded3f50e4588e11692a7864973bf8a3e43f4778448",
+        "engine": "python-engineering-batch-canary",
+        "engine_version": "3.12.14",
+        "test": "CAPILLARY_LENGTH",
+        "scope": "engineering-canary-not-physical-validation"
+      }
     },
     {
       "id": 141,
