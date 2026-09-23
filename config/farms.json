@@ -393,8 +393,23 @@
     {
       "id": 74,
       "repo": "cerebron-farm-74-session-memory-encyclopedia",
-      "domain": "session-memory-encyclopedia",
-      "status": "PLANNED"
+      "domain": "sigma-platform-intelligence-model-lab",
+      "status": "SIGMA_CONFIGURED_MODEL_LAB",
+      "identity": "SIGMA",
+      "legacy_domain": "session-memory-encyclopedia",
+      "capabilities": [
+        "platform-native-ai",
+        "teacher-ensemble-orchestration",
+        "gold-trace-curation",
+        "distillation",
+        "lora-qlora-training",
+        "compatible-weight-merging",
+        "benchmark-m6",
+        "red-team",
+        "agora-participation",
+        "session-memory-encyclopedia"
+      ],
+      "claim_ceiling": "ARCHITECTURE_CONFIGURED_TRAINING_NOT_YET_EXECUTED_FOR_SIGMA"
     },
     {
       "id": 75,
