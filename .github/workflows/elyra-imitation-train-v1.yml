@@ -1,0 +1,55 @@
+name: ELYRA Neural Imitation V1
+on:
+  push:
+    branches: ['feat/elyra-imitation-v1']
+    paths:
+      - 'platform/elyra_imitation_train_v1.py'
+      - '.github/workflows/elyra-imitation-train-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ELYRA_M6_SEED: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU torch
+        run: python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+      - name: Compile
+        run: python -m compileall -q platform/elyra_imitation_train_v1.py
+      - name: Train real ELYRA neural policy
+        run: python platform/elyra_imitation_train_v1.py
+      - name: Verify neural-learning evidence
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          gold=json.loads((root/"elyra-imitation-gold-manifest-v1.json").read_text())
+          report=json.loads((root/"elyra-neural-training-v1.json").read_text())
+          weights=root/"elyra-imitation-policy-v1.pt"
+          assert gold["memory_class"]=="M4_GOLD"
+          assert gold["training_eligible"] is True
+          assert report["weights_changed"] is True
+          assert report["g6_neural_training_verified"] is True
+          assert report["g7_post_m6_promoted"] is True
+          assert report["promotion"]=="PROMOTE_SCOPED_G7"
+          assert hashlib.sha256(weights.read_bytes()).hexdigest()==report["weights_sha256"]
+          assert report["posttrain_m6_action_mse"] < report["baseline_m6_action_mse"]
+          print("ELYRA_NEURAL_LEARNING_VERIFIED", report["weights_sha256"], report["mse_gain_ratio"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: elyra-neural-imitation-v1
+          path: |
+            platform/artifacts/elyra-imitation-gold-manifest-v1.json
+            platform/artifacts/elyra-imitation-gold-v1.pt
+            platform/artifacts/elyra-imitation-m6-v1.pt
+            platform/artifacts/elyra-imitation-policy-v1.pt
+            platform/artifacts/elyra-neural-training-v1.json
