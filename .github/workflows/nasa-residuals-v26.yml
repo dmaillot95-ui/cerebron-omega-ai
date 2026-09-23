@@ -1,0 +1,38 @@
+name: ASTRION METRION NASA Residuals V26
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "benchmarks/nasa_residuals_v26.py"
+      - "external/nasa_nesc/occ06c_time_history.csv"
+      - ".github/workflows/nasa-residuals-v26.yml"
+permissions:
+  contents: read
+jobs:
+  residuals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/nasa_residuals_v26.py
+      - name: METRION evidence gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/nasa_residuals_v26.json"))
+          if d["decision"]=="RESIDUALS_COMPUTED":
+              r=d["residuals"]
+              assert all(v>=0 for v in r.values())
+              assert d["g03_status"]=="EXTERNAL_TIME_HISTORY_COMPARED"
+              assert "MODEL_MISMATCH_EXPECTED" in d["limits"]
+          else:
+              assert d["decision"] in {"BLOCKED_RAW_NASA_TIME_HISTORY_MISSING","BLOCKED_SCHEMA_MISMATCH"}
+              assert d["g03_status"]=="PARTIAL"
+          print("NASA_RESIDUALS_V26",d["decision"],d["g03_status"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nasa-residuals-v26
+          path: artifacts/nasa_residuals_v26.json
+          retention-days: 30
