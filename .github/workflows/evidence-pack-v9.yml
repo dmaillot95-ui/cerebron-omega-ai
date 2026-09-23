@@ -1,0 +1,37 @@
+name: METRION F72 Evidence Pack V9
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Generate prerequisite simulation artifacts
+        run: |
+          set -e
+          for f in simulations/space_vehicle_chain_v1.py simulations/ascent_3dof_v2.py simulations/orbit_target_v3.py simulations/orbit_insertion_v4.py simulations/guidance_search_v5.py simulations/guidance_constrained_v6.py simulations/robustness_mc_v7.py simulations/failure_injection_v8.py; do
+            python "$f"
+          done
+      - run: python runtime/evidence_pack_v9.py
+      - name: F72 pre-gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/evidence_pack_v9.json"))
+          assert d["expected_count"]==8 and d["observed_count"]==8 and d["complete"] is True
+          assert d["maturity"]=="S5_ARTIFACT_PLUS_SHA"
+          assert d["gates"]["F72"]=="NOT_YET_VALIDATED"
+          assert d["gates"]["AFAH"]=="NOT_YET_PROMOTED"
+          assert len(d["sha256"])==64
+          print("EVIDENCE_PACK_V9",d["decision"],d["contradictions_or_gaps"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evidence-pack-v9
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14
