@@ -8,13 +8,13 @@ This file records measured gate status. "PASS_SCOPED" never means general capabi
 | G1 real execution | PASS | Multiple real GitHub jobs/artifacts/SHA including F123 bridge and model workflows |
 | G2 reproduced | PASS_SCOPED | F139 V6 reproduced at software/run level; not an independent physical reference |
 | G3 specialized benchmark | PASS_SCOPED | Qwen and specialist tool workers benchmarked on bounded tasks |
-| G4 coalition > best single agent | PASS_SCOPED_SEMANTIC_TRANSFER | After V3 exposed template brittleness, semantic holdout V4 improved 16→41 with 36/60 tool hits and 4/6 domains improved; still synthetic and bounded |
+| G4 coalition > best single agent | PASS_SCOPED_SEMANTIC_TRANSFER | Post-fix semantic V5 repeated across runtime seeds at 52–54/60 vs single-model 11–17/60, with all 6 domains improved; still synthetic/internal |
 | G5 M4 GOLD | PASS_SCOPED | F139 experiment-selection policy accepted only within stated scope |
 | G6 neural training | PASS_SCOPED_ELYRA | Real ELYRA imitation policy weights trained and artifact-hashed; not an LLM/LoRA and not physical validation |
 | G7 post-M6 promotion | PASS_SCOPED_ELYRA | Two M6-seeded promotions plus fresh shifted-distribution audit: trained 50.8% vs random 0%, teacher 52.5%; same promoted weights SHA |
 | G8 bounded autonomy | PASS_SCOPED_INTERNAL | Multi-step internal mission loop enforces step/tool/time budgets and stops at a human gate before external action |
 | G9 authorized external action | PASS_SCOPED_GITHUB | Authorized GitHub writes/workflows only; public deployment remains blocked |
-| G10 collective superiority | PASS_SCOPED_HOLDOUT_ONLY | Semantic V4 beats single-model baseline on a new synthetic holdout; general superiority remains unproven and G11 remains open |
+| G10 collective superiority | PASS_SCOPED_HOLDOUT_ONLY | Semantic V5 repeatedly beats the single-model baseline on fresh internal holdouts; external/general superiority remains unproven and G11 remains open |
 | G11 external superintelligence evaluation | OPEN | No such evidence; term must not be used as a system status |
 
 ## Cold-60 V2
@@ -230,3 +230,46 @@ Interpretation:
 - the audit used a separate evaluator code path and fresh seed, while loading the exact promoted weights artifact by SHA.
 - this strengthens scoped G7 evidence, but it is still the same repository and synthetic dynamics family.
 - no physical rover, external-organization, RL, language-model, AGI or superintelligence claim follows.
+
+
+## Semantic V5 repeated holdouts
+
+After the V3 failure and V4 transfer recovery, the modular semantic dispatcher was hardened and tested again on runtime-seeded V5 holdouts.
+
+Run A:
+- run 35905721509 = SUCCESS
+- job 107332784454
+- artifact 10770732811
+- digest sha256:01177c73a262522337ae6a74117fefaba6005544d85a96904df876180b879a32
+- baseline 12/60
+- adaptive 54/60
+- tool hits 52/60
+- domains improved 6/6
+- result SHA f04c6c96ec73b8f70a752a79bc824424e3919cb55672e603bd36ee2e27370647
+
+Run B:
+- run 35905927548 = SUCCESS
+- job 107333499020
+- artifact 10770239590
+- digest sha256:f1a1eabbb9ffc95f2a83e61b44726bae94e1e3dcdcca126622ad1eec75c99742
+- baseline 11/60
+- adaptive 52/60
+- tool hits 49/60
+- domains improved 6/6
+- result SHA 543c29b60917b335028478f95b3ace5d04a773a89de1f59dbd6201e0d784c390
+
+Run C:
+- run 35905965573 = SUCCESS
+- job 107333615532
+- artifact 10770908796
+- digest sha256:639eb214cfdbb8513f0076b2e3c3980b88887df83c7aa4649e244a74d6cb4f2b
+- baseline 17/60
+- adaptive 54/60
+- tool hits 50/60
+- domains improved 6/6
+- result SHA ff83c11102ed1724194c17dbf30a1a5869bf34e06b794d4f53ee65b2ea686eb5
+
+Interpretation:
+- semantic/tool-contract routing now transfers materially across multiple fresh internal seeds.
+- the result supports scoped G4/G10 on this synthetic capability family.
+- it remains an internally authored benchmark and is not external evidence of general or superintelligent capability.
