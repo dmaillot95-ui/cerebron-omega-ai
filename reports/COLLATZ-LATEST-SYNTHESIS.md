@@ -16,18 +16,18 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## État des fermes au dernier cycle
 
-- Fermes configurées : 100
+- Fermes configurées : 110
 - Derniers workflows en succès : 90
 - Derniers workflows en échec : 2
-- Fermes avec au moins un artefact sur leur dernier run : 85
+- Fermes avec au moins un artefact sur leur dernier run : 86
 
 ## Détail technique
 
 - Farm 01 collatz-theory: run=35812009687 status=completed conclusion=success artifacts=21
-- Farm 02 collatz-dynamics: run=35812288064 status=queued conclusion=None artifacts=0
+- Farm 02 collatz-dynamics: run=35812288064 status=in_progress conclusion=None artifacts=21
 - Farm 03 collatz-adic: run=35811866194 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=35812211005 status=in_progress conclusion=None artifacts=16
-- Farm 05 collatz-literature: run=35811569807 status=completed conclusion=success artifacts=22
+- Farm 04 collatz-counterexample: run=35812211005 status=completed conclusion=success artifacts=21
+- Farm 05 collatz-literature: run=35812370423 status=in_progress conclusion=None artifacts=0
 - Farm 06 collatz-formal-audit: run=35811997192 status=completed conclusion=success artifacts=21
 - Farm 07 collatz-synthesis: run=35812149909 status=completed conclusion=success artifacts=22
 - Farm 08 research-web: run=35806105920 status=completed conclusion=success artifacts=22
@@ -90,13 +90,13 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
 - Farm 66 knowledge-graph-vector-index: run=35812094197 status=completed conclusion=success artifacts=1
 - Farm 67 cross-farm-communication: run=35812252151 status=completed conclusion=success artifacts=1
-- Farm 68 autonomous-experiment-orchestrator: run=35812287099 status=queued conclusion=None artifacts=0
+- Farm 68 autonomous-experiment-orchestrator: run=35812287099 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=35812053984 status=completed conclusion=success artifacts=1
-- Farm 71 scientific-reproduction: run=35811775157 status=completed conclusion=success artifacts=1
+- Farm 71 scientific-reproduction: run=35812344576 status=completed conclusion=success artifacts=1
 - Farm 72 reality-evidence-gate: run=35812189747 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
-- Farm 74 session-memory-encyclopedia: run=35811768051 status=completed conclusion=success artifacts=1
+- Farm 74 session-memory-encyclopedia: run=35812402013 status=in_progress conclusion=None artifacts=1
 - Farm 75 exploration-discovery: run=35750096709 status=completed conclusion=success artifacts=1
 - Farm 76 central-orchestration-chatgpt-interface: run=35759230595 status=completed conclusion=success artifacts=1
 - Farm 77 humanoid-robotics-digital-twin-simulation-rl-sim2real: run=35769750335 status=completed conclusion=success artifacts=1
@@ -123,3 +123,13 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 98 autonomous-scientific-loop: run=None status=None conclusion=None artifacts=0
 - Farm 99 invention-prior-art-patent-candidate-discovery: run=None status=None conclusion=None artifacts=0
 - Farm 100 grand-challenge-generalization-arena: run=None status=None conclusion=None artifacts=0
+- Farm 101 space-world-core: run=None status=None conclusion=None artifacts=0
+- Farm 102 space-architecture-construction-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 103 lunar-city-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 104 mars-city-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 105 space-factory-industrial-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 106 space-energy-nuclear-system-digital-twin: run=None status=None conclusion=None artifacts=0
+- Farm 107 space-robot-workforce-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 108 isru-mining-resource-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 109 space-logistics-supply-chain-simulation: run=None status=None conclusion=None artifacts=0
+- Farm 110 space-civilization-system-simulation: run=None status=None conclusion=None artifacts=0
