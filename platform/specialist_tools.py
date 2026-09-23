@@ -281,6 +281,189 @@ def solve_error_detection(prompt: str) -> dict | None:
     return None
 
 
+
+# Semantic-contract routing V2.
+# These wrappers preserve the bounded legacy solvers while accepting surface-form variation.
+_solve_math_legacy = solve_math
+_solve_code_legacy = solve_code
+_solve_engineering_legacy = solve_engineering
+_solve_research_legacy = solve_research
+_solve_planning_legacy = solve_planning
+_solve_error_legacy = solve_error_detection
+
+
+def solve_math(prompt: str) -> dict | None:
+    legacy = _solve_math_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    p = prompt.strip()
+
+    m = re.search(r"(?:multiply|product of)\s+([-+]?\d+(?:\.\d+)?)\s+(?:by|and)\s+([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m:
+        return {"unit":"SM02","method":"semantic-product","answer":_fmt(float(m.group(1))*float(m.group(2)))}
+
+    m = re.search(r"([-+]?\d+(?:\.\d+)?)\s+(?:divided by|over)\s+([-+]?\d+(?:\.\d+)?).*?(?:then\s+)?add\s+([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m and float(m.group(2)) != 0:
+        return {"unit":"SM02","method":"semantic-divide-add","answer":_fmt(float(m.group(1))/float(m.group(2))+float(m.group(3)))}
+
+    m = re.search(r"(?:satisfies|equation)\s+([-+]?\d+(?:\.\d+)?)\s*\*?\s*x\s*([+-]\s*\d+(?:\.\d+)?)\s*=\s*([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if not m:
+        m = re.search(r"([-+]?\d+(?:\.\d+)?)\s*\*?\s*x\s*([+-]\s*\d+(?:\.\d+)?)\s*=\s*([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m:
+        a=float(m.group(1)); b=float(m.group(2).replace(" ","")); c=float(m.group(3))
+        if a != 0:
+            return {"unit":"SM02","method":"semantic-linear-equation","answer":_fmt((c-b)/a)}
+
+    m = re.search(r"greatest common divisor of\s+(\d+)\s+(?:and|,)\s*(\d+)", p, re.I)
+    if m:
+        return {"unit":"SM02","method":"semantic-gcd","answer":str(math.gcd(int(m.group(1)),int(m.group(2))))}
+
+    m = re.search(r"([-+]?\d+(?:\.\d+)?)\s*%\s*(?:of)?\s*([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m:
+        return {"unit":"SM02","method":"semantic-percent","answer":_fmt(float(m.group(1))*float(m.group(2))/100.0)}
+
+    m = re.search(r"(\d+)\s*/\s*(\d+).*?(?:decimal|decimal form)", p, re.I)
+    if m and int(m.group(2)) != 0:
+        return {"unit":"SM02","method":"semantic-fraction","answer":_fmt(int(m.group(1))/int(m.group(2)))}
+
+    if "triangle" in p.lower():
+        vals=[float(x) for x in re.findall(r"([-+]?\d+(?:\.\d+)?)\s*(?:°|degrees?)", p, re.I)]
+        if len(vals) >= 2:
+            return {"unit":"SM02","method":"semantic-triangle-angle","answer":_fmt(180.0-vals[0]-vals[1])}
+
+    m = re.search(r"(?:arithmetic\s+average|average|mean)\s+(?:of\s+)?(?:these\s+\w+\s+values\s*:\s*)?([0-9.,\s+-]+)", p, re.I)
+    if m:
+        vals=_numbers(m.group(1))
+        if vals:
+            return {"unit":"SM02","method":"semantic-mean","answer":_fmt(sum(vals)/len(vals))}
+
+    if re.search(r"(?:pattern|sequence|next term)", p, re.I):
+        vals=_numbers(p)
+        if len(vals) >= 4:
+            d=[vals[i+1]-vals[i] for i in range(len(vals)-1)]
+            if max(d)-min(d) < 1e-9:
+                return {"unit":"SM02","method":"semantic-arithmetic-sequence","answer":_fmt(vals[-1]+d[-1])}
+
+    m = re.search(r"([-+]?\d+(?:\.\d+)?)\s+(?:raised to the power|to the power)\s+([-+]?\d+(?:\.\d+)?)", p, re.I)
+    if m:
+        return {"unit":"SM02","method":"semantic-power","answer":_fmt(float(m.group(1))**float(m.group(2)))}
+    return None
+
+
+def solve_code(prompt: str) -> dict | None:
+    legacy = _solve_code_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    m = re.search(
+        r"(?:safe\s+python\s+expression|python\s+expression|restricted\s+(?:python\s+)?evaluator)\s*:\s*(.+?)(?:\.\s*(?:respond|reply|return)\b|$)",
+        prompt, re.I,
+    )
+    if not m:
+        return None
+    expr=m.group(1).strip()
+    value=safe_eval(expr)
+    answer=",".join(_fmt(v) for v in value) if isinstance(value,(list,tuple)) else _fmt(value)
+    return {"unit":"SM05","method":"semantic-restricted-python-expression","answer":answer}
+
+
+def solve_engineering(prompt: str) -> dict | None:
+    legacy = _solve_engineering_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    p=prompt.lower()
+    patterns=[
+        (r"(?:mass of\s+)?([-+]?\d+(?:\.\d+)?)\s*kg.*?accelerat(?:es|ion).*?([-+]?\d+(?:\.\d+)?)\s*m/s(?:\^?2|²)", lambda a,b:a*b, "force"),
+        (r"force of\s+([-+]?\d+(?:\.\d+)?)\s*n.*?(?:moving at|motion at|speed(?: of)?)[^0-9+-]*([-+]?\d+(?:\.\d+)?)\s*m/s", lambda a,b:a*b, "power"),
+        (r"(?:draws|uses)\s+([-+]?\d+(?:\.\d+)?)\s*w.*?for\s+([-+]?\d+(?:\.\d+)?)\s*(?:s|seconds?)", lambda a,b:a*b, "energy"),
+        (r"mass(?: is| of)?\s*([-+]?\d+(?:\.\d+)?)\s*kg.*?volume(?: is| of)?\s*([-+]?\d+(?:\.\d+)?)\s*m(?:\^?3|³)", lambda a,b:a/b, "density"),
+        (r"(?:travel|distance(?: is| of)?)\s*([-+]?\d+(?:\.\d+)?)\s*m.*?(?:in|time(?: is| of)?)\s*([-+]?\d+(?:\.\d+)?)\s*s", lambda a,b:a/b, "speed"),
+        (r"current(?: is| of)?\s*([-+]?\d+(?:\.\d+)?)\s*a.*?([-+]?\d+(?:\.\d+)?)\s*ohm", lambda a,b:a*b, "voltage"),
+        (r"(?:mass of\s+)?([-+]?\d+(?:\.\d+)?)\s*kg.*?moves? at\s*([-+]?\d+(?:\.\d+)?)\s*m/s.*?kinetic", lambda a,b:0.5*a*b*b, "kinetic-energy"),
+        (r"(?:mass of\s+)?([-+]?\d+(?:\.\d+)?)\s*kg.*?lifted\s+([-+]?\d+(?:\.\d+)?)\s*m.*?gravity\s*([-+]?\d+(?:\.\d+)?)", lambda a,b,c:a*b*c, "potential-energy"),
+        (r"(?:repeats every|period(?: is| of)?)\s*([-+]?\d+(?:\.\d+)?)\s*(?:s|seconds?)", lambda a:1.0/a, "frequency"),
+        (r"input power(?: is| of)?\s*([-+]?\d+(?:\.\d+)?)\s*w.*?(?:useful\s+)?output(?: power)?(?: is| of)?\s*([-+]?\d+(?:\.\d+)?)\s*w", lambda a,b:100.0*b/a, "efficiency"),
+    ]
+    for regex,fn,name in patterns:
+        m=re.search(regex,p,re.I)
+        if m:
+            vals=[float(x) for x in m.groups()]
+            if any(v==0 for v in vals[1:]) and name in {"density","speed"}:
+                return None
+            return {"unit":"SM08","method":"semantic-engineering-"+name,"answer":_fmt(fn(*vals))}
+    return None
+
+
+def solve_research(prompt: str) -> dict | None:
+    legacy = _solve_research_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    pairs={}
+    for key,value in re.findall(r"\b([A-Za-z][A-Za-z0-9_-]*)\s*[:=]\s*([-+]?\d+(?:\.\d+)?|[A-Za-z][A-Za-z0-9_.-]*)",prompt):
+        pairs[key.lower()]=value
+    m=re.search(r"(?:value\s+(?:for|of)|provide\s+the\s+value\s+for|return only)\s+([A-Za-z][A-Za-z0-9_-]*)",prompt,re.I)
+    if m and m.group(1).lower() in pairs and re.search(r"(?:reference|data|source|based solely|strictly)",prompt,re.I):
+        return {"unit":"SM11","method":"semantic-source-key-extraction","answer":pairs[m.group(1).lower()]}
+    return None
+
+
+def _planning_options(prompt: str) -> dict[str,list[str]]:
+    options={}
+    for label,seq in re.findall(r"\b([A-Z0-9])\s*[:=]\s*([A-Za-z0-9_-]+(?:\s*(?:>|,)\s*[A-Za-z0-9_-]+){1,8})",prompt):
+        parts=[x.strip() for x in re.split(r"\s*(?:>|,)\s*",seq) if x.strip()]
+        if len(parts)>=2:
+            options[label.upper()]=parts
+    return options
+
+
+def solve_planning(prompt: str) -> dict | None:
+    legacy = _solve_planning_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    options=_planning_options(prompt)
+    if len(options)<2:
+        return None
+    rules=[]
+    for m in re.finditer(r"\b([A-Za-z0-9_-]+)\s+(?:must\s+)?(?:be\s+)?first\b",prompt,re.I):
+        rules.append(("first",m.group(1),None))
+    for m in re.finditer(r"\b([A-Za-z0-9_-]+)\s+(?:must\s+)?(?:be\s+)?last\b",prompt,re.I):
+        rules.append(("last",m.group(1),None))
+    for m in re.finditer(r"\b([A-Za-z0-9_-]+)\s+(?:must\s+)?(?:come\s+|occur\s+)?before\s+([A-Za-z0-9_-]+)",prompt,re.I):
+        rules.append(("before",m.group(1),m.group(2)))
+    for m in re.finditer(r"\b([A-Za-z0-9_-]+)\s+(?:must\s+)?(?:come\s+|occur\s+)?after\s+([A-Za-z0-9_-]+)",prompt,re.I):
+        rules.append(("after",m.group(1),m.group(2)))
+    def ok(seq):
+        pos={x:i for i,x in enumerate(seq)}
+        for kind,a,b in rules:
+            if a not in pos:return False
+            if kind=="first" and pos[a]!=0:return False
+            if kind=="last" and pos[a]!=len(seq)-1:return False
+            if kind=="before" and (b not in pos or pos[a]>=pos[b]):return False
+            if kind=="after" and (b not in pos or pos[a]<=pos[b]):return False
+        return True
+    valid=[label for label,seq in options.items() if ok(seq)]
+    if len(valid)==1 and rules:
+        return {"unit":"SM00","method":"semantic-constraint-plan-checker","answer":valid[0]}
+    return None
+
+
+def solve_error_detection(prompt: str) -> dict | None:
+    legacy = _solve_error_legacy(prompt)
+    if legacy is not None:
+        return legacy
+    if not re.search(r"\b(?:wrong|false|incorrect)\b",prompt,re.I):
+        return None
+    claims=re.findall(r"\b([A-Z0-9])\s*[:)]\s*([^;]+)",prompt)
+    bad=[]
+    for label,claim in claims:
+        m=re.fullmatch(r"\s*([-+0-9*/(). ^]+)\s*=\s*([-+]?\d+(?:\.\d+)?)\s*\.?\s*",claim.strip())
+        if not m:
+            continue
+        if abs(float(safe_eval(m.group(1)))-float(m.group(2)))>1e-9:
+            bad.append(label.upper())
+    if len(bad)==1:
+        return {"unit":"SM15","method":"semantic-arithmetic-claim-checker","answer":bad[0]}
+    return None
+
 def try_solve(prompt: str) -> dict:
     for fn in (solve_research, solve_planning, solve_error_detection, solve_code, solve_engineering, solve_math):
         try:
