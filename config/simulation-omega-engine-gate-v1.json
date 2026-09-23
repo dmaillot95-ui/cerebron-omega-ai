@@ -1,0 +1,37 @@
+{
+  "version": "SIMULATION_OMEGA_ENGINE_GATE_V1",
+  "status": "PREQUALIFICATION_GATE_ACTIVE",
+  "checkpoint": "CEREBRON-226",
+  "principle": "No external simulator is promoted because it is popular or because installation succeeds.",
+  "required_evidence": [
+    "official_source",
+    "license_verified",
+    "current_version_or_revision",
+    "linux_github_actions_install_reproduced",
+    "minimal_reference_case_executes",
+    "deterministic_or_bounded_replay",
+    "artifact_and_sha",
+    "domain_invariant_or_reference_output",
+    "resource_cost_recorded",
+    "failure_mode_recorded"
+  ],
+  "levels": {
+    "Q0": "candidate_only",
+    "Q1": "source_license_verified",
+    "Q2": "install_reproduced",
+    "Q3": "reference_case_executes",
+    "Q4": "replay_and_failure_gate",
+    "Q5": "space_world_adapter_executes",
+    "Q6": "cross_farm_coupling_executes",
+    "Q7": "reference_or_calibration_evidence",
+    "Q8": "F72_AFAH_reviewed"
+  },
+  "promotion_rule": "CLAIM_LEQ_EVIDENCE",
+  "research_dependency": {
+    "farm": 8,
+    "run_id": 35819624232,
+    "state_at_creation": "QUEUED",
+    "note": "Selection waits for targeted F08 evidence; no candidate promoted yet."
+  },
+  "cost_policy": "NO_PAID_SERVICE_WITHOUT_EXPLICIT_USER_APPROVAL"
+}
