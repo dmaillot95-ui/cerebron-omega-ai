@@ -2,6 +2,10 @@ name: AGORA Cross-Run Retrieval V2
 # orchestration-retrigger: 2026-09-23T16:34+02:00
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/agora-crossrun-retrieval-v2.yml'
+      - 'runtime/agora_crossrun_retrieval_v2.py'
 permissions:
   actions: read
   contents: read
