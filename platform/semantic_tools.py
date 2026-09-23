@@ -55,6 +55,23 @@ def solve_math_semantic(prompt: str):
 
 
 def _extract_expression(prompt: str):
+    # Natural instructions may place the expression after a final colon, e.g.
+    # "Evaluate this Python expression and answer only with the value: (7+5)*2".
+    # Accept that suffix only when it parses through the bounded safe evaluator.
+    if "python" in prompt.lower() and "expression" in prompt.lower() and ":" in prompt:
+        suffix=prompt.rsplit(":",1)[-1].strip().rstrip(" .?;")
+        suffix=re.split(
+            r"(?:[.?;]\s*)?\b(?:reply|return|answer|give|output|respond)\b",
+            suffix,
+            flags=re.I,
+        )[0].strip().rstrip(" .?;")
+        if suffix:
+            try:
+                safe_eval(suffix)
+                return suffix
+            except (ToolWorkerError, ValueError, SyntaxError, TypeError):
+                pass
+
     candidates = [
         # Instruction text may appear between "expression" and the delimiter.
         # Prefer the payload after ':' so prose such as "and answer only..." is
