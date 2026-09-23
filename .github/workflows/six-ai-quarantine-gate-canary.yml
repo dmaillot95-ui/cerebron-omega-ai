@@ -1,0 +1,44 @@
+name: Six-AI Quarantine Dataset Gate Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'training/SIX_AI_QUARANTINE_DATASET_GATE_V1.json'
+      - '.github/workflows/six-ai-quarantine-gate-canary.yml'
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify deny-by-default state machine
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("training/SIX_AI_QUARANTINE_DATASET_GATE_V1.json")
+          c=json.loads(p.read_text())
+          sm=c["state_machine"]
+          forbidden={"INBOX_TEMP","QUARANTINE","SILVER","OPEN","REJECT","AUDIT_REQUIRED","COUNTER_AUDIT_REQUIRED","F72_REQUIRED"}
+          failures=[]
+          for s in forbidden:
+            if "DATASET_CANDIDATE" in sm.get(s,[]) or "DATASET_VERSIONED" in sm.get(s,[]): failures.append("direct_dataset:"+s)
+          for req in ["MISSING_PROVENANCE","MISSING_DEPENDENCY_FINGERPRINT","MISSING_AUDIT","MISSING_COUNTER_AUDIT","MISSING_F72","RAW_OUTPUT_AS_TRAINING_TRUTH"]:
+            if req not in c["hard_denies"]: failures.append("missing_deny:"+req)
+          for good in ["GOLD_VALIDATED","RED_VALIDATED"]:
+            if sm.get(good)!=["DATASET_CANDIDATE"]: failures.append("validated_path:"+good)
+          if sm.get("DATASET_CANDIDATE")!=["DATASET_VERSIONED"]: failures.append("version_gate")
+          receipt={"schema":"six-ai-quarantine-gate-canary-v1","contract_sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+            "negative_tests":len(forbidden)+6,"failures":failures,"result":"PASS" if not failures else "FAIL",
+            "claim_scope":"Static deterministic contract test only; does not validate scientific records or release a training dataset."}
+          Path("out").mkdir(exist_ok=True); Path("out/quarantine-gate-canary.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          if failures: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: six-ai-quarantine-gate-canary
+          path: out/quarantine-gate-canary.json
+          retention-days: 14
