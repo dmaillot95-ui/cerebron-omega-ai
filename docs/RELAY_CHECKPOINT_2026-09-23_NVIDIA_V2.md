@@ -64,3 +64,10 @@ Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log
 
 ## Newton F139 latest
 - Native 100-grain lunar settling V4 SUCCESS: run 35870520172, job 107213076521, artifact 10755061421; 100 grains, 1200 steps, max rigid contacts 3301, z_min 0.0349977836 m, z_max 0.2449900657 m, horizontal spread 0.3120000064 m, 50 grains below 3r; result SHA 78a3313f6942cc9dfb3b8c3141af122a61eae6752c026b9048b0274312cb1d4a. Real Newton multi-rigid contact simulation, NOT calibrated lunar-regolith validation. Tool Fabric evidence commit 6c98d0f06cc350f01de17a9b9e3171df2db5dec3.
+
+## AGORA / memory / learning audit and first E2E proof
+- Audit found AGORA engine code present but no persistent capsules/workflows at expected paths; Memory Fabric control plane exists but external data planes remain unproven/unconnected; continuous neural learning was NOT proven.
+- First explicit E2E gate workflow commit 56737d607cfe43c88391e3fc970dbfe8c0a9bc4d executed successfully: run 35874397482, job 107226442953, artifact 10757281642, artifact digest sha256:6fc89f1b956626fa0b243ccdafeb3d2c38120480e385bfa2df25e420c4af2eb7.
+- METRION posted AGORA LESSON capsule AGORA:b7a077098a53553ff4bf with provenance to Newton gravity-ablation run 35873551620. Capsule SHA b7a077098a53553ff4bf4e52204d3d09ceac96547d8c92a0b837df91c5e4972f.
+- Gate result GATES_OK, result SHA 7ae9697c6e4d180038dd5d9a4bd2c451c2930c0c84c9724ff47aecb143b0d9d2. Stored as AGORA_TASKS/M1_TRACE in artifact; gold_promoted=false and training_triggered=false because measured transfer gain is not yet proven.
+- Important: this proves capsule creation + gate logic + artifact persistence for one run. It does NOT yet prove durable cross-run memory retrieval, autonomous recurring forum operation, GOLD promotion, model-weight training, or learning gain.
