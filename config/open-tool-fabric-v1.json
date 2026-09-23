@@ -415,7 +415,18 @@
           "package": "physicsnemo"
         },
         "corrected_package": "nvidia-physicsnemo",
-        "current_status": "RETRY_IN_PROGRESS"
+        "current_status": "RUNTIME_VERIFIED_MODEL_V2_IN_PROGRESS"
+      },
+      "verified_runtime": {
+        "farm": 127,
+        "run_id": 35864199488,
+        "job_id": 107191543995,
+        "artifact_id": 10752545024,
+        "version": "2.2.2",
+        "python": "3.11.16",
+        "result_sha256": "c262668e75bba6cf3c483d95eb540a01961e310ab5863aa4b7a7b01b144dfca0",
+        "status": "IMPORT_OK",
+        "scope": "RUNTIME_AVAILABILITY_CANARY_NOT_PHYSICS_MODEL_OR_VALIDATION"
       }
     },
     {
