@@ -1109,6 +1109,59 @@
         "BENCHMARK_BEFORE_PROMOTION",
         "NO_TOOL_EQUALS_EVIDENCE"
       ]
+    },
+    "AMD": {
+      "farm_count_effect": 0,
+      "mode": "SHARED_LOCAL_COMPUTE_AND_AI_RUNTIME",
+      "engines": [
+        {
+          "id": "OTF027",
+          "name": "ROCm",
+          "targets": [
+            "SAPHEA_MICRO",
+            "training",
+            "inference",
+            "simulation"
+          ]
+        },
+        {
+          "id": "OTF028",
+          "name": "Lemonade",
+          "targets": [
+            "SAPHEA_MICRO",
+            "local_llm",
+            "OpenAI-compatible local routing"
+          ]
+        },
+        {
+          "id": "OTF029",
+          "name": "GAIA",
+          "targets": [
+            "CEREBRON",
+            "local_agents",
+            "RAG"
+          ]
+        },
+        {
+          "id": "OTF030",
+          "name": "Ryzen AI Software",
+          "targets": [
+            "SAPHEA_MICRO",
+            "NPU",
+            "iGPU",
+            "hybrid inference"
+          ]
+        }
+      ],
+      "rules": [
+        "NO_NEW_FARM",
+        "REAL_WORKER_REQUIRED",
+        "HARDWARE_DETECTION_BEFORE_ROUTE",
+        "BENCHMARK_BEFORE_PROMOTION",
+        "ZERO_PAID_OVERAGE_DEFAULT",
+        "CLOUD_CREDIT_NOT_PERMANENT_FREE_COMPUTE",
+        "NO_ENGINE_EQUALS_EVIDENCE"
+      ]
     }
   }
 }
