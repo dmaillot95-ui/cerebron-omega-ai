@@ -145,7 +145,7 @@
   },
   "huggingface_connector": {
     "implementation": "platform/huggingface_memory.py",
-    "status": "AUTHENTICATED_ACCOUNT_CONFIRMED_PRIVATE_REPO_BOOTSTRAP_PENDING",
+    "status": "CONNECTED_VERIFIED_PRIVATE",
     "token_env": [
       "HF_TOKEN",
       "HUGGING_FACE_HUB_TOKEN"
@@ -162,6 +162,16 @@
     "training_forbidden_class": "M6",
     "authenticated_account": "cerebron-omega",
     "default_private_repo": "cerebron-omega/cerebron-sigma-memory",
-    "authentication_probe_run_id": 35911785348
+    "authentication_probe_run_id": 35911785348,
+    "private_repo": "cerebron-omega/cerebron-sigma-memory",
+    "bootstrap_run_id": 35912062787,
+    "bootstrap_job_id": 107354114117,
+    "bootstrap_artifact_id": 10773831499,
+    "bootstrap_artifact_digest": "sha256:f09eb8bc030e74e4cf1180883e594ed104f2a2fb7d6863503fd95dc4b64c0a5e",
+    "first_object": {
+      "path": "bootstrap/sigma-connection-v1.json",
+      "sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66",
+      "memory_class": "M7"
+    }
   }
 }
