@@ -129,6 +129,18 @@
       "artifact_id": 10773831499,
       "artifact_digest": "sha256:f09eb8bc030e74e4cf1180883e594ed104f2a2fb7d6863503fd95dc4b64c0a5e",
       "bootstrap_object_sha256": "44cfaac3639a8af2c8477e490382ae6624e75237823ac390029ff19502deeb66"
+    },
+    "sigma_full_council_8": {
+      "status": "EXECUTED_VERIFIED",
+      "run_id": 35912363315,
+      "job_id": 107355132277,
+      "artifact_id": 10773053770,
+      "artifact_digest": "sha256:3b3ea28d56a0df53fc945e447882a3534195a820465faec5ed07cf7e12beaeb7",
+      "fusion_sha256": "9a209dc96476a0a51109f6e3acd8a5277d885c9fc7da3a530f0df90b75c7a43b",
+      "result_sha256": "b4cecebd05e2fb6737adf0d52eb92152482c781644e9d81ac02b2a7f20d1d9a0",
+      "delegate_count": 8,
+      "independent_general_neural_models": 1,
+      "claim_ceiling": "EIGHT_EXECUTED_ROLE_INFERENCES_PLUS_FUSION_NOT_EIGHT_INDEPENDENT_MODELS"
     }
   },
   "last_verified_code_head": "c654efdea6b0faa03a39bf4854128ae2c488250c",
