@@ -351,3 +351,45 @@ END UPDATE VERIFIED
 3. Validate ELYRA replay/data schema and controller baseline, then create an imitation-learning dataset only through the GOLD gate.
 4. Neural training remains blocked until a sufficient scoped GOLD corpus exists; any first trained adapter/model must include weights artifact SHA and before/after cold benchmark.
 5. Keep public deployment blocked until remote TLS/proxy/secret/deployment review is explicit.
+
+
+## UPDATE 2026-09-23 — REPRODUCTION B + LIVE COALITION/Cockpit
+
+### F139 V6 separate workflow reproduction
+- Separate implementation/workflow commit in F139: 5d09fe0d69172c8ac70560352f2098dfd50c290f.
+- Reproduction run 35901349529 = SUCCESS; job 107318057554.
+- Artifact 10769451138; digest sha256:3c633424f84e082bb92e7907c79cc3224c62eb44d0878b933cbd3c9d4446af7c.
+- Reproduction result SHA256: 9b2010fb9f3bad7c2d016620034096b12d607a47af9d3c7300f0a578d61d3142.
+- Relative error versus V6 reference = 0 for lunar final spread, Earth final spread, and dynamic discrimination index.
+- Maturity claim: S7_REPRODUCED at software/run level only.
+- Limitation: same Newton engine and numerical parameters; this is not an independent physical reference and not calibrated lunar-regolith validation.
+
+### Cold-60 V1 ablation: roles around the same model
+- Single Qwen baseline run 35901638355: 14/60.
+- Corrected minimal coalition, same sealed V1 dataset, run 35902074329: 14/60.
+- Corrected coalition artifact 10769382912; digest sha256:393e6fedcdff7eb581dfa2beabaab663fb5e493731bea961b19f9ef0f48542bc.
+- Interpretation: routing/role prompting/Red Team/fusion around the same shared Qwen model produced no measured accuracy gain on V1 after execution semantics were corrected.
+- Earlier 18/60 run 35901848276 is preserved as an ablation affected by older coalition execution semantics; do not use it as superiority evidence.
+- This supports the architectural rule AGENT_COUNT != INTELLIGENCE and SHARED_BASE_MODEL_IS_CORRELATED_DEPENDENCY.
+
+### Cold-60 V2 reproduced scoped tool-augmentation gain
+- Run A 35902694640: baseline 19/60, adaptive+tools 60/60, 6/6 domains improved.
+- Run B 35903080344 with independent runtime seed: baseline 15/60, adaptive+tools 60/60, 6/6 domains improved.
+- The measured gain comes from orchestration plus bounded deterministic specialist tools, not from pretending that multiple calls to one Qwen base are independent agents.
+- Claim ceiling remains SCOPED_COLLECTIVE_TOOL_AUGMENTATION_GAIN.
+
+### Live Control Plane integration
+Platform branch feat/cerebron-ai-platform-mvp:
+- f17929990e92038a1a2678effb867c27a1371d52 routes non-space live missions through adaptive coalition + specialist tools with Qwen fallback.
+- a2bfaaeaa4a4c7cc9b2a8f60ad1a202b92f34042 adds live E2E tests: deterministic math mission succeeds with model runtime disabled, records SM02/SM15/SM18 task traces and E2_COMPUTATION evidence.
+- CI run 35903451187 = SUCCESS.
+- 4aaf0dad7dca4d395544cdbaa11cc96e85cdcd5d adds regression/safety tests for specialist tools; CI run 35903257778 = SUCCESS.
+- c5d3347a725e59c9a43a11d6dd39d04be0167e01 updates the cockpit to display answer, selected coalition, claim ceiling, and artifact.
+- Cockpit CI run 35903534095 = SUCCESS.
+- Deterministic specialist results can execute with independent_model_count=0; unsupported tasks fall back to the qualified Qwen backend only when the real runtime is enabled.
+- This makes the local Control Plane operational for bounded tool-backed missions while preserving fail-closed model/farm semantics.
+- Public/remote deployment remains BLOCKED.
+
+### Current status wording
+Use: INTELLIGENCE COLLECTIVE ORCHESTRÉE À CAPACITÉ MESURÉE.
+Do not use SUPERINTELLIGENCE as a system status. G11 remains OPEN.

@@ -72,3 +72,13 @@ Corrected run:
 3. First neural training requires a sufficiently validated GOLD corpus, changed weights, weight/adapter artifact SHA, sealed before/after M6, regression checks and rollback.
 4. ELYRA replay is candidate data, not training-eligible GOLD by default.
 5. FARM_EXECUTED remains forbidden without run/job/log/artifact/artifact SHA/output SHA.
+
+
+## Live operational core evidence
+- F139 software/run reproduction B: run 35901349529, job 107318057554, artifact 10769451138, digest sha256:3c633424f84e082bb92e7907c79cc3224c62eb44d0878b933cbd3c9d4446af7c; S7 software/run reproduction only.
+- Pure shared-model orchestration ablation: Qwen single 14/60 vs corrected coalition without tools 14/60 on Cold-60 V1. More logical roles alone did not improve accuracy.
+- Tool-augmented Cold-60 V2 reproduced on two runtime seeds: 19→60 and 15→60, 6/6 domains improved. Scope remains structured task-family performance.
+- Live adaptive coalition integration commit f17929990e92038a1a2678effb867c27a1371d52; live test commit a2bfaaeaa4a4c7cc9b2a8f60ad1a202b92f34042; CI 35903451187 SUCCESS.
+- Cockpit coalition/evidence display commit c5d3347a725e59c9a43a11d6dd39d04be0167e01; CI 35903534095 SUCCESS.
+- Specialist safety/regression tests commit 4aaf0dad7dca4d395544cdbaa11cc96e85cdcd5d; CI 35903257778 SUCCESS.
+- Local core status: OPERATIONAL_SCOPED. Remote/public deployment: BLOCKED.
