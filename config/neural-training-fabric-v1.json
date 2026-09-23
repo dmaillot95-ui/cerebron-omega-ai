@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "status": "ARCHITECTURE_REGISTERED_TRAINING_NOT_YET_EXECUTED",
+  "name": "CEREBRON Neural Training Fabric",
+  "principles": [
+    "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
+    "AGORA_IS_NOT_TRAINING",
+    "GOLD_ONLY_FOR_TRAINING",
+    "M6_COLD_BENCHMARK_DENY_TRAINING",
+    "BASELINE_BEFORE_TRAINING",
+    "INDEPENDENT_POST_TRAIN_BENCHMARK",
+    "ROLLBACK_ON_REGRESSION",
+    "NO_PROMOTION_WITHOUT_MEASURED_GAIN",
+    "ZERO_PAID_OVERAGE_DEFAULT"
+  ],
+  "pipeline": [
+    "AGORA_VALIDATED",
+    "M4_GOLD",
+    "ROLE_DATASET_BUILD",
+    "TRAIN_VALIDATION_SPLIT",
+    "BASELINE_M6",
+    "LORA_OR_QLORA_TRAIN",
+    "ADAPTER_SHA",
+    "POSTTRAIN_M6",
+    "RED_TEAM",
+    "F72",
+    "AFAH",
+    "PROMOTE_OR_ROLLBACK"
+  ],
+  "roles": {
+    "SAPHEA": {
+      "target": "specialist execution and routing",
+      "training": "domain SFT/LoRA"
+    },
+    "SPIRALION": {
+      "target": "cumulative reasoning and checkpoint continuity",
+      "training": "trajectory/checkpoint SFT"
+    },
+    "ETHERION": {
+      "target": "difficult science math R&D",
+      "training": "verified technical reasoning SFT"
+    },
+    "HYPERION": {
+      "target": "divergent hypotheses and alternative methods",
+      "training": "diversity/contrastive candidate generation"
+    },
+    "ASTRION": {
+      "target": "aerospace R&D",
+      "training": "aerospace GOLD SFT/LoRA"
+    },
+    "METRION": {
+      "target": "engineering calculation simulation validation",
+      "training": "engineering GOLD SFT/LoRA"
+    },
+    "AFAH": {
+      "target": "epistemic final audit",
+      "training": "audit/critique preference or SFT; never substitute for evidence"
+    },
+    "AELYS": {
+      "target": "dialogue coordination human interaction",
+      "training": "dialogue/coordination SFT"
+    },
+    "ELYRA": {
+      "target": "embodied perception and action",
+      "training": "simulation trajectories imitation learning; RL only after validated simulator"
+    },
+    "SAPHEA_MICRO": {
+      "target": "population of compact specialists",
+      "training": "per-domain LoRA/QLoRA"
+    }
+  },
+  "promotion_requirements": {
+    "actual_weights_or_adapter_artifact": true,
+    "artifact_sha": true,
+    "training_manifest": true,
+    "base_model_pinned": true,
+    "dataset_sha": true,
+    "cold_benchmark_m6": true,
+    "measured_gain": true,
+    "regression_check": true,
+    "f72_review": true,
+    "afah_review": true
+  },
+  "forbidden_claims": [
+    "PROMPT_CHANGE_EQUALS_NEURAL_TRAINING",
+    "MEMORY_RETRIEVAL_EQUALS_NEURAL_TRAINING",
+    "ROLE_NAME_EQUALS_INDEPENDENT_MODEL",
+    "SIMULATOR_SUCCESS_EQUALS_REAL_WORLD_VALIDATION"
+  ]
+}
