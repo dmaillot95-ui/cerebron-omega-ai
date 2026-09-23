@@ -377,6 +377,16 @@
           "total_updates": 1024000,
           "result_sha256": "07517c81f3e595c8654d88e3e0095be00ba220103c33a009fc7a0b6023f5949f",
           "scope": "DYNAMIC_WARP_PHYSICS_KERNEL_NOT_MULTIPHASE_CFD_OR_PHYSICAL_EXPERIMENT"
+        },
+        "reference_v3": {
+          "farm": 140,
+          "run_id": 35866776553,
+          "artifact_id": 10751879409,
+          "updates": 4096000,
+          "x_abs_error": 0.00000909517215603485,
+          "v_abs_error": 3.3087714408630564e-9,
+          "result_sha256": "1d0abd62991cbfdcf794e5785812b1df5fde38d5533a58abe028e3e459f2c78c",
+          "status": "REFERENCE_REPRODUCED_OK"
         }
       }
     },
@@ -446,6 +456,23 @@
         ],
         "result_sha256": "60b9d813e8f098e64d753f6696e6a7566e6337ec454d8cb92efce97c4cdaf1db",
         "scope": "REAL_PHYSICSNEMO_MODEL_FORWARD_PASS_SYNTHETIC_NORMALIZED_INPUT_NOT_TRAINED_CFD_SURROGATE_NOT_PHYSICAL_VALIDATION"
+      },
+      "verified_physics_v3": {
+        "farm": 127,
+        "run_id": 35866592008,
+        "artifact_id": 10751544524,
+        "training_points": 257,
+        "epochs": 1200,
+        "mach_range": [
+          0,
+          5
+        ],
+        "mae": 0.000522388203535229,
+        "max_abs_error": 0.004441261291503906,
+        "mse": 5.570676080424164e-7,
+        "result_sha256": "e9351fd14144a72619dea6c6da24fc6324643c368f31d395080f37b472644354",
+        "status": "REFERENCE_LEARNED_OK",
+        "scope": "ANALYTIC_COMPRESSIBLE_FLOW_REFERENCE_NOT_CFD_OR_PHYSICAL_VALIDATION"
       }
     },
     {
