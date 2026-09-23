@@ -1046,9 +1046,49 @@
         "test": "INDEPENDENT_ORBIT_CROSSCHECK",
         "scope": "independent-formula-crosscheck-not-external-or-physical-validation"
       }
+    },
+    {
+      "id": 145,
+      "code": "F145",
+      "name": "ELYSION",
+      "repo": "cerebron-farm-145-elysion",
+      "repo_full_name": "dmaillot95-ui/cerebron-farm-145-elysion",
+      "url": "https://github.com/dmaillot95-ui/cerebron-farm-145-elysion",
+      "domain": "elysion-native-intelligence",
+      "status": "REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
+      "type": "AI_FARM",
+      "shared_base_family": "ELYSION_ELYSIUM_SHARED_BASE",
+      "role": "generation-reasoning-invention-solution-search",
+      "rules": [
+        "CEREBRON_MODE_REQUIRED",
+        "REAL_EXECUTION_RECEIPT_REQUIRED",
+        "TRAINING_REQUIRES_WEIGHTS_CHANGED",
+        "M6_NEVER_IN_TRAIN",
+        "CLAIM_LE_EVIDENCE"
+      ]
+    },
+    {
+      "id": 146,
+      "code": "F146",
+      "name": "ELYSIUM",
+      "repo": "cerebron-farm-146-elysium",
+      "repo_full_name": "dmaillot95-ui/cerebron-farm-146-elysium",
+      "url": "https://github.com/dmaillot95-ui/cerebron-farm-146-elysium",
+      "domain": "elysium-native-verification",
+      "status": "REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
+      "type": "AI_FARM",
+      "shared_base_family": "ELYSION_ELYSIUM_SHARED_BASE",
+      "role": "verification-red-team-optimization-validation",
+      "rules": [
+        "CEREBRON_MODE_REQUIRED",
+        "REAL_EXECUTION_RECEIPT_REQUIRED",
+        "TRAINING_REQUIRES_WEIGHTS_CHANGED",
+        "M6_NEVER_IN_TRAIN",
+        "CLAIM_LE_EVIDENCE"
+      ]
     }
   ],
-  "max_farms": 144,
+  "max_farms": 146,
   "policy": {
     "farm_cap": 144,
     "no_farm_above_144": true,
@@ -1178,5 +1218,6 @@
         "NO_ENGINE_EQUALS_EVIDENCE"
       ]
     }
-  }
+  },
+  "farm_ceiling": 146
 }
