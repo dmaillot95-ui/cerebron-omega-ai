@@ -8,13 +8,13 @@ This file records measured gate status. "PASS_SCOPED" never means general capabi
 | G1 real execution | PASS | Multiple real GitHub jobs/artifacts/SHA including F123 bridge and model workflows |
 | G2 reproduced | PASS_SCOPED | F139 V6 reproduced at software/run level; not an independent physical reference |
 | G3 specialized benchmark | PASS_SCOPED | Qwen and specialist tool workers benchmarked on bounded tasks |
-| G4 coalition > best single agent | OPEN_OUTSIDE_TEMPLATE_FAMILY | Cold-60 V2 was 19→60 and 15→60, but transfer Red Team V3 was only 25→26 with 0 specialist-tool hits and 1/6 domains improved |
+| G4 coalition > best single agent | PASS_SCOPED_SEMANTIC_TRANSFER | After V3 exposed template brittleness, semantic holdout V4 improved 16→41 with 36/60 tool hits and 4/6 domains improved; still synthetic and bounded |
 | G5 M4 GOLD | PASS_SCOPED | F139 experiment-selection policy accepted only within stated scope |
-| G6 neural training | OPEN | No promoted LoRA/QLoRA or ELYRA learned policy yet |
-| G7 post-M6 promotion | OPEN | Requires trained weights plus before/after M6 |
-| G8 bounded autonomy | PARTIAL | Workflows/orchestration are bounded, but no general autonomy claim |
+| G6 neural training | PASS_SCOPED_ELYRA | Real ELYRA imitation policy weights trained and artifact-hashed; not an LLM/LoRA and not physical validation |
+| G7 post-M6 promotion | PASS_SCOPED_ELYRA | Two M6-seeded runs showed large action-MSE gain and closed-loop promotion under the predeclared gate |
+| G8 bounded autonomy | PASS_SCOPED_INTERNAL | Multi-step internal mission loop enforces step/tool/time budgets and stops at a human gate before external action |
 | G9 authorized external action | PASS_SCOPED_GITHUB | Authorized GitHub writes/workflows only; public deployment remains blocked |
-| G10 collective superiority | OPEN | V2 tool-template gain did not transfer under parser-unseen reformulations; no general collective-superiority claim is allowed |
+| G10 collective superiority | PASS_SCOPED_HOLDOUT_ONLY | Semantic V4 beats single-model baseline on a new synthetic holdout; general superiority remains unproven and G11 remains open |
 | G11 external superintelligence evaluation | OPEN | No such evidence; term must not be used as a system status |
 
 ## Cold-60 V2
@@ -114,3 +114,91 @@ Interpretation:
 - baseline 23/60; adaptive 23/60; deterministic tool hits 0/60; domains improved 0/6.
 - V2 gains are therefore bounded to the structured/template family until semantic dispatch transfers across unseen surface forms.
 - General G4/G10 superiority claim remains blocked.
+
+
+## Semantic transfer after Red Team V3
+
+V3 failure is preserved:
+- paraphrase holdout run 35903871389: baseline 23/60, adaptive 23/60, tool hits 0/60.
+- transfer run 35903773988: baseline 25/60, adaptive 26/60, tool hits 0/60.
+
+Semantic dispatch was then implemented on the platform branch without training on V3 answers.
+
+Post-freeze semantic holdout V4:
+- run 35904991179 = SUCCESS
+- job 107330319430
+- artifact 10770927163
+- digest sha256:8476bf54966a0814fa30888f397d30e0b1648c20caa0dfee632b7fcda2dfcc18
+- dataset SHA256 e120fa58db4ee1e618215a36ea634b7462f78221b2a6e11cd106682b79b13444
+- single Qwen baseline 16/60
+- adaptive semantic coalition 41/60
+- deterministic tool hits 36/60
+- domains improved: math, engineering, research_grounded, planning = 4/6
+- result SHA256 f5c516cd4da0f9898f07bea24c4ad2e61c20915109469c238d3d07d2201c81b9
+
+Interpretation:
+- semantic/tool-contract dispatch materially transfers beyond the original V2 surface templates.
+- code and error-detection remain open weaknesses on V4.
+- this is still a synthetic benchmark authored inside the project, not external evaluation.
+
+## ELYRA neural learning — G6/G7 scoped
+
+First training attempt is preserved as rollback evidence:
+- run 35904510366 = FAILURE by policy gate, not by missing training.
+- baseline M6 action MSE 0.4468966722 → post-train 0.0046996782 (~95.1x reduction).
+- untrained closed-loop success 0.0; trained 0.40; teacher 0.60.
+- promotion correctly remained ROLLBACK because the predeclared teacher-fraction gate was missed.
+
+Improved training, no gate relaxation:
+- training dataset memory class: scoped M4 GOLD for synthetic teacher imitation only.
+- training dataset SHA256 daf914773d656965fa0f724df8b1a33b340958bf05f8c967bdce7c855f3a3247.
+- weights_changed=true; training_triggered=true.
+
+Run A:
+- run 35904919982 = SUCCESS
+- job 107330075394
+- artifact 10770647209
+- digest sha256:74a95dac7ac585cfc42ada5d6ca639d5fc159c3195b57451f6625f39488ce673
+- M6 dataset SHA256 1eb5ea9e94a9de777865eb0cf1b2fccf8e40c82760505e657f8bffc89bf1bdcf
+- baseline M6 MSE 0.4573424459 → post-train 0.0037131347 (~123.17x)
+- untrained success 0.0; teacher success 0.5666667; trained success 0.5666667
+- weights SHA256 f44cbc85b3c6b60363abf21bd759faa956efad99e9622c19a397d6830933201a
+- promotion PROMOTE_SCOPED_G7.
+
+Run B, different M6 seed:
+- run 35904950828 = SUCCESS
+- job 107330182533
+- artifact 10770497581
+- digest sha256:fe342b4403902c3643165e5b617b8d1dbf61d716c2af217e64f2634f8c9a8717
+- M6 dataset SHA256 386e76f4b93d685e34732015a6303bc11ef54a27df9283f3fb2e745e36950d51
+- baseline M6 MSE 0.4504657388 → post-train 0.0039337175 (~114.51x)
+- untrained success 0.0; teacher success 0.60; trained success 0.5416667
+- weights SHA256 b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601
+- promotion PROMOTE_SCOPED_G7.
+
+Claim ceiling:
+- NEURAL_LEARNING_VERIFIED_FOR_SYNTHETIC_ELYRA_POLICY_IMITATION.
+- This does not validate lunar physics, does not prove real-robot performance, and is not a language-model LoRA.
+
+## G8 bounded autonomy
+
+- run 35905066201 = SUCCESS
+- job 107330573098
+- artifact 10770652252
+- digest sha256:2c2e4f3924ab492ff8d7098625bd254d6806522c6f17545b8195e3c118bae39e
+- result SHA256 03fd9735d72e5fa4d1b97e109ca8cd0e797bfbd6b05482f785680c468c10a9fd
+- three internal tool-backed steps executed.
+- external action stopped at WAITING_HUMAN_APPROVAL.
+- overflow test stopped at BUDGET_EXHAUSTED.
+- external_action_executed=false.
+
+Claim ceiling:
+- G8_PASS_SCOPED_INTERNAL.
+- No general autonomy or unsupervised external-action claim.
+
+## Consolidated platform branch
+
+- integrated commit f53be91f30f2f3168d201c5195083063f91b4904 adds verified ELYRA neural-learning and bounded-autonomy capabilities to feat/cerebron-ai-platform-mvp.
+- consolidated platform CI run 35905343265 = SUCCESS.
+- public/remote deployment remains BLOCKED.
+- G11 remains OPEN.
