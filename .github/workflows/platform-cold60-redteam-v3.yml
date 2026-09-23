@@ -1,0 +1,55 @@
+name: CEREBRON Cold 60 Red Team V3
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'platform/cold60_redteam_v3.py'
+      - 'platform/coalition_tools.py'
+      - 'platform/specialist_tools.py'
+      - 'platform/coalition.py'
+      - 'platform/generative_backend.py'
+      - '.github/workflows/platform-cold60-redteam-v3.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  redteam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_REDTEAM_SEED: ${{ github.run_id }}
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Compile Red Team benchmark
+        run: python -m compileall -q platform
+      - name: Run paraphrase holdout
+        run: python platform/cold60_redteam_v3.py
+      - name: Verify artifact schema
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          d=json.loads((root/"cold60-redteam-v3-dataset.json").read_text())
+          r=json.loads((root/"cold60-redteam-v3-result.json").read_text())
+          assert d["deny_training"] is True
+          assert len(d["tasks"])==60
+          assert r["dataset_sha"]
+          assert 0 <= r["adaptive"]["tool_hits"] <= 60
+          assert len(r["result_sha256"])==64
+          print("REDTEAM_V3_VERIFIED",r["baseline"]["score"],r["adaptive"]["score"],r["adaptive"]["tool_hits"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-cold60-redteam-v3
+          path: |
+            platform/artifacts/cold60-redteam-v3-dataset.json
+            platform/artifacts/cold60-redteam-v3-result.json
