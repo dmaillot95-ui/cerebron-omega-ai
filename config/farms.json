@@ -1,5 +1,5 @@
 {
-  "version": "2.05",
+  "version": "2.06",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -630,6 +630,48 @@
       "id": 113,
       "repo": "cerebron-farm-113-elyra-embodied-digital-humanoid",
       "domain": "embodied-digital-humanoid-sim-to-real-agent",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 114,
+      "repo": "cerebron-farm-114-encyclopedic-memory-index",
+      "domain": "encyclopedic-memory-index",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 115,
+      "repo": "cerebron-farm-115-vector-semantic-memory",
+      "domain": "vector-semantic-memory",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 116,
+      "repo": "cerebron-farm-116-dedup-knowledge-fusion",
+      "domain": "dedup-knowledge-fusion",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 117,
+      "repo": "cerebron-farm-117-simulation-replay-memory",
+      "domain": "simulation-replay-memory",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 118,
+      "repo": "cerebron-farm-118-gold-knowledge-library",
+      "domain": "gold-knowledge-library",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 119,
+      "repo": "cerebron-farm-119-evidence-scientific-archive",
+      "domain": "evidence-scientific-archive",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 120,
+      "repo": "cerebron-farm-120-memory-governor-freeze",
+      "domain": "memory-governor-freeze",
       "status": "SCAFFOLDED"
     }
   ]
