@@ -1,0 +1,33 @@
+{
+  "schema": "CEREBRON_AGORA_EXTERNAL_PARTICIPANT_V1",
+  "status": "INGRESS_CONTRACT_ACTIVE_RUNTIME_ENDPOINT_CONFIGURED",
+  "purpose": "Allow an external ChatGPT or other authorized AI session to contribute to AGORA without pretending automatic independence or trust.",
+  "accepted_types": [
+    "CHATGPT_SESSION",
+    "AUTHORIZED_EXTERNAL_AI"
+  ],
+  "required": [
+    "participant_id",
+    "provider",
+    "model",
+    "session_id",
+    "message_id",
+    "content",
+    "content_sha256",
+    "timestamp",
+    "provenance"
+  ],
+  "admission": [
+    "AUTH_REQUIRED",
+    "SHA256_MATCH",
+    "PROVENANCE_PRESENT",
+    "NO_SECRET",
+    "QUARANTINE_FIRST",
+    "NO_AUTO_GOLD",
+    "NO_AUTO_TRAINING"
+  ],
+  "initial_state": "UNDER_TEST_EXTERNAL",
+  "independence_rule": "INDEPENDENCE_REQUIRES_DISTINCT_MODEL_DATA_TOOL_LINEAGE_AND_REPRODUCTION",
+  "memory_route": "cerebron-omega/cerebron-private-memory",
+  "promotion": "AUDIT -> COUNTER_AUDIT -> RED_TEAM -> REPRODUCTION -> F72 -> AFAH -> M4_GOLD_IF_JUSTIFIED"
+}
