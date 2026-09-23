@@ -473,3 +473,4 @@ def try_solve(prompt: str) -> dict:
         if result is not None:
             return {"handled": True, "status": "EXECUTED", **result}
     return {"handled": False, "status": "NOT_APPLICABLE"}
+# Semantic routing V2 CI trigger; no behavior change.
