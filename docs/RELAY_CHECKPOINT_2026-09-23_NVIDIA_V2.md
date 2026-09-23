@@ -54,3 +54,13 @@ Never simulate an agent/farm/tool execution. A run exists only if GitHub run/log
 - Newton+Warp lunar ballistic V2 SUCCESS: run 35868432958, artifact 10753332014, 4,096,000 updates, position error 0.003291378 m after 2s, velocity error 2.78598e-5 m/s, result SHA 2a1ba8a56265ee46d93156f7a3d0b17c7f14cf1644ac77d658c49211be71ff52. This is NOT native Newton contact evidence.
 - Newton API probe SUCCESS: run 35868628617; exposed Model, ModelBuilder, Contacts, CollisionPipeline-compatible API path and solvers.
 - Native Newton contact V3 created: code commit 764dafe0f0682be04c2dedb896a2d43b27f44f2a; workflow commit b6991ee0075903aaccd8524908884320eba3168b; run 35869399793 IN PROGRESS at this update. Verify before claim or Tool Fabric promotion.
+
+## AMD shared compute branch
+- OTF027 ROCm, OTF028 Lemonade, OTF029 GAIA, OTF030 Ryzen AI Software registered as shared engines; farm_count_effect=0. Master Tool Fabric commit d558739477a515a29b002be9f4e256bcdf3e29c9; farms registry commit 9dd9d844785d75932316779d2b54a6c592cf96f1.
+- AMD worker detector implemented fail-closed: code commit 7859830be84a8477dd9edc6ea9ccd828263742c5; workflow commit 154e934075a7bb97979935a23af33bd4147b1361.
+- Detector run 35872591064 SUCCESS, job 107220224030, artifact 10755144094. Observed on GitHub runner: ROCm=false, hipcc=false, AMD GPU=false, Lemonade=false, GAIA=false; therefore routing gpu_compute=false/local_ai=false/npu_inference=false. This is a successful negative capability test, NOT AMD compute execution. Profile SHA 01d20c1142858a32a51e9e2f4f037865fa7a5ad450b339f3d992a54d789764a1. Evidence commit 1db943d541e5ee69d40c2866b56ee708b1b75d6d.
+- AMD complimentary cloud opportunity recorded with ZERO-COST guard; application/access required, no connected AMD cloud worker yet. Commit 5aaedb8cb1a3a1cb086c63f2c9336f23c1422a47.
+- Do not mark OTF027-030 BENCHMARKED until their actual engines execute on compatible hardware/runtime.
+
+## Newton F139 latest
+- Native 100-grain lunar settling V4 SUCCESS: run 35870520172, job 107213076521, artifact 10755061421; 100 grains, 1200 steps, max rigid contacts 3301, z_min 0.0349977836 m, z_max 0.2449900657 m, horizontal spread 0.3120000064 m, 50 grains below 3r; result SHA 78a3313f6942cc9dfb3b8c3141af122a61eae6752c026b9048b0274312cb1d4a. Real Newton multi-rigid contact simulation, NOT calibrated lunar-regolith validation. Tool Fabric evidence commit 6c98d0f06cc350f01de17a9b9e3171df2db5dec3.
