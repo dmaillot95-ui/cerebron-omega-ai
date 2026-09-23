@@ -1,5 +1,5 @@
 {
-  "version": "2.03",
+  "version": "2.04",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -613,6 +613,18 @@
       "repo": "cerebron-farm-110-space-civilization-simulator",
       "domain": "space-civilization-system-simulation",
       "status": "SCAFFOLDED"
+    },
+    {
+      "id": 111,
+      "repo": "cerebron-farm-111-humanoid-head-face-simulator",
+      "domain": "humanoid-head-face-ocular-expression-mechatronics-simulation",
+      "status": "PLANNED_REPOSITORY_REQUIRED"
+    },
+    {
+      "id": 112,
+      "repo": "cerebron-farm-112-cognitive-thought-simulator",
+      "domain": "cognitive-process-working-memory-hypothesis-planning-audit-simulation",
+      "status": "PLANNED_REPOSITORY_REQUIRED"
     }
   ]
 }
