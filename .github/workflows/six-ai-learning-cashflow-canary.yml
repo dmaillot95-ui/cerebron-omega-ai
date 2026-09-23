@@ -1,0 +1,43 @@
+name: Six-AI Learning Cashflow Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'training/SIX_AI_LEARNING_CASHFLOW_V1.json'
+      - '.github/workflows/six-ai-learning-cashflow-canary.yml'
+permissions:
+  contents: read
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify curator and parametric truth boundary
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path("training/SIX_AI_LEARNING_CASHFLOW_V1.json"); c=json.loads(p.read_text())
+          fail=[]
+          if len(c["sources"])!=6: fail.append("sources_not_6")
+          if c["curator"]["owner"]!="AGORA_M5_COACH": fail.append("curator")
+          if not {"AGORA_M3_RED_TEAM","F72","AFAH"}.issubset(set(c["curator"]["checks_by"])): fail.append("checks")
+          forbidden=set(c["cerebron_parameter_scope"]["forbidden"])
+          required={"execution_count_truth","ATTEMPTED_SUCCEEDED_FAILED_truth","artifact_hash_truth","provenance_truth","F72_verdict_truth"}
+          if not required.issubset(forbidden): fail.append("truth_boundary")
+          chain=c["release_chain"]
+          for x in ["CURATOR_SELECT","RED_TEAM","F72","AFAH","DATASET_VERSIONED","TRAIN_ADAPTER","COLD_NO_RAG","TRANSFER_NO_RAG","ABLATION","REGRESSION","PROMOTE_OR_ROLLBACK"]:
+            if x not in chain: fail.append("missing_chain:"+x)
+          if "vector retrieval disabled" not in c["proof_of_parametric_learning"]: fail.append("no_cold_separation")
+          out={"schema":"six-ai-learning-cashflow-canary-v1","contract_sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+          "failures":fail,"result":"PASS" if not fail else "FAIL","claim_scope":"Static policy validation only; no adapter training or parameter update performed."}
+          Path("out").mkdir(exist_ok=True); Path("out/cashflow-canary.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: six-ai-learning-cashflow-canary
+          path: out/cashflow-canary.json
+          retention-days: 14
