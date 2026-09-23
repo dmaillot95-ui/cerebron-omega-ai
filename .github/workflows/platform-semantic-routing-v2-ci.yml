@@ -1,0 +1,24 @@
+name: CEREBRON Semantic Tool Routing V2 CI
+on:
+  push:
+    branches: ['feat/cerebron-semantic-tool-routing-v2']
+    paths:
+      - 'platform/specialist_tools.py'
+      - 'platform/tests/test_specialist_tools.py'
+      - '.github/workflows/platform-semantic-routing-v2-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile routing code
+        run: python -m compileall -q platform/specialist_tools.py platform/tests/test_specialist_tools.py
+      - name: Run specialist routing tests
+        run: python -m unittest platform.tests.test_specialist_tools -v
