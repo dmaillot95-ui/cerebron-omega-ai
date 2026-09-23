@@ -1,0 +1,32 @@
+name: METRION Frozen Acceptance V31
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python benchmarks/occ06c_solar_ablation_v30.py
+      - run: python runtime/frozen_acceptance_v31.py
+      - name: F72 pre-review gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/frozen_acceptance_v31.json"))
+          assert d["threshold_status"]=="FROZEN_PRE_RESULT"
+          assert "PASS_IS_NOT_CERTIFICATION" in d["epistemic"]
+          if d["decision"]=="ACCEPTANCE_PASS_CANDIDATE":
+              assert d["f72"]=="REVIEW_REQUIRED" and all(d["checks"].values())
+          else:
+              assert d["f72"]=="BLOCKED"
+          print("FROZEN_ACCEPTANCE_V31",d["decision"],d["f72"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frozen-acceptance-v31
+          path: artifacts/
+          retention-days: 30
