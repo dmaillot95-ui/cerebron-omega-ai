@@ -1,0 +1,47 @@
+name: CEREBRON Semantic Routing V3 Regression
+on:
+  push:
+    branches: ['feat/cerebron-semantic-tool-routing-v2']
+    paths:
+      - 'platform/cold60_v3_regression.py'
+      - 'platform/specialist_tools.py'
+      - 'platform/coalition_tools.py'
+      - '.github/workflows/platform-semantic-v3-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CEREBRON_ENABLE_LOCAL_GENERATIVE: '1'
+      CEREBRON_TRANSFER_SEED: '35903773988'
+      PYTHONPATH: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute seen V3 regression set
+        run: python platform/cold60_v3_regression.py
+      - name: Verify regression artifacts
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          r=json.loads((root/"cold60-v3-transfer-result.json").read_text())
+          assert r["adaptive"]["max_score"]==60
+          assert len(r["result_sha256"])==64
+          print("V3_REGRESSION_VERIFIED",r["baseline"]["score"],r["adaptive"]["score"],r["adaptive"]["tool_handled_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-semantic-v3-regression
+          path: |
+            platform/artifacts/cold60-v3-transfer-dataset.json
+            platform/artifacts/cold60-v3-transfer-result.json
