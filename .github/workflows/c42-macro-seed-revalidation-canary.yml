@@ -1,0 +1,40 @@
+name: C42 Macro-Seed Revalidation Canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'training/C42_MACRO_SEED_REVALIDATION_V1.json'
+      - 'training/C42_MACRO_SEED_REGISTRY_V1.json'
+      - '.github/workflows/c42-macro-seed-revalidation-canary.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify recovered corpus and hard gates
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          r=Path("training/C42_MACRO_SEED_REGISTRY_V1.json"); c=Path("training/C42_MACRO_SEED_REVALIDATION_V1.json")
+          R=json.loads(r.read_text()); C=json.loads(c.read_text()); f=[]
+          if len(R["mother_seeds"])!=3: f.append("mother_seed_count")
+          if len(R["root_macrograins"])!=12: f.append("macrograin_count")
+          if R["parameter_policy"]["training_released"] is not False: f.append("premature_training")
+          req={"AUDIT","COUNTER_AUDIT","F72","AFAH","CURRICULUM_ELIGIBILITY"}
+          if not req.issubset(set(C["stages"])): f.append("missing_gates")
+          if "REVALIDATED" not in C["decisions"]: f.append("decision")
+          out={"schema":"c42-macro-seed-revalidation-canary-v1","registry_sha256":hashlib.sha256(r.read_bytes()).hexdigest(),
+          "contract_sha256":hashlib.sha256(c.read_bytes()).hexdigest(),"items_checked":15,"failures":f,
+          "result":"PASS" if not f else "FAIL","claim_scope":"Structural revalidation contract test only; no macro-seed is scientifically revalidated and no training is released."}
+          Path("out").mkdir(exist_ok=True);Path("out/c42-revalidation-canary.json").write_text(json.dumps(out,indent=2)+"\n");print(json.dumps(out))
+          if f: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: c42-macro-seed-revalidation-canary
+          path: out/c42-revalidation-canary.json
+          retention-days: 14
