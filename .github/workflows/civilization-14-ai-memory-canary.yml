@@ -1,0 +1,82 @@
+name: CEREBRON Civilization 14-AI Memory Canary
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - '.github/workflows/civilization-14-ai-memory-canary.yml'
+      - 'config/cerebron-civilization-memory-bindings-v1.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Verify isolated namespaces for all current AI
+        run: |
+          mkdir -p receipts/civilization
+          python - <<'PY'
+          import os,json,hashlib,tempfile,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          ai=[
+            "CEREBRON","SIGMA","SAPHEA","SPIRALION","ETHERION","HYPERION",
+            "ASTRION","METRION","AFAH","AELYS","ELYRA","SAPHEA_MICRO",
+            "ELYSION","ELYSIUM"
+          ]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)):
+              raise SystemExit("HF_REPO_NOT_PRIVATE")
+
+          rows=[]
+          for name in ai:
+              payload={
+                  "schema":"CEREBRON_AI_MEMORY_NAMESPACE_CANARY_V1",
+                  "ai_id":name,
+                  "namespace":f"native-ai/{name}",
+                  "memory_class":"M7",
+                  "content":"synthetic namespace canary; no training data",
+                  "m6_training":"DENY",
+                  "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat()
+              }
+              raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+              digest=hashlib.sha256(raw).hexdigest()
+              with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+                  t.write(raw); src=t.name
+              path=f"native-ai/{name}/M7/NAMESPACE-CANARY-V1.json"
+              api.upload_file(path_or_fileobj=src,path_in_repo=path,repo_id=repo,repo_type="model",commit_message=f"{name} namespace canary")
+              dst=hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=token,force_download=True)
+              got=Path(dst).read_bytes()
+              if hashlib.sha256(got).hexdigest()!=digest:
+                  raise SystemExit(f"{name}_SHA_MISMATCH")
+              rows.append({"ai_id":name,"status":"PASS","object_path":path,"sha256":digest})
+
+          receipt={
+              "schema":"CEREBRON_CIVILIZATION_14_AI_MEMORY_CANARY_V1",
+              "status":"PASS",
+              "repo":repo,
+              "private":True,
+              "ai_count":len(rows),
+              "rows":rows,
+              "claim_scope":"Authenticated private write/read/SHA per AI namespace; no neural-learning claim."
+          }
+          Path("receipts/civilization/14-ai-memory-canary.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: civilization-14-ai-memory-canary
+          path: receipts/civilization/14-ai-memory-canary.json
+          if-no-files-found: error
