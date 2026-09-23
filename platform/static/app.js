@@ -71,9 +71,20 @@ async function pollMission(){
   $('#eventLog').innerHTML=m.events.map(ev=>`<p><time>${new Date(ev.time*1000).toLocaleTimeString('fr-FR')}</time> ${esc(ev.message)}</p>`).join(''); $('#eventLog').scrollTop=$('#eventLog').scrollHeight;
   if(['COMPLETED','FAILED'].includes(m.status)){
     clearInterval(poller);
-    const result=m.result||{}; const calc=result.calculation?.results;
-    const summary=m.status==='COMPLETED'?(calc?`Mission terminée. Calcul réel : force ${calc.traction_force_n} N, puissance électrique ${calc.electrical_power_w} W. Niveau E2, pas une validation physique.`:'Mission routée; aucun modèle génératif n’est connecté.'):`Mission échouée : ${m.error}`;
-    $('#conversation').insertAdjacentHTML('beforeend',`<article class="message system-msg"><span>CÉRÉBRON · ${esc(m.status)}</span><p>${esc(summary)}</p>${result.artifact?`<p><a href="${result.artifact.url}">Télécharger l’artifact</a> · SHA ${esc(result.artifact.sha.slice(0,16))}…</p>`:''}</article>`);
+    const result=m.result||{}; const calc=result.calculation?.results; const coalition=result.coalition;
+    let summary;
+    if(m.status!=='COMPLETED'){
+      summary=`Mission échouée : ${m.error}`;
+    }else if(calc){
+      summary=`Mission terminée. Calcul réel : force ${calc.traction_force_n} N, puissance électrique ${calc.electrical_power_w} W. Niveau E2, pas une validation physique.`;
+    }else if(result.answer){
+      const units=(coalition?.plan?.selected_units||[]).join(', ')||'—';
+      summary=`${result.answer} · Coalition: ${units} · Claim ceiling: ${result.claim_ceiling||'UNSPECIFIED'}.`;
+    }else{
+      summary='Mission routée sans sortie exécutable vérifiée.';
+    }
+    const artifact=result.artifact||coalition?.artifact;
+    $('#conversation').insertAdjacentHTML('beforeend',`<article class="message system-msg"><span>CÉRÉBRON · ${esc(m.status)}</span><p>${esc(summary)}</p>${artifact?`<p><a href="${artifact.url}">Télécharger l’artifact</a> · SHA ${esc(artifact.sha.slice(0,16))}…</p>`:''}</article>`);
     $('#conversation').scrollTop=$('#conversation').scrollHeight; await Promise.all([loadAgora(),loadEvidence()]);
   }
 }
