@@ -1,0 +1,50 @@
+{
+  "schema": "AGORA_RED_VALIDATED_V1",
+  "record_id": "RED-COLD60-V3-TRANSFER-001",
+  "source_ai": "AFAH_RED_TEAM",
+  "task_id": "COLD60_V3_TRANSFER",
+  "class": "RED",
+  "domain": "orchestration_tool_routing",
+  "state": "RED_VALIDATED",
+  "failure_verified": true,
+  "failure_mode": "SURFACE_TRIGGER_BRITTLENESS",
+  "cause": "The deterministic specialist layer recognized V2 prompt markers but failed to recognize semantically equivalent V3 reformulations. All 60 V3 tasks bypassed specialist tools.",
+  "evidence": {
+    "branch": "feat/cerebron-cold60-redteam-v3",
+    "commit": "eaf87cf87b5aa8f0de3a7cf35c1874dd18511fec",
+    "run_id": 35903773988,
+    "job_id": 107326190245,
+    "artifact_id": 10770645736,
+    "artifact_digest": "sha256:27a37328a6a9e09b27e2d733aa20c77b3f2c26787f6a6264bc68141f6fc9585e",
+    "result_sha256": "9c01b869f09d265725517a219a2b5175c3ebbd76d34c57cb331337336a816ca8",
+    "baseline_score": 25,
+    "adaptive_score": 26,
+    "tool_handled_count": 0,
+    "domains_improved": [
+      "code"
+    ],
+    "criterion_4_of_6": false,
+    "transfer_gap_from_v2": 0.5666666666666667
+  },
+  "corrective_signal": {
+    "design_change": "Replace exact surface-trigger routing with semantic tool contracts and robust argument extraction; keep deterministic execution after selection.",
+    "regression_rule": "V3 may be reused only as a regression set after repair, never again as a cold transfer set.",
+    "next_cold_gate": "Create a new runtime-seeded V4 holdout whose exact prompts and answers are not used for router development."
+  },
+  "anti_error_rules": [
+    "TEMPLATE_MATCHING_NE_TRANSFER",
+    "TOOL_BENCHMARK_SUCCESS_NE_GENERALIZATION",
+    "SEEN_REDTEAM_NE_COLD_TEST",
+    "CLAIM_LE_EVIDENCE"
+  ],
+  "benchmark_exclusion": {
+    "v2": "deny_training",
+    "v3": "deny_training_and_seen_after_failure",
+    "v4": "future_sealed_holdout"
+  },
+  "training_eligible": false,
+  "gold_eligible": false,
+  "red_training_candidate": true,
+  "weights_changed": false,
+  "created_at": "2026-09-23T20:41:00+02:00"
+}
