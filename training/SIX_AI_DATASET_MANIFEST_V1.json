@@ -1,0 +1,56 @@
+{
+  "schema": "cerebron-six-ai-dataset-manifest-v1",
+  "version": "1.0.0",
+  "status": "EMPTY_LOCKED_AWAITING_VALIDATED_RECORDS",
+  "authority": "AFAH_WITH_F72_GATE",
+  "contract": "training/SIX_AI_QUARANTINE_DATASET_GATE_V1.json",
+  "base_model": {
+    "model_id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "immutable_g0": true
+  },
+  "target_ais": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "AFAH",
+    "CEREBRON"
+  ],
+  "eligible_states": [
+    "GOLD_VALIDATED",
+    "RED_VALIDATED"
+  ],
+  "records": [],
+  "splits": {
+    "TRAIN": [],
+    "VALIDATION": [],
+    "BLIND_TEST": [],
+    "TRANSFER": [],
+    "ADVERSARIAL": []
+  },
+  "release_gate": {
+    "training_released": false,
+    "reason": "No validated records have yet been admitted through quarantine, audit, counter-audit and F72.",
+    "requires": [
+      "NONEMPTY_VALIDATED_RECORD_SET",
+      "ALL_RECORD_SHA256_PRESENT",
+      "PROVENANCE_COMPLETE",
+      "DEPENDENCY_FINGERPRINT_COMPLETE",
+      "AUDIT_RECEIPTS_COMPLETE",
+      "COUNTER_AUDIT_RECEIPTS_COMPLETE",
+      "F72_RECEIPTS_COMPLETE",
+      "DEDUP_PASS",
+      "NO_BLIND_TEST_LEAKAGE",
+      "SPLIT_MANIFEST_HASHED"
+    ]
+  },
+  "invariants": [
+    "EMPTY_DATASET_MUST_NOT_TRAIN",
+    "RAW_INBOX_NEVER_TRAINING_TRUTH",
+    "BLIND_TEST_IMMUTABLE",
+    "G0_IMMUTABLE",
+    "NO_AUTO_PROMOTION"
+  ],
+  "note": "This manifest establishes the versioned six-AI dataset boundary. Empty is intentional until real validated records exist."
+}
