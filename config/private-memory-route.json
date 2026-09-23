@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-private-memory-route-v1",
   "version": "1.0",
-  "status": "HOLD_AWAITING_PRIVATE_AUTH",
+  "status": "CONNECTED_VERIFIED_PRIVATE_HF",
   "authority": "AFAH",
   "objective": "Keep private colony learning and parametric artifacts outside public GitHub while retaining non-sensitive routing metadata.",
   "routes": {
@@ -27,14 +27,18 @@
     },
     "private_data_plane": {
       "preferred_store": "Hugging Face private repository",
-      "auth": "REQUIRED",
+      "auth": "VERIFIED",
       "contents": [
         "private validated memory payloads",
         "private datasets when approved",
         "LoRA/adapters",
-        "derived weights"
+        "derived weights",
+        "all-core-role validated memories",
+        "AGORA quarantined external contributions"
       ],
-      "availability": "NOT_VERIFIED"
+      "availability": "CONNECTED_VERIFIED",
+      "repo_id": "cerebron-omega/cerebron-private-memory",
+      "sigma_repo_id": "cerebron-omega/cerebron-sigma-memory"
     }
   },
   "envelope": {
@@ -69,5 +73,5 @@
   ],
   "failure_rule": "If private authentication/write/read is unavailable, keep payload local/ephemeral and do not publish it.",
   "security": "A public pointer must not reveal sensitive content through names, descriptions, metadata, URLs, or embedded parameters.",
-  "next_gate": "AUTHENTICATED_PRIVATE_HF_WRITE_READ_DELETE_OR_RETAIN_TEST"
+  "next_gate": "KEEP_CANARIES_GREEN_AND_MIGRATE_BULK_MEMORY_OUT_OF_GITHUB"
 }
