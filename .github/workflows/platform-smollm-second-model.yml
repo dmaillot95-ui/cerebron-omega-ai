@@ -1,0 +1,33 @@
+name: CEREBRON SmolLM2 Second Model Benchmark
+on:
+  push:
+    branches: ['feat/smollm-second-model']
+    paths:
+      - 'platform/second_model_benchmark_v2.py'
+      - '.github/workflows/platform-smollm-second-model.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0
+      - name: Execute identical second-model benchmark
+        run: |
+          python platform/second_model_benchmark_v2.py \
+            --model-id HuggingFaceTB/SmolLM2-1.7B-Instruct \
+            --revision 31b70e2e869a7173562077fd711b654946d38674
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-smollm-second-model-benchmark
+          path: platform/artifacts/smollm-second-model-benchmark.json
