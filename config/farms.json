@@ -618,13 +618,13 @@
       "id": 111,
       "repo": "cerebron-farm-111-humanoid-head-face-simulator",
       "domain": "humanoid-head-face-ocular-expression-mechatronics-simulation",
-      "status": "PLANNED_REPOSITORY_REQUIRED"
+      "status": "SCAFFOLDED"
     },
     {
       "id": 112,
       "repo": "cerebron-farm-112-cognitive-thought-simulator",
       "domain": "cognitive-process-working-memory-hypothesis-planning-audit-simulation",
-      "status": "PLANNED_REPOSITORY_REQUIRED"
+      "status": "SCAFFOLDED"
     }
   ]
 }
