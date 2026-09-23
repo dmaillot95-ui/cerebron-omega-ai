@@ -64,7 +64,7 @@ def main():
     control=json.loads((ROOT/"config"/"platform-control-plane-v1.json").read_text())
     gates.append(gate(
         "control_plane_invariants",
-        op["status"]=="OPERATIONAL_SCOPED_LOCAL"
+        op["status"] in {"OPERATIONAL_SCOPED_LOCAL","OPERATIONAL_SCOPED_LOCAL_VERIFIED"}
         and control["farm_count_effect"]==0
         and control["farm_cap"]==144
         and op["public_remote_deployment"]=="BLOCKED"
