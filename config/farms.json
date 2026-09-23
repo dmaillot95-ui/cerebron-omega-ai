@@ -1,5 +1,5 @@
 {
-  "version": "2.02",
+  "version": "2.03",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -552,6 +552,66 @@
       "id": 100,
       "repo": "cerebron-farm-100-grand-challenge-arena",
       "domain": "grand-challenge-generalization-arena",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 101,
+      "repo": "cerebron-farm-101-space-world-core",
+      "domain": "space-world-core",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 102,
+      "repo": "cerebron-farm-102-space-architect-construction",
+      "domain": "space-architecture-construction-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 103,
+      "repo": "cerebron-farm-103-lunar-city-simulator",
+      "domain": "lunar-city-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 104,
+      "repo": "cerebron-farm-104-mars-city-simulator",
+      "domain": "mars-city-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 105,
+      "repo": "cerebron-farm-105-space-factory-simulator",
+      "domain": "space-factory-industrial-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 106,
+      "repo": "cerebron-farm-106-space-energy-nuclear-digital-twin",
+      "domain": "space-energy-nuclear-system-digital-twin",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 107,
+      "repo": "cerebron-farm-107-space-robot-workforce",
+      "domain": "space-robot-workforce-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 108,
+      "repo": "cerebron-farm-108-isru-mining-world",
+      "domain": "isru-mining-resource-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 109,
+      "repo": "cerebron-farm-109-space-logistics-world",
+      "domain": "space-logistics-supply-chain-simulation",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 110,
+      "repo": "cerebron-farm-110-space-civilization-simulator",
+      "domain": "space-civilization-system-simulation",
       "status": "SCAFFOLDED"
     }
   ]
