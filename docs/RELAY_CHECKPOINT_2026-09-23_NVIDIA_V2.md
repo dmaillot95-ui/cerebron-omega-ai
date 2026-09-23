@@ -296,3 +296,23 @@ END UPDATE VERIFIED
 4. Build the 60-mission cold benchmark and ablations before claiming coalition superiority.
 5. First LoRA/QLoRA only after a sufficient GOLD dataset exists; one scoped policy lesson is not enough by itself.
 6. Any future neural-learning claim still requires changed weights/adapter artifact + SHA + M6 before/after + regression test + rollback path.
+
+
+### Adaptive SAPHEA MICRO coalition V1
+- Registry/coalition commit: 7b993bafb3f9eaf40be0cc4c3d680f0d4c2dac0a on feat/cerebron-ai-platform-mvp.
+- Registry config: config/saphea-micro-v1.json.
+- Exactly 20 units are registered.
+- Seven initial implemented units: SM00 router/planning; SM02 math/logic/proof; SM05 code/tests/calculation; SM08 physics/engineering/simulation; SM11 research/memory; SM15 reproduction/audit/Red Team; SM18 fusion.
+- Remaining 13 units are PLANNED_UNAVAILABLE, not simulated.
+- SM02/SM05/SM08 share Qwen/Qwen2.5-0.5B-Instruct and MUST NOT be counted as independent models or independent evidence.
+- Platform structural CI after coalition commit: run 35901431755 = SUCCESS.
+- Coalition E2E workflow commit: b6df2c20e3e9975a2f983b969dff62e0150aad6a.
+- Real coalition E2E run 35901503667 = SUCCESS; job 107318582271.
+- Actual selected coalition for the math pilot: [SM00, SM02, SM15, SM18], not 20 units.
+- Router SM00 executed on CPU; SM02 executed the pinned Qwen model; SM15 deterministic Red Team executed; SM18 deterministic fusion executed.
+- Qwen generation output SHA: dbe505f296432b8dc69b83f42182cac726078fe5448a41d9f6cf5419d8673883.
+- Coalition result file SHA256: 36ed756fe1504b10c044c5af100dca09abfde2c083b72d23badf4282cb1a228e.
+- Workflow artifact 10769052680; artifact digest sha256:6f32dbf448a5c0d47b69520921828641e1b52fe3ba875f7f4b0bd02c7a7fc15c.
+- The coalition correctly reports independent_model_count=1 and warns that shared-base role calls are correlated.
+- Claim ceiling remains MODEL_OUTPUT_UNVERIFIED until separate evidence tasks validate the content.
+- This proves a real Search→Generate→Verify→Fusion path with minimal coalition selection; it does NOT yet prove coalition superiority over the best single model.
