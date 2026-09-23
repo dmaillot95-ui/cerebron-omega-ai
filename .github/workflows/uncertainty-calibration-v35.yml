@@ -1,0 +1,36 @@
+name: METRION Uncertainty Calibration V35
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "external/calibration/uncertainty_observations.csv"
+      - "runtime/uncertainty_calibration_v35.py"
+permissions:
+  contents: read
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python runtime/uncertainty_calibration_v35.py
+      - name: G01 integrity gate
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("artifacts/uncertainty_calibration_v35.json"))
+          assert d["g01_status"] in {"OPEN","REVIEW_REQUIRED"}
+          assert "G01_NOT_AUTO_CLOSED" in d["epistemic"]
+          if d["ready"]:
+              assert d["decision"]=="CALIBRATION_CANDIDATE_READY_FOR_REVIEW"
+              assert all(v["n"]>=5 for v in d["parameters"].values())
+          else:
+              assert d["decision"].startswith("BLOCKED_")
+          print("UNCERTAINTY_V35",d["decision"],d["g01_status"],d["sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uncertainty-calibration-v35
+          path: artifacts/uncertainty_calibration_v35.json
+          retention-days: 30
