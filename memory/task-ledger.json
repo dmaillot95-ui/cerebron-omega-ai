@@ -144,14 +144,26 @@
     {
       "id": "C80-M10",
       "title": "AGORA packet contract and semantic audit gate",
-      "status": "AUDIT_RUN_QUEUED",
+      "status": "AUDIT_IN_PROGRESS",
       "objective": "Validate five executed role-diverse receipts, quantify output diversity, preserve shared-lineage correlation, then require audit/counter-audit before any GOLD or training promotion.",
       "run_id": 36015400305,
       "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
       "auditors": [
         "ELYSIUM-SMOL-AUDITOR",
         "OMEGA-QWEN-COUNTERAUDITOR"
-      ]
+      ],
+      "active_auditor": "OMEGA-QWEN-COUNTERAUDITOR",
+      "queued_auditor": "ELYSIUM-SMOL-AUDITOR",
+      "gold_gate": "DENY_PENDING_AUDIT",
+      "scaling_5_to_10": "HOLD"
+    },
+    {
+      "id": "C80-M11",
+      "title": "Prompt repair S5 V2",
+      "status": "BLOCKED_BY_M10",
+      "contract": "config/role-diverse-prompt-contract-v2.json",
+      "plan": "config/m11-prompt-repair-plan-v1.json",
+      "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling."
     }
   ],
   "updated_at": "2026-09-24",
