@@ -71,7 +71,14 @@
     "DELTA",
     "NEXUS"
   ],
-  "planned_role_policy": "PLANNED_NOT_ACTIVE_UNTIL_REAL_PROJECT_OR_REPOSITORY_EXISTS_AND_MEMORY_CANARY_PASSES",
+  "planned_role_policy": "REPOSITORY_PRESENT_BUT_NOT_ACTIVE_UNTIL_MEMORY_CANARY_AND_MODEL_GATES_PASS",
   "memory_binding_manifest": "config/cerebron-civilization-memory-bindings-v1.json",
-  "hf_agent_pool": "config/hf-20-agent-pool-v1.json"
+  "hf_agent_pool": "config/hf-20-agent-pool-v1.json",
+  "planned_farms": {
+    "SAELION": 147,
+    "ALPHA": 148,
+    "OMEGA": 149,
+    "DELTA": 150,
+    "NEXUS": 151
+  }
 }
