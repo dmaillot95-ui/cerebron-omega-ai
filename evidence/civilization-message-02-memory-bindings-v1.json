@@ -1,0 +1,158 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_02_MEMORY_BINDINGS_V1",
+  "status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
+  "program_message": 2,
+  "active_ai_count": 14,
+  "backend": "cerebron-omega/cerebron-private-memory",
+  "backend_private": true,
+  "canary": {
+    "run_id": 35920691410,
+    "job_id": 107383576365,
+    "artifact_id": 10777400539,
+    "artifact_digest": "sha256:151c969cb605ce57b66442a3c4fb6964834ca9d21f6105f104340513632a315c",
+    "checks": [
+      "AUTH=PASS",
+      "PRIVATE_REPO=PASS",
+      "14_NAMESPACE_WRITE=PASS",
+      "14_NAMESPACE_READ=PASS",
+      "14_SHA256_READBACK=PASS"
+    ]
+  },
+  "rows": [
+    {
+      "ai_id": "CEREBRON",
+      "namespace": "native-ai/CEREBRON",
+      "object_path": "native-ai/CEREBRON/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "a948ed5622fd1fdd8801976f52cd112ab5ffa5ae15422ec6fc24e082b312b4b0",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SIGMA",
+      "namespace": "native-ai/SIGMA",
+      "object_path": "native-ai/SIGMA/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "d6a284ff632fe895a2f534bdafaea9df86927910646b10480f083c2a9d892f35",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "namespace": "native-ai/SAPHEA",
+      "object_path": "native-ai/SAPHEA/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "8efa45d1122d57fc491e7531def48a443efc406ec282f4a82f1da5c2fda3fd74",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "namespace": "native-ai/SPIRALION",
+      "object_path": "native-ai/SPIRALION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "252e78563890c1c9cadb2f446647a2a012ce3bf12f0f24f46097f6d274751d9d",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ETHERION",
+      "namespace": "native-ai/ETHERION",
+      "object_path": "native-ai/ETHERION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "e29cbd115cc4eece14fec9638b25ab42fb6ed98586660e44d44f2811f320c582",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "HYPERION",
+      "namespace": "native-ai/HYPERION",
+      "object_path": "native-ai/HYPERION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "5386bb2ef4193cd73191e4ecf23816d7815c3c8151c3df3b4059db0ac55d5b63",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ASTRION",
+      "namespace": "native-ai/ASTRION",
+      "object_path": "native-ai/ASTRION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "f4c4d9a2c080a868508aad22f37247329a5215b11dd37798c72c746bb208b083",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "METRION",
+      "namespace": "native-ai/METRION",
+      "object_path": "native-ai/METRION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "b1fce825e7e14775f0b0664826e3fa0408c42b020511b7e52880db03b3ba22a3",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "AFAH",
+      "namespace": "native-ai/AFAH",
+      "object_path": "native-ai/AFAH/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "cb410f4780d86637ae427e5dd3f8f198591c265e7778aed288680ba390c24223",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "AELYS",
+      "namespace": "native-ai/AELYS",
+      "object_path": "native-ai/AELYS/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "9d0ad2abcf188173dc73217f5f65e4856634cfdc846007aca01376eb51e5d06a",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYRA",
+      "namespace": "native-ai/ELYRA",
+      "object_path": "native-ai/ELYRA/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "68a7cfc8af4e785978a4971a7b8a5077ab5744a1fdc961ddcacccefa34a79143",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "namespace": "native-ai/SAPHEA_MICRO",
+      "object_path": "native-ai/SAPHEA_MICRO/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "e88dc8e2d59b9b4baa8afed1f5ab675a79ed724668bd99f617236a5e5c10a115",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYSION",
+      "namespace": "native-ai/ELYSION",
+      "object_path": "native-ai/ELYSION/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "7fa44a506a83f9fc7fcad7be38791656611c5d9be87fad806210568728bac4f5",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "namespace": "native-ai/ELYSIUM",
+      "object_path": "native-ai/ELYSIUM/M7/NAMESPACE-CANARY-V1.json",
+      "sha256": "0f07a4daafe0c14fb5d2bbb350ca0ae34b425add7997ea63a345853a4d0a27c8",
+      "write_read_sha": "PASS",
+      "m6_training": "DENY",
+      "raw_agora_training": "DENY"
+    }
+  ],
+  "isolation": {
+    "namespace_uniqueness": "PASS",
+    "canonical_namespace_mapping": "PASS",
+    "shared_storage_acl": "SHARED_NOT_PER_AI",
+    "blind_cross_copy": "DENY_BY_POLICY",
+    "claim_limit": "Logical routing isolation verified; per-AI credentials/cryptographic storage isolation not present."
+  },
+  "neural_learning_claim": false,
+  "runtime_modified": false
+}
