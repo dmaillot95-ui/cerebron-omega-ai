@@ -153,7 +153,7 @@
     {
       "id": "C80-M10",
       "title": "AGORA packet contract and semantic audit gate",
-      "status": "PARTIAL_AUDIT_ONE_COMPLETE_ONE_RUNNING",
+      "status": "COMPLETE_HOLD_REPAIR_REQUIRED",
       "objective": "Validate five executed role-diverse receipts, quantify output diversity, preserve shared-lineage correlation, then require audit/counter-audit before any GOLD or training promotion.",
       "run_id": 36015400305,
       "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
@@ -164,19 +164,25 @@
       "active_auditor": "OMEGA-QWEN-COUNTERAUDITOR",
       "queued_auditor": "ELYSIUM-SMOL-AUDITOR",
       "gold_gate": "DENY",
-      "scaling_5_to_10": "HOLD",
+      "scaling_5_to_10": "DENY_PENDING_PROMPT_REPAIR",
       "active_auditors": [
         "OMEGA-QWEN-COUNTERAUDITOR",
         "ELYSIUM-SMOL-AUDITOR"
       ],
       "completed_auditor": "ELYSIUM-SMOL-AUDITOR",
       "completed_auditor_classification": "AUDITOR_OVERPERMISSIVE",
-      "partial_receipt": "receipts/agora/m10-partial-elysium-overpermissive-36015400305.json"
+      "partial_receipt": "receipts/agora/m10-partial-elysium-overpermissive-36015400305.json",
+      "run_conclusion": "cancelled_but_decide_job_success",
+      "decision_receipt": "receipts/agora/m10-semantic-audit-36015400305.json",
+      "decision": "HOLD",
+      "gold": "DENY",
+      "auditors_completed": 1,
+      "deterministic_gate": "PASS_HOLD"
     },
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "PREFLIGHT_PASS_EXECUTION_BLOCKED_BY_M10",
+      "status": "UNBLOCKED_READY_TO_TRIGGER",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -186,7 +192,11 @@
       "problem_sha256": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230",
       "semantic_baseline": "receipts/agora/m09-semantic-baseline-v1.json",
       "execution_triggered": false,
-      "preflight_conclusion": "success"
+      "preflight_conclusion": "success",
+      "blocked_by": null,
+      "quality_policy": "config/quality-first-scale-policy-v1.json",
+      "required_pass_number": 1,
+      "scale_requires_total_consecutive_passes": 2
     },
     {
       "id": "C80-NU-F162",
