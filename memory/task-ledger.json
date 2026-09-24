@@ -3,44 +3,28 @@
   "version": 2,
   "tasks": [
     {
-      "id": "M01",
-      "status": "IN_PROGRESS",
-      "goal": "Freeze 8-agent topology, 20-agent burst policy, HF scoped memory truth, crystal preservation and successor handoff."
+      "id": "C80-M01",
+      "title": "Crystal baseline",
+      "status": "COMPLETE",
+      "checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
+      "receipts": [
+        35980026231,
+        35980025335,
+        35980025191
+      ]
     },
     {
-      "id": "M02",
-      "status": "PENDING",
-      "goal": "Audit all Greek/native repositories and guards; reconcile F162 NU availability."
+      "id": "C80-M02",
+      "title": "Universal successor handoff",
+      "status": "GUARD_PENDING",
+      "checkpoint": "checkpoints/CEREBRON_80_M02_SUCCESSOR_HANDOFF.json",
+      "guard_run": 35980515906
     },
     {
-      "id": "M03",
-      "status": "PENDING",
-      "goal": "Generate per-AI eight-agent manifests without claiming execution."
-    },
-    {
-      "id": "M04",
-      "status": "PENDING",
-      "goal": "Design deterministic eight-agent local canary and evidence receipt schema."
-    },
-    {
-      "id": "M05",
-      "status": "PENDING",
-      "goal": "Prove representative HF namespace write/read/SHA canaries without destructive overwrite."
-    },
-    {
-      "id": "M06",
-      "status": "PENDING",
-      "goal": "Reconcile F66/F74 opaque pointers with HF private objects."
-    },
-    {
-      "id": "M07",
-      "status": "PENDING",
-      "goal": "AGORA/FORUM successor handoff rehearsal and rollback verification."
-    },
-    {
-      "id": "M08",
-      "status": "PENDING",
-      "goal": "Freeze Phase-1 checkpoint and advance to installation/execution gates."
+      "id": "C80-M03",
+      "title": "All-AI HF memory verification matrix",
+      "status": "NEXT",
+      "objective": "Map per-AI or representative-family HF private write/read/SHA evidence and generate safe rollout gates."
     }
   ],
   "updated_at": "2026-09-24",
@@ -53,5 +37,7 @@
     "checkpoint_contract": "config/crystal-preservation-v1.json",
     "next_phase": "M01-M08_CRYSTAL_BASELINE_AND_MEMORY",
     "runtime_changed": false
-  }
+  },
+  "resume_rule": "Read latest COMPLETE checkpoint, then resume first non-COMPLETE task; never restart from zero.",
+  "crystal_rule": "Append/version only; preserve parent SHA, rollback and negative evidence."
 }
