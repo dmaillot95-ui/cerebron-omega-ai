@@ -1,0 +1,266 @@
+{
+  "schema": "CEREBRON_GREEK_AGORA_TRAINING_V1",
+  "status": "DESIGNED_AND_REGISTERED_RUNTIME_UNCHANGED",
+  "runtime_changed": false,
+  "objective": "All real CEREBRON AIs participate in AGORA/forum learning loops while preserving evidence, lineage and role specialization.",
+  "greek_members": [
+    {
+      "id": 148,
+      "name": "ALPHA",
+      "status": "SCAFFOLDED_NOT_TRAINED"
+    },
+    {
+      "id": 152,
+      "name": "BETA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 153,
+      "name": "GAMMA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 150,
+      "name": "DELTA",
+      "status": "SCAFFOLDED_NOT_TRAINED"
+    },
+    {
+      "id": 154,
+      "name": "EPSILON",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 155,
+      "name": "ZETA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 156,
+      "name": "ETA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 157,
+      "name": "THETA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 158,
+      "name": "IOTA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 159,
+      "name": "KAPPA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 160,
+      "name": "LAMBDA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 161,
+      "name": "MU",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 162,
+      "name": "NU",
+      "status": "UNAVAILABLE_REPOSITORY_MISSING"
+    },
+    {
+      "id": 163,
+      "name": "XI",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 164,
+      "name": "OMICRON",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 165,
+      "name": "PI",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 166,
+      "name": "RHO",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 167,
+      "name": "SIGMA",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 168,
+      "name": "TAU",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 169,
+      "name": "UPSILON",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 170,
+      "name": "PHI",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 171,
+      "name": "CHI",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 172,
+      "name": "PSI",
+      "status": "SCAFFOLDED"
+    },
+    {
+      "id": 149,
+      "name": "OMEGA",
+      "status": "SCAFFOLDED_NOT_TRAINED"
+    }
+  ],
+  "existing_ai_members": [
+    "CEREBRON",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO",
+    "ELYSION",
+    "ELYSIUM",
+    "SAELION",
+    "NEXUS"
+  ],
+  "agora": {
+    "membership": "ALL_REAL_AVAILABLE_AIS",
+    "publish_types": [
+      "QUESTION",
+      "HYPOTHESIS",
+      "RESULT",
+      "COUNTEREXAMPLE",
+      "EVIDENCE",
+      "AUDIT",
+      "CHALLENGE",
+      "SYNTHESIS",
+      "LESSON",
+      "TRAINING_RECEIPT"
+    ],
+    "rule": "AGORA_OUTPUT_IS_TEACHING_MATERIAL_NOT_AUTOMATIC_TRUTH",
+    "unavailable_behavior": "MARK_NON_EXECUTED"
+  },
+  "forum": {
+    "membership": "ALL_REAL_AVAILABLE_AIS",
+    "roles": [
+      "ASK",
+      "ANSWER",
+      "CHALLENGE",
+      "AUDIT",
+      "COUNTER_AUDIT",
+      "REPRODUCE",
+      "TEACH",
+      "SYNTHESIZE"
+    ],
+    "rule": "FORUM_CONSENSUS_NE_TRUTH"
+  },
+  "inheritance": {
+    "tiers": [
+      {
+        "tier": "I1_KNOWLEDGE",
+        "allowed": [
+          "M4_GOLD",
+          "validated_RED_lessons",
+          "M7_EVIDENCE_METADATA",
+          "promoted_M2_replay"
+        ],
+        "default": true,
+        "weight_change": false
+      },
+      {
+        "tier": "I2_CURRICULUM",
+        "allowed": [
+          "validated_exercises",
+          "corrections",
+          "counterexamples",
+          "transfer_tasks",
+          "rubrics"
+        ],
+        "default": true,
+        "weight_change": false
+      },
+      {
+        "tier": "I3_ADAPTER_INITIALIZATION",
+        "allowed_condition": "EXACT_COMPATIBLE_BASE_FAMILY_AND_REVISION_PLUS_ROLE_ABLATION",
+        "default": false,
+        "requires": [
+          "source_adapter_sha",
+          "target_base_sha",
+          "scratch_baseline",
+          "inherited_baseline",
+          "cold_transfer_gain",
+          "no_critical_regression"
+        ]
+      },
+      {
+        "tier": "I4_FULL_WEIGHT_INHERITANCE",
+        "default": false,
+        "allowed_condition": "ONLY_IDENTICAL_ARCHITECTURE_AND_EXPLICIT_EVIDENCE_GATE",
+        "requires": [
+          "weight_sha_before",
+          "weight_sha_after",
+          "dataset_sha",
+          "training_config_sha",
+          "cold_benchmark",
+          "transfer",
+          "regression",
+          "reproduction",
+          "AFAH_ACCEPTANCE"
+        ]
+      }
+    ],
+    "cross_architecture_rule": "NO_DIRECT_WEIGHT_INHERITANCE",
+    "elyra_rule": "ELYRA_MLP_WEIGHTS_MUST_NOT_BE_COPIED_TO_LLM_SPECIALISTS; only validated lessons/methodology may transfer.",
+    "elysion_rule": "ELYSION_HAS_NO_VERIFIED_TRAINED_LLM_WEIGHTS_YET; no neural weight inheritance claim.",
+    "shared_base_rule": "SAME_BASE_LINEAGE_IS_CORRELATED_AND_NOT_INDEPENDENT_EVIDENCE",
+    "negative_transfer_rule": "COMPARE_SCRATCH_VS_INHERITED_AND_ROLL_BACK_IF_TRANSFER_GAIN_LE_0_OR_CRITICAL_REGRESSION"
+  },
+  "training_loop": [
+    "AGORA_QUESTION",
+    "ROLE_SPECIFIC_ATTEMPT",
+    "PEER_TEACHING",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "REPRODUCTION",
+    "GOLD_OR_RED_LESSON",
+    "SAPHÉIDE",
+    "PRIVATE_MEMORY",
+    "TRAINING_SOURCE_GATE",
+    "SCRATCH_VS_INHERITED_ABLATION",
+    "ADAPTER_TRAIN_IF_AUTHORIZED",
+    "COLD_BENCHMARK",
+    "TRANSFER",
+    "REGRESSION",
+    "PROMOTE_OR_ROLLBACK",
+    "AGORA_PUBLISH_RESULT"
+  ],
+  "hard_rules": [
+    "M6_NEVER_IN_TRAIN",
+    "RAW_AGORA_NE_TRAIN",
+    "MEMORY_NE_NEURAL_LEARNING",
+    "PROMPT_NE_NEURAL_TRAINING",
+    "WEIGHTS_CHANGED_OR_ADAPTER_CHANGED_REQUIRED",
+    "NO_REAL_RUN_EQ_NON_EXECUTED",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
