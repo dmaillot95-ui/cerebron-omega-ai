@@ -178,7 +178,18 @@
       "namespace_reserved": "native-ai/SAELION",
       "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
       "farm_id": 147,
-      "repository": "dmaillot95-ui/cerebron-farm-147-saelion"
+      "repository": "dmaillot95-ui/cerebron-farm-147-saelion",
+      "memory_canary": {
+        "status": "PASS",
+        "run_id": 35960696909,
+        "job_id": 107508490339,
+        "artifact_id": 10792147214,
+        "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+        "namespace": "native-ai/SAELION",
+        "object_path": "native-ai/SAELION/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "86ebb057ab38d5ea9326e01739c1ef8ff5431dd00f36e7bdec4b3b96bdc69a14",
+        "activation_effect": "NONE"
+      }
     },
     {
       "ai_id": "ALPHA",
@@ -186,7 +197,18 @@
       "namespace_reserved": "native-ai/ALPHA",
       "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
       "farm_id": 148,
-      "repository": "dmaillot95-ui/cerebron-farm-148-alpha"
+      "repository": "dmaillot95-ui/cerebron-farm-148-alpha",
+      "memory_canary": {
+        "status": "PASS",
+        "run_id": 35960696909,
+        "job_id": 107508490339,
+        "artifact_id": 10792147214,
+        "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+        "namespace": "native-ai/ALPHA",
+        "object_path": "native-ai/ALPHA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "135b0dd35f3390f78d4988611be5ad74ba841f523ccfbf98bb929054781f2e8e",
+        "activation_effect": "NONE"
+      }
     },
     {
       "ai_id": "OMEGA",
@@ -194,7 +216,18 @@
       "namespace_reserved": "native-ai/OMEGA",
       "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
       "farm_id": 149,
-      "repository": "dmaillot95-ui/cerebron-farm-149-omega"
+      "repository": "dmaillot95-ui/cerebron-farm-149-omega",
+      "memory_canary": {
+        "status": "PASS",
+        "run_id": 35960696909,
+        "job_id": 107508490339,
+        "artifact_id": 10792147214,
+        "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+        "namespace": "native-ai/OMEGA",
+        "object_path": "native-ai/OMEGA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "49c42d42d0f7f088b27d4411605ebde0833a59bff62ce83e81a8e84d38befcb6",
+        "activation_effect": "NONE"
+      }
     },
     {
       "ai_id": "DELTA",
@@ -202,7 +235,18 @@
       "namespace_reserved": "native-ai/DELTA",
       "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
       "farm_id": 150,
-      "repository": "dmaillot95-ui/cerebron-farm-150-delta"
+      "repository": "dmaillot95-ui/cerebron-farm-150-delta",
+      "memory_canary": {
+        "status": "PASS",
+        "run_id": 35960696909,
+        "job_id": 107508490339,
+        "artifact_id": 10792147214,
+        "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+        "namespace": "native-ai/DELTA",
+        "object_path": "native-ai/DELTA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "c43c6573ba5ddf059974ec89b1ca7950c1fb5da2bd90bce93e0918bc6b2067ea",
+        "activation_effect": "NONE"
+      }
     },
     {
       "ai_id": "NEXUS",
@@ -210,7 +254,18 @@
       "namespace_reserved": "native-ai/NEXUS",
       "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
       "farm_id": 151,
-      "repository": "dmaillot95-ui/cerebron-farm-151-nexus"
+      "repository": "dmaillot95-ui/cerebron-farm-151-nexus",
+      "memory_canary": {
+        "status": "PASS",
+        "run_id": 35960696909,
+        "job_id": 107508490339,
+        "artifact_id": 10792147214,
+        "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+        "namespace": "native-ai/NEXUS",
+        "object_path": "native-ai/NEXUS/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "6c7434e8052cfcbf14bbec518e59256c0c27750a3e1c7bb5c94304c946fd48e7",
+        "activation_effect": "NONE"
+      }
     }
   ],
   "hard_rules": [
