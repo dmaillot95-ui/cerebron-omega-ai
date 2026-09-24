@@ -1,0 +1,4 @@
+C80 M05 BATCH ROLLBACK RETRY
+parent_run=35996621664
+mode=single_batch_commit_7_objects
+runtime_changed=false
