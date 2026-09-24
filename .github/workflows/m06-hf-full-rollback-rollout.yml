@@ -1,0 +1,140 @@
+name: M06 HF Full Rollback Rollout
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/m06-full-rollback-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rollout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      PARENT_RUN: '35996621664'
+      RUN_ID: ${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Batch-write 38 second versions and verify rollback
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,time,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download,CommitOperationAdd
+
+          token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
+          parent_run=os.environ["PARENT_RUN"]; run_id=os.environ["RUN_ID"]
+          parent_receipt_path=Path(f"receipts/p03/all-ai-hf-m03/{parent_run}.json")
+          parent_receipt=json.loads(parent_receipt_path.read_text())
+          if str(parent_receipt.get("run_id"))!=parent_run:
+              raise SystemExit("PINNED_PARENT_RUN_MISMATCH")
+          parents=[x for x in parent_receipt["results"] if x.get("status")=="PASS"]
+          if len(parents)!=38:
+              raise SystemExit(f"EXPECTED_38_VERIFIED_PARENTS_GOT_{len(parents)}")
+          api=HfApi(token=token)
+
+          def retry_read(label,fn,attempts=7):
+              last=None
+              for n in range(attempts):
+                  try: return fn()
+                  except Exception as e:
+                      last=e; msg=str(e)
+                      if "429" not in msg and "Too Many Requests" not in msg: raise
+                      delay=min(90,5*(2**n)); print(f"{label}=RETRY_{n+1} delay={delay}s"); time.sleep(delay)
+              raise last
+
+          info=retry_read("HF_REPO_INFO",lambda: api.repo_info(repo_id=repo,repo_type="model"))
+          if not getattr(info,"private",False): raise SystemExit("HF_PRIVATE_REPO_FAIL")
+
+          ops=[]; prepared=[]
+          for p in parents:
+              aid=p["ai_id"]; parent_path=p["remote_object"]; parent_sha=p["payload_sha256"]
+              old=retry_read("PARENT_"+aid,lambda q=parent_path: hf_hub_download(repo_id=repo,filename=q,repo_type="model",token=token,force_download=True))
+              old_raw=Path(old).read_bytes()
+              if hashlib.sha256(old_raw).hexdigest()!=parent_sha:
+                  raise SystemExit("PARENT_SHA_FAIL:"+aid)
+              prefix=parent_path.split("/M7_EVIDENCE/")[0]
+              new_path=f"{prefix}/M7_EVIDENCE/{run_id}.json"
+              payload={
+                "schema":"CEREBRON_AI_MEMORY_VERSION_V4",
+                "ai_id":aid,"identity":p["identity"],
+                "agent_slot":"A6_MEMORY_KEEPER","memory_class":"M7_EVIDENCE",
+                "generation":"M06","parent_generation":"M03",
+                "parent_run_id":parent_run,"parent_object_path":parent_path,
+                "parent_payload_sha256":parent_sha,
+                "rollback_object_path":parent_path,"rollback_payload_sha256":parent_sha,
+                "run_id":run_id,"private":True,
+                "purpose":"M06_FULL_38_VERSION_AND_ROLLBACK_NOT_TRAINING"
+              }
+              raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+              local=Path("/tmp")/(aid.replace("/","-")+".json"); local.write_bytes(raw)
+              new_sha=hashlib.sha256(raw).hexdigest()
+              ops.append(CommitOperationAdd(path_in_repo=new_path,path_or_fileobj=str(local)))
+              prepared.append((p,new_path,new_sha))
+
+          # exactly one HF commit for all 38 objects
+          api.create_commit(
+              repo_id=repo,repo_type="model",operations=ops,
+              commit_message=f"M06 batch: 38 versioned rollback fixtures run {run_id}"
+          )
+
+          results=[]
+          for p,new_path,new_sha in prepared:
+              aid=p["ai_id"]; parent_path=p["remote_object"]; parent_sha=p["payload_sha256"]
+              newf=retry_read("NEW_"+aid,lambda q=new_path: hf_hub_download(repo_id=repo,filename=q,repo_type="model",token=token,force_download=True))
+              newraw=Path(newf).read_bytes(); newgot=hashlib.sha256(newraw).hexdigest()
+              obj=json.loads(newraw)
+              new_ok=(newgot==new_sha and str(obj.get("parent_run_id"))==parent_run and obj.get("parent_object_path")==parent_path)
+              rbf=retry_read("ROLLBACK_"+aid,lambda q=parent_path: hf_hub_download(repo_id=repo,filename=q,repo_type="model",token=token,force_download=True))
+              rbsha=hashlib.sha256(Path(rbf).read_bytes()).hexdigest()
+              rb_ok=(rbsha==parent_sha)
+              results.append({
+                "ai_id":aid,"status":"PASS" if new_ok and rb_ok else "FAIL",
+                "parent_run_id":parent_run,"parent_object":parent_path,"parent_sha256":parent_sha,
+                "new_object":new_path,"new_sha256":new_sha,
+                "new_read_sha256":newgot,
+                "new_parent_metadata":"PASS" if new_ok else "FAIL",
+                "rollback_read":"PASS" if rb_ok else "FAIL",
+                "parent_unchanged_after_new_write":"PASS" if rb_ok else "FAIL"
+              })
+
+          failed=[x for x in results if x["status"]!="PASS"]
+          out={
+            "schema":"CEREBRON_M06_FULL_ROLLBACK_RECEIPT_V1",
+            "run_id":run_id,"parent_run_id":parent_run,
+            "parent_receipt":str(parent_receipt_path),
+            "hf_commit_mode":"SINGLE_BATCH_COMMIT_38_OBJECTS",
+            "checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "results":results,
+            "summary":{"available":38,"passed":38-len(failed),"failed":len(failed),"unavailable":1},
+            "unavailable":[{"ai_id":"F162-NU","reason":"REPOSITORY_MISSING"}],
+            "status":"PASS" if not failed else "FAIL"
+          }
+          Path("receipts/p03/m06-hf-full-rollback").mkdir(parents=True,exist_ok=True)
+          versioned=Path("receipts/p03/m06-hf-full-rollback")/f"{run_id}.json"
+          versioned.write_text(json.dumps(out,indent=2)+"\n")
+          Path("receipts/p03/m06-hf-full-rollback-latest.json").write_text(json.dumps({
+            "schema":"CEREBRON_M06_FULL_ROLLBACK_LATEST_V1",
+            "run_id":run_id,"receipt":str(versioned)
+          },indent=2)+"\n")
+          print(json.dumps(out["summary"],sort_keys=True))
+          if failed: raise SystemExit(2)
+          PY
+      - name: Persist immutable non-sensitive M06 receipt
+        if: always()
+        run: |
+          test -d receipts/p03/m06-hf-full-rollback || exit 0
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/m06-hf-full-rollback/ receipts/p03/m06-hf-full-rollback-latest.json
+          git diff --cached --quiet && exit 0
+          git commit -m "M06 receipt: full 38-AI rollback rollout"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
