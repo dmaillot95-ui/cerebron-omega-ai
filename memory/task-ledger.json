@@ -182,7 +182,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "UNBLOCKED_READY_TO_TRIGGER",
+      "status": "QUALITY_PASS1_RUNNING",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -196,7 +196,10 @@
       "blocked_by": null,
       "quality_policy": "config/quality-first-scale-policy-v1.json",
       "required_pass_number": 1,
-      "scale_requires_total_consecutive_passes": 2
+      "scale_requires_total_consecutive_passes": 2,
+      "run_id": 36024003536,
+      "role_contracts": "config/agent-role-quality-contracts-v2.json",
+      "pass2_plan": "config/s5-quality-transfer-pass2-v1.json"
     },
     {
       "id": "C80-NU-F162",
@@ -206,6 +209,16 @@
       "scaffold": "scaffolds/f162-nu",
       "guard_run": 36017814035,
       "objective": "Validate complete NU NULL_MODEL_CHALLENGER scaffold without claiming deployment; deploy only when the repository exists."
+    },
+    {
+      "id": "QF-AELYS-01",
+      "title": "AELYS quality-first doctrine",
+      "status": "ACTIVE",
+      "policy": "config/quality-first-scale-policy-v1.json",
+      "roadmap": "config/aelys-quality-first-roadmap-v1.json",
+      "role_contracts": "config/agent-role-quality-contracts-v2.json",
+      "current_scale": 5,
+      "scale_5_to_10": "LOCKED_UNTIL_TWO_QUALITY_PASSES"
     }
   ],
   "updated_at": "2026-09-24",
