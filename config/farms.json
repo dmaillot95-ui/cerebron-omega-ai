@@ -1,5 +1,5 @@
 {
-  "version": "2.20",
+  "version": "2.21",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1031,15 +1031,322 @@
         "test": "INDEPENDENT_ORBIT_CROSSCHECK",
         "scope": "independent-formula-crosscheck-not-external-or-physical-validation"
       }
+    },
+    {
+      "id": 145,
+      "repo": "cerebron-farm-145-elysion",
+      "domain": "elysion-native-intelligence",
+      "identity": "ELYSION",
+      "status": "PRETRAIN_SCAFFOLD_VALIDATED",
+      "type": "AI_FARM",
+      "role": "generation-reasoning-invention-solution-search",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 146,
+      "repo": "cerebron-farm-146-elysium",
+      "domain": "elysium-native-verification",
+      "identity": "ELYSIUM",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "verification-red-team-optimization-validation",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 147,
+      "repo": "cerebron-farm-147-saelion",
+      "domain": "saelion-native-learning-exploration",
+      "identity": "SAELION",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "exploration-learning-selection-compression",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 148,
+      "repo": "cerebron-farm-148-alpha",
+      "domain": "alpha-native-divergence-construction",
+      "identity": "ALPHA",
+      "greek_letter": "Α",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "divergence-opening-construction",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 149,
+      "repo": "cerebron-farm-149-omega",
+      "domain": "omega-native-proof-falsification",
+      "identity": "OMEGA",
+      "greek_letter": "Ω",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "proof-audit-counteraudit-falsification",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 150,
+      "repo": "cerebron-farm-150-delta",
+      "domain": "delta-native-science-modeling",
+      "identity": "DELTA",
+      "greek_letter": "Δ",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "scientific-modeling-simulation-validation",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 151,
+      "repo": "cerebron-farm-151-nexus",
+      "domain": "nexus-native-knowledge-orchestration",
+      "identity": "NEXUS",
+      "status": "SCAFFOLDED_NOT_TRAINED",
+      "type": "AI_FARM",
+      "role": "knowledge-connection-ai-tool-orchestration",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 152,
+      "repo": "cerebron-farm-152-beta",
+      "domain": "beta-native-ai",
+      "identity": "BETA",
+      "greek_letter": "Β",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 153,
+      "repo": "cerebron-farm-153-gamma",
+      "domain": "gamma-native-ai",
+      "identity": "GAMMA",
+      "greek_letter": "Γ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 154,
+      "repo": "cerebron-farm-154-epsilon",
+      "domain": "epsilon-native-ai",
+      "identity": "EPSILON",
+      "greek_letter": "Ε",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 155,
+      "repo": "cerebron-farm-155-zeta",
+      "domain": "zeta-native-ai",
+      "identity": "ZETA",
+      "greek_letter": "Ζ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 156,
+      "repo": "cerebron-farm-156-eta",
+      "domain": "eta-native-ai",
+      "identity": "ETA",
+      "greek_letter": "Η",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 157,
+      "repo": "cerebron-farm-157-theta",
+      "domain": "theta-native-ai",
+      "identity": "THETA",
+      "greek_letter": "Θ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 158,
+      "repo": "cerebron-farm-158-iota",
+      "domain": "iota-native-ai",
+      "identity": "IOTA",
+      "greek_letter": "Ι",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 159,
+      "repo": "cerebron-farm-159-kappa",
+      "domain": "kappa-native-ai",
+      "identity": "KAPPA",
+      "greek_letter": "Κ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 160,
+      "repo": "cerebron-farm-160-lambda",
+      "domain": "lambda-native-ai",
+      "identity": "LAMBDA",
+      "greek_letter": "Λ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 161,
+      "repo": "cerebron-farm-161-mu",
+      "domain": "mu-native-ai",
+      "identity": "MU",
+      "greek_letter": "Μ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 162,
+      "repo": "cerebron-farm-162-nu",
+      "domain": "nu-native-ai",
+      "identity": "NU",
+      "greek_letter": "Ν",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 163,
+      "repo": "cerebron-farm-163-xi",
+      "domain": "xi-native-ai",
+      "identity": "XI",
+      "greek_letter": "Ξ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 164,
+      "repo": "cerebron-farm-164-omicron",
+      "domain": "omicron-native-ai",
+      "identity": "OMICRON",
+      "greek_letter": "Ο",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 165,
+      "repo": "cerebron-farm-165-pi",
+      "domain": "pi-native-ai",
+      "identity": "PI",
+      "greek_letter": "Π",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED",
+      "note": "Distinct from shared PI-SWEEP/PI-NEEDLE/PI-SEARCH tools"
+    },
+    {
+      "id": 166,
+      "repo": "cerebron-farm-166-rho",
+      "domain": "rho-native-ai",
+      "identity": "RHO",
+      "greek_letter": "Ρ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 167,
+      "repo": "cerebron-farm-167-sigma",
+      "domain": "sigma-native-ai",
+      "identity": "SIGMA",
+      "greek_letter": "Σ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 168,
+      "repo": "cerebron-farm-168-tau",
+      "domain": "tau-native-ai",
+      "identity": "TAU",
+      "greek_letter": "Τ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 169,
+      "repo": "cerebron-farm-169-upsilon",
+      "domain": "upsilon-native-ai",
+      "identity": "UPSILON",
+      "greek_letter": "Υ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 170,
+      "repo": "cerebron-farm-170-phi",
+      "domain": "phi-native-ai",
+      "identity": "PHI",
+      "greek_letter": "Φ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 171,
+      "repo": "cerebron-farm-171-chi",
+      "domain": "chi-native-ai",
+      "identity": "CHI",
+      "greek_letter": "Χ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
+    },
+    {
+      "id": 172,
+      "repo": "cerebron-farm-172-psi",
+      "domain": "psi-native-ai",
+      "identity": "PSI",
+      "greek_letter": "Ψ",
+      "status": "REPOSITORY_PRESENT_EMPTY",
+      "type": "AI_FARM",
+      "role": "SPECIALIZATION_PENDING",
+      "training_status": "NOT_TRAINED"
     }
   ],
-  "max_farms": 144,
+  "max_farms": 172,
   "policy": {
-    "farm_cap": 144,
-    "no_farm_above_144": true,
+    "farm_cap": 172,
+    "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
-    "tools_are_not_farms": true
+    "tools_are_not_farms": true,
+    "no_farm_above_172": true,
+    "greek_ai_constellation_registered": true
   },
   "shared_engines": {
     "NVIDIA": {
