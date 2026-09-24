@@ -76,7 +76,9 @@
     "collective_step": "Q_(t+1)=Q_t*(1+alpha*mean(e_i))",
     "observed_ratio": "r_t=Q_(t+1)/Q_t",
     "geometric_claim_gate": "Only call growth geometric-like after >=4 consecutive transfer cycles with r_t>1 on held-out tasks and no quality/evidence regression.",
-    "redundancy_penalty": "effective_information=raw_information*(1-redundancy)"
+    "redundancy_penalty": "effective_information=raw_information*(1-redundancy)",
+    "quality_metric": "Q defined by config/gvl-growth-benchmark-v1.json",
+    "comparability_rule": "Only frozen benchmark version and distinct held-out task families may contribute to geometric-like claim."
   },
   "lesson_pipeline": [
     "REAL_EXECUTION",
@@ -1993,5 +1995,7 @@
       "action": "Replaced lexical-only vectors with explicit functional ontology V2.",
       "status": "CORRECTED"
     }
-  ]
+  ],
+  "growth_benchmark": "config/gvl-growth-benchmark-v1.json",
+  "lesson_promoter": "tools/gvl_lesson_promoter.py"
 }
