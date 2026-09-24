@@ -73,7 +73,8 @@
     "IF_QUALITY_FAILS_DO_NOT_ADD_WORKERS",
     "IF_NEW_WORKERS_ADD_REDUNDANCY_NOT_INFORMATION_STOP_SCALING",
     "IF_AUDITOR_DISAGREES_WITH_DETERMINISTIC_FAILURE_GATE_KEEP_HOLD",
-    "AGENT_COUNT_NE_INTELLIGENCE"
+    "AGENT_COUNT_NE_INTELLIGENCE",
+    "IF_GVL_EFFECTIVE_GAIN_LE_0_STAY_AT_CURRENT_SCALE"
   ],
   "hard_rules": [
     "REALITY>COHERENCE",
@@ -81,5 +82,12 @@
     "CLAIM_LE_EVIDENCE",
     "SELF_REPORT_NE_EVIDENCE",
     "RUNTIME_FREEZE"
-  ]
+  ],
+  "gvl_interlock": {
+    "contract": "config/geometric-vector-learning-v1.json",
+    "require_positive_effective_gain": true,
+    "require_novelty_floor": 0.15,
+    "require_transfer": true,
+    "rule": "Do not scale worker count when new workers are redundant or when transfer gain is non-positive."
+  }
 }
