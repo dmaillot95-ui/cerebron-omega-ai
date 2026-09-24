@@ -182,7 +182,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "PASS1_COMPLETE_PASS2_FAILED_4_OF_5_REPAIR_CANARY_QUEUED",
+      "status": "PASS1_AND_PASS2_COMPLETE_B3_RUNNING",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -210,7 +210,7 @@
       "v3_contract": "config/m11-quality-pass1-v3-contract.json",
       "v3_run_id": 36027613868,
       "v3_strategy": "CHAT_TEMPLATE_MODEL_CONTENT_ONLY_SYSTEM_METADATA_DETERMINISTIC_AUDIT",
-      "scale_5_to_10": "HOLD_AT_5",
+      "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST_NOT_YET_SCALED",
       "quality_improvement_loop": "config/quality-improvement-loop-v1.json",
       "v3_receipt": "receipts/workers/m11-quality-pass1-v3-36027613868.json",
       "quality_pass1": true,
@@ -233,7 +233,11 @@
       "role_contract": "config/system-architect-evidence-contract-v1.json",
       "previous_canary_run": 36031518267,
       "previous_canary_failure": "TECHNICAL_NAMERROR_ROLE_CONTRACT_NOT_COGNITIVE_RESULT",
-      "repair_canary_status": "QUEUED_AFTER_SCOPE_FIX"
+      "repair_canary_status": "QUEUED_AFTER_SCOPE_FIX",
+      "pass2r_run": 36034245620,
+      "pass2r_receipt": "receipts/workers/s5-quality-transfer-pass2-v3-36034245620.json",
+      "pass2r": true,
+      "pass2r_worker_quality_passes": 5
     },
     {
       "id": "C80-NU-F162",
@@ -257,17 +261,17 @@
     {
       "id": "C80-GVL",
       "title": "Geometric Vector Learning",
-      "status": "GVL_V2_CONTROLPLANE_PASS_ACTION_GUARD_PENDING",
+      "status": "B3_CONTROLLED_AB_RUNNING",
       "contract": "config/geometric-vector-learning-v1.json",
       "engine": "tools/gvl_vector_engine.py",
       "history": "memory/gvl-learning-history.json",
       "lesson_schema": "config/gvl-lesson-capsule-schema-v1.json",
       "lesson_index": "memory/gvl-lesson-index.json",
-      "guard_run": 36033064544,
+      "guard_run": 36037885406,
       "logical_ai": 39,
       "available_ai": 38,
       "vector_dimension": 32,
-      "geometric_growth_claim": "NOT_DEMONSTRATED",
+      "geometric_growth_claim": "DENY_PENDING_4_POSITIVE_HELD_OUT_CYCLES",
       "required_growth_gate": "AT_LEAST_4_CONSECUTIVE_HELD_OUT_TRANSFER_CYCLES_WITH_RATIO_GT_1_AND_ZERO_CRITICAL_REGRESSION",
       "civilisation_tasks_updated": 5,
       "scale_5_to_10": "HOLD",
@@ -280,7 +284,10 @@
       "measured_transfer_ratios": [
         0.8
       ],
-      "action_guard_run": 36033414058
+      "action_guard_run": 36033414058,
+      "dimension": 32,
+      "guard_conclusion": "success",
+      "b3_run": 36038241741
     }
   ],
   "updated_at": "2026-09-24",
