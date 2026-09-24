@@ -1,0 +1,171 @@
+{
+  "schema": "CEREBRON_AGORA_TRANSFER_CONTRACT_V1",
+  "date": "2026-09-24",
+  "status": "ACTIVE_CONFIG_CONTRACT_RUNTIME_FORUM_PARTIAL_SCOPE",
+  "active_roles": [
+    "CEREBRON",
+    "SIGMA",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO",
+    "ELYSION",
+    "ELYSIUM"
+  ],
+  "pending_roles": [
+    {
+      "ai_id": "SAELION",
+      "farm_id": 147,
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "ai_id": "ALPHA",
+      "farm_id": 148,
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "ai_id": "OMEGA",
+      "farm_id": 149,
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "ai_id": "DELTA",
+      "farm_id": 150,
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "ai_id": "NEXUS",
+      "farm_id": 151,
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    }
+  ],
+  "teacher_cycle": [
+    "PEDAGOGUE",
+    "EXAMINER",
+    "RED_TEAM",
+    "CONNECTOR",
+    "SYNTHESIZER"
+  ],
+  "participant_rotation": [
+    "STUDENT",
+    "PROPOSER",
+    "CRITIC",
+    "REPRODUCER",
+    "IMPROVER"
+  ],
+  "capsule_states": [
+    "PROPOSED",
+    "UNDER_TEST",
+    "REJECTED",
+    "VALIDATED"
+  ],
+  "transfer_flow": [
+    "SOURCE_OUTPUT",
+    "PROVENANCE_AND_SHA",
+    "QUARANTINE_OR_M1_TRACE",
+    "CRITIQUE",
+    "CORRECTION",
+    "UNAIDED_RETEST",
+    "INDEPENDENT_REPRODUCTION_IF_CLAIM_REQUIRES",
+    "MEASURED_GAIN",
+    "F72_REALITY_EVIDENCE_GATE",
+    "AFAH_FINAL_AUDIT",
+    "TARGET_NAMESPACE_WRITE_AS_M2_M4_OR_M7",
+    "RECALL_TEST"
+  ],
+  "cross_ai_transfer": {
+    "default": "DENY_DIRECT_COPY",
+    "allowed_only_if": [
+      "SOURCE_PROVENANCE_PRESENT",
+      "CONTENT_SHA256_PRESENT",
+      "SOURCE_MEMORY_CLASS_KNOWN",
+      "TARGET_NAMESPACE_EXPLICIT",
+      "AUDIT_COMPLETE",
+      "DEDUP_COMPLETE",
+      "CONTAMINATION_CHECK_PASS",
+      "M6_NOT_SOURCE",
+      "RAW_AGORA_NOT_SOURCE",
+      "PROMOTION_CLASS_EXPLICIT"
+    ],
+    "preserve": [
+      "source_ai",
+      "source_namespace",
+      "source_execution_id",
+      "model_lineage",
+      "data_lineage",
+      "tool_lineage",
+      "evidence",
+      "contradictions",
+      "failed_branches"
+    ],
+    "independence": "TRANSFERRED_CONTENT_DOES_NOT_BECOME_INDEPENDENT_EVIDENCE_IN_TARGET_AI"
+  },
+  "memory_classes": {
+    "raw_forum": "M0_OR_M1_ONLY_NO_TRAINING",
+    "tested_lesson": "M2_REPLAY_CANDIDATE",
+    "gold": "M4_ONLY_AFTER_FULL_PROMOTION",
+    "model": "M5_SEPARATE_ASSET",
+    "cold_benchmark": "M6_SEALED_DENY_TRAINING",
+    "evidence": "M7_DURABLE"
+  },
+  "promotion_requirements": {
+    "to_M2": [
+      "PROVENANCE",
+      "SHA256",
+      "AUDIT",
+      "UNAIDED_RETEST"
+    ],
+    "to_M4": [
+      "M2_OR_EQUIVALENT",
+      "MEASURED_GAIN",
+      "REPRODUCTION",
+      "F72",
+      "AFAH",
+      "NO_M6_CONTAMINATION"
+    ],
+    "to_training_dataset": [
+      "M4_GOLD",
+      "DEDUP",
+      "LICENSE_OR_ORIGIN_CHECK",
+      "TRAIN_VALID_SPLIT",
+      "M6_EXCLUSION_E2E"
+    ]
+  },
+  "runtime_scope": {
+    "historical_forum_runtime": "runtime/agora_forum.py",
+    "historical_forum_supported_roles": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "CEREBRON"
+    ],
+    "full_active_role_count": 14,
+    "full_runtime_role_support": false,
+    "external_ingress": "platform/agora_external.py",
+    "school_config": "config/agora-school-v1.json",
+    "rule": "DO_NOT_CLAIM_14_ROLE_SUPPORT_THROUGH_HISTORICAL_FORUM_RUNTIME",
+    "runtime_change": false
+  },
+  "pending_activation_rule": "PENDING_ROLE_CANNOT_POST_AS_ACTIVE_NATIVE_AI_OR_RECEIVE_DURABLE_ACTIVE_NAMESPACE_PROMOTION_BEFORE_OWN_GATES_PASS",
+  "hard_rules": [
+    "FORUM_IS_NOT_GOLD",
+    "FORUM_IS_NOT_TRAINING",
+    "CONSENSUS_IS_NOT_TRUTH",
+    "NO_AUTOMATIC_CROSS_NAMESPACE_COPY",
+    "TRANSFERRED_EVIDENCE_IS_NOT_INDEPENDENT_EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "PLANNED_ROLE_NOT_EXECUTED_ROLE",
+    "NO_RUNTIME_CHANGE_IN_CIVILIZATION_FOUNDATION"
+  ],
+  "claim_ceiling": "AGORA configuration, school, external ingress and transfer governance are defined. Historical internal forum runtime remains limited to 8 roles."
+}
