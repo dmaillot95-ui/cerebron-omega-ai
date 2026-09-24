@@ -237,5 +237,24 @@
       "prompt_hash"
     ],
     "rule": "A routed slot becomes EXECUTED only when a receipt passes schema, immutable revision and result-hash checks."
+  },
+  "execution_canary": {
+    "status": "PASS_ONE_SLOT_ONLY",
+    "run_id": 35953143135,
+    "job_id": 107485985625,
+    "slot_id": "HF-A01",
+    "farm_id": 145,
+    "model_id": "Qwen/Qwen3-4B",
+    "model_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "runtime_provider": "GITHUB_ACTIONS_CPU",
+    "completion_status": "SUCCESS",
+    "output": "HF20_CANARY_OK",
+    "result_hash": "63b0c170ea22505ba9bd82956bf94e68de8d8a5c6ea4aaedd517048a4beb71f1",
+    "latency_ms": 3174,
+    "artifact_id": 10789317767,
+    "artifact_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88",
+    "binding_scope": "EPHEMERAL_CANARY",
+    "independent_evidence": false,
+    "other_slots_execution": "HF-A02_TO_HF-A20_NOT_EXECUTED"
   }
 }
