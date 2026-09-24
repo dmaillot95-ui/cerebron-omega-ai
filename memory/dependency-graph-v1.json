@@ -1,0 +1,62 @@
+{
+  "schema": "CEREBRON_DEPENDENCY_GRAPH_V1",
+  "status": "ACTIVE",
+  "nodes": [
+    {
+      "id": "MODEL-SMOLLM3-3B-A07CC9",
+      "type": "D_MODEL",
+      "value": "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "critical": true
+    },
+    {
+      "id": "RUN-36042832474",
+      "type": "D_TEST",
+      "value": "S10 marginal gain mission",
+      "critical": true
+    },
+    {
+      "id": "PROBLEM-C80-S10",
+      "type": "D_DATA",
+      "value": "shared frozen readiness-validation problem",
+      "critical": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "S10_SHARED_LINEAGE",
+      "members": [
+        "SAPHEA-A",
+        "SAPHEA-B",
+        "SAPHEA-C",
+        "SPIRALION-A",
+        "ETHERION-A",
+        "METRION-A",
+        "RHO-A",
+        "XI-A",
+        "PSI-A",
+        "TAU-A"
+      ],
+      "shared_critical_dependencies": [
+        "MODEL-SMOLLM3-3B-A07CC9",
+        "RUN-36042832474",
+        "PROBLEM-C80-S10"
+      ],
+      "worker_count": 10,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0,
+      "independent_evidence": false,
+      "reason": "Shared model revision and common mission lineage."
+    }
+  ],
+  "independence_dimensions": [
+    "different_model",
+    "different_data",
+    "different_method",
+    "different_tool",
+    "different_proof",
+    "different_team",
+    "independent_experiment",
+    "external_reproduction"
+  ],
+  "rule": "AGENT_COUNT_NE_EVIDENCE_COUNT"
+}
