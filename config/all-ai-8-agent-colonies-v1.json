@@ -1,0 +1,4540 @@
+{
+  "schema": "CEREBRON_ALL_AI_8_AGENT_COLONIES_V1",
+  "status": "CONTRACTS_CONFIGURED_EXECUTION_NOT_CLAIMED",
+  "runtime_changed": false,
+  "logical_ai": 39,
+  "available_ai": 38,
+  "slots_per_ai": 8,
+  "configured_slots_total": 312,
+  "available_parent_slots": 304,
+  "unavailable_parent_slots": 8,
+  "burst_pool_max": 20,
+  "persistence_rule": "A6_MEMORY_KEEPER_ONLY_BY_DEFAULT_TO_LIMIT_HF_COMMIT_PRESSURE",
+  "execution_rule": "CONFIGURED_SLOT_NE_EXECUTED_AGENT",
+  "colonies": [
+    {
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Executive decomposition, routing, coalition and resource authority",
+      "agent_slots": [
+        {
+          "agent_id": "CEREBRON:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "CEREBRON:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "SAPHEA",
+      "identity": "SAPHEA",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Specialist selection and execution",
+      "agent_slots": [
+        {
+          "agent_id": "SAPHEA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "SPIRALION",
+      "identity": "SPIRALION",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Verified checkpoint continuity and memory",
+      "agent_slots": [
+        {
+          "agent_id": "SPIRALION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SPIRALION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "ETHERION",
+      "identity": "ETHERION",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Difficult science and mathematics R&D",
+      "agent_slots": [
+        {
+          "agent_id": "ETHERION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ETHERION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "HYPERION",
+      "identity": "HYPERION",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Broad hypothesis generation",
+      "agent_slots": [
+        {
+          "agent_id": "HYPERION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "HYPERION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "ASTRION",
+      "identity": "ASTRION",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Space R&D",
+      "agent_slots": [
+        {
+          "agent_id": "ASTRION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ASTRION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Engineering validation",
+      "agent_slots": [
+        {
+          "agent_id": "METRION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "METRION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Final epistemic promotion boundary",
+      "agent_slots": [
+        {
+          "agent_id": "AFAH:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AFAH:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Human dialogue and presentation",
+      "agent_slots": [
+        {
+          "agent_id": "AELYS:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "AELYS:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "ELYRA",
+      "identity": "ELYRA",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Simulation and embodied action",
+      "agent_slots": [
+        {
+          "agent_id": "ELYRA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYRA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "identity": "SAPHEA_MICRO",
+      "farm_id": null,
+      "available": true,
+      "parent_function": "Compact specialist model fabric",
+      "agent_slots": [
+        {
+          "agent_id": "SAPHEA_MICRO:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAPHEA_MICRO:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "ELYSION",
+      "identity": "ELYSION",
+      "farm_id": 145,
+      "available": true,
+      "parent_function": "Solution generation, reasoning and invention",
+      "agent_slots": [
+        {
+          "agent_id": "ELYSION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "identity": "ELYSIUM",
+      "farm_id": 146,
+      "available": true,
+      "parent_function": "General verification, red-team and validation",
+      "agent_slots": [
+        {
+          "agent_id": "ELYSIUM:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "ELYSIUM:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "SAELION",
+      "identity": "SAELION",
+      "farm_id": 147,
+      "available": true,
+      "parent_function": "Validated lesson selection and compression",
+      "agent_slots": [
+        {
+          "agent_id": "SAELION:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "SAELION:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "NEXUS",
+      "identity": "NEXUS",
+      "farm_id": 151,
+      "available": true,
+      "parent_function": "Global knowledge, model, tool and farm connectivity",
+      "agent_slots": [
+        {
+          "agent_id": "NEXUS:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "NEXUS:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "farm_id": 148,
+      "available": true,
+      "parent_function": "Generate structurally different starting representations and search directions before deep reasoning.",
+      "agent_slots": [
+        {
+          "agent_id": "F148-ALPHA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F148-ALPHA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F152-BETA",
+      "identity": "BETA",
+      "farm_id": 152,
+      "available": true,
+      "parent_function": "Convert a vague question into a testable problem contract: objective, variables, constraints, acceptance criteria, unknowns and forbidden assumptions.",
+      "agent_slots": [
+        {
+          "agent_id": "F152-BETA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F152-BETA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F153-GAMMA",
+      "identity": "GAMMA",
+      "farm_id": 153,
+      "available": true,
+      "parent_function": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
+      "agent_slots": [
+        {
+          "agent_id": "F153-GAMMA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F153-GAMMA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F150-DELTA",
+      "identity": "DELTA",
+      "farm_id": 150,
+      "available": true,
+      "parent_function": "Build explicit scientific models, equations, assumptions, simulations and discriminating tests.",
+      "agent_slots": [
+        {
+          "agent_id": "F150-DELTA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F150-DELTA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F154-EPSILON",
+      "identity": "EPSILON",
+      "farm_id": 154,
+      "available": true,
+      "parent_function": "Probe epsilon-neighborhoods around candidate solutions to measure local sensitivity, robustness margins and bifurcation points.",
+      "agent_slots": [
+        {
+          "agent_id": "F154-EPSILON:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F154-EPSILON:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F155-ZETA",
+      "identity": "ZETA",
+      "farm_id": 155,
+      "available": true,
+      "parent_function": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
+      "agent_slots": [
+        {
+          "agent_id": "F155-ZETA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F155-ZETA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F156-ETA",
+      "identity": "ETA",
+      "farm_id": 156,
+      "available": true,
+      "parent_function": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
+      "agent_slots": [
+        {
+          "agent_id": "F156-ETA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F156-ETA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F157-THETA",
+      "identity": "THETA",
+      "farm_id": 157,
+      "available": true,
+      "parent_function": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
+      "agent_slots": [
+        {
+          "agent_id": "F157-THETA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F157-THETA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F158-IOTA",
+      "identity": "IOTA",
+      "farm_id": 158,
+      "available": true,
+      "parent_function": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
+      "agent_slots": [
+        {
+          "agent_id": "F158-IOTA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F158-IOTA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F159-KAPPA",
+      "identity": "KAPPA",
+      "farm_id": 159,
+      "available": true,
+      "parent_function": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
+      "agent_slots": [
+        {
+          "agent_id": "F159-KAPPA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F159-KAPPA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F160-LAMBDA",
+      "identity": "LAMBDA",
+      "farm_id": 160,
+      "available": true,
+      "parent_function": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
+      "agent_slots": [
+        {
+          "agent_id": "F160-LAMBDA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F160-LAMBDA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F161-MU",
+      "identity": "MU",
+      "farm_id": 161,
+      "available": true,
+      "parent_function": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
+      "agent_slots": [
+        {
+          "agent_id": "F161-MU:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F161-MU:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F162-NU",
+      "identity": "NU",
+      "farm_id": 162,
+      "available": false,
+      "parent_function": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
+      "agent_slots": [
+        {
+          "agent_id": "F162-NU:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F162-NU:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "UNAVAILABLE_PARENT_AI",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F163-XI",
+      "identity": "XI",
+      "farm_id": 163,
+      "available": true,
+      "parent_function": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
+      "agent_slots": [
+        {
+          "agent_id": "F163-XI:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F163-XI:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F164-OMICRON",
+      "identity": "OMICRON",
+      "farm_id": 164,
+      "available": true,
+      "parent_function": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
+      "agent_slots": [
+        {
+          "agent_id": "F164-OMICRON:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F164-OMICRON:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F165-PI",
+      "identity": "PI",
+      "farm_id": 165,
+      "available": true,
+      "parent_function": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
+      "agent_slots": [
+        {
+          "agent_id": "F165-PI:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F165-PI:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F166-RHO",
+      "identity": "RHO",
+      "farm_id": 166,
+      "available": true,
+      "parent_function": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
+      "agent_slots": [
+        {
+          "agent_id": "F166-RHO:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F166-RHO:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "identity": "SIGMA",
+      "farm_id": 167,
+      "available": true,
+      "parent_function": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
+      "agent_slots": [
+        {
+          "agent_id": "F167-SIGMA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F167-SIGMA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F168-TAU",
+      "identity": "TAU",
+      "farm_id": 168,
+      "available": true,
+      "parent_function": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
+      "agent_slots": [
+        {
+          "agent_id": "F168-TAU:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F168-TAU:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F169-UPSILON",
+      "identity": "UPSILON",
+      "farm_id": 169,
+      "available": true,
+      "parent_function": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
+      "agent_slots": [
+        {
+          "agent_id": "F169-UPSILON:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F169-UPSILON:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F170-PHI",
+      "identity": "PHI",
+      "farm_id": 170,
+      "available": true,
+      "parent_function": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
+      "agent_slots": [
+        {
+          "agent_id": "F170-PHI:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F170-PHI:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F171-CHI",
+      "identity": "CHI",
+      "farm_id": 171,
+      "available": true,
+      "parent_function": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
+      "agent_slots": [
+        {
+          "agent_id": "F171-CHI:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F171-CHI:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F172-PSI",
+      "identity": "PSI",
+      "farm_id": 172,
+      "available": true,
+      "parent_function": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
+      "agent_slots": [
+        {
+          "agent_id": "F172-PSI:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F172-PSI:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "identity": "OMEGA",
+      "farm_id": 149,
+      "available": true,
+      "parent_function": "Close the funnel with formal proof status, falsification, counter-audit and explicit residual uncertainty.",
+      "agent_slots": [
+        {
+          "agent_id": "F149-OMEGA:A0_CHIEF",
+          "slot": "A0_CHIEF",
+          "function": "Coordinate local mission, dependencies, budget and handoff; cannot self-certify.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A1_EXPLORER",
+          "slot": "A1_EXPLORER",
+          "function": "Generate alternative branches through the parent AI specialization.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A2_ANALYST",
+          "slot": "A2_ANALYST",
+          "function": "Formalize, calculate, model or structure strongest branches.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A3_EXECUTOR",
+          "slot": "A3_EXECUTOR",
+          "function": "Invoke permitted real tools/models/workflows; NON_EXECUTED if unavailable.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A4_AUDITOR",
+          "slot": "A4_AUDITOR",
+          "function": "Verify claims, provenance, contracts and evidence ceiling.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A5_COUNTER_AUDITOR",
+          "slot": "A5_COUNTER_AUDITOR",
+          "function": "Seek counterexamples, leakage, shared dependencies and regressions.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A6_MEMORY_KEEPER",
+          "slot": "A6_MEMORY_KEEPER",
+          "function": "Version memory, lineage, SHA and rollback; sole default HF writer.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        },
+        {
+          "agent_id": "F149-OMEGA:A7_SYNTHESIZER",
+          "slot": "A7_SYNTHESIZER",
+          "function": "Compress local work into one capsule preserving disagreements and residuals.",
+          "status": "CONFIGURED_NOT_EXECUTED",
+          "evidence_required": [
+            "worker_or_model_id",
+            "run_or_execution_receipt",
+            "log_or_result",
+            "artifact_or_receipt",
+            "provenance"
+          ]
+        }
+      ],
+      "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
+      "hf_writer": "A6_MEMORY_KEEPER",
+      "runtime_changed": false
+    }
+  ]
+}
