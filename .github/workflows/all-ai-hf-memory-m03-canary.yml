@@ -1,0 +1,112 @@
+name: All AI HF Private Memory M03 Canary
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/all-ai-memory-matrix-v1.json'
+      - 'tools/validate_all_ai_memory_matrix.py'
+      - '.github/workflows/all-ai-hf-memory-m03-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_all_ai_memory_matrix.py
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Per-AI private write read SHA canary
+        env:
+          CEREBRON_RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ["HF_TOKEN"]
+          repo=os.environ["HF_REPO"]
+          run_id=os.environ["CEREBRON_RUN_ID"]
+          matrix=json.loads(Path("config/all-ai-memory-matrix-v1.json").read_text())
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not getattr(info,"private",False):
+              raise SystemExit("HF_PRIVATE_REPO=FAIL")
+
+          receipt={
+            "schema":"CEREBRON_ALL_AI_HF_M03_RECEIPT_V1",
+            "run_id":run_id,
+            "checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "repo":repo,
+            "results":[],
+            "status":"PASS"
+          }
+          for x in matrix["entries"]:
+              if not x["available"]:
+                  receipt["results"].append({
+                    "ai_id":x["ai_id"],"identity":x["identity"],"status":"UNAVAILABLE","reason":"REPOSITORY_MISSING"
+                  })
+                  continue
+              payload={
+                "schema":"CEREBRON_AI_MEMORY_CONNECTIVITY_FIXTURE_V1",
+                "ai_id":x["ai_id"],
+                "identity":x["identity"],
+                "agent_slot":"A6_MEMORY_KEEPER",
+                "memory_class":"M7_EVIDENCE",
+                "run_id":run_id,
+                "private":True,
+                "purpose":"M03_CONNECTIVITY_ONLY_NOT_TRAINING"
+              }
+              raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+              digest=hashlib.sha256(raw).hexdigest()
+              local="/tmp/"+x["ai_id"].replace("/","-")+".json"
+              Path(local).write_bytes(raw)
+              remote=x["namespace"]+"/M7_EVIDENCE/"+run_id+".json"
+              api.upload_file(
+                path_or_fileobj=local,path_in_repo=remote,repo_id=repo,repo_type="model",
+                commit_message="M03 versioned connectivity fixture "+x["ai_id"]
+              )
+              got=hf_hub_download(repo_id=repo,filename=remote,repo_type="model",token=token,force_download=True)
+              got_raw=Path(got).read_bytes()
+              got_sha=hashlib.sha256(got_raw).hexdigest()
+              ok=got_sha==digest
+              receipt["results"].append({
+                "ai_id":x["ai_id"],"identity":x["identity"],"status":"PASS" if ok else "FAIL",
+                "write":"PASS","read":"PASS","sha256":"PASS" if ok else "FAIL",
+                "payload_sha256":digest,"remote_object":remote
+              })
+              if not ok:
+                  receipt["status"]="FAIL"
+
+          available=[x for x in receipt["results"] if x["status"]!="UNAVAILABLE"]
+          receipt["summary"]={
+            "logical_ai":len(receipt["results"]),
+            "available_tested":len(available),
+            "unavailable":len(receipt["results"])-len(available),
+            "passed":sum(1 for x in available if x["status"]=="PASS"),
+            "failed":sum(1 for x in available if x["status"]=="FAIL")
+          }
+          Path("receipts/p03").mkdir(parents=True,exist_ok=True)
+          Path("receipts/p03/all-ai-hf-m03.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          if receipt["status"]!="PASS":
+              raise SystemExit(2)
+          PY
+      - name: Persist non-sensitive receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/all-ai-hf-m03.json
+          git diff --cached --quiet && exit 0
+          git commit -m "M03 receipt: all-AI HF private memory canary"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
