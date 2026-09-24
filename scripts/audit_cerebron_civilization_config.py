@@ -35,6 +35,16 @@ def main():
     if set(school.get("roles",[]))!=active: errors.append("AGORA/CEREBRON active role mismatch")
     if {x["ai_id"] for x in bind.get("current_ai",[])}!=active: errors.append("memory binding active role mismatch")
     if set(mem.get("native_ai",{}).get("active",[]))!=active: errors.append("memory fabric active role mismatch")
+    bind_rows=bind.get("current_ai",[])
+    namespaces=[x.get("namespace") for x in bind_rows]
+    if len(namespaces)!=len(set(namespaces)): errors.append("duplicate native AI memory namespace")
+    for row in bind_rows:
+        expected=f"native-ai/{row['ai_id']}"
+        if row.get("namespace")!=expected: errors.append(f"noncanonical namespace for {row['ai_id']}")
+        if row.get("durable_backend")!="cerebron-omega/cerebron-private-memory": errors.append(f"backend mismatch for {row['ai_id']}")
+        if row.get("m6_training")!="DENY": errors.append(f"M6 training not denied for {row['ai_id']}")
+        if row.get("raw_agora_training")!="DENY": errors.append(f"RAW AGORA training not denied for {row['ai_id']}")
+        if row.get("cross_ai_blind_copy")!="DENY": errors.append(f"blind cross-copy not denied for {row['ai_id']}")
 
     planned={"SAELION","ALPHA","OMEGA","DELTA","NEXUS"}
     if set(school.get("planned_roles",[]))!=planned: errors.append("AGORA planned role mismatch")
