@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M19_GVL_B3_RUNNING.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M20_S10_MARGINAL_GAIN_RUNNING.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -46,9 +46,9 @@
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
   },
-  "current_message": "M19_IN_PROGRESS",
+  "current_message": "M20_IN_PROGRESS",
   "active_runs": {
-    "gvl_b3": 36038241741
+    "s10_marginal_gain": 36042832474
   },
   "m05_result": "7_OF_7_PASS_GUARD_PENDING",
   "m06": "PREPARED_NOT_TRIGGERED",
@@ -66,14 +66,16 @@
     "pass2r": "PASS_5_OF_5",
     "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST_ONLY"
   },
-  "next_action": "Complete GVL B3 controlled A/B at scale 5; measure baseline versus GVL transfer gain. Do not scale 5->10 unless marginal gain is positive and quality gates remain satisfied.",
+  "next_action": "Complete wave A, then GVL-complementary wave B, then deterministic marginal gain score; do not scale without persisted positive receipt.",
   "gvl": {
-    "version": "2.0.0",
     "dimension": 32,
-    "status": "V2_GUARD_PASS",
-    "guard_run": 36037885406,
-    "controlplane_canary": "PASS_703_PAIRS",
-    "geometric_growth": "NOT_DEMONSTRATED",
-    "active_benchmark": "B3_CAUSAL_CONFOUNDING_AB"
+    "b3_ratio": 1.032258,
+    "geometric_gate_progress": "1_OF_4",
+    "geometric_growth_claim": "DENY"
+  },
+  "scaling": {
+    "current_scale": 5,
+    "s10_test": "WAVE_A_RUNNING",
+    "actual_scale_change": false
   }
 }
