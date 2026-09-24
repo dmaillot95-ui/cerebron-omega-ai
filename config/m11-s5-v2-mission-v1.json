@@ -4,7 +4,7 @@
   "runtime_changed": false,
   "mission_id": "C80-M11-S5-V2-001",
   "problem_text": "A coalition of five workers uses the exact same model family and exact same model revision, but each worker receives a different role-specific prompt. Does that coalition constitute five independent evidentiary sources for validating a scientific or mathematical claim?",
-  "problem_sha256": "TO_BE_VALIDATED_BY_WORKFLOW",
+  "problem_sha256": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230",
   "expected_epistemic_core": [
     "Different prompts can create search or reasoning diversity.",
     "Shared model/revision creates common lineage and correlated failure modes.",
@@ -49,5 +49,6 @@
   },
   "contract": "config/role-diverse-prompt-contract-v2.json",
   "gold_status": "DENY_UNTIL_POSTRUN_AUDIT",
-  "scale_status": "5_TO_10_DENY_UNTIL_V2_BEATS_V1"
+  "scale_status": "5_TO_10_DENY_UNTIL_V2_BEATS_V1",
+  "problem_hash_policy": "IMMUTABLE_EXACT_UTF8_SHA256"
 }
