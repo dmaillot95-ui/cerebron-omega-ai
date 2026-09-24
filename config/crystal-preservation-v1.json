@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_CRYSTAL_PRESERVATION_V1",
+  "status": "ENFORCED_BY_POLICY_VALIDATION_PENDING_PER_COMPONENT",
+  "runtime_changed": false,
+  "objective": "Prevent loss, destructive overwrite, silent promotion and lineage erasure while allowing successor AIs to improve the system.",
+  "storage_model": {
+    "github": "code, configs, manifests, opaque pointers, small evidence and immutable history",
+    "huggingface_private": "private validated payloads, approved datasets, adapters and weights",
+    "f66": "relation/index pointer layer",
+    "f74": "validated memory catalog/pointer layer",
+    "agora_forum": "discussion/lesson capsules; never raw truth"
+  },
+  "invariants": [
+    "APPEND_OR_VERSION_NEVER_DESTRUCTIVE_OVERWRITE",
+    "PRESERVE_PRIOR_SHA_AND_PARENT_POINTER",
+    "FAILED_BRANCHES_RETAINED_WITH_REASON",
+    "M6_SEALED_AND_DENIED_TO_TRAINING",
+    "PRIVATE_PAYLOAD_NEVER_COPIED_TO_PUBLIC_GITHUB",
+    "MEMORY_NE_TRAINING",
+    "PROMPT_NE_WEIGHT_CHANGE",
+    "SUCCESSOR_READS_LATEST_VERIFIED_CHECKPOINT_BEFORE_WRITE",
+    "ROLLBACK_POINTER_REQUIRED_FOR_MODEL_OR_ADAPTER_PROMOTION",
+    "NO_CRYSTAL_CHANGE_WITHOUT_VALIDATOR_AND_RECEIPT"
+  ],
+  "handoff_packet": [
+    "checkpoint_id",
+    "parent_checkpoint_id",
+    "git_head",
+    "registry_version",
+    "ai_states",
+    "agent_states",
+    "memory_pointer_set",
+    "hf_private_revision_or_object_ids",
+    "evidence_receipts",
+    "open_failures",
+    "blocked_gates",
+    "next_actions",
+    "rollback_targets"
+  ],
+  "hf_namespace_pattern": "ai/{ai_id}/agent/{agent_slot}/{memory_class}/{memory_id}",
+  "hf_write_protocol": [
+    "CLASSIFY",
+    "HASH",
+    "DEDUP",
+    "WRITE_NEW_VERSION",
+    "READ_BACK",
+    "VERIFY_SHA256",
+    "PUBLISH_OPAQUE_POINTER",
+    "INDEX",
+    "CHECKPOINT"
+  ],
+  "no_overwrite": true
+}
