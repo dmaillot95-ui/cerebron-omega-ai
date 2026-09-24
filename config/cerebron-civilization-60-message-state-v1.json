@@ -29,7 +29,7 @@
   },
   "runtime_modified": false,
   "next_message": 4,
-  "next_objective": "VERIFY_FARM_FUNCTION_ROUTING_AND_NATIVE_AI_F145_F146_DIRECT_ROUTE",
+  "next_objective": "VERIFY_FARM_FUNCTION_ARCHITECTURE_DIRECT_ROUTING_FALLBACK_AND_RECEIPT_RULES",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -43,17 +43,18 @@
     "isolation_mode": "LOGICAL_NAMESPACE_POLICY_NOT_SEPARATE_STORAGE_ACL",
     "runtime_modified": false
   },
-  "message_3_status": "PASS_SCOPED",
+  "message_3_status": "PASS_SCOPED_SINGLE_SLOT_EXECUTION",
   "message_3_evidence": {
-    "hf20_pool_audit_run": 35953143135,
-    "pool_audit_job": 107485765676,
-    "hf_a01_job": 107485985625,
-    "hf_a01_receipt_artifact": 10789317767,
-    "hf_a01_receipt_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88",
-    "executed_slots": 1,
-    "non_executed_slots": 19,
-    "platform_ci_run": 35953133114,
-    "platform_ci_result": "SUCCESS",
+    "evidence_commit": "34979b51efd6f65b4c449e3595cf6f95f7c14c30",
+    "workflow_run_id": 35953143135,
+    "pool_audit_job_id": 107485765676,
+    "execution_job_id": 107485985625,
+    "artifact_id": 10789317767,
+    "artifact_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88",
+    "executed_slots": [
+      "HF-A01"
+    ],
+    "non_executed_slot_count": 19,
     "runtime_modified": false
   }
 }
