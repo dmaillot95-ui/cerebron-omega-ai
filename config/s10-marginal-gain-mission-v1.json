@@ -1,0 +1,121 @@
+{
+  "schema": "CEREBRON_S10_MARGINAL_GAIN_MISSION_V1",
+  "status": "READY",
+  "runtime_changed": false,
+  "mission_id": "C80-S10-MARGINAL-GAIN-001",
+  "objective": "Measure whether five GVL-complementary specialists add nonredundant useful information beyond the validated five-worker baseline, without treating correlated same-model outputs as independent evidence.",
+  "problem_text": "A proposed autonomous orbital habitat thermal-control system is claimed ready for representative operation because a high-fidelity digital twin predicts all components remain below limits, three subsystem benches passed laboratory tests, and telemetry from two similar systems shows no failures during 500 operating hours. However, several subsystems share sensors, software and power buses; extreme eclipse conditions, a degraded pump, maintenance variability and combined failures are incompletely tested. What additional evidence or checks are required before promoting the claim that representative operation is validated?",
+  "model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "lineage_class": "CORRELATED_SHARED_MODEL_REVISION"
+  },
+  "wave_A_baseline": [
+    {
+      "worker_id": "SAPHEA-A",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A2_ANALYST",
+      "role_id": "SYSTEM_ARCHITECT",
+      "task": "Define the minimum validation chain and promotion gates."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A4_AUDITOR",
+      "role_id": "EVIDENCE_AUDITOR",
+      "task": "Classify which existing evidence supports which claims and identify evidence gaps."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A5_COUNTER_AUDITOR",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "task": "Find failure scenarios that could defeat the readiness claim despite current evidence."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "parent_ai": "SPIRALION",
+      "endpoint": "SPIRALION:A7_SYNTHESIZER",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "task": "Produce a checkpoint-ready synthesis preserving validated evidence, gaps and residual risk."
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "parent_ai": "ETHERION",
+      "endpoint": "ETHERION:A2_ANALYST",
+      "role_id": "FORMAL_ANALYST",
+      "task": "Formalize the strongest admissible claim and the conditions needed to strengthen it."
+    }
+  ],
+  "wave_B_extension": [
+    {
+      "worker_id": "METRION-A",
+      "parent_ai": "METRION",
+      "endpoint": "METRION:A4_AUDITOR",
+      "role_id": "ENGINEERING_VALIDATOR",
+      "task": "Specify representative engineering tests, metrology and acceptance criteria still required."
+    },
+    {
+      "worker_id": "RHO-A",
+      "parent_ai": "F166-RHO",
+      "endpoint": "F166-RHO:A5_COUNTER_AUDITOR",
+      "role_id": "DEPENDENCY_CORRELATION_AUDITOR",
+      "task": "Detect common-cause dependencies and pseudo-independent evidence created by shared sensors, software, power or data lineage."
+    },
+    {
+      "worker_id": "XI-A",
+      "parent_ai": "F163-XI",
+      "endpoint": "F163-XI:A4_AUDITOR",
+      "role_id": "TRANSFER_VALIDATOR",
+      "task": "Test whether evidence from benches and similar systems transfers to this habitat and operating regime."
+    },
+    {
+      "worker_id": "PSI-A",
+      "parent_ai": "F172-PSI",
+      "endpoint": "F172-PSI:A1_EXPLORER",
+      "role_id": "HIDDEN_VARIABLE_HUNTER",
+      "task": "Identify omitted states, hidden variables and combined conditions that could overturn the readiness conclusion."
+    },
+    {
+      "worker_id": "TAU-A",
+      "parent_ai": "F168-TAU",
+      "endpoint": "F168-TAU:A2_ANALYST",
+      "role_id": "MARGINAL_GAIN_ANALYST",
+      "task": "Identify the highest-information next tests and when further testing should stop under a fixed budget."
+    }
+  ],
+  "finding_taxonomy": [
+    "SIMULATION_NE_REPRESENTATIVE_VALIDATION",
+    "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+    "COMMON_CAUSE_DEPENDENCY",
+    "TRANSFER_LIMIT_FROM_SIMILAR_SYSTEMS",
+    "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+    "REPRESENTATIVE_ENVIRONMENT_TEST",
+    "METROLOGY_AND_ACCEPTANCE_CRITERIA",
+    "UNCERTAINTY_AND_MARGIN",
+    "MAINTENANCE_OR_HUMAN_VARIABILITY",
+    "INFORMATION_GAIN_AND_STOP_RULE"
+  ],
+  "pass_gate": {
+    "wave_A_real_receipts": 5,
+    "wave_B_real_receipts": 5,
+    "wave_A_spiralix": 5,
+    "wave_B_spiralix": 5,
+    "critical_errors_max": 0,
+    "extension_min_new_findings": 2,
+    "extension_min_useful_workers": 3,
+    "independent_evidence_count": 0,
+    "result_if_pass": "MARGINAL_GAIN_POSITIVE_ELIGIBLE_FOR_CONTROLLED_S10_STAGE",
+    "result_if_fail": "STAY_AT_5"
+  },
+  "integrity": [
+    "SAME_MODEL_REVISION_ALL_10",
+    "MAX_PARALLEL_5",
+    "WAVE_B_AFTER_WAVE_A",
+    "NO_GOLD",
+    "NO_TRAINING",
+    "NO_INDEPENDENCE_CLAIM",
+    "SPIRALIX_REQUIRED",
+    "GVL_SPECIALIZATION_SELECTION_RECORDED"
+  ]
+}
