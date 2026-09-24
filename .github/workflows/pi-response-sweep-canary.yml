@@ -1,0 +1,24 @@
+name: PI-SWEEP shared response-angle canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/pi_response_sweep.py'
+      - 'tests/test_pi_response_sweep.py'
+      - '.github/workflows/pi-response-sweep-canary.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m unittest tests/test_pi_response_sweep.py -v
+      - name: Generate shared sweep manifest
+        run: python tools/pi_response_sweep.py --circle 16 --sphere 32
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pi-response-sweep-v1
+          path: out/pi-response-sweep.json
+          retention-days: 14
