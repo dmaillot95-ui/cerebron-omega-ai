@@ -288,6 +288,19 @@
       "dimension": 32,
       "guard_conclusion": "success",
       "b3_run": 36038241741
+    },
+    {
+      "id": "C80-GVL-B3",
+      "title": "GVL B3 causal confounding",
+      "status": "COMPLETE_POSITIVE_TRANSFER",
+      "run_id": 36038241741,
+      "receipt": "receipts/gvl/gvl-b3-36038241741.json",
+      "quality_before": 0.93,
+      "quality_after": 0.96,
+      "transfer_gain": 0.03,
+      "ratio": 1.032258,
+      "critical_errors": 0,
+      "geometric_gate_progress": "1_OF_4"
     }
   ],
   "updated_at": "2026-09-24",
