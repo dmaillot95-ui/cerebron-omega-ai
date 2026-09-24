@@ -1,0 +1,4 @@
+ASK_AELYS_SELF_ASSESSMENT_V1
+mode=CEREBRON-M
+spiralix=required
+runtime_changed=false
