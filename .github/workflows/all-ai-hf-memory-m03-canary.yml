@@ -96,7 +96,10 @@ jobs:
             "failed":sum(1 for x in available if x["status"]=="FAIL")
           }
           Path("receipts/p03").mkdir(parents=True,exist_ok=True)
-          Path("receipts/p03/all-ai-hf-m03.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          Path("receipts/p03/all-ai-hf-m03").mkdir(parents=True,exist_ok=True)
+          versioned=Path("receipts/p03/all-ai-hf-m03")/f"{run_id}.json"
+          versioned.write_text(json.dumps(receipt,indent=2)+"\n")
+          Path("receipts/p03/all-ai-hf-m03-latest.json").write_text(json.dumps({"schema":"CEREBRON_ALL_AI_HF_M03_LATEST_V1","run_id":run_id,"receipt":str(versioned)},indent=2)+"\n")
           if receipt["status"]!="PASS":
               raise SystemExit(2)
           PY
@@ -105,7 +108,7 @@ jobs:
         run: |
           git config user.name cerebron-bot
           git config user.email actions@users.noreply.github.com
-          git add receipts/p03/all-ai-hf-m03.json
+          git add receipts/p03/all-ai-hf-m03/ receipts/p03/all-ai-hf-m03-latest.json
           git diff --cached --quiet && exit 0
           git commit -m "M03 receipt: all-AI HF private memory canary"
           for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
