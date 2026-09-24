@@ -31,7 +31,8 @@
       "MAX_20",
       "NO_POSITIVE_INFORMATION_GAIN",
       "NO_QUALIFIED_EXECUTION_ROUTE",
-      "BUDGET_GUARD"
+      "BUDGET_GUARD",
+      "GVL_NO_POSITIVE_EFFECTIVE_GAIN"
     ]
   },
   "standard_20_roles": [
@@ -138,5 +139,13 @@
     "output_envelope": true,
     "max_workers": 20,
     "rule": "Every selected/executed Burst20 worker must receive and return a SPIRALIX envelope; planned workers still remain NOT_EXECUTED."
+  },
+  "gvl_selection": {
+    "enabled": true,
+    "contract": "config/geometric-vector-learning-v1.json",
+    "objective": "MAXIMIZE_EXPECTED_INFORMATION_GAIN_SUBJECT_TO_REAL_EXECUTION_AND_EVIDENCE_GATES",
+    "score": "0.55*expected_information_gain + 0.30*vector_complementarity + 0.15*role_coverage",
+    "redundancy_penalty": "Subtract candidates with cosine redundancy above 0.85 unless needed for replication.",
+    "replication_exception": "High-redundancy workers may be selected for explicit replication, but never counted as independent evidence."
   }
 }
