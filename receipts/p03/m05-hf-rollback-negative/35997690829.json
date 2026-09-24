@@ -1,0 +1,9 @@
+{
+  "schema": "CEREBRON_M05_NEGATIVE_EVIDENCE_V2",
+  "run_id": 35997690829,
+  "classification": "WORKFLOW_CODE_DEFECT",
+  "failure": "NameError: m03 is not defined before any valid corrected rollback receipt could be produced.",
+  "data_integrity": "NO_VALID_NEW_CLAIM_FROM_THIS_RUN",
+  "preserve": true,
+  "corrected_by_commit": "557820cef35dd2ff43cd24ffa571d10f0104568c"
+}
