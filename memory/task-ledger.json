@@ -25,8 +25,15 @@
     {
       "id": "C80-M03",
       "title": "All-AI HF memory verification matrix",
-      "status": "NEXT",
-      "objective": "Map per-AI or representative-family HF private write/read/SHA evidence and generate safe rollout gates."
+      "status": "CANARY_RUNNING",
+      "objective": "Verify HF private write/read/SHA for each of 38 available logical AIs using unique versioned A6_MEMORY_KEEPER namespaces.",
+      "guard_run": 35995124491
+    },
+    {
+      "id": "C80-M04",
+      "title": "F66/F74 pointer and rollback rollout",
+      "status": "BLOCKED_BY_M03",
+      "objective": "After per-AI HF round-trip passes, verify public opaque pointer, F66/F74 identity and rollback for each available AI family without exposing private payload."
     }
   ],
   "updated_at": "2026-09-24",
