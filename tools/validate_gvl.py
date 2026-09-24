@@ -8,7 +8,7 @@ lessons=json.loads((R/"memory/gvl-lesson-index.json").read_text())
 lesson_schema=json.loads((R/"config/gvl-lesson-capsule-schema-v1.json").read_text())
 registry=json.loads((R/"config/gvl-specialization-registry-v2.json").read_text())
 benchmark=json.loads((R/"config/gvl-growth-benchmark-v1.json").read_text())
-assert cfg["schema"]=="CEREBRON_GEOMETRIC_VECTOR_LEARNING_V1"
+assert cfg["schema"]=="CEREBRON_GEOMETRIC_VECTOR_LEARNING_V2"
 assert cfg["runtime_changed"] is False
 assert cfg["counts"]=={"logical_ai":39,"available_ai":38,"prep_only_ai":1}
 assert registry["schema"]=="CEREBRON_GVL_SPECIALIZATION_REGISTRY_V2"
