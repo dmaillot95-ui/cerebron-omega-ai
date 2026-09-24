@@ -58,7 +58,7 @@
     "non_executed_slot_count": 19,
     "runtime_modified": false
   },
-  "message_4_status": "PASS_DIRECT_AUDIT_CI_REVALIDATION_QUEUED",
+  "message_4_status": "PASS_WITH_BRIDGE_SCOPE_LIMIT",
   "message_4_evidence": {
     "evidence_commit": "3aace3ff0c75c5b0e550e24f5dbff67aafd0e047",
     "registry_count": 151,
@@ -80,7 +80,10 @@
     "f123_bridge_run_id": 35897592604,
     "f123_bridge_artifact_id": 10767830799,
     "global_ci_run_id": 35954042621,
-    "global_ci_status": "QUEUED_AT_CHECKPOINT",
-    "runtime_modified": false
+    "global_ci_status": "SUCCESS",
+    "runtime_modified": false,
+    "global_ci_job_id": 107488449983,
+    "f123_bridge_job_id": 107305284787,
+    "f123_bridge_artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75"
   }
 }
