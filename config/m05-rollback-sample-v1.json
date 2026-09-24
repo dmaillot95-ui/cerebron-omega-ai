@@ -1,8 +1,8 @@
 {
   "schema": "CEREBRON_M05_ROLLBACK_SAMPLE_V1",
-  "status": "READY",
+  "status": "READY_CORRECTED_PARENT_PINNED",
   "runtime_changed": false,
-  "parent_run_id": "35995124491",
+  "parent_run_id": "35996621664",
   "sample": [
     {
       "ai_id": "CEREBRON",
@@ -34,5 +34,7 @@
     }
   ],
   "rule": "Write M05 as a new object, preserve M03 object unchanged, and prove rollback by re-reading M03 and matching its original SHA256.",
-  "no_overwrite": true
+  "no_overwrite": true,
+  "parent_receipt": "receipts/p03/all-ai-hf-m03/35996621664.json",
+  "previous_run_35997393013": "PASS_DATA_INTEGRITY_BUT_PARENT_METADATA_MISMATCH_PRESERVED_AS_NEGATIVE_EVIDENCE"
 }
