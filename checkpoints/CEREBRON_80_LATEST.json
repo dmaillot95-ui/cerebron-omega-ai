@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M13_CONTROLLED_CONVERGENCE.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M14_GATED_PARALLEL_PROGRESS.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -22,9 +22,9 @@
     "receipts/p03/m05-hf-rollback-negative/35997686804.json"
   ],
   "blocked": {
-    "m11": "BLOCKED_BY_M10",
+    "m11_execution": "BLOCKED_BY_M10",
     "scaling_5_to_10": "HOLD",
-    "gold": "DENY_PENDING_M10"
+    "m06_f66_f74_promotion": "BLOCKED_BY_M06"
   },
   "parallel_completed_branch": {
     "task": "C80-M07",
@@ -46,15 +46,19 @@
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
   },
-  "current_message": "M13_IN_PROGRESS",
+  "current_message": "M14_IN_PROGRESS",
   "active_runs": {
+    "m06_full_rollback": 36017852411,
     "m10_semantic_audit": 36015400305,
-    "m05_guard": 36017126572,
-    "m11_preflight": 36016825702
+    "nu_scaffold_guard": 36017814035
   },
   "m05_result": "7_OF_7_PASS_GUARD_PENDING",
   "m06": "PREPARED_NOT_TRIGGERED",
   "m10": "ELYSIUM_OVERPERMISSIVE_OMEGA_RUNNING_GOLD_DENY",
   "m11": "PREFLIGHT_QUEUED_EXECUTION_NOT_TRIGGERED",
-  "scaling_5_to_10": "HOLD"
+  "scaling_5_to_10": "HOLD",
+  "completed": {
+    "m05": "COMPLETE_GUARD_PASS",
+    "m11_preflight": "SUCCESS"
+  }
 }
