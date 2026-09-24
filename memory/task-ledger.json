@@ -257,7 +257,7 @@
     {
       "id": "C80-GVL",
       "title": "Geometric Vector Learning",
-      "status": "GVL_INSTALLED_GUARD_QUEUED",
+      "status": "GVL_V2_CONTROLPLANE_PASS_ACTION_GUARD_PENDING",
       "contract": "config/geometric-vector-learning-v1.json",
       "engine": "tools/gvl_vector_engine.py",
       "history": "memory/gvl-learning-history.json",
@@ -266,11 +266,21 @@
       "guard_run": 36033064544,
       "logical_ai": 39,
       "available_ai": 38,
-      "vector_dimension": 16,
+      "vector_dimension": 32,
       "geometric_growth_claim": "NOT_DEMONSTRATED",
       "required_growth_gate": "AT_LEAST_4_CONSECUTIVE_HELD_OUT_TRANSFER_CYCLES_WITH_RATIO_GT_1_AND_ZERO_CRITICAL_REGRESSION",
       "civilisation_tasks_updated": 5,
-      "scale_5_to_10": "HOLD"
+      "scale_5_to_10": "HOLD",
+      "version": "1.1.0",
+      "registry": "config/gvl-specialization-registry-v2.json",
+      "controlplane_receipt": "receipts/gvl/gvl-v2-controlplane-canary.json",
+      "controlplane_result": "PASS",
+      "cerebron_aelys_redundancy": 0.288675,
+      "pair_count": 703,
+      "measured_transfer_ratios": [
+        0.8
+      ],
+      "action_guard_run": 36033414058
     }
   ],
   "updated_at": "2026-09-24",
