@@ -173,7 +173,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "PREFLIGHT_QUEUED_NOT_TRIGGERED",
+      "status": "PREFLIGHT_PASS_EXECUTION_BLOCKED_BY_M10",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -182,7 +182,8 @@
       "preflight_run": 36016825702,
       "problem_sha256": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230",
       "semantic_baseline": "receipts/agora/m09-semantic-baseline-v1.json",
-      "execution_triggered": false
+      "execution_triggered": false,
+      "preflight_conclusion": "success"
     }
   ],
   "updated_at": "2026-09-24",
