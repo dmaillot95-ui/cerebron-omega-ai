@@ -1,0 +1,161 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_04_FARM_ROUTING_V1",
+  "status": "PASS_DIRECT_AUDIT_CI_REVALIDATION_QUEUED",
+  "program_message": 4,
+  "registry": {
+    "count": 151,
+    "min_id": 1,
+    "max_id": 151,
+    "contiguous": true,
+    "registry_commit": "afa62b4e4bccfe7e2f9da2f900ea19a5d621bf3e",
+    "repository_presence": {
+      "present": 151,
+      "missing": 0,
+      "note": "150 matched broad installed-repository search; F41 verified separately by exact repository search."
+    }
+  },
+  "functional_architecture": {
+    "group_count": 19,
+    "coverage_once": 151,
+    "missing": [],
+    "duplicate_membership": [],
+    "commits": {
+      "classify_f101_f144": "8146faab7c5315e3f3f8a948097a60b4fa3a7c06",
+      "extend_native_ai_f151": "4069c90a2714c89582866c2aaa868ec3a8f0d75d"
+    },
+    "new_groups": {
+      "G13": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110
+      ],
+      "G14": [
+        111,
+        112,
+        113
+      ],
+      "G15": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ],
+      "G16": [
+        121,
+        122
+      ],
+      "G17": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ],
+      "G18": [
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ],
+      "G19": [
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    "fallback": "NONE_FOR_F001_F151_AFTER_EXPLICIT_CLASSIFICATION"
+  },
+  "routing": {
+    "unknown_ids": [],
+    "active_native_ai_farms": [
+      145,
+      146
+    ],
+    "pending_native_ai_farms": [
+      147,
+      148,
+      149,
+      150,
+      151
+    ],
+    "pending_rule": "NOT_ROUTABLE_UNTIL_MEMORY_RUNTIME_BENCHMARK_GATES_PASS",
+    "direct_routing_commit": "b63492b4b6707ce2943b3a2bbc9ecaac40baeffd"
+  },
+  "new_native_ai_repositories": [
+    {
+      "farm_id": 147,
+      "name": "SAELION",
+      "repo": "dmaillot95-ui/cerebron-farm-147-saelion",
+      "state": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "farm_id": 148,
+      "name": "ALPHA",
+      "repo": "dmaillot95-ui/cerebron-farm-148-alpha",
+      "state": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "farm_id": 149,
+      "name": "OMEGA",
+      "repo": "dmaillot95-ui/cerebron-farm-149-omega",
+      "state": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "farm_id": 150,
+      "name": "DELTA",
+      "repo": "dmaillot95-ui/cerebron-farm-150-delta",
+      "state": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    },
+    {
+      "farm_id": 151,
+      "name": "NEXUS",
+      "repo": "dmaillot95-ui/cerebron-farm-151-nexus",
+      "state": "REPOSITORY_PRESENT_NOT_ACTIVE"
+    }
+  ],
+  "execution_receipt_policy": {
+    "rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY",
+    "platform_bridge_pilots": [
+      123
+    ],
+    "platform_bridge_scope": "Only F123 is currently integrated in platform/farm_bridge.py.",
+    "f123_latest_verified_bridge": {
+      "run_id": 35897592604,
+      "job_id": 107305284787,
+      "head_sha": "6264778e9de372471bfc2a9ba9b7caf48612fcfd",
+      "artifact_id": 10767830799,
+      "artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75",
+      "conclusion": "success"
+    },
+    "claim_limit": "Other farms may have their own workflows/results, but platform-level bridge execution is not universal and must not be inferred from registry status."
+  },
+  "global_ci_revalidation": {
+    "run_id": 35954042621,
+    "head_sha": "0a2164af49facb998c32b963578021a61dd358ef",
+    "status": "QUEUED_AT_CHECKPOINT",
+    "note": "Direct configuration audit passed; this CI run is additional asynchronous revalidation and is not claimed as PASS yet."
+  },
+  "runtime_modified": false,
+  "farms_deleted": 0,
+  "farm_identities_renamed": 0
+}
