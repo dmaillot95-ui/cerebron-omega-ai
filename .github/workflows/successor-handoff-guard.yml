@@ -1,0 +1,24 @@
+name: Successor Handoff Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'checkpoints/CEREBRON_80_M02_SUCCESSOR_HANDOFF.json'
+      - 'tools/validate_successor_handoff.py'
+      - '.github/workflows/successor-handoff-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_successor_handoff.py
+      - name: Verify current history descends from frozen base
+        run: git merge-base --is-ancestor a1308a84583a08c67e4ca2f063c5346f48e738e8 HEAD
