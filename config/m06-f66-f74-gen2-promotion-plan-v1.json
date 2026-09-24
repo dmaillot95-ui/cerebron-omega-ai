@@ -1,0 +1,59 @@
+{
+  "schema": "CEREBRON_M06_F66_F74_GEN2_PROMOTION_PLAN_V1",
+  "status": "BLOCKED_BY_M06_FULL_ROLLBACK_PASS",
+  "runtime_changed": false,
+  "prerequisite": {
+    "receipt": "receipts/p03/m06-hf-full-rollback-latest.json",
+    "guard": ".github/workflows/m06-full-rollback-guard.yml",
+    "required": "38_OF_38_PASS_PARENT_35996621664"
+  },
+  "generation": "M06",
+  "parent_generation": "M03",
+  "target_available_ai": 38,
+  "excluded": [
+    {
+      "ai_id": "F162-NU",
+      "reason": "REPOSITORY_MISSING"
+    }
+  ],
+  "f74": {
+    "repository": "dmaillot95-ui/cerebron-farm-74-session-memory-encyclopedia",
+    "new_path_pattern": "memory/private-pointers/m06/{ai_id}.json",
+    "preserve_parent_path_pattern": "memory/private-pointers/m03/{ai_id}.json",
+    "fields_required": [
+      "memory_id",
+      "ai_id",
+      "generation",
+      "parent_generation",
+      "parent_pointer",
+      "rollback_pointer",
+      "payload_sha256",
+      "private_object_path",
+      "source_run_id",
+      "privacy"
+    ]
+  },
+  "f66": {
+    "repository": "dmaillot95-ui/cerebron-farm-66-knowledge-graph-vector-index",
+    "new_path_pattern": "index/private-pointers/m06/{ai_id}.json",
+    "preserve_parent_path_pattern": "index/private-pointers/m03/{ai_id}.json",
+    "rule": "Point to exact F74 M06 commit and retain M03 index unchanged."
+  },
+  "verification": [
+    "M06_HF_RECEIPT_PASS",
+    "F74_NEW_POINTER_COUNT_38",
+    "F74_PARENT_M03_POINTERS_STILL_EXIST",
+    "F66_NEW_INDEX_COUNT_38",
+    "F66_POINTS_EXACT_F74_COMMIT",
+    "PAYLOAD_SHA_MATCHES_M06_RECEIPT",
+    "ROLLBACK_POINTS_TO_M03",
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB"
+  ],
+  "no_overwrite": true,
+  "hard_rules": [
+    "APPEND_OR_VERSION_ONLY",
+    "NO_ORPHAN_POINTER",
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
