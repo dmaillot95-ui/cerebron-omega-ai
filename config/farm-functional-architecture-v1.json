@@ -198,23 +198,117 @@
         145,
         146
       ]
+    },
+    {
+      "id": "G13",
+      "name": "SPACE_WORLD_CIVILIZATION",
+      "purpose": "space world, cities, factories, energy, robotic workforce, ISRU, logistics and civilization simulation",
+      "farms": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110
+      ]
+    },
+    {
+      "id": "G14",
+      "name": "EMBODIED_COGNITIVE_SYSTEMS",
+      "purpose": "humanoid mechatronics, cognitive-process simulation and embodied ELYRA digital humanoid",
+      "farms": [
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "id": "G15",
+      "name": "MEMORY_OMEGA",
+      "purpose": "encyclopedic/vector memory, dedup, replay, GOLD, evidence archive and memory governor",
+      "farms": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "id": "G16",
+      "name": "ASTRION_METRION_SPECIALISTS",
+      "purpose": "spatial intelligence and engineering validation specialist roots",
+      "farms": [
+        121,
+        122
+      ]
+    },
+    {
+      "id": "G17",
+      "name": "SPACE_MISSION_FLIGHT_SYSTEMS",
+      "purpose": "mission design, GNC, flight software, digital twin, reentry, propulsion, communications and space traffic",
+      "farms": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ]
+    },
+    {
+      "id": "G18",
+      "name": "SPACE_ENVIRONMENT_HABITAT",
+      "purpose": "radiation, space weather, cryogenics, ECLSS, vacuum, tribology, optics and remote sensing",
+      "farms": [
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ]
+    },
+    {
+      "id": "G19",
+      "name": "SPACE_INDUSTRIAL_VERIFICATION",
+      "purpose": "regolith, microgravity manufacturing, qualification, ground ops, MBSE and independent aerospace verification",
+      "farms": [
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ]
     }
   ],
   "registry_snapshot": {
     "count": 146,
     "max_id": 146,
     "sha": "0f720039f5d0773823441fb33cdd034bc769060e",
-    "date": "2026-09-23"
+    "date": "2026-09-24"
   },
   "dynamic_fallback": {
-    "applies_to": "ANY_REGISTERED_FARM_NOT_LISTED_IN_STATIC_GROUPS",
+    "applies_to": "ANY_FUTURE_VERIFIED_REGISTERED_FARM_NOT_LISTED_IN_STATIC_GROUPS",
     "route_by": [
       "domain",
       "role",
       "status",
       "evidence"
     ],
-    "current_range": "F101-F144_AND_FUTURE_VERIFIED_NOT_EXPLICITLY_GROUPED",
-    "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY"
+    "current_range": "NONE_FOR_F001_F146_AFTER_EXPLICIT_CLASSIFICATION",
+    "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY",
+    "future_rule": "NEW_FARM_MUST_ENTER_A_FUNCTIONAL_GROUP_OR_EXPLICIT_FALLBACK_WITH_REASON"
   }
 }
