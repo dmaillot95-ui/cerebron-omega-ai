@@ -77,11 +77,19 @@
     "WORKFLOW_SUCCESS_NOT_RESULT_VALIDATION",
     "CLAIM_LE_EVIDENCE"
   ],
-  "next_gate": "PROVE_SINGLE_EPHEMERAL_HF_SLOT_EXECUTION_WITH_VALID_RECEIPT_THEN_KEEP_19_UNUSED",
+  "next_gate": "TEST_SMALL_FANOUT_INFORMATION_GAIN_BEFORE_ANY_SCALE_ABOVE_1_SLOT",
   "receipt_policy": {
     "routed": "NOT_EXECUTED",
     "executed": "VALID_RECEIPT_REQUIRED",
     "independent_evidence": "REQUIRES_DISTINCT_MODEL_OR_DATA_TOOL_LINEAGE_NOT_SLOT_ID_ALONE",
     "max_slots": "20_CAPACITY_NOT_TARGET_UTILIZATION"
+  },
+  "last_execution_canary": {
+    "status": "PASS",
+    "slot_id": "HF-A01",
+    "run_id": 35953143135,
+    "receipt_artifact_id": 10789317767,
+    "other_slots_executed": 0,
+    "interpretation": "Slot routing and receipt chain proven once; no evidence that using more slots improves results."
   }
 }
