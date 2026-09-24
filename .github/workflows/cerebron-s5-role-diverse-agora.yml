@@ -90,6 +90,9 @@ jobs:
             "receipt_sha256":r["receipt_sha256"]
           }))
           if not r["llm_inference"]: raise SystemExit(2)
+      - name: Wrap worker receipt in mandatory SPIRALIX
+        if: always()
+        run: python tools/spiralix_receipt_bridge.py --receipt "artifacts/${{ matrix.worker }}/receipt.json" --target AGORA --message-type RESULT
       - uses: actions/upload-artifact@v4
         if: always()
         with:
