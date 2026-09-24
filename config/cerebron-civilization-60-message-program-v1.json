@@ -78,7 +78,7 @@
   "current_message": {
     "number": 6,
     "action": "VERIFY_AGORA_ROLES_COORDINATION_AND_TRANSFER_RULES_FOR_ACTIVE_AND_PENDING_NATIVE_AI",
-    "status": "PASS_GOVERNANCE_WITH_HISTORICAL_FORUM_SCOPE_LIMIT"
+    "status": "PASS_GOVERNANCE_WITH_HISTORICAL_RUNTIME_SCOPE_LIMIT"
   },
   "chatgpt_task_schedule_unchanged": true,
   "date": "2026-09-24",
@@ -197,6 +197,6 @@
   },
   "next_message": {
     "number": 7,
-    "action": "VERIFY_MEMORY_CLASS_PROMOTION_PATH_M0_TO_M7_AND_FAIL_CLOSED_CONTAMINATION_GATES"
+    "action": "VERIFY_MEMORY_CLASS_PROMOTION_GATES_M0_TO_M7_AND_PREVENT_M6_OR_RAW_AGORA_CONTAMINATION"
   }
 }
