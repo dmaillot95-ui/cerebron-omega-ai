@@ -1,0 +1,112 @@
+name: GVL B3 Causal Confounding A-B
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/gvl-b3-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - SAPHEA-A
+          - SAPHEA-B
+          - SAPHEA-C
+          - SPIRALION-A
+          - ETHERION-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-smollm3-3b-a07cc9a04f16550a088caea529712d1d335b0ac1
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Baseline execution
+        run: python tools/gvl_b3_worker.py --worker "${{ matrix.worker }}" --wave BASELINE --run-id "${{ github.run_id }}" --output "artifacts/baseline/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gvl-b3-baseline-${{ matrix.worker }}
+          path: artifacts/baseline/${{ matrix.worker }}/receipt.json
+
+  learned:
+    needs: baseline
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - SAPHEA-A
+          - SAPHEA-B
+          - SAPHEA-C
+          - SPIRALION-A
+          - ETHERION-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-smollm3-3b-a07cc9a04f16550a088caea529712d1d335b0ac1
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: GVL execution
+        run: python tools/gvl_b3_worker.py --worker "${{ matrix.worker }}" --wave GVL --run-id "${{ github.run_id }}" --output "artifacts/gvl/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gvl-b3-learned-${{ matrix.worker }}
+          path: artifacts/gvl/${{ matrix.worker }}/receipt.json
+
+  score:
+    needs:
+      - baseline
+      - learned
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gvl-b3-baseline-*
+          path: downloaded/baseline
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gvl-b3-learned-*
+          path: downloaded/gvl
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Score controlled ablation
+        run: python tools/gvl_b3_score.py --baseline-glob "downloaded/baseline/**/receipt.json" --gvl-glob "downloaded/gvl/**/receipt.json" --run-id "${{ github.run_id }}" --output "receipts/gvl/gvl-b3-${{ github.run_id }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gvl-b3-score-${{ github.run_id }}
+          path: receipts/gvl/gvl-b3-${{ github.run_id }}.json
+      - name: Persist B3 receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/gvl/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: GVL B3 controlled causal-confounding ablation"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
