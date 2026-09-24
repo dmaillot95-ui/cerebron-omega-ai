@@ -1,5 +1,5 @@
 {
-  "version": "2.20",
+  "version": "2.21",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1086,6 +1086,51 @@
         "M6_NEVER_IN_TRAIN",
         "CLAIM_LE_EVIDENCE"
       ]
+    },
+    {
+      "id": 147,
+      "repo": "cerebron-farm-147-saelion",
+      "domain": "saelion-native-learning-exploration",
+      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "name": "SAELION",
+      "type": "AI_FARM",
+      "role": "exploration-learning-selection-compression"
+    },
+    {
+      "id": 148,
+      "repo": "cerebron-farm-148-alpha",
+      "domain": "alpha-native-divergence-construction",
+      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "name": "ALPHA",
+      "type": "AI_FARM",
+      "role": "divergence-opening-construction"
+    },
+    {
+      "id": 149,
+      "repo": "cerebron-farm-149-omega",
+      "domain": "omega-native-proof-falsification",
+      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "name": "OMEGA",
+      "type": "AI_FARM",
+      "role": "proof-audit-counteraudit-falsification"
+    },
+    {
+      "id": 150,
+      "repo": "cerebron-farm-150-delta",
+      "domain": "delta-native-science-modeling",
+      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "name": "DELTA",
+      "type": "AI_FARM",
+      "role": "scientific-modeling-simulation-validation"
+    },
+    {
+      "id": 151,
+      "repo": "cerebron-farm-151-nexus",
+      "domain": "nexus-native-knowledge-orchestration",
+      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "name": "NEXUS",
+      "type": "AI_FARM",
+      "role": "knowledge-connection-ai-tool-orchestration"
     }
   ],
   "max_farms": 146,
