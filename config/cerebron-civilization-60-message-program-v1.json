@@ -78,7 +78,7 @@
   "current_message": {
     "number": 4,
     "action": "VERIFY_FARM_FUNCTION_ARCHITECTURE_DIRECT_ROUTING_FALLBACK_AND_RECEIPT_RULES",
-    "status": "PASS_DIRECT_AUDIT_CI_REVALIDATION_QUEUED"
+    "status": "PASS_WITH_BRIDGE_SCOPE_LIMIT"
   },
   "chatgpt_task_schedule_unchanged": true,
   "date": "2026-09-24",
