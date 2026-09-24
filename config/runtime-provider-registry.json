@@ -1,25 +1,28 @@
 {
   "schema": "cerebron-runtime-provider-registry-v1",
-  "status": "DISCOVERY_WITH_GITHUB_CPU_CANARY_RUNNING",
+  "status": "GITHUB_ACTIONS_CPU_QUALIFIED_CANARY_5_OTHER_PROVIDERS_GATED",
   "contract": "config/inference-runner-contract.json",
   "canary": "config/inference-runner-canary.json",
   "providers": [
     {
       "id": "GITHUB_ACTIONS_CPU",
-      "state": "CANARY_RUNNING",
-      "exact_revision": "PINNED_IN_CANARY",
-      "weights_execution": "PENDING_RUN_36002999588",
+      "state": "QUALIFIED_CANARY_5",
+      "exact_revision": "PROVEN",
+      "weights_execution": "PROVEN_5_WORKERS_RUN_36002999588",
       "cost_policy": "PUBLIC_REPOSITORY_STANDARD_RUNNER_ZERO_PAID_OVERAGE",
-      "next_test": "resource feasibility canary only",
+      "next_test": "S5_ROLE_DIVERSE_AGORA_MISSION",
       "current_canary": {
         "run_id": 36002999588,
         "workflow": "CEREBRON 5 Real AI Workers Canary",
         "workers": 5,
+        "result": "5_OF_5_REAL_LLM_INFERENCE_PASS",
+        "receipt": "receipts/workers/5-real-ai-workers-36002999588.json",
         "model": "HuggingFaceTB/SmolLM3-3B",
         "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
-        "required_result": "5_OF_5_REAL_LLM_INFERENCE_PASS"
+        "output_diversity": "1_UNIQUE_OUTPUT_OF_5"
       },
-      "promotion_rule": "Do not set QUALIFIED until all five job receipts are inspected and validated."
+      "promotion_rule": "Do not set QUALIFIED until all five job receipts are inspected and validated.",
+      "qualification_scope": "Five real parallel/queued GitHub-hosted CPU jobs with the pinned model/revision; does not qualify 10 or 20 workers."
     },
     {
       "id": "HF_SERVERLESS",
