@@ -182,7 +182,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "QUALITY_PASS1_V3_QUEUED",
+      "status": "QUALITY_PASS1_V3_RUNNING",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -210,7 +210,8 @@
       "v3_contract": "config/m11-quality-pass1-v3-contract.json",
       "v3_run_id": 36027613868,
       "v3_strategy": "CHAT_TEMPLATE_MODEL_CONTENT_ONLY_SYSTEM_METADATA_DETERMINISTIC_AUDIT",
-      "scale_5_to_10": "HOLD"
+      "scale_5_to_10": "HOLD",
+      "quality_improvement_loop": "config/quality-improvement-loop-v1.json"
     },
     {
       "id": "C80-NU-F162",
