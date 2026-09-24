@@ -107,6 +107,15 @@
       "guard_job": 107631939392,
       "guard_conclusion": "success",
       "result": "39_AI_COLONIES_312_CONFIGURED_SLOTS_304_AVAILABLE_PARENT_SLOTS_8_NU_UNAVAILABLE"
+    },
+    {
+      "id": "C80-M08",
+      "title": "Qualify real burst worker execution route",
+      "status": "CANARY_5_QUEUED",
+      "run_id": 36002999588,
+      "selection_guard_run": 36000734259,
+      "route": "GITHUB_ACTIONS_CPU",
+      "objective": "Require 5/5 real pinned-model inference receipts before binding Burst20 slots to this route."
     }
   ],
   "updated_at": "2026-09-24",
