@@ -1,0 +1,35 @@
+{
+  "schema": "CEREBRON_80_M17_PASS2_REPAIR_CANARY",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 17,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "quality_pass1": {
+    "run_id": 36027613868,
+    "status": "PASS",
+    "workers": "5_OF_5",
+    "spiralix": "5_OF_5",
+    "false_independence": 0
+  },
+  "quality_pass2": {
+    "run_id": 36028613557,
+    "status": "FAIL_4_OF_5",
+    "collective_core_count": 4,
+    "failed_worker": "SAPHEA-A",
+    "failed_role": "SYSTEM_ARCHITECT",
+    "critical_finding": "Simulation result alone was incorrectly described as validating representative real-system operation."
+  },
+  "repair": {
+    "role_contract": "config/system-architect-evidence-contract-v1.json",
+    "scorer_hardened": true,
+    "canary_run": 36031518267,
+    "canary_status": "QUEUED",
+    "collective_retest_plan": "config/s5-pass2r-retest-plan-v1.json",
+    "collective_retest_status": "BLOCKED_BY_CANARY"
+  },
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "HOLD_AT_5"
+  },
+  "next_action": "Require SAPHEA-A canary PASS, then rerun the same 5-worker transfer test with only the generic SYSTEM_ARCHITECT evidence contract changed."
+}
