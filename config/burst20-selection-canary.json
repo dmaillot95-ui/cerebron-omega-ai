@@ -1,0 +1,29 @@
+{
+  "schema": "CEREBRON_BURST20_SELECTION_CANARY_V1",
+  "mission_id": "BURST20-SELECTION-CANARY-001",
+  "requested_workers": 20,
+  "required_roles": [
+    "REALITY_RESEARCH",
+    "SYSTEM_ARCHITECT",
+    "CALCULATION",
+    "SIMULATION",
+    "CAUSAL_ANALYSIS",
+    "INVENTION",
+    "FAILURE_ANALYSIS",
+    "COUNTEREXAMPLE_HUNTER",
+    "FALSIFIER",
+    "FORMAL_AUDITOR",
+    "INDEPENDENT_REPLICATOR",
+    "UNCERTAINTY_ANALYST",
+    "INTERFACE_ANALYST",
+    "INVARIANT_HUNTER",
+    "EXPERIMENT_DESIGN",
+    "CONTRADICTION_RESOLUTION",
+    "UNKNOWN_GAP_ANALYST",
+    "EVIDENCE_AUDITOR",
+    "SYNTHESIS_ANALYST",
+    "OMEGA_JUDGE"
+  ],
+  "objective": "Exercise deterministic selection/accounting only; no model execution claim.",
+  "execution": false
+}
