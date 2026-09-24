@@ -1,0 +1,160 @@
+{
+  "schema": "CEREBRON_GVL_GROWTH_BENCHMARK_V1",
+  "status": "FROZEN_MEASUREMENT_CONTRACT",
+  "runtime_changed": false,
+  "purpose": "Measure transferable compound improvement consistently across CEREBRON AIs without moving the goalposts.",
+  "benchmark_layers": {
+    "coaxial_common": {
+      "weight": 0.5,
+      "applies_to": "ALL_AVAILABLE_AI",
+      "dimensions": [
+        {
+          "id": "C1",
+          "name": "EVIDENCE_DISCIPLINE",
+          "weight": 0.12
+        },
+        {
+          "id": "C2",
+          "name": "CLAIM_CALIBRATION",
+          "weight": 0.08
+        },
+        {
+          "id": "C3",
+          "name": "SPIRALIX_PROVENANCE",
+          "weight": 0.08
+        },
+        {
+          "id": "C4",
+          "name": "ROLE_FIDELITY",
+          "weight": 0.08
+        },
+        {
+          "id": "C5",
+          "name": "AUDIT_RESISTANCE",
+          "weight": 0.08
+        },
+        {
+          "id": "C6",
+          "name": "TRANSFER_TO_HELD_OUT_TASK",
+          "weight": 0.06
+        }
+      ]
+    },
+    "vector_specialist": {
+      "weight": 0.35,
+      "applies_to": "AI_SPECIALIZATION",
+      "dimensions": [
+        {
+          "id": "V1",
+          "name": "SPECIALIST_TASK_QUALITY",
+          "weight": 0.15
+        },
+        {
+          "id": "V2",
+          "name": "SPECIALIST_TRANSFER",
+          "weight": 0.1
+        },
+        {
+          "id": "V3",
+          "name": "COMPLEMENTARITY",
+          "weight": 0.05
+        },
+        {
+          "id": "V4",
+          "name": "NON_REDUNDANT_INFORMATION_GAIN",
+          "weight": 0.05
+        }
+      ]
+    },
+    "efficiency": {
+      "weight": 0.15,
+      "dimensions": [
+        {
+          "id": "E1",
+          "name": "USEFUL_INFORMATION_PER_EXECUTION",
+          "weight": 0.06
+        },
+        {
+          "id": "E2",
+          "name": "USEFUL_INFORMATION_PER_TOKEN_OR_STEP",
+          "weight": 0.04
+        },
+        {
+          "id": "E3",
+          "name": "FAILURE_RECOVERY_WITHOUT_SCALE",
+          "weight": 0.03
+        },
+        {
+          "id": "E4",
+          "name": "MEMORY_DEDUP_RATIO",
+          "weight": 0.02
+        }
+      ]
+    }
+  },
+  "quality_formula": "Q = sum(weight_k * normalized_metric_k), Q in [0,1]",
+  "gvl_formula": {
+    "cycle_ratio": "r_t = Q_t / Q_(t-1)",
+    "effective_gain": "e_t = max(0,Q_t-Q_(t-1)) * novelty * evidence_weight * audit_pass",
+    "compound_index": "G_T = product_t(r_t) over comparable held-out cycles",
+    "geometric_like_gate": "At least 4 consecutive comparable held-out cycles with r_t>1, zero critical regression, frozen benchmark version and no benchmark leakage."
+  },
+  "benchmark_integrity": [
+    "FREEZE_TASK_IDS_BEFORE_RUN",
+    "NO_TRAINING_ON_HELD_OUT_TASKS",
+    "NO_M6_IN_TRAIN",
+    "NO_PROMPT_SPECIFIC_TO_HIDDEN_ANSWER",
+    "SAME_SCORING_VERSION_ACROSS_COMPARED_CYCLES",
+    "REPORT_FAILED_AND_NEGATIVE_CYCLES",
+    "DO_NOT_DROP_HARD_TASKS_AFTER_FAILURE"
+  ],
+  "task_families": [
+    {
+      "id": "B1",
+      "class": "EVIDENCE_INDEPENDENCE",
+      "role": "coaxial",
+      "status": "CALIBRATION_USED"
+    },
+    {
+      "id": "B2",
+      "class": "SIMULATION_VS_REAL_VALIDATION",
+      "role": "held_out_transfer",
+      "status": "USED_TRANSFER_1"
+    },
+    {
+      "id": "B3",
+      "class": "CAUSAL_CONFOUNDING",
+      "role": "future_held_out",
+      "status": "SEALED_NOT_RUN"
+    },
+    {
+      "id": "B4",
+      "class": "UNCERTAINTY_AND_EXTREME_CASE",
+      "role": "future_held_out",
+      "status": "SEALED_NOT_RUN"
+    },
+    {
+      "id": "B5",
+      "class": "INTERFACE_CONTRACT_FAILURE",
+      "role": "future_held_out",
+      "status": "SEALED_NOT_RUN"
+    },
+    {
+      "id": "B6",
+      "class": "CROSS_DOMAIN_TRANSFER",
+      "role": "future_held_out",
+      "status": "SEALED_NOT_RUN"
+    }
+  ],
+  "anti_gaming": {
+    "geometric_growth_claim_requires": "B2 plus at least three additional distinct held-out task families with ratios >1.",
+    "specialization_gain_requires": "Gain on specialist task plus no coaxial regression.",
+    "redundancy_gain_is_zero": "Duplicating an existing validated lesson without new evidence or transfer does not increase Q."
+  },
+  "hard_rules": [
+    "BENCHMARK_FREEZE",
+    "TRANSFER_BEFORE_GENERALITY",
+    "GEOMETRIC_GROWTH_MEASURED_NOT_DECLARED",
+    "QUALITY_BEFORE_QUANTITY"
+  ]
+}
