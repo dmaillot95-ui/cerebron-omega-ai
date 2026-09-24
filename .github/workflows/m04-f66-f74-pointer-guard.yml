@@ -1,0 +1,20 @@
+name: M04 F66 F74 Pointer Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/m04-pointer-manifest.json'
+      - 'tools/validate_m04_pointer_pairs.py'
+      - '.github/workflows/m04-f66-f74-pointer-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_m04_pointer_pairs.py
