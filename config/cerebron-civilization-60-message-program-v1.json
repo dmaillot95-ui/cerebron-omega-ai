@@ -78,7 +78,7 @@
   "current_message": {
     "number": 3,
     "action": "VERIFY_HF20_SLOT_SEMANTICS_RUNTIME_GATES_AND_EXECUTION_RECEIPTS",
-    "status": "PASS_SCOPED"
+    "status": "PASS_SCOPED_SINGLE_SLOT_EXECUTION"
   },
   "chatgpt_task_schedule_unchanged": true,
   "date": "2026-09-24",
@@ -192,6 +192,6 @@
   },
   "next_message": {
     "number": 4,
-    "action": "VERIFY_FARM_FUNCTION_ROUTING_AND_NATIVE_AI_F145_F146_DIRECT_ROUTE"
+    "action": "VERIFY_FARM_FUNCTION_ARCHITECTURE_DIRECT_ROUTING_FALLBACK_AND_RECEIPT_RULES"
   }
 }
