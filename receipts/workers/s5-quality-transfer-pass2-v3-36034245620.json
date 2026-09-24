@@ -1,0 +1,125 @@
+{
+  "schema": "CEREBRON_S5_TRANSFER_PASS2_V3_SCORE",
+  "run_id": "36034245620",
+  "rows": [
+    {
+      "worker_id": "ETHERION-A",
+      "role_id": "FORMAL_ANALYST",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 4,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "role_id": "SYSTEM_ARCHITECT",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 4,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "role_id": "EVIDENCE_AUDITOR",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 3,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES"
+      ],
+      "core_hit_count": 2,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 4,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    }
+  ],
+  "collective_core_hits": [
+    "ASSUMPTIONS_BOUNDARIES",
+    "PREDICTION_NE_OPERATIONAL_VALIDATION",
+    "REPRESENTATIVE_TEST_REQUIRED",
+    "SIMULATION_NE_TEST"
+  ],
+  "collective_core_count": 4,
+  "worker_quality_passes": 5,
+  "quality_pass2": true,
+  "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST",
+  "spiralix_audit_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "9ae1927e0662e44ef406da9ad5e36fb9b0218f23ddbd093954af98a3982d408a",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SPIRALION:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "C80-S5-QUALITY-PASS2-TRANSFER-001",
+    "message_type": "AUDIT",
+    "glyph_expression": "\u03a9\u27e6SPIRALION:A\u2087\u27e7\u2192AG\u03a9",
+    "V": {
+      "P": "THERMAL_SIMULATION_VALIDATION",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "e417f7250fef79780e07e0ca4cf2137663c0b35d90e946e788e0777b9b19b8f7",
+        "3afa90274fa169859c1227e6d5c550fd6c3c373c727a76ed57de9afa1357c6f3",
+        "dc3530085a2cb1e0f2a199574269e457990da07c1e313b2fa913c7e9f37841c8",
+        "9e0b13a8a0d6a1b94c1b6fc87e455760c26e8dac864b452deeb79330d6e40ee7",
+        "7843d96cf29a7dd8480a78cbe75f3d1628d685e6d446c4d8804c5f0c17501688"
+      ],
+      "M": null
+    },
+    "payload_sha256": "42c301fb2ea3c0bcf8b9336494c5d05a702e68ebc2302a8920b61e76d0ea2469",
+    "lineage_fingerprint": "7874b18b87661a61520beea747418da0caadc0526b168a123d89866e3aa9cedc",
+    "evidence_refs": [],
+    "natural_language": "Transfer pass2=True; worker passes=5/5; core=4/4.",
+    "json_payload": {
+      "schema": "CEREBRON_S5_TRANSFER_PASS2_V3_SCORE",
+      "run_id": "36034245620",
+      "collective_core_hits": [
+        "ASSUMPTIONS_BOUNDARIES",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "SIMULATION_NE_TEST"
+      ],
+      "collective_core_count": 4,
+      "worker_quality_passes": 5,
+      "quality_pass2": true,
+      "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST"
+    },
+    "created_at": "2026-09-24T17:45:14.008488+00:00"
+  },
+  "spiralix_audit_envelope_sha256": "8e1979cfcdcbdb6440d200af48c21539d6eaaaf50c00b1e104ec0e322f12e96b",
+  "score_sha256": "beef739e4db5c91034dd7b5a48ec485fcaceff767424a9632748f4644e617a50"
+}
