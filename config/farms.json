@@ -1,5 +1,5 @@
 {
-  "version": "2.23",
+  "version": "2.24",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1139,7 +1139,7 @@
       "domain": "gamma-native-ai",
       "identity": "GAMMA",
       "greek_letter": "Γ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
       "training_status": "NOT_TRAINED",
@@ -1147,7 +1147,7 @@
       "role_id": "MECHANISM_TOPOLOGY_BUILDER",
       "role_boundary": "Does not maintain the global knowledge graph; NEXUS does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 154,
@@ -1171,7 +1171,7 @@
       "domain": "zeta-native-ai",
       "identity": "ZETA",
       "greek_letter": "Ζ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
       "training_status": "NOT_TRAINED",
@@ -1179,7 +1179,7 @@
       "role_id": "COMPLEXITY_RESOURCE_MINIMIZER",
       "role_boundary": "Does not choose mission priorities; CEREBRON does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 156,
@@ -1187,7 +1187,7 @@
       "domain": "eta-native-ai",
       "identity": "ETA",
       "greek_letter": "Η",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
       "training_status": "NOT_TRAINED",
@@ -1195,7 +1195,7 @@
       "role_id": "TEMPORAL_DYNAMICS_ANALYST",
       "role_boundary": "Does not manage checkpoint memory; SPIRALION does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 157,
@@ -1203,7 +1203,7 @@
       "domain": "theta-native-ai",
       "identity": "THETA",
       "greek_letter": "Θ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
       "training_status": "NOT_TRAINED",
@@ -1211,7 +1211,7 @@
       "role_id": "REPRESENTATION_TRANSFORMER",
       "role_boundary": "Does not generate the broad hypothesis population; HYPERION does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 158,
@@ -1219,7 +1219,7 @@
       "domain": "iota-native-ai",
       "identity": "IOTA",
       "greek_letter": "Ι",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
       "training_status": "NOT_TRAINED",
@@ -1227,7 +1227,7 @@
       "role_id": "ATOMIC_CLAIM_INSPECTOR",
       "role_boundary": "Not mission task decomposition; this is claim-level micro-analysis.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 159,
@@ -1235,7 +1235,7 @@
       "domain": "kappa-native-ai",
       "identity": "KAPPA",
       "greek_letter": "Κ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
       "training_status": "NOT_TRAINED",
@@ -1243,7 +1243,7 @@
       "role_id": "FEASIBILITY_ENVELOPE_SOLVER",
       "role_boundary": "Does not perform final verification; ELYSIUM does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 160,
@@ -1251,7 +1251,7 @@
       "domain": "lambda-native-ai",
       "identity": "LAMBDA",
       "greek_letter": "Λ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
       "training_status": "NOT_TRAINED",
@@ -1259,7 +1259,7 @@
       "role_id": "TRANSFORMATION_COMPOSER",
       "role_boundary": "Does not execute code; SAPHEA/code tools execute.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 161,
@@ -1267,7 +1267,7 @@
       "domain": "mu-native-ai",
       "identity": "MU",
       "greek_letter": "Μ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
       "training_status": "NOT_TRAINED",
@@ -1275,7 +1275,7 @@
       "role_id": "UNCERTAINTY_QUANTIFIER",
       "role_boundary": "Does not make final epistemic acceptance; AFAH does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 162,
@@ -1299,7 +1299,7 @@
       "domain": "xi-native-ai",
       "identity": "XI",
       "greek_letter": "Ξ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
       "training_status": "NOT_TRAINED",
@@ -1307,7 +1307,7 @@
       "role_id": "TRANSFER_GENERALIZATION_EXAMINER",
       "role_boundary": "Does not store/compress learned lessons; SAELION does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 164,
@@ -1315,7 +1315,7 @@
       "domain": "omicron-native-ai",
       "identity": "OMICRON",
       "greek_letter": "Ο",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
       "training_status": "NOT_TRAINED",
@@ -1323,7 +1323,7 @@
       "role_id": "RARE_EVENT_OUTLIER_HUNTER",
       "role_boundary": "Not a general adversarial verifier; ELYSIUM covers broad verification.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 165,
@@ -1331,7 +1331,7 @@
       "domain": "pi-native-ai",
       "identity": "PI",
       "greek_letter": "Π",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
       "training_status": "NOT_TRAINED",
@@ -1340,7 +1340,7 @@
       "role_id": "POSSIBILITY_SPACE_SAMPLER",
       "role_boundary": "PI is not an oracle and sampling is not proof.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 166,
@@ -1348,7 +1348,7 @@
       "domain": "rho-native-ai",
       "identity": "RHO",
       "greek_letter": "Ρ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
       "training_status": "NOT_TRAINED",
@@ -1356,7 +1356,7 @@
       "role_id": "INDEPENDENCE_CORRELATION_AUDITOR",
       "role_boundary": "Does not aggregate evidence weights; SIGMA does.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 167,
@@ -1364,7 +1364,7 @@
       "domain": "sigma-native-ai",
       "identity": "SIGMA",
       "greek_letter": "Σ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
       "training_status": "NOT_TRAINED",
@@ -1372,7 +1372,7 @@
       "role_id": "STATISTICAL_EVIDENCE_AGGREGATOR",
       "role_boundary": "Not general narrative synthesis; CEREBRON/SM18 handle fusion.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 168,
@@ -1380,7 +1380,7 @@
       "domain": "tau-native-ai",
       "identity": "TAU",
       "greek_letter": "Τ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
       "training_status": "NOT_TRAINED",
@@ -1388,7 +1388,7 @@
       "role_id": "CONVERGENCE_STOPPING_CONTROLLER",
       "role_boundary": "Does not set human priorities or alter schedules autonomously.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 169,
@@ -1396,7 +1396,7 @@
       "domain": "upsilon-native-ai",
       "identity": "UPSILON",
       "greek_letter": "Υ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
       "training_status": "NOT_TRAINED",
@@ -1404,7 +1404,7 @@
       "role_id": "PARETO_UTILITY_ANALYST",
       "role_boundary": "Does not make the final human value decision.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 170,
@@ -1412,7 +1412,7 @@
       "domain": "phi-native-ai",
       "identity": "PHI",
       "greek_letter": "Φ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
       "training_status": "NOT_TRAINED",
@@ -1420,7 +1420,7 @@
       "role_id": "SCALE_SYMMETRY_ANALYST",
       "role_boundary": "Does not treat the golden ratio as universal or privileged evidence.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 171,
@@ -1428,7 +1428,7 @@
       "domain": "chi-native-ai",
       "identity": "CHI",
       "greek_letter": "Χ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
       "training_status": "NOT_TRAINED",
@@ -1436,7 +1436,7 @@
       "role_id": "INTERFACE_COMPATIBILITY_RESOLVER",
       "role_boundary": "Does not globally orchestrate tools; NEXUS connects them.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     },
     {
       "id": 172,
@@ -1444,7 +1444,7 @@
       "domain": "psi-native-ai",
       "identity": "PSI",
       "greek_letter": "Ψ",
-      "status": "SCAFFOLDED_PENDING_GUARDS",
+      "status": "SCAFFOLDED_GUARDS_PASS_NOT_TRAINED",
       "type": "AI_FARM",
       "role": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
       "training_status": "NOT_TRAINED",
@@ -1452,7 +1452,7 @@
       "role_id": "LATENT_BLINDSPOT_EXPLORER",
       "role_boundary": "Does not certify discovered hypotheses; they return to verification.",
       "campaign_passes": 10,
-      "infrastructure_status": "FILES_COMMITTED_GUARDS_PENDING"
+      "infrastructure_status": "VALIDATED"
     }
   ],
   "max_farms": 172,
@@ -1471,7 +1471,13 @@
     "greek_ai_scaffold_installation_started": true,
     "greek_ai_repository_missing_ids": [
       162
-    ]
+    ],
+    "greek_new_scaffolds_validated_count": 20,
+    "greek_missing_repository_ids": [
+      162
+    ],
+    "greek_total_infrastructure_present": 23,
+    "greek_total_target": 24
   },
   "shared_engines": {
     "NVIDIA": {
