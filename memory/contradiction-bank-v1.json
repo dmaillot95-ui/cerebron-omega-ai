@@ -1,0 +1,48 @@
+{
+  "schema": "CEREBRON_CONTRADICTION_BANK_V1",
+  "status": "ACTIVE",
+  "entries": [
+    {
+      "CONTRADICTION_ID": "CONTRA-C80-LATEST-STATE-001",
+      "CLAIM_A": "Legacy latest pointer contains earlier HOLD/BLOCKED or WAVE_A_RUNNING fields.",
+      "CLAIM_B": "S10 run 36042832474 completed with deterministic decision STAY_AT_5.",
+      "SOURCE_A": "checkpoints/CEREBRON_80_LATEST.json",
+      "SOURCE_B": "receipts/workers/s10-marginal-gain-36042832474.json",
+      "LINEAGE_A": "LEGACY_POINTER_ACCUMULATED_FIELDS",
+      "LINEAGE_B": "RUN_36042832474_SCORE_JOB",
+      "EVIDENCE_A": "repository file state",
+      "EVIDENCE_B": "10 worker receipts + deterministic score receipt",
+      "CONTEXT": "State continuity pointer drift.",
+      "POSSIBLE_CAUSES": [
+        "append-style pointer accumulated stale fields",
+        "workflow completed after pointer write"
+      ],
+      "RESOLUTION_STATUS": "RESOLVED_BY_VERSIONED_POINTER_V2",
+      "RESOLUTION_TEST": "Read checkpoints/CEREBRON_80_LATEST_V2.json and verify S10 COMPLETE_STAY_AT_5.",
+      "WINNER": "NONE",
+      "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "CONTRADICTION_ID": "CONTRA-C80-S10-LINEAGE-001",
+      "CLAIM_A": "Ten role-diverse worker outputs were executed.",
+      "CLAIM_B": "The ten outputs do not constitute ten independent evidence lines.",
+      "SOURCE_A": "run:36042832474",
+      "SOURCE_B": "receipts/workers/s10-marginal-gain-36042832474.json",
+      "LINEAGE_A": "10_ENDPOINT_EXECUTIONS",
+      "LINEAGE_B": "1_SHARED_MODEL_REVISION_AND_1_UNIQUE_LINEAGE_FINGERPRINT",
+      "EVIDENCE_A": "executed_count=10",
+      "EVIDENCE_B": "correlated_count=10; unique_lineage_fingerprints=1; independent_evidence_count=0",
+      "CONTEXT": "Execution multiplicity versus evidentiary independence.",
+      "POSSIBLE_CAUSES": [
+        "shared model revision",
+        "shared task",
+        "shared workflow lineage"
+      ],
+      "RESOLUTION_STATUS": "RESOLVED_DEFINITIONAL",
+      "RESOLUTION_TEST": "Apply DEPENDENCY_GRAPH and independence rule.",
+      "WINNER": "NONE",
+      "TIMESTAMP": "2026-09-24"
+    }
+  ],
+  "rule": "No majority-vote resolution; unresolved contradictions remain visible."
+}
