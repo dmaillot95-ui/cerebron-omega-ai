@@ -1,0 +1,63 @@
+name: M11 Quality Pass1 V3
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/m11-quality-pass1-v3-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  worker:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - SAPHEA-A
+          - SAPHEA-B
+          - SAPHEA-C
+          - SPIRALION-A
+          - ETHERION-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute V3 chat-template quality worker
+        run: python tools/m11_quality_worker_v3.py --worker "${{ matrix.worker }}" --run-id "${{ github.run_id }}" --output "artifacts/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m11-v3-${{ matrix.worker }}
+          path: artifacts/${{ matrix.worker }}/receipt.json
+  score:
+    needs: worker
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: m11-v3-*
+          path: downloaded
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Deterministic quality score
+        run: python tools/m11_quality_score_v3.py --glob "downloaded/**/receipt.json" --run-id "${{ github.run_id }}" --output "receipts/workers/m11-quality-pass1-v3-${{ github.run_id }}.json"
+      - name: Persist V3 quality receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/workers/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: M11 quality pass1 V3"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
