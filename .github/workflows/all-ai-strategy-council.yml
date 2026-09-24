@@ -1,0 +1,104 @@
+name: CEREBRON All-AI Strategy Council
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/all-ai-strategy-council-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  council:
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        ai:
+          - CEREBRON
+          - SAPHEA
+          - SPIRALION
+          - ETHERION
+          - HYPERION
+          - ASTRION
+          - METRION
+          - AFAH
+          - AELYS
+          - ELYRA
+          - SAPHEA_MICRO
+          - ELYSION
+          - ELYSIUM
+          - SAELION
+          - NEXUS
+          - F148-ALPHA
+          - F152-BETA
+          - F153-GAMMA
+          - F150-DELTA
+          - F154-EPSILON
+          - F155-ZETA
+          - F156-ETA
+          - F157-THETA
+          - F158-IOTA
+          - F159-KAPPA
+          - F160-LAMBDA
+          - F161-MU
+          - F163-XI
+          - F164-OMICRON
+          - F165-PI
+          - F166-RHO
+          - F167-SIGMA
+          - F168-TAU
+          - F169-UPSILON
+          - F170-PHI
+          - F171-CHI
+          - F172-PSI
+          - F149-OMEGA
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache compact council model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-qwen25-05b-ec7ddfa904d4d447eedd0b7f126df16957734abb
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute logical-AI advisory perspective
+        run: python tools/all_ai_strategy_council_worker.py --ai "${{ matrix.ai }}" --run-id "${{ github.run_id }}" --output "artifacts/council/${{ matrix.ai }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: council-${{ matrix.ai }}
+          path: artifacts/council/${{ matrix.ai }}/receipt.json
+  audit:
+    needs: council
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: council-*
+          path: downloaded/council
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit contribution quality and redundancy
+        run: python tools/all_ai_strategy_council_score.py --glob "downloaded/council/**/receipt.json" --run-id "${{ github.run_id }}" --output "receipts/council/all-ai-strategy-council-${{ github.run_id }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-ai-strategy-council-audit-${{ github.run_id }}
+          path: receipts/council/all-ai-strategy-council-${{ github.run_id }}.json
+      - name: Persist council audit
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/council/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: all-AI strategy council audit"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
