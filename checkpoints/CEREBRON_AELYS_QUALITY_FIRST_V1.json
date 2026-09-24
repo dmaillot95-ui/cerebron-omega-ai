@@ -1,0 +1,38 @@
+{
+  "schema": "CEREBRON_AELYS_QUALITY_FIRST_CHECKPOINT_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "adopted_idea": "Improve reliability, memory use and specialization of existing agents before increasing their number.",
+  "evidence_basis": {
+    "aelys_self_report": "receipts/aelys/learning-message-v2-36021516601.json",
+    "aelys_audit": "receipts/aelys/learning-message-v2-audit-36021516601.json",
+    "m09_baseline": "receipts/agora/m09-semantic-baseline-v1.json",
+    "m10_decision": "receipts/agora/m10-semantic-audit-36015400305.json",
+    "spiralix_canary": "receipts/spiralix/universal-bus-canary.json",
+    "m06_memory": "receipts/p03/m06-hf-full-rollback-latest.json"
+  },
+  "installed": [
+    "config/quality-first-scale-policy-v1.json",
+    "config/aelys-quality-first-roadmap-v1.json",
+    "config/agent-quality-readiness-v1.json",
+    "config/agent-role-quality-contracts-v2.json",
+    "config/s5-quality-transfer-pass2-v1.json"
+  ],
+  "current": {
+    "coalition_size": 5,
+    "m11_pass1_run": 36024003536,
+    "m11_status": "RUNNING",
+    "scale_5_to_10": "LOCKED",
+    "scale_10_to_20": "LOCKED",
+    "spiralix_status": "MANDATORY_VALIDATED_304"
+  },
+  "unlock_5_to_10_requires": [
+    "M11_PASS1_5_OF_5",
+    "TRANSFER_PASS2_5_OF_5",
+    "DETERMINISTIC_AUDIT_PASS",
+    "NO_FALSE_INDEPENDENCE",
+    "POSITIVE_NONREDUNDANT_INFORMATION_GAIN",
+    "RESOURCE_BUDGET_PASS"
+  ],
+  "resume_rule": "On SUITE, inspect run 36024003536 first. If any worker fails, repair that failure at scale 5. If 5/5 pass, execute transfer pass 2; do not scale yet."
+}
