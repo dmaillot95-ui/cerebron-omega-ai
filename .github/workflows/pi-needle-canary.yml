@@ -1,0 +1,26 @@
+name: PI-NEEDLE Monte-Carlo direction canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/pi_needle.py'
+      - 'tests/test_pi_needle.py'
+      - '.github/workflows/pi-needle-canary.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m unittest tests/test_pi_needle.py -v
+      - name: Self-test
+        run: python tools/pi_needle.py --self-test
+      - name: Generate 512-needle manifest
+        run: python tools/pi_needle.py --task CEREBRON-PI-NEEDLE-CANARY --samples 512
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pi-needle-v1
+          path: out/pi-needle.json
+          retention-days: 14
