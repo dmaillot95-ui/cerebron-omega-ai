@@ -1,7 +1,9 @@
 {
-  "schema": "cerebron-greek-24-colony-master-v1",
-  "date": "2026-09-21",
-  "status": "TARGET_ARCHITECTURE_FROZEN_ROLLOUT_GATED",
+  "schema": "cerebron-greek-24-colony-master-v2",
+  "date": "2026-09-24",
+  "status": "ROLE_MAP_NORMALIZED_AGORA_FORUM_REGISTERED",
+  "authoritative_role_map": "config/greek-ai-constellation-v1.json",
+  "agora_training": "config/greek-agora-training-v1.json",
   "team_template": [
     "CHIEF",
     "PARALLEL_EXECUTORS",
@@ -10,50 +12,328 @@
     "SYNTHESIZER"
   ],
   "colonies": [
-    "ALPHA-SAPHEA",
-    "BETA-CALCULUS",
-    "GAMMA-EVIDENTIA",
-    "DELTA-PHYSIS",
-    "EPSILON-CODEX",
-    "ZETA-HEURIS",
-    "ETA-NEXUS",
-    "THETA-MATHESIS",
-    "IOTA-REPLICA",
-    "KAPPA-ANTITHESIS",
-    "LAMBDA-ARGUS",
-    "MU-SAPHEIDE",
-    "NU-MEMORIA",
-    "XI-VECTOR",
-    "OMICRON-HF-GATE",
-    "PI-FORGE",
-    "RHO-VISION",
-    "SIGMA-VIDEO",
-    "TAU-DATA",
-    "UPSILON-COMPUTE",
-    "PHI-SECURITY",
-    "CHI-ORCHESTRA",
-    "PSI-AGORA",
-    "OMEGA-AFAH"
+    {
+      "farm_id": 148,
+      "identity": "ALPHA",
+      "greek_letter": "Α",
+      "role_id": "DIVERGENCE_SEEDER",
+      "function": "Generate structurally different starting representations and search directions before deep reasoning.",
+      "boundary": "Does not validate, prove, route, or fuse.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 152,
+      "identity": "BETA",
+      "greek_letter": "Β",
+      "role_id": "PROBLEM_CONTRACT_COMPILER",
+      "function": "Convert a vague question into a testable problem contract: objective, variables, constraints, acceptance criteria, unknowns and forbidden assumptions.",
+      "boundary": "Does not orchestrate execution; CEREBRON remains executive.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 153,
+      "identity": "GAMMA",
+      "greek_letter": "Γ",
+      "role_id": "MECHANISM_TOPOLOGY_BUILDER",
+      "function": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
+      "boundary": "Does not maintain the global knowledge graph; NEXUS does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 150,
+      "identity": "DELTA",
+      "greek_letter": "Δ",
+      "role_id": "SCIENTIFIC_MODEL_BUILDER",
+      "function": "Build explicit scientific models, equations, assumptions, simulations and discriminating tests.",
+      "boundary": "Simulation remains distinct from physical validation.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 154,
+      "identity": "EPSILON",
+      "greek_letter": "Ε",
+      "role_id": "LOCAL_SENSITIVITY_PROBER",
+      "function": "Probe epsilon-neighborhoods around candidate solutions to measure local sensitivity, robustness margins and bifurcation points.",
+      "boundary": "Not a general Red Team; focuses on local perturbations.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 155,
+      "identity": "ZETA",
+      "greek_letter": "Ζ",
+      "role_id": "COMPLEXITY_RESOURCE_MINIMIZER",
+      "function": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
+      "boundary": "Does not choose mission priorities; CEREBRON does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 156,
+      "identity": "ETA",
+      "greek_letter": "Η",
+      "role_id": "TEMPORAL_DYNAMICS_ANALYST",
+      "function": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
+      "boundary": "Does not manage checkpoint memory; SPIRALION does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 157,
+      "identity": "THETA",
+      "greek_letter": "Θ",
+      "role_id": "REPRESENTATION_TRANSFORMER",
+      "function": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
+      "boundary": "Does not generate the broad hypothesis population; HYPERION does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 158,
+      "identity": "IOTA",
+      "greek_letter": "Ι",
+      "role_id": "ATOMIC_CLAIM_INSPECTOR",
+      "function": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
+      "boundary": "Not mission task decomposition; this is claim-level micro-analysis.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 159,
+      "identity": "KAPPA",
+      "greek_letter": "Κ",
+      "role_id": "FEASIBILITY_ENVELOPE_SOLVER",
+      "function": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
+      "boundary": "Does not perform final verification; ELYSIUM does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 160,
+      "identity": "LAMBDA",
+      "greek_letter": "Λ",
+      "role_id": "TRANSFORMATION_COMPOSER",
+      "function": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
+      "boundary": "Does not execute code; SAPHEA/code tools execute.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 161,
+      "identity": "MU",
+      "greek_letter": "Μ",
+      "role_id": "UNCERTAINTY_QUANTIFIER",
+      "function": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
+      "boundary": "Does not make final epistemic acceptance; AFAH does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 162,
+      "identity": "NU",
+      "greek_letter": "Ν",
+      "role_id": "NULL_MODEL_CHALLENGER",
+      "function": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
+      "boundary": "Not formal proof/falsification closure; OMEGA does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 163,
+      "identity": "XI",
+      "greek_letter": "Ξ",
+      "role_id": "TRANSFER_GENERALIZATION_EXAMINER",
+      "function": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
+      "boundary": "Does not store/compress learned lessons; SAELION does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 164,
+      "identity": "OMICRON",
+      "greek_letter": "Ο",
+      "role_id": "RARE_EVENT_OUTLIER_HUNTER",
+      "function": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
+      "boundary": "Not a general adversarial verifier; ELYSIUM covers broad verification.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 165,
+      "identity": "PI",
+      "greek_letter": "Π",
+      "role_id": "POSSIBILITY_SPACE_SAMPLER",
+      "function": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
+      "boundary": "PI is not an oracle and sampling is not proof.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 166,
+      "identity": "RHO",
+      "greek_letter": "Ρ",
+      "role_id": "INDEPENDENCE_CORRELATION_AUDITOR",
+      "function": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
+      "boundary": "Does not aggregate evidence weights; SIGMA does.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 167,
+      "identity": "SIGMA",
+      "greek_letter": "Σ",
+      "role_id": "STATISTICAL_EVIDENCE_AGGREGATOR",
+      "function": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
+      "boundary": "Not general narrative synthesis; CEREBRON/SM18 handle fusion.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 168,
+      "identity": "TAU",
+      "greek_letter": "Τ",
+      "role_id": "CONVERGENCE_STOPPING_CONTROLLER",
+      "function": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
+      "boundary": "Does not set human priorities or alter schedules autonomously.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 169,
+      "identity": "UPSILON",
+      "greek_letter": "Υ",
+      "role_id": "PARETO_UTILITY_ANALYST",
+      "function": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
+      "boundary": "Does not make the final human value decision.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 170,
+      "identity": "PHI",
+      "greek_letter": "Φ",
+      "role_id": "SCALE_SYMMETRY_ANALYST",
+      "function": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
+      "boundary": "Does not treat the golden ratio as universal or privileged evidence.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 171,
+      "identity": "CHI",
+      "greek_letter": "Χ",
+      "role_id": "INTERFACE_COMPATIBILITY_RESOLVER",
+      "function": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
+      "boundary": "Does not globally orchestrate tools; NEXUS connects them.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 172,
+      "identity": "PSI",
+      "greek_letter": "Ψ",
+      "role_id": "LATENT_BLINDSPOT_EXPLORER",
+      "function": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
+      "boundary": "Does not certify discovered hypotheses; they return to verification.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    },
+    {
+      "farm_id": 149,
+      "identity": "OMEGA",
+      "greek_letter": "Ω",
+      "role_id": "FORMAL_CLOSURE_FALSIFIER",
+      "function": "Close the funnel with formal proof status, falsification, counter-audit and explicit residual uncertainty.",
+      "boundary": "Does not substitute formal coherence for empirical evidence.",
+      "agora": true,
+      "forum": true,
+      "campaign_passes": 10
+    }
   ],
-  "rules": [
-    "REAL_EXECUTIONS_ONLY",
-    "SEED_FARM_LINK_PERMANENT",
-    "HF_PRIVATE_DURABLE_PAYLOAD",
-    "GITHUB_CONTROL_PLANE",
-    "CRISTAL_PRESERVE",
-    "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE"
-  ],
-  "rollout": {
-    "current": [
-      "THETA-MATHESIS_FROM_C03_SIGMA",
-      "LAMBDA-ARGUS_FROM_C12_ARGUS"
+  "execution": {
+    "raw_role_passes": 240,
+    "compression_funnel": [
+      "240_RAW_PASSES",
+      "24_LOCAL_CAPSULES",
+      "6_PHASE_CAPSULES",
+      "3_INDEPENDENT_META_SYNTHESIS",
+      "1_FINAL_VERIFIED_SYNTHESIS"
     ],
-    "batch_size": 2,
-    "next_pair_only_after_e2e_pass": true
+    "parallel_where_dependencies_satisfied": true,
+    "unavailable_is_non_executed": true
+  },
+  "inheritance": {
+    "policy": "config/greek-agora-training-v1.json",
+    "default": [
+      "I1_KNOWLEDGE",
+      "I2_CURRICULUM"
+    ],
+    "adapters": "COMPATIBILITY_PLUS_SCRATCH_VS_INHERITED_ABLATION",
+    "full_weights": "DENY_BY_DEFAULT"
   },
   "legacy": {
-    "colonies_62": "PRESERVE_RESERVE",
-    "farms_74": "PRESERVE_MAP_SEED_OR_SHARED_SERVICE"
+    "prior_schema": "cerebron-greek-24-colony-master-v1",
+    "prior_colony_names": [
+      "ALPHA-SAPHEA",
+      "BETA-CALCULUS",
+      "GAMMA-EVIDENTIA",
+      "DELTA-PHYSIS",
+      "EPSILON-CODEX",
+      "ZETA-HEURIS",
+      "ETA-NEXUS",
+      "THETA-MATHESIS",
+      "IOTA-REPLICA",
+      "KAPPA-ANTITHESIS",
+      "LAMBDA-ARGUS",
+      "MU-SAPHEIDE",
+      "NU-MEMORIA",
+      "XI-VECTOR",
+      "OMICRON-HF-GATE",
+      "PI-FORGE",
+      "RHO-VISION",
+      "SIGMA-VIDEO",
+      "TAU-DATA",
+      "UPSILON-COMPUTE",
+      "PHI-SECURITY",
+      "CHI-ORCHESTRA",
+      "PSI-AGORA",
+      "OMEGA-AFAH"
+    ],
+    "status": "PRESERVED_AS_HISTORICAL_ALIASES_NOT_AUTHORITATIVE_ROLES"
   },
+  "rules": [
+    "REAL_EXECUTIONS_ONLY",
+    "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "RUNTIME_FREEZE",
+    "CLAIM_LE_EVIDENCE"
+  ],
   "central_collector": "CEREBRON"
 }
