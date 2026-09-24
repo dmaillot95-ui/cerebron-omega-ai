@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_03_HF20_AUDIT_V1",
+  "status": "PASS_SCOPED",
+  "program_message": 3,
+  "pool": {
+    "max_slots": 20,
+    "default_active": 0,
+    "permanent_identity": false,
+    "permanent_model_bindings": 0,
+    "permanent_farm_bindings": 0,
+    "slot_ids": "HF-A01..HF-A20",
+    "memory_route": "cerebron-omega/cerebron-private-memory"
+  },
+  "configuration_audit": {
+    "status": "PASS",
+    "workflow_run_id": 35953143135,
+    "audit_job_id": 107485765676,
+    "checks": "20 exact slots; runtime gated; no permanent bindings; receipt contract; qualified model/runtime evidence"
+  },
+  "platform_ci": {
+    "status": "PASS",
+    "run_id": 35953133114,
+    "job_id": 107485734379
+  },
+  "real_execution": {
+    "executed_slots": [
+      "HF-A01"
+    ],
+    "non_executed_slots": [
+      "HF-A02",
+      "HF-A03",
+      "HF-A04",
+      "HF-A05",
+      "HF-A06",
+      "HF-A07",
+      "HF-A08",
+      "HF-A09",
+      "HF-A10",
+      "HF-A11",
+      "HF-A12",
+      "HF-A13",
+      "HF-A14",
+      "HF-A15",
+      "HF-A16",
+      "HF-A17",
+      "HF-A18",
+      "HF-A19",
+      "HF-A20"
+    ],
+    "execution_id": "HF20-CANARY-35953143135-8efb76bd",
+    "farm_id": 145,
+    "model_id": "Qwen/Qwen3-4B",
+    "model_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "provider": "huggingface",
+    "runtime_provider": "GITHUB_ACTIONS_CPU",
+    "data_lineage": "SYNTHETIC_CANARY_NO_USER_DATA_NO_M6",
+    "result": "HF20_CANARY_OK",
+    "result_hash": "63b0c170ea22505ba9bd82956bf94e68de8d8a5c6ea4aaedd517048a4beb71f1",
+    "latency_ms": 3174,
+    "binding_scope": "EPHEMERAL_CANARY",
+    "independent_evidence": false,
+    "receipt_artifact_id": 10789317767,
+    "receipt_artifact_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88"
+  },
+  "independence": {
+    "rule": "SLOT_ID_DOES_NOT_CREATE_INDEPENDENT_EVIDENCE",
+    "same_model_or_lineage": "CORRELATED",
+    "twenty_slots_mean": "MAX_EXECUTION_CAPACITY_NOT_20_DISTINCT_AIS",
+    "evidence_count_from_this_canary": 1
+  },
+  "scaling": {
+    "next_test": "1_vs_2_or_3_SLOT_INFORMATION_GAIN_ABLATION",
+    "forbid": "DO_NOT_SCALE_TO_20_JUST_BECAUSE_CAPACITY_EXISTS"
+  },
+  "runtime_modified": false,
+  "neural_learning_claim": false
+}
