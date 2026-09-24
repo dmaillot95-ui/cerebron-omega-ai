@@ -3,9 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'config/all-ai-memory-matrix-v1.json'
-      - 'tools/validate_all_ai_memory_matrix.py'
-      - '.github/workflows/all-ai-hf-memory-m03-canary.yml'
+      - 'config/m03-hf-retry-trigger.txt'
   workflow_dispatch:
 permissions:
   contents: write
