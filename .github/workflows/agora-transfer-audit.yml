@@ -1,0 +1,26 @@
+name: CEREBRON AGORA Transfer Audit
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/agora-transfer-contract-v1.json'
+      - 'config/agora-school-v1.json'
+      - 'config/cerebron-mode-v1.json'
+      - 'config/cerebron-civilization-memory-bindings-v1.json'
+      - 'config/memory-fabric-v1.json'
+      - 'runtime/agora_forum.py'
+      - 'scripts/audit_agora_transfer.py'
+      - '.github/workflows/agora-transfer-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/audit_agora_transfer.py
