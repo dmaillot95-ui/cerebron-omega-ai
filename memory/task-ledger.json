@@ -1,6 +1,57 @@
 {
-  "schema": "cerebron-task-ledger-state-v1",
-  "version": 1,
-  "tasks": [],
-  "updated_at": null
+  "schema": "cerebron-task-ledger-state-v2",
+  "version": 2,
+  "tasks": [
+    {
+      "id": "M01",
+      "status": "IN_PROGRESS",
+      "goal": "Freeze 8-agent topology, 20-agent burst policy, HF scoped memory truth, crystal preservation and successor handoff."
+    },
+    {
+      "id": "M02",
+      "status": "PENDING",
+      "goal": "Audit all Greek/native repositories and guards; reconcile F162 NU availability."
+    },
+    {
+      "id": "M03",
+      "status": "PENDING",
+      "goal": "Generate per-AI eight-agent manifests without claiming execution."
+    },
+    {
+      "id": "M04",
+      "status": "PENDING",
+      "goal": "Design deterministic eight-agent local canary and evidence receipt schema."
+    },
+    {
+      "id": "M05",
+      "status": "PENDING",
+      "goal": "Prove representative HF namespace write/read/SHA canaries without destructive overwrite."
+    },
+    {
+      "id": "M06",
+      "status": "PENDING",
+      "goal": "Reconcile F66/F74 opaque pointers with HF private objects."
+    },
+    {
+      "id": "M07",
+      "status": "PENDING",
+      "goal": "AGORA/FORUM successor handoff rehearsal and rollback verification."
+    },
+    {
+      "id": "M08",
+      "status": "PENDING",
+      "goal": "Freeze Phase-1 checkpoint and advance to installation/execution gates."
+    }
+  ],
+  "updated_at": "2026-09-24",
+  "campaign": {
+    "id": "CEREBRON-80-CIVILIZATION-V1",
+    "total_messages": 80,
+    "current_message": 1,
+    "status": "IN_PROGRESS",
+    "previous_work": "PREFLIGHT_COMPLETED_BEFORE_M01",
+    "checkpoint_contract": "config/crystal-preservation-v1.json",
+    "next_phase": "M01-M08_CRYSTAL_BASELINE_AND_MEMORY",
+    "runtime_changed": false
+  }
 }
