@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import argparse,hashlib,json
 from pathlib import Path
+import sys
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 from tools.spiralix_bus import make_envelope,sha256_obj
 
 WORKER_PARENT={"SAPHEA-A":"SAPHEA","SAPHEA-B":"SAPHEA","SAPHEA-C":"SAPHEA","SPIRALION-A":"SPIRALION","ETHERION-A":"ETHERION","ELYSIUM-SMOL-AUDITOR":"ELYSIUM","OMEGA-QWEN-COUNTERAUDITOR":"F149-OMEGA"}
