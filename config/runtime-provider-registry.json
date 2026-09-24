@@ -1,16 +1,25 @@
 {
   "schema": "cerebron-runtime-provider-registry-v1",
-  "status": "DISCOVERY",
+  "status": "DISCOVERY_WITH_GITHUB_CPU_CANARY_RUNNING",
   "contract": "config/inference-runner-contract.json",
   "canary": "config/inference-runner-canary.json",
   "providers": [
     {
       "id": "GITHUB_ACTIONS_CPU",
-      "state": "UNQUALIFIED",
-      "exact_revision": "POSSIBLE_IN_PRINCIPLE",
-      "weights_execution": "NOT_PROVEN",
-      "cost_policy": "NO_PAID_ASSUMPTION",
-      "next_test": "resource feasibility canary only"
+      "state": "CANARY_RUNNING",
+      "exact_revision": "PINNED_IN_CANARY",
+      "weights_execution": "PENDING_RUN_36002999588",
+      "cost_policy": "PUBLIC_REPOSITORY_STANDARD_RUNNER_ZERO_PAID_OVERAGE",
+      "next_test": "resource feasibility canary only",
+      "current_canary": {
+        "run_id": 36002999588,
+        "workflow": "CEREBRON 5 Real AI Workers Canary",
+        "workers": 5,
+        "model": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+        "required_result": "5_OF_5_REAL_LLM_INFERENCE_PASS"
+      },
+      "promotion_rule": "Do not set QUALIFIED until all five job receipts are inspected and validated."
     },
     {
       "id": "HF_SERVERLESS",
