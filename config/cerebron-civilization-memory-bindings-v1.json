@@ -36,7 +36,9 @@
       "namespace": "native-ai/CEREBRON",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "SIGMA",
@@ -44,7 +46,9 @@
       "namespace": "native-ai/SIGMA",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "SAPHEA",
@@ -52,7 +56,9 @@
       "namespace": "native-ai/SAPHEA",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "SPIRALION",
@@ -60,7 +66,9 @@
       "namespace": "native-ai/SPIRALION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "ETHERION",
@@ -68,7 +76,9 @@
       "namespace": "native-ai/ETHERION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "HYPERION",
@@ -76,7 +86,9 @@
       "namespace": "native-ai/HYPERION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "ASTRION",
@@ -84,7 +96,9 @@
       "namespace": "native-ai/ASTRION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "METRION",
@@ -92,7 +106,9 @@
       "namespace": "native-ai/METRION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "AFAH",
@@ -100,7 +116,9 @@
       "namespace": "native-ai/AFAH",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "AELYS",
@@ -108,7 +126,9 @@
       "namespace": "native-ai/AELYS",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "ELYRA",
@@ -116,7 +136,9 @@
       "namespace": "native-ai/ELYRA",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "SAPHEA_MICRO",
@@ -124,7 +146,9 @@
       "namespace": "native-ai/SAPHEA_MICRO",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "ELYSION",
@@ -132,7 +156,9 @@
       "namespace": "native-ai/ELYSION",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     },
     {
       "ai_id": "ELYSIUM",
@@ -140,7 +166,9 @@
       "namespace": "native-ai/ELYSIUM",
       "durable_backend": "cerebron-omega/cerebron-private-memory",
       "m6_training": "DENY",
-      "raw_agora_training": "DENY"
+      "raw_agora_training": "DENY",
+      "namespace_isolation": "LOGICAL_ROUTER_ENFORCED_POLICY",
+      "cross_ai_blind_copy": "DENY"
     }
   ],
   "planned_ai": [
@@ -192,5 +220,15 @@
     "namespace_pattern": "agent-run/{execution_id}/{slot_id}",
     "durable_promotion": "ONLY_AFTER_AUDIT_PROVENANCE_DEDUP_AND_MEMORY_CLASSIFICATION",
     "rule": "HF_SLOT_OUTPUT_DOES_NOT_AUTO_ENTER_NATIVE_AI_MEMORY_OR_TRAINING"
+  },
+  "isolation": {
+    "mode": "LOGICAL_NAMESPACE_POLICY_NOT_SEPARATE_STORAGE_ACL",
+    "backend_scope": "SHARED_PRIVATE_HF_REPOSITORY",
+    "credential_scope": "SHARED_CONTROL_PLANE_TOKEN",
+    "namespace_rule": "ONE_CANONICAL_NATIVE_AI_NAMESPACE_PER_ACTIVE_AI",
+    "cross_ai_read": "ONLY_VIA_CEREBRON_ROUTER_AND_EXPLICIT_TRANSFER_POLICY",
+    "cross_ai_write": "FORBIDDEN_BY_DEFAULT",
+    "blind_copy": "FORBIDDEN",
+    "security_claim_limit": "Namespaces separate routing and lineage; they do not provide independent repository credentials or cryptographic tenant isolation."
   }
 }
