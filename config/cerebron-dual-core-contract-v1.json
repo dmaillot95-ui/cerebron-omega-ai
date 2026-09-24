@@ -1,0 +1,20 @@
+{
+  "schema": "CEREBRON_DUAL_CORE_CONTRACT_V1",
+  "status": "SUPPORTED_NO_VERIFIED_ASSIGNMENTS",
+  "purpose": "Support logical AIs with two coordinated internal cores without double-counting identity, execution, memory or evidence.",
+  "modes": [
+    "SINGLE_CORE",
+    "DUAL_CORE"
+  ],
+  "rules": [
+    "A dual-core AI remains one logical AI unless an explicit registry says otherwise.",
+    "Two cores are not two independent evidence lines by default.",
+    "Each core execution requires its own worker/model/run/log/artifact/receipt/provenance before it can be called executed.",
+    "Shared model, data, source, method or memory dependencies must be declared.",
+    "Core disagreement must enter CONTRADICTION_BANK rather than be hidden by averaging.",
+    "A6_MEMORY_KEEPER remains the default persistent writer.",
+    "No dual-core assignment may be claimed without a repository manifest and verification."
+  ],
+  "verified_assignments": [],
+  "assignment_status": "UNVERIFIED_PENDING_MANIFEST"
+}
