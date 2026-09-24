@@ -49,13 +49,20 @@
     },
     {
       "step": 7,
+      "id": "VECTOR_DEDUP",
+      "owner": "SPIRALION+A6",
+      "input": "audited transferable lesson",
+      "output": "specialization vector, novelty score, redundancy links, invariant capsule"
+    },
+    {
+      "step": 8,
       "id": "SCALE_DECISION",
       "owner": "CEREBRON",
       "input": "two quality passes + marginal information gain",
       "output": "STAY_5 or SCALE_10"
     },
     {
-      "step": 8,
+      "step": 9,
       "id": "MEMORY",
       "owner": "A6_MEMORY_KEEPER",
       "input": "validated lesson only",
@@ -85,6 +92,19 @@
     "NO_SIMULATED_AGENT",
     "NO_AUTO_GOLD",
     "NO_DESTRUCTIVE_OVERWRITE",
-    "RUNTIME_FREEZE"
-  ]
+    "RUNTIME_FREEZE",
+    "GVL_NON_REDUNDANT_LEARNING",
+    "GEOMETRIC_GROWTH_MEASURED_NOT_DECLARED"
+  ],
+  "gvl": {
+    "enabled": true,
+    "contract": "config/geometric-vector-learning-v1.json",
+    "history": "memory/gvl-learning-history.json",
+    "insertion_points": [
+      "AFTER_DETERMINISTIC_AUDIT",
+      "BEFORE_MEMORY_PROMOTION",
+      "BEFORE_SCALE_DECISION"
+    ],
+    "rule": "Vectorize validated lesson, measure redundancy/novelty, require held-out transfer gain, then promote invariant capsule only."
+  }
 }
