@@ -4,6 +4,8 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 cfg=json.loads((R/"config/geometric-vector-learning-v1.json").read_text())
 hist=json.loads((R/"memory/gvl-learning-history.json").read_text())
+lessons=json.loads((R/"memory/gvl-lesson-index.json").read_text())
+lesson_schema=json.loads((R/"config/gvl-lesson-capsule-schema-v1.json").read_text())
 assert cfg["schema"]=="CEREBRON_GEOMETRIC_VECTOR_LEARNING_V1"
 assert cfg["runtime_changed"] is False
 assert cfg["counts"]=={"logical_ai":39,"available_ai":38,"prep_only_ai":1}
@@ -11,6 +13,15 @@ assert cfg["vector_space"]["dimension"]==16
 assert len(cfg["ais"])==39
 assert sum(1 for x in cfg["ais"] if x["available"])==38
 assert hist["current_claim"]=="GEOMETRIC_GROWTH_NOT_DEMONSTRATED"
+assert lesson_schema["schema"]=="CEREBRON_GVL_LESSON_CAPSULE_SCHEMA_V1"
+assert lessons["schema"]=="CEREBRON_GVL_LESSON_INDEX_V1"
+assert lessons["dedup_summary"]["merged_redundant"]>=1
+assert lessons["dedup_summary"]["promoted_validated"]==0
+for item in lessons["lessons"]:
+    assert item["promotion_status"] in lesson_schema["promotion_status_values"]
+    if item["promotion_status"]=="MERGED_REDUNDANT":
+        assert item.get("merged_into")
+        assert item.get("novelty_score")==0.0
 with tempfile.TemporaryDirectory() as td:
     out=Path(td)/"gvl.json"
     subprocess.run([sys.executable,str(R/"tools/gvl_vector_engine.py"),"--canary","--output",str(out)],check=True)
