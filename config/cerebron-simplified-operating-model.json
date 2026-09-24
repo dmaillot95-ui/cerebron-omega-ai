@@ -26,8 +26,8 @@
       "purpose": "preserved callable roots selected by task as in original CEREBRON routing",
       "preserve_all_existing": true,
       "selection": "route only required farms",
-      "current_registry_count": 146,
-      "highest_farm_id": 146
+      "current_registry_count": 151,
+      "highest_farm_id": 151
     },
     "providers": {
       "purpose": "interchangeable execution backends",
@@ -70,8 +70,8 @@
     "gate": "benchmark + ablation + cost/resource + reliability"
   },
   "registry_snapshot": {
-    "count": 146,
-    "max_id": 146,
+    "count": 151,
+    "max_id": 151,
     "source": "config/farms.json",
     "rule": "DYNAMIC_VERIFIED_STATE_NOT_HARDCODED_LIMIT"
   }
