@@ -1,0 +1,8 @@
+S10 MARGINAL GAIN TEST
+baseline=5
+extension=5
+selection=GVL_32D
+max_parallel=5
+same_model_revision=true
+independent_evidence_claim=0
+runtime_changed=false
