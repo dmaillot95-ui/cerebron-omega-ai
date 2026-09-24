@@ -5,6 +5,7 @@ on:
     paths:
       - 'receipts/p03/m05-hf-rollback/**'
       - 'receipts/p03/m05-hf-rollback-latest.json'
+      - 'config/m05-rollback-guard-trigger.txt'
   workflow_dispatch:
 permissions:
   contents: read
