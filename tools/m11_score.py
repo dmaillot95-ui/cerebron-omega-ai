@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import argparse,glob,hashlib,json
 from pathlib import Path
+import sys
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 from tools.spiralix_bus import make_envelope,sha256_obj
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("--input-glob",required=True);ap.add_argument("--run-id",required=True);ap.add_argument("--output",required=True);args=ap.parse_args()
