@@ -111,11 +111,28 @@
     {
       "id": "C80-M08",
       "title": "Qualify real burst worker execution route",
-      "status": "CANARY_5_QUEUED",
+      "status": "CANARY_5_IN_PROGRESS",
       "run_id": 36002999588,
       "selection_guard_run": 36000734259,
       "route": "GITHUB_ACTIONS_CPU",
-      "objective": "Require 5/5 real pinned-model inference receipts before binding Burst20 slots to this route."
+      "objective": "Require 5/5 real pinned-model inference receipts before binding Burst20 slots to this route.",
+      "started_workers": [
+        "SAPHEA-B",
+        "SPIRALION-A"
+      ],
+      "queued_workers": [
+        "SAPHEA-A",
+        "SAPHEA-C",
+        "ETHERION-A"
+      ]
+    },
+    {
+      "id": "C80-M09",
+      "title": "Role-diverse AGORA real-worker mission",
+      "status": "BLOCKED_BY_M08_5_OF_5",
+      "mission": "config/s5-role-diverse-agora-mission-v1.json",
+      "packet_contract": "config/agora-real-worker-packet-v1.json",
+      "scaling_gate": "config/burst-marginal-gain-gate-v1.json"
     }
   ],
   "updated_at": "2026-09-24",
