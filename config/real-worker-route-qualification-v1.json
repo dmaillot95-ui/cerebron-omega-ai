@@ -1,0 +1,64 @@
+{
+  "schema": "CEREBRON_REAL_WORKER_ROUTE_QUALIFICATION_V1",
+  "status": "PENDING_5_WORKER_CANARY",
+  "runtime_changed": false,
+  "target_route": "GITHUB_ACTIONS_CPU",
+  "canary_run_id": 36002999588,
+  "repository_visibility": "PUBLIC",
+  "runner": "ubuntu-latest",
+  "model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "workers": [
+    "SAPHEA-A",
+    "SAPHEA-B",
+    "SAPHEA-C",
+    "SPIRALION-A",
+    "ETHERION-A"
+  ],
+  "pass_gate": {
+    "required_workers": 5,
+    "each_requires": [
+      "job_conclusion_success",
+      "real_execution=true",
+      "llm_inference=true",
+      "inference=PASS",
+      "output_nonempty",
+      "output_sha256",
+      "receipt_sha256",
+      "artifact_receipt"
+    ],
+    "route_promotion": "QUALIFIED_CANARY_5_ONLY",
+    "not_implied": [
+      "20_WORKERS_PROVEN",
+      "INDEPENDENT_EVIDENCE_5",
+      "MODEL_QUALITY",
+      "TRAINING",
+      "HF_SERVERLESS"
+    ]
+  },
+  "lineage": {
+    "shared_model": true,
+    "shared_revision": true,
+    "independence_status": "CORRELATED_EXECUTIONS_NOT_INDEPENDENT_EVIDENCE",
+    "rule": "Execution multiplicity may improve search throughput but shared lineage must not be counted as independent evidence."
+  },
+  "next_if_pass": [
+    "PROMOTE_GITHUB_ACTIONS_CPU_TO_QUALIFIED_CANARY_5",
+    "BIND_FIRST_5_BURST20_SLOTS_TO_REAL_ROUTE",
+    "RUN_ROLE_DIVERSE_5_WORKER_MISSION",
+    "THEN_SCALE_5_TO_10_TO_20_ONLY_IF_RESOURCE_AND_INFORMATION_GAIN_PASS"
+  ],
+  "next_if_fail": [
+    "PRESERVE_FAILURE_RECEIPTS",
+    "CLASSIFY_MEMORY_CPU_DISK_MODEL_DOWNLOAD_OR_RUNTIME_FAILURE",
+    "DO_NOT_SCALE"
+  ],
+  "hard_rules": [
+    "ZERO_PAID_OVERAGE",
+    "CLAIM_LE_EVIDENCE",
+    "NO_SIMULATED_AGENT",
+    "RUNTIME_FREEZE"
+  ]
+}
