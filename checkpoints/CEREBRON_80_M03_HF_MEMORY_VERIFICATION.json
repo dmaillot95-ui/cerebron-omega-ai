@@ -1,0 +1,41 @@
+{
+  "schema": "CEREBRON_80_M03_HF_MEMORY_VERIFICATION_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 3,
+  "status": "COMPLETE",
+  "runtime_changed": false,
+  "run_id": 35995124491,
+  "receipt": "receipts/p03/all-ai-hf-m03.json",
+  "receipt_git_blob_sha": "763ce8058e9dcc4ca6d15914444756433a16d750",
+  "summary": {
+    "logical_ai": 39,
+    "available_tested": 38,
+    "unavailable": 1,
+    "passed": 38,
+    "failed": 0
+  },
+  "verified_claim": "38 available logical AIs each completed authenticated private HF write/read/SHA256 in its own A6_MEMORY_KEEPER namespace.",
+  "limits": [
+    "Connectivity fixture only; not a learning-quality claim.",
+    "Does not yet prove F66/F74 pointer rollout for all AIs.",
+    "Does not prove rollback to a prior private payload for each AI.",
+    "Does not prove 8 real running agents per AI.",
+    "Does not prove 20-agent burst execution."
+  ],
+  "unavailable": [
+    {
+      "ai_id": "F162-NU",
+      "reason": "REPOSITORY_MISSING"
+    }
+  ],
+  "next_message": {
+    "id": "M04",
+    "objective": "Create F74 opaque pointers and F66 indexes for the verified M03 HF objects, preserving first-version semantics and preparing a second-version rollback test."
+  },
+  "hard_rules": [
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
