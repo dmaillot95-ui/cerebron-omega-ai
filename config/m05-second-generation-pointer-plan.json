@@ -1,0 +1,22 @@
+{
+  "schema": "CEREBRON_M05_SECOND_GEN_POINTER_PLAN_V1",
+  "status": "BLOCKED_BY_M05_PRIVATE_ROLLBACK_CANARY",
+  "runtime_changed": false,
+  "prerequisite_run": 35997393013,
+  "sample": [
+    "CEREBRON",
+    "SAPHEA",
+    "ELYSION",
+    "ELYRA",
+    "F148-ALPHA",
+    "F167-SIGMA",
+    "F149-OMEGA"
+  ],
+  "generation": "M05",
+  "parent_generation": "M03",
+  "f74_rule": "Create new M05 pointer path; retain M03 pointer unchanged; set parent and rollback to M03.",
+  "f66_rule": "Create new M05 index path pointing to exact new F74 commit; retain M03 index unchanged.",
+  "rollback_test": "Resolve M05 -> rollback M03 -> verify original HF M03 SHA still matches receipt.",
+  "no_overwrite": true,
+  "generalization_after_pass": "Expand second-generation pointer/rollback protocol to all 38 available AIs in a later checkpoint."
+}
