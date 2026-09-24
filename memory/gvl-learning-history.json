@@ -1,0 +1,31 @@
+{
+  "schema": "CEREBRON_GVL_LEARNING_HISTORY_V1",
+  "status": "MEASUREMENT_STARTED",
+  "metric_policy": "Only comparable held-out transfer cycles may be used for growth ratios.",
+  "cycles": [
+    {
+      "cycle_id": "GVL-C0-M11-PASS1",
+      "source_run_id": 36027613868,
+      "task_class": "EVIDENTIARY_INDEPENDENCE",
+      "held_out_transfer": false,
+      "quality_before": null,
+      "quality_after": 1,
+      "measurement": "5_OF_5_WORKER_QUALITY_PASS",
+      "critical_regression_count": 0,
+      "note": "Calibration/pass1. Not counted as held-out transfer growth."
+    },
+    {
+      "cycle_id": "GVL-C1-S5-PASS2",
+      "source_run_id": 36028613557,
+      "task_class": "SIMULATION_VS_PHYSICAL_VALIDATION",
+      "held_out_transfer": true,
+      "quality_before": 1,
+      "quality_after": 0.8,
+      "measurement": "4_OF_5_WORKER_QUALITY_PASS",
+      "critical_regression_count": 1,
+      "note": "Transfer exposed SAPHEA-A SYSTEM_ARCHITECT error. This is evidence against claiming geometric growth."
+    }
+  ],
+  "current_claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
+  "next_requirement": "Repair SAPHEA-A, rerun comparable transfer, then accumulate at least four held-out positive transfer ratios with zero critical regression before any geometric-like claim."
+}
