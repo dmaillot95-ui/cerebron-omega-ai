@@ -1,0 +1,5 @@
+M11 QUALITY PASS1 V3
+mode=CEREBRON-M
+workers=5
+quality_before_scale=true
+runtime_changed=false
