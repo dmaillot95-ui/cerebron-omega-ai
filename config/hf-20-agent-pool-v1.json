@@ -218,6 +218,24 @@
     "NO_SIMULATED_AGENT",
     "REAL_EXECUTION_RECEIPT_REQUIRED",
     "MINIMAL_USEFUL_COALITION",
-    "AGENT_COUNT_NOT_EVIDENCE_COUNT"
-  ]
+    "AGENT_COUNT_NOT_EVIDENCE_COUNT",
+    "ROUTED_SLOT_NOT_EXECUTED_SLOT",
+    "RECEIPT_PASS_REQUIRED_BEFORE_COUNTING_EXECUTION",
+    "ONE_RECEIPT_DOES_NOT_QUALIFY_ALL_20_SLOTS",
+    "RUNTIME_PROVIDER_MUST_BE_RECORDED_SEPARATELY_FROM_MODEL_REGISTRY"
+  ],
+  "receipt_contract": {
+    "schema": "schemas/hf-agent-execution-receipt.schema.json",
+    "validator": "scripts/validate_hf20_pool.py",
+    "canary_workflow": ".github/workflows/hf20-execution-receipt-canary.yml",
+    "runtime_provider_field": "runtime_provider",
+    "lineage_fields": [
+      "model_id",
+      "model_revision",
+      "provider",
+      "data_lineage",
+      "prompt_hash"
+    ],
+    "rule": "A routed slot becomes EXECUTED only when a receipt passes schema, immutable revision and result-hash checks."
+  }
 }
