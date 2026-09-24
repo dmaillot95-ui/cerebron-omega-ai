@@ -1,0 +1,125 @@
+{
+  "schema": "CEREBRON_BURST20_CONTROLLER_V1",
+  "status": "SELECTION_AND_EXECUTION_CONTRACT_READY_RUNTIME_BINDING_GATED",
+  "runtime_changed": false,
+  "max_workers": 20,
+  "min_workers": 1,
+  "objective": "Select up to 20 real useful workers from CEREBRON AI/farm capabilities for hard missions, then execute only through qualified zero-paid-overage routes with per-worker receipts.",
+  "sources": {
+    "ai_colonies": "config/all-ai-8-agent-colonies-v1.json",
+    "direct_farms": "config/cerebron-farm-direct-routing-v1.json",
+    "model_bank": "config/model-bank-six.json",
+    "provider_registry": "config/runtime-provider-registry.json"
+  },
+  "selection": {
+    "strategy": "MINIMAL_USEFUL_COALITION_THEN_EXPAND_BY_INFORMATION_GAIN",
+    "requested_20_behavior": "If 20 useful distinct candidates exist, select 20; otherwise select the actual smaller real coalition and report the count.",
+    "uniqueness": [
+      "worker_id",
+      "parent_ai_or_farm",
+      "role"
+    ],
+    "diversity_dimensions": [
+      "role",
+      "parent_ai",
+      "farm_class",
+      "model_family",
+      "evidence_lineage"
+    ],
+    "correlated_lineage": "Allowed for exploration but marked CORRELATED and never counted as independent evidence.",
+    "stop_conditions": [
+      "MAX_20",
+      "NO_POSITIVE_INFORMATION_GAIN",
+      "NO_QUALIFIED_EXECUTION_ROUTE",
+      "BUDGET_GUARD"
+    ]
+  },
+  "standard_20_roles": [
+    "REALITY_RESEARCH",
+    "SYSTEM_ARCHITECT",
+    "CALCULATION",
+    "SIMULATION",
+    "CAUSAL_ANALYSIS",
+    "INVENTION",
+    "FAILURE_ANALYSIS",
+    "COUNTEREXAMPLE_HUNTER",
+    "FALSIFIER",
+    "FORMAL_AUDITOR",
+    "INDEPENDENT_REPLICATOR",
+    "UNCERTAINTY_ANALYST",
+    "INTERFACE_ANALYST",
+    "INVARIANT_HUNTER",
+    "EXPERIMENT_DESIGN",
+    "CONTRADICTION_RESOLUTION",
+    "UNKNOWN_GAP_ANALYST",
+    "EVIDENCE_AUDITOR",
+    "SYNTHESIS_ANALYST",
+    "OMEGA_JUDGE"
+  ],
+  "execution_routes": {
+    "DIRECT_FARM": {
+      "status": "AVAILABLE_WHEN_FARM_ACTION_OR_TOOL_EXISTS",
+      "rule": "Use specialist farm directly without unnecessary agent wrapper."
+    },
+    "GITHUB_ACTIONS_HF_WEIGHTS": {
+      "status": "CANARY_EVIDENCE_EXISTS_FOR_5_WORKER_PATTERN_BINDING_STILL_GATED",
+      "model_source": "Hugging Face Hub pinned revision",
+      "runtime": "GitHub Actions CPU or other qualified GitHub runner",
+      "default_candidate": {
+        "model": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      },
+      "zero_paid_overage": "REQUIRED"
+    },
+    "HF_PRIVATE_STORAGE": {
+      "status": "MEMORY_ONLY_NOT_INFERENCE_RUNNER",
+      "repo": "cerebron-omega/cerebron-private-memory"
+    },
+    "HF_SERVERLESS": {
+      "status": "UNQUALIFIED",
+      "rule": "Do not count as executable until exact model/revision and permission canary passes."
+    },
+    "EXTERNAL_PROVIDER": {
+      "status": "OPTIONAL_ONLY_IF_CONNECTED_AND_FREE_OR_ALREADY_AUTHORIZED",
+      "rule": "Missing key or quota never becomes fake execution."
+    }
+  },
+  "memory": {
+    "persistent_writer": "A6_MEMORY_KEEPER",
+    "max_parallel_hf_memory_writers": 4,
+    "policy": "config/hf-rate-limit-policy-v1.json",
+    "write_mode": "BATCH_WHEN_POSSIBLE",
+    "no_destructive_overwrite": true
+  },
+  "receipt_required": [
+    "mission_id",
+    "worker_id",
+    "parent_ai_or_farm",
+    "role",
+    "execution_route",
+    "model_or_tool_id",
+    "model_revision_if_applicable",
+    "started_at",
+    "ended_at",
+    "success",
+    "result_sha256",
+    "lineage_fingerprint"
+  ],
+  "accounting": {
+    "planned_worker": "NOT_EXECUTED",
+    "started_real_worker": "EXECUTED_PENDING_RESULT",
+    "successful_receipt": "EXECUTED_SUCCESS",
+    "failed_receipt": "EXECUTED_FAILURE",
+    "no_receipt": "NON_EXECUTED"
+  },
+  "hard_rules": [
+    "MAX_20_DYNAMIC_AGENT_SLOTS",
+    "REAL_EXECUTION_RECEIPT_REQUIRED",
+    "HF_PRIVATE_STORAGE_NE_INFERENCE",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "NO_PAID_OVERAGE_ASSUMPTION",
+    "RUNTIME_FREEZE",
+    "CLAIM_LE_EVIDENCE",
+    "NO_DESTRUCTIVE_OVERWRITE"
+  ]
+}
