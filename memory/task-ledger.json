@@ -182,7 +182,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "PASS1_AND_PASS2_COMPLETE_B3_RUNNING",
+      "status": "PASS1_AND_PASS2R_COMPLETE_B3_RUNNING",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -233,7 +233,7 @@
       "role_contract": "config/system-architect-evidence-contract-v1.json",
       "previous_canary_run": 36031518267,
       "previous_canary_failure": "TECHNICAL_NAMERROR_ROLE_CONTRACT_NOT_COGNITIVE_RESULT",
-      "repair_canary_status": "QUEUED_AFTER_SCOPE_FIX",
+      "repair_canary_status": "PASS",
       "pass2r_run": 36034245620,
       "pass2r_receipt": "receipts/workers/s5-quality-transfer-pass2-v3-36034245620.json",
       "pass2r": true,
