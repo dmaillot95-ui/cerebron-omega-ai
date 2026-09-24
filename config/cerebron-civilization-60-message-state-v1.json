@@ -1,11 +1,12 @@
 {
   "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_STATE_V1",
   "program": "config/cerebron-civilization-60-message-program-v1.json",
-  "current_message": 3,
+  "current_message": 4,
   "completed_messages": [
     1,
     2,
-    3
+    3,
+    4
   ],
   "phase": "FOUNDATION",
   "message_1_status": "PASS",
@@ -28,8 +29,8 @@
     "elysion_m6_baseline_result": "SUCCESS"
   },
   "runtime_modified": false,
-  "next_message": 4,
-  "next_objective": "VERIFY_FARM_FUNCTION_ARCHITECTURE_DIRECT_ROUTING_FALLBACK_AND_RECEIPT_RULES",
+  "next_message": 5,
+  "next_objective": "VERIFY_NATIVE_AI_DUAL_CORE_BLUEPRINT_FOR_F145_F151_WITH_DISTINCT_FUNCTIONS_AND_ACTIVATION_GATES",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -55,6 +56,31 @@
       "HF-A01"
     ],
     "non_executed_slot_count": 19,
+    "runtime_modified": false
+  },
+  "message_4_status": "PASS_DIRECT_AUDIT_CI_REVALIDATION_QUEUED",
+  "message_4_evidence": {
+    "evidence_commit": "3aace3ff0c75c5b0e550e24f5dbff67aafd0e047",
+    "registry_count": 151,
+    "max_farm_id": 151,
+    "functional_groups": 19,
+    "functional_coverage": 151,
+    "repository_presence": "151/151",
+    "active_native_ai_farms": [
+      145,
+      146
+    ],
+    "pending_native_ai_farms": [
+      147,
+      148,
+      149,
+      150,
+      151
+    ],
+    "f123_bridge_run_id": 35897592604,
+    "f123_bridge_artifact_id": 10767830799,
+    "global_ci_run_id": 35954042621,
+    "global_ci_status": "QUEUED_AT_CHECKPOINT",
     "runtime_modified": false
   }
 }
