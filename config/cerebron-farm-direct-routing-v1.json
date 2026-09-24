@@ -17,7 +17,10 @@
     "FAILED_PROVIDER_DOES_NOT_DISABLE_FARM_IDENTITY",
     "REAL_EXECUTION_RECEIPT_REQUIRED",
     "NATIVE_AI_DUAL_CORE_REQUIRES_ABLATION_GAIN",
-    "NATIVE_AI_MEMORY_USES_PER_AI_NAMESPACE"
+    "NATIVE_AI_MEMORY_USES_PER_AI_NAMESPACE",
+    "EVERY_REGISTERED_FARM_F001_F146_MUST_HAVE_FUNCTIONAL_GROUP_OR_DOCUMENTED_FALLBACK",
+    "REGISTRY_STATUS_DOES_NOT_SUBSTITUTE_FOR_CURRENT_RUN_RECEIPT",
+    "FARM_EXECUTION_CLAIM_REQUIRES_RUN_JOB_ARTIFACT_OR_EQUIVALENT_RECEIPT"
   ],
   "routing_classes": {
     "proof": [
@@ -67,6 +70,64 @@
     "native_ai": [
       "F145",
       "F146"
+    ],
+    "space_world_civilization": [
+      "F101",
+      "F102",
+      "F103",
+      "F104",
+      "F105",
+      "F106",
+      "F107",
+      "F108",
+      "F109",
+      "F110"
+    ],
+    "embodied_cognitive_systems": [
+      "F111",
+      "F112",
+      "F113"
+    ],
+    "memory_omega": [
+      "F114",
+      "F115",
+      "F116",
+      "F117",
+      "F118",
+      "F119",
+      "F120"
+    ],
+    "astrion_metrion_specialists": [
+      "F121",
+      "F122"
+    ],
+    "space_mission_flight_systems": [
+      "F123",
+      "F124",
+      "F125",
+      "F126",
+      "F127",
+      "F128",
+      "F129",
+      "F130"
+    ],
+    "space_environment_habitat": [
+      "F131",
+      "F132",
+      "F133",
+      "F134",
+      "F135",
+      "F136",
+      "F137",
+      "F138"
+    ],
+    "space_industrial_verification": [
+      "F139",
+      "F140",
+      "F141",
+      "F142",
+      "F143",
+      "F144"
     ]
   },
   "dispatch": {
@@ -81,7 +142,8 @@
     "farms146": "current verified registry snapshot; future farms admitted only after repository verification"
   },
   "current_blockers": [
-    "HF slots remain runtime-gated; provider failures are route-specific and do not invalidate farm identity"
+    "Only explicitly integrated bridge pilots can be invoked through platform/farm_bridge.py today; registered farms remain callable capability identities but platform bridge execution is not universal.",
+    "HF slots remain runtime-gated; provider failures are route-specific and do not invalidate farm identity."
   ],
   "registry_snapshot": {
     "count": 146,
