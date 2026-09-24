@@ -12,14 +12,20 @@
     "lesson_index": "memory/gvl-lesson-index.json",
     "logical_ai": 39,
     "available_ai": 38,
-    "vector_dimension": 16,
+    "vector_dimension": 32,
     "coaxial_axis": "CEREBRON_M_CORE",
     "spiralix_integration": true,
     "burst20_integration": true,
     "quality_loop_integration": true,
     "civilisation_tasks_updated": 5,
-    "guard_run": 36033064544,
-    "guard_status": "QUEUED"
+    "guard_run": 36033414058,
+    "guard_status": "QUEUED",
+    "version": "1.1.0",
+    "specialization_registry": "config/gvl-specialization-registry-v2.json",
+    "controlplane_receipt": "receipts/gvl/gvl-v2-controlplane-canary.json",
+    "controlplane_status": "PASS",
+    "cerebron_aelys_redundancy": 0.288675,
+    "pair_count": 703
   },
   "growth_measurement": {
     "claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
@@ -37,7 +43,10 @@
         "critical_regression_count": 1
       }
     ],
-    "geometric_claim_gate": "MIN_4_CONSECUTIVE_HELD_OUT_RATIOS_GT_1_WITH_ZERO_CRITICAL_REGRESSION"
+    "geometric_claim_gate": "MIN_4_CONSECUTIVE_HELD_OUT_RATIOS_GT_1_WITH_ZERO_CRITICAL_REGRESSION",
+    "observed_transfer_ratios": [
+      0.8
+    ]
   },
   "nonredundancy": {
     "duplicate_example": "SIMULATION_NE_TEST",
