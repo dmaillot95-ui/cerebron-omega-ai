@@ -160,10 +160,12 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "BLOCKED_BY_M10",
+      "status": "PREPARED_NOT_TRIGGERED_BLOCKED_BY_M10",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
-      "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling."
+      "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
+      "mission": "config/m11-s5-v2-mission-v1.json",
+      "workflow": ".github/workflows/m11-s5-v2-role-fidelity.yml"
     }
   ],
   "updated_at": "2026-09-24",
