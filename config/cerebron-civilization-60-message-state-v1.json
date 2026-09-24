@@ -1,13 +1,14 @@
 {
   "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_STATE_V1",
   "program": "config/cerebron-civilization-60-message-program-v1.json",
-  "current_message": 5,
+  "current_message": 6,
   "completed_messages": [
     1,
     2,
     3,
     4,
-    5
+    5,
+    6
   ],
   "phase": "FOUNDATION",
   "message_1_status": "PASS",
@@ -30,8 +31,8 @@
     "elysion_m6_baseline_result": "SUCCESS"
   },
   "runtime_modified": false,
-  "next_message": 6,
-  "next_objective": "VERIFY_AGORA_ROLES_COORDINATION_AND_TRANSFER_RULES_FOR_ACTIVE_AND_PENDING_NATIVE_AI",
+  "next_message": 7,
+  "next_objective": "REPRODUCE_CURRENT_F151_REALITY_AND_PROVENANCE_THROUGH_F67_F72_WITHOUT_EDITING_FAILURES_TO_PASS",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -96,6 +97,22 @@
     "audit_result": "SUCCESS",
     "native_ai_count": 7,
     "pending_dual_core_count": 7,
+    "runtime_modified": false
+  },
+  "message_6_status": "PASS_GOVERNANCE_PROMOTION_HOLD",
+  "message_6_evidence": {
+    "evidence_commit": "69f4227a3c9f5a6c6eb304ef6e48bffea5b557bc",
+    "transfer_contract_commit": "dbdb4d4d6e4eaf3f217a0c903d2825758cf7517e",
+    "agora_school_run_id": 35953959891,
+    "agora_school_result": "SUCCESS",
+    "external_agora_run_id": 35953957480,
+    "external_agora_result": "SUCCESS",
+    "f67_decision": "HOLD",
+    "f72_reality_gate": "FAIL",
+    "f72_observed_old_packet_count": 144,
+    "current_registry_count": 151,
+    "audit_ci_run_id": 35958416712,
+    "audit_ci_status": "QUEUED_AT_CHECKPOINT",
     "runtime_modified": false
   }
 }
