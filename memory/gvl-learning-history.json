@@ -27,5 +27,15 @@
     }
   ],
   "current_claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
-  "next_requirement": "Repair SAPHEA-A, rerun comparable transfer, then accumulate at least four held-out positive transfer ratios with zero critical regression before any geometric-like claim."
+  "next_requirement": "Repair SAPHEA-A, rerun comparable transfer, then accumulate at least four held-out positive transfer ratios with zero critical regression before any geometric-like claim.",
+  "diagnostics": [
+    {
+      "id": "GVL-DIAG-001",
+      "source_run_id": 36032486589,
+      "finding": "V1 lexical vectors produced false functional redundancy CEREBRON/AELYS=1.0.",
+      "corrective_action": "Upgrade to explicit 32D role ontology V2.",
+      "counted_as_learning_growth_cycle": false
+    }
+  ],
+  "vector_ontology_version": "V2_32D_EXPLICIT_ROLE_ONTOLOGY"
 }
