@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import argparse,hashlib,json,time
 from pathlib import Path
+import sys
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 from tools.spiralix_bus import make_envelope,sha256_obj
 from tools.spiralix_receipt_bridge import bridge_receipt
 
