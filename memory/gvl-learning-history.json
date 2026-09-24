@@ -24,10 +24,22 @@
       "measurement": "4_OF_5_WORKER_QUALITY_PASS",
       "critical_regression_count": 1,
       "note": "Transfer exposed SAPHEA-A SYSTEM_ARCHITECT error. This is evidence against claiming geometric growth."
+    },
+    {
+      "cycle_id": "GVL-C1R-S5-PASS2R",
+      "source_run_id": 36034245620,
+      "task_class": "SIMULATION_VS_PHYSICAL_VALIDATION",
+      "held_out_transfer": false,
+      "repair_retest": true,
+      "quality_before": 0.8,
+      "quality_after": 1,
+      "measurement": "5_OF_5_WORKER_QUALITY_PASS_AFTER_SYSTEM_ARCHITECT_REPAIR",
+      "critical_regression_count": 0,
+      "note": "Same transfer family as failed C1; proves repair but is not counted as a new independent held-out growth cycle."
     }
   ],
   "current_claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
-  "next_requirement": "Repair SAPHEA-A, rerun comparable transfer, then accumulate at least four held-out positive transfer ratios with zero critical regression before any geometric-like claim.",
+  "next_requirement": "Complete distinct held-out GVL A/B benchmark families and obtain at least four consecutive positive transfer ratios with zero critical regression.",
   "diagnostics": [
     {
       "id": "GVL-DIAG-001",
