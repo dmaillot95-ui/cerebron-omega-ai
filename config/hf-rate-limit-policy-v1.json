@@ -1,0 +1,41 @@
+{
+  "schema": "CEREBRON_HF_RATE_LIMIT_POLICY_V1",
+  "status": "ACTIVE_POLICY_RUNTIME_UNCHANGED",
+  "runtime_changed": false,
+  "objective": "Prevent HF API saturation during multi-AI memory/version campaigns without dropping evidence or overwriting history.",
+  "rules": {
+    "max_parallel_hf_writers": 4,
+    "per_writer_sequential": true,
+    "base_delay_seconds": 3,
+    "retry_on": [
+      "HTTP_429",
+      "Too Many Requests"
+    ],
+    "retry_attempts": 6,
+    "backoff_seconds": [
+      5,
+      10,
+      20,
+      40,
+      60,
+      60
+    ],
+    "jitter": "NOT_REQUIRED_FOR_DETERMINISTIC_GITHUB_CANARIES",
+    "write_if_changed_only": true,
+    "dedup_before_write": true,
+    "immutable_receipt_per_run": true,
+    "latest_pointer_is_non_authoritative": true
+  },
+  "scaling": {
+    "eight_agents_per_ai": "A6_MEMORY_KEEPER is the default persistent writer; other agents submit capsules to A6 rather than each writing independently.",
+    "twenty_agent_burst": "Use one or a few MEMORY_KEEPER writers for the burst; 20 agents does not imply 20 simultaneous HF writers.",
+    "thirty_eight_ai_rollout": "Batch by families; never start 38 concurrent HF writers."
+  },
+  "safety": [
+    "NO_PRIVATE_PAYLOAD_ON_PUBLIC_GITHUB",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "PARENT_RECEIPT_PINNED_BY_RUN_ID",
+    "RATE_LIMIT_FAILURE_IS_RETRYABLE_NOT_SUCCESS",
+    "RETRY_EXHAUSTION=>FAIL_CLOSED"
+  ]
+}
