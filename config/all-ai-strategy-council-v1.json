@@ -1,0 +1,54 @@
+{
+  "schema": "CEREBRON_ALL_AI_STRATEGY_COUNCIL_V1",
+  "status": "READY",
+  "mission_id": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+  "objective": "Ask every currently available logical CEREBRON AI for one specialization-grounded proposal for the next system phase, then audit usefulness, novelty, redundancy, role fidelity, risk and future contribution without treating shared-runtime outputs as independent evidence.",
+  "line_of_route": [
+    "1. Preserve REALITY>COHERENCE, CLAIM<=EVIDENCE and crystal memory.",
+    "2. Keep operational coalition scale at 5 after S10 decision STAY_AT_5; do not scale to 10 without measured marginal gain.",
+    "3. Consolidate LESSON/FAILURE/CONTRADICTION/UNKNOWN/DEPENDENCY/TRANSFER banks without duplicating existing evidence.",
+    "4. Continue GVL with distinct frozen held-out transfer families; current geometric gate remains 1/4.",
+    "5. Repair before scale: isolate local prompt/role/tool/model failures and retest same scale before adding complexity.",
+    "6. Audit each logical AI by unique future contribution, role fidelity, transfer, novelty and redundancy.",
+    "7. Support dual-core architecture only when a verified manifest identifies a dual-core AI and ablation shows added value.",
+    "8. Finish Control Plane/platform verification end-to-end: farm bridge, model backend, security, AGORA/memory and rollback evidence.",
+    "9. Prefer minimal useful coalitions; use intentional redundancy only for replication/audit/stability and mark it explicitly.",
+    "10. Do not call architecture, configuration or workflow success cognitive/scientific validation."
+  ],
+  "questions": [
+    "What is the single highest-leverage next action from your specialization?",
+    "What concrete implementation or repair do you propose?",
+    "What exact test or benchmark should verify it?",
+    "What should CEREBRON stop doing or avoid because it wastes resources or creates false confidence?",
+    "What unique value can your specialization add over the next three cycles?",
+    "What metric should be used to decide whether your future contribution is useful?",
+    "Should a dual-core pattern be used in your area? If yes, state the two complementary core functions and an ablation test; if no, explain why.",
+    "What is the main risk or unknown that could invalidate your proposal?"
+  ],
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "lineage_class": "CORRELATED_SHARED_MODEL_REVISION",
+    "reason": "Breadth council uses the previously cold-smoke-qualified compact model to reduce execution cost; proposals are advisory and must be audited."
+  },
+  "registry": "config/gvl-specialization-registry-v2.json",
+  "representative_slot": "A2_ANALYST",
+  "available_ai_expected": 38,
+  "max_parallel": 20,
+  "evidence_policy": {
+    "output_class": "ADVISORY_PROPOSAL_E1_MAX",
+    "independent_evidence_claim": false,
+    "all_shared_runtime_outputs_correlated": true,
+    "promotion_requires": "separate audit + implementation + real test + held-out transfer where applicable"
+  },
+  "required_output_labels": [
+    "PRIORITY",
+    "PROPOSAL",
+    "TEST",
+    "STOP",
+    "UNIQUE_VALUE",
+    "BENCHMARK",
+    "DUAL_CORE",
+    "RISK"
+  ]
+}
