@@ -176,6 +176,14 @@
     ],
     "namespace_pattern": "native-ai/{AI_ID}",
     "backend": "cerebron-omega/cerebron-private-memory",
-    "rule": "PER_AI_NAMESPACE_SHARED_BACKEND_NO_BLIND_CROSS_COPY"
+    "rule": "PER_AI_NAMESPACE_SHARED_BACKEND_NO_BLIND_CROSS_COPY",
+    "planned_farm_ids": {
+      "SAELION": 147,
+      "ALPHA": 148,
+      "OMEGA": 149,
+      "DELTA": 150,
+      "NEXUS": 151
+    },
+    "activation_rule": "REPOSITORY_PRESENT_IS_NOT_ACTIVE; MEMORY_CANARY_PLUS_MODEL_GATES_REQUIRED"
   }
 }
