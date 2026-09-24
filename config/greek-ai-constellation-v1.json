@@ -1,0 +1,320 @@
+{
+  "schema": "CEREBRON_GREEK_AI_CONSTELLATION_V1",
+  "status": "ROLE_MAP_DEFINED_INFRASTRUCTURE_MIXED",
+  "objective": "Maximize measurable collective problem-solving capability through complementary specialized roles; superintelligence is a research objective, not a current claim.",
+  "runtime_changed": false,
+  "farm_range": {
+    "min": 148,
+    "max": 172,
+    "note": "F148/F149/F150 already existed; F152-F172 newly registered. F145-F147/F151 remain non-Greek native AIs."
+  },
+  "greek_ai_count": 24,
+  "per_ai_passes": 10,
+  "raw_role_passes_per_full_campaign": 240,
+  "compression_funnel": [
+    "240_RAW_PASSES",
+    "24_LOCAL_CAPSULES",
+    "6_PHASE_CAPSULES",
+    "3_INDEPENDENT_META_SYNTHESIS",
+    "1_FINAL_VERIFIED_SYNTHESIS"
+  ],
+  "concurrency_policy": {
+    "mode": "PARALLEL_WHERE_REAL_EXECUTION_EXISTS",
+    "max_claim": "No agent/model is counted as running without workflow/log/artifact evidence.",
+    "batching": "Run independent members of a phase in parallel; keep dependency-ordered phases sequential when outputs are required.",
+    "nonexecuted": "NON_EXECUTED"
+  },
+  "ten_pass_protocol": [
+    "01_SCOPE_FROM_ROLE",
+    "02_INDEPENDENT_FIRST_PASS",
+    "03_PI_SEARCH_OR_ROLE_SPECIFIC_EXPANSION",
+    "04_ALTERNATIVE_BRANCH",
+    "05_QUANTITATIVE_OR_FORMAL_CHECK",
+    "06_COUNTERCASE_OR_FAILURE_SEARCH",
+    "07_CROSS_CHECK_AGAINST_DEPENDENCIES",
+    "08_TRANSFER_OR_HOLDOUT",
+    "09_SELF_AUDIT_AND_LIMITS",
+    "10_LOCAL_SYNTHESIS_CAPSULE"
+  ],
+  "phases": [
+    {
+      "name": "P0_CONTRACT",
+      "members": [
+        "BETA"
+      ]
+    },
+    {
+      "name": "P1_OPEN",
+      "members": [
+        "ALPHA",
+        "THETA",
+        "PI",
+        "PSI"
+      ]
+    },
+    {
+      "name": "P2_STRUCTURE",
+      "members": [
+        "GAMMA",
+        "IOTA",
+        "KAPPA",
+        "LAMBDA"
+      ]
+    },
+    {
+      "name": "P3_MODEL",
+      "members": [
+        "DELTA",
+        "ETA",
+        "PHI",
+        "NU"
+      ]
+    },
+    {
+      "name": "P4_STRESS",
+      "members": [
+        "EPSILON",
+        "OMICRON",
+        "MU",
+        "RHO"
+      ]
+    },
+    {
+      "name": "P5_OPTIMIZE_TRANSFER",
+      "members": [
+        "ZETA",
+        "XI",
+        "UPSILON",
+        "TAU"
+      ]
+    },
+    {
+      "name": "P6_AGGREGATE_CLOSE",
+      "members": [
+        "SIGMA",
+        "CHI",
+        "OMEGA"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": 148,
+      "name": "ALPHA",
+      "letter": "Α",
+      "role_id": "DIVERGENCE_SEEDER",
+      "function": "Generate structurally different starting representations and search directions before deep reasoning.",
+      "boundary": "Does not validate, prove, route, or fuse."
+    },
+    {
+      "id": 152,
+      "name": "BETA",
+      "letter": "Β",
+      "role_id": "PROBLEM_CONTRACT_COMPILER",
+      "function": "Convert a vague question into a testable problem contract: objective, variables, constraints, acceptance criteria, unknowns and forbidden assumptions.",
+      "boundary": "Does not orchestrate execution; CEREBRON remains executive."
+    },
+    {
+      "id": 153,
+      "name": "GAMMA",
+      "letter": "Γ",
+      "role_id": "MECHANISM_TOPOLOGY_BUILDER",
+      "function": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
+      "boundary": "Does not maintain the global knowledge graph; NEXUS does."
+    },
+    {
+      "id": 150,
+      "name": "DELTA",
+      "letter": "Δ",
+      "role_id": "SCIENTIFIC_MODEL_BUILDER",
+      "function": "Build explicit scientific models, equations, assumptions, simulations and discriminating tests.",
+      "boundary": "Simulation remains distinct from physical validation."
+    },
+    {
+      "id": 154,
+      "name": "EPSILON",
+      "letter": "Ε",
+      "role_id": "LOCAL_SENSITIVITY_PROBER",
+      "function": "Probe epsilon-neighborhoods around candidate solutions to measure local sensitivity, robustness margins and bifurcation points.",
+      "boundary": "Not a general Red Team; focuses on local perturbations."
+    },
+    {
+      "id": 155,
+      "name": "ZETA",
+      "letter": "Ζ",
+      "role_id": "COMPLEXITY_RESOURCE_MINIMIZER",
+      "function": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
+      "boundary": "Does not choose mission priorities; CEREBRON does."
+    },
+    {
+      "id": 156,
+      "name": "ETA",
+      "letter": "Η",
+      "role_id": "TEMPORAL_DYNAMICS_ANALYST",
+      "function": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
+      "boundary": "Does not manage checkpoint memory; SPIRALION does."
+    },
+    {
+      "id": 157,
+      "name": "THETA",
+      "letter": "Θ",
+      "role_id": "REPRESENTATION_TRANSFORMER",
+      "function": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
+      "boundary": "Does not generate the broad hypothesis population; HYPERION does."
+    },
+    {
+      "id": 158,
+      "name": "IOTA",
+      "letter": "Ι",
+      "role_id": "ATOMIC_CLAIM_INSPECTOR",
+      "function": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
+      "boundary": "Not mission task decomposition; this is claim-level micro-analysis."
+    },
+    {
+      "id": 159,
+      "name": "KAPPA",
+      "letter": "Κ",
+      "role_id": "FEASIBILITY_ENVELOPE_SOLVER",
+      "function": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
+      "boundary": "Does not perform final verification; ELYSIUM does."
+    },
+    {
+      "id": 160,
+      "name": "LAMBDA",
+      "letter": "Λ",
+      "role_id": "TRANSFORMATION_COMPOSER",
+      "function": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
+      "boundary": "Does not execute code; SAPHEA/code tools execute."
+    },
+    {
+      "id": 161,
+      "name": "MU",
+      "letter": "Μ",
+      "role_id": "UNCERTAINTY_QUANTIFIER",
+      "function": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
+      "boundary": "Does not make final epistemic acceptance; AFAH does."
+    },
+    {
+      "id": 162,
+      "name": "NU",
+      "letter": "Ν",
+      "role_id": "NULL_MODEL_CHALLENGER",
+      "function": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
+      "boundary": "Not formal proof/falsification closure; OMEGA does."
+    },
+    {
+      "id": 163,
+      "name": "XI",
+      "letter": "Ξ",
+      "role_id": "TRANSFER_GENERALIZATION_EXAMINER",
+      "function": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
+      "boundary": "Does not store/compress learned lessons; SAELION does."
+    },
+    {
+      "id": 164,
+      "name": "OMICRON",
+      "letter": "Ο",
+      "role_id": "RARE_EVENT_OUTLIER_HUNTER",
+      "function": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
+      "boundary": "Not a general adversarial verifier; ELYSIUM covers broad verification."
+    },
+    {
+      "id": 165,
+      "name": "PI",
+      "letter": "Π",
+      "role_id": "POSSIBILITY_SPACE_SAMPLER",
+      "function": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
+      "boundary": "PI is not an oracle and sampling is not proof."
+    },
+    {
+      "id": 166,
+      "name": "RHO",
+      "letter": "Ρ",
+      "role_id": "INDEPENDENCE_CORRELATION_AUDITOR",
+      "function": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
+      "boundary": "Does not aggregate evidence weights; SIGMA does."
+    },
+    {
+      "id": 167,
+      "name": "SIGMA",
+      "letter": "Σ",
+      "role_id": "STATISTICAL_EVIDENCE_AGGREGATOR",
+      "function": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
+      "boundary": "Not general narrative synthesis; CEREBRON/SM18 handle fusion."
+    },
+    {
+      "id": 168,
+      "name": "TAU",
+      "letter": "Τ",
+      "role_id": "CONVERGENCE_STOPPING_CONTROLLER",
+      "function": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
+      "boundary": "Does not set human priorities or alter schedules autonomously."
+    },
+    {
+      "id": 169,
+      "name": "UPSILON",
+      "letter": "Υ",
+      "role_id": "PARETO_UTILITY_ANALYST",
+      "function": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
+      "boundary": "Does not make the final human value decision."
+    },
+    {
+      "id": 170,
+      "name": "PHI",
+      "letter": "Φ",
+      "role_id": "SCALE_SYMMETRY_ANALYST",
+      "function": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
+      "boundary": "Does not treat the golden ratio as universal or privileged evidence."
+    },
+    {
+      "id": 171,
+      "name": "CHI",
+      "letter": "Χ",
+      "role_id": "INTERFACE_COMPATIBILITY_RESOLVER",
+      "function": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
+      "boundary": "Does not globally orchestrate tools; NEXUS connects them."
+    },
+    {
+      "id": 172,
+      "name": "PSI",
+      "letter": "Ψ",
+      "role_id": "LATENT_BLINDSPOT_EXPLORER",
+      "function": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
+      "boundary": "Does not certify discovered hypotheses; they return to verification."
+    },
+    {
+      "id": 149,
+      "name": "OMEGA",
+      "letter": "Ω",
+      "role_id": "FORMAL_CLOSURE_FALSIFIER",
+      "function": "Close the funnel with formal proof status, falsification, counter-audit and explicit residual uncertainty.",
+      "boundary": "Does not substitute formal coherence for empirical evidence."
+    }
+  ],
+  "external_boundaries": {
+    "CEREBRON": "executive decomposition, routing, coalition and resource authority",
+    "SPIRALION": "checkpoint continuity and verified memory",
+    "SAPHEA": "specialist selection/execution",
+    "HYPERION": "broad hypothesis generation",
+    "ELYSION": "solution generation/reasoning/invention",
+    "ELYSIUM": "general verification/red-team/validation",
+    "SAELION": "validated lesson selection/compression",
+    "NEXUS": "global knowledge/tool/farm connectivity",
+    "AFAH": "final epistemic promotion boundary",
+    "AELYS": "human dialogue and presentation",
+    "ELYRA": "embodied simulation/action",
+    "ASTRION": "space R&D",
+    "METRION": "engineering validation",
+    "ETHERION": "difficult science/math R&D"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "CONSENSUS!=TRUTH",
+    "SHARED_BASE!=INDEPENDENT_EVIDENCE",
+    "PI_IS_NOT_ORACLE",
+    "M6_NEVER_IN_TRAIN",
+    "RUNTIME_FREEZE"
+  ]
+}
