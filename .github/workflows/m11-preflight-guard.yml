@@ -1,0 +1,20 @@
+name: M11 Preflight Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/m11-s5-v2-mission-v1.json'
+      - 'config/role-diverse-prompt-contract-v2.json'
+      - 'tools/validate_m11_preflight.py'
+      - '.github/workflows/m11-preflight-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python tools/validate_m11_preflight.py
