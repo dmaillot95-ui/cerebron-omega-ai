@@ -1,12 +1,13 @@
 {
   "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_STATE_V1",
   "program": "config/cerebron-civilization-60-message-program-v1.json",
-  "current_message": 4,
+  "current_message": 5,
   "completed_messages": [
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "phase": "FOUNDATION",
   "message_1_status": "PASS",
@@ -29,8 +30,8 @@
     "elysion_m6_baseline_result": "SUCCESS"
   },
   "runtime_modified": false,
-  "next_message": 5,
-  "next_objective": "VERIFY_NATIVE_AI_DUAL_CORE_BLUEPRINT_FOR_F145_F151_WITH_DISTINCT_FUNCTIONS_AND_ACTIVATION_GATES",
+  "next_message": 6,
+  "next_objective": "VERIFY_AGORA_ROLES_COORDINATION_AND_TRANSFER_RULES_FOR_ACTIVE_AND_PENDING_NATIVE_AI",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -85,5 +86,16 @@
     "global_ci_job_id": 107488449983,
     "f123_bridge_job_id": 107305284787,
     "f123_bridge_artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75"
+  },
+  "message_5_status": "PASS_ARCHITECTURE_ONLY_DUAL_CORE_NOT_ACTIVATED",
+  "message_5_evidence": {
+    "evidence_commit": "c0bcdc5bed6f27803879eee75fcbcdc59f720fc0",
+    "contract_commit": "425e69d2d1274d24fe9f080c08a1640c96bf709e",
+    "audit_run_id": 35956692338,
+    "audit_job_id": 107496421447,
+    "audit_result": "SUCCESS",
+    "native_ai_count": 7,
+    "pending_dual_core_count": 7,
+    "runtime_modified": false
   }
 }
