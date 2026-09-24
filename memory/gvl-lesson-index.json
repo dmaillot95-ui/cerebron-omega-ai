@@ -1,0 +1,60 @@
+{
+  "schema": "CEREBRON_GVL_LESSON_INDEX_V1",
+  "status": "ACTIVE",
+  "lessons": [
+    {
+      "lesson_id": "GVL-L0001-SIMULATION-NE-TEST",
+      "source_ai": "SAPHEA",
+      "source_role": "SYSTEM_ARCHITECT",
+      "problem_class": "SIMULATION_VS_PHYSICAL_VALIDATION",
+      "invariant": "SIMULATION_NE_TEST",
+      "scope": "Real-system representative operation claims",
+      "evidence_refs": [
+        "receipts/workers/s5-quality-transfer-pass2-v3-36028613557.json",
+        "config/system-architect-evidence-contract-v1.json"
+      ],
+      "failure_modes": [
+        "SIMULATION_EQ_VALIDATION"
+      ],
+      "specialization_vector": null,
+      "novelty_score": 0,
+      "transfer_gain": null,
+      "promotion_status": "MERGED_REDUNDANT",
+      "merged_into": "config/geometric-vector-learning-v1.json#coaxial_axis.invariants/SIMULATION_NE_TEST",
+      "parent_sha": "COAXIAL_INVARIANT_PREEXISTING",
+      "rollback_pointer": "N/A_NO_DUPLICATE_CREATED",
+      "note": "The failure adds evidence for an existing invariant; GVL references it instead of duplicating the lesson."
+    },
+    {
+      "lesson_id": "GVL-L0002-CONTROL-PLANE-METADATA",
+      "source_ai": "CEREBRON",
+      "source_role": "SYSTEM_ARCHITECT",
+      "problem_class": "MODEL_OUTPUT_CONTRACT",
+      "invariant": "SYSTEM_METADATA_MUST_BE_GENERATED_BY_CONTROL_PLANE_NOT_MODEL_SELF_REPORT",
+      "scope": "Identity, SHA, provenance, role and execution metadata",
+      "evidence_refs": [
+        "receipts/workers/m11-s5-v2-36024003536.json",
+        "receipts/workers/m11-quality-pass1-v3-36027613868.json"
+      ],
+      "failure_modes": [
+        "PROMPT_ECHO",
+        "IDENTITY_METADATA_FAILURE",
+        "SELF_REPORTED_VALIDATION_FIELDS_UNRELIABLE"
+      ],
+      "specialization_vector": null,
+      "novelty_score": null,
+      "transfer_gain": null,
+      "promotion_status": "TRANSFER_PENDING",
+      "parent_sha": "M11_V2_TO_V3_REPAIR",
+      "rollback_pointer": "receipts/workers/m11-s5-v2-36024003536.json",
+      "note": "V3 improved the original task from 0/5 strict contract validity to 5/5 quality pass; a distinct held-out transfer validation is still required for promotion."
+    }
+  ],
+  "dedup_summary": {
+    "candidate_lessons": 2,
+    "merged_redundant": 1,
+    "transfer_pending": 1,
+    "promoted_validated": 0
+  },
+  "geometric_growth_claim": "DENY"
+}
