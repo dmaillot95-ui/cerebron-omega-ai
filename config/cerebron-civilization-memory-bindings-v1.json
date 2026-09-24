@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_CIVILIZATION_MEMORY_BINDINGS_V1",
   "date": "2026-09-23",
-  "status": "CURRENT_AI_BOUND_PLANNED_AI_RESERVED_NOT_ACTIVE",
+  "status": "CURRENT_AI_BOUND_NEW_NATIVE_AI_REPOSITORIES_PRESENT_PENDING_ACTIVATION",
   "runtime_modified": false,
   "common_private_repo": "cerebron-omega/cerebron-private-memory",
   "model_asset_repo": "cerebron-omega/cerebron-sigma-memory",
@@ -174,33 +174,43 @@
   "planned_ai": [
     {
       "ai_id": "SAELION",
-      "status": "PLANNED_NOT_BOUND",
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE",
       "namespace_reserved": "native-ai/SAELION",
-      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+      "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
+      "farm_id": 147,
+      "repository": "dmaillot95-ui/cerebron-farm-147-saelion"
     },
     {
       "ai_id": "ALPHA",
-      "status": "PLANNED_NOT_BOUND",
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE",
       "namespace_reserved": "native-ai/ALPHA",
-      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+      "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
+      "farm_id": 148,
+      "repository": "dmaillot95-ui/cerebron-farm-148-alpha"
     },
     {
       "ai_id": "OMEGA",
-      "status": "PLANNED_NOT_BOUND",
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE",
       "namespace_reserved": "native-ai/OMEGA",
-      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+      "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
+      "farm_id": 149,
+      "repository": "dmaillot95-ui/cerebron-farm-149-omega"
     },
     {
       "ai_id": "DELTA",
-      "status": "PLANNED_NOT_BOUND",
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE",
       "namespace_reserved": "native-ai/DELTA",
-      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+      "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
+      "farm_id": 150,
+      "repository": "dmaillot95-ui/cerebron-farm-150-delta"
     },
     {
       "ai_id": "NEXUS",
-      "status": "PLANNED_NOT_BOUND",
+      "status": "REPOSITORY_PRESENT_NOT_ACTIVE",
       "namespace_reserved": "native-ai/NEXUS",
-      "activation_rule": "REPOSITORY_OR_MODEL_PROJECT_MUST_EXIST_AND_PASS_MEMORY_CANARY_BEFORE_ACTIVE"
+      "activation_rule": "PASS_MEMORY_CANARY_THEN_RUNTIME_ARCHITECTURE_BENCHMARK_GATES_BEFORE_ACTIVE",
+      "farm_id": 151,
+      "repository": "dmaillot95-ui/cerebron-farm-151-nexus"
     }
   ],
   "hard_rules": [
