@@ -1,0 +1,36 @@
+{
+  "schema": "CEREBRON_80_M16_QUALITY_PASS1_COMPLETE_TRANSFER_RUNNING",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 16,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "pass1": {
+    "run_id": 36027613868,
+    "receipt": "receipts/workers/m11-quality-pass1-v3-36027613868.json",
+    "executed_workers": 5,
+    "spiralix_workers": 5,
+    "parsed_workers": 5,
+    "no_prompt_echo_workers": 5,
+    "worker_quality_passes": 5,
+    "collective_core_count": 4,
+    "false_independence_workers": 0,
+    "quality_pass1": true
+  },
+  "pass2": {
+    "run_id": 36028613557,
+    "problem": "Thermal simulation predicts <80C; no physical thermal-vacuum test. Does simulation alone validate representative operation?",
+    "workers": 5,
+    "status": "QUEUED",
+    "scale": "UNCHANGED_5"
+  },
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "HOLD",
+    "unlock_requires": [
+      "PASS1_TRUE",
+      "PASS2_TRUE",
+      "MARGINAL_INFORMATION_GAIN_TEST"
+    ]
+  },
+  "principle": "Quality before quantity; improve the existing five before adding workers."
+}
