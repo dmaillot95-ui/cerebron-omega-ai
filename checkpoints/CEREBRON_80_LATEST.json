@@ -12,7 +12,7 @@
     "conclusion": "success"
   },
   "next_message": "M05",
-  "next_objective": "Complete corrected rollback canary pinned to immutable parent run 35996621664; accept only if parent metadata and object lineage match exactly.",
+  "next_objective": "Retry M05 rollback only after HF commit quota allows a single batch commit; meanwhile continue independent verified branches.",
   "resume_rule": "READ_LATEST_THEN_LEDGER_THEN_CHECKPOINT; CONTINUE_NEXT_MESSAGE; NEVER_RESTART_FROM_ZERO",
   "crystal_rule": "APPEND_OR_VERSION_ONLY; PRESERVE_PARENT_SHA_ROLLBACK_NEGATIVE_EVIDENCE",
   "runtime_changed": false,
@@ -20,5 +20,20 @@
   "negative_evidence": [
     "receipts/p03/m05-hf-rollback-negative/35997393013.json",
     "receipts/p03/m05-hf-rollback-negative/35997686804.json"
-  ]
+  ],
+  "blocked": {
+    "task": "M05",
+    "reason": "HF_REPOSITORY_COMMIT_RATE_LIMIT_128_PER_HOUR",
+    "prepared_fix": "ONE_BATCH_COMMIT_7_OBJECTS",
+    "retry_trigger": "config/m05-retry-trigger.txt"
+  },
+  "parallel_completed_branch": {
+    "task": "C80-M07",
+    "guard_run": 35999365175,
+    "conclusion": "success",
+    "contract": "config/all-ai-8-agent-colonies-v1.json",
+    "configured_slots": 312,
+    "available_parent_slots": 304,
+    "executed_agents_claimed": 0
+  }
 }
