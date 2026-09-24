@@ -1,0 +1,19 @@
+name: F162 NU Prepared Scaffold Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scaffolds/f162-nu/**'
+      - 'tools/validate_f162_nu_prepared_scaffold.py'
+      - '.github/workflows/f162-nu-prepared-scaffold-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python tools/validate_f162_nu_prepared_scaffold.py
