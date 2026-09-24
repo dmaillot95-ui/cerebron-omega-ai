@@ -1,0 +1,336 @@
+{
+  "schema": "CEREBRON_80_M04_POINTER_MANIFEST_V1",
+  "campaign_message": 4,
+  "status": "POINTERS_CREATED_GUARD_PENDING",
+  "runtime_changed": false,
+  "source_hf_run_id": 35995124491,
+  "source_receipt": "receipts/p03/all-ai-hf-m03.json",
+  "verified_ai_count": 38,
+  "f74": {
+    "repo": "dmaillot95-ui/cerebron-farm-74-session-memory-encyclopedia",
+    "commit": "3dcebd021776740fc66fbffa4f55888afba74f55"
+  },
+  "f66": {
+    "repo": "dmaillot95-ui/cerebron-farm-66-knowledge-graph-vector-index",
+    "commit": "4025a7fc89ee94f109a05bfee94bd579b1839416"
+  },
+  "first_version_semantics": {
+    "parent_generation": null,
+    "rollback_generation": null,
+    "rollback_status": "FIRST_VERSION_NO_PRIOR_POINTER",
+    "note": "Actual rollback requires a second version and is scheduled for M05."
+  },
+  "entries": [
+    {
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "payload_sha256": "0b70be32c952da88e13c6a2b98fa2a57d38ad5f16a98b30a3ba9e8961d99463e",
+      "hf_remote_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/cerebron.json",
+      "f66_path": "index/private-pointers/m03/cerebron.json"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "identity": "SAPHEA",
+      "payload_sha256": "782ef884923cb59bc40906caafef5d565f5e62e80d6d1f65245944100216862d",
+      "hf_remote_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/saphea.json",
+      "f66_path": "index/private-pointers/m03/saphea.json"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "identity": "SPIRALION",
+      "payload_sha256": "2399eaab7126c2de823029442fd6346f656a71557459db9eeda3267bd9189480",
+      "hf_remote_object": "ai/spiralion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/spiralion.json",
+      "f66_path": "index/private-pointers/m03/spiralion.json"
+    },
+    {
+      "ai_id": "ETHERION",
+      "identity": "ETHERION",
+      "payload_sha256": "c50f699aeaf2b5468e8c5d2618ab8d9bc1bf40f7999be75f34e5ff7ecd4df9fb",
+      "hf_remote_object": "ai/etherion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/etherion.json",
+      "f66_path": "index/private-pointers/m03/etherion.json"
+    },
+    {
+      "ai_id": "HYPERION",
+      "identity": "HYPERION",
+      "payload_sha256": "062abdb99567be67d699ba758b0980c762849386c3cf79651b4b345b49eba1f8",
+      "hf_remote_object": "ai/hyperion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/hyperion.json",
+      "f66_path": "index/private-pointers/m03/hyperion.json"
+    },
+    {
+      "ai_id": "ASTRION",
+      "identity": "ASTRION",
+      "payload_sha256": "c35707c4b1e6d28b97dd3514c789cc939367f5b5608e55414696dbeb60fa30cd",
+      "hf_remote_object": "ai/astrion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/astrion.json",
+      "f66_path": "index/private-pointers/m03/astrion.json"
+    },
+    {
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "payload_sha256": "e0f22dbc9efd3d62b7aaab4e53f339614e64606b0d88b91bdbf134a26b8f7a2b",
+      "hf_remote_object": "ai/metrion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/metrion.json",
+      "f66_path": "index/private-pointers/m03/metrion.json"
+    },
+    {
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "payload_sha256": "de035a6b894aa4f9d0d8df521353b9b8806da4f80f8379cc0b66886132412d22",
+      "hf_remote_object": "ai/afah/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/afah.json",
+      "f66_path": "index/private-pointers/m03/afah.json"
+    },
+    {
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "payload_sha256": "0b73e098f5f485386e67170cc764a10fb574b6d1825253f313b7f44ff4b72663",
+      "hf_remote_object": "ai/aelys/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/aelys.json",
+      "f66_path": "index/private-pointers/m03/aelys.json"
+    },
+    {
+      "ai_id": "ELYRA",
+      "identity": "ELYRA",
+      "payload_sha256": "432cb6ef95ddd225ce0a74544df32329befd61b6e751c4b15348d5a6a6e36fbb",
+      "hf_remote_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/elyra.json",
+      "f66_path": "index/private-pointers/m03/elyra.json"
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "identity": "SAPHEA_MICRO",
+      "payload_sha256": "7d197eacac76ebee9ac1ec268f6b69a1a23b2ec64a4bbb2c7a0789d32b24c4fd",
+      "hf_remote_object": "ai/saphea-micro/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/saphea-micro.json",
+      "f66_path": "index/private-pointers/m03/saphea-micro.json"
+    },
+    {
+      "ai_id": "ELYSION",
+      "identity": "ELYSION",
+      "payload_sha256": "0c94484c7208d69486ea1a8f3a7ae33812e572ebbad7df0b199e9d3e51a8fe9d",
+      "hf_remote_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/elysion.json",
+      "f66_path": "index/private-pointers/m03/elysion.json"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "identity": "ELYSIUM",
+      "payload_sha256": "f163a22d273e0ce2a1c2d1f8704f7fc3f98796fd47b6a721b23ac628119c7258",
+      "hf_remote_object": "ai/elysium/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/elysium.json",
+      "f66_path": "index/private-pointers/m03/elysium.json"
+    },
+    {
+      "ai_id": "SAELION",
+      "identity": "SAELION",
+      "payload_sha256": "f18db9c2a258aa20c66521d426e22948da29c30024d4da343a92b95cb6e9b42d",
+      "hf_remote_object": "ai/saelion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/saelion.json",
+      "f66_path": "index/private-pointers/m03/saelion.json"
+    },
+    {
+      "ai_id": "NEXUS",
+      "identity": "NEXUS",
+      "payload_sha256": "a10090ea55f8f2a4e83232b85ba4f84ba56a10724fff1debd8df3c8e661edd22",
+      "hf_remote_object": "ai/nexus/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/nexus.json",
+      "f66_path": "index/private-pointers/m03/nexus.json"
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "payload_sha256": "b80f7157bdedb555b61a01ab979d8162ca4b921a1bb938a79c6782509ba6516a",
+      "hf_remote_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f148-alpha.json",
+      "f66_path": "index/private-pointers/m03/f148-alpha.json"
+    },
+    {
+      "ai_id": "F152-BETA",
+      "identity": "BETA",
+      "payload_sha256": "7692bafe769bff6b5443635b8eb9225921b8e33082ade906041e106bb530a34e",
+      "hf_remote_object": "ai/f152-beta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f152-beta.json",
+      "f66_path": "index/private-pointers/m03/f152-beta.json"
+    },
+    {
+      "ai_id": "F153-GAMMA",
+      "identity": "GAMMA",
+      "payload_sha256": "33d094574792782c16e1dfcc1f327cbae1f9c356f1ff9c5a7d04266f6d178c93",
+      "hf_remote_object": "ai/f153-gamma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f153-gamma.json",
+      "f66_path": "index/private-pointers/m03/f153-gamma.json"
+    },
+    {
+      "ai_id": "F150-DELTA",
+      "identity": "DELTA",
+      "payload_sha256": "95b3dce5c0711945451deac8a7a27ff5eb20da48c54c1eca7ac2752589806265",
+      "hf_remote_object": "ai/f150-delta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f150-delta.json",
+      "f66_path": "index/private-pointers/m03/f150-delta.json"
+    },
+    {
+      "ai_id": "F154-EPSILON",
+      "identity": "EPSILON",
+      "payload_sha256": "1d5dc8a4e1d8d92aaeb349f69eabe9ecafb47995083041900a4b57ac370609d0",
+      "hf_remote_object": "ai/f154-epsilon/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f154-epsilon.json",
+      "f66_path": "index/private-pointers/m03/f154-epsilon.json"
+    },
+    {
+      "ai_id": "F155-ZETA",
+      "identity": "ZETA",
+      "payload_sha256": "2b507e60707c7db4eb0696aab6c37a4f945c971af77001bdd1d274c326c187c5",
+      "hf_remote_object": "ai/f155-zeta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f155-zeta.json",
+      "f66_path": "index/private-pointers/m03/f155-zeta.json"
+    },
+    {
+      "ai_id": "F156-ETA",
+      "identity": "ETA",
+      "payload_sha256": "ba2d1a1768c2626570a1fe5bad551d56217884bf19552f37def80dc12fac0f1a",
+      "hf_remote_object": "ai/f156-eta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f156-eta.json",
+      "f66_path": "index/private-pointers/m03/f156-eta.json"
+    },
+    {
+      "ai_id": "F157-THETA",
+      "identity": "THETA",
+      "payload_sha256": "8d1ca721ed80a874688dd804c509ee0fc25bcdd19f889b5e1914bcc23acfecf7",
+      "hf_remote_object": "ai/f157-theta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f157-theta.json",
+      "f66_path": "index/private-pointers/m03/f157-theta.json"
+    },
+    {
+      "ai_id": "F158-IOTA",
+      "identity": "IOTA",
+      "payload_sha256": "4b5220868b277a58f2c215b5f3604fbccea13118dbae284fe7efc8ee2e226c8b",
+      "hf_remote_object": "ai/f158-iota/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f158-iota.json",
+      "f66_path": "index/private-pointers/m03/f158-iota.json"
+    },
+    {
+      "ai_id": "F159-KAPPA",
+      "identity": "KAPPA",
+      "payload_sha256": "34d0cc548996116f3695872fe67f2ac85d9e13fdc1641bcc111e0a3176582bc1",
+      "hf_remote_object": "ai/f159-kappa/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f159-kappa.json",
+      "f66_path": "index/private-pointers/m03/f159-kappa.json"
+    },
+    {
+      "ai_id": "F160-LAMBDA",
+      "identity": "LAMBDA",
+      "payload_sha256": "a89312b91d0007b3f809ab275c0a302304ef2d11a84026b45f40565d45a2665d",
+      "hf_remote_object": "ai/f160-lambda/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f160-lambda.json",
+      "f66_path": "index/private-pointers/m03/f160-lambda.json"
+    },
+    {
+      "ai_id": "F161-MU",
+      "identity": "MU",
+      "payload_sha256": "17007173b5fd03a11e8e335652f028ae75a824fa85024493051e2db775af6ab8",
+      "hf_remote_object": "ai/f161-mu/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f161-mu.json",
+      "f66_path": "index/private-pointers/m03/f161-mu.json"
+    },
+    {
+      "ai_id": "F163-XI",
+      "identity": "XI",
+      "payload_sha256": "4210e1249502f2016a7c5d5a849e192411d9ec506879c4d5e87d71e9723f5c05",
+      "hf_remote_object": "ai/f163-xi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f163-xi.json",
+      "f66_path": "index/private-pointers/m03/f163-xi.json"
+    },
+    {
+      "ai_id": "F164-OMICRON",
+      "identity": "OMICRON",
+      "payload_sha256": "e230bd512dbb44cf819803d05a09485bc5e01afa073c365a3255220da6e6552c",
+      "hf_remote_object": "ai/f164-omicron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f164-omicron.json",
+      "f66_path": "index/private-pointers/m03/f164-omicron.json"
+    },
+    {
+      "ai_id": "F165-PI",
+      "identity": "PI",
+      "payload_sha256": "f1d7000af5aa30acc26bd52140564b81c29326bcb6016807705f5ec3ab358f09",
+      "hf_remote_object": "ai/f165-pi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f165-pi.json",
+      "f66_path": "index/private-pointers/m03/f165-pi.json"
+    },
+    {
+      "ai_id": "F166-RHO",
+      "identity": "RHO",
+      "payload_sha256": "14518ed6335d5b6688b7f112cb690f60a98965a089329192c3a251c81e881626",
+      "hf_remote_object": "ai/f166-rho/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f166-rho.json",
+      "f66_path": "index/private-pointers/m03/f166-rho.json"
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "identity": "SIGMA",
+      "payload_sha256": "96be8be27346712d750a9546cfd26e75ef30577d91a3af91ebea7b1ff815a4e6",
+      "hf_remote_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f167-sigma.json",
+      "f66_path": "index/private-pointers/m03/f167-sigma.json"
+    },
+    {
+      "ai_id": "F168-TAU",
+      "identity": "TAU",
+      "payload_sha256": "fa51a4564d90375dff5d0ccfc9b9783ac651284b938951165391a2eebd1db343",
+      "hf_remote_object": "ai/f168-tau/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f168-tau.json",
+      "f66_path": "index/private-pointers/m03/f168-tau.json"
+    },
+    {
+      "ai_id": "F169-UPSILON",
+      "identity": "UPSILON",
+      "payload_sha256": "59512919ca182ab24dc9404e66b157b9ed367fafd483141a0adf7ea21cd3bdb8",
+      "hf_remote_object": "ai/f169-upsilon/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f169-upsilon.json",
+      "f66_path": "index/private-pointers/m03/f169-upsilon.json"
+    },
+    {
+      "ai_id": "F170-PHI",
+      "identity": "PHI",
+      "payload_sha256": "cbc299019710f1f7a68ed423f9f24124e9959319e73895bf778bfafd7c3a2e31",
+      "hf_remote_object": "ai/f170-phi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f170-phi.json",
+      "f66_path": "index/private-pointers/m03/f170-phi.json"
+    },
+    {
+      "ai_id": "F171-CHI",
+      "identity": "CHI",
+      "payload_sha256": "4153a2d755e0b8d557c6e6258519bc84594bf957769a1329d6b4e857eca3fdcf",
+      "hf_remote_object": "ai/f171-chi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f171-chi.json",
+      "f66_path": "index/private-pointers/m03/f171-chi.json"
+    },
+    {
+      "ai_id": "F172-PSI",
+      "identity": "PSI",
+      "payload_sha256": "96924af759764e188677f2c3900eeac2da6530c9c031e452a21eb8a5f4361653",
+      "hf_remote_object": "ai/f172-psi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f172-psi.json",
+      "f66_path": "index/private-pointers/m03/f172-psi.json"
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "identity": "OMEGA",
+      "payload_sha256": "256a1ba205b2a8b0beb93637d4186c2977220aa284320007b68f6ee4572a5e80",
+      "hf_remote_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35995124491.json",
+      "f74_path": "memory/private-pointers/m03/f149-omega.json",
+      "f66_path": "index/private-pointers/m03/f149-omega.json"
+    }
+  ],
+  "rules": [
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB",
+    "F66_MUST_POINT_EXACT_F74_COMMIT",
+    "SHA_MUST_MATCH_HF_RECEIPT",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "RUNTIME_FREEZE"
+  ]
+}
