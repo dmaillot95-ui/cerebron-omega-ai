@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M12_PARALLEL_AUDIT_AND_ROLLBACK.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M13_CONTROLLED_CONVERGENCE.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -46,9 +46,15 @@
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
   },
-  "current_message": "M12_IN_PROGRESS",
+  "current_message": "M13_IN_PROGRESS",
   "active_runs": {
     "m10_semantic_audit": 36015400305,
-    "m05_batch_rollback": 36016484074
-  }
+    "m05_guard": 36017126572,
+    "m11_preflight": 36016825702
+  },
+  "m05_result": "7_OF_7_PASS_GUARD_PENDING",
+  "m06": "PREPARED_NOT_TRIGGERED",
+  "m10": "ELYSIUM_OVERPERMISSIVE_OMEGA_RUNNING_GOLD_DENY",
+  "m11": "PREFLIGHT_QUEUED_EXECUTION_NOT_TRIGGERED",
+  "scaling_5_to_10": "HOLD"
 }
