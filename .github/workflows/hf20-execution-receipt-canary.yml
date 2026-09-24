@@ -1,0 +1,112 @@
+name: CEREBRON HF20 Execution Receipt Canary
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/hf-20-agent-pool-v1.json'
+      - 'config/cerebron-agent-budget-v1.json'
+      - 'schemas/hf-agent-execution-receipt.schema.json'
+      - 'scripts/validate_hf20_pool.py'
+      - '.github/workflows/hf20-execution-receipt-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pool-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/validate_hf20_pool.py
+
+  hf-a01-canary:
+    needs: pool-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      MODEL_ID: Qwen/Qwen3-4B
+      MODEL_REVISION: 1cfa9a7208912126459214e8b04321603b3df60c
+      SLOT_ID: HF-A01
+      FARM_ID: "145"
+      HF_HOME: /tmp/hf-hfa01
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install exact CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors huggingface_hub
+      - name: Execute HF-A01 and write receipt
+        run: |
+          mkdir -p receipts/civilization
+          python - <<'PY'
+          import os,json,time,hashlib,uuid
+          import torch
+          from huggingface_hub import HfApi
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          mid=os.environ["MODEL_ID"]; rev=os.environ["MODEL_REVISION"]
+          slot=os.environ["SLOT_ID"]; farm=int(os.environ["FARM_ID"])
+          info=HfApi().model_info(mid,revision=rev)
+          if info.sha != rev:
+              raise SystemExit("REVISION_MISMATCH")
+          prompt="Return exactly: HF20_CANARY_OK"
+          ph=hashlib.sha256(prompt.encode()).hexdigest()
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+          try:
+              rendered=tok.apply_chat_template(
+                  [{"role":"system","content":"Return only the exact requested text. /no_think"},
+                   {"role":"user","content":prompt}],
+                  tokenize=False,add_generation_prompt=True,enable_thinking=False
+              )
+          except TypeError:
+              rendered=tok.apply_chat_template(
+                  [{"role":"system","content":"Return only the exact requested text. /no_think"},
+                   {"role":"user","content":prompt}],
+                  tokenize=False,add_generation_prompt=True
+              )
+          inputs=tok(rendered,return_tensors="pt")
+          t=time.time()
+          with torch.inference_mode():
+              out=model.generate(**inputs,max_new_tokens=12,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+          latency_ms=int((time.time()-t)*1000)
+          new=out[0][inputs["input_ids"].shape[-1]:]
+          raw=tok.decode(new,skip_special_tokens=True).strip()
+          result_hash=hashlib.sha256(raw.encode()).hexdigest()
+          receipt={
+            "schema":"CEREBRON_HF_AGENT_EXECUTION_RECEIPT_V1",
+            "execution_id":f"HF20-CANARY-{os.environ.get('GITHUB_RUN_ID','local')}-{uuid.uuid4().hex[:8]}",
+            "slot_id":slot,
+            "farm_id":farm,
+            "model_id":mid,
+            "model_revision":rev,
+            "provider":"huggingface",
+            "runtime_provider":"GITHUB_ACTIONS_CPU",
+            "prompt_hash":ph,
+            "data_lineage":"SYNTHETIC_CANARY_NO_USER_DATA_NO_M6",
+            "result_hash":result_hash,
+            "latency_ms":latency_ms,
+            "completion_status":"SUCCESS",
+            "binding_scope":"EPHEMERAL_CANARY",
+            "independent_evidence":False,
+            "model_lineage":"Qwen3",
+            "raw_output":raw,
+            "claim_scope":"One real HF-A01 task execution only; does not activate or qualify the other 19 slots."
+          }
+          required=["execution_id","slot_id","farm_id","model_id","model_revision","provider","runtime_provider","prompt_hash","data_lineage","result_hash","latency_ms","completion_status","binding_scope","independent_evidence"]
+          miss=[k for k in required if k not in receipt]
+          if miss: raise SystemExit("RECEIPT_FIELDS_MISSING:"+",".join(miss))
+          if receipt["slot_id"]!="HF-A01": raise SystemExit("SLOT_MISMATCH")
+          if receipt["result_hash"]!=hashlib.sha256(receipt["raw_output"].encode()).hexdigest(): raise SystemExit("RESULT_HASH_MISMATCH")
+          open("receipts/civilization/hf-a01-execution-receipt.json","w").write(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hf-a01-execution-receipt
+          path: receipts/civilization/hf-a01-execution-receipt.json
+          if-no-files-found: error
