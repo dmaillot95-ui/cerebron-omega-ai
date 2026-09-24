@@ -1,0 +1,105 @@
+{
+  "schema": "CEREBRON_AELYS_QUALITY_FIRST_ROADMAP_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "rationale": "Adopt AELYS's audited recommendation: improve reliability, memory use and specialization before increasing agent count.",
+  "phases": [
+    {
+      "id": "Q0",
+      "name": "BASELINE",
+      "status": "COMPLETE",
+      "evidence": [
+        "receipts/agora/m09-semantic-baseline-v1.json",
+        "receipts/agora/m10-semantic-audit-36015400305.json"
+      ],
+      "result": "5 real workers and 5 distinct outputs, but semantic drift detected; scale denied."
+    },
+    {
+      "id": "Q1",
+      "name": "EXACT_PROBLEM_ROLE_FIDELITY",
+      "status": "RUNNING",
+      "run_id": 36024003536,
+      "mission": "config/m11-s5-v2-mission-v1.json",
+      "objective": "Make all five current workers answer the exact same concrete problem from distinct roles with strict SPIRALIX and no drift."
+    },
+    {
+      "id": "Q2",
+      "name": "TRANSFER",
+      "status": "BLOCKED_BY_Q1",
+      "mission": "config/s5-quality-transfer-pass2-v1.json",
+      "objective": "Repeat quality gates on a different engineering/evidence problem."
+    },
+    {
+      "id": "Q3",
+      "name": "AUDIT_RESILIENCE",
+      "status": "BLOCKED_BY_Q2",
+      "objective": "Run deterministic audit plus a separate counter-audit; reject rubber-stamping and preserve disagreements."
+    },
+    {
+      "id": "Q4",
+      "name": "MEMORY_RECALL_AND_CONTINUITY",
+      "status": "INFRASTRUCTURE_PASS_MISSION_USE_PENDING",
+      "evidence": [
+        "receipts/p03/m06-hf-full-rollback-latest.json",
+        "receipts/spiralix/universal-bus-canary.json"
+      ],
+      "objective": "Require agents to retrieve a verified prior capsule, cite its immutable pointer, and avoid treating memory as proof."
+    },
+    {
+      "id": "Q5",
+      "name": "SCALE_5_TO_10",
+      "status": "LOCKED",
+      "unlock_requires": [
+        "Q1_PASS",
+        "Q2_PASS",
+        "Q3_PASS",
+        "POSITIVE_NONREDUNDANT_INFORMATION_GAIN",
+        "RESOURCE_BUDGET_PASS"
+      ],
+      "objective": "Add only roles that provide new method/evidence diversity."
+    },
+    {
+      "id": "Q6",
+      "name": "SCALE_10_TO_20",
+      "status": "LOCKED",
+      "unlock_requires": [
+        "Q5_STABLE",
+        "MEASURED_GAIN_FROM_6_TO_10",
+        "NO_CRITICAL_REGRESSION",
+        "HARD_MISSION_REMAINS_OPEN"
+      ],
+      "objective": "Use up to 20 only when the hard problem justifies it."
+    }
+  ],
+  "correction_loop": {
+    "on_failure": [
+      "CLASSIFY_FAILURE_DIMENSION",
+      "PATCH_ONLY_FAILED_CONTRACT_OR_ROLE",
+      "REPEAT_SAME_SCALE",
+      "COMPARE_TO_PREVIOUS_RECEIPT",
+      "PROMOTE_ONLY_IF_MEASURED_IMPROVEMENT"
+    ],
+    "dimensions": [
+      "FORMAT",
+      "ROLE",
+      "SEMANTIC",
+      "EVIDENCE",
+      "MEMORY",
+      "LINEAGE",
+      "AUDIT",
+      "RESOURCE"
+    ]
+  },
+  "no_scale_if": [
+    "ONE_OR_MORE_CURRENT_WORKERS_FAIL_QUALITY_GATE",
+    "AUDITOR_RUBBER_STAMPS_DETERMINISTIC_FAILURE",
+    "MARGINAL_INFORMATION_GAIN_NONPOSITIVE"
+  ],
+  "hard_rules": [
+    "QUALITY_BEFORE_QUANTITY",
+    "CLAIM_LE_EVIDENCE",
+    "NO_SIMULATED_AGENT",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "RUNTIME_FREEZE"
+  ]
+}
