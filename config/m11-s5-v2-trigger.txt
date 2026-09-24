@@ -1,0 +1,6 @@
+C80 M11 S5 V2 QUALITY PASS 1
+mode=CEREBRON-M
+spiralix=required
+quality_policy=config/quality-first-scale-policy-v1.json
+scale_5_to_10=HOLD
+runtime_changed=false
