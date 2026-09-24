@@ -1,0 +1,61 @@
+name: S5 Quality Transfer Pass2 V3
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/s5-quality-transfer-pass2-v3-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  worker:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - SAPHEA-A
+          - SAPHEA-B
+          - SAPHEA-C
+          - SPIRALION-A
+          - ETHERION-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - run: python tools/s5_transfer_worker_v3.py --worker "${{ matrix.worker }}" --run-id "${{ github.run_id }}" --output "artifacts/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s5-pass2-v3-${{ matrix.worker }}
+          path: artifacts/${{ matrix.worker }}/receipt.json
+  score:
+    needs: worker
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: s5-pass2-v3-*
+          path: downloaded
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/s5_transfer_score_v3.py --glob "downloaded/**/receipt.json" --run-id "${{ github.run_id }}" --output "receipts/workers/s5-quality-transfer-pass2-v3-${{ github.run_id }}.json"
+      - name: Persist transfer score
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/workers/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: S5 quality transfer Pass2 V3"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
