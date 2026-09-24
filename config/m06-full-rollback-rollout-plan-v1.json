@@ -1,0 +1,39 @@
+{
+  "schema": "CEREBRON_M06_FULL_ROLLBACK_ROLLOUT_PLAN_V1",
+  "status": "BLOCKED_UNTIL_M05_CORRECTED_PASS",
+  "runtime_changed": false,
+  "prerequisite": {
+    "run_id": 35998647929,
+    "requirement": "7_OF_7_PASS_WITH_PINNED_PARENT_35996621664_AND_VERSIONED_RECEIPT"
+  },
+  "target_available_ai": 38,
+  "excluded": [
+    {
+      "ai_id": "F162-NU",
+      "reason": "REPOSITORY_MISSING"
+    }
+  ],
+  "execution": {
+    "batch_size": 4,
+    "max_parallel_hf_writers": 4,
+    "writer_role": "A6_MEMORY_KEEPER",
+    "per_ai_sequence": [
+      "READ_PINNED_PARENT",
+      "VERIFY_PARENT_SHA",
+      "WRITE_NEW_VERSION",
+      "READ_NEW_VERSION",
+      "VERIFY_NEW_SHA",
+      "READ_PARENT_AGAIN",
+      "VERIFY_ROLLBACK_SHA",
+      "PERSIST_IMMUTABLE_RECEIPT"
+    ],
+    "between_ai_delay_seconds": 3,
+    "retry_policy": "config/hf-rate-limit-policy-v1.json"
+  },
+  "promotion": {
+    "f74": "new generation pointer retaining parent/rollback to prior pointer",
+    "f66": "new generation index pointing to exact F74 commit",
+    "no_overwrite": true
+  },
+  "claim_gate": "38_OF_38_AVAILABLE_PASS_OR_REPORT_PARTIAL_EXACTLY"
+}
