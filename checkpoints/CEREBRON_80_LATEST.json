@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M18_GVL_INSTALLATION.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M19_GVL_V2_AND_PASS2R.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -46,10 +46,9 @@
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
   },
-  "current_message": "M18_IN_PROGRESS",
+  "current_message": "M19_IN_PROGRESS",
   "active_runs": {
-    "gvl_guard": 36033064544,
-    "saphea_a_system_architect_canary": 36032722283
+    "pass2r": 36034245620
   },
   "m05_result": "7_OF_7_PASS_GUARD_PENDING",
   "m06": "PREPARED_NOT_TRIGGERED",
@@ -63,17 +62,15 @@
   "quality_first": {
     "current_scale": 5,
     "pass1": "PASS",
-    "pass2": "FAIL_4_OF_5",
-    "repair_canary": "QUEUED_AFTER_TECHNICAL_FIX",
-    "scale_5_to_10": "HOLD_AT_5"
+    "saphea_a_repair": "PASS",
+    "pass2r": "QUEUED",
+    "scale_5_to_10": "HOLD"
   },
-  "next_action": "Wait only on active evidence: GVL guard and repaired SAPHEA-A canary. If both pass, rerun the same five-worker transfer test; do not scale.",
+  "next_action": "Read Pass2R score and GVL V2 guard; no scale before both pass and marginal gain is positive.",
   "gvl": {
-    "installed": true,
-    "guard": "QUEUED",
-    "geometric_growth_claim": "NOT_DEMONSTRATED",
-    "logical_ai": 39,
-    "available_ai": 38,
-    "vector_dimension": 16
+    "version": "2.0.0",
+    "dimension": 24,
+    "status": "V2_GUARD_PENDING",
+    "geometric_growth": "NOT_DEMONSTRATED"
   }
 }
