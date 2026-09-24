@@ -1,0 +1,29 @@
+{
+  "schema": "CEREBRON_LESSON_BANK_V1",
+  "status": "ACTIVE_REFERENCE_BANK",
+  "storage_policy": "REFERENCE_EXISTING_VALIDATED_INDEXES_BEFORE_DUPLICATION",
+  "class_order": [
+    "L0_RAW",
+    "L1_PARSED",
+    "L2_AUDITED",
+    "L3_COUNTER_AUDITED",
+    "L4_TRANSFERRED",
+    "L5_VALIDATED",
+    "L6_PROMOTED",
+    "L7_SUPERSEDED",
+    "L8_REJECTED"
+  ],
+  "auto_propagation_allowed": [
+    "L5_VALIDATED",
+    "L6_PROMOTED"
+  ],
+  "linked_indexes": [
+    {
+      "path": "memory/gvl-lesson-index.json",
+      "authority": "GVL_LESSON_INDEX",
+      "dedup_required": true
+    }
+  ],
+  "entries": [],
+  "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
+}
