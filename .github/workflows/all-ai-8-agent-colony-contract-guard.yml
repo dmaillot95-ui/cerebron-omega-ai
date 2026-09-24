@@ -1,0 +1,20 @@
+name: All AI Eight Agent Colony Contract Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/all-ai-8-agent-colonies-v1.json'
+      - 'tools/validate_all_ai_8_agent_colonies.py'
+      - '.github/workflows/all-ai-8-agent-colony-contract-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_all_ai_8_agent_colonies.py
