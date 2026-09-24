@@ -132,18 +132,26 @@
     {
       "id": "C80-M09",
       "title": "Role-diverse AGORA real-worker mission",
-      "status": "ROLE_DIVERSE_RUN_QUEUED",
+      "status": "EXECUTION_COMPLETE_SEMANTIC_HOLD",
       "mission": "config/s5-role-diverse-agora-mission-v1.json",
       "packet_contract": "config/agora-real-worker-packet-v1.json",
       "scaling_gate": "config/burst-marginal-gain-gate-v1.json",
       "run_id": 36006247528,
-      "required": "5_OF_5_REAL_ROLE_DIVERSE_RECEIPTS_PLUS_AGORA_PACKET"
+      "required": "5_OF_5_REAL_ROLE_DIVERSE_RECEIPTS_PLUS_AGORA_PACKET",
+      "packet": "agora/packets/s5-role-diverse-36006247528.json",
+      "result": "5_OF_5_PASS_5_UNIQUE_OUTPUTS_1_SHARED_LINEAGE_0_INDEPENDENT_EVIDENCE"
     },
     {
       "id": "C80-M10",
       "title": "AGORA packet contract and semantic audit gate",
-      "status": "BLOCKED_BY_M09_PACKET",
-      "objective": "Validate five executed role-diverse receipts, quantify output diversity, preserve shared-lineage correlation, then require audit/counter-audit before any GOLD or training promotion."
+      "status": "AUDIT_RUN_QUEUED",
+      "objective": "Validate five executed role-diverse receipts, quantify output diversity, preserve shared-lineage correlation, then require audit/counter-audit before any GOLD or training promotion.",
+      "run_id": 36015400305,
+      "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+      "auditors": [
+        "ELYSIUM-SMOL-AUDITOR",
+        "OMEGA-QWEN-COUNTERAUDITOR"
+      ]
     }
   ],
   "updated_at": "2026-09-24",
