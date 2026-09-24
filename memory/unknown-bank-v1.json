@@ -1,0 +1,54 @@
+{
+  "schema": "CEREBRON_UNKNOWN_BANK_V1",
+  "status": "ACTIVE",
+  "entries": [
+    {
+      "UNKNOWN_ID": "UNK-GVL-GROWTH-001",
+      "CLASS": "U1",
+      "STATE": "KNOWN_UNKNOWN",
+      "DESCRIPTION": "Three additional consecutive positive held-out transfer cycles are still required before GEOMETRIC_LIKE_GROWTH can pass the 4-cycle gate.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "memory/gvl-learning-history.json"
+      ],
+      "ROUTE_TO": [
+        "F163-XI",
+        "F168-TAU",
+        "F149-OMEGA"
+      ],
+      "STATUS": "OPEN"
+    },
+    {
+      "UNKNOWN_ID": "UNK-S10-METRION-PARSE-001",
+      "CLASS": "U1",
+      "STATE": "UNMEASURED",
+      "DESCRIPTION": "METRION-A executed and yielded findings but parsed=false in the S10 score receipt; parser/schema robustness requires isolated retest.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "receipts/workers/s10-marginal-gain-36042832474.json"
+      ],
+      "ROUTE_TO": [
+        "METRION",
+        "A4_AUDITOR",
+        "A5_COUNTER_AUDITOR"
+      ],
+      "STATUS": "OPEN"
+    },
+    {
+      "UNKNOWN_ID": "UNK-DUAL-CORE-ASSIGNMENT-001",
+      "CLASS": "U4",
+      "STATE": "UNTESTED",
+      "DESCRIPTION": "Dual-core logical-AI support is defined, but no repository manifest currently identifies which concrete AIs are dual-core.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "config/cerebron-dual-core-contract-v1.json"
+      ],
+      "ROUTE_TO": [
+        "CEREBRON",
+        "A6_MEMORY_KEEPER"
+      ],
+      "STATUS": "OPEN_NO_ASSIGNMENT_CLAIM"
+    }
+  ],
+  "rule": "UNKNOWNs must not be silently compressed into certainty."
+}
