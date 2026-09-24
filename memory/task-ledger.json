@@ -182,7 +182,7 @@
     {
       "id": "C80-M11",
       "title": "Prompt repair S5 V2",
-      "status": "QUALITY_PASS1_RUNNING",
+      "status": "QUALITY_PASS1_V3_QUEUED",
       "contract": "config/role-diverse-prompt-contract-v2.json",
       "plan": "config/m11-prompt-repair-plan-v1.json",
       "objective": "Repeat five-worker role-diverse mission with exact problem hash, strict JSON, no example substitution, then compare semantic fidelity before any 5->10 scaling.",
@@ -199,7 +199,18 @@
       "scale_requires_total_consecutive_passes": 2,
       "run_id": 36024003536,
       "role_contracts": "config/agent-role-quality-contracts-v2.json",
-      "pass2_plan": "config/s5-quality-transfer-pass2-v1.json"
+      "pass2_plan": "config/s5-quality-transfer-pass2-v1.json",
+      "failed_v2_run": 36024003536,
+      "failed_v2_result": "5_EXECUTED_5_SPIRALIX_0_CONTRACT_VALID_3_NO_DRIFT",
+      "failure_root_cause": [
+        "MODEL_METADATA_ECHO",
+        "RAW_PROMPT_CONTINUATION",
+        "MODEL_SELF_REPORTED_VALIDATION_FIELDS_UNRELIABLE"
+      ],
+      "v3_contract": "config/m11-quality-pass1-v3-contract.json",
+      "v3_run_id": 36027613868,
+      "v3_strategy": "CHAT_TEMPLATE_MODEL_CONTENT_ONLY_SYSTEM_METADATA_DETERMINISTIC_AUDIT",
+      "scale_5_to_10": "HOLD"
     },
     {
       "id": "C80-NU-F162",
