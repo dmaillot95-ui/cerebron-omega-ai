@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEREBRON native AI dual core contract",
+  "type": "object",
+  "required": [
+    "schema",
+    "scope_farms",
+    "shared_architecture",
+    "activation_gates",
+    "native_ai",
+    "rules"
+  ],
+  "properties": {
+    "schema": {
+      "const": "CEREBRON_NATIVE_AI_DUAL_CORE_V1"
+    },
+    "scope_farms": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true
+    },
+    "native_ai": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": [
+          "farm_id",
+          "ai_id",
+          "function",
+          "core_a",
+          "core_b",
+          "fusion",
+          "project_state",
+          "dual_core_state"
+        ]
+      }
+    }
+  }
+}
