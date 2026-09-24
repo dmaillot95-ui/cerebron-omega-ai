@@ -106,11 +106,16 @@
     "NEXUS"
   ],
   "registered_farms": {
-    "count": 146,
-    "max_id": 146,
+    "count": 151,
+    "max_id": 151,
     "native_ai_farms": [
       145,
-      146
+      146,
+      147,
+      148,
+      149,
+      150,
+      151
     ]
   },
   "hf_agent_pool": {
