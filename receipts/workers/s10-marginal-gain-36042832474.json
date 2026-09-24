@@ -1,0 +1,421 @@
+{
+  "schema": "CEREBRON_S10_MARGINAL_GAIN_SCORE_V1",
+  "run_id": "36042832474",
+  "mission_id": "C80-S10-MARGINAL-GAIN-001",
+  "wave_A": {
+    "rows": [
+      {
+        "worker_id": "ETHERION-A",
+        "parent_ai": "ETHERION",
+        "role_id": "FORMAL_ANALYST",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 3
+      },
+      {
+        "worker_id": "SAPHEA-A",
+        "parent_ai": "SAPHEA",
+        "role_id": "SYSTEM_ARCHITECT",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "SIMULATION_NE_REPRESENTATIVE_VALIDATION",
+          "COMMON_CAUSE_DEPENDENCY",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 5
+      },
+      {
+        "worker_id": "SAPHEA-B",
+        "parent_ai": "SAPHEA",
+        "role_id": "EVIDENCE_AUDITOR",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 4
+      },
+      {
+        "worker_id": "SAPHEA-C",
+        "parent_ai": "SAPHEA",
+        "role_id": "COUNTEREXAMPLE_HUNTER",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 4
+      },
+      {
+        "worker_id": "SPIRALION-A",
+        "parent_ai": "SPIRALION",
+        "role_id": "CONTINUITY_SYNTHESIZER",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "COMMON_CAUSE_DEPENDENCY",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 4
+      }
+    ],
+    "executed": 5,
+    "spiralix": 5,
+    "parsed": 5,
+    "clean": 5,
+    "critical_errors": 0,
+    "finding_union": [
+      "COMMON_CAUSE_DEPENDENCY",
+      "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+      "MAINTENANCE_OR_HUMAN_VARIABILITY",
+      "SIMULATION_NE_REPRESENTATIVE_VALIDATION",
+      "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+      "UNCERTAINTY_AND_MARGIN"
+    ],
+    "finding_count": 6
+  },
+  "wave_B": {
+    "rows": [
+      {
+        "worker_id": "METRION-A",
+        "parent_ai": "METRION",
+        "role_id": "ENGINEERING_VALIDATOR",
+        "executed": true,
+        "spiralix": true,
+        "parsed": false,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "METROLOGY_AND_ACCEPTANCE_CRITERIA",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 4,
+        "new_findings_vs_wave_A": [
+          "METROLOGY_AND_ACCEPTANCE_CRITERIA"
+        ],
+        "marginally_useful": true
+      },
+      {
+        "worker_id": "PSI-A",
+        "parent_ai": "F172-PSI",
+        "role_id": "HIDDEN_VARIABLE_HUNTER",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 3,
+        "new_findings_vs_wave_A": [],
+        "marginally_useful": false
+      },
+      {
+        "worker_id": "RHO-A",
+        "parent_ai": "F166-RHO",
+        "role_id": "DEPENDENCY_CORRELATION_AUDITOR",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+          "COMMON_CAUSE_DEPENDENCY",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 5,
+        "new_findings_vs_wave_A": [],
+        "marginally_useful": false
+      },
+      {
+        "worker_id": "TAU-A",
+        "parent_ai": "F168-TAU",
+        "role_id": "MARGINAL_GAIN_ANALYST",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 3,
+        "new_findings_vs_wave_A": [],
+        "marginally_useful": false
+      },
+      {
+        "worker_id": "XI-A",
+        "parent_ai": "F163-XI",
+        "role_id": "TRANSFER_VALIDATOR",
+        "executed": true,
+        "spiralix": true,
+        "parsed": true,
+        "clean": true,
+        "critical_error": false,
+        "findings": [
+          "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+          "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+          "UNCERTAINTY_AND_MARGIN",
+          "MAINTENANCE_OR_HUMAN_VARIABILITY"
+        ],
+        "finding_count": 4,
+        "new_findings_vs_wave_A": [],
+        "marginally_useful": false
+      }
+    ],
+    "executed": 5,
+    "spiralix": 5,
+    "parsed": 4,
+    "clean": 5,
+    "critical_errors": 0,
+    "finding_union": [
+      "COMMON_CAUSE_DEPENDENCY",
+      "EXTREME_OR_COMBINED_FAILURE_COVERAGE",
+      "MAINTENANCE_OR_HUMAN_VARIABILITY",
+      "METROLOGY_AND_ACCEPTANCE_CRITERIA",
+      "SUBSYSTEM_TEST_NE_INTEGRATED_SYSTEM_VALIDATION",
+      "UNCERTAINTY_AND_MARGIN"
+    ],
+    "finding_count": 6
+  },
+  "new_findings_from_wave_B": [
+    "METROLOGY_AND_ACCEPTANCE_CRITERIA"
+  ],
+  "new_finding_count": 1,
+  "extension_useful_workers": 1,
+  "selected_count": 10,
+  "executed_count": 10,
+  "useful_count": 6,
+  "correlated_count": 10,
+  "unique_lineage_fingerprints": 1,
+  "independent_evidence_count": 0,
+  "marginal_gain_positive": false,
+  "scale_decision": "STAY_AT_5",
+  "stop_reason": "STAY_AT_5_NO_SUFFICIENT_MARGINAL_GAIN",
+  "gvl_selection": {
+    "registry": "config/gvl-specialization-registry-v2.json",
+    "baseline_parent_ais": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION"
+    ],
+    "selected": [
+      {
+        "ai_id": "METRION",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "engineering_validation",
+          "metrology_benchmark",
+          "simulation",
+          "constraint_feasibility"
+        ]
+      },
+      {
+        "ai_id": "F166-RHO",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "dependency_correlation",
+          "evidence_audit",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F163-XI",
+        "novelty_vs_baseline": 0.711325,
+        "max_redundancy_vs_baseline": 0.288675,
+        "tags": [
+          "transfer_generalization",
+          "evidence_audit",
+          "science_modeling"
+        ]
+      },
+      {
+        "ai_id": "F172-PSI",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "hidden_variables",
+          "uncertainty",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F168-TAU",
+        "novelty_vs_baseline": 0.666667,
+        "max_redundancy_vs_baseline": 0.333333,
+        "tags": [
+          "information_gain",
+          "optimization_efficiency",
+          "coordination"
+        ]
+      }
+    ],
+    "selection_frozen_before_run": true
+  },
+  "gold_status": "DENY",
+  "training_status": "NO_TRAINING",
+  "spiralix_audit_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "aeadb7b31f1367d350535391b0711fdbb449f83a1a93e88f2c69c68473b76796",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "F168-TAU:A2_ANALYST",
+    "target": "AGORA",
+    "mission_id": "C80-S10-MARGINAL-GAIN-001",
+    "message_type": "AUDIT",
+    "glyph_expression": "Ω⟦F168-TAU:A₂⟧→AGΩ",
+    "V": {
+      "P": "S10_MARGINAL_INFORMATION_GAIN",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.6,
+      "D": [
+        "3a03d1ddb9415f74d9d64ca6c31e84d641e1eabeabc3ee51e22be2739c2fb0f9",
+        "e9b673392820a0359de16f916f5e5030c327cc83b53ed3406f470efda196e381",
+        "08772f41364ab52805244d353ee594e98713b37590f9bb939fe29cf5238ec116",
+        "64db6ac9c229d6c3725c62b71e37c49e6903157633913699844551bd737c134e",
+        "9831c6188361c4b575c8ad6cabd5b442406e823813cd7c8a2dfb839b6ccef9b8",
+        "629e05281aacf26f38cc4340b5a7c70ec009272d61b61ce02c44a57b09cfe2e5",
+        "2168551674d7e4d92b0f6095ded02523b337147298c1f6154fd6fc8cf1538cf9",
+        "f30c1481db84b91a1f5dc09aa86808311c358614aeca48ac60985264818ef473",
+        "17d360a519fe32e7ffc10d843ef0454ab11a186f5a9a59d0a17d68a75e6f2c04",
+        "7eb48b9147e49afa5d819eea494ad1918d3755cc3c3df03d31c8192197aae75b"
+      ],
+      "M": null
+    },
+    "payload_sha256": "3d782b9236f8268c50b088c4e0baefb4e557606840f4d34353cd78a851c2fe63",
+    "lineage_fingerprint": "f2901fc766f74b1574707b037e40544c1ae630902655e1a1d80329257b0e5664",
+    "evidence_refs": [],
+    "natural_language": "S10 marginal gain positive=False; new_findings=1; useful_extension_workers=1; independent_evidence=0.",
+    "json_payload": {
+      "schema": "CEREBRON_S10_MARGINAL_GAIN_SCORE_V1",
+      "run_id": "36042832474",
+      "mission_id": "C80-S10-MARGINAL-GAIN-001",
+      "new_findings_from_wave_B": [
+        "METROLOGY_AND_ACCEPTANCE_CRITERIA"
+      ],
+      "new_finding_count": 1,
+      "extension_useful_workers": 1,
+      "selected_count": 10,
+      "executed_count": 10,
+      "useful_count": 6,
+      "correlated_count": 10,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0,
+      "marginal_gain_positive": false,
+      "scale_decision": "STAY_AT_5",
+      "stop_reason": "STAY_AT_5_NO_SUFFICIENT_MARGINAL_GAIN",
+      "gvl_selection": {
+        "registry": "config/gvl-specialization-registry-v2.json",
+        "baseline_parent_ais": [
+          "SAPHEA",
+          "SPIRALION",
+          "ETHERION"
+        ],
+        "selected": [
+          {
+            "ai_id": "METRION",
+            "novelty_vs_baseline": 1,
+            "max_redundancy_vs_baseline": 0,
+            "tags": [
+              "engineering_validation",
+              "metrology_benchmark",
+              "simulation",
+              "constraint_feasibility"
+            ]
+          },
+          {
+            "ai_id": "F166-RHO",
+            "novelty_vs_baseline": 1,
+            "max_redundancy_vs_baseline": 0,
+            "tags": [
+              "dependency_correlation",
+              "evidence_audit",
+              "counterexample"
+            ]
+          },
+          {
+            "ai_id": "F163-XI",
+            "novelty_vs_baseline": 0.711325,
+            "max_redundancy_vs_baseline": 0.288675,
+            "tags": [
+              "transfer_generalization",
+              "evidence_audit",
+              "science_modeling"
+            ]
+          },
+          {
+            "ai_id": "F172-PSI",
+            "novelty_vs_baseline": 1,
+            "max_redundancy_vs_baseline": 0,
+            "tags": [
+              "hidden_variables",
+              "uncertainty",
+              "counterexample"
+            ]
+          },
+          {
+            "ai_id": "F168-TAU",
+            "novelty_vs_baseline": 0.666667,
+            "max_redundancy_vs_baseline": 0.333333,
+            "tags": [
+              "information_gain",
+              "optimization_efficiency",
+              "coordination"
+            ]
+          }
+        ],
+        "selection_frozen_before_run": true
+      },
+      "gold_status": "DENY",
+      "training_status": "NO_TRAINING"
+    },
+    "created_at": "2026-09-24T19:01:24.877930+00:00"
+  },
+  "spiralix_audit_envelope_sha256": "33ca8bd77c336cfba4f7245de9b7b9f19c7487380ab9ea5ee0bc50bfec19bddb",
+  "score_sha256": "7b3518aaacaf204395bebd9b40052c741b8b1879f8f7fcf318a45ebd8fdad0f0"
+}
