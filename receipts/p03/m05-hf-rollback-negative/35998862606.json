@@ -1,0 +1,9 @@
+{
+  "schema": "CEREBRON_M05_NEGATIVE_EVIDENCE_V2",
+  "run_id": 35998862606,
+  "classification": "PREMATURE_GUARD_TRIGGER",
+  "failure": "Strict M05 versioned rollback guard ran before a versioned receipt existed.",
+  "data_integrity": "NO_MEMORY_WRITE_FROM_THIS_GUARD",
+  "corrected_by_commit": "e73381e3c17b6aae82bc43d6a460ed1ea74f00e5",
+  "preserve": true
+}
