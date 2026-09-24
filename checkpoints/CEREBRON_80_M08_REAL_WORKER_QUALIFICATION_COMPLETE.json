@@ -1,0 +1,23 @@
+{
+  "schema": "CEREBRON_80_M08_REAL_WORKER_QUALIFICATION_V2",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 8,
+  "status": "COMPLETE",
+  "runtime_changed": false,
+  "run_id": 36002999588,
+  "route": "GITHUB_ACTIONS_CPU",
+  "qualification": "QUALIFIED_CANARY_5",
+  "receipt": "receipts/workers/5-real-ai-workers-36002999588.json",
+  "result": {
+    "jobs_success": 5,
+    "llm_inference_pass": 5,
+    "artifacts_present": 5,
+    "unique_receipt_sha256": 5,
+    "unique_output_sha256": 1
+  },
+  "interpretation": "Execution route proven for 5 real pinned-model workers. Identical deterministic prompt yielded identical output, so evidentiary diversity is not proven.",
+  "next_message": {
+    "id": "M09",
+    "objective": "Run five role-diverse real workers, fuse receipts into an AGORA packet, and measure output diversity without treating shared lineage as independent evidence."
+  }
+}
