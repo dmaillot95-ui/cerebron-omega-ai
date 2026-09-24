@@ -1,0 +1,170 @@
+name: CEREBRON S5 Role Diverse AGORA Mission
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/s5-role-diverse-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  worker:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker: [SAPHEA-A, SAPHEA-B, SAPHEA-C, SPIRALION-A, ETHERION-A]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Run role-diverse real inference
+        env:
+          WORKER: ${{ matrix.worker }}
+          MODEL_ID: HuggingFaceTB/SmolLM3-3B
+          REVISION: a07cc9a04f16550a088caea529712d1d335b0ac1
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import os,json,time,hashlib,pathlib
+          from pathlib import Path
+          cfg=json.loads(Path("config/s5-role-diverse-agora-mission-v1.json").read_text())
+          spec=next(x for x in cfg["workers"] if x["worker_id"]==os.environ["WORKER"])
+          prompt=(
+            "You are a specialized CEREBRON worker. "
+            f"Role: {spec['agora_role']}. "
+            f"Mission problem: {cfg['problem']} "
+            f"Your assigned task: {spec['task']} "
+            "Return a concise structured answer with: RESULT, ASSUMPTIONS, EVIDENCE_NEEDED, FAILURE_MODES, RESIDUAL_UNCERTAINTY. "
+            "Do not claim proof unless proved."
+          )
+          t=time.time()
+          r={
+            "schema":"CEREBRON_REAL_WORKER_ROLE_DIVERSE_RECEIPT_V1",
+            "mission_id":cfg["mission_id"],
+            "run_id":os.environ["RUN_ID"],
+            "worker_id":spec["worker_id"],
+            "parent_ai":spec["parent_ai"],
+            "agora_role":spec["agora_role"],
+            "task":spec["task"],
+            "execution_route":"GITHUB_ACTIONS_CPU",
+            "model_id":os.environ["MODEL_ID"],
+            "revision":os.environ["REVISION"],
+            "real_execution":True,
+            "llm_inference":False,
+            "lineage_fingerprint":hashlib.sha256(
+              (os.environ["MODEL_ID"]+"|"+os.environ["REVISION"]+"|GITHUB_ACTIONS_CPU").encode()
+            ).hexdigest()
+          }
+          try:
+              import torch
+              from transformers import AutoTokenizer,AutoModelForCausalLM
+              tok=AutoTokenizer.from_pretrained(os.environ["MODEL_ID"],revision=os.environ["REVISION"])
+              model=AutoModelForCausalLM.from_pretrained(
+                os.environ["MODEL_ID"],revision=os.environ["REVISION"],
+                torch_dtype=torch.float32,low_cpu_mem_usage=True
+              )
+              x=tok(prompt,return_tensors="pt")
+              with torch.no_grad():
+                  y=model.generate(**x,max_new_tokens=180,do_sample=False)
+              out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+              r.update(
+                llm_inference=True,inference="PASS",result=out[:4000],
+                result_sha256=hashlib.sha256(out.encode()).hexdigest()
+              )
+          except Exception as e:
+              r.update(inference="FAIL",failure_class=type(e).__name__,failure_message=str(e)[:1000])
+          r["latency_s"]=round(time.time()-t,3)
+          r["receipt_sha256"]=hashlib.sha256(json.dumps(r,sort_keys=True).encode()).hexdigest()
+          p=pathlib.Path("artifacts")/os.environ["WORKER"]; p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(r,indent=2)+"\n")
+          print(json.dumps({
+            "worker_id":r["worker_id"],"agora_role":r["agora_role"],
+            "llm_inference":r["llm_inference"],"inference":r.get("inference"),
+            "result_sha256":r.get("result_sha256"),"latency_s":r["latency_s"],
+            "receipt_sha256":r["receipt_sha256"]
+          }))
+          if not r["llm_inference"]: raise SystemExit(2)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s5-role-receipt-${{ matrix.worker }}
+          path: artifacts/${{ matrix.worker }}/receipt.json
+
+  fuse:
+    needs: worker
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: s5-role-receipt-*
+          path: downloaded
+          merge-multiple: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fuse receipts into candidate AGORA packet
+        env:
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import os,json,hashlib,pathlib,glob
+          from pathlib import Path
+          receipts=[]
+          for fn in glob.glob("downloaded/**/receipt.json",recursive=True):
+              receipts.append(json.loads(Path(fn).read_text()))
+          receipts=sorted(receipts,key=lambda x:x["worker_id"])
+          expected={"SAPHEA-A","SAPHEA-B","SAPHEA-C","SPIRALION-A","ETHERION-A"}
+          got={x["worker_id"] for x in receipts}
+          all_pass=(got==expected and len(receipts)==5 and all(x.get("llm_inference") and x.get("inference")=="PASS" for x in receipts))
+          output_hashes={x.get("result_sha256") for x in receipts if x.get("result_sha256")}
+          lineage_hashes={x.get("lineage_fingerprint") for x in receipts if x.get("lineage_fingerprint")}
+          roles={x.get("agora_role") for x in receipts}
+          packet={
+            "schema":"CEREBRON_AGORA_REAL_WORKER_PACKET_V1",
+            "mission_id":"C80-M09-S5-ROLE-DIVERSE-001",
+            "run_id":os.environ["RUN_ID"],
+            "status":"EXECUTED_CORRELATED_ROLE_DIVERSE_PENDING_SEMANTIC_AUDIT" if all_pass else "FAIL",
+            "executed_workers":len(receipts),
+            "successful_workers":sum(1 for x in receipts if x.get("llm_inference") and x.get("inference")=="PASS"),
+            "roles":sorted(roles),
+            "unique_result_sha256":len(output_hashes),
+            "unique_lineage_fingerprints":len(lineage_hashes),
+            "lineage_classification":"CORRELATED_SHARED_MODEL_REVISION",
+            "independent_evidence_count":0,
+            "workers":receipts,
+            "promotion":"NOT_GOLD_PENDING_AUDIT_COUNTER_AUDIT",
+            "privacy":"PUBLIC_NON_SECRET_OUTPUT_ONLY"
+          }
+          packet["capsule_sha256"]=hashlib.sha256(json.dumps(packet,sort_keys=True).encode()).hexdigest()
+          Path("receipts/workers").mkdir(parents=True,exist_ok=True)
+          Path("agora/packets").mkdir(parents=True,exist_ok=True)
+          Path(f"receipts/workers/s5-role-diverse-{os.environ['RUN_ID']}.json").write_text(json.dumps(packet,indent=2)+"\n")
+          Path(f"agora/packets/s5-role-diverse-{os.environ['RUN_ID']}.json").write_text(json.dumps(packet,indent=2)+"\n")
+          print(json.dumps({
+            "status":packet["status"],"executed_workers":packet["executed_workers"],
+            "successful_workers":packet["successful_workers"],
+            "unique_results":packet["unique_result_sha256"],
+            "roles":len(packet["roles"]),"independent_evidence_count":0,
+            "capsule_sha256":packet["capsule_sha256"]
+          }))
+          if not all_pass: raise SystemExit(2)
+      - name: Persist non-sensitive packet
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/workers/ agora/packets/
+          git diff --cached --quiet && exit 0
+          git commit -m "M09 receipt: five role-diverse real workers AGORA packet"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
