@@ -221,7 +221,7 @@
       "pass2_failed_worker": "SAPHEA-A",
       "pass2_failure": "SYSTEM_ARCHITECT did not meet representative-validation evidence hierarchy",
       "repair_overlay": "config/role-overlays-v1.json",
-      "repair_canary_run": 36031518267,
+      "repair_canary_run": 36032722283,
       "pass1_run": 36027613868,
       "pass1_receipt": "receipts/workers/m11-quality-pass1-v3-36027613868.json",
       "pass1": true,
@@ -230,7 +230,10 @@
       "failed_worker": "SAPHEA-A",
       "failed_role": "SYSTEM_ARCHITECT",
       "failure_class": "CRITICAL_EPISTEMIC_ERROR_SIMULATION_EQ_VALIDATION",
-      "role_contract": "config/system-architect-evidence-contract-v1.json"
+      "role_contract": "config/system-architect-evidence-contract-v1.json",
+      "previous_canary_run": 36031518267,
+      "previous_canary_failure": "TECHNICAL_NAMERROR_ROLE_CONTRACT_NOT_COGNITIVE_RESULT",
+      "repair_canary_status": "QUEUED_AFTER_SCOPE_FIX"
     },
     {
       "id": "C80-NU-F162",
@@ -250,6 +253,24 @@
       "role_contracts": "config/agent-role-quality-contracts-v2.json",
       "current_scale": 5,
       "scale_5_to_10": "LOCKED_UNTIL_TWO_QUALITY_PASSES"
+    },
+    {
+      "id": "C80-GVL",
+      "title": "Geometric Vector Learning",
+      "status": "GVL_INSTALLED_GUARD_QUEUED",
+      "contract": "config/geometric-vector-learning-v1.json",
+      "engine": "tools/gvl_vector_engine.py",
+      "history": "memory/gvl-learning-history.json",
+      "lesson_schema": "config/gvl-lesson-capsule-schema-v1.json",
+      "lesson_index": "memory/gvl-lesson-index.json",
+      "guard_run": 36033064544,
+      "logical_ai": 39,
+      "available_ai": 38,
+      "vector_dimension": 16,
+      "geometric_growth_claim": "NOT_DEMONSTRATED",
+      "required_growth_gate": "AT_LEAST_4_CONSECUTIVE_HELD_OUT_TRANSFER_CYCLES_WITH_RATIO_GT_1_AND_ZERO_CRITICAL_REGRESSION",
+      "civilisation_tasks_updated": 5,
+      "scale_5_to_10": "HOLD"
     }
   ],
   "updated_at": "2026-09-24",
