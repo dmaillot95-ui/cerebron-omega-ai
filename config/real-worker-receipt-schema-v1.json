@@ -1,0 +1,54 @@
+{
+  "schema": "CEREBRON_REAL_WORKER_RECEIPT_SCHEMA_V1",
+  "status": "ACTIVE_CONTRACT",
+  "runtime_changed": false,
+  "required": [
+    "mission_id",
+    "worker_id",
+    "parent_ai_or_farm",
+    "role",
+    "execution_route",
+    "model_or_tool_id",
+    "started_at",
+    "ended_at",
+    "success",
+    "result_sha256",
+    "lineage_fingerprint"
+  ],
+  "conditional": {
+    "llm": [
+      "model_revision",
+      "llm_inference",
+      "output_sha256"
+    ],
+    "tool": [
+      "tool_id",
+      "tool_version_or_commit_if_available"
+    ],
+    "farm": [
+      "farm_id",
+      "workflow_or_action_id"
+    ]
+  },
+  "states": {
+    "PLANNED_NOT_EXECUTED": "No execution receipt; never counted.",
+    "EXECUTED_PENDING_RESULT": "Real job started and identifiable.",
+    "EXECUTED_SUCCESS": "Job completed and receipt validates.",
+    "EXECUTED_FAILURE": "Job completed or aborted with preserved failure receipt.",
+    "CORRELATED_SUCCESS": "Successful execution sharing model/data lineage with another worker."
+  },
+  "agora_publish_gate": [
+    "EXECUTED_SUCCESS_OR_CORRELATED_SUCCESS",
+    "A4_AUDIT_OR_EQUIVALENT",
+    "A5_COUNTER_AUDIT_WHEN_HIGH_STAKES",
+    "PROVENANCE_COMPLETE",
+    "NO_PRIVATE_PAYLOAD"
+  ],
+  "memory_gate": "A6_MEMORY_KEEPER batches validated capsules; raw worker outputs do not directly become HF GOLD.",
+  "hard_rules": [
+    "NO_RECEIPT_NE_EXECUTED",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "RAW_AGORA_NE_TRAIN",
+    "NO_DESTRUCTIVE_OVERWRITE"
+  ]
+}
