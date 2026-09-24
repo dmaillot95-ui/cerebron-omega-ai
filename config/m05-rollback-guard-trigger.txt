@@ -1,0 +1,4 @@
+M05 ROLLBACK GUARD
+receipt=receipts/p03/m05-hf-rollback/36016484074.json
+parent=35996621664
+runtime_changed=false
