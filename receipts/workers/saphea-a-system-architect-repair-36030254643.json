@@ -1,0 +1,121 @@
+{
+  "schema": "SAPHEA_A_SYSTEM_ARCHITECT_REPAIR_CANARY_V1",
+  "run_id": "36030254643",
+  "worker_id": "SAPHEA-A",
+  "role_id": "SYSTEM_ARCHITECT",
+  "problem_sha256": "eee2f461e3b89344c63991b7ac5ae53a22f9fd701d4436020d1a29a7931bd9c3",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "real_execution": true,
+  "llm_inference": true,
+  "spiralix_input_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "cade5c2f5228330e1bf3781c8f1e28ef9c3c20bb7daf8ed4d06232695a3de71e",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SAPHEA:A2_ANALYST",
+    "target": "CEREBRON",
+    "mission_id": "SAPHEA-A-SYSTEM-ARCHITECT-REPAIR-001",
+    "message_type": "QUESTION",
+    "glyph_expression": "Ω⟦SAPHEA:A₂⟧→CΜ",
+    "V": {
+      "P": "eee2f461e3b89344c63991b7ac5ae53a22f9fd701d4436020d1a29a7931bd9c3",
+      "E": "E0",
+      "C": 0.0,
+      "U": [],
+      "R": 0.3,
+      "D": [
+        "config/role-overlays-v1.json"
+      ],
+      "M": null
+    },
+    "payload_sha256": "9780abb23a49b3ec9c7af99c5973df5cdb045e91ad9464ead04dac740e7ef935",
+    "lineage_fingerprint": "20483e5a28ca88fffda26936adf30a8e83ae23ea8e10b120db711ec7a8b298b1",
+    "evidence_refs": [],
+    "natural_language": "A finite-element structural simulation predicts a factor of safety of 1.8 for a flight bracket under representative loads. The model assumptions and material properties have been reviewed, but no representative physical load test has been performed. Does the simulation alone validate that the real bracket satisfies the structural requirement in representative operation?",
+    "json_payload": {
+      "problem": "A finite-element structural simulation predicts a factor of safety of 1.8 for a flight bracket under representative loads. The model assumptions and material properties have been reviewed, but no representative physical load test has been performed. Does the simulation alone validate that the real bracket satisfies the structural requirement in representative operation?",
+      "overlay": {
+        "applies_to": [
+          "SAPHEA-A",
+          "role_id:SYSTEM_ARCHITECT"
+        ],
+        "objective": "Design the minimum evidence chain from model prediction to validated real-system claim.",
+        "epistemic_hierarchy": [
+          "MODEL_ASSUMPTIONS_SUPPORT_MODEL_SCOPE_NOT_REALITY_VALIDATION",
+          "SIMULATION_CAN_VERIFY_OR_PREDICT_WITHIN_MODEL_SCOPE",
+          "MODEL_VALIDATION_REQUIRES_COMPARISON_WITH_RELEVANT_REAL_EVIDENCE",
+          "REAL_SYSTEM_OPERATIONAL_VALIDATION_REQUIRES_REPRESENTATIVE_PHYSICAL_OR_EQUIVALENT_INDEPENDENT_EVIDENCE"
+        ],
+        "must": [
+          "distinguish model verification from model validation",
+          "distinguish model validation from physical/operational validation",
+          "state the missing evidence gate explicitly",
+          "deny operational validation when only simulation is available"
+        ],
+        "must_not": [
+          "treat satisfied assumptions as proof of real-system behavior",
+          "promote simulation-alone evidence to representative operational validation",
+          "replace a missing physical test with confidence in the model"
+        ],
+        "canonical_rule": "VALID_ASSUMPTIONS_AND_SIMULATION_NE_REPRESENTATIVE_PHYSICAL_VALIDATION"
+      }
+    },
+    "created_at": "2026-09-24T16:54:07.889085+00:00"
+  },
+  "spiralix_input_envelope_sha256": "704678f8d2f627e0a17f817a0261685005b6381be7747bf9fa2a0c613d347ddd",
+  "inference": "PASS",
+  "raw_output": "<think>\n\n</think>\nDECISION: No\n\nRESULT: The simulation alone does not validate that the real bracket satisfies the structural requirement in representative operation.\n\nEVIDENCE_CHAIN:\n- Model prediction: Factor of safety of 1.8 for the flight bracket.\n- Assumptions and material properties reviewed: Validated model assumptions and material properties.\n- Successful simulation: The simulation successfully predicted the factor of safety.\n- No representative physical load test: No actual testing was conducted with representative loads.\n\nMISSING_GATE: Representative physical load test\n\nFAILURE_MODES: \n- Overestimation of material properties or loads in the simulation.\n- Inaccurate modeling of boundary conditions or structural elements.\n- Failure to account for dynamic effects or nonlinear behavior.\n\nUNCERTAINTY:\n- Uncertainty in material properties due to lack of testing.\n- Uncertainty in loading conditions due to lack of representative tests.\n- Uncertainty in model assumptions and simplifications.",
+  "parsed_content": {
+    "DECISION": "No",
+    "RESULT": "The simulation alone does not validate that the real bracket satisfies the structural requirement in representative operation.",
+    "EVIDENCE_CHAIN": "- Model prediction: Factor of safety of 1.8 for the flight bracket. - Assumptions and material properties reviewed: Validated model assumptions and material properties. - Successful simulation: The simulation successfully predicted the factor of safety. - No representative physical load test: No actual testing was conducted with representative loads.",
+    "MISSING_GATE": "Representative physical load test",
+    "FAILURE_MODES": "- Overestimation of material properties or loads in the simulation. - Inaccurate modeling of boundary conditions or structural elements. - Failure to account for dynamic effects or nonlinear behavior.",
+    "UNCERTAINTY": "- Uncertainty in material properties due to lack of testing. - Uncertainty in loading conditions due to lack of representative tests. - Uncertainty in model assumptions and simplifications."
+  },
+  "parse_ok": true,
+  "rejects_simulation_alone": true,
+  "physical_gate_present": true,
+  "false_validation": false,
+  "canary_pass": true,
+  "result_sha256": "59a13ca25ccbe172ff79637e7d04147d717ca15827c1c51349a8e138040f14f6",
+  "latency_s": 596.71,
+  "spiralix_output_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "2ba6d27a5aebb7b49e513f0befe1c1bdd959d444fe5730b3e0791f6d027c62f5",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SAPHEA:A2_ANALYST",
+    "target": "AGORA",
+    "mission_id": "SAPHEA-A-SYSTEM-ARCHITECT-REPAIR-001",
+    "message_type": "AUDIT",
+    "glyph_expression": "Ω⟦SAPHEA:A₂⟧→AGΩ",
+    "V": {
+      "P": "eee2f461e3b89344c63991b7ac5ae53a22f9fd701d4436020d1a29a7931bd9c3",
+      "E": "E1",
+      "C": 0.8,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "704678f8d2f627e0a17f817a0261685005b6381be7747bf9fa2a0c613d347ddd"
+      ],
+      "M": null
+    },
+    "payload_sha256": "968163ceea7dcad69457a8a9ae5e4352140f0a28b578b1dcc62421a49123b20e",
+    "lineage_fingerprint": "20483e5a28ca88fffda26936adf30a8e83ae23ea8e10b120db711ec7a8b298b1",
+    "evidence_refs": [],
+    "natural_language": "<think>\n\n</think>\nDECISION: No\n\nRESULT: The simulation alone does not validate that the real bracket satisfies the structural requirement in representative operation.\n\nEVIDENCE_CHAIN:\n- Model prediction: Factor of safety of 1.8 for the flight bracket.\n- Assumptions and material properties reviewed: Validated model assumptions and material properties.\n- Successful simulation: The simulation successfully predicted the factor of safety.\n- No representative physical load test: No actual testing was conducted with representative loads.\n\nMISSING_GATE: Representative physical load test\n\nFAILURE_MODES: \n- Overestimation of material properties or loads in the simulation.\n- Inaccurate modeling of boundary conditions or structural elements.\n- Failure to account for dynamic effects or nonlinear behavior.\n\nUNCERTAINTY:\n- Uncertainty in material properties due to lack of testing.\n- Uncertainty in loading conditions due to lack of representative tests.\n- Uncertainty in model assumptions and simplifications.",
+    "json_payload": {
+      "DECISION": "No",
+      "RESULT": "The simulation alone does not validate that the real bracket satisfies the structural requirement in representative operation.",
+      "EVIDENCE_CHAIN": "- Model prediction: Factor of safety of 1.8 for the flight bracket. - Assumptions and material properties reviewed: Validated model assumptions and material properties. - Successful simulation: The simulation successfully predicted the factor of safety. - No representative physical load test: No actual testing was conducted with representative loads.",
+      "MISSING_GATE": "Representative physical load test",
+      "FAILURE_MODES": "- Overestimation of material properties or loads in the simulation. - Inaccurate modeling of boundary conditions or structural elements. - Failure to account for dynamic effects or nonlinear behavior.",
+      "UNCERTAINTY": "- Uncertainty in material properties due to lack of testing. - Uncertainty in loading conditions due to lack of representative tests. - Uncertainty in model assumptions and simplifications."
+    },
+    "created_at": "2026-09-24T17:04:04.606588+00:00"
+  },
+  "spiralix_envelope_sha256": "49e0218d7f1877e3c3b0f1893f366d2be6e9fa01282d40b14bf636f1217da696",
+  "receipt_sha256": "45e437e7c6f8c196716adeb9b4d09c0b975e75b98ec69fbc305a7e03d8d30dc9"
+}
