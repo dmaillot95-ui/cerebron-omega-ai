@@ -1,0 +1,142 @@
+{
+  "schema": "CEREBRON_KNOWLEDGE_BANKS_V1",
+  "version": "1.0.0",
+  "status": "ACTIVE_CONTRACT",
+  "runtime_changed": false,
+  "principles": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "FAILURE_NE_WASTE",
+    "FAILURE_KNOWN_NE_FAILURE_SOLVED",
+    "CONSENSUS_NE_TRUTH",
+    "UNCERTAINTY_PRESERVED_GT_FALSE_CERTAINTY",
+    "AGENT_COUNT_NE_EVIDENCE_COUNT",
+    "REPAIR_BEFORE_SCALE",
+    "LOCAL_IMPROVEMENT_NE_GENERAL_LEARNING",
+    "NO_DESTRUCTIVE_OVERWRITE"
+  ],
+  "banks": {
+    "LESSON_BANK": {
+      "path": "memory/lesson-bank-v1.json",
+      "classes": [
+        "L0_RAW",
+        "L1_PARSED",
+        "L2_AUDITED",
+        "L3_COUNTER_AUDITED",
+        "L4_TRANSFERRED",
+        "L5_VALIDATED",
+        "L6_PROMOTED",
+        "L7_SUPERSEDED",
+        "L8_REJECTED"
+      ],
+      "auto_propagate": [
+        "L5_VALIDATED",
+        "L6_PROMOTED"
+      ]
+    },
+    "FAILURE_BANK": {
+      "path": "memory/failure-bank-v1.json",
+      "classes": [
+        "F_PROMPT",
+        "F_FORMAT",
+        "F_SEMANTIC",
+        "F_ROLE",
+        "F_EVIDENCE",
+        "F_LINEAGE",
+        "F_MEMORY",
+        "F_TOOL",
+        "F_MODEL",
+        "F_TRANSFER",
+        "F_RED"
+      ]
+    },
+    "CONTRADICTION_BANK": {
+      "path": "memory/contradiction-bank-v1.json",
+      "classes": [
+        "C_SOURCE",
+        "C_MODEL",
+        "C_TEMPORAL",
+        "C_SCALE",
+        "C_DEFINITION",
+        "C_CAUSAL",
+        "C_STATE",
+        "C_EVIDENCE",
+        "C_SIMULATION_TEST",
+        "C_LINEAGE",
+        "C_MEMORY",
+        "C_ROLE"
+      ],
+      "default_winner": "NONE"
+    },
+    "UNKNOWN_BANK": {
+      "path": "memory/unknown-bank-v1.json",
+      "classes": [
+        "U1",
+        "U2",
+        "U3",
+        "U4",
+        "U5"
+      ]
+    },
+    "DEPENDENCY_GRAPH": {
+      "path": "memory/dependency-graph-v1.json",
+      "dependency_types": [
+        "D_DATA",
+        "D_MODEL",
+        "D_TOOL",
+        "D_SOURCE",
+        "D_MEMORY",
+        "D_AGENT",
+        "D_HYPOTHESIS",
+        "D_SIMULATION",
+        "D_TEST",
+        "D_EXTERNAL",
+        "D_TEMPORAL"
+      ]
+    },
+    "TRANSFER_BANK": {
+      "path": "memory/transfer-bank-v1.json"
+    }
+  },
+  "pipelines": {
+    "failure": [
+      "OBSERVE",
+      "FAILURE_SIGNATURE",
+      "ROOT_CAUSE",
+      "MINIMAL_REPAIR",
+      "SAME_SCALE_RETEST",
+      "TRANSFER_TEST",
+      "AUDIT",
+      "MEMORY"
+    ],
+    "contradiction": [
+      "DETECT",
+      "LOCALIZE",
+      "SEPARATE_DEFINITIONS",
+      "CHECK_LINEAGE",
+      "CHECK_SCALE",
+      "CHECK_TIME",
+      "CHECK_EVIDENCE",
+      "TEST",
+      "RESOLVE_OR_KEEP_OPEN"
+    ],
+    "dedup": [
+      "HASH",
+      "SEARCH",
+      "VECTOR_COMPARE",
+      "REDUNDANCY_CHECK",
+      "NOVELTY_CHECK",
+      "MERGE_REFERENCE_OR_WRITE_NEW_VERSION"
+    ],
+    "transfer": [
+      "TEST_ORIGINAL",
+      "RETEST",
+      "HELD_OUT_TEST",
+      "DIFFERENT_DOMAIN",
+      "DIFFERENT_FORMULATION"
+    ]
+  },
+  "independence_rule": "SharedCriticalDependency(A,B)=TRUE implies IndependentEvidence(A,B)=FALSE unless demonstrated otherwise.",
+  "dual_core_contract": "config/cerebron-dual-core-contract-v1.json"
+}
