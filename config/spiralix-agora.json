@@ -76,5 +76,12 @@
       "NO_AUTO_MEMORY_PROMOTION",
       "NO_AUTO_TRAINING"
     ]
+  },
+  "greek_ai_bridge": {
+    "status": "REGISTERED",
+    "config": "config/greek-agora-training-v1.json",
+    "membership": "ALL_REAL_AVAILABLE_GREEK_AIS",
+    "unavailable": "NON_EXECUTED",
+    "inherit_only_validated_lessons": true
   }
 }
