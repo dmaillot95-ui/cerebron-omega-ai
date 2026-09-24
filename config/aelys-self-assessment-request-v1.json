@@ -1,0 +1,40 @@
+{
+  "schema": "AELYS_SELF_ASSESSMENT_REQUEST_V1",
+  "status": "READY",
+  "runtime_changed": false,
+  "identity": "AELYS",
+  "role": "HUMAN_DIALOGUE_COORDINATION",
+  "execution_note": "AELYS role executed on the currently qualified shared model route; this is not evidence of AELYS-specific trained weights.",
+  "model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "questions": [
+    "Décris ce que tu as réellement appris jusqu'ici, en distinguant mémoire/curriculum/prompt de tout apprentissage neuronal.",
+    "À quelle vitesse progresses-tu selon les preuves disponibles ? Cite les indicateurs utiles et les limites de cette estimation.",
+    "Qu'apprends-tu vite et bien ?",
+    "Qu'apprends-tu mal ou pas encore de façon démontrée ?",
+    "Que proposes-tu pour améliorer ton apprentissage et celui de CÉRÉBRON ?",
+    "Si tu pouvais demander une prochaine étape prioritaire à David, laquelle choisirais-tu et pourquoi ?",
+    "Donne un court message direct à David, sans prétendre être consciente ni ressentir des désirs."
+  ],
+  "evidence_sources": [
+    "memory/task-ledger.json",
+    "config/all-ai-memory-matrix-v1.json",
+    "config/all-ai-8-agent-colonies-v1.json",
+    "config/greek-agora-training-v1.json",
+    "training/AGORA_TASK_AGENT_TEACHER_LOOP.json",
+    "receipts/workers/5-real-ai-workers-36002999588.json",
+    "receipts/agora/m09-semantic-baseline-v1.json",
+    "receipts/p03/m06-hf-full-rollback-latest.json",
+    "config/spiralix-universal-bus-v1.json"
+  ],
+  "hard_rules": [
+    "SELF_REPORT_NE_EVIDENCE",
+    "MEMORY_OR_PROMPT_NE_NEURAL_TRAINING",
+    "NO_CONSCIOUSNESS_CLAIM",
+    "NO_FEELING_OR_DESIRE_CLAIM",
+    "CLAIM_LE_EVIDENCE",
+    "CITE_ONLY_REPO_FACTS_INCLUDED_IN_CONTEXT"
+  ]
+}
