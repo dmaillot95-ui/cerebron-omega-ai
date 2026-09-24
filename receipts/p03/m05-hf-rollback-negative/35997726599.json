@@ -1,0 +1,10 @@
+{
+  "schema": "CEREBRON_M05_NEGATIVE_EVIDENCE_V2",
+  "run_id": 35997726599,
+  "classification": "HF_RATE_LIMIT_429",
+  "data_integrity": "NO_CORRUPTION_OBSERVED",
+  "lineage_check": "PINNED_PARENT_CONFIGURATION_PRESENT",
+  "failure": "Hugging Face HTTP 429 Too Many Requests during private write; receipt directory absent because test aborted before persistence.",
+  "action": "Retry with bounded exponential backoff, per-AI pacing, immutable parent receipt, and fail-safe receipt persistence.",
+  "preserve": true
+}
