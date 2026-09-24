@@ -1,0 +1,61 @@
+{
+  "schema": "CEREBRON_M11_QUALITY_PASS1_V3_CONTRACT",
+  "status": "READY",
+  "runtime_changed": false,
+  "source_failed_run": 36024003536,
+  "source_failure": {
+    "real_execution": "5_OF_5_PASS",
+    "spiralix": "5_OF_5_PASS",
+    "contract_valid": "0_OF_5",
+    "no_drift": "3_OF_5",
+    "root_cause": [
+      "MODEL_WAS_ASKED_TO_ECHO_SYSTEM_METADATA",
+      "RAW_COMPLETION_BEHAVED_LIKE_PROMPT_CONTINUATION",
+      "MODEL_SELF_REPORTED_DRIFT_FLAGS_WERE_NOT_TRUSTWORTHY"
+    ]
+  },
+  "repair": [
+    "USE_NATIVE_CHAT_TEMPLATE_IF_AVAILABLE",
+    "SYSTEM_OWNS_SHA_IDENTITY_ROLE_LINEAGE_SPIRALIX",
+    "MODEL_ONLY_GENERATES_COGNITIVE_CONTENT",
+    "NO_JSON_REQUIRED_FROM_MODEL",
+    "DETERMINISTIC_POST_VALIDATION_OF_SEMANTIC_CORE",
+    "NO_SCALE_IF_PASS1_FAILS"
+  ],
+  "model_output_labels": [
+    "DECISION",
+    "RESULT",
+    "ASSUMPTIONS",
+    "EVIDENCE",
+    "FAILURE_MODES",
+    "UNCERTAINTY"
+  ],
+  "semantic_core_required": [
+    "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+    "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+    "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+    "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+  ],
+  "system_metadata": [
+    "problem_sha256",
+    "worker_id",
+    "role_id",
+    "spiralix_input_envelope_sha256",
+    "spiralix_output_envelope_sha256",
+    "lineage_fingerprint",
+    "model_id",
+    "revision",
+    "run_id"
+  ],
+  "pass_gate": [
+    "5_OF_5_REAL_EXECUTION",
+    "5_OF_5_SPIRALIX",
+    "5_OF_5_CHAT_OUTPUT_PARSED",
+    "5_OF_5_NO_PROMPT_ECHO",
+    "5_OF_5_NO_FALSE_INDEPENDENCE",
+    "EACH_WORKER_MATCHES_AT_LEAST_2_CORE_CONCEPTS",
+    "COLLECTIVE_MATCHES_ALL_4_CORE_CONCEPTS",
+    "ZERO_CRITICAL_EVIDENCE_VIOLATION"
+  ],
+  "scale_effect": "PASS1_ONLY; DOES_NOT_UNLOCK_5_TO_10_WITHOUT_TRANSFER_PASS2"
+}
