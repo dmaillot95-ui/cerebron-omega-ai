@@ -1,0 +1,32 @@
+name: Burst20 Selection Contract Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/burst20-controller-v1.json'
+      - 'config/burst20-selection-canary.json'
+      - 'config/all-ai-8-agent-colonies-v1.json'
+      - 'tools/select_burst20.py'
+      - '.github/workflows/burst20-selection-contract-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/select_burst20.py
+      - name: Persist non-sensitive selection receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/burst20/selection-canary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: burst20 deterministic selection canary"
+          git pull --rebase origin main || true
+          git push origin HEAD:main
