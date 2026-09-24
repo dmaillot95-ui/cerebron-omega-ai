@@ -1,8 +1,8 @@
 {
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
-  "completed_message": 4,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M04_POINTER_ROLLOUT.json",
+  "completed_message": 9,
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M09_ROLE_DIVERSE_AGORA.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -11,12 +11,12 @@
     "job_id": 107571014468,
     "conclusion": "success"
   },
-  "next_message": "M05",
-  "next_objective": "Retry M05 rollback only after HF commit quota allows a single batch commit; meanwhile continue independent verified branches.",
+  "next_message": "M10",
+  "next_objective": "Complete cross-lineage semantic audit of the five role-diverse AGORA outputs; keep GOLD denied and 5->10 scaling on HOLD until decision.",
   "resume_rule": "READ_LATEST_THEN_LEDGER_THEN_CHECKPOINT; CONTINUE_NEXT_MESSAGE; NEVER_RESTART_FROM_ZERO",
   "crystal_rule": "APPEND_OR_VERSION_ONLY; PRESERVE_PARENT_SHA_ROLLBACK_NEGATIVE_EVIDENCE",
   "runtime_changed": false,
-  "active_run": 35997726599,
+  "active_run": 36015400305,
   "negative_evidence": [
     "receipts/p03/m05-hf-rollback-negative/35997393013.json",
     "receipts/p03/m05-hf-rollback-negative/35997686804.json"
@@ -35,5 +35,16 @@
     "configured_slots": 312,
     "available_parent_slots": 304,
     "executed_agents_claimed": 0
+  },
+  "active_state": {
+    "omega_qwen": "IN_PROGRESS",
+    "elysium_smol": "QUEUED",
+    "gold": "DENY_PENDING_AUDIT",
+    "scaling_5_to_10": "HOLD"
+  },
+  "prepared_next": {
+    "m11_contract": "config/role-diverse-prompt-contract-v2.json",
+    "m11_plan": "config/m11-prompt-repair-plan-v1.json",
+    "status": "BLOCKED_BY_M10"
   }
 }
