@@ -1,0 +1,23 @@
+name: CEREBRON Native AI Dual Core Audit
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/native-ai-dual-core-v1.json'
+      - 'config/farms.json'
+      - 'config/cerebron-mode-v1.json'
+      - 'scripts/audit_native_ai_dual_core.py'
+      - '.github/workflows/native-ai-dual-core-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/audit_native_ai_dual_core.py
