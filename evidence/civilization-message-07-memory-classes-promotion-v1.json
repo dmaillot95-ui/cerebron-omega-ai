@@ -1,0 +1,103 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_07_MEMORY_CLASSES_PROMOTION_V1",
+  "status": "PASS_MEMORY_FOUNDATION_M4_PROMOTION_BLOCKED_BY_F72",
+  "program_message": 7,
+  "memory_classes": {
+    "M0": "EPHEMERAL_NO_TRAINING",
+    "M1": "TRACE_NO_DIRECT_TRAINING",
+    "M2": "REPLAY_ONLY_IF_PROMOTED",
+    "M3": "WARM_NOT_DIRECT_TRAINING",
+    "M4": "GOLD_TRAINING_ELIGIBLE_ONLY_AFTER_FULL_GATES",
+    "M5": "MODEL_VERSIONED_ASSET",
+    "M6": "COLD_BENCHMARK_SEALED_NEVER_TRAIN",
+    "M7": "EVIDENCE_NOT_DIRECT_TRAINING"
+  },
+  "active_native_ai_memory": {
+    "count": 14,
+    "status": "PREVIOUSLY_VERIFIED_WRITE_READ_SHA",
+    "run_id": 35952748885,
+    "artifact_id": 10789177358
+  },
+  "pending_native_ai_memory": {
+    "status": "PASS_M7_ONLY_NO_ACTIVATION",
+    "run_id": 35960696909,
+    "policy_audit_job_id": 107508421195,
+    "namespace_canary_job_id": 107508490339,
+    "artifact_id": 10792147214,
+    "artifact_digest": "sha256:52e62f0bf1f12c9efe05df8d0d08db536d301c6d34238403a686bd318e22c918",
+    "rows": [
+      {
+        "ai_id": "SAELION",
+        "farm_id": 147,
+        "namespace": "native-ai/SAELION",
+        "object_path": "native-ai/SAELION/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "86ebb057ab38d5ea9326e01739c1ef8ff5431dd00f36e7bdec4b3b96bdc69a14",
+        "write_read_sha": "PASS",
+        "activation_effect": "NONE"
+      },
+      {
+        "ai_id": "ALPHA",
+        "farm_id": 148,
+        "namespace": "native-ai/ALPHA",
+        "object_path": "native-ai/ALPHA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "135b0dd35f3390f78d4988611be5ad74ba841f523ccfbf98bb929054781f2e8e",
+        "write_read_sha": "PASS",
+        "activation_effect": "NONE"
+      },
+      {
+        "ai_id": "OMEGA",
+        "farm_id": 149,
+        "namespace": "native-ai/OMEGA",
+        "object_path": "native-ai/OMEGA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "49c42d42d0f7f088b27d4411605ebde0833a59bff62ce83e81a8e84d38befcb6",
+        "write_read_sha": "PASS",
+        "activation_effect": "NONE"
+      },
+      {
+        "ai_id": "DELTA",
+        "farm_id": 150,
+        "namespace": "native-ai/DELTA",
+        "object_path": "native-ai/DELTA/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "c43c6573ba5ddf059974ec89b1ca7950c1fb5da2bd90bce93e0918bc6b2067ea",
+        "write_read_sha": "PASS",
+        "activation_effect": "NONE"
+      },
+      {
+        "ai_id": "NEXUS",
+        "farm_id": 151,
+        "namespace": "native-ai/NEXUS",
+        "object_path": "native-ai/NEXUS/M7/NAMESPACE-CANARY-V1.json",
+        "sha256": "6c7434e8052cfcbf14bbec518e59256c0c27750a3e1c7bb5c94304c946fd48e7",
+        "write_read_sha": "PASS",
+        "activation_effect": "NONE"
+      }
+    ]
+  },
+  "promotion_path": [
+    "M0_RAW_OR_EPHEMERAL",
+    "M1_TRACE_AFTER_PROVENANCE_SHA",
+    "M2_REPLAY_AFTER_AUDIT_UNAIDED_RETEST",
+    "M4_GOLD_AFTER_MEASURED_GAIN_REPRODUCTION_F72_AFAH_NO_M6_CONTAMINATION",
+    "TRAIN_DATASET_AFTER_DEDUP_ORIGIN_TRAIN_VALID_SPLIT_M6_EXCLUSION_E2E"
+  ],
+  "live_blockers": {
+    "F67": {
+      "state": "HOLD",
+      "iteration": 462,
+      "nextlock": "COLLECT_REAL_OUTPUT"
+    },
+    "F72": {
+      "state": "FAIL",
+      "iteration": 464,
+      "nextlock": "REALITY_FAILURE",
+      "observed_packet_count": 144,
+      "current_registry_count": 151,
+      "rule": "REGENERATE_AND_REPRODUCE_FRESH_151_FARM_REALITY_PACKET; DO_NOT_EDIT_STALE_PACKET_TO_PASS"
+    }
+  },
+  "global_m4_promotion": "BLOCKED",
+  "m6_training": "DENY",
+  "runtime_modified": false,
+  "weights_changed": false,
+  "claim_limit": "All 19 native-AI namespaces now have verified or reserved memory routing evidence, but F147-F151 remain inactive and M4 promotion remains blocked by the live F72 reality failure."
+}
