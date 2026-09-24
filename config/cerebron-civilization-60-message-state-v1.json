@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_STATE_V1",
   "program": "config/cerebron-civilization-60-message-program-v1.json",
-  "current_message": 7,
+  "current_message": 6,
   "completed_messages": [
     1,
     2,
@@ -32,8 +32,8 @@
     "elysion_m6_baseline_result": "SUCCESS"
   },
   "runtime_modified": false,
-  "next_message": 8,
-  "next_objective": "VERIFY_MODEL_BANK_RUNTIME_ADMISSION_AND_BINDING_RULES_WITHOUT_PREMATURE_NATIVE_AI_ACTIVATION",
+  "next_message": 7,
+  "next_objective": "VERIFY_MEMORY_CLASS_PROMOTION_PATH_M0_TO_M7_AND_FAIL_CLOSED_CONTAMINATION_GATES",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -100,18 +100,19 @@
     "pending_dual_core_count": 7,
     "runtime_modified": false
   },
-  "message_6_status": "PASS_WITH_HISTORICAL_FORUM_RUNTIME_SCOPE_LIMIT",
+  "message_6_status": "PASS_GOVERNANCE_WITH_HISTORICAL_FORUM_SCOPE_LIMIT",
   "message_6_evidence": {
-    "evidence_commit": "18fe4a93b90a90978fb39966ef00c713465e286e",
+    "evidence_commit": "87a96e2037322e23f062d2217834bcf07c3c572e",
     "transfer_audit_run_id": 35958285046,
     "transfer_audit_job_id": 107501161153,
     "transfer_audit_result": "SUCCESS",
     "school_canary_run_id": 35953959891,
-    "school_canary_artifact_id": 10789906204,
-    "external_agora_ci_run_id": 35953957480,
-    "active_roles": 14,
-    "pending_roles": 5,
-    "historical_forum_roles": 8,
+    "school_canary_job_id": 107488199253,
+    "school_artifact_id": 10789906204,
+    "external_agora_run_id": 35953957480,
+    "external_agora_job_id": 107488191568,
+    "historical_forum_runtime_roles": 8,
+    "configured_active_roles": 14,
     "runtime_modified": false
   },
   "message_7_status": "PASS_MEMORY_FOUNDATION_M4_PROMOTION_BLOCKED_BY_F72",
