@@ -20,7 +20,8 @@
     "NATIVE_AI_MEMORY_USES_PER_AI_NAMESPACE",
     "EVERY_REGISTERED_FARM_F001_F146_MUST_HAVE_FUNCTIONAL_GROUP_OR_DOCUMENTED_FALLBACK",
     "REGISTRY_STATUS_DOES_NOT_SUBSTITUTE_FOR_CURRENT_RUN_RECEIPT",
-    "FARM_EXECUTION_CLAIM_REQUIRES_RUN_JOB_ARTIFACT_OR_EQUIVALENT_RECEIPT"
+    "FARM_EXECUTION_CLAIM_REQUIRES_RUN_JOB_ARTIFACT_OR_EQUIVALENT_RECEIPT",
+    "PENDING_NATIVE_AI_FARM_NOT_ROUTABLE_UNTIL_MEMORY_RUNTIME_BENCHMARK_GATES_PASS"
   ],
   "routing_classes": {
     "proof": [
@@ -128,6 +129,13 @@
       "F142",
       "F143",
       "F144"
+    ],
+    "native_ai_pending_activation": [
+      "F147",
+      "F148",
+      "F149",
+      "F150",
+      "F151"
     ]
   },
   "dispatch": {
@@ -139,14 +147,14 @@
   "compatibility": {
     "greek24": "routing vocabulary only; not mandatory persistent colonies",
     "legacy62": "preserved reserve/archive",
-    "farms146": "current verified registry snapshot; future farms admitted only after repository verification"
+    "farms151": "current verified registry snapshot; F147-F151 repositories exist but remain activation-gated"
   },
   "current_blockers": [
     "Only explicitly integrated bridge pilots can be invoked through platform/farm_bridge.py today; registered farms remain callable capability identities but platform bridge execution is not universal.",
     "HF slots remain runtime-gated; provider failures are route-specific and do not invalidate farm identity."
   ],
   "registry_snapshot": {
-    "count": 146,
-    "max_id": 146
+    "count": 151,
+    "max_id": 151
   }
 }
