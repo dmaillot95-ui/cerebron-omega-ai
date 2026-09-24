@@ -1,0 +1,38 @@
+{
+  "schema": "CEREBRON_M05_ROLLBACK_SAMPLE_V1",
+  "status": "READY",
+  "runtime_changed": false,
+  "parent_run_id": "35995124491",
+  "sample": [
+    {
+      "ai_id": "CEREBRON",
+      "family": "EXECUTIVE"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "family": "SPECIALIST_ROUTER"
+    },
+    {
+      "ai_id": "ELYSION",
+      "family": "NATIVE_LLM_PROJECT"
+    },
+    {
+      "ai_id": "ELYRA",
+      "family": "SIMULATION_ACTION"
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "family": "GREEK_OPENING"
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "family": "GREEK_AGGREGATION"
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "family": "GREEK_CLOSURE"
+    }
+  ],
+  "rule": "Write M05 as a new object, preserve M03 object unchanged, and prove rollback by re-reading M03 and matching its original SHA256.",
+  "no_overwrite": true
+}
