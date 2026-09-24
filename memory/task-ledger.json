@@ -111,7 +111,7 @@
     {
       "id": "C80-M08",
       "title": "Qualify real burst worker execution route",
-      "status": "CANARY_5_IN_PROGRESS",
+      "status": "COMPLETE",
       "run_id": 36002999588,
       "selection_guard_run": 36000734259,
       "route": "GITHUB_ACTIONS_CPU",
@@ -124,15 +124,26 @@
         "SAPHEA-A",
         "SAPHEA-C",
         "ETHERION-A"
-      ]
+      ],
+      "result": "5_OF_5_REAL_LLM_INFERENCE_PASS",
+      "receipt": "receipts/workers/5-real-ai-workers-36002999588.json",
+      "route_status": "QUALIFIED_CANARY_5"
     },
     {
       "id": "C80-M09",
       "title": "Role-diverse AGORA real-worker mission",
-      "status": "BLOCKED_BY_M08_5_OF_5",
+      "status": "ROLE_DIVERSE_RUN_QUEUED",
       "mission": "config/s5-role-diverse-agora-mission-v1.json",
       "packet_contract": "config/agora-real-worker-packet-v1.json",
-      "scaling_gate": "config/burst-marginal-gain-gate-v1.json"
+      "scaling_gate": "config/burst-marginal-gain-gate-v1.json",
+      "run_id": 36006247528,
+      "required": "5_OF_5_REAL_ROLE_DIVERSE_RECEIPTS_PLUS_AGORA_PACKET"
+    },
+    {
+      "id": "C80-M10",
+      "title": "AGORA packet contract and semantic audit gate",
+      "status": "BLOCKED_BY_M09_PACKET",
+      "objective": "Validate five executed role-diverse receipts, quantify output diversity, preserve shared-lineage correlation, then require audit/counter-audit before any GOLD or training promotion."
     }
   ],
   "updated_at": "2026-09-24",
