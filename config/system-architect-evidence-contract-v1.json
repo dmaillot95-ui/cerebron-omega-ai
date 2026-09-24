@@ -1,0 +1,45 @@
+{
+  "schema": "CEREBRON_SYSTEM_ARCHITECT_EVIDENCE_CONTRACT_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "applies_to": [
+    "A2_ANALYST",
+    "SYSTEM_ARCHITECT"
+  ],
+  "origin_failure": {
+    "run_id": 36028613557,
+    "worker_id": "SAPHEA-A",
+    "finding": "The worker incorrectly claimed a simulation result alone could validate representative real-system operation if assumptions were met.",
+    "classification": "CRITICAL_EPISTEMIC_ERROR_SIMULATION_EQ_VALIDATION"
+  },
+  "invariant_rules": [
+    "SIMULATION_IS_MODEL_BASED_PREDICTION_NOT_PHYSICAL_VALIDATION",
+    "VERIFICATION_OF_MODEL_IMPLEMENTATION_NE_VALIDATION_OF_REAL_SYSTEM",
+    "CALIBRATION_AGAINST_DATA_IMPROVES_MODEL_CREDIBILITY_BUT_DOES_NOT_BY_ITSELF_VALIDATE_ALL_REPRESENTATIVE_OPERATION",
+    "REPRESENTATIVE_OPERATIONAL_CLAIMS_REQUIRE_REPRESENTATIVE_EMPIRICAL_EVIDENCE_OR_AN_EXPLICITLY_JUSTIFIED_EQUIVALENT_EVIDENCE_CHAIN",
+    "ACCEPTANCE_CRITERIA_MUST_BE_DEFINED_BEFORE_PROMOTION",
+    "UNCERTAINTY_MODEL_FORM_AND_BOUNDARY_CONDITION_RISK_MUST_BE_EXPLICIT",
+    "CLAIM_LE_EVIDENCE"
+  ],
+  "minimum_validation_chain": [
+    "MODEL_IMPLEMENTATION_VERIFICATION",
+    "INPUT_AND_BOUNDARY_CONDITION_PROVENANCE",
+    "SENSITIVITY_AND_UNCERTAINTY_ANALYSIS",
+    "CALIBRATION_OR_COMPARISON_WITH_EMPIRICAL_DATA_WHERE_AVAILABLE",
+    "REPRESENTATIVE_SUBSYSTEM_OR_HARDWARE_TEST",
+    "REPRESENTATIVE_ENVIRONMENT_TEST_WHEN_ENVIRONMENT_MATTERS",
+    "PREDEFINED_ACCEPTANCE_CRITERIA",
+    "RESIDUAL_UNCERTAINTY_AND_LIMITATIONS"
+  ],
+  "output_discipline": [
+    "For a claim about real representative operation, never use VALIDATED or PROVED when only simulation evidence exists.",
+    "Use PREDICTED, SUPPORTED_BY_MODEL, or NOT_YET_VALIDATED until representative empirical evidence exists.",
+    "If a proposed validation chain lacks a physical or equivalent representative evidence stage, flag the chain as incomplete."
+  ],
+  "hard_fail_patterns": [
+    "simulation alone validates the real system",
+    "simulation result alone validates representative operation",
+    "no physical or representative evidence is needed"
+  ],
+  "note": "This contract is generic and applies beyond thermal problems."
+}
