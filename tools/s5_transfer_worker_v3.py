@@ -26,8 +26,10 @@ def main():
     overlays=json.loads((ROOT/"config/role-overlays-v1.json").read_text()).get("overlays",{})
     role_overlay=overlays.get(spec["role_id"])
     psha=hashlib.sha256(cfg["problem_text"].encode()).hexdigest()
-    inp=make_envelope(spec["endpoint"],"CEREBRON",cfg["mission_id"],"QUESTION",cfg["problem_text"],problem_ref=psha,evidence_level="E0",confidence=0.0,risk=0.3,dependencies=["config/s5-quality-transfer-pass2-v1.json"],json_payload={"problem":cfg["problem_text"],"role_id":spec["role_id"],"role_task":spec["role_task"]})
+    inp=make_envelope(spec["endpoint"],"CEREBRON",cfg["mission_id"],"QUESTION",cfg["problem_text"],problem_ref=psha,evidence_level="E0",confidence=0.0,risk=0.3,dependencies=["config/s5-quality-transfer-pass2-v1.json"]+(["config/system-architect-evidence-contract-v1.json"] if role_contract else []),json_payload={"problem":cfg["problem_text"],"role_id":spec["role_id"],"role_task":spec["role_task"],"role_contract":role_contract["invariant_rules"] if role_contract else None})
     system="Answer the exact engineering validation problem only. Simulation is model-based evidence, not automatically a physical test. Do not echo instructions or invent a different example. Be concise and explicit about evidence limits."
+    if role_contract:
+      system += " As SYSTEM_ARCHITECT, apply these invariant rules: " + "; ".join(role_contract["invariant_rules"]) + ". Minimum validation chain: " + "; ".join(role_contract["minimum_validation_chain"]) + "."
     if role_overlay:
       system += " ROLE OVERLAY: " + role_overlay.get("objective","") + " Canonical rule: " + role_overlay.get("canonical_rule","") + ". MUST: " + "; ".join(role_overlay.get("must",[])) + ". MUST NOT: " + "; ".join(role_overlay.get("must_not",[]))
     user=f"""PROBLEM:
