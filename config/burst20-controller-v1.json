@@ -62,14 +62,21 @@
       "rule": "Use specialist farm directly without unnecessary agent wrapper."
     },
     "GITHUB_ACTIONS_HF_WEIGHTS": {
-      "status": "CANARY_EVIDENCE_EXISTS_FOR_5_WORKER_PATTERN_BINDING_STILL_GATED",
+      "status": "QUALIFIED_CANARY_5",
       "model_source": "Hugging Face Hub pinned revision",
       "runtime": "GitHub Actions CPU or other qualified GitHub runner",
       "default_candidate": {
         "model": "HuggingFaceTB/SmolLM3-3B",
         "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
       },
-      "zero_paid_overage": "REQUIRED"
+      "zero_paid_overage": "REQUIRED",
+      "evidence": {
+        "run_id": 36002999588,
+        "receipt": "receipts/workers/5-real-ai-workers-36002999588.json",
+        "workers_passed": 5,
+        "output_diversity": "1_UNIQUE_OUTPUT_OF_5_IDENTICAL_PROMPT"
+      },
+      "binding_scope": "UP_TO_5_REAL_WORKERS_FOR_CANARY_AND_ROLE_DIVERSE_TESTS_ONLY"
     },
     "HF_PRIVATE_STORAGE": {
       "status": "MEMORY_ONLY_NOT_INFERENCE_RUNNER",
