@@ -5,11 +5,14 @@
   "authoritative_role_map": "config/greek-ai-constellation-v1.json",
   "agora_training": "config/greek-agora-training-v1.json",
   "team_template": [
-    "CHIEF",
-    "PARALLEL_EXECUTORS",
-    "AUDITOR",
-    "COUNTER_AUDITOR",
-    "SYNTHESIZER"
+    "A0_CHIEF",
+    "A1_EXPLORER",
+    "A2_ANALYST",
+    "A3_EXECUTOR",
+    "A4_AUDITOR",
+    "A5_COUNTER_AUDITOR",
+    "A6_MEMORY_KEEPER",
+    "A7_SYNTHESIZER"
   ],
   "colonies": [
     {
@@ -333,7 +336,20 @@
     "SAME_LINEAGE_NOT_INDEPENDENT_EVIDENCE",
     "M6_NEVER_IN_TRAIN",
     "RUNTIME_FREEZE",
-    "CLAIM_LE_EVIDENCE"
+    "CLAIM_LE_EVIDENCE",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "SUCCESSOR_CHECKPOINT_FIRST",
+    "TWENTY_SLOTS_NE_TWENTY_EXECUTED_AGENTS"
   ],
-  "central_collector": "CEREBRON"
+  "central_collector": "CEREBRON",
+  "team_template_source": "config/ai-8-agent-topology-v1.json",
+  "agent_slots_per_ai": 8,
+  "burst_pool": {
+    "max_agents": 20,
+    "activation": "REAL_WORKERS_ONLY",
+    "memory": "HF_PRIVATE_AUTHORIZED_NAMESPACES",
+    "unavailable": "NON_EXECUTED"
+  },
+  "crystal_preservation": "config/crystal-preservation-v1.json",
+  "campaign_80": "docs/CEREBRON_80_MESSAGE_CAMPAIGN_V1.md"
 }
