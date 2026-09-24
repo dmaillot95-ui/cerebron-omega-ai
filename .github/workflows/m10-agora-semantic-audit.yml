@@ -1,0 +1,192 @@
+name: M10 AGORA Semantic Audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/m10-semantic-audit-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        auditor: [ELYSIUM-SMOL-AUDITOR, OMEGA-QWEN-COUNTERAUDITOR]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Real semantic audit
+        env:
+          AUDITOR: ${{ matrix.auditor }}
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import json,os,time,hashlib,pathlib
+          from pathlib import Path
+          cfg=json.loads(Path("config/m10-semantic-audit-v1.json").read_text())
+          packet=json.loads(Path(cfg["source_packet"]).read_text())
+          spec=next(x for x in cfg["auditors"] if x["id"]==os.environ["AUDITOR"])
+          compact=[{
+            "worker_id":w["worker_id"],
+            "role":w["agora_role"],
+            "task":w["task"],
+            "result":w["result"][:2200]
+          } for w in packet["workers"]]
+          prompt=(
+            "Audit this multi-agent packet. The mission was to test a generic candidate scientific or mathematical claim by identifying "
+            "the strongest test route, principal failure mode, evidence required, and residual uncertainty. "
+            f"You are {spec['role']}. Review each worker for: relevance to assigned task, instruction adherence, unsupported claims, "
+            "role fidelity, hallucinated examples, and whether the combined packet adds useful information. "
+            "Return exactly these headings: DECISION, RELEVANCE, ROLE_FIDELITY, EVIDENCE_DISCIPLINE, MAJOR_FAILURES, USEFUL_PARTS, "
+            "SCALING_5_TO_10, GOLD_STATUS. DECISION must be ACCEPT, LIMIT, HOLD, or REJECT. "
+            "Do not reward diversity alone. Packet: "+json.dumps(compact,ensure_ascii=False)
+          )
+          t=time.time()
+          r={
+            "schema":"CEREBRON_M10_AUDITOR_RECEIPT_V1",
+            "run_id":os.environ["RUN_ID"],
+            "auditor_id":spec["id"],
+            "role":spec["role"],
+            "model_id":spec["model"],
+            "revision":spec["revision"],
+            "lineage":spec["lineage"],
+            "source_packet":cfg["source_packet"],
+            "real_execution":True,
+            "llm_inference":False,
+            "audit_status":"MODEL_PENDING"
+          }
+          try:
+            import torch
+            from transformers import AutoTokenizer,AutoModelForCausalLM
+            tok=AutoTokenizer.from_pretrained(spec["model"],revision=spec["revision"])
+            model=AutoModelForCausalLM.from_pretrained(
+              spec["model"],revision=spec["revision"],torch_dtype=torch.float32,low_cpu_mem_usage=True
+            )
+            x=tok(prompt,return_tensors="pt")
+            with torch.no_grad():
+              y=model.generate(**x,max_new_tokens=260,do_sample=False)
+            out=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True)
+            r.update(
+              llm_inference=True,inference="PASS",audit_status="COMPLETED",
+              audit_text=out[:6000],audit_sha256=hashlib.sha256(out.encode()).hexdigest()
+            )
+          except Exception as e:
+            r.update(
+              inference="FAIL",audit_status="MODEL_FAILURE",
+              failure_class=type(e).__name__,failure_message=str(e)[:1500]
+            )
+          r["latency_s"]=round(time.time()-t,3)
+          r["receipt_sha256"]=hashlib.sha256(json.dumps(r,sort_keys=True).encode()).hexdigest()
+          p=pathlib.Path("artifacts")/spec["id"]; p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(r,indent=2)+"\n")
+          print(json.dumps({
+            "auditor":spec["id"],"audit_status":r["audit_status"],
+            "llm_inference":r["llm_inference"],"latency_s":r["latency_s"],
+            "receipt_sha256":r["receipt_sha256"]
+          }))
+          # Evidence-producing job: model failure is recorded, not converted into fake audit PASS.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m10-audit-${{ matrix.auditor }}
+          path: artifacts/${{ matrix.auditor }}/receipt.json
+
+  decide:
+    needs: audit
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: m10-audit-*
+          path: downloaded
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Deterministic gate and decision packet
+        env:
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import json,glob,hashlib,re,os
+          from pathlib import Path
+          cfg=json.loads(Path("config/m10-semantic-audit-v1.json").read_text())
+          packet=json.loads(Path(cfg["source_packet"]).read_text())
+          audits=[]
+          for fn in glob.glob("downloaded/**/receipt.json",recursive=True):
+            audits.append(json.loads(Path(fn).read_text()))
+          audits=sorted(audits,key=lambda x:x["auditor_id"])
+          completed=[a for a in audits if a.get("audit_status")=="COMPLETED" and a.get("llm_inference")]
+          texts="\n".join(a.get("audit_text","") for a in completed).upper()
+          # Deterministic semantic observations from source packet.
+          outputs=[w.get("result","") for w in packet["workers"]]
+          drift_markers=["TRIANGLE","SUM OF THE SQUARES","ALL SWANS","ALL PRIME NUMBERS"]
+          drift_hits={m:sum(m in o.upper() for o in outputs) for m in drift_markers}
+          drift_count=sum(v>0 for v in drift_hits.values())
+          role_directness=sum(
+            1 for w in packet["workers"]
+            if w.get("task","").split(".")[0].lower()[:20] in w.get("result","").lower()
+          )
+          # Conservative decision: existing observed drift is enough to deny GOLD and 5->10.
+          decision="HOLD"
+          gold_status="DENY"
+          scaling="DENY_5_TO_10_PENDING_PROMPT_REPAIR"
+          if len(completed)==2 and drift_count==0 and any(k in texts for k in ["DECISION: ACCEPT","DECISION\nACCEPT"]):
+            decision="LIMIT"
+            gold_status="DENY_PENDING_HUMAN_OR_STRONGER_AUDIT"
+            scaling="HOLD"
+          out={
+            "schema":"CEREBRON_M10_SEMANTIC_AUDIT_DECISION_V1",
+            "run_id":os.environ["RUN_ID"],
+            "source_packet":cfg["source_packet"],
+            "auditors_expected":2,
+            "auditors_completed":len(completed),
+            "auditor_receipts":audits,
+            "deterministic_findings":{
+              "source_workers":5,
+              "source_unique_results":packet["unique_result_sha256"],
+              "shared_lineage":packet["unique_lineage_fingerprints"]==1,
+              "independent_evidence_count":0,
+              "drift_markers":drift_hits,
+              "drift_marker_types_detected":drift_count,
+              "role_directness_proxy":role_directness
+            },
+            "decision":decision,
+            "gold_status":gold_status,
+            "scaling_5_to_10":scaling,
+            "repair_required":[
+              "Use a concrete claim/problem instead of an underspecified placeholder mission.",
+              "Put the exact assigned task after examples and forbid substituting a new example.",
+              "Require machine-checkable JSON fields and reject echoed instructions/examples.",
+              "Repeat S5 role-diverse test before scaling."
+            ],
+            "promotion":"NO_GOLD_NO_TRAINING",
+            "claim":"Five real role-diverse executions occurred, but semantic usefulness must be repaired before scaling."
+          }
+          out["decision_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True).encode()).hexdigest()
+          Path("receipts/agora").mkdir(parents=True,exist_ok=True)
+          Path(f"receipts/agora/m10-semantic-audit-{os.environ['RUN_ID']}.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps({
+            "decision":decision,"gold_status":gold_status,"scaling":scaling,
+            "auditors_completed":len(completed),"drift_marker_types_detected":drift_count,
+            "decision_sha256":out["decision_sha256"]
+          }))
+      - name: Persist M10 audit decision
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/agora/
+          git diff --cached --quiet && exit 0
+          git commit -m "M10 receipt: semantic audit decision"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
