@@ -41,18 +41,20 @@ jobs:
           ]
           missing=[p for p in must_exist if not pathlib.Path(p).exists()]
           assert not missing, missing
-          farms=json.loads(pathlib.Path("config/farms.json").read_text())["farms"]
+          registry=json.loads(pathlib.Path("config/farms.json").read_text())
+          farms=registry["farms"]
+          expected=registry["max_farms"]
           micro=json.loads(pathlib.Path("config/saphea-micro-v1.json").read_text())
           control=json.loads(pathlib.Path("config/platform-control-plane-v1.json").read_text())
           training=json.loads(pathlib.Path("config/neural-training-fabric-v1.json").read_text())
           specialist=json.loads(pathlib.Path("config/specialist-ai-v1.json").read_text())
-          assert len(farms)==144
-          assert max(f["id"] for f in farms)==144
+          assert len(farms)==expected
+          assert {f["id"] for f in farms}==set(range(1,expected+1))
           assert len(micro["units"])==20
           active=sum(1 for u in micro["units"] if u.get("status")!="PLANNED_UNAVAILABLE")
           assert active==7
           assert control["farm_count_effect"]==0
-          assert control["farm_cap"]==144
+          assert control["farm_cap"]==expected
           assert training["roles"]["ELYRA"]["status"]=="SCOPED_NEURAL_POLICY_TRAINED_AND_M6_PROMOTED"
           assert specialist["ELYRA"]["neural_policy"]["weights_changed"] is True
           print("INTEGRATION_STATE_OK",len(farms),len(micro["units"]),active)
