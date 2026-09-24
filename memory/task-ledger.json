@@ -101,9 +101,12 @@
     {
       "id": "C80-M07",
       "title": "All-AI eight-agent colony contracts",
-      "status": "GUARD_PENDING",
+      "status": "COMPLETE",
       "guard_run": 35999365175,
-      "objective": "Validate 39 AI colonies × 8 unique slots, with 304 available-parent slots, 8 unavailable NU slots, A6 as default HF writer, and zero executed-agent claims."
+      "objective": "Validate 39 AI colonies × 8 unique slots, with 304 available-parent slots, 8 unavailable NU slots, A6 as default HF writer, and zero executed-agent claims.",
+      "guard_job": 107631939392,
+      "guard_conclusion": "success",
+      "result": "39_AI_COLONIES_312_CONFIGURED_SLOTS_304_AVAILABLE_PARENT_SLOTS_8_NU_UNAVAILABLE"
     }
   ],
   "updated_at": "2026-09-24",
