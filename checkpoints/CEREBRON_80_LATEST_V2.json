@@ -1,0 +1,41 @@
+{
+  "schema": "CEREBRON_80_LATEST_V2",
+  "generated_at": "2026-09-24",
+  "source_legacy_pointer": "checkpoints/CEREBRON_80_LATEST.json",
+  "resume_rule": "READ_V2_THEN_TASK_LEDGER_THEN_LATEST_CHECKPOINT; NEVER_RESTART_FROM_ZERO",
+  "crystal_rule": "APPEND_OR_VERSION_ONLY; PRESERVE_PARENT_SHA_ROLLBACK_NEGATIVE_EVIDENCE",
+  "current_state": {
+    "gvl": {
+      "dimension": 32,
+      "geometric_gate_progress": "1_OF_4",
+      "geometric_growth_claim": "DENY"
+    },
+    "s10": {
+      "run_id": 36042832474,
+      "executed_count": 10,
+      "correlated_count": 10,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0,
+      "new_findings": 1,
+      "useful_extension_workers": 1,
+      "marginal_gain_positive": false,
+      "scale_decision": "STAY_AT_5",
+      "stop_reason": "STAY_AT_5_NO_SUFFICIENT_MARGINAL_GAIN"
+    },
+    "knowledge_banks": "CONFIGURED",
+    "dual_core": "SUPPORTED_NO_VERIFIED_ASSIGNMENTS",
+    "strategy_council": {
+      "mission": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "run_id": 36046943012,
+      "status": "RUNNING_AT_POINTER_CREATION"
+    }
+  },
+  "next_actions": [
+    "Keep operational scale at 5.",
+    "Audit all-AI strategy council contributions.",
+    "Retest METRION parser/schema robustness at same scale.",
+    "Run next distinct frozen held-out GVL transfer family.",
+    "Register concrete dual-core assignments only after manifest verification.",
+    "Continue M06 memory rollout without destroying prior rollback evidence."
+  ]
+}
