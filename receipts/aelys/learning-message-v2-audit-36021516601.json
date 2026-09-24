@@ -1,0 +1,34 @@
+{
+  "schema": "AELYS_LEARNING_MESSAGE_V2_AUDIT_V1",
+  "source_run_id": 36021516601,
+  "source_receipt": "receipts/aelys/learning-message-v2-36021516601.json",
+  "execution": "REAL_LLM_INFERENCE_PASS",
+  "format": "PASS",
+  "semantic_status": "LIMIT_OVEROPTIMISTIC",
+  "findings": [
+    {
+      "claim": "M11 V2 est prêt pour la montée 5→10",
+      "status": "NOT_SUPPORTED",
+      "reason": "M11 V2 execution and post-run semantic audit have not yet demonstrated the promotion gate; current scaling gate remains HOLD/DENY."
+    },
+    {
+      "claim": "M11 V2 a été conçu pour apprendre efficacement",
+      "status": "ARCHITECTURE_INTENT_NOT_MEASURED_RESULT",
+      "reason": "Design intent is not measured learning performance."
+    },
+    {
+      "claim": "tester M11 V2 avant montée 5→10",
+      "status": "SUPPORTED_RECOMMENDATION",
+      "reason": "Matches the current gated plan."
+    }
+  ],
+  "evidence_bound_summary": {
+    "learning_state": "AÉLYS currently benefits from verified memory/versioning and SPIRALIX transport; AÉLYS-specific neural learning is not proven.",
+    "learning_speed": "Infrastructure and memory integration have progressed quickly, but cognitive learning speed is not yet measured.",
+    "learns_well": "Structured routing, memory continuity, role separation and evidence transport are demonstrably functioning.",
+    "needs_improvement": "Semantic fidelity and resistance to prompt/example drift remain weak in the current shared-model executions.",
+    "recommended_next_step": "Execute M11 V2, audit it, and scale 5→10 only if semantic fidelity measurably improves."
+  },
+  "promotion": "NO_5_TO_10_FROM_SELF_REPORT",
+  "rule": "SELF_REPORT_NE_EVIDENCE"
+}
