@@ -1,0 +1,117 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_06_AGORA_TRANSFER_V1",
+  "status": "PASS_GOVERNANCE_PROMOTION_HOLD",
+  "program_message": 6,
+  "active_roles": 14,
+  "pending_roles": [
+    {
+      "ai_id": "SAELION",
+      "farm_id": 147
+    },
+    {
+      "ai_id": "ALPHA",
+      "farm_id": 148
+    },
+    {
+      "ai_id": "OMEGA",
+      "farm_id": 149
+    },
+    {
+      "ai_id": "DELTA",
+      "farm_id": 150
+    },
+    {
+      "ai_id": "NEXUS",
+      "farm_id": 151
+    }
+  ],
+  "teacher_cycle": [
+    "PEDAGOGUE",
+    "EXAMINER",
+    "RED_TEAM",
+    "CONNECTOR",
+    "SYNTHESIZER"
+  ],
+  "transfer_contract": "config/agora-transfer-contract-v1.json",
+  "transfer_rule": "DENY_DIRECT_COPY",
+  "promotion_flow": [
+    "SOURCE_OUTPUT",
+    "PROVENANCE_AND_SHA",
+    "M1_TRACE_OR_QUARANTINE",
+    "CRITIQUE",
+    "CORRECTION",
+    "UNAIDED_RETEST",
+    "INDEPENDENT_REPRODUCTION_IF_REQUIRED",
+    "MEASURED_GAIN",
+    "F72",
+    "AFAH",
+    "TARGET_MEMORY_WRITE",
+    "RECALL_TEST"
+  ],
+  "memory_rules": {
+    "forum_is_gold": false,
+    "forum_is_training": false,
+    "raw_agora_training": "DENY",
+    "m6_training": "DENY",
+    "cross_namespace_blind_copy": "DENY",
+    "transferred_content_independent_evidence": false
+  },
+  "current_runtime_scope": {
+    "historical_forum_runtime": "runtime/agora_forum.py",
+    "historical_supported_roles": 8,
+    "full_config_active_roles": 14,
+    "full_14_role_runtime_support": false,
+    "runtime_modified": false,
+    "claim_limit": "The historical internal forum CLI supports only 8 roles; the 14-role governance is broader than that runtime surface."
+  },
+  "verified_workflows": {
+    "agora_school": {
+      "run_id": 35953959891,
+      "job_id": 107488199253,
+      "conclusion": "success",
+      "artifact_id": 10789906204,
+      "artifact_digest": "sha256:bd8b2a14bb2fb5d27d5b49c8bbc37b191e80663669d828a5faa03a0d141986bb"
+    },
+    "external_agora_hf20": {
+      "run_id": 35953957480,
+      "job_id": 107488191568,
+      "conclusion": "success"
+    }
+  },
+  "live_farm_gates": {
+    "F67": {
+      "repo": "dmaillot95-ui/cerebron-farm-67-cross-farm-communication",
+      "state_sha": "4ee0837c362e0bf01ae84676244ba02fcea1d60c",
+      "iteration": 459,
+      "decision": "HOLD",
+      "residual": "COLLECT_REAL_OUTPUT",
+      "audit": "PENDING",
+      "reproduction": "PENDING",
+      "transfer": "PENDING"
+    },
+    "F72": {
+      "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+      "state_sha": "0cc4f98a04731abe7ea99c2cca74a3d047456849",
+      "iteration": 461,
+      "decision": "HOLD",
+      "reproduction": "FAIL",
+      "reality_gate": "FAIL",
+      "observed_old_packet_count": 144,
+      "current_registry_count": 151,
+      "nextlock": "REALITY_FAILURE"
+    }
+  },
+  "promotion_state": "BLOCKED",
+  "promotion_blocker": "F67_PENDING_AND_F72_REALITY_FAIL_ON_STALE_144_FARM_PACKET",
+  "required_next_action": "REPRODUCE_CURRENT_151_FARM_REALITY_PACKET_AND_REFRESH_F67_F72_WITH_REAL_EVIDENCE",
+  "audit_ci": {
+    "latest_run_id": 35958416712,
+    "head_sha": "dbdb4d4d6e4eaf3f217a0c903d2825758cf7517e",
+    "status": "QUEUED_AT_CHECKPOINT",
+    "prior_run_id": 35958285046,
+    "note": "CI revalidation is supplemental; promotion remains HOLD regardless until F67/F72 live gates pass."
+  },
+  "runtime_modified": false,
+  "weights_changed": false,
+  "claim_limit": "AGORA governance and transfer protections are configured and have scoped workflow evidence. Promotion is deliberately blocked by current live F67/F72 gate state."
+}
