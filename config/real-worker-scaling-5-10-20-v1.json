@@ -1,0 +1,83 @@
+{
+  "schema": "CEREBRON_REAL_WORKER_SCALING_5_10_20_V1",
+  "status": "BLOCKED_UNTIL_RUN_36002999588_5_OF_5_PASS",
+  "runtime_changed": false,
+  "objective": "Scale from 5 real workers to 10 then up to 20 only when execution receipts, resource feasibility and marginal information gain justify expansion.",
+  "current_gate": {
+    "run_id": 36002999588,
+    "required": "5_OF_5_REAL_LLM_INFERENCE_PASS_WITH_RECEIPTS",
+    "route": "GITHUB_ACTIONS_CPU",
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "stages": [
+    {
+      "stage": "S5_INFRASTRUCTURE",
+      "workers": 5,
+      "purpose": "Prove real pinned-model execution and per-worker receipts.",
+      "max_parallel_jobs": 5,
+      "promotion_requires": [
+        "5_OF_5_PASS",
+        "ARTIFACT_RECEIPTS",
+        "NO_CRITICAL_RESOURCE_FAILURE"
+      ]
+    },
+    {
+      "stage": "S5_ROLE_DIVERSE",
+      "workers": 5,
+      "purpose": "Bind five distinct AGORA roles and test useful task diversity rather than duplicate prompts.",
+      "max_parallel_jobs": 5,
+      "promotion_requires": [
+        "ROLE_OUTPUTS_DISTINCT",
+        "AUDIT_PASS",
+        "COUNTER_AUDIT_PASS",
+        "AGORA_CAPSULES_VALID"
+      ]
+    },
+    {
+      "stage": "S10",
+      "workers": 10,
+      "purpose": "Measure whether doubling coalition size improves coverage/information gain.",
+      "max_parallel_jobs": 5,
+      "batching": "2_WAVES_OF_5",
+      "promotion_requires": [
+        "10_REAL_RECEIPTS",
+        "MARGINAL_INFORMATION_GAIN_POSITIVE",
+        "NO_CRITICAL_LATENCY_OR_RESOURCE_REGRESSION"
+      ]
+    },
+    {
+      "stage": "S20",
+      "workers": 20,
+      "purpose": "Maximum direct burst only for hard missions with enough useful distinct roles.",
+      "max_parallel_jobs": 5,
+      "batching": "4_WAVES_OF_5",
+      "promotion_requires": [
+        "20_REAL_RECEIPTS",
+        "INFORMATION_GAIN_JUSTIFIES_20",
+        "AUDIT_AND_COUNTER_AUDIT",
+        "RESOURCE_BUDGET_PASS"
+      ]
+    }
+  ],
+  "role_policy": {
+    "minimal_first": true,
+    "stop_if_no_information_gain": true,
+    "max_workers": 20,
+    "lineage": "Shared model/data lineage marked CORRELATED; do not count as independent evidence.",
+    "agora": "Only audited executed receipts may publish RESULT/EVIDENCE/SYNTHESIS."
+  },
+  "resource_policy": {
+    "public_standard_runner_only": true,
+    "zero_paid_overage": true,
+    "no_external_gpu_auto_purchase": true,
+    "hf_memory_writer": "A6_MEMORY_KEEPER",
+    "hf_memory_write_batch": true
+  },
+  "hard_rules": [
+    "NO_SIMULATED_AGENT",
+    "NO_RECEIPT_NE_EXECUTED",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
