@@ -1,0 +1,21 @@
+name: M05 Versioned Rollback Guard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'receipts/p03/m05-hf-rollback/**'
+      - 'receipts/p03/m05-hf-rollback-latest.json'
+      - 'tools/validate_m05_versioned_rollback.py'
+      - '.github/workflows/m05-versioned-rollback-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_m05_versioned_rollback.py
