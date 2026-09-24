@@ -1,0 +1,38 @@
+{
+  "schema": "CEREBRON_AGORA_BURST20_BRIDGE_V1",
+  "status": "READY_SELECTION_EXECUTION_BINDING_PENDING",
+  "runtime_changed": false,
+  "source": "config/burst20-controller-v1.json",
+  "receipt_schema": "config/real-worker-receipt-schema-v1.json",
+  "flow": [
+    "MISSION",
+    "MINIMAL_USEFUL_COALITION",
+    "REAL_EXECUTION",
+    "PER_WORKER_RECEIPTS",
+    "LINEAGE_CORRELATION_TAGGING",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "LOCAL_CAPSULES",
+    "AGORA_PUBLICATION",
+    "FORUM_CHALLENGE",
+    "A6_MEMORY_KEEPER_BATCH",
+    "VALIDATED_LESSON_ONLY_TO_MEMORY"
+  ],
+  "agora_types": [
+    "RESULT",
+    "EVIDENCE",
+    "AUDIT",
+    "CHALLENGE",
+    "SYNTHESIS",
+    "LESSON"
+  ],
+  "forbidden": [
+    "PLANNED_AS_EXECUTED",
+    "RAW_PRIVATE_PAYLOAD",
+    "UNAUDITED_GOLD",
+    "CORRELATED_VOTES_AS_INDEPENDENT"
+  ],
+  "max_real_workers": 20,
+  "memory_writers_max_parallel": 4,
+  "default_memory_writer": "A6_MEMORY_KEEPER"
+}
