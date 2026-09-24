@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_CIVILIZATION_MESSAGE_04_FARM_ROUTING_V1",
-  "status": "PASS_DIRECT_AUDIT_CI_REVALIDATION_QUEUED",
+  "status": "PASS_WITH_BRIDGE_SCOPE_LIMIT",
   "program_message": 4,
   "registry": {
     "count": 151,
@@ -151,9 +151,10 @@
   },
   "global_ci_revalidation": {
     "run_id": 35954042621,
+    "job_id": 107488449983,
     "head_sha": "0a2164af49facb998c32b963578021a61dd358ef",
-    "status": "QUEUED_AT_CHECKPOINT",
-    "note": "Direct configuration audit passed; this CI run is additional asynchronous revalidation and is not claimed as PASS yet."
+    "status": "SUCCESS",
+    "conclusion": "success"
   },
   "runtime_modified": false,
   "farms_deleted": 0,
