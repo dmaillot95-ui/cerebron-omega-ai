@@ -16,9 +16,11 @@
     {
       "id": "C80-M02",
       "title": "Universal successor handoff",
-      "status": "GUARD_PENDING",
+      "status": "COMPLETE",
       "checkpoint": "checkpoints/CEREBRON_80_M02_SUCCESSOR_HANDOFF.json",
-      "guard_run": 35980515906
+      "guard_run": 35980515906,
+      "guard_job": 107571014468,
+      "guard_conclusion": "success"
     },
     {
       "id": "C80-M03",
