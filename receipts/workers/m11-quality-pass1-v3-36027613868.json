@@ -1,0 +1,162 @@
+{
+  "schema": "CEREBRON_M11_QUALITY_PASS1_V3_SCORE",
+  "run_id": "36027613868",
+  "source_failed_run": 36024003536,
+  "executed_workers": 5,
+  "spiralix_workers": 5,
+  "parsed_workers": 5,
+  "no_prompt_echo_workers": 5,
+  "worker_quality_passes": 5,
+  "collective_core_hits": [
+    "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+    "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION",
+    "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+    "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK"
+  ],
+  "collective_core_count": 4,
+  "false_independence_workers": 0,
+  "rows": [
+    {
+      "worker_id": "ETHERION-A",
+      "role_id": "FORMAL_ANALYST",
+      "real_execution": true,
+      "spiralix": true,
+      "parse_ok": true,
+      "prompt_echo": false,
+      "false_independence": false,
+      "core_hits": [
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+      ],
+      "core_hit_count": 4,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "role_id": "SYSTEM_ARCHITECT",
+      "real_execution": true,
+      "spiralix": true,
+      "parse_ok": true,
+      "prompt_echo": false,
+      "false_independence": false,
+      "core_hits": [
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+      ],
+      "core_hit_count": 4,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "role_id": "EVIDENCE_AUDITOR",
+      "real_execution": true,
+      "spiralix": true,
+      "parse_ok": true,
+      "prompt_echo": false,
+      "false_independence": false,
+      "core_hits": [
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+      ],
+      "core_hit_count": 4,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "real_execution": true,
+      "spiralix": true,
+      "parse_ok": true,
+      "prompt_echo": false,
+      "false_independence": false,
+      "core_hits": [
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+      ],
+      "core_hit_count": 4,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "real_execution": true,
+      "spiralix": true,
+      "parse_ok": true,
+      "prompt_echo": false,
+      "false_independence": false,
+      "core_hits": [
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK",
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION"
+      ],
+      "core_hit_count": 4,
+      "worker_quality_pass": true
+    }
+  ],
+  "quality_pass1": true,
+  "scale_5_to_10": "HOLD_REQUIRES_TRANSFER_PASS2",
+  "gold_status": "DENY_PENDING_TWO_PASS_QUALITY_POLICY",
+  "spiralix_audit_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "98848c2214f9465fd7841c0fb0059ac737528f6c6240ec0f27f0112b04681da2",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SPIRALION:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "C80-M11-QUALITY-PASS1-V3",
+    "message_type": "AUDIT",
+    "glyph_expression": "Ω⟦SPIRALION:A₇⟧→AGΩ",
+    "V": {
+      "P": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "8aa7621e000457d47c8d1d4615613fcff04bdb43643a55e192fdeebf1f46fa4e",
+        "85cb27bcc3edae70718cffe4b985ff6f51252c7c1973ebab05cb05b3c433d232",
+        "fc3066fb6f5037ee7c4e944b9803f1060faf8763024eb36fd639738d75149b7b",
+        "34472441456a05d5a68a8a65b53f5512795a6836bcd60f98440b725465c5d43f",
+        "d28225dc62213fca605b810402ee89047541d53ab378dc8c1cf3d97a81025ddf"
+      ],
+      "M": null
+    },
+    "payload_sha256": "afb7e1bf764679a125eff0966ddf69b0c6d6570aead12076fab64ffc9030b858",
+    "lineage_fingerprint": "a7dae8e74e03c351c9ba3b33eb01d9efc0bd82a35ebc6277b1e11594cb2d7685",
+    "evidence_refs": [],
+    "natural_language": "M11 V3 quality pass1=True; worker_passes=5/5; core=4/4.",
+    "json_payload": {
+      "schema": "CEREBRON_M11_QUALITY_PASS1_V3_SCORE",
+      "run_id": "36027613868",
+      "source_failed_run": 36024003536,
+      "executed_workers": 5,
+      "spiralix_workers": 5,
+      "parsed_workers": 5,
+      "no_prompt_echo_workers": 5,
+      "worker_quality_passes": 5,
+      "collective_core_hits": [
+        "FIVE_EXECUTIONS_NE_FIVE_INDEPENDENT_EVIDENCE_SOURCES",
+        "INDEPENDENCE_REQUIRES_MATERIALLY_DISTINCT_EVIDENCE_METHOD_DATA_MODEL_OR_EXTERNAL_REPRODUCTION",
+        "PROMPT_DIVERSITY_NE_EVIDENCE_INDEPENDENCE",
+        "SHARED_MODEL_REVISION_IMPLIES_CORRELATED_FAILURE_RISK"
+      ],
+      "collective_core_count": 4,
+      "false_independence_workers": 0,
+      "quality_pass1": true,
+      "scale_5_to_10": "HOLD_REQUIRES_TRANSFER_PASS2",
+      "gold_status": "DENY_PENDING_TWO_PASS_QUALITY_POLICY"
+    },
+    "created_at": "2026-09-24T16:36:26.105976+00:00"
+  },
+  "spiralix_audit_envelope_sha256": "9823feed3d512833351b3175a69cb14d4b485970a664d21f990c505c1c0ec826",
+  "score_sha256": "7225a72172519a8f22769718f93dc7003945daf0f4545eb9049a302117e16779"
+}
