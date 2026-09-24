@@ -1,0 +1,1 @@
+C80 M09 S5 ROLE DIVERSE AGORA TRIGGER\nrun=1\nruntime_changed=false\n
