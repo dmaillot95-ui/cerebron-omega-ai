@@ -1,0 +1,23 @@
+{
+  "schema": "CEREBRON_M11_PROMPT_REPAIR_PLAN_V1",
+  "status": "BLOCKED_BY_M10_DECISION",
+  "runtime_changed": false,
+  "prerequisite_run": 36015400305,
+  "repair_contract": "config/role-diverse-prompt-contract-v2.json",
+  "repeat_scale": 5,
+  "intended_change": "PROMPT_AND_VALIDATION_ONLY",
+  "no_runtime_change": true,
+  "no_model_change": true,
+  "comparison": "S5_V1_VS_S5_V2",
+  "metrics": [
+    "5_OF_5_EXECUTION",
+    "ROLE_FIDELITY",
+    "PROBLEM_HASH_MATCH",
+    "UNRELATED_EXAMPLE_RATE",
+    "INSTRUCTION_ECHO_RATE",
+    "UNIQUE_USEFUL_FINDINGS",
+    "AUDIT_STATUS",
+    "COUNTER_AUDIT_STATUS"
+  ],
+  "promotion_rule": "V2 must improve semantic fidelity without critical regression before any 5_to_10 scale."
+}
