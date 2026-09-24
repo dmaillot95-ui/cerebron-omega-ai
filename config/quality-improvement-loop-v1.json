@@ -1,0 +1,90 @@
+{
+  "schema": "CEREBRON_QUALITY_IMPROVEMENT_LOOP_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "current_scale": 5,
+  "purpose": "Convert observed worker failures into measured repairs before any increase in agent count.",
+  "cycle": [
+    {
+      "step": 1,
+      "id": "OBSERVE",
+      "owner": "AELYS+A4",
+      "input": "real receipts only",
+      "output": "measured failure signature"
+    },
+    {
+      "step": 2,
+      "id": "DIAGNOSE",
+      "owner": "CEREBRON+A5",
+      "input": "failure signature",
+      "output": "root-cause classification"
+    },
+    {
+      "step": 3,
+      "id": "REPAIR",
+      "owner": "SAPHEA+CEREBRON",
+      "input": "root cause",
+      "output": "minimal contract/prompt/router/code change"
+    },
+    {
+      "step": 4,
+      "id": "RETEST_SAME_SCALE",
+      "owner": "A3",
+      "input": "same problem and same worker count",
+      "output": "comparable receipt"
+    },
+    {
+      "step": 5,
+      "id": "DETERMINISTIC_AUDIT",
+      "owner": "OMEGA_GATE",
+      "input": "retest receipt",
+      "output": "PASS/HOLD/REJECT"
+    },
+    {
+      "step": 6,
+      "id": "TRANSFER_TEST",
+      "owner": "ETHERION+ELYSIUM",
+      "input": "different concrete problem",
+      "output": "transfer receipt"
+    },
+    {
+      "step": 7,
+      "id": "SCALE_DECISION",
+      "owner": "CEREBRON",
+      "input": "two quality passes + marginal information gain",
+      "output": "STAY_5 or SCALE_10"
+    },
+    {
+      "step": 8,
+      "id": "MEMORY",
+      "owner": "A6_MEMORY_KEEPER",
+      "input": "validated lesson only",
+      "output": "versioned checkpoint with parent SHA and rollback"
+    }
+  ],
+  "failure_taxonomy": [
+    "PROMPT_ECHO",
+    "FORMAT_FAILURE",
+    "IDENTITY_METADATA_FAILURE",
+    "SEMANTIC_DRIFT",
+    "ROLE_DRIFT",
+    "UNSUPPORTED_CLAIM",
+    "FALSE_INDEPENDENCE",
+    "AUDITOR_RUBBER_STAMP",
+    "MODEL_RESOURCE_FAILURE",
+    "MEMORY_LINEAGE_FAILURE",
+    "SPIRALIX_ENVELOPE_FAILURE"
+  ],
+  "repair_rule": "Change the smallest layer responsible for the observed failure; do not add agents to compensate for a broken worker contract.",
+  "scale_rule": "Two consecutive quality passes at scale 5 are required before considering 10; 10 must show positive marginal information gain before considering 20.",
+  "evidence_rule": "A workflow SUCCESS is infrastructure evidence only. Quality requires receipt-level semantic gates.",
+  "aelys_role": "AELYS may propose improvements from measured failures but its self-report is never sufficient evidence for promotion.",
+  "hard_rules": [
+    "QUALITY_BEFORE_QUANTITY",
+    "CLAIM_LE_EVIDENCE",
+    "NO_SIMULATED_AGENT",
+    "NO_AUTO_GOLD",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "RUNTIME_FREEZE"
+  ]
+}
