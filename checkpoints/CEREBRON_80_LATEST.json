@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M09_ROLE_DIVERSE_AGORA.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M12_PARALLEL_AUDIT_AND_ROLLBACK.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -11,7 +11,7 @@
     "job_id": 107571014468,
     "conclusion": "success"
   },
-  "next_message": "M10",
+  "next_message": "M10_AND_M05_COMPLETION_THEN_M11",
   "next_objective": "Complete cross-lineage semantic audit of the five role-diverse AGORA outputs; keep GOLD denied and 5->10 scaling on HOLD until decision.",
   "resume_rule": "READ_LATEST_THEN_LEDGER_THEN_CHECKPOINT; CONTINUE_NEXT_MESSAGE; NEVER_RESTART_FROM_ZERO",
   "crystal_rule": "APPEND_OR_VERSION_ONLY; PRESERVE_PARENT_SHA_ROLLBACK_NEGATIVE_EVIDENCE",
@@ -22,10 +22,9 @@
     "receipts/p03/m05-hf-rollback-negative/35997686804.json"
   ],
   "blocked": {
-    "task": "M05",
-    "reason": "HF_REPOSITORY_COMMIT_RATE_LIMIT_128_PER_HOUR",
-    "prepared_fix": "ONE_BATCH_COMMIT_7_OBJECTS",
-    "retry_trigger": "config/m05-retry-trigger.txt"
+    "m11": "BLOCKED_BY_M10",
+    "scaling_5_to_10": "HOLD",
+    "gold": "DENY_PENDING_M10"
   },
   "parallel_completed_branch": {
     "task": "C80-M07",
@@ -46,5 +45,10 @@
     "m11_contract": "config/role-diverse-prompt-contract-v2.json",
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
+  },
+  "current_message": "M12_IN_PROGRESS",
+  "active_runs": {
+    "m10_semantic_audit": 36015400305,
+    "m05_batch_rollback": 36016484074
   }
 }
