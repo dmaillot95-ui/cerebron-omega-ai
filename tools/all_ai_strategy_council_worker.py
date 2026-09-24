@@ -12,12 +12,19 @@ def parse_labels(raw):
     for line in raw.splitlines():
         s=line.strip()
         if not s: continue
+        # Accept plain labels and common Markdown wrappers such as **PRIORITY:**.
+        cleaned=re.sub(r"^[\\s>\\-#*]+","",s)
         hit=False
         for lab in LABELS:
-            if s.upper().startswith(lab+":"):
-                cur=lab; out[lab]=s.split(":",1)[1].strip(); hit=True; break
+            m=re.match(r"^\\*{0,2}"+re.escape(lab)+r"\\*{0,2}\\s*:\\s*\\*{0,2}(.*)$",cleaned,re.I)
+            if m:
+                cur=lab
+                out[lab]=m.group(1).strip().strip("*").strip()
+                hit=True
+                break
         if not hit and cur:
-            out[cur]=(out[cur]+" "+s).strip()
+            continuation=re.sub(r"^[\\s>\\-#*]+","",s).strip()
+            out[cur]=(out[cur]+" "+continuation).strip()
     return out
 
 def main():
@@ -67,6 +74,7 @@ RISK:
          "ai_id":a.ai,"identity":spec["identity"],"parent_function":spec["parent_function"],
          "specialization_tags":spec["specialization_tags"],"specialization_vector":spec["specialization_vector"],
          "endpoint":endpoint,"model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False,
+         "format_contract_version":"V2_MARKDOWN_TOLERANT",
          "spiralix_input_envelope":inp,"spiralix_input_sha256":sha256_obj(inp)}
     t=time.time()
     try:
@@ -79,7 +87,7 @@ RISK:
         except Exception: prompt=system+"\n\n"+user+"\nASSISTANT:\n"
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
-            y=model.generate(**x,max_new_tokens=260,do_sample=False,repetition_penalty=1.05)
+            y=model.generate(**x,max_new_tokens=420,do_sample=False,repetition_penalty=1.05)
         raw=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
         parsed=parse_labels(raw)
         echo=any(p in raw.lower() for p in ["return exactly eight","current line of route:","questions:"])
