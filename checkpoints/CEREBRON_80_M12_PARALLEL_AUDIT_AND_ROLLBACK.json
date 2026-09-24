@@ -1,0 +1,37 @@
+{
+  "schema": "CEREBRON_80_M12_PARALLEL_AUDIT_AND_ROLLBACK_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 12,
+  "status": "IN_PROGRESS_TWO_REAL_RUNS",
+  "runtime_changed": false,
+  "branch_m10": {
+    "run_id": 36015400305,
+    "purpose": "Cross-lineage semantic audit of M09 AGORA packet",
+    "omega_qwen": "IN_PROGRESS",
+    "elysium_smol": "IN_PROGRESS",
+    "gold_status": "DENY_PENDING_AUDIT",
+    "scaling_5_to_10": "HOLD"
+  },
+  "branch_m05": {
+    "run_id": 36016484074,
+    "purpose": "Retry seven-object rollback test using one HF batch commit",
+    "status": "QUEUED",
+    "parent_run_id": 35996621664,
+    "strategy": "ONE_HF_COMMIT_FOR_7_OBJECTS"
+  },
+  "prepared_m11": {
+    "mission": "config/m11-s5-v2-mission-v1.json",
+    "workflow": ".github/workflows/m11-s5-v2-role-fidelity.yml",
+    "validator": "tools/validate_m10_semantic_audit.py",
+    "status": "PREPARED_NOT_TRIGGERED_BLOCKED_BY_M10"
+  },
+  "hard_rules": [
+    "NO_GOLD_BEFORE_M10",
+    "NO_5_TO_10_BEFORE_M10_AND_M11",
+    "NO_SIMULATED_AGENT",
+    "NO_HF_RETRY_STORM",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ],
+  "next_action": "Read final M10 semantic decision and M05 rollback receipt. Trigger M11 only if M10 closes with the expected HOLD/LIMIT repair path."
+}
