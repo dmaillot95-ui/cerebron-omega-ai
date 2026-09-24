@@ -1,0 +1,52 @@
+{
+  "schema": "CEREBRON_80_M08_REAL_WORKER_QUALIFICATION_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 8,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "selection_guard": {
+    "run_id": 36000734259,
+    "conclusion": "success"
+  },
+  "real_worker_canary": {
+    "run_id": 36002999588,
+    "route": "GITHUB_ACTIONS_CPU",
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+    "workers": [
+      {
+        "id": "SAPHEA-A",
+        "status": "QUEUED"
+      },
+      {
+        "id": "SAPHEA-B",
+        "status": "IN_PROGRESS"
+      },
+      {
+        "id": "SAPHEA-C",
+        "status": "QUEUED"
+      },
+      {
+        "id": "SPIRALION-A",
+        "status": "IN_PROGRESS"
+      },
+      {
+        "id": "ETHERION-A",
+        "status": "QUEUED"
+      }
+    ],
+    "required_for_qualification": "5_OF_5_REAL_LLM_INFERENCE_PASS_WITH_RECEIPTS"
+  },
+  "prepared_next": [
+    "config/real-worker-scaling-5-10-20-v1.json",
+    "config/s5-role-diverse-agora-mission-v1.json",
+    "config/agora-real-worker-packet-v1.json",
+    "config/burst-marginal-gain-gate-v1.json"
+  ],
+  "claim_limits": [
+    "Two workers have started; none are yet counted as successful.",
+    "Five jobs do not imply five independent evidentiary sources because the same model/revision is used.",
+    "Do not scale to 10 or 20 until M08 closes 5/5."
+  ],
+  "next_action": "Inspect all five receipts and artifacts when run 36002999588 completes; then promote or reject GITHUB_ACTIONS_CPU."
+}
