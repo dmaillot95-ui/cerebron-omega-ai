@@ -101,6 +101,36 @@
       "TRANSFER_RISK": "LOW_WITH_ONTOLOGY_GUARD",
       "PARENT_SHA": "309f330f5bd5d9c44b22588a2e804289a17dc5b0",
       "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-FORMAT-001",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "ALL_AVAILABLE_LOGICAL_AI",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_FORMAT",
+      "FAILURE_SIGNATURE": "38_EXECUTED_0_OF_38_PARSE_PASS_MARKDOWN_LABEL_WRAPPER",
+      "ROOT_CAUSE": "The council worker parser required bare LABEL: prefixes while the shared compact model consistently emitted Markdown-wrapped labels such as **PRIORITY:**.",
+      "EVIDENCE_REFS": [
+        "run:36046943012",
+        "receipts/council/all-ai-strategy-council-36046943012.json",
+        "artifact:council-CEREBRON",
+        "artifact:council-AELYS",
+        "artifact:council-ETHERION",
+        "artifact:council-METRION",
+        "artifact:council-F166-RHO"
+      ],
+      "IMPACT": "Initial deterministic ranking was invalid because all parsed fields were null and every proxy collapsed to 0.2.",
+      "SCOPE": "All-AI strategy council output-format parser; does not by itself establish semantic failure of the raw model outputs.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "Markdown-tolerant label parser",
+        "increase max_new_tokens 260->420",
+        "same-scale 5-AI canary before full rerun"
+      ],
+      "REPAIR_STATUS": "REPAIR_IMPLEMENTED_CANARY_PENDING",
+      "TRANSFER_RISK": "MEDIUM_UNTIL_CANARY_AND_FULL_COUNCIL_RETEST",
+      "PARENT_SHA": "f045d0c0b3a2c95e69a978c517eb57adce996180",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
