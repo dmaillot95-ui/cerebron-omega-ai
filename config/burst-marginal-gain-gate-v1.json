@@ -1,0 +1,64 @@
+{
+  "schema": "CEREBRON_BURST_MARGINAL_GAIN_GATE_V1",
+  "status": "ACTIVE_DECISION_CONTRACT",
+  "runtime_changed": false,
+  "objective": "Prevent worker-count inflation by expanding 5→10→20 only when new workers add measurable nonredundant information.",
+  "compare_dimensions": [
+    "new_claims_supported",
+    "new_counterexamples",
+    "new_failure_modes",
+    "new_evidence_sources_or_methods",
+    "new_formal_constraints",
+    "new_transfer_findings",
+    "new_uncertainty_reduction"
+  ],
+  "redundancy_dimensions": [
+    "same_model_family",
+    "same_model_revision",
+    "same_parent_ai",
+    "same_prompt_or_task",
+    "same_evidence_source",
+    "same_reasoning_path_hash"
+  ],
+  "stage_gate": {
+    "5_to_10": {
+      "require": [
+        "5_REAL_RECEIPTS",
+        "AUDITED_CAPSULE",
+        "POSITIVE_MARGINAL_GAIN_EXPECTED"
+      ],
+      "deny_if": [
+        "ALL_MAJOR_FINDINGS_DUPLICATED",
+        "NO_QUALIFIED_NEW_ROLE",
+        "RESOURCE_FAILURE"
+      ]
+    },
+    "10_to_20": {
+      "require": [
+        "10_REAL_RECEIPTS",
+        "MEASURED_NONREDUNDANT_GAIN_FROM_WORKERS_6_TO_10",
+        "HARD_MISSION_REMAINS_OPEN"
+      ],
+      "deny_if": [
+        "MARGINAL_GAIN_NONPOSITIVE",
+        "CONSENSUS_ONLY_WITH_SHARED_LINEAGE",
+        "RESOURCE_OR_QUOTA_PRESSURE"
+      ]
+    }
+  },
+  "independence": "Execution diversity and evidentiary independence are separate fields.",
+  "output": [
+    "selected_count",
+    "executed_count",
+    "useful_count",
+    "correlated_count",
+    "independent_evidence_count",
+    "stop_reason"
+  ],
+  "hard_rules": [
+    "AGENT_COUNT_NE_INTELLIGENCE",
+    "CONSENSUS_NE_TRUTH",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
