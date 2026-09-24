@@ -1,0 +1,28 @@
+name: PI-SEARCH shared calculator canary
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/pi_search.py'
+      - 'config/pi-search.json'
+      - 'protocols/PI_SEARCH_PROTOCOL_V1.md'
+      - 'tests/test_pi_search.py'
+      - '.github/workflows/pi-search-canary.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m unittest tests/test_pi_search.py -v
+      - name: Self-test
+        run: python tools/pi_search.py --self-test
+      - name: Generate canonical packet
+        run: python tools/pi_search.py --task CEREBRON-PI-SEARCH-CANARY --sweep 16 --needle 512 --sphere 32
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pi-search-v1
+          path: out/pi-search.json
+          retention-days: 14
