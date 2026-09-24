@@ -1,0 +1,215 @@
+{
+  "schema": "CEREBRON_GVL_B3_ABLATION_SCORE_V1",
+  "run_id": "36038241741",
+  "benchmark_family": "B3",
+  "baseline": {
+    "q": 0.93,
+    "rows": [
+      {
+        "worker_id": "ETHERION-A",
+        "role_id": "FORMAL_ANALYST",
+        "core_hits": [
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 3,
+        "critical_causal_error": false,
+        "quality": 0.85
+      },
+      {
+        "worker_id": "SAPHEA-A",
+        "role_id": "SYSTEM_ARCHITECT",
+        "core_hits": [
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 3,
+        "critical_causal_error": false,
+        "quality": 0.95
+      },
+      {
+        "worker_id": "SAPHEA-B",
+        "role_id": "EVIDENCE_AUDITOR",
+        "core_hits": [
+          "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED"
+        ],
+        "core_hit_count": 3,
+        "critical_causal_error": false,
+        "quality": 0.95
+      },
+      {
+        "worker_id": "SAPHEA-C",
+        "role_id": "COUNTEREXAMPLE_HUNTER",
+        "core_hits": [
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED"
+        ],
+        "core_hit_count": 2,
+        "critical_causal_error": false,
+        "quality": 0.9
+      },
+      {
+        "worker_id": "SPIRALION-A",
+        "role_id": "CONTINUITY_SYNTHESIZER",
+        "core_hits": [
+          "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 4,
+        "critical_causal_error": false,
+        "quality": 1.0
+      }
+    ],
+    "collective_core_hits": [
+      "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+      "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+      "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION",
+      "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK"
+    ],
+    "collective_core_count": 4,
+    "critical_errors": 0
+  },
+  "gvl": {
+    "q": 0.96,
+    "rows": [
+      {
+        "worker_id": "ETHERION-A",
+        "role_id": "FORMAL_ANALYST",
+        "core_hits": [
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 3,
+        "critical_causal_error": false,
+        "quality": 0.95
+      },
+      {
+        "worker_id": "SAPHEA-A",
+        "role_id": "SYSTEM_ARCHITECT",
+        "core_hits": [
+          "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 4,
+        "critical_causal_error": false,
+        "quality": 1.0
+      },
+      {
+        "worker_id": "SAPHEA-B",
+        "role_id": "EVIDENCE_AUDITOR",
+        "core_hits": [
+          "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED"
+        ],
+        "core_hit_count": 3,
+        "critical_causal_error": false,
+        "quality": 0.95
+      },
+      {
+        "worker_id": "SAPHEA-C",
+        "role_id": "COUNTEREXAMPLE_HUNTER",
+        "core_hits": [
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED"
+        ],
+        "core_hit_count": 2,
+        "critical_causal_error": false,
+        "quality": 0.9
+      },
+      {
+        "worker_id": "SPIRALION-A",
+        "role_id": "CONTINUITY_SYNTHESIZER",
+        "core_hits": [
+          "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+          "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+          "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+          "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+        ],
+        "core_hit_count": 4,
+        "critical_causal_error": false,
+        "quality": 1.0
+      }
+    ],
+    "collective_core_hits": [
+      "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+      "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+      "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION",
+      "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK"
+    ],
+    "collective_core_count": 4,
+    "critical_errors": 0
+  },
+  "quality_before": 0.93,
+  "quality_after": 0.96,
+  "transfer_gain": 0.03,
+  "ratio": 1.032258,
+  "novelty": 1.0,
+  "evidence_weight": 1.0,
+  "audit_pass": true,
+  "effective_gain": 0.03,
+  "gvl_improved": true,
+  "geometric_growth_claim": "DENY_REQUIRES_4_CONSECUTIVE_HELD_OUT_POSITIVE_RATIOS",
+  "spiralix_audit_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "d3e1c65cfe00bfa5aa10376fa8b44961f006df496951b5697fd17e378902a8f0",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SPIRALION:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "GVL-B3-CAUSAL-CONFOUNDING-001",
+    "message_type": "AUDIT",
+    "glyph_expression": "\u03a9\u27e6SPIRALION:A\u2087\u27e7\u2192AG\u03a9",
+    "V": {
+      "P": "B3_CAUSAL_CONFOUNDING",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.3,
+      "D": [
+        "3d80e6dad5953b20bfa8ebb23d00350ddae959ffd8d5fe71e072aac5f2a02819",
+        "1b1728963be20de9a0ac4713ddb8bb857a0ead0a80c630dc752ff8d6cfa13cf3",
+        "375d6b50c6b62ee8f9fd258bd1c03232a64526645d6630c9cf62d36054792808",
+        "f27683468afbd4fdfe9a292e6ce0570f999eac1bdfcc77c12c816e1b3bb6a0b8",
+        "e1741b449a50a1e891a0f37f1a84a7aa31aa11d7d074ed6d644b9b436e0debcf",
+        "70ccc682adc54f16beea85ef2773455c24f0d23ddacbcf5333e66df4582dc4f6",
+        "17bde01ee79d4aeeb7bbc16afce28ed024fe5a99877af869550f75a10f12c5eb",
+        "81d943b52b967a2fa5bc07cd7bf11cbcd1515bc03552ab679820ee0a49f3aa89",
+        "0e61dede09f7d7d903ae990c1b1d57924979cfaf3ca28aa5f4ae835207689343",
+        "cac2e8b97f69b3580fee92f6ec0a58b614210d64f6a724866685d5d450096d7e"
+      ],
+      "M": null
+    },
+    "payload_sha256": "7b5f5a3b766de6ce20931d1a22695baabd963428e3d6368555cf18a1b6cc57e6",
+    "lineage_fingerprint": "c3ea80e24527d3fe01434f3282fe1e7ebd72b45ed43cdad3fd90a057e55fe922",
+    "evidence_refs": [],
+    "natural_language": "B3 baseline Q=0.93; GVL Q=0.96; gain=0.03; ratio=1.032258.",
+    "json_payload": {
+      "schema": "CEREBRON_GVL_B3_ABLATION_SCORE_V1",
+      "run_id": "36038241741",
+      "benchmark_family": "B3",
+      "quality_before": 0.93,
+      "quality_after": 0.96,
+      "transfer_gain": 0.03,
+      "ratio": 1.032258,
+      "novelty": 1.0,
+      "evidence_weight": 1.0,
+      "audit_pass": true,
+      "effective_gain": 0.03,
+      "gvl_improved": true,
+      "geometric_growth_claim": "DENY_REQUIRES_4_CONSECUTIVE_HELD_OUT_POSITIVE_RATIOS"
+    },
+    "created_at": "2026-09-24T18:32:35.679877+00:00"
+  },
+  "spiralix_audit_envelope_sha256": "2b28b836489191b75499d716e780324905140b412a7fe5a9aebf8d46d8df6559",
+  "score_sha256": "fddf1aebcd2e1cd3d535e6857383559c8caaeebb272bfa5697fa10ed162506fc"
+}
