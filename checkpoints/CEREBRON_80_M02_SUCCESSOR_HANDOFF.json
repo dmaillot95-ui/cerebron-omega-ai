@@ -1,0 +1,199 @@
+{
+  "schema": "CEREBRON_80_M02_SUCCESSOR_HANDOFF_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 2,
+  "status": "HANDOFF_READY_PENDING_OWN_GUARD",
+  "runtime_changed": false,
+  "base_git_head": "a1308a84583a08c67e4ca2f063c5346f48e738e8",
+  "parent_checkpoint": {
+    "path": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
+    "git_blob_sha": "988d749c144c28db0b048bc86cd065b99cdf4d3b"
+  },
+  "authoritative_files": [
+    {
+      "path": "config/farms.json",
+      "git_blob_sha": "51bbe923a8245af0f9c757d577a2e6f13682b896"
+    },
+    {
+      "path": "config/ai-8-agent-topology-v1.json",
+      "git_blob_sha": "6ed4fd107677ba93011cd185722297048b7c60f8"
+    },
+    {
+      "path": "config/crystal-preservation-v1.json",
+      "git_blob_sha": "fdab94bb4703e6d7d4f49660070680668a845ed4"
+    },
+    {
+      "path": "config/private-memory-route.json",
+      "git_blob_sha": "799825c759da4e44259965438b41767ee2dd5768"
+    },
+    {
+      "path": "config/memory-fabric-v1.json",
+      "git_blob_sha": "2ec76431a985adf8aba30cbf8bb53303107cc776"
+    },
+    {
+      "path": "config/greek-agora-training-v1.json",
+      "git_blob_sha": "aa388cb8b7958a1251b6b4a30cbfaa4d20873268"
+    },
+    {
+      "path": "config/spiralix-agora.json",
+      "git_blob_sha": "8cda88ed2c796fc0d7b559d1788c9d2c29c00917"
+    },
+    {
+      "path": "config/spiralix-forum.json",
+      "git_blob_sha": "9367400eaadd8c9997c66317bd1a685b229ec8b0"
+    }
+  ],
+  "m01_receipts": [
+    {
+      "name": "Civilization Crystal Baseline Guard",
+      "run_id": 35980026231,
+      "job_id": 107569446558,
+      "conclusion": "success"
+    },
+    {
+      "name": "CEREBRON Main Integration Gate",
+      "run_id": 35980025335,
+      "job_id": 107569443419,
+      "conclusion": "success"
+    },
+    {
+      "name": "CEREBRON Omega Core",
+      "run_id": 35980025191,
+      "job_id": 107569442807,
+      "conclusion": "success"
+    }
+  ],
+  "registry": {
+    "version": "2.24",
+    "farm_count": 172,
+    "farm_cap": 172,
+    "greek_target": 24,
+    "greek_infrastructure_present": 23,
+    "greek_new_scaffolds_guards_pass": 20,
+    "missing_repository": [
+      {
+        "farm_id": 162,
+        "identity": "NU",
+        "repo": "cerebron-farm-162-nu"
+      }
+    ]
+  },
+  "agents": {
+    "topology": "config/ai-8-agent-topology-v1.json",
+    "per_ai_slots": 8,
+    "burst_pool_max": 20,
+    "active_claim_requires": [
+      "real_worker_or_model",
+      "run_or_execution_receipt",
+      "log_or_result",
+      "artifact_or_receipt",
+      "provenance"
+    ],
+    "rule": "CONFIGURED_SLOT_NE_EXECUTED_AGENT"
+  },
+  "civilization_tasks": [
+    {
+      "title": "Civilisation Pedagogue",
+      "cadence": "hourly minute 00",
+      "enabled": true
+    },
+    {
+      "title": "Civilisation Examiner",
+      "cadence": "hourly minute 12",
+      "enabled": true
+    },
+    {
+      "title": "Civilisation Red Team",
+      "cadence": "hourly minute 24",
+      "enabled": true
+    },
+    {
+      "title": "Civilisation Connector",
+      "cadence": "hourly minute 36",
+      "enabled": true
+    },
+    {
+      "title": "Civilisation Synthesizer",
+      "cadence": "hourly minute 48",
+      "enabled": true
+    }
+  ],
+  "memory": {
+    "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+    "verification_scope": "SCOPED_VERIFIED_NOT_GLOBAL",
+    "receipts": [
+      "receipts/colonies/wave01-hf-memory-gate.json",
+      "receipts/p03/hf-memory-health.json",
+      "receipts/p03/unified-memory-recall-v2.json"
+    ],
+    "public_control_plane": [
+      "GitHub",
+      "F66",
+      "F74"
+    ],
+    "private_data_plane": "Hugging Face private",
+    "namespace_pattern": "ai/{ai_id}/agent/{agent_slot}/{class}/{memory_id}",
+    "write_policy": "APPEND_OR_VERSION_NEVER_DESTRUCTIVE_OVERWRITE",
+    "required_on_write": [
+      "payload_sha256",
+      "parent_version",
+      "rollback_pointer",
+      "readback_sha",
+      "provenance"
+    ],
+    "unverified_scope_behavior": "HF_PRIVATE_UNAVAILABLE"
+  },
+  "training": {
+    "default_inheritance": [
+      "I1_KNOWLEDGE",
+      "I2_CURRICULUM"
+    ],
+    "adapter_inheritance": "I3_ONLY_COMPATIBLE_BASE_REVISION_PLUS_SCRATCH_VS_INHERITED",
+    "full_weight_inheritance": "DENY_BY_DEFAULT",
+    "m6": "NEVER_IN_TRAIN",
+    "raw_agora": "NEVER_DIRECT_TO_TRAIN",
+    "neural_proof": [
+      "weights_changed_or_adapter_changed",
+      "before_after_sha",
+      "dataset_sha",
+      "config_sha",
+      "cold_posttest",
+      "transfer",
+      "regression",
+      "reproduction"
+    ]
+  },
+  "open_blockers": [
+    "F162_NU_REPOSITORY_MISSING",
+    "PER_AI_HF_ROUNDTRIP_NOT_YET_PROVED_FOR_ALL_AIS",
+    "EIGHT_REAL_AGENTS_PER_AI_NOT_YET_PROVED",
+    "TWENTY_AGENT_BURST_NOT_YET_PROVED",
+    "MOST_NATIVE_AND_GREEK_AIS_NOT_NEURALLY_TRAINED"
+  ],
+  "successor_protocol": [
+    "READ_THIS_HANDOFF_FIRST",
+    "VERIFY_PARENT_CHECKPOINT_AND_AUTHORITATIVE_FILE_BLOBS",
+    "VERIFY_CURRENT_HEAD_DESCENDS_FROM_BASE_GIT_HEAD",
+    "DO_NOT_RESTART_FROM_ZERO",
+    "RESTORE_OPEN_BLOCKERS_AND_NEXT_ACTION",
+    "READ_MEMORY_POINTERS_BEFORE_WRITE",
+    "WRITE_NEW_VERSION_ONLY",
+    "PRESERVE_FAILED_BRANCHES_AND_NEGATIVE_EVIDENCE",
+    "NEVER_CLAIM_AGENT_EXECUTION_WITHOUT_RECEIPT",
+    "CONTINUE_CAMPAIGN_AT_M03"
+  ],
+  "next_message": {
+    "id": "M03",
+    "objective": "Create the all-AI memory namespace manifest and verification matrix; map which AI families have HF write/read/SHA proof and which remain gated."
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "NO_SIMULATED_AGENT",
+    "M6_NEVER_IN_TRAIN",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
