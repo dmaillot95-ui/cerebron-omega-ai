@@ -1,0 +1,50 @@
+{
+  "schema": "CEREBRON_80_M19_GVL_V2_AND_PASS2R",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 19,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "quality_first": {
+    "pass1": {
+      "run_id": 36027613868,
+      "status": "PASS_5_OF_5"
+    },
+    "pass2": {
+      "run_id": 36028613557,
+      "status": "FAIL_4_OF_5",
+      "failed_worker": "SAPHEA-A"
+    },
+    "saphea_a_repair_canary": {
+      "run_id": 36032722283,
+      "status": "PASS",
+      "finding": "Simulation alone does not validate representative real-system operation.",
+      "spiralix": true
+    },
+    "pass2r": {
+      "run_id": 36034245620,
+      "status": "QUEUED",
+      "scale": "STILL_5"
+    }
+  },
+  "gvl": {
+    "contract": "config/geometric-vector-learning-v1.json",
+    "schema": "CEREBRON_GEOMETRIC_VECTOR_LEARNING_V2",
+    "version": "2.0.0",
+    "dimension": 24,
+    "available_ai": 38,
+    "logical_ai": 39,
+    "cerebron_aelys_redundancy": 0,
+    "spiralion_aelys_redundancy": 0,
+    "current_growth_claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
+    "guard_v1_run": 36032486589,
+    "guard_v1_status": "SUCCESS",
+    "v2_guard": "TRIGGERED_PENDING_DISCOVERY"
+  },
+  "civilisation": "5 recurring tasks updated to SPIRALIX + GVL",
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "HOLD",
+    "reason": "Pass2R and marginal information gain still required."
+  },
+  "next_action": "Wait for Pass2R five-worker deterministic score and GVL V2 guard; only then evaluate marginal gain. Do not scale automatically."
+}
