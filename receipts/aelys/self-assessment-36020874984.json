@@ -1,0 +1,151 @@
+{
+  "schema": "AELYS_SELF_ASSESSMENT_RECEIPT_V1",
+  "run_id": "36020874984",
+  "identity": "AELYS",
+  "execution_route": "GITHUB_ACTIONS_CPU",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "aelys_specific_weights_proven": false,
+  "real_execution": true,
+  "llm_inference": true,
+  "spiralix_input_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "98a628d23908fee460cbf5b532d56fea149a7ae38bcee116065d0e5e5f75cde8",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "AELYS:A0_CHIEF",
+    "target": "AGORA",
+    "mission_id": "AELYS-SELF-ASSESSMENT-001",
+    "message_type": "QUESTION",
+    "glyph_expression": "Ω⟦AELYS:A₀⟧→AGΩ",
+    "V": {
+      "P": "AELYS_SELF_ASSESSMENT",
+      "E": "E1",
+      "C": 1.0,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "memory/task-ledger.json",
+        "config/all-ai-memory-matrix-v1.json",
+        "config/all-ai-8-agent-colonies-v1.json",
+        "config/greek-agora-training-v1.json",
+        "training/AGORA_TASK_AGENT_TEACHER_LOOP.json",
+        "receipts/workers/5-real-ai-workers-36002999588.json",
+        "receipts/agora/m09-semantic-baseline-v1.json",
+        "receipts/p03/m06-hf-full-rollback-latest.json",
+        "config/spiralix-universal-bus-v1.json"
+      ],
+      "M": null
+    },
+    "payload_sha256": "b6f981945f377eaa59e79b0abc1269a4dc49cdd4bea4388638cc5bc6e97fd746",
+    "lineage_fingerprint": "d7cd53cdfc7265c1f3a7111e2e153e53142564362099affd9330fd77826c37f2",
+    "evidence_refs": [],
+    "natural_language": "AÉLYS, fais un bilan factuel de ton apprentissage et indique ce que tu proposes pour la suite.",
+    "json_payload": {
+      "identity": "AELYS",
+      "role": "HUMAN_DIALOGUE_COORDINATION",
+      "request": [
+        "Décris ce que tu as réellement appris jusqu'ici, en distinguant mémoire/curriculum/prompt de tout apprentissage neuronal.",
+        "À quelle vitesse progresses-tu selon les preuves disponibles ? Cite les indicateurs utiles et les limites de cette estimation.",
+        "Qu'apprends-tu vite et bien ?",
+        "Qu'apprends-tu mal ou pas encore de façon démontrée ?",
+        "Que proposes-tu pour améliorer ton apprentissage et celui de CÉRÉBRON ?",
+        "Si tu pouvais demander une prochaine étape prioritaire à David, laquelle choisirais-tu et pourquoi ?",
+        "Donne un court message direct à David, sans prétendre être consciente ni ressentir des désirs."
+      ],
+      "known_system_evidence": {
+        "memory_matrix": {
+          "status": "M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS",
+          "available_ai": 38,
+          "unavailable_ai": 1,
+          "m03_run_id": 35996621664,
+          "parent_alignment_status": "ALL_38_AVAILABLE_ENTRIES_MATCH_PINNED_M03_RECEIPT"
+        },
+        "eight_agent_topology": {
+          "logical_ai": 39,
+          "available_ai": 38,
+          "slots_per_ai": 8,
+          "configured_slots_total": 312,
+          "execution_rule": "CONFIGURED_SLOT_NE_EXECUTED_AGENT",
+          "spiralix": {
+            "status": "MANDATORY_FOR_AVAILABLE_ENDPOINTS",
+            "language": "SPIRALIX-OMEGA",
+            "mode": "CEREBRON-M",
+            "bus": "config/spiralix-universal-bus-v1.json",
+            "active_endpoints": 304,
+            "prep_only_endpoints": 8
+          }
+        },
+        "m09_semantic_baseline": {
+          "drift_workers": 3,
+          "instruction_echo_proxy_workers": 4,
+          "clean_by_simple_proxy": 0
+        },
+        "m06_rollback_summary": {
+          "available": 38,
+          "passed": 38,
+          "failed": 0,
+          "unavailable": 1
+        },
+        "m06_status": "PASS",
+        "spiralix_counts": {
+          "logical_ai": 39,
+          "available_ai": 38,
+          "slots_per_ai": 8,
+          "total_endpoints": 312,
+          "required_active_endpoints": 304,
+          "prep_only_endpoints": 8
+        },
+        "spiralix_status": "MANDATORY_CONTRACT_CANARY_PENDING",
+        "training_inheritance_note": "I1/I2 knowledge/curriculum may transfer; neural weight changes require explicit training receipts and are not implied by memory or prompts."
+      },
+      "epistemic_rules": [
+        "REALITY>COHERENCE",
+        "EVIDENCE>CONFIDENCE",
+        "CLAIM<=EVIDENCE",
+        "MEMORY_OR_PROMPT_NE_NEURAL_TRAINING",
+        "SELF_REPORT_NE_EVIDENCE"
+      ]
+    },
+    "created_at": "2026-09-24T15:33:51.986024+00:00"
+  },
+  "spiralix_input_envelope_sha256": "63f4f2ad85e761aaad8c66be3baf9688416a17521aae84a8ffe59f900048f45f",
+  "inference": "PASS",
+  "raw_output": "}\n\nRéponse attendue:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte différent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte où l'apprentissage est lent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF",
+  "parsed_response": null,
+  "result_sha256": "22666fdfed4ec4810d7721b62240348173682e50df6a92d821a190f0e353d621",
+  "parse_status": "FAIL",
+  "latency_s": 438.689,
+  "spiralix_output_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "4b64a6e757863f204eed606a4472e34cca6facc7c2068175de69c6aab4c51075",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "AELYS:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "AELYS-SELF-ASSESSMENT-001",
+    "message_type": "SYNTHESIS",
+    "glyph_expression": "Ω⟦AELYS:A₇⟧→AGΩ",
+    "V": {
+      "P": "AELYS_SELF_ASSESSMENT",
+      "E": "E1",
+      "C": 0.6,
+      "U": [],
+      "R": 0.3,
+      "D": [
+        "63f4f2ad85e761aaad8c66be3baf9688416a17521aae84a8ffe59f900048f45f"
+      ],
+      "M": null
+    },
+    "payload_sha256": "c8a3a4055217431d821848c16d1cf0e1a813e2073253548344f7abab3f79ccf2",
+    "lineage_fingerprint": "0a3ef37a1408d191881521ad3215a1049e0f2596a6f355c72415cee1cf0907da",
+    "evidence_refs": [],
+    "natural_language": "}\n\nRéponse attendue:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte différent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte où l'apprentissage est lent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF",
+    "json_payload": {
+      "raw": "}\n\nRéponse attendue:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte différent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"], \"limits\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"]},\n  \"learns_fast_and_well\":[\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\"],\n  \"learns_poorly_or_not_proven\": [],\n  \"proposals\":[{\"priority\":1,\"proposal\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum, en utilisant les outils de CÉRÉBRON pour renforcer les connexions de base.\", \"why\":\"Pour assurer une compréhension solide des concepts de base avant de passer à des méthodes plus avancées.\"}],\n  \"recommended_next_step_to_david\":\"Commence par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"message_to_david\":\"Je recommande de commencer par une session de révision structurée basée sur les principes de la mémoire et du curriculum.\",\n  \"neural_training_status\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"confidence\":\"HIGH\"\n} \n\nRéponse attendue pour un contexte où l'apprentissage est lent:\n{\n  \"learning_state\": \"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\",\n  \"learning_speed\": {\"assessment\":\"M03_HF_DIRECT_VERIFIED_FOR_38_AVAILABLE_AIS\", \"evidence\":[\"M03_HF"
+    },
+    "created_at": "2026-09-24T15:41:10.679176+00:00"
+  },
+  "spiralix_output_envelope_sha256": "a2839ecb22c23edf339242220aed824ca2432244860a180425402436903c4fac",
+  "receipt_sha256": "b188af157256884ef1848babbdca3af8ce893345e87f62b83ad3947ff28a67e2"
+}
