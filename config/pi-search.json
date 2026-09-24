@@ -1,0 +1,22 @@
+{
+  "schema": "CEREBRON_PI_SEARCH_CONFIG_V1",
+  "runtime_changed": false,
+  "default_mode": "HYBRID",
+  "coarse_sweep_samples": 16,
+  "needle_samples": 512,
+  "sphere_samples": 32,
+  "refine_top_k": 16,
+  "refine_half_width_deg": 11.25,
+  "refine_samples_per_sector": 9,
+  "diversity_min_separation_deg": 8.0,
+  "rules": [
+    "PI_IS_NOT_AN_ORACLE",
+    "FINITE_SEARCH_IS_NOT_EXHAUSTIVE",
+    "SAME_TASK_SAME_SEED_FOR_REPRODUCIBILITY",
+    "DIVERSITY_BEFORE_DEPTH",
+    "ELYSIUM_REDTEAM_BEFORE_PROMOTION",
+    "OMEGA_EVIDENCE_GATE",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
