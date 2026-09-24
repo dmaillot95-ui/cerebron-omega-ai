@@ -1,0 +1,4 @@
+SAPHEA-A SYSTEM_ARCHITECT REPAIR CANARY
+mode=CEREBRON-M
+source_failure_run=36028613557
+runtime_changed=false
