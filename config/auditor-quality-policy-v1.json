@@ -1,0 +1,37 @@
+{
+  "schema": "CEREBRON_AUDITOR_QUALITY_POLICY_V1",
+  "status": "ACTIVE_CONTRACT",
+  "runtime_changed": false,
+  "trigger": "M10 exposed an over-permissive semantic auditor that returned ACCEPT/GOLD despite deterministic drift markers in source outputs.",
+  "objective": "Prevent audit models from rubber-stamping outputs and promote only when model audit agrees with deterministic evidence gates.",
+  "requirements": [
+    "AUDITOR_OUTPUT_MUST_REFERENCE_SOURCE_FAILURES",
+    "AUDITOR_MUST_NOT_GRANT_GOLD_IF_DETERMINISTIC_DRIFT_OR_SCHEMA_FAILURE_EXISTS",
+    "AUDITOR_DECISION_MUST_BE_CROSS_CHECKED_BY_NON_LLM_DETERMINISTIC_RULES",
+    "AUDITOR_LINEAGE_MUST_BE_RECORDED",
+    "DISAGREEMENT_BETWEEN_AUDITOR_AND_DETERMINISTIC_GATE_IS_PRESERVED",
+    "DETERMINISTIC_GATE_WINS_FOR_SAFETY_AND_EVIDENCE_CEILING"
+  ],
+  "disagreement_states": [
+    "AUDITOR_ALIGNED",
+    "AUDITOR_OVERPERMISSIVE",
+    "AUDITOR_OVERRESTRICTIVE",
+    "AUDITOR_UNPARSABLE",
+    "AUDITOR_MODEL_FAILURE"
+  ],
+  "m10_observation": {
+    "auditor_id": "ELYSIUM-SMOL-AUDITOR",
+    "run_id": 36015400305,
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "model_audit_status": "COMPLETED",
+    "observed_model_judgment": "ACCEPT/GOLD on multiple workers",
+    "deterministic_source_status": "SEMANTIC_HOLD_WITH_UNRELATED_EXAMPLES",
+    "alignment": "AUDITOR_OVERPERMISSIVE",
+    "promotion_effect": "NO_GOLD"
+  },
+  "hard_rules": [
+    "AUDIT_MODEL_NE_TRUTH",
+    "DETERMINISTIC_FAILURE_NE_OVERRIDDEN_BY_MODEL_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
