@@ -1,0 +1,176 @@
+{
+  "schema": "CEREBRON_MEMORY_PROMOTION_POLICY_V1",
+  "date": "2026-09-24",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "classes": {
+    "M0": {
+      "name": "EPHEMERAL",
+      "training_source": false,
+      "next": [
+        "M1"
+      ],
+      "requirements": [
+        "PROVENANCE",
+        "SHA256"
+      ]
+    },
+    "M1": {
+      "name": "TRACE",
+      "training_source": false,
+      "next": [
+        "M2"
+      ],
+      "requirements": [
+        "AUDIT",
+        "UNAIDED_RETEST",
+        "DEDUP"
+      ]
+    },
+    "M2": {
+      "name": "REPLAY",
+      "training_source": "ONLY_IF_PROMOTED",
+      "next": [
+        "M4"
+      ],
+      "requirements": [
+        "MEASURED_GAIN",
+        "REPRODUCTION",
+        "F72_PASS",
+        "AFAH_PASS",
+        "NO_M6_CONTAMINATION"
+      ]
+    },
+    "M3": {
+      "name": "WARM",
+      "training_source": false,
+      "next": [
+        "M2",
+        "M4"
+      ],
+      "requirements": [
+        "PROVENANCE",
+        "AUDIT",
+        "RETENTION_REVIEW"
+      ]
+    },
+    "M4": {
+      "name": "GOLD",
+      "training_source": true,
+      "next": [
+        "TRAIN_DATASET"
+      ],
+      "requirements": [
+        "F72_PASS",
+        "AFAH_PASS",
+        "DEDUP",
+        "LICENSE_OR_ORIGIN",
+        "TRAIN_VALID_SPLIT",
+        "M6_EXCLUSION_E2E"
+      ]
+    },
+    "M5": {
+      "name": "MODEL",
+      "training_source": false,
+      "next": [],
+      "requirements": [
+        "WEIGHTS_OR_ADAPTER_SHA256",
+        "TRAINING_CONFIG_SHA256",
+        "DATASET_SHA256",
+        "POSTTRAIN_M6",
+        "TRANSFER",
+        "REGRESSION"
+      ]
+    },
+    "M6": {
+      "name": "COLD_BENCHMARK",
+      "training_source": false,
+      "next": [],
+      "requirements": [
+        "SEALED",
+        "DENY_TRAINING"
+      ],
+      "absolute_rules": [
+        "NEVER_TRAIN_SOURCE",
+        "NEVER_AUTO_PROMOTE"
+      ]
+    },
+    "M7": {
+      "name": "EVIDENCE",
+      "training_source": false,
+      "next": [
+        "M1",
+        "M2"
+      ],
+      "requirements": [
+        "PROVENANCE",
+        "SHA256",
+        "AUDIT_BEFORE_CONTENT_REUSE"
+      ]
+    }
+  },
+  "active_namespaces": [
+    "native-ai/CEREBRON",
+    "native-ai/SIGMA",
+    "native-ai/SAPHEA",
+    "native-ai/SPIRALION",
+    "native-ai/ETHERION",
+    "native-ai/HYPERION",
+    "native-ai/ASTRION",
+    "native-ai/METRION",
+    "native-ai/AFAH",
+    "native-ai/AELYS",
+    "native-ai/ELYRA",
+    "native-ai/SAPHEA_MICRO",
+    "native-ai/ELYSION",
+    "native-ai/ELYSIUM"
+  ],
+  "pending_namespaces": [
+    "native-ai/SAELION",
+    "native-ai/ALPHA",
+    "native-ai/OMEGA",
+    "native-ai/DELTA",
+    "native-ai/NEXUS"
+  ],
+  "pending_namespace_policy": {
+    "durable_classes_allowed_before_activation": [
+      "M7"
+    ],
+    "durable_classes_denied_before_activation": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6"
+    ],
+    "canary_object": "M7/NAMESPACE-CANARY-V1.json",
+    "activation_effect": "NONE",
+    "rule": "MEMORY_CANARY_PROVES_STORAGE_ROUTE_ONLY_NOT_MODEL_RUNTIME_OR_AI_ACTIVATION"
+  },
+  "live_gates": {
+    "F67": {
+      "required_for": "CROSS_FARM_TRANSFER_PROMOTION",
+      "current": "HOLD",
+      "state_sha": "98540a1bc78e59fd3174a5dd736dcbcd91064d77",
+      "iteration": 462
+    },
+    "F72": {
+      "required_for": "M4_GOLD_PROMOTION",
+      "current": "FAIL",
+      "state_sha": "7bec961e6e2980bed75b676e7c51200aac348e5c",
+      "iteration": 464,
+      "observed_packet_count": 144,
+      "current_registry_count": 151
+    }
+  },
+  "global_promotion_state": "BLOCKED_PENDING_F72_REALITY_PACKET_REFRESH_AND_REPRODUCTION",
+  "rules": [
+    "MEMORY_NOT_LEARNING",
+    "M6_NEVER_IN_TRAIN",
+    "RAW_AGORA_NEVER_AUTO_GOLD",
+    "TRANSFERRED_CONTENT_NOT_INDEPENDENT_EVIDENCE",
+    "PENDING_NAMESPACE_CANARY_DOES_NOT_ACTIVATE_AI",
+    "LIVE_GATE_FAIL_BLOCKS_PROMOTION",
+    "STALE_PACKET_MUST_BE_REGENERATED_AND_REPRODUCED_NOT_EDITED_TO_PASS"
+  ]
+}
