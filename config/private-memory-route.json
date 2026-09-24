@@ -1,7 +1,7 @@
 {
   "schema": "cerebron-private-memory-route-v1",
   "version": "1.0",
-  "status": "HOLD_AWAITING_PRIVATE_AUTH",
+  "status": "HF_PRIVATE_SCOPED_VERIFIED_GLOBAL_AI_ROLLOUT_GATED",
   "authority": "AFAH",
   "objective": "Keep private colony learning and parametric artifacts outside public GitHub while retaining non-sensitive routing metadata.",
   "routes": {
@@ -34,7 +34,14 @@
         "LoRA/adapters",
         "derived weights"
       ],
-      "availability": "NOT_VERIFIED"
+      "availability": "VERIFIED_SCOPED",
+      "repo_id": "cerebron-omega/cerebron-private-memory",
+      "verification_receipts": [
+        "receipts/colonies/wave01-hf-memory-gate.json",
+        "receipts/p03/hf-memory-health.json",
+        "receipts/p03/unified-memory-recall-v2.json"
+      ],
+      "global_ai_rollout": "REQUIRES_PER_AI_OR_REPRESENTATIVE_FAMILY_WRITE_READ_SHA_CANARY"
     }
   },
   "envelope": {
@@ -59,15 +66,18 @@
     "CLASSIFY",
     "REJECT_SECRET",
     "HASH_PRIVATE_PAYLOAD",
-    "WRITE_PRIVATE_STORE",
+    "DEDUP",
+    "WRITE_NEW_VERSION_PRIVATE_STORE",
     "READ_BACK_PRIVATE_STORE",
     "VERIFY_DIGEST",
     "WRITE_PUBLIC_OPAQUE_POINTER",
     "INDEX_F66",
     "REGISTER_F74_POINTER",
-    "RECALL_TEST"
+    "RECALL_TEST",
+    "CHECKPOINT_PARENT_AND_ROLLBACK"
   ],
-  "failure_rule": "If private authentication/write/read is unavailable, keep payload local/ephemeral and do not publish it.",
+  "failure_rule": "If authenticated private write/read is unavailable for a target AI/agent, mark HF_PRIVATE_UNAVAILABLE for that scope, retain versioned local/ephemeral state as permitted, and never publish private payload.",
   "security": "A public pointer must not reveal sensitive content through names, descriptions, metadata, URLs, or embedded parameters.",
-  "next_gate": "AUTHENTICATED_PRIVATE_HF_WRITE_READ_DELETE_OR_RETAIN_TEST"
+  "next_gate": "EXPAND_AUTHENTICATED_HF_WRITE_READ_SHA_CANARIES_TO_GREEK_AND_NATIVE_AI_FAMILIES",
+  "successor_rule": "A successor AI must read the latest verified checkpoint and opaque pointer set before creating a new version; never overwrite the only prior version."
 }
