@@ -1,6 +1,6 @@
 {
   "schema_version": "CEREBRON_MEMORY_FABRIC_V1",
-  "status": "CONTROL_PLANE_ACTIVE_EXTERNAL_DATA_PLANES_NOT_CONNECTED",
+  "status": "CONTROL_PLANE_ACTIVE_HF_PRIVATE_SCOPED_VERIFIED_GLOBAL_ROLLOUT_GATED",
   "principles": [
     "CONTENT_ADDRESSABLE",
     "DOMAIN_ISOLATION",
@@ -8,7 +8,10 @@
     "REPLAY_OVER_RAW",
     "BENCHMARK_DENY_TRAINING",
     "FAIL_CLOSED",
-    "ZERO_PAID_OVERAGE"
+    "ZERO_PAID_OVERAGE",
+    "VERSION_BEFORE_WRITE",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "SUCCESSOR_CHECKPOINT_FIRST"
   ],
   "namespaces": [
     "COLLATZ",
@@ -74,7 +77,15 @@
       "role": "GOLD_MODELS_CURATED_DATA",
       "budget_gb": 90,
       "hard_external_limit_gb": 100,
-      "headroom_gb": 10
+      "headroom_gb": 10,
+      "status": "SCOPED_WRITE_READ_SHA_VERIFIED",
+      "repo_id": "cerebron-omega/cerebron-private-memory",
+      "receipts": [
+        "receipts/colonies/wave01-hf-memory-gate.json",
+        "receipts/p03/hf-memory-health.json",
+        "receipts/p03/unified-memory-recall-v2.json"
+      ],
+      "global_rollout": "GATED_PER_AI_OR_FAMILY_CANARY"
     },
     "r2_candidate": {
       "role": "HOT_WARM_OBJECT_DATA",
@@ -97,7 +108,10 @@
     "PROVENANCE",
     "RETENTION_CLASS",
     "BUDGET",
-    "CONTAMINATION"
+    "CONTAMINATION",
+    "PARENT_VERSION",
+    "ROLLBACK_POINTER",
+    "READBACK_SHA"
   ],
   "emergency": {
     "soft_pct": 70,
@@ -105,7 +119,7 @@
     "raw_stop_pct": 90,
     "freeze_pct": 95
   },
-  "freeze": "DRAIN_CHECKPOINT_VERIFY_READ_ONLY",
+  "freeze": "DRAIN_CHECKPOINT_VERIFY_READ_ONLY_NO_DESTRUCTIVE_OVERWRITE",
   "pointer_schema": [
     "memory_id",
     "namespace",
@@ -119,5 +133,7 @@
     "created_at",
     "replay_recipe",
     "epistemic"
-  ]
+  ],
+  "ai_namespace_pattern": "ai/{ai_id}/agent/{agent_slot}/{class}/{memory_id}",
+  "successor_handoff": "config/crystal-preservation-v1.json"
 }
