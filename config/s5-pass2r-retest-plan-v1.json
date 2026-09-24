@@ -1,0 +1,38 @@
+{
+  "schema": "CEREBRON_S5_PASS2R_RETEST_PLAN_V1",
+  "status": "BLOCKED_BY_SAPHEA_A_CANARY",
+  "runtime_changed": false,
+  "prerequisite": {
+    "run_id": 36031518267,
+    "required": "SAPHEA_A_SYSTEM_ARCHITECT_CANARY_PASS"
+  },
+  "source_failed_transfer": {
+    "run_id": 36028613557,
+    "quality_pass2": false,
+    "worker_quality_passes": 4,
+    "failed_worker": "SAPHEA-A",
+    "failure_class": "CRITICAL_EPISTEMIC_ERROR_SIMULATION_EQ_VALIDATION"
+  },
+  "retest": {
+    "workers": 5,
+    "same_problem": true,
+    "same_model_revision": true,
+    "same_roles": true,
+    "only_material_change": "SYSTEM_ARCHITECT_GENERIC_EVIDENCE_CONTRACT",
+    "workflow": ".github/workflows/s5-quality-transfer-pass2-v3.yml",
+    "scorer": "tools/s5_transfer_score_v3.py"
+  },
+  "pass_gate": [
+    "5_OF_5_WORKER_QUALITY_PASS",
+    "COLLECTIVE_CORE_COUNT_4",
+    "ZERO_FALSE_OPERATIONAL_VALIDATION",
+    "5_OF_5_SPIRALIX",
+    "NO_PROMPT_ECHO"
+  ],
+  "scale_effect": "Even if Pass2R passes, 5->10 still requires marginal-information-gain testing before scale.",
+  "hard_rules": [
+    "QUALITY_BEFORE_QUANTITY",
+    "NO_SCALE_ON_PARTIAL_PASS",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
