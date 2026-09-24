@@ -1,0 +1,13 @@
+{
+  "schema": "CEREBRON_KNOWLEDGE_BANKS_GUARD_V1",
+  "status": "PASS",
+  "lesson_entries": 0,
+  "failure_entries": 4,
+  "contradiction_entries": 2,
+  "unknown_entries": 3,
+  "transfer_entries": 4,
+  "s10_scale": "STAY_AT_5",
+  "geometric_gate": "1_OF_4",
+  "dual_core_assignments_verified": 0,
+  "sha256": "a3834b8921c9db1d29a20e7049b31d265106051bff77e2fe82168788f294e265"
+}
