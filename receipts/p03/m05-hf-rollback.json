@@ -1,0 +1,91 @@
+{
+  "schema": "CEREBRON_M05_ROLLBACK_RECEIPT_V1",
+  "run_id": "35997393013",
+  "parent_run_id": "35995124491",
+  "checked_at": "2026-09-24T12:10:45.878562+00:00",
+  "results": [
+    {
+      "ai_id": "CEREBRON",
+      "family": "EXECUTIVE",
+      "status": "PASS",
+      "parent_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "d572052be3633672b4f3a3626fa96551ec62d0aafb362190e7dd170b7a7e0ad4",
+      "new_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "6e7cdf03232b5f90c36332eb37c05be591148239f4e0cf93d6ae49b95958e971",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "family": "SPECIALIST_ROUTER",
+      "status": "PASS",
+      "parent_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "a204e3194601895281cba15fe3d1a760ba45bfde81abbacd8321f7e20de90057",
+      "new_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "172b409eec5c990087a900d9939843fd58e152222c314c930f2ef0b495138fe8",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "ELYSION",
+      "family": "NATIVE_LLM_PROJECT",
+      "status": "PASS",
+      "parent_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "52d49a9114315665e4015783a9c3e3cb354de71bea0f87f471f593b6580d7aa0",
+      "new_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "2bde92107999a4f30a5872fff01b0121e054062116c0c2fade6e60ee23dca171",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "ELYRA",
+      "family": "SIMULATION_ACTION",
+      "status": "PASS",
+      "parent_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "330356a6e8b83dc5fe3b3fd6b81d7d4a98f6354bd83a2955105e9e7398727f48",
+      "new_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "bc2dc452c5e338412a2ffb0eb8247ca1cc0a8424b2b751ccc94a6462a5f9c515",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "family": "GREEK_OPENING",
+      "status": "PASS",
+      "parent_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "c0bde4f37113b74f8ebd29cfd07cd2e624715ff14f336a543255d445f41728c8",
+      "new_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "d8af0d898007629dbf67b0266e6678f6d418d6877fe253989c1267b14b22424b",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "family": "GREEK_AGGREGATION",
+      "status": "PASS",
+      "parent_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "8821e287e680b519c482ea96345c6cf2829e13962c7d8d1958713be652dc0611",
+      "new_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "0d5be55e30d1a803846eb012aba3025263156ed89676f08592765df5270c5296",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "family": "GREEK_CLOSURE",
+      "status": "PASS",
+      "parent_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+      "parent_sha256": "7b37ca3e80d3dd6c7e33e59f7d6a269a1292cabe7ac0b593dacdd571be706e5f",
+      "new_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997393013.json",
+      "new_sha256": "6ad1d7209ccd1c006a1239fd2a4f5ff5713978ae3a4338b3537d40293621336e",
+      "rollback_read": "PASS",
+      "parent_unchanged_after_new_write": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "summary": {
+    "sample": 7,
+    "passed": 7,
+    "failed": 0
+  }
+}
