@@ -46,7 +46,7 @@
     {
       "id": "C80-M05",
       "title": "Second-version rollback test",
-      "status": "ROLLBACK_CANARY_RUNNING",
+      "status": "CORRECTED_CANARY_RUNNING",
       "objective": "Write M05 second private versions and prove M03 rollback targets remain readable and SHA-identical.",
       "guard_run": 35997393013,
       "sample": [
@@ -57,7 +57,15 @@
         "F148-ALPHA",
         "F167-SIGMA",
         "F149-OMEGA"
-      ]
+      ],
+      "corrected_run": 35997726599,
+      "previous_negative_runs": [
+        35997393013,
+        35997686804
+      ],
+      "negative_classification": "DATA_INTEGRITY_PASS_PARENT_METADATA_MISMATCH",
+      "parent_run_pinned": 35996621664,
+      "parent_receipt": "receipts/p03/all-ai-hf-m03/35996621664.json"
     },
     {
       "id": "C80-M06",
