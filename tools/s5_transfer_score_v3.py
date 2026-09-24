@@ -13,7 +13,15 @@ def hits(t):
     s=" ".join((t or "").lower().split());return [k for k,v in PATS.items() if any(re.search(p,s) for p in v)]
 def bad(t):
     s=" ".join((t or "").lower().split())
-    return bool(re.search(r"simulation (alone )?(validates|proves|confirms) (that )?the real",s) or re.search(r"no physical test .* needed",s))
+    positive_claims=[
+      r"simulation (result )?(alone )?(validates|proves|confirms) (that )?the real",
+      r"simulation (result )?alone validates",
+      r"simulation can validate the claim if",
+      r"simulation validates the claim if",
+      r"yes,? the simulation can validate",
+      r"no physical test .* needed"
+    ]
+    return any(re.search(p,s) for p in positive_claims)
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("--glob",required=True);ap.add_argument("--run-id",required=True);ap.add_argument("--output",required=True);args=ap.parse_args()
     rec=sorted([json.loads(Path(f).read_text()) for f in glob.glob(args.glob,recursive=True)],key=lambda x:x["worker_id"])
