@@ -48,5 +48,28 @@
     "native_ai_default_repo": "cerebron-omega/cerebron-private-memory",
     "training_asset_repo": "cerebron-omega/cerebron-sigma-memory",
     "rule": "PER_AI_NAMESPACE_SHARED_BACKEND_NO_BLIND_CROSS_COPY"
-  }
+  },
+  "pending_native_ai": [
+    {
+      "ai_id": "SAELION",
+      "farm_id": 147
+    },
+    {
+      "ai_id": "ALPHA",
+      "farm_id": 148
+    },
+    {
+      "ai_id": "OMEGA",
+      "farm_id": 149
+    },
+    {
+      "ai_id": "DELTA",
+      "farm_id": 150
+    },
+    {
+      "ai_id": "NEXUS",
+      "farm_id": 151
+    }
+  ],
+  "pending_rule": "NOT_INCLUDED_IN applies_to UNTIL ACTIVATION GATES PASS"
 }
