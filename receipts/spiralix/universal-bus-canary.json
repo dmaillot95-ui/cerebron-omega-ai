@@ -1,0 +1,2144 @@
+{
+  "schema": "CEREBRON_SPIRALIX_UNIVERSAL_BUS_CANARY_V1",
+  "status": "PASS",
+  "active_endpoints_tested": 304,
+  "prep_only_endpoints": 8,
+  "logical_ai": 39,
+  "available_ai": 38,
+  "slots_per_ai": 8,
+  "agora": "PASS",
+  "forum": "CONTRACT_REQUIRED",
+  "burst20": "CONTRACT_REQUIRED",
+  "lossless_json_payload_roundtrip": "PASS",
+  "results": [
+    {
+      "endpoint_id": "CEREBRON:A0_CHIEF",
+      "envelope_id": "32c9591e7920ded1134c300acd4c65254d3896fce321c4c2ae8c28e54597631d",
+      "payload_sha256": "6afe8a1120bd14a8060efa521677992bcabdac33d05bd49280f37790f545c31d",
+      "glyph_expression": "Ω⟦CEREBRON:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A1_EXPLORER",
+      "envelope_id": "2ce17f4ccba097be6c7bfbefd48e75ebad08c470314d237c8296d0f779e5c6e3",
+      "payload_sha256": "9c83622a2bb431a9783eed54704948a86210409bde43073ab5108b3660cb09a1",
+      "glyph_expression": "Ω⟦CEREBRON:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A2_ANALYST",
+      "envelope_id": "f3d3157e31895290d2d86ac460dce017e48994b26a45fd490b24ad24177c3ab9",
+      "payload_sha256": "4ebc05b8fd09df2ea5f13052a3902179f3c39e2c17b9fa2446c037c908631dad",
+      "glyph_expression": "Ω⟦CEREBRON:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A3_EXECUTOR",
+      "envelope_id": "4113a4d59ba05f278319060954007c01aaa4314e3abebe0a056d48878eb432b1",
+      "payload_sha256": "139405edbd14647c0226230a5be88bbe07fa561e01db89bd4467e2e78693a2e0",
+      "glyph_expression": "Ω⟦CEREBRON:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A4_AUDITOR",
+      "envelope_id": "ac4c4d84f50cb8366acc8c186015a94bd4773c62e4f4174c4618423179e32a99",
+      "payload_sha256": "52e1f51f3e0501ac7ff418772728ec7f694ad6617b9f089a77e207b8da224b81",
+      "glyph_expression": "Ω⟦CEREBRON:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A5_COUNTER_AUDITOR",
+      "envelope_id": "9ddfe146e30bbabe23178a4dbb2ead8887c124628bfffc627d0c4d90af43a144",
+      "payload_sha256": "f401866fecaeaa49c8d51d3c0a1c4b5b6260a0491cf346f9cad17392a6bf207a",
+      "glyph_expression": "Ω⟦CEREBRON:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A6_MEMORY_KEEPER",
+      "envelope_id": "95e1fd3a792939e1b1fc01ff669de0d0af0750b27d0633fa6b8a7aa04a9b29ea",
+      "payload_sha256": "3e74fefeb027faa7491090797586e6566acf2cda4575e43f93b0ea2e45f150b3",
+      "glyph_expression": "Ω⟦CEREBRON:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "CEREBRON:A7_SYNTHESIZER",
+      "envelope_id": "eefe160ae93ca8a2660d426462c06a58d41d5355f73afb78c10507308610727f",
+      "payload_sha256": "e648f069c4f3e03742f6201fe30c5c3ac64fc746d24a37c69ccef12477d47e69",
+      "glyph_expression": "Ω⟦CEREBRON:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A0_CHIEF",
+      "envelope_id": "954fb69147396dcc8c67c491412ff562529d7d6d38d7a0c9124dc0300fbabf48",
+      "payload_sha256": "7b504cab8c3490bd38bc50850c895b6a177a4e03f472bca237b6f4bdd16b4a53",
+      "glyph_expression": "Ω⟦SAPHEA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A1_EXPLORER",
+      "envelope_id": "48533009e0dc7844cb2da3edfcff7d8ee9e2f364462758bb21dbf5548c15a204",
+      "payload_sha256": "94eb887fcb400daeab11ff62e7d7696e152ad5dabf3bb9568528876dcd167711",
+      "glyph_expression": "Ω⟦SAPHEA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A2_ANALYST",
+      "envelope_id": "98781100453b77c1347f394153f10590f8aef1dc7e912adc3f93d4ffe3acec01",
+      "payload_sha256": "e166072f5481bfb39805c2017d179c5fc5ae3faff602bd477cbac8239f515b5b",
+      "glyph_expression": "Ω⟦SAPHEA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A3_EXECUTOR",
+      "envelope_id": "35d496aa37305ccc0026325a319fafd4eee8f38b00735ba10170b0b7abeead81",
+      "payload_sha256": "fb50c81b3e763e4c703e95a698d7fbde13cde9e8bd7fd81283ccc30ff9148b82",
+      "glyph_expression": "Ω⟦SAPHEA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A4_AUDITOR",
+      "envelope_id": "6373c3b3df534c4a948f7dacee9f9fc0ee900acd6d1ede6b31919f6fefe8cfaa",
+      "payload_sha256": "876224ba4282252d7b8a3868cca5e290cb28eb3dba08babddbe20d7da1631f4f",
+      "glyph_expression": "Ω⟦SAPHEA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A5_COUNTER_AUDITOR",
+      "envelope_id": "18a6c7d1f39c79bd161e35f0d0801744c9aa55a73dd94616bda8c740de9af2d1",
+      "payload_sha256": "d6383248e262d42ce59db1ee5f9b1448270e226203d0a65425f682e26992a2e3",
+      "glyph_expression": "Ω⟦SAPHEA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A6_MEMORY_KEEPER",
+      "envelope_id": "7566663355b1aacd83af18237926bb99ab3e6f34880bf0d77c85b34238e2140c",
+      "payload_sha256": "c60b6b2ae6b60df27b4c52887cdaeb7f0ee7fb52485565e2cea8dfd031463140",
+      "glyph_expression": "Ω⟦SAPHEA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA:A7_SYNTHESIZER",
+      "envelope_id": "5b629f11d9ca03c3f9b5773725376ef665e29913812b778f7358cd606d2fe283",
+      "payload_sha256": "e39fb2b649869a2641ee7b966783247bae2676380d6dded5f1945dcffcb02708",
+      "glyph_expression": "Ω⟦SAPHEA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A0_CHIEF",
+      "envelope_id": "3a8dac5c493e30f5e41571f1eae70fca33753b2a5937e5190dc39ba570c27941",
+      "payload_sha256": "cf4160e91790a5542605026ca1057376f5521fc31b0bc9f50385d73a3170ff85",
+      "glyph_expression": "Ω⟦SPIRALION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A1_EXPLORER",
+      "envelope_id": "cd2b40f248756e86a2caf3d760b8127f8bc8f74954491e8897c790d0dd4e668d",
+      "payload_sha256": "3ca9f4bd24215d1d32ac0fa57acf350ef7833e376aa58ee540ed2fd51333d8a4",
+      "glyph_expression": "Ω⟦SPIRALION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A2_ANALYST",
+      "envelope_id": "fcebffbd1882b26c97917052d7ba7dc6b570fcc475619d6282486fc2ebdad658",
+      "payload_sha256": "5ebc1ee0d48dc3debbd490aabbce87acc0403197b36042d081abb269a66d301c",
+      "glyph_expression": "Ω⟦SPIRALION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A3_EXECUTOR",
+      "envelope_id": "2683908e9749e99f423411096729698eb85b7d2889791e83722702335548a3fa",
+      "payload_sha256": "08246d8e2fa0c4c0a70d75ea9988d37a954dd107ae1d7238f59e3a25b38ac75e",
+      "glyph_expression": "Ω⟦SPIRALION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A4_AUDITOR",
+      "envelope_id": "8d1d22a2d3a97a5a4ed0dafaffb4441133d97230d9edf9c94d09a22a377f6df3",
+      "payload_sha256": "dd75c3e0550cbc64d690cc4193cc020bc4d09b7d0ba7015c59a9e7dca10655e6",
+      "glyph_expression": "Ω⟦SPIRALION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A5_COUNTER_AUDITOR",
+      "envelope_id": "7868f519141f62514e712f564eaafccf8177151f9a5623abf50418731218f65c",
+      "payload_sha256": "5c78b05c51cff2c4fe827511c4ed1f87ecd82037b4b47d949d226d8feccec796",
+      "glyph_expression": "Ω⟦SPIRALION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A6_MEMORY_KEEPER",
+      "envelope_id": "628abeded6489e902984b23e5d14c5e35cb4540da8e23545fce5114becd82c78",
+      "payload_sha256": "90443b5e481162c73802f6e990daf46bd7f3bd68d53e7998a9a23887a146951f",
+      "glyph_expression": "Ω⟦SPIRALION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SPIRALION:A7_SYNTHESIZER",
+      "envelope_id": "29f7954c7b2e00fe95cd66341ab9293cc1d0a4ffcf1e785051baabef09a1522b",
+      "payload_sha256": "fb2827b46d0a51c98ecad1d5757fe8f1702f67f435d3d9856264f891a6e0a1d7",
+      "glyph_expression": "Ω⟦SPIRALION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A0_CHIEF",
+      "envelope_id": "11b69bdf89ecb73a953f9631d8928acab0aecd8ade02125575b705954862b671",
+      "payload_sha256": "c00c877285a5f66ed69c704f607aaf90773a5bf91e46d3f35da43851d55d2872",
+      "glyph_expression": "Ω⟦ETHERION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A1_EXPLORER",
+      "envelope_id": "b34e4439f14e27f8c6fb2108da033f9c529c1c3f1c38c4e5c1acaaa059b39a46",
+      "payload_sha256": "cf62b44a70f3634d21f986e317ac3e66594d67f0aa7b3682ff9ef5b5793e4e53",
+      "glyph_expression": "Ω⟦ETHERION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A2_ANALYST",
+      "envelope_id": "d6838f8297723ac012ea4fc5959276dd45dbd40318c627be3499290bf95dc692",
+      "payload_sha256": "e8efaadde324ba6f9e7f677a7c838fd6987cdd62868cda9ff4dadb7dc2fd3f74",
+      "glyph_expression": "Ω⟦ETHERION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A3_EXECUTOR",
+      "envelope_id": "0db00f13834d601990d01405bb9b41fedd376aae8a126ec7c1a0a9bd9c79996c",
+      "payload_sha256": "2ca608fb035898920d7490e29c476ac823dd0673cf55fd8a256ca69b3f48cb2f",
+      "glyph_expression": "Ω⟦ETHERION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A4_AUDITOR",
+      "envelope_id": "3d03bd4df9cf007a9d926c430e3ae3c1d0539c5a72fc515d3ce5d0a6c5b782b5",
+      "payload_sha256": "1d51364d9e0f62285349286d9879297815bd558c4da426beae2c624e8feeab42",
+      "glyph_expression": "Ω⟦ETHERION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A5_COUNTER_AUDITOR",
+      "envelope_id": "dfa4d5aa601389784517a1e4ef97d4a5351938e17889dcd15e9414c1e14ed01b",
+      "payload_sha256": "747eb8fb7a14e31c35d448a1903a55b6cf12ceb5a88c605d30a20129859d4e07",
+      "glyph_expression": "Ω⟦ETHERION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A6_MEMORY_KEEPER",
+      "envelope_id": "817db645cbdb08c0d09001c25ad5bbfd451d63739c995337fd763bfbfe666c4d",
+      "payload_sha256": "1e46570764df180f770db56edb61c61945b2f0b2b1d5f2b48cfe2fd683fb8268",
+      "glyph_expression": "Ω⟦ETHERION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ETHERION:A7_SYNTHESIZER",
+      "envelope_id": "811dccc478c5e35b62216fa448dc8b9ef4f82e732b864451c1b0cd2d12d928fd",
+      "payload_sha256": "52be7c0dbc013a35b6925891c32803514a1bde8d763d96900f9778d30fe8f0ac",
+      "glyph_expression": "Ω⟦ETHERION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A0_CHIEF",
+      "envelope_id": "5455a8979519219410e3c4a9f93cc79a710d2526c39a8f160d7c62a46d65e190",
+      "payload_sha256": "fc734196136fb2eae77a3e0ed5be40e3c3360c0bb4110f98d147e3bc744305d2",
+      "glyph_expression": "Ω⟦HYPERION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A1_EXPLORER",
+      "envelope_id": "d6d909bd112d7673a5c120e9b0dc35ce33a1ee4074a848907d4da72770b41af7",
+      "payload_sha256": "6b128760203e1f1d22ec6347fc4ef5099df45423b614ac6002abbcd4b4e4fcce",
+      "glyph_expression": "Ω⟦HYPERION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A2_ANALYST",
+      "envelope_id": "49429405410c265c05714a6400da90d0a8a37a951e973b5bbd76b7e2705d8337",
+      "payload_sha256": "bdebedcaccedd160e21f0d057b6c8a1714611fbee9248de13a4bde27d656b8e3",
+      "glyph_expression": "Ω⟦HYPERION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A3_EXECUTOR",
+      "envelope_id": "7d2940662f4363e2776084ab67d0240d1a521e3c6e70d3bee4867c2247230796",
+      "payload_sha256": "439983784a3cd6c237630cab5e3248ceb61d135736301d21eadd5506d244d9b3",
+      "glyph_expression": "Ω⟦HYPERION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A4_AUDITOR",
+      "envelope_id": "5381cd968d88ab3263cc9deced0b979d96296f8030cc6c569c215f232ccb2542",
+      "payload_sha256": "2d4b9d5c38ba0d4d8e7b1ed0f4814a72c88f5a20dab17218becae3ecff20ed0a",
+      "glyph_expression": "Ω⟦HYPERION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A5_COUNTER_AUDITOR",
+      "envelope_id": "748303e3ccbf0198b9bd8df9b57a578639c30cb138d294741224acfd3ae98035",
+      "payload_sha256": "e7990c2261853b6b11247fea71076cdec6eab61aae995eac07d1c3586a79daba",
+      "glyph_expression": "Ω⟦HYPERION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A6_MEMORY_KEEPER",
+      "envelope_id": "7e499304af6a183aa7ad92a75df0318cae6d7ff3737fd2539e186962a0a68f52",
+      "payload_sha256": "0598ed33b25880f2f51183729fa64f54f2f133429a1d6f6ccb8a84f73366b3f0",
+      "glyph_expression": "Ω⟦HYPERION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "HYPERION:A7_SYNTHESIZER",
+      "envelope_id": "a7cbf6dbe6fe7ae62f49eaf92b88f02ad2f249e5a4904179f7b6b72cc6511cea",
+      "payload_sha256": "255883f59f2a4c27f6dd254a2567bd3167e9e888f08be83a87415493ddb43b89",
+      "glyph_expression": "Ω⟦HYPERION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A0_CHIEF",
+      "envelope_id": "57b0b934d7b53b63d49f7aa188ca1eb0c2d2998aadd8348dcc4a7292c41da289",
+      "payload_sha256": "bd7fc1eeab39300befee6ec1025b75a571f321a4092245a488b641d5d8c353ec",
+      "glyph_expression": "Ω⟦ASTRION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A1_EXPLORER",
+      "envelope_id": "9a09bd4b00751760e295bd9b41bbea943ff2fab5a98801cfe0d1a13df03ee094",
+      "payload_sha256": "d0297db9269d39c964df0f8b80efb98aaa5ce7f7f661986f9823446f27da3b62",
+      "glyph_expression": "Ω⟦ASTRION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A2_ANALYST",
+      "envelope_id": "1937bc60aedcc4aa7629541b6939df0fa4ca152885fe956bab45adf6ed9ca9c5",
+      "payload_sha256": "fe4f69d1b450b593cda1062908e01dc37201c3c0e170acc2b484a28731d72cde",
+      "glyph_expression": "Ω⟦ASTRION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A3_EXECUTOR",
+      "envelope_id": "b0b869563bd884edb457d049535553244ac12b38c0bd4bbfde74a31b80b4714f",
+      "payload_sha256": "4fded9e4779f06554bf0565175e0b3e5536e63b35dca613dd3369cb55d46ac93",
+      "glyph_expression": "Ω⟦ASTRION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A4_AUDITOR",
+      "envelope_id": "7583587c9981a55c7b1474cc38537463ed9c2d302b4a8b176589b6a1c8a87b69",
+      "payload_sha256": "630d6199850dd4285cad93cdfde7a001b31f4cd6a84198d2d95c41ff6cc093ad",
+      "glyph_expression": "Ω⟦ASTRION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A5_COUNTER_AUDITOR",
+      "envelope_id": "3cd3102426b7885bc73b29856253e50026a9da4404e0c8bdf6778eee5725af36",
+      "payload_sha256": "1955e281052a851075661a17183589907c51ea0228f4230084d126aba971c1de",
+      "glyph_expression": "Ω⟦ASTRION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A6_MEMORY_KEEPER",
+      "envelope_id": "854dd1999d1b4f97788f2dd5a529694723ec39c3c8142ce1d725ffede52135ba",
+      "payload_sha256": "e3ee03a4f7d5440a903b2e18f79c89137b9202ac2cbc62547e58ac402feb288b",
+      "glyph_expression": "Ω⟦ASTRION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ASTRION:A7_SYNTHESIZER",
+      "envelope_id": "f54134cbdd4d25fe14c2f1837471d1fe3aa30129fc663f7c2e6dab93568969af",
+      "payload_sha256": "88255ad1e0eded9ed436f3345f4a73a9f23f1d6f366b3766812da609d9e33ad9",
+      "glyph_expression": "Ω⟦ASTRION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A0_CHIEF",
+      "envelope_id": "c6fb0ab5ecbf1fa16a4c2b7d607adc1ceb2be1dda73b3487cbb80026bdc9712a",
+      "payload_sha256": "3ed59aea471cbb4e714390f89bfb00eb90f738df2c6655ae287913ea9144e3b4",
+      "glyph_expression": "Ω⟦METRION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A1_EXPLORER",
+      "envelope_id": "0725170eeb082d1f8dfaf83619c693ec9367439a24b5ee55eb38fad0d76ecd4a",
+      "payload_sha256": "8e2345f8814dd0e60714b38cb069df65f5de0e0c3676eb6c814b5af0f2d23730",
+      "glyph_expression": "Ω⟦METRION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A2_ANALYST",
+      "envelope_id": "2323e5e8f1c6aa9b59e80fc7302df42eb6b07cc1fc27aa552898c83198fec8ec",
+      "payload_sha256": "bf44263b9d38a82175de2525edad2104b534f93de1b2b7db75815c1384e8c748",
+      "glyph_expression": "Ω⟦METRION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A3_EXECUTOR",
+      "envelope_id": "dbd5479afaec121dc6850475633440109550bc4eeab5aa06ac704ee627656b10",
+      "payload_sha256": "1b5624bcaf895d6ce6984325052c3dacd3546608943820312f2f9ef847a30414",
+      "glyph_expression": "Ω⟦METRION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A4_AUDITOR",
+      "envelope_id": "adcdf3a6091674faab4f5e83713b436f0099920332199f17b008f182aa216f16",
+      "payload_sha256": "344c02ca1bbbfa4d9e6512409fc9e16f9b6283c4c1ec61b79ae55f5f6f876ea5",
+      "glyph_expression": "Ω⟦METRION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A5_COUNTER_AUDITOR",
+      "envelope_id": "f994af50929ef82f816470127602421504ba1c5ded4db1296c6bf563039fbceb",
+      "payload_sha256": "31cecf004779dbfd8955f8be45a67a77f44fff6bdc39ae89a4274c56908c23eb",
+      "glyph_expression": "Ω⟦METRION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A6_MEMORY_KEEPER",
+      "envelope_id": "056c890c0c4d8314b6a4aa35ae8808f2b2e1b8ad4ddafd08633b4e59db6d29f6",
+      "payload_sha256": "0dd9156a01664c24cfb9b549404e332da6ef16831aa7f3d036523df5c94fcf9b",
+      "glyph_expression": "Ω⟦METRION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "METRION:A7_SYNTHESIZER",
+      "envelope_id": "53db73d58c94f9a436d9d4bbaf2b30797039a8654821ec47592f9cf8917095a9",
+      "payload_sha256": "dd9dd566d9912e37a64ec66979cda5e0180aff7625fc94fe6317d17fe09529c7",
+      "glyph_expression": "Ω⟦METRION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A0_CHIEF",
+      "envelope_id": "6dcefb6c700ab00ba8f94ed24bc9ebd06a004426dbb03ed2a0cd870a20e82766",
+      "payload_sha256": "740096a1cc25f38e258c9694d5bfdcc6cf8fb43fc449b99c3bf467015ae35e3b",
+      "glyph_expression": "Ω⟦AFAH:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A1_EXPLORER",
+      "envelope_id": "22b04f91fa7980a40e9488ff9cae2d81673a911ae33777566c8d46feacdedae5",
+      "payload_sha256": "90494d926d9d31688c1f5d7075800e024786fe90d567ece27f52015dd35077c2",
+      "glyph_expression": "Ω⟦AFAH:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A2_ANALYST",
+      "envelope_id": "827b3a7a48dbd692ebc72118bccb50c10345da6ea97cad0c3289e6c794318a4e",
+      "payload_sha256": "907b6147a846047bec4feb4c160c24fe56a877b34e4dfcf877516cb87e422bab",
+      "glyph_expression": "Ω⟦AFAH:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A3_EXECUTOR",
+      "envelope_id": "91f76cfbd94249f7118325f8ced33e1d04345bb634ae900979c29c29c8b73327",
+      "payload_sha256": "c9842c5a04224e6c406dbc4efc6efca09dd7b7841c47346c12a2c859d4f06f1e",
+      "glyph_expression": "Ω⟦AFAH:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A4_AUDITOR",
+      "envelope_id": "fe7e2c0cdc9c66c18e0c89abb1c143226d160f6e4f8acbd1d76cb1b0b61df213",
+      "payload_sha256": "c145e7b10e899c1290d900be2c54fadd34416b9c6cfba98b1895b2ca229920b6",
+      "glyph_expression": "Ω⟦AFAH:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A5_COUNTER_AUDITOR",
+      "envelope_id": "1bdf3fdd65ed0281a9ce35732aa4865c8049289c2ea0de68e13563f0e006bcaf",
+      "payload_sha256": "16fefa2efc0d097d15a5a5c81cdc377d4165f8f3829bd8677e33c2b70662877e",
+      "glyph_expression": "Ω⟦AFAH:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A6_MEMORY_KEEPER",
+      "envelope_id": "dc53a66bbc89be82dfc0b2d61635cb1ac993a416fafb25906c4af59f23d648c2",
+      "payload_sha256": "7c172fee765e81e7ec4c3cd506ffaa7e56c5e39fcb09ad27e24d0e78e09b5e0c",
+      "glyph_expression": "Ω⟦AFAH:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AFAH:A7_SYNTHESIZER",
+      "envelope_id": "ac8f5769c9c28bbc0cbdaacc322183c20cb5260f1379633385e3b0c25e6ede26",
+      "payload_sha256": "4764d9ef5b1bdf0c6c424c2ca6a0bdd62ff879627b70772b040a3e0f711aa513",
+      "glyph_expression": "Ω⟦AFAH:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A0_CHIEF",
+      "envelope_id": "767b47c3a2d370e2d8e4ea72953c7d42bd1d553fc660c72cfcb7bb30befeab1f",
+      "payload_sha256": "34443287159c190738e9fec9220c198055dd0f96c1757e2085dd457a2a895216",
+      "glyph_expression": "Ω⟦AELYS:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A1_EXPLORER",
+      "envelope_id": "6885ad7689ca4d8412b7819a987a8fcfb2cba0c55c1b7e01db9ec0e4aa667a40",
+      "payload_sha256": "ae2ecf7f21ae3af49f41daa306b08df51f25f60b1253781317cb7ac84e1c4261",
+      "glyph_expression": "Ω⟦AELYS:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A2_ANALYST",
+      "envelope_id": "45af76b453f6de6cfa5cea20254abb934e4dca2b9fcfe93ade2faddf976f0a53",
+      "payload_sha256": "d66b3014f04061df6f5c3e23c582c89431ae10fe59d444c22763a859b7ffd543",
+      "glyph_expression": "Ω⟦AELYS:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A3_EXECUTOR",
+      "envelope_id": "b759f082f0fcab7c599bfc0ed01d227f6c38bbdd02d6f380b637de1dcfdef6ad",
+      "payload_sha256": "b1c98cf004be97f776623dd7a9990ef681ffcb60855b7e9b550473863ce990fb",
+      "glyph_expression": "Ω⟦AELYS:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A4_AUDITOR",
+      "envelope_id": "a91189dad7964e2b5387e38fe601abbaffb0510ed074a639f4ba4d695aa2cb54",
+      "payload_sha256": "381ec02fdf930b7cee155d2a10cf770de9eaeeb057206e548b3b055940352c2e",
+      "glyph_expression": "Ω⟦AELYS:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A5_COUNTER_AUDITOR",
+      "envelope_id": "3c356a3afa1131f30db3f05d1e2d5648c81e8ee6c59f884effb1c11220685d1c",
+      "payload_sha256": "10f0e41b99cc30b7238e51604a8afa3d76c712299e52168615f988eaee6917f5",
+      "glyph_expression": "Ω⟦AELYS:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A6_MEMORY_KEEPER",
+      "envelope_id": "ecd9694da0ad7d311cd2aaee27a9511bae8e66102544ad14bd34f0ff68e18e30",
+      "payload_sha256": "3a89d18aca60bf08930eef21c11ccb6c85d0d0ad9560006f6f0448acc305b5f0",
+      "glyph_expression": "Ω⟦AELYS:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "AELYS:A7_SYNTHESIZER",
+      "envelope_id": "0c15f431fa22db6ddf7b080c9afa8cb208d4bc33384684c11b70d511bd2f9d0c",
+      "payload_sha256": "04e268e1135c93efa730810d8e796b2a577824d38b1a21fb4308e9959fe75686",
+      "glyph_expression": "Ω⟦AELYS:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A0_CHIEF",
+      "envelope_id": "09ef5d0f0156eb8ca60a5273f6258a6a7157c52dc782bd96fce7756bb4f9692a",
+      "payload_sha256": "c4393d09230a6fbc25e231974c0d7163d24d611573720d4288326f86a54db4e5",
+      "glyph_expression": "Ω⟦ELYRA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A1_EXPLORER",
+      "envelope_id": "032b93864bd4fbf7e15edf5fd0a4e6c129565566ba5b49c96c3efece2da52417",
+      "payload_sha256": "929f9af0f07ddb647ce5f80024f37079158ae696ea38af6a129a0775385949de",
+      "glyph_expression": "Ω⟦ELYRA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A2_ANALYST",
+      "envelope_id": "dc46a46bc008de7ede3bd60fa5887c277590ee83bd4437afa64aa46c6b28b675",
+      "payload_sha256": "9f2d75c4466e2edb71e02ede59c55019b9c40852ab0a1ce200d76305cf45943b",
+      "glyph_expression": "Ω⟦ELYRA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A3_EXECUTOR",
+      "envelope_id": "cd26f32163d0416fed5580ba8c96ae97700cbb2dd9f334f99bc25f4115475421",
+      "payload_sha256": "6fdb0b9b17a1856aef72a68034a04cc530e88571df40b881ef8188a51528df33",
+      "glyph_expression": "Ω⟦ELYRA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A4_AUDITOR",
+      "envelope_id": "71b67cf52137c1d268ed95bb8c92b3f195cb5d9841723cd78089f9c4bfdec1ef",
+      "payload_sha256": "1f15da008b0caab381bedc966a51fe83a17c8f6a8e003c1d9e923e1cbb5e1b51",
+      "glyph_expression": "Ω⟦ELYRA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A5_COUNTER_AUDITOR",
+      "envelope_id": "98165ee32c12ce6b7f6b4920fbae0ca78eba936032158f998b51f9e016d68112",
+      "payload_sha256": "037ce01f40e06e9e20029dac29f9d422159373343c7ed34da587a1ad2b3d3648",
+      "glyph_expression": "Ω⟦ELYRA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A6_MEMORY_KEEPER",
+      "envelope_id": "7d65b08fd29f287d94bb591d0bfc0fda48849e1ee74a8c41ebedbc10c5cd0d86",
+      "payload_sha256": "07506a826c10d924c03b5e0acfac9ced0c1b06e56b587ed1bb450b24a423ff08",
+      "glyph_expression": "Ω⟦ELYRA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYRA:A7_SYNTHESIZER",
+      "envelope_id": "8ff31499352b3a41966a26edbf848e8139b4defc15cd113ccb4e1aa63ff4851f",
+      "payload_sha256": "3c0104f5086084ebbb38e3672f4837857c37c2daa02bd89b1b98e48b3f4094e8",
+      "glyph_expression": "Ω⟦ELYRA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A0_CHIEF",
+      "envelope_id": "477542aab6fa98f4f020e35d0d315a62b0b969ade93d160e472903bfd4f228ff",
+      "payload_sha256": "05541b94954c3339d284ffe8f0933a240bc1a9ff7049842f822be939d6ccd52f",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A1_EXPLORER",
+      "envelope_id": "0701c75dd61cbc2ce50761f597931251d2ef52a843736790a9c4ca594512d71b",
+      "payload_sha256": "1a04cda43cf12ec63282141e05c25fb3bc9f549d5058acd4fe1ebd7e303e99cd",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A2_ANALYST",
+      "envelope_id": "d01600244521f2e40e87e417424c6557528ee0abe50e4bd630fe5d9d7aafb116",
+      "payload_sha256": "4f1619c844c8222406ebd23c692fbc81136dd184bd42bfcdaeeaf3d3ab8fbdc8",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A3_EXECUTOR",
+      "envelope_id": "ca1f017a494e752c4907cce27284e38d3e99e2f1454cc07df8bff26db80f8eeb",
+      "payload_sha256": "063ddcf138954251b712074814fb641918ce721ba73f6cf03c24e9379548ae00",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A4_AUDITOR",
+      "envelope_id": "dcb12c936f8e68b7fe5748906555129c99efad39f93edb662c541d860a18a394",
+      "payload_sha256": "8edd61300f7b7dda1ea972f9e43c96e05b5e1496cd7d6b075e0055c112437a04",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A5_COUNTER_AUDITOR",
+      "envelope_id": "7860c647d0c39478bdffa5be60ce25e54283a12e207c3eae36c102eca23c9eb2",
+      "payload_sha256": "3343422e229f19e1964fb6e305cd1b8324934ef1277b82b4387204ba5c242c0c",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A6_MEMORY_KEEPER",
+      "envelope_id": "44537bb729b387906ca15541e6f5c94e31703a77869e89562fe5e1e755c1d92f",
+      "payload_sha256": "ce7b0dbe2fffdc47608afb1bb2521132f40b72af4bd0153609b1f2b8800e6742",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAPHEA_MICRO:A7_SYNTHESIZER",
+      "envelope_id": "af12dd56155dc2e43ab4986b7added457c83a97b73f84f35dcd8bdeb08701644",
+      "payload_sha256": "2ec71439f237659e74a5f41afdd863468cacc43d15b9ddc00a1ed071771c28cd",
+      "glyph_expression": "Ω⟦SAPHEA_MICRO:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A0_CHIEF",
+      "envelope_id": "4373d9ef8d58cdb6774356f9fb643d1ba905146cb6d566abee940520c6eb0e88",
+      "payload_sha256": "9febb70901ed0a01b0dc5ea2ad26a19aa6eaba579848b11f726a4511aacc744e",
+      "glyph_expression": "Ω⟦ELYSION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A1_EXPLORER",
+      "envelope_id": "278b0b692d114d874ff481508899bf1e52e8ca71527aa1c3ae636a591700ca5d",
+      "payload_sha256": "2d06d178f9ae799fe61a90a3373e0b15923245e438b50e2da6233d32195ee912",
+      "glyph_expression": "Ω⟦ELYSION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A2_ANALYST",
+      "envelope_id": "fb04fa8bd4acb6278a939e640d0e60659ea6532bf44fc7595f11eb5177a6f37e",
+      "payload_sha256": "1dcc9de03382f66890cc1b737dfde69ffcd87916310a031fab995288bfa76f40",
+      "glyph_expression": "Ω⟦ELYSION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A3_EXECUTOR",
+      "envelope_id": "8e625a3c928b18dab9f94216450ba8321e22b4915f8ac87b3ca2cdf44a41f252",
+      "payload_sha256": "2e201eda221b6272eef3994e6974ed7e2177fe6bbabb4ed75defe47d8175afe8",
+      "glyph_expression": "Ω⟦ELYSION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A4_AUDITOR",
+      "envelope_id": "024b04b9290d784d4fb2188f9b5c3fe58299f993ad2e5dade7cd9bcc5a423f47",
+      "payload_sha256": "2396377416a09b8aeb1637573abac6ae179d1f7aa046f1dc8dd2293a9cf793f7",
+      "glyph_expression": "Ω⟦ELYSION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A5_COUNTER_AUDITOR",
+      "envelope_id": "fce9e4b2ee70aefc60d9cb881eb4afd92451a4aa671de25b863b57350f454dd8",
+      "payload_sha256": "8ac140941a4e4ac194a29e39ddfea01ff284eb8be61d03b8377bea0e7ef2c5d3",
+      "glyph_expression": "Ω⟦ELYSION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A6_MEMORY_KEEPER",
+      "envelope_id": "eed61e676200ce86c0a3d5057b1b3aed072c4c670125f88a6b832ab2d7d26b53",
+      "payload_sha256": "9a46f4cf520c9340b0b45599d2819ca2b2280585111241ae72f82efef044c14b",
+      "glyph_expression": "Ω⟦ELYSION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSION:A7_SYNTHESIZER",
+      "envelope_id": "e8eabfb1f0508de8d95ad845577d40285e86840d1a8ad615bc8cb114efef11e3",
+      "payload_sha256": "76e37e264a825bb60f3dc6cecf4a028d1d3c63a00ab0fd65e58607977e1f788d",
+      "glyph_expression": "Ω⟦ELYSION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A0_CHIEF",
+      "envelope_id": "3a5bb0ecb448cdafcdec692145e1dfcdf9af1a291d67288efbacf422a123beb9",
+      "payload_sha256": "17a3367a0fad103ff308bb023fb7d3a7c46281153ed832014e644b78ba77af5c",
+      "glyph_expression": "Ω⟦ELYSIUM:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A1_EXPLORER",
+      "envelope_id": "5947e3a9411a97f403b96c40e9e5a0b80d75edcd79559fc729d3347added3f62",
+      "payload_sha256": "9b038ef258d6f6500964614a90ebbaf032c5e66678171236feec90fd490fa10d",
+      "glyph_expression": "Ω⟦ELYSIUM:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A2_ANALYST",
+      "envelope_id": "c807ea473cafb7eaf19f78cac257aade2aa386248f398eadefd73f2337684ad2",
+      "payload_sha256": "08c788b2875525bbcfc3cd73fbf3d87eedf097e1047930de074104567b1378d3",
+      "glyph_expression": "Ω⟦ELYSIUM:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A3_EXECUTOR",
+      "envelope_id": "278a81de0e970c2e733ef3ca5c751720a13530a9f38dc4841739e6e62bd15714",
+      "payload_sha256": "83d71b40f03a8476638ddf495b53a30166a7de105a57b587fffdb3efaca915f4",
+      "glyph_expression": "Ω⟦ELYSIUM:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A4_AUDITOR",
+      "envelope_id": "6ba52c5c614f6053adf8fd6529687c010eb3e3cc4f62883ba63bcff5b1994f58",
+      "payload_sha256": "c8f476cd747b6e7eb94f40de4ad453a4f729de94bb96f97bf62f6018345ebf80",
+      "glyph_expression": "Ω⟦ELYSIUM:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A5_COUNTER_AUDITOR",
+      "envelope_id": "5f79d4fd93362189a92ef78a28bc82315bff63d882466eee0726d4b9f990e3a0",
+      "payload_sha256": "b4dc282af4d53fa19a82224f176a03c22a3b3916d140913837a76c1fefd8f24b",
+      "glyph_expression": "Ω⟦ELYSIUM:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A6_MEMORY_KEEPER",
+      "envelope_id": "0cdc0a3b00d74f6d97fdc3ed1e11d5360e9871f358c8d2f8325b39a24c3b1b67",
+      "payload_sha256": "0e7fecc9c034f8675829da73d354c245210515fdbc090aa588331abaac0722fc",
+      "glyph_expression": "Ω⟦ELYSIUM:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "ELYSIUM:A7_SYNTHESIZER",
+      "envelope_id": "32201b078bab01db852ef34a82727e051a2c488761dde238f941b466956b31cd",
+      "payload_sha256": "902b317ac34d400b9307a80fa31712501cc22fa294903f445c673432c1258a14",
+      "glyph_expression": "Ω⟦ELYSIUM:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A0_CHIEF",
+      "envelope_id": "fc68e0237b5d50b2ba4f64c95d867406917f50a6106fae8eb4a2c785fa14911e",
+      "payload_sha256": "edbebfa638c743bc19590093a1f8f045c6f77c9ac0ac2c1fb2c1dd0239618632",
+      "glyph_expression": "Ω⟦SAELION:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A1_EXPLORER",
+      "envelope_id": "baca63049493462c1d636ded1a33b46bd08324b54af6e09c4b7458dd174f7f67",
+      "payload_sha256": "84868ae89e3a2c30580166b6866fd991df1aaa7b290eec8969741b2e2b4c57a7",
+      "glyph_expression": "Ω⟦SAELION:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A2_ANALYST",
+      "envelope_id": "75362a45a6b865306d3755b1880f4a54e0b9c250bb6b42d6a3b58afb4eae1338",
+      "payload_sha256": "44b22351e989b4c640193ab6788e8f3c06538cb9cd9c5308e70971517f633ad1",
+      "glyph_expression": "Ω⟦SAELION:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A3_EXECUTOR",
+      "envelope_id": "3a34e696905b05528efe709a8f42a95f61e37e265ea271326b6363d14e7f7d06",
+      "payload_sha256": "87347fe203870d9fe7704320eacb942565f46651f86a954a360a8292a45bcb90",
+      "glyph_expression": "Ω⟦SAELION:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A4_AUDITOR",
+      "envelope_id": "a9ed16894ada6a4048d7dd4385f99488edfc3ff0e464814490a7a2e10c57747d",
+      "payload_sha256": "ffa732173a7bf04e30ca8c973d17ad573f1d605450026f1f2a61b682c4045756",
+      "glyph_expression": "Ω⟦SAELION:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A5_COUNTER_AUDITOR",
+      "envelope_id": "f26d29ff50735baf86a66afdfbc51bccfce151efa54983bab63a8c99da46907f",
+      "payload_sha256": "e656c95913e87525e7e3cc8c5c8226474693ec4bbfcab0939316433b369d48b7",
+      "glyph_expression": "Ω⟦SAELION:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A6_MEMORY_KEEPER",
+      "envelope_id": "f3ea391998ccd7e77bdf7ac3f1f969f3df01a3fffdf48cb34835f3508201748b",
+      "payload_sha256": "297955db3e2bc4b9a4b7e53d19d199c079707b827b9c72a358047b30168ffb4c",
+      "glyph_expression": "Ω⟦SAELION:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "SAELION:A7_SYNTHESIZER",
+      "envelope_id": "cbdbb2c100bc0d51ac297c015225a3e29c01e1fc146e930fce37f157a6d62562",
+      "payload_sha256": "6db955c527047b15f4c58b1ac1936307ecf6003f6aa6089bdd1385262d9b28d8",
+      "glyph_expression": "Ω⟦SAELION:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A0_CHIEF",
+      "envelope_id": "0f90a33a8a9116b4b5248edb40616cf27fe1fad39eed3a2fdfa592fb96c97aad",
+      "payload_sha256": "0bc2cf9e567306fdec7a52c6d1e6f8a7f65aa80083517435354b91497b4d2e19",
+      "glyph_expression": "Ω⟦NEXUS:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A1_EXPLORER",
+      "envelope_id": "f8511497fbe3d0cb7270b725919f0025ba02bcbb286d2a87e68a28a79c9efa3e",
+      "payload_sha256": "215c7e8f5dd0e63c74bd3271a63e8a9e4a69958c9dc2d2b0a32a039bff6f3839",
+      "glyph_expression": "Ω⟦NEXUS:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A2_ANALYST",
+      "envelope_id": "525cd7c8ff22a29cba17d1ec605220d232c51fc12d59102ab4901ecacd9c4e5b",
+      "payload_sha256": "44741dbb70c22e6bb5056aef6a2d1ed2e5b8c307ebb5f4a8042813f554607a9e",
+      "glyph_expression": "Ω⟦NEXUS:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A3_EXECUTOR",
+      "envelope_id": "a141423ec3ae1960b0ae86add10992c5a482f71eddb2e2b305a7407d0bed1871",
+      "payload_sha256": "9ffd446061fc9875e020fa85e5e4add040bd740d00f79f56cf6119142f16e18d",
+      "glyph_expression": "Ω⟦NEXUS:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A4_AUDITOR",
+      "envelope_id": "3d58b21625803a606b902530aa878db631b2f65c9f03fed3de758308b5c535af",
+      "payload_sha256": "6dbf4a707c8c209e3e136f444700770c957e4b69ea00656cc68dd8cd4aa09875",
+      "glyph_expression": "Ω⟦NEXUS:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A5_COUNTER_AUDITOR",
+      "envelope_id": "df7c85d9715d1f8e607b5cb08fdd66889afd74054546058ba497c7a7d63ae39d",
+      "payload_sha256": "b8aa25ea2e5511e6bf7fd7fb9d81861c1781d462ad4e7bc987e3dbae7dba87fd",
+      "glyph_expression": "Ω⟦NEXUS:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A6_MEMORY_KEEPER",
+      "envelope_id": "dd92f9843c28a1cfabc19d04aea9821dbc5aa1ab999391e694047a0081a88493",
+      "payload_sha256": "b7b0b4800009bfd0d009bd5df319c6731f0d5c9fadff9c7f406bc7a89653f7b8",
+      "glyph_expression": "Ω⟦NEXUS:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "NEXUS:A7_SYNTHESIZER",
+      "envelope_id": "ae839059a84d6dcd2104d0eb2d072676cbcd576a3fd15b292c0b114c49f7fc67",
+      "payload_sha256": "8779353b11d47c23a0fde6aee5f506b631cdd121589cca276947ca5d10dc45f5",
+      "glyph_expression": "Ω⟦NEXUS:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A0_CHIEF",
+      "envelope_id": "898ea1f68b17c8e919ac642fc70df8b7de1de50fe44bf23f2479255cc8078f7f",
+      "payload_sha256": "05968c255309a330a3f4857d2e29577fee706596035b8e8d61a4a4720c164403",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A1_EXPLORER",
+      "envelope_id": "64be4e8467c9e66be746e118aceb515d35f128bb33b91ab6513357a0da37a6d8",
+      "payload_sha256": "8cf756265b25f022cd6dd57fa5c0ebb4e947ef0d5a282e5b5ca2906f52e98bbd",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A2_ANALYST",
+      "envelope_id": "188c26f6847e482f0f8f6e537240cbb8a4c7b135600e6dbaddd21acc120daf94",
+      "payload_sha256": "0b0e82045fdbb867718f24ba07e275c1418d0a83271215f6af0c0467f063e78b",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A3_EXECUTOR",
+      "envelope_id": "fabd61abd5297f1f56e748ddfe24679078165ac64f65f5232e64c537cd68368a",
+      "payload_sha256": "3850926eaf7503cef88f4c41d3c3790cc80440fb9da9242fe1bcb1e6d2698064",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A4_AUDITOR",
+      "envelope_id": "7cbbe7006651fd61e1d0ec679af5a4d420e946cc9acaf4e6f57b18a88ec8f57b",
+      "payload_sha256": "37e6cb29611603727d81160dce4b8bdf6ccf7899853e80be80b7073041ecd284",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A5_COUNTER_AUDITOR",
+      "envelope_id": "787eca6d487070fef3ebf7eba771a5982b7892f0611398bf5d7afe9a51f17c0d",
+      "payload_sha256": "6cf71d17bb59fc1f7c282a6b648873872d6ecf1f376a8346f4b1770d77943dfd",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A6_MEMORY_KEEPER",
+      "envelope_id": "9462859a48dafbdd8ec68019f89300ec8fe6acf4a766a9b5f281173957ae82e8",
+      "payload_sha256": "d02c378eb55f16c632f951815e4f792007dfd797ac0205dd1e11b620d90b99bc",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F148-ALPHA:A7_SYNTHESIZER",
+      "envelope_id": "c92d9b364d4b43ac3b0ac3ce1a24059caa04b6555b4c6dd87d91afad99c6c19c",
+      "payload_sha256": "d68622673b45df55a421c3cc3b8ec593349b8a84e4e515ae84a5070419eafdde",
+      "glyph_expression": "Ω⟦F148-ALPHA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A0_CHIEF",
+      "envelope_id": "6e46915725f50b0c1b66146f53d00abba6e6fd6a5721e1e3e6c6876960034a8d",
+      "payload_sha256": "0e6757aa441f022fb6199b955baeafac3a53e4a3c4039c4f9bf3b43089097200",
+      "glyph_expression": "Ω⟦F152-BETA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A1_EXPLORER",
+      "envelope_id": "edc60c5efb0b97d2ebed10ad7af562a5efcba64580814de30655b529b6d685bf",
+      "payload_sha256": "ec51936bb9acab45414d8ffaab6314aa9f94854373f2ca0534470e76b6366313",
+      "glyph_expression": "Ω⟦F152-BETA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A2_ANALYST",
+      "envelope_id": "caacb99d170a85f432db52907097e5c771de3f9a47f4aa70a36044b821d43acc",
+      "payload_sha256": "c3c5d5718eeb4a4817766d9d0498b9521176e32b10587a808cef8b729b4ed900",
+      "glyph_expression": "Ω⟦F152-BETA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A3_EXECUTOR",
+      "envelope_id": "40f254ef125dc4939a46f75ec571bf42f5458383193c7a63d48449d80915bea6",
+      "payload_sha256": "3490404e6a61e5d0bbf99aae5024f889361781acf75ba6cbfca42bb35e20c87a",
+      "glyph_expression": "Ω⟦F152-BETA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A4_AUDITOR",
+      "envelope_id": "0d72eebb6e05cb3d1dfa93cddfa7ca84f3e15b1f7e18565305f17415a8046fea",
+      "payload_sha256": "7e57c6aaa27caeae3951c37c2fe4d405a8df40af14c9fb86565cc854bd92f66a",
+      "glyph_expression": "Ω⟦F152-BETA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A5_COUNTER_AUDITOR",
+      "envelope_id": "c06122110e56666f239ba3440c29327ea47f7653d5b4e5923c7fb797fe01776f",
+      "payload_sha256": "ea7569542531c3b3a5f0b719680681b95df9c31b7748156c5746f359e4d8f58c",
+      "glyph_expression": "Ω⟦F152-BETA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A6_MEMORY_KEEPER",
+      "envelope_id": "10397dada090a223d67088a852124cce8bc3e178b2749b4f9541991dcac84216",
+      "payload_sha256": "2ceb3479824009237f3e4d339d885a63d9b00af242dc0bbb5dcf38f6832dc27f",
+      "glyph_expression": "Ω⟦F152-BETA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F152-BETA:A7_SYNTHESIZER",
+      "envelope_id": "df6936dd4124d6a4ad4bb5c1e2cae167aa225832522302eb712a58cac21ee3f1",
+      "payload_sha256": "5cc3c346d3d2813d52b768a3fbe3a337e235afc2bc8ecd401684e97c521f57d9",
+      "glyph_expression": "Ω⟦F152-BETA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A0_CHIEF",
+      "envelope_id": "17ef72ac5c9141d09469f605938960013f24bfc5992449cd4c27620ff803c8fb",
+      "payload_sha256": "d98cf9f3b0ff1a32353162531ce504e2c97dfabfdcb21e5cac4224419e67dff6",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A1_EXPLORER",
+      "envelope_id": "da25ea58941742371bd4e85991d6f0499a359d26adc42ab986231aae77b17852",
+      "payload_sha256": "d8665f9a20a378053d5d05804e8776994e0720207d6fb28feccef3cdaf7384f7",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A2_ANALYST",
+      "envelope_id": "c28fe41e575b91be589d3cc69e8e9390caf0bd0f84ccf221aca2de5d7909d9f8",
+      "payload_sha256": "261b34ba00950d0bdaf1866a48fde28522f6c6642197d3b40bd983aa465b21e0",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A3_EXECUTOR",
+      "envelope_id": "bea43e6548d98f1ff280636f91206333820d69d1d55ba3a3f13547e37062b581",
+      "payload_sha256": "ab04759569040538af06214c203f4332d22ddf29d0a7180c57b05ed5bf5c4de3",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A4_AUDITOR",
+      "envelope_id": "5b859abe809d7a424a66ceedbbed1be81deb35eb895c324eef3df309cc2fe28f",
+      "payload_sha256": "f64749b7932f67b81977f7f52b02f8478e90d57e5195effd70478f81317c0339",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A5_COUNTER_AUDITOR",
+      "envelope_id": "8cca803503493821447723b696b0ee8749793ff12685d3e832997d5928d62236",
+      "payload_sha256": "b308ddf17a1bbdd4c5d75fc77571f6599a9ef1f696fc7e08f5f183d7c16205a2",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A6_MEMORY_KEEPER",
+      "envelope_id": "89847ee59608cfd9440a98a27a2268cb43bca770355d9c8c789c3956a701dfa9",
+      "payload_sha256": "c39b4ad033f428653023eba768b7ea4539998ee7e06e01c7e714fecc90740744",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F153-GAMMA:A7_SYNTHESIZER",
+      "envelope_id": "aa1582e004eb2f7a3a822153591dc4eebbc58f91a61b168603be8679219fcf12",
+      "payload_sha256": "b6cdbbf1072a2ec550bfbba9c2fed787675a5ce3764c03f2f1d1b5e81fe3f3ef",
+      "glyph_expression": "Ω⟦F153-GAMMA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A0_CHIEF",
+      "envelope_id": "ad2e65b5e194355165a11c51d7db07a62b56111fe7f989a5f1e7c44535a249ce",
+      "payload_sha256": "7a6c64496b537d4d2f151666f36b91d5a36255fb36090ac5a21e2bd01b94a7a3",
+      "glyph_expression": "Ω⟦F150-DELTA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A1_EXPLORER",
+      "envelope_id": "731d0c22d6329ed41b92077c18a53eb64bf324b6c54be62c763dfa1a2777ba19",
+      "payload_sha256": "890ec21b7ed39ab62ad81088ec1bca8a595462ccdabf56ae1074fb31bb12b7ea",
+      "glyph_expression": "Ω⟦F150-DELTA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A2_ANALYST",
+      "envelope_id": "426fd6f2c91d354f0405fd40c82ec70426153d3dcb2ff01f45ef5c70a1e13d82",
+      "payload_sha256": "3d5d535c5303276fc5395bdf4e0b01f74b201db00c17cd724594c5a7f093c6d1",
+      "glyph_expression": "Ω⟦F150-DELTA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A3_EXECUTOR",
+      "envelope_id": "dc3e4688552928b59372fa4989c169cb7959fec9a7c57d3c6de4a0931cf48978",
+      "payload_sha256": "f4a07abb2d6e7ec13187562ce3d9de177b93c5cbc3d760cbcffd093e2ad32f49",
+      "glyph_expression": "Ω⟦F150-DELTA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A4_AUDITOR",
+      "envelope_id": "22d0ae3d7843aa12f264fab3556ad51ab4b384ec58019151cb3029d704b8ff55",
+      "payload_sha256": "09c21f29c0356ee6eac2117b98101e642d9d7eb5412310ca1c0f13888fd65fd6",
+      "glyph_expression": "Ω⟦F150-DELTA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A5_COUNTER_AUDITOR",
+      "envelope_id": "9b3cffb8c1641b9468d60a51406984fa2c74729f63c03af796dd4fb0c4865694",
+      "payload_sha256": "6ff9901e4e2e0512c44a6d2c12602c2a3ff7e2aa9e996cc22d87eb9bd92415ec",
+      "glyph_expression": "Ω⟦F150-DELTA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A6_MEMORY_KEEPER",
+      "envelope_id": "4107df624d8b9ece5387c34d252f165a5dc78bf430a6a47b1e3a9dd583ba0a0b",
+      "payload_sha256": "ccbb01eb1cb46b2205f3985d7cc07312b82b4ddd82bbdb5df28e486c7bfbafcc",
+      "glyph_expression": "Ω⟦F150-DELTA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F150-DELTA:A7_SYNTHESIZER",
+      "envelope_id": "897136f8479ec63eeaea0d2b717d91074672cf7b721d7a7ff4eac06d39cff5ed",
+      "payload_sha256": "48a95b79a82a4bdcb14bafe8fcc98a2733f3933f599d56eabee7fa005287c618",
+      "glyph_expression": "Ω⟦F150-DELTA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A0_CHIEF",
+      "envelope_id": "c8c1052048bd3aa052f1f247b80e7b5b1ee77153101841246723c8d0d1568c9c",
+      "payload_sha256": "6cd4c2353b0af3c7cf55e8a02d9ede071c64925074e9c175253b1492da481cb3",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A1_EXPLORER",
+      "envelope_id": "610c0cd8b00727a9b87944c8be5ef231ce0c2f4bcb119c4f9a5052f17eb9fb71",
+      "payload_sha256": "909b3dec4b419f6b58c3e0da065ea3422f7c016c6827569fd4695b721c9760d6",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A2_ANALYST",
+      "envelope_id": "a7fb079645053acd2a436e5e1a08a3f7c8a06a765329d5d1b77fb30494c84192",
+      "payload_sha256": "3a52d1a7d6f053143704908c6cb0a9ace0afd6ba7efaca707c9194ded40f78f5",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A3_EXECUTOR",
+      "envelope_id": "c96d24a942a3957cf89f32d310f216b0680fb9439f18b2afd337f38ca4a70b00",
+      "payload_sha256": "0f87801618a533183c7d1c6a55c111086577a270e12c0d34259c5d86c9e76ca1",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A4_AUDITOR",
+      "envelope_id": "b26e4b26078b0a75bb8659262e16bda2966087115ab8853a73285eb569a9f71c",
+      "payload_sha256": "52f48f68120c4d56cf99b3f0e1761b76183558da7cb9c8371d9bc2f9ac826a06",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A5_COUNTER_AUDITOR",
+      "envelope_id": "b173a39f5248ca171b601b1fbbff19bc48e760ef4ed98786ad2f59e457164c0e",
+      "payload_sha256": "0efb8620d7e698172857e902229a32f9029e679f5f697f00e837d9e2c2fa9020",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A6_MEMORY_KEEPER",
+      "envelope_id": "72975f2aca4846360d47b2e28ef56c26392d829974572dab654c4bad1edf420f",
+      "payload_sha256": "dc2f9455fb2170c47bb186d887441d2f91a48af201643739e19df916f1779677",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F154-EPSILON:A7_SYNTHESIZER",
+      "envelope_id": "879e1a3e34500dc816a8f15b351675d2f9b2ab53df1fccfff6ab1a7d65bdae24",
+      "payload_sha256": "c53ac4f8f20de96c241c730bd2b5b7f32727d26b331617c600b366d3e9e3476f",
+      "glyph_expression": "Ω⟦F154-EPSILON:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A0_CHIEF",
+      "envelope_id": "7fe4509cbec45830505f6c23c87f92ded66bf0086674185e81a67e9d3c2c5039",
+      "payload_sha256": "542b994ad2a2b4f4cc7dc023849692ec9067b0db95bcb6dfe132bb5d2e82e7b9",
+      "glyph_expression": "Ω⟦F155-ZETA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A1_EXPLORER",
+      "envelope_id": "b5ade9d86be54b81271969831c9c6554485d77af5b485f7a1ea7996e15be3b2e",
+      "payload_sha256": "2d683589f44695dbafb23b389bad51536f21814fb56ba6f227fa07c4f5bdcd3c",
+      "glyph_expression": "Ω⟦F155-ZETA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A2_ANALYST",
+      "envelope_id": "04aab86d13d37050f6c4ebfe2780f20bde6c112de4c42b7c6c2619a93404617c",
+      "payload_sha256": "2cdb03668274b645294c11c8689512b15981a4c2d4b5969a0bc4f276d4b829fc",
+      "glyph_expression": "Ω⟦F155-ZETA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A3_EXECUTOR",
+      "envelope_id": "656e9315fba620402b1f785b5b65304a7cf83b76ffe6b9df54e0e5e8b6c88409",
+      "payload_sha256": "66f9f98f8842ce5bed974b99a8b7ca63d6d98e3a297137293ea786020c023ae5",
+      "glyph_expression": "Ω⟦F155-ZETA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A4_AUDITOR",
+      "envelope_id": "0c1611d0343f47d6d42602f54aa07bd0c10a0f11fafb48d86d5c692c650a6dd7",
+      "payload_sha256": "09bf6c522e3d1174aa9dc79ab2e1fa2b0a15c23f7fe92524038f883605e932a4",
+      "glyph_expression": "Ω⟦F155-ZETA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A5_COUNTER_AUDITOR",
+      "envelope_id": "5d8a59b0874628cb7f86e551d87e53984753308197134462cc39152ba96e0709",
+      "payload_sha256": "69360e68f2efa232f922f6102d74024e0d843ac15e57faac17fa229de051dbc0",
+      "glyph_expression": "Ω⟦F155-ZETA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A6_MEMORY_KEEPER",
+      "envelope_id": "62d7a1aaffc2bdfd5dcc05bd80b3888459e7e8a211b9572e49de4771167fc1ad",
+      "payload_sha256": "08816ccda6529bbbb06ca64c4fe5aca2acfe1c0ca6493f90d9938596cc9e20a1",
+      "glyph_expression": "Ω⟦F155-ZETA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F155-ZETA:A7_SYNTHESIZER",
+      "envelope_id": "ba4959101d41009a0a7024444abba1b9600de4ef255fd601664224816b50af56",
+      "payload_sha256": "4a12548500d0aa1b2a7a86e7ff75ea0531e0293341cb10bbf431a402e36eae26",
+      "glyph_expression": "Ω⟦F155-ZETA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A0_CHIEF",
+      "envelope_id": "dafabd0eb80a35e0e21b53b176a79a252680211c9b37a29657d42c0d815f7a1e",
+      "payload_sha256": "bd391b7b9decd95e3630653fc6839afb4f9b7bedfc3f02efb40a56bd7da36705",
+      "glyph_expression": "Ω⟦F156-ETA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A1_EXPLORER",
+      "envelope_id": "ff3602ad241601f758d02f94568f1ee9dbcb53bc2d27c4a06054bfbab029bf83",
+      "payload_sha256": "0c9fd4c2d14eba57effce541c37fb70acde68deae0a07f448ce5bc93368edf81",
+      "glyph_expression": "Ω⟦F156-ETA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A2_ANALYST",
+      "envelope_id": "e41a6e288c6617a80f63da65f835db928e9e557c0c021117a495d74275747abd",
+      "payload_sha256": "34d72a9c9f5536ea3fba7d0f9defd9b1cc261c8853c3e2425688811e1332393d",
+      "glyph_expression": "Ω⟦F156-ETA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A3_EXECUTOR",
+      "envelope_id": "edcb9e6dab3de17f108b84c6c70b44a1eb7ee2e956ddcabbfa4af9e37e5220dd",
+      "payload_sha256": "a79d76d41b9ab8641caf0b3393d5a5e470637486f09d98bdcc1ff6b4aa70d079",
+      "glyph_expression": "Ω⟦F156-ETA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A4_AUDITOR",
+      "envelope_id": "f581ffe7306706b5dd62707978d33a61ea4f81692d6259c1ca40ebd2fc6237e1",
+      "payload_sha256": "ff221806c4b73cc23097ea89bb9fa9795fc204886562282e183fe94e3c6d1319",
+      "glyph_expression": "Ω⟦F156-ETA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A5_COUNTER_AUDITOR",
+      "envelope_id": "1780fb6eaa21643bfef8341354f55d56c929f02d5f011156523821c36920a250",
+      "payload_sha256": "72c54c65bbce766dc8726d9b5525a9d3e1a46da84d57795faef1185f0e526f50",
+      "glyph_expression": "Ω⟦F156-ETA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A6_MEMORY_KEEPER",
+      "envelope_id": "e6260bca44ba3435f4b911962ace60ca8cf85b60e90732c8e6ba6dfd8c9a5c19",
+      "payload_sha256": "6547566109df9e487528d25381980afe0d457083b5a9c88060532762b97a6ef2",
+      "glyph_expression": "Ω⟦F156-ETA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F156-ETA:A7_SYNTHESIZER",
+      "envelope_id": "e3c4b687a82f7a99453cc5e28e1e7eac56aa8e681721b8e43ee75adfb1eb4b16",
+      "payload_sha256": "4b5b515f5c542897cc0133975618cad40884aecea38046b6eaada58f666ab46a",
+      "glyph_expression": "Ω⟦F156-ETA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A0_CHIEF",
+      "envelope_id": "00d7cd7496d64a7a4b98f6624d4925d68bfa1582bfb6f7b3c409d019ed3a1567",
+      "payload_sha256": "48f9048d3c28fe251efa1024a8f9e51198848c66c1df9f1d8b36e7196289546d",
+      "glyph_expression": "Ω⟦F157-THETA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A1_EXPLORER",
+      "envelope_id": "1161b3aa42eecefaf1aa1fed2577945961df54e58b9de9e9775d45049baf1a91",
+      "payload_sha256": "f6d19785ed822bd1d65a56bb01e12ca33b0908fb1bfd1254af5643b2ff7eac53",
+      "glyph_expression": "Ω⟦F157-THETA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A2_ANALYST",
+      "envelope_id": "2a4b64b32ee9a7f56708e6572662d5a2af949ca5b8ffefbd374946e4ff4ad2b2",
+      "payload_sha256": "ef9c9d9d344fd0c882cd8fc5d5fdbe716e88004f3fee98275ef775834cf3a535",
+      "glyph_expression": "Ω⟦F157-THETA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A3_EXECUTOR",
+      "envelope_id": "4da90e02e3814f05a1170e1a89e4d0bb4230fa40d01f294f28e64034d502c2e3",
+      "payload_sha256": "c1f659131cd6e95682e7197af9340f2ba4e33d38a98207910415893766222bcc",
+      "glyph_expression": "Ω⟦F157-THETA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A4_AUDITOR",
+      "envelope_id": "1e6c2fde769b2549b0b785232d18fb700b3f4181036b9a07e988ad450cb4caf6",
+      "payload_sha256": "180ba8bd866bc33284e87aaa62d24948b9de8ef87d409af59f120509269bbe93",
+      "glyph_expression": "Ω⟦F157-THETA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A5_COUNTER_AUDITOR",
+      "envelope_id": "f9b717da61e75f8839a784ccd791f7e80c09558d7217fe87b29163486ed3782f",
+      "payload_sha256": "5cedd211ff5eb776fb4e14a71f6ada22ebea315fed5e7bd95e1c11c03618326a",
+      "glyph_expression": "Ω⟦F157-THETA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A6_MEMORY_KEEPER",
+      "envelope_id": "95958484d496581dd1b0c442c475f5a5f128e618be1519a695289dd0746726df",
+      "payload_sha256": "d24b898f5baba19424b5daace881385c0920461b8ff4870925b32b75be7c798c",
+      "glyph_expression": "Ω⟦F157-THETA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F157-THETA:A7_SYNTHESIZER",
+      "envelope_id": "76830f360e348b454da9cc3351aa784cf9f6e1a1f6f873d5b523dfa271990079",
+      "payload_sha256": "f5b5afc0dc940a34e2be553b653ba824611be8cab3f213c73d3709b2d4bdb33b",
+      "glyph_expression": "Ω⟦F157-THETA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A0_CHIEF",
+      "envelope_id": "f19124d08c06d36735668bb17f2f0c80ea4a75586c8d9adaa053671e0a86e842",
+      "payload_sha256": "1c6dc253e675a9bade98f717a26a48a7f51b074fc07a8834c9d1c7edc38d1b98",
+      "glyph_expression": "Ω⟦F158-IOTA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A1_EXPLORER",
+      "envelope_id": "1374dd51a17da811eba88581264570cf1f9137604dbe9dd99c9fd965e2cebe78",
+      "payload_sha256": "b4e90fda94ea213a8ce9b54e50f1f21dc950102d0457bc397bfb8f56f65d3e49",
+      "glyph_expression": "Ω⟦F158-IOTA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A2_ANALYST",
+      "envelope_id": "afae673b120712eb815734adbf3638f40231851341f4113f963fc17badfb0ca7",
+      "payload_sha256": "6c5ca17d63447b691d774d66ea39aa51c457dce05d1c9e72d1171a9fd294bf93",
+      "glyph_expression": "Ω⟦F158-IOTA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A3_EXECUTOR",
+      "envelope_id": "5a2b826324f35c4762d6e5eaf2dbbc115f19f174cb491a4be77abeebf5f906c0",
+      "payload_sha256": "2064817c2225108f2e45c808ac798f2139d8190ea09a2796979ac38f207825aa",
+      "glyph_expression": "Ω⟦F158-IOTA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A4_AUDITOR",
+      "envelope_id": "f31a6d8e7daf9e870fdf33f62f3189a8cb9aa54c7dedb22e4f43ad80c626350d",
+      "payload_sha256": "716e23bbab802eef6af36ff18983311d56f6bac2be74911a8a1f7557293a1932",
+      "glyph_expression": "Ω⟦F158-IOTA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A5_COUNTER_AUDITOR",
+      "envelope_id": "4dcd4bf8e0a91c14d2e540f2fa5e7320e3caf6de653370120daf1293d0fbd21e",
+      "payload_sha256": "aff09e8555250528cef8cc51030a1947d40191b7c8e9b20bd75896c21119be3b",
+      "glyph_expression": "Ω⟦F158-IOTA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A6_MEMORY_KEEPER",
+      "envelope_id": "66f292607a1f7c36ac6238a5b64c989b3168888ce69cacf50a186c696d5f4a25",
+      "payload_sha256": "2a4a68bef46540b31e6471ac1966ea13df9925d7cc7dbff0d4f1c36fc7618ce7",
+      "glyph_expression": "Ω⟦F158-IOTA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F158-IOTA:A7_SYNTHESIZER",
+      "envelope_id": "34c559e86ac3059c72b4d4631b40d22985f8e4807894d85e4ad8e5cf27d83c14",
+      "payload_sha256": "e785871674b10a0860110e7a069192dbf47e346ac73181a3508125fc5e8651a9",
+      "glyph_expression": "Ω⟦F158-IOTA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A0_CHIEF",
+      "envelope_id": "f240cb4e73922f05e64d7243517808863f152546b06dc5bba06088b4a61d195e",
+      "payload_sha256": "f2bcc7772a40e5cec7dab811508f6476d5a844c6882d45a87a363e2c4795935a",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A1_EXPLORER",
+      "envelope_id": "a195d314f848b9f72d1f9cf50833a1797be94757f61b542350c1577744b2f6de",
+      "payload_sha256": "3965bcad5bf18d6753d0b8c4add5c21305b5036e9971905b33248464a1d6dea2",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A2_ANALYST",
+      "envelope_id": "0495876ccea681096b349fcbec8a34b21b9ce5b106f30a0c0720f28da03b70b3",
+      "payload_sha256": "f224a8cad015c473d72ecb61ed23e33d0c72b17364081ddcb9403b565ceb11da",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A3_EXECUTOR",
+      "envelope_id": "ae1a67056571aae5376e89ffae8ba8898c6f9e5cf15742b59a2ce421c9feb336",
+      "payload_sha256": "fc657285fc58c0bd30e79553df42d22806d71e8ae1ff1df4c264216f83716c30",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A4_AUDITOR",
+      "envelope_id": "201e1bc99f5bac03811e48a3069d83a3cea50fee0818a4ca25645813e21c5081",
+      "payload_sha256": "0a6068201dfecee273751247b4e25723da27c822e01415829f4b68534801a5a8",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A5_COUNTER_AUDITOR",
+      "envelope_id": "a08d9a10774600e0f3e6922ad8668d83ea5056d83b209f7a0b697ce4235d5dbc",
+      "payload_sha256": "3d11009d3e1c662ba1d52cffa76e045572391cb4711dc116b0deea61f465167f",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A6_MEMORY_KEEPER",
+      "envelope_id": "aa5befd79f7616d4411839c32b00b63ebc5c6988ea444ccd2c58b0a75d74b449",
+      "payload_sha256": "12ac3cfc09c0454b36b72cc213d16a3fb5b3c868100a0789d9ab120c8096b375",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F159-KAPPA:A7_SYNTHESIZER",
+      "envelope_id": "f87bc027bb44db0cc2ce5012cb5132c73637a10d7aaf317bcaee5e112de6715d",
+      "payload_sha256": "7b1f45f57f4e23056053ac189178420936117572a566515527b8f83bd82badc0",
+      "glyph_expression": "Ω⟦F159-KAPPA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A0_CHIEF",
+      "envelope_id": "0c6ab84c956c009319b011b8611246ad9073093f287d379001e6c2d4751b629c",
+      "payload_sha256": "71383631f98881d3a24e03aaeb6b649a6d813c2300822f61a5b9f6412a0972f2",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A1_EXPLORER",
+      "envelope_id": "ced4c894e0d9bc94ea0ba2d84bf68d52ca0abd545a36b2393cfcaaed3b40330a",
+      "payload_sha256": "1d4b7073aa2516a41e8ebd43048215dd8c5947ae93aecef457306c1814f1cf00",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A2_ANALYST",
+      "envelope_id": "2cb737a383d8a725587218a46718430fdbd413934936141baf65cb8be5a8d7a0",
+      "payload_sha256": "494418d6efd74839b26f2cf99747c72e6d609dbe083565c954aec31a8aa534f7",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A3_EXECUTOR",
+      "envelope_id": "3912765103f47453b66c4652bfae9264e4b5208a1d2c923d2af590548327fa97",
+      "payload_sha256": "fb3ad3e969404a18dc5b156da9891d3dfb6bb3043f1ab4b6729c42f791a4df97",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A4_AUDITOR",
+      "envelope_id": "7e096a69b8820114358d9112bc59d7c04c90ce1eda8ba0e6f6870151324d0764",
+      "payload_sha256": "2540eaac7930235bed2ca2382367b577aa4be83e8af967d7b6b5073184f25d86",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A5_COUNTER_AUDITOR",
+      "envelope_id": "0650c257b77ce1d80df771f37457aaf88f7055fabd51aa37cbcd5f81cb93abdf",
+      "payload_sha256": "94903e078f5b90db29e4e52de8cb455281bed34a75ba503da6c8d4696f6dcc61",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A6_MEMORY_KEEPER",
+      "envelope_id": "62146e00b61281c45d968e3fa985cb9d3797aeadf694c0393ac10a5f7c712417",
+      "payload_sha256": "5d17ec1eebad1cf99dfbd0b78b6f19bf9cf2f17e3d5e5f95847e2f0aa5bcc2ef",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F160-LAMBDA:A7_SYNTHESIZER",
+      "envelope_id": "bfb64c3a3ec2ec37d192ddf800ca6652de764c83f6974553092eb14ef6113713",
+      "payload_sha256": "b1db9fdef9c822b119ff2d80b1f2e17a12fa533f42f9b57386c698868c092d8f",
+      "glyph_expression": "Ω⟦F160-LAMBDA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A0_CHIEF",
+      "envelope_id": "9f0fb1683d15fc46f3afb645d57f407d2ff02f8913fd51ca0aaba59ebb1009dc",
+      "payload_sha256": "cf985f60255b7c92f2d2cdb327f3ff64ded1bf31537f4a64c99e0b117d476560",
+      "glyph_expression": "Ω⟦F161-MU:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A1_EXPLORER",
+      "envelope_id": "982d20bc13a15186ea120d92505124c8b4dfd4e8607364885125bad165a74c16",
+      "payload_sha256": "3f4f04073df7164659ccecb4dabb5cd89da82221e8fd93f9ee325dbfc566d877",
+      "glyph_expression": "Ω⟦F161-MU:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A2_ANALYST",
+      "envelope_id": "f9a30456bee319be3fa95b8e2d8f162104927fed2e91ec9e5d069b27650a04cb",
+      "payload_sha256": "edbc6b61bb9bee4318e9f80443dc94da7fc6a4e6540a273171206e4f3f0da79f",
+      "glyph_expression": "Ω⟦F161-MU:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A3_EXECUTOR",
+      "envelope_id": "78558f481e02171827da75c53f0ee63dca1a3cb0e8e33f6c8251c4869ffbf955",
+      "payload_sha256": "8ab77cc08b89dfb84c28bb970ed538e5627b4209ce32882db6153e34abc76ee8",
+      "glyph_expression": "Ω⟦F161-MU:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A4_AUDITOR",
+      "envelope_id": "4ba7da5e1cf1d3241167e8aff7650d79ffb38f6ab232d54a2d1630427be2cb19",
+      "payload_sha256": "6c1ecb6c534f65919e29ddb6b08e927e0f83ae2347bbae57ccc78a02f2398801",
+      "glyph_expression": "Ω⟦F161-MU:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A5_COUNTER_AUDITOR",
+      "envelope_id": "fc9146e53c4002ff72fa3517bbe64dc62b14ff68a64639f79a3f2dd2871121eb",
+      "payload_sha256": "8e3295154d5ea549b14e675ef1c7c8de6e67ec154fa4f6d8217dfec1f0c515fd",
+      "glyph_expression": "Ω⟦F161-MU:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A6_MEMORY_KEEPER",
+      "envelope_id": "9d835ce6e22715f1e5ccde659f384590ac8eceb9f4f2003ea3f75b8629e63552",
+      "payload_sha256": "10ac2569f608665fe5208cfa2d11ce8bca22e1c1200b8a5fb3fdeb3a60fb0c11",
+      "glyph_expression": "Ω⟦F161-MU:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F161-MU:A7_SYNTHESIZER",
+      "envelope_id": "fc4ff89a1a499b180896e630f87caca4408e1a513133f1b6ed2d3a6940029251",
+      "payload_sha256": "e4a49cebdb55cab23f2a8381b3e887214d99ebc1a27184c12af2c33b223cfddf",
+      "glyph_expression": "Ω⟦F161-MU:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A0_CHIEF",
+      "envelope_id": "19c6f756d94499aec68f44e5870386a6ac32c74b52a1e06becb1c672b9812b49",
+      "payload_sha256": "e32c381ee466f3e4ccffa0fc276a9f4119aaf9201d54a5c4aa5109853d43c6d5",
+      "glyph_expression": "Ω⟦F163-XI:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A1_EXPLORER",
+      "envelope_id": "5b96d51e77f6ac698ccb788c2452d9cf57bbaf447a5e45336b0266849cfaa81a",
+      "payload_sha256": "f99fdbaa3104c266f5175322d8c18a1ede54d69478923d76738462f64cce884d",
+      "glyph_expression": "Ω⟦F163-XI:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A2_ANALYST",
+      "envelope_id": "c819572cc08cbced0fbc65ef04130e7bbbe8bfef5945a08421d59def24c106d6",
+      "payload_sha256": "3f250d657f52b0d5bab6d42c60781679619fd184261377f3a674207ecf85e739",
+      "glyph_expression": "Ω⟦F163-XI:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A3_EXECUTOR",
+      "envelope_id": "06ef2c6781d71af981ed1df4a255cac928e18adbd544508c4862749f79759265",
+      "payload_sha256": "71be8aa4df35ba8219aefdb3da808c5fcfc93a78de6bfd08e7421bacb4b2a6e1",
+      "glyph_expression": "Ω⟦F163-XI:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A4_AUDITOR",
+      "envelope_id": "5e2738c8cf0285655092c6eb992918c753e23fbc635ad9a894ba136c29124f57",
+      "payload_sha256": "a0414e73f66cf52cd8be520b89b14c3fbced6db2db9b2b8bbfc91902f5914dfd",
+      "glyph_expression": "Ω⟦F163-XI:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A5_COUNTER_AUDITOR",
+      "envelope_id": "59430622fa6c7589c962cb199035a66f40b31ca51e7089700a6ed3e10c8839cc",
+      "payload_sha256": "d63ff27a1ff23673c5688dca69ffc36622453f0f5f856b64a63b2019d83854fb",
+      "glyph_expression": "Ω⟦F163-XI:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A6_MEMORY_KEEPER",
+      "envelope_id": "bf23c5bc79367d761cfd18f598976ab42f1d2a06af6ce214ea13c6aa051816d4",
+      "payload_sha256": "d524ce52653957362dc974d866f9d0d3cef85d4e98afb884be480033be370299",
+      "glyph_expression": "Ω⟦F163-XI:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F163-XI:A7_SYNTHESIZER",
+      "envelope_id": "805e84ec1c53b56420989386605b0ccf136236be539eded407acc5762eeb4325",
+      "payload_sha256": "ae2b617014be24533d25612291e858f8ebaba103014a1f0b488e10dd3a246c7e",
+      "glyph_expression": "Ω⟦F163-XI:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A0_CHIEF",
+      "envelope_id": "20a9b72736ee6c35c980e6fce6a0d8a506a1532d7c821e065a1b240c4c43c248",
+      "payload_sha256": "51b76366066f614222bb88e71a57b2275f5cd0a34b9d8f1180addab181447e5d",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A1_EXPLORER",
+      "envelope_id": "fc38d66cbd52e61ad6200bfd7ead800f8e68f567117366c2c8bbd255a749d83e",
+      "payload_sha256": "948b093f49b557d77ca6667652ee2178c4c8310e961026a3441f3becd16d9de6",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A2_ANALYST",
+      "envelope_id": "e7180db19640a93a7ffede8f7e2c9ca95913f1ad902c48a99cf226a79e67fe3f",
+      "payload_sha256": "2b36c70753f85deb7e1bf511320b98873440663f769f3df3f083c21ecf934a21",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A3_EXECUTOR",
+      "envelope_id": "06da4301a12f4460f5a4d2305351ff4e55d397ce60b48508e0ea3b59440adb77",
+      "payload_sha256": "4ae2b52d561b43a3307ae9606d166669387564880559f8e98b95f126512df16e",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A4_AUDITOR",
+      "envelope_id": "f6f90442e61562a30c79fd7f3c768d0714b3befa4c330b954c619007c13011ad",
+      "payload_sha256": "478768cbf96edf463ccc42a4dde22357bcef5bf30bbbb64dba140d0987863abd",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A5_COUNTER_AUDITOR",
+      "envelope_id": "cc447a3956f3d3e7ff892721e4ee8f2e023e9eaba1213eaf9c2a20f4f3909c92",
+      "payload_sha256": "1770d421ecd4e08695f5d97e0a3b5ea5dc8fd9bb3f6fa72d1008789737c6056c",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A6_MEMORY_KEEPER",
+      "envelope_id": "d16768c203b5e5f3db35a8e45f388d67fdea4c2f919010659ed0678be99d6a6a",
+      "payload_sha256": "ae5ff25911d59198ba1db1c24e8929350c20625b7b57fce19abbe5b96f8e274f",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F164-OMICRON:A7_SYNTHESIZER",
+      "envelope_id": "f7285adf60a0730f8518da5d8cd5d2812933fd4265ba04a5749d8c6f406822e8",
+      "payload_sha256": "89d537df8ffd66d9235777ed80fee4940ecac4625739665de1954662f93feb5a",
+      "glyph_expression": "Ω⟦F164-OMICRON:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A0_CHIEF",
+      "envelope_id": "9a7494eb3226614649678094405ab9342bab76ab372a875357a8212a12d997cb",
+      "payload_sha256": "173bd71a363c2c304b39f6beca6635c276b159afd1945eb8ce24a5931222b42a",
+      "glyph_expression": "Ω⟦F165-PI:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A1_EXPLORER",
+      "envelope_id": "8d68bf322f977795c621ad53141276bf45327d6ae2ddc4ce6d38c7577aa6e9b7",
+      "payload_sha256": "c96a33159698d7ced152a49f1b865ecf3ce5da6781c74ea229bd0f818fd18b0c",
+      "glyph_expression": "Ω⟦F165-PI:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A2_ANALYST",
+      "envelope_id": "1641cc036727a95345d050b08e692115845650f60da8225bd315e9fc78ab20b5",
+      "payload_sha256": "10d927ba443b1e6d0b61bdc8f8908699191c76dbfa7e68692e3b745523a20b87",
+      "glyph_expression": "Ω⟦F165-PI:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A3_EXECUTOR",
+      "envelope_id": "27a7415100d471bd5b9c61223ec6fda3698044b9ad832f386467b09b04f31621",
+      "payload_sha256": "bc7d6d0c0c6415997f7368c4464fcc1ca6fde67d9992c1cbadc30671c7afa3bc",
+      "glyph_expression": "Ω⟦F165-PI:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A4_AUDITOR",
+      "envelope_id": "8722541e03baf4d8722a41a2082fec8355a5b1cc9559f0c2cddd68bad2ed29e5",
+      "payload_sha256": "3fac5f6dc789deb7462f6ee3e417f145fe7f6f0f58dd623263ec5a46833df18c",
+      "glyph_expression": "Ω⟦F165-PI:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A5_COUNTER_AUDITOR",
+      "envelope_id": "1226173d31e66025b4eb6bac227823c6fca5677d42fe20b1827650ec4fc49976",
+      "payload_sha256": "9055f335055b20f98e07016812b53b09c2d3ab7f7166d0c3efcc039611251072",
+      "glyph_expression": "Ω⟦F165-PI:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A6_MEMORY_KEEPER",
+      "envelope_id": "55a4965ec447579a7730b00008163ebfd66b3dd962adb1e44e3da743a60d0d71",
+      "payload_sha256": "7673cf1964333d7856765dfd7b73ce236a71985f26ac9f9a3f6bc55b6cf2eda3",
+      "glyph_expression": "Ω⟦F165-PI:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F165-PI:A7_SYNTHESIZER",
+      "envelope_id": "22bb7d821fa3137c4f46b61143de5d6a6a4f9245aecfa6ce68b13cd365cbe532",
+      "payload_sha256": "47ed4d09cf2a0a2539eb40b8d081fa3e01d5198ed60ece776efd80f46eabc916",
+      "glyph_expression": "Ω⟦F165-PI:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A0_CHIEF",
+      "envelope_id": "b6df8d8b8d1c1f575953ec2796f2eeea06acc4c199b3b20bc56c8e36d5b5e84b",
+      "payload_sha256": "f6e5703342c95d7d8a63b1049093eca63f356eedb81f210ec86096aa948ace83",
+      "glyph_expression": "Ω⟦F166-RHO:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A1_EXPLORER",
+      "envelope_id": "ba0ebfc653fce3d155530c91b405aaea7ceae2468197368ff4c34db5f6243905",
+      "payload_sha256": "499a4275acce8171fe8f47d97a9b4c6125df346503df82ba9239e5784ccac23a",
+      "glyph_expression": "Ω⟦F166-RHO:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A2_ANALYST",
+      "envelope_id": "14c0211b8ae3393e60ae690104ea18a6f912e792663154063f6e6c7130de1792",
+      "payload_sha256": "852bed547f249788125227e1a549a1088e52da43d6f39b6cb7715f601825b80d",
+      "glyph_expression": "Ω⟦F166-RHO:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A3_EXECUTOR",
+      "envelope_id": "cee8890f2ff8bfe229c5a2f656e6a67de225f2474a05a57d5a839622d9a5f778",
+      "payload_sha256": "8bbd253880df2a8b28f18cfeb0c05ec0d12447f2a1327efdf88cd75d30b602ff",
+      "glyph_expression": "Ω⟦F166-RHO:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A4_AUDITOR",
+      "envelope_id": "475812765d27707fe242c4d9b18fa212a362e5501c02c98f9fe331ddf43575dc",
+      "payload_sha256": "238924b52bd6d455112f335090bbd66f1f258984a8a67e694b33795de9e3ffc9",
+      "glyph_expression": "Ω⟦F166-RHO:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A5_COUNTER_AUDITOR",
+      "envelope_id": "d27dd7f4b3fb364daee51bade6b4081d657f6bccf0d1841df86bbee1af55f210",
+      "payload_sha256": "4e6673158e6882d19ca4ffa0ee0bf7926b3f81f395cecb6448842e03ea2b7e3d",
+      "glyph_expression": "Ω⟦F166-RHO:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A6_MEMORY_KEEPER",
+      "envelope_id": "768cf4164ee39be95eb8506a1aeb66be89624130dd7c1751716f9ac77d0390d4",
+      "payload_sha256": "b80cdeac0e7c6d6ad6e4031b13e08ad1ae647c16808d0939d01c5817a19b6c37",
+      "glyph_expression": "Ω⟦F166-RHO:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F166-RHO:A7_SYNTHESIZER",
+      "envelope_id": "d79afc5fa08ac09087e938f83e0696f7f74093c3d0753447860a9a804d43ab71",
+      "payload_sha256": "ead5ea15390aeffaebb673e7e85b30ecfaf535181aa339ee1a1ffc306a53c446",
+      "glyph_expression": "Ω⟦F166-RHO:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A0_CHIEF",
+      "envelope_id": "b60d8b2a42d44a9f1e61aa933f3a6a19ec7b3227b3235bc6ce3cd06710294a67",
+      "payload_sha256": "fea45e5f81b1cc8025a52cd3c55019252c78175106a9fdba89d35507f3a1ddc8",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A1_EXPLORER",
+      "envelope_id": "08d6415ea22882e1de0079c7111fdbc75abe587c3e5517650014326c5c43d149",
+      "payload_sha256": "72c8971842425a0e59b4a129d223e249b2294a1d44ec04498e6fc56000ba8048",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A2_ANALYST",
+      "envelope_id": "232c9201c305784dcf10d5399d0daf8862ee8bfc4781932d795317995de19271",
+      "payload_sha256": "71b20d292c86a39239f47d068ebf129fb13d0e8e0a2610e52310e98caca5905a",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A3_EXECUTOR",
+      "envelope_id": "f947c0c1b85b4d79e9c3c7b0bd4dacc31eac7109d917d8a4d5177d1a6b90948a",
+      "payload_sha256": "dd2a0c4f7812eb4e2b94849b3587d033099bd6347bca822e3c2bac57da3fcd6c",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A4_AUDITOR",
+      "envelope_id": "62e722c0ddc0b5ed3ec8ef7c36de5839c1bff534ae27abf2d478645e49521757",
+      "payload_sha256": "bcdb6852c7a5db63f47449611129b327f64caa32ce6ad7478359a0f7aa8a8a7b",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A5_COUNTER_AUDITOR",
+      "envelope_id": "de71461b9057992570161e600708c55fefae323ed484ed32dda5677007e673bb",
+      "payload_sha256": "bae700633402d0a15f8499bd5fec100ece7d2b25c84998466428d4254e8dca83",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A6_MEMORY_KEEPER",
+      "envelope_id": "33b65a5c67c4b4e6057561652ab2822a0530c0e0f60a2ea0aafaf5030762b573",
+      "payload_sha256": "c953ab12c4a22149f77eddaf9c65696b2e1bcf04fd9ac2b07b37fd68a11237a6",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F167-SIGMA:A7_SYNTHESIZER",
+      "envelope_id": "97ae1b233569049628fe50cdace557d5c2b320c147e84dcb1e104169c6cf194b",
+      "payload_sha256": "5bc4d5a3bd2f0bbd1f0595a75fb438b2124595accfea65a5f89f27d763e261af",
+      "glyph_expression": "Ω⟦F167-SIGMA:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A0_CHIEF",
+      "envelope_id": "7d2f9f6206b597697dbe08257899558bdb5fbab3f38664cc2ebae01e39bddc5b",
+      "payload_sha256": "4e637026ff8a1bed083707b930cf370c438f62ee3d548c0b086604377aebebe0",
+      "glyph_expression": "Ω⟦F168-TAU:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A1_EXPLORER",
+      "envelope_id": "78798f5945752e1d1eb59d731c32dc021c59aa983f4d874622a561c33e0e3696",
+      "payload_sha256": "dfc686f5690cc5cb5c6d86d014e1161988903010be9e906ec2c53de0b1289926",
+      "glyph_expression": "Ω⟦F168-TAU:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A2_ANALYST",
+      "envelope_id": "d15837aa11bd8dd104f89ef8e2bcd0bf1271c7e3bb6f2964f49a30e894caccf0",
+      "payload_sha256": "907fac812a33ddaa33fde5196184945c18d02131773efff5be0e5812c0535ac0",
+      "glyph_expression": "Ω⟦F168-TAU:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A3_EXECUTOR",
+      "envelope_id": "07ce03736332bdf0b9c10099d804e068a9b94ed80e294688266f36ef5fe54566",
+      "payload_sha256": "e1e0ff459b63f22b3731dd49c087302dba8476840050de8686ab53da192edb7f",
+      "glyph_expression": "Ω⟦F168-TAU:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A4_AUDITOR",
+      "envelope_id": "e719919af44eb60cc4d26cf3c36ba5f3e905a1eeda5a729531bfba321702d797",
+      "payload_sha256": "6d9448f76dfcf289901fde47a1b2db66487581eef26d85e370d924dcd17516bb",
+      "glyph_expression": "Ω⟦F168-TAU:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A5_COUNTER_AUDITOR",
+      "envelope_id": "fc3406d363cdee259e33cfe4e8f59a4fa4ba81a23646e3eea0947257c9830309",
+      "payload_sha256": "c7020f28eb3bb91d29c981570297dd1d42dde8be3c392bdfb66b3dd4bbd21738",
+      "glyph_expression": "Ω⟦F168-TAU:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A6_MEMORY_KEEPER",
+      "envelope_id": "fdeee2ef19cee217bc752ea56bb47a2cf66372719b85f8da75937deb7a358d91",
+      "payload_sha256": "b34e0f063935ddc5149364bfae2fe8a0fbb76ea0b4afab25d545d4042db376d2",
+      "glyph_expression": "Ω⟦F168-TAU:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F168-TAU:A7_SYNTHESIZER",
+      "envelope_id": "fd1817cf56ea7bf64e5c5f54af34eb7e6332e7122aa73eb29f8365996f1ab9b1",
+      "payload_sha256": "896c233b438375c100c4f3406db90f392ddd932465cf16098473ebb20e176d57",
+      "glyph_expression": "Ω⟦F168-TAU:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A0_CHIEF",
+      "envelope_id": "5454f12a610603086eccaa9d0ac83b71203ed4e6635901269ab71795d87176e4",
+      "payload_sha256": "8be2ba13dd1fdcaa4c24387cad53628e34a45ce5ce0b433c89f83a1531f6cacc",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A1_EXPLORER",
+      "envelope_id": "f5a974a6e3355015ff27ff3fbfb2f37d00c16a6e470434babc66019ec22c87f4",
+      "payload_sha256": "036bb8e3134388dbc458cb13d83b9a7ea7d293185355d984eb3387329d095dd6",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A2_ANALYST",
+      "envelope_id": "14c067bc43f457696e084ee34691409ba1676d8c1c260b83fdb09864982bf46b",
+      "payload_sha256": "dcea769b83d79d2baaf3b6ec0b9e75e308a8c9441fb99e65554499d9c2826752",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A3_EXECUTOR",
+      "envelope_id": "8a9acc29666e62c2e3352f1706aa89e99b91480ef4410a869c7616860e48909b",
+      "payload_sha256": "8070b326552d80bf10f96214c5914e82e536836a5643817edf2248146fb3e6c3",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A4_AUDITOR",
+      "envelope_id": "aae9c433425998bde7591a95a54b287fdc835cba9f38c6d658897115ac6e6ca5",
+      "payload_sha256": "e3cc2c2e702f101e79ff5f569fa17d8673f72553bdb1a79cc48642dc64e5be81",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A5_COUNTER_AUDITOR",
+      "envelope_id": "c736769ffc47ae3e8f04b7a91c71bba63954d391b260776ad3a1b7cc1e47224e",
+      "payload_sha256": "c28e29a486810fbea9ba663cbe14846a14bad82f7054a220194a9aebd30842ec",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A6_MEMORY_KEEPER",
+      "envelope_id": "49330074a2a0bfa39cb2bc2c6c774314ff0775ce68b0c8f1dc2aff9051085c90",
+      "payload_sha256": "709d485086de99dd94bcfc524e05041c1949c9997de038eb2bd7a420daf1a2b2",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F169-UPSILON:A7_SYNTHESIZER",
+      "envelope_id": "3a41f86c8e1b5d35c817e5b29a4b468fcc7f7ecc716c0e3e50d1b99a6ca86e29",
+      "payload_sha256": "7603c724d613f29643de72a9ee4506bb3f9fc4a5b610f9f69b6e5795c191d81e",
+      "glyph_expression": "Ω⟦F169-UPSILON:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A0_CHIEF",
+      "envelope_id": "a0d17b501316cee5b598bf52bac7f9ab45c9ba1ca96c1913cb2c93b21021bc3f",
+      "payload_sha256": "90b2240375c130c07a3b0a7f9c2ccc4caa992735112f861a9f49765fc9b40be8",
+      "glyph_expression": "Ω⟦F170-PHI:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A1_EXPLORER",
+      "envelope_id": "be2b2c8afeb01bdfd2df31307e061090ab584ba2869db950b05f696ca09d701e",
+      "payload_sha256": "0b24433240aa6eb2d658f7a9857aa3892b2c4440b7cde35314a33a449c892c00",
+      "glyph_expression": "Ω⟦F170-PHI:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A2_ANALYST",
+      "envelope_id": "e9dbb9e9f3ae2f1a8c900183917abc2db95378d6a20eab70e021cb2a3e661003",
+      "payload_sha256": "de0ba5a285521869dd0c28bcd12bfffd503635469559ef6a7b9531543540cdcc",
+      "glyph_expression": "Ω⟦F170-PHI:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A3_EXECUTOR",
+      "envelope_id": "db45279acac0495475cab11905fdb99b2d2ddaaba0fd34221d54eed981e41afc",
+      "payload_sha256": "bfead8531a87f0028000a1e1e21e06473d4a660d3bef6c8ce1b519fc59efafca",
+      "glyph_expression": "Ω⟦F170-PHI:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A4_AUDITOR",
+      "envelope_id": "c8096483b19cf82bcd77063a03faf4c2b906a20cedf9c25c689dd733592776dc",
+      "payload_sha256": "9a222bee188c973ebc8096adfe2f6f5e4865de4444e6ab34015aa6bb61535281",
+      "glyph_expression": "Ω⟦F170-PHI:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A5_COUNTER_AUDITOR",
+      "envelope_id": "127f8aaf793fde886dbff5e6ad48dc0a55ee6abda50ed06236307735d7d5bbe6",
+      "payload_sha256": "f647af11cc6bb965b9252d04aa491bc2dcbcf64c8589a5df73e201285b6c6616",
+      "glyph_expression": "Ω⟦F170-PHI:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A6_MEMORY_KEEPER",
+      "envelope_id": "5d7a032799c1c87fe4e0b76f75bab38af66d0db339d71a9d1fc71957ed2c9487",
+      "payload_sha256": "09ace401b7535da67f72b9d737e0879f47ca5af15a584c62e8343a00efcae481",
+      "glyph_expression": "Ω⟦F170-PHI:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F170-PHI:A7_SYNTHESIZER",
+      "envelope_id": "f5a3d6e306a4df44969ba9ca901fc3737e41250a4806b4499d300b71d184a7e5",
+      "payload_sha256": "8ee9356cb3cd6adf293905b1f2641362b7a8ec1790946bd77c3f8eb75e107fe8",
+      "glyph_expression": "Ω⟦F170-PHI:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A0_CHIEF",
+      "envelope_id": "b8b8d463d002e9874a151221975944110ef60818ab8fb2f9e556dc457e3e374f",
+      "payload_sha256": "23708c1fe2b5fee532f7499cd0bbdd3370ea04eeb52530cf892935700fbd68e1",
+      "glyph_expression": "Ω⟦F171-CHI:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A1_EXPLORER",
+      "envelope_id": "646d293338c06be0e481e5abaf11ed1fc388e5f5dfff94824474285ed0ae83f9",
+      "payload_sha256": "deef6ce3403d148b614139e29a3713f406243bfe5794591f0faa866237ea541f",
+      "glyph_expression": "Ω⟦F171-CHI:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A2_ANALYST",
+      "envelope_id": "1b341cf31ffd40beb026376272c472962ff30609bf038e2b70cb0b8ceaa8d6b8",
+      "payload_sha256": "eb786e63dc93572e6472d35eeada28b7f7a544f56daf2b287b9de3833335a9a5",
+      "glyph_expression": "Ω⟦F171-CHI:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A3_EXECUTOR",
+      "envelope_id": "afedca6d78ebcaa01e55c582e465aa68e7f31e92ca23ea38adeb9c2fd9073471",
+      "payload_sha256": "6d8043589342a20e2c8c809b32a5e2fa53e05d15123af9204ad53d35f6ffe7f3",
+      "glyph_expression": "Ω⟦F171-CHI:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A4_AUDITOR",
+      "envelope_id": "a512afe249355f171a573d68684fa4011fd82ad1d9b28bd213843359d59fc6f6",
+      "payload_sha256": "13a1fe3a1ddd18116c5aa9f7a827b84b68d86c33b537d97aacae62503c6c3993",
+      "glyph_expression": "Ω⟦F171-CHI:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A5_COUNTER_AUDITOR",
+      "envelope_id": "e715451c2fb5c472d18412bfb3e25bf76f4da13440c612d0fdf1f1adaca80b9b",
+      "payload_sha256": "0f94799edcc20e9e606b209e4c7d5abab8936ee87920a7426a948f12f8c0cecf",
+      "glyph_expression": "Ω⟦F171-CHI:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A6_MEMORY_KEEPER",
+      "envelope_id": "4d6331fc2a3d3147643ec4c5105ea9ba71825cb7e8c1ca2f21d4911ad2a529eb",
+      "payload_sha256": "04dcbc3e496c466746f5bf849a50d4dc69a26d396e6a517440e66b147e6b4aba",
+      "glyph_expression": "Ω⟦F171-CHI:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F171-CHI:A7_SYNTHESIZER",
+      "envelope_id": "51545beebc169ad798d8cdf7998a56390f446697cae63993fb8e9032a7c22b45",
+      "payload_sha256": "4758232dddc70b50c3d8ac6275cc9b1222c08c477f289ffb395d12bd7ae86655",
+      "glyph_expression": "Ω⟦F171-CHI:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A0_CHIEF",
+      "envelope_id": "79634312b59cca6aa6f5bf59a72c37a7910f8bb8ecb56faee64c1794f8196502",
+      "payload_sha256": "04360623f2ee59d93a6cbda60f1346fd6035f2d1bdade1ffd4017d3eb4b37c32",
+      "glyph_expression": "Ω⟦F172-PSI:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A1_EXPLORER",
+      "envelope_id": "5fc2e8ad92c8ac2738985925fcec2611e65bbe0e0a878ed54de0d72ec1891599",
+      "payload_sha256": "211e59170c11825cf0cc8b573006e35e55807e42d7dd680c9b3ce1121509398a",
+      "glyph_expression": "Ω⟦F172-PSI:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A2_ANALYST",
+      "envelope_id": "72d83b495797ff00e743fc78836671960d28fce0f6070c55fbe49db0a23731df",
+      "payload_sha256": "eb6366df4008fc53ada80c4f10574b2e882a49f525e71f113db4e433261336b4",
+      "glyph_expression": "Ω⟦F172-PSI:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A3_EXECUTOR",
+      "envelope_id": "21aeb28f71992230cb1711a7e801f3caa01bc6588ce1c9a308c348828fdc00c3",
+      "payload_sha256": "289793b581b54e6fa450e1934594161baf705e685163ebbbadbf438eecf129a6",
+      "glyph_expression": "Ω⟦F172-PSI:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A4_AUDITOR",
+      "envelope_id": "e948438c9504c7bf7e56f1f32690ba2d351163ea63850a2b20c8f12a800c55af",
+      "payload_sha256": "6688e850f4fba3c3ff34a85f8086e2a4d4c8f9a138a8f796592e0e6f598a4a06",
+      "glyph_expression": "Ω⟦F172-PSI:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A5_COUNTER_AUDITOR",
+      "envelope_id": "ce730c6369b9f084f18e5417c2ff222d0f5c0e65aaca150854d12ec4df6c0e95",
+      "payload_sha256": "2acc836f7d3ed4ae27970062f83756b94694a19ee89f580d95c29ac604c85def",
+      "glyph_expression": "Ω⟦F172-PSI:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A6_MEMORY_KEEPER",
+      "envelope_id": "22f6beb72c5fc5f9878dac9950986817a64434fbdb45860032e142284c35e0ca",
+      "payload_sha256": "51a14cb4c332718df307a356026f06f7cdf7ae0e4d3cf03a3a7388cd5308768f",
+      "glyph_expression": "Ω⟦F172-PSI:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F172-PSI:A7_SYNTHESIZER",
+      "envelope_id": "cd665852c4cf5d826a29756e6f5db4a97a4b74ebe6fc70996750739fa7089641",
+      "payload_sha256": "61f218dad87ccbc47f1fbb0af317eeeebcc743b0d7214a960ed2a344cdb9ca5b",
+      "glyph_expression": "Ω⟦F172-PSI:A₇⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A0_CHIEF",
+      "envelope_id": "9b924aa02703556dd02bab919a33477bedf51dce37e02245b71c3f7657d58756",
+      "payload_sha256": "7a39ac4638cbb47c549a34adf11a23532fdd09a275349e14721efa03df3eeacf",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₀⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A1_EXPLORER",
+      "envelope_id": "e88b5b62c7f6e88d0d6cda17f97cb8bee28861fdac7cb19381b0676d39ea23ca",
+      "payload_sha256": "7ec4014f93631fdb7cf724da66fe60703c353d30c72ff8a022025e08f6ed1c63",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₁⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A2_ANALYST",
+      "envelope_id": "a578f9d865d85f0a109ac94277062f6b04ecf13ae1d594f1f6281c195dc02a2b",
+      "payload_sha256": "d87c7b67c2b11087b0d7e7de877298f8e1b11274afdbe18f402ad768ab7ba99a",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₂⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A3_EXECUTOR",
+      "envelope_id": "e3399b935a72b2f1d542fa61255b9de634d25b910e3730859ea7e7a4782000c4",
+      "payload_sha256": "e564f0e886ac4a548d42fb9436f6d4e053a2c7bfc47c5e554f2103cf74223bb1",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₃⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A4_AUDITOR",
+      "envelope_id": "c0fb71d497bc6c317108c6029ab8b544ec0a0bb97ba36555b85a40df2e665057",
+      "payload_sha256": "ebd8c4c5c3de66a41caa73c284aee1d56bd2fed531275ee23f814402b26d584f",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₄⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A5_COUNTER_AUDITOR",
+      "envelope_id": "7aa9649d39d132b5e929d664441283140daf74a6bd402c01a642c5e76491d183",
+      "payload_sha256": "293c7426b06c95c05d076b073daf218af34322e0b48eb7925fb4fbcfd263f1ee",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₅⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A6_MEMORY_KEEPER",
+      "envelope_id": "982ff759d3984ea4124cb23eca7fa7b8f010e63176729407e9540ae0c4cd7b47",
+      "payload_sha256": "0b155cf9620089d2637b3e09596cc803e42cb87f3ea943cfa3477cfe9cca6b71",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₆⟧→AGΩ",
+      "status": "PASS"
+    },
+    {
+      "endpoint_id": "F149-OMEGA:A7_SYNTHESIZER",
+      "envelope_id": "467b384a5016253e14ff67ef0e1b437c4fde6d158c7dde0edf91f6522c91c775",
+      "payload_sha256": "731b629f802a60cd7dffef289e2ad4acdbfdde5ddbe3c3790cb7f033a3904ae9",
+      "glyph_expression": "Ω⟦F149-OMEGA:A₇⟧→AGΩ",
+      "status": "PASS"
+    }
+  ],
+  "receipt_sha256": "97cd2e65f2e6aefa6ae8828559bc3100fbbea1f88ff4bb6d9fac741d6be7ef33"
+}
