@@ -1,0 +1,1271 @@
+{
+  "schema": "CEREBRON_GEOMETRIC_VECTOR_LEARNING_V1",
+  "version": "1.0.0",
+  "status": "ACTIVE_MEASUREMENT_CONTRACT",
+  "runtime_changed": false,
+  "name": "GVL",
+  "full_name": "GEOMETRIC VECTOR LEARNING",
+  "purpose": "Make each validated learning cycle improve future cycles through a shared coaxial evidence axis while preserving distinct specialization vectors and suppressing redundant learning.",
+  "definitions": {
+    "coaxial_axis": "Shared invariants every AI must preserve.",
+    "specialization_vector": "Interpretable vector describing the AI's distinct functional direction.",
+    "novelty": "Distance from already-promoted lessons/vectors; high novelty means low redundancy.",
+    "transfer_gain": "Measured quality improvement on a different task after a validated lesson.",
+    "compound_gain": "Measured multiplication of validated transferable quality across cycles; never assumed from architecture alone."
+  },
+  "coaxial_axis": {
+    "id": "CEREBRON_M_CORE",
+    "invariants": [
+      "REALITY_GT_COHERENCE",
+      "EVIDENCE_GT_CONFIDENCE",
+      "CLAIM_LE_EVIDENCE",
+      "SPIRALIX_REQUIRED",
+      "PROVENANCE_REQUIRED",
+      "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+      "SIMULATION_NE_TEST",
+      "MEMORY_NE_TRAINING",
+      "NO_DESTRUCTIVE_OVERWRITE",
+      "TRANSFER_BEFORE_GENERALITY"
+    ]
+  },
+  "vector_space": {
+    "basis": [
+      "coordination",
+      "memory",
+      "formal_reasoning",
+      "evidence_audit",
+      "counterexample",
+      "simulation",
+      "science",
+      "engineering",
+      "invention",
+      "search",
+      "causal",
+      "uncertainty",
+      "integration",
+      "synthesis",
+      "human_dialogue",
+      "metrology"
+    ],
+    "dimension": 16,
+    "metric": "COSINE_SIMILARITY",
+    "redundancy": "R_ij=cos(S_i,S_j)",
+    "novelty": "N_i=1-max_j(R_ij) against promoted comparable lessons",
+    "complementarity": "K_ij=1-R_ij when both pass evidence/role gates",
+    "note": "These are interpretable control-plane vectors, not neural embeddings."
+  },
+  "learning_equations": {
+    "local_quality_gain": "g_i=max(0,transfer_quality_after-transfer_quality_before)",
+    "effective_gain": "e_i=g_i*novelty_i*evidence_weight_i*audit_pass_i",
+    "collective_step": "Q_(t+1)=Q_t*(1+alpha*mean(e_i))",
+    "observed_ratio": "r_t=Q_(t+1)/Q_t",
+    "geometric_claim_gate": "Only call growth geometric-like after >=4 consecutive transfer cycles with r_t>1 on held-out tasks and no quality/evidence regression.",
+    "redundancy_penalty": "effective_information=raw_information*(1-redundancy)"
+  },
+  "lesson_pipeline": [
+    "REAL_EXECUTION",
+    "SPIRALIX_ENVELOPE",
+    "LOCAL_ROLE_RESULT",
+    "AUDIT_AND_COUNTER_AUDIT",
+    "EXTRACT_INVARIANT_LESSON",
+    "VECTORIZE_LESSON",
+    "DEDUP_AGAINST_PROMOTED_MEMORY",
+    "TRANSFER_TEST_ON_NEW_TASK",
+    "MEASURE_GAIN_AND_NOVELTY",
+    "PROMOTE_ONLY_IF_POSITIVE_EFFECTIVE_GAIN",
+    "A6_VERSIONED_MEMORY",
+    "PROPAGATE_INVARIANT_NOT_RAW_COPY"
+  ],
+  "propagation": {
+    "principle": "One AI's validated lesson may improve other AIs through a compact invariant capsule without forcing all AIs to duplicate the same specialization.",
+    "capsule_fields": [
+      "lesson_id",
+      "source_ai",
+      "source_role",
+      "problem_class",
+      "invariant",
+      "scope",
+      "evidence_refs",
+      "failure_modes",
+      "specialization_vector",
+      "novelty_score",
+      "transfer_gain",
+      "parent_sha",
+      "rollback_pointer"
+    ],
+    "receiving_rule": "Receiver integrates the invariant into its coaxial axis or role contract only if relevant; it does not copy the source's full specialization."
+  },
+  "promotion_gates": {
+    "minimum_evidence_level": "E2",
+    "require_transfer_test": true,
+    "require_counter_audit": true,
+    "require_positive_effective_gain": true,
+    "novelty_floor": 0.15,
+    "max_redundancy_for_new_specialist": 0.85,
+    "duplicate_behavior": "MERGE_OR_REFERENCE_EXISTING_LESSON_INSTEAD_OF_COPYING"
+  },
+  "scale_interlock": {
+    "policy": "config/quality-first-scale-policy-v1.json",
+    "rule": "Increasing 5->10->20 is forbidden as a substitute for low novelty or failed transfer.",
+    "burst_selection": "Prefer candidates maximizing expected information gain and vector complementarity subject to evidence and execution-route gates."
+  },
+  "ais": [
+    {
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "available": true,
+      "parent_function": "Executive decomposition, routing, coalition and resource authority",
+      "specialization_tags": [
+        "human_dialogue"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "identity": "SAPHEA",
+      "available": true,
+      "parent_function": "Specialist selection and execution",
+      "specialization_tags": [
+        "synthesis"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "identity": "SPIRALION",
+      "available": true,
+      "parent_function": "Verified checkpoint continuity and memory",
+      "specialization_tags": [
+        "memory"
+      ],
+      "specialization_vector": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "ETHERION",
+      "identity": "ETHERION",
+      "available": true,
+      "parent_function": "Difficult science and mathematics R&D",
+      "specialization_tags": [
+        "formal_reasoning",
+        "science"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "HYPERION",
+      "identity": "HYPERION",
+      "available": true,
+      "parent_function": "Broad hypothesis generation",
+      "specialization_tags": [
+        "invention"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "ASTRION",
+      "identity": "ASTRION",
+      "available": true,
+      "parent_function": "Space R&D",
+      "specialization_tags": [
+        "simulation"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "available": true,
+      "parent_function": "Engineering validation",
+      "specialization_tags": [
+        "evidence_audit",
+        "engineering"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "available": true,
+      "parent_function": "Final epistemic promotion boundary",
+      "specialization_tags": [
+        "evidence_audit"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "available": true,
+      "parent_function": "Human dialogue and presentation",
+      "specialization_tags": [
+        "human_dialogue"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "ELYRA",
+      "identity": "ELYRA",
+      "available": true,
+      "parent_function": "Simulation and embodied action",
+      "specialization_tags": [
+        "simulation"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "identity": "SAPHEA_MICRO",
+      "available": true,
+      "parent_function": "Compact specialist model fabric",
+      "specialization_tags": [
+        "metrology"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "ELYSION",
+      "identity": "ELYSION",
+      "available": true,
+      "parent_function": "Solution generation, reasoning and invention",
+      "specialization_tags": [
+        "invention"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "identity": "ELYSIUM",
+      "available": true,
+      "parent_function": "General verification, red-team and validation",
+      "specialization_tags": [
+        "evidence_audit"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "SAELION",
+      "identity": "SAELION",
+      "available": true,
+      "parent_function": "Validated lesson selection and compression",
+      "specialization_tags": [
+        "synthesis"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "NEXUS",
+      "identity": "NEXUS",
+      "available": true,
+      "parent_function": "Global knowledge, model, tool and farm connectivity",
+      "specialization_tags": [
+        "memory",
+        "integration"
+      ],
+      "specialization_vector": [
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "available": true,
+      "parent_function": "Generate structurally different starting representations and search directions before deep reasoning.",
+      "specialization_tags": [
+        "search"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F152-BETA",
+      "identity": "BETA",
+      "available": true,
+      "parent_function": "Convert a vague question into a testable problem contract: objective, variables, constraints, acceptance criteria, unknowns and forbidden assumptions.",
+      "specialization_tags": [
+        "search",
+        "uncertainty"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F153-GAMMA",
+      "identity": "GAMMA",
+      "available": true,
+      "parent_function": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
+      "specialization_tags": [
+        "causal",
+        "integration"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0.707107,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F150-DELTA",
+      "identity": "DELTA",
+      "available": true,
+      "parent_function": "Build explicit scientific models, equations, assumptions, simulations and discriminating tests.",
+      "specialization_tags": [
+        "simulation"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F154-EPSILON",
+      "identity": "EPSILON",
+      "available": true,
+      "parent_function": "Probe epsilon-neighborhoods around candidate solutions to measure local sensitivity, robustness margins and bifurcation points.",
+      "specialization_tags": [
+        "synthesis"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F155-ZETA",
+      "identity": "ZETA",
+      "available": true,
+      "parent_function": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
+      "specialization_tags": [
+        "memory",
+        "evidence_audit"
+      ],
+      "specialization_vector": [
+        0,
+        0.707107,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F156-ETA",
+      "identity": "ETA",
+      "available": true,
+      "parent_function": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
+      "specialization_tags": [
+        "counterexample"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F157-THETA",
+      "identity": "THETA",
+      "available": true,
+      "parent_function": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
+      "specialization_tags": [
+        "formal_reasoning"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F158-IOTA",
+      "identity": "IOTA",
+      "available": true,
+      "parent_function": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
+      "specialization_tags": [
+        "synthesis"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F159-KAPPA",
+      "identity": "KAPPA",
+      "available": true,
+      "parent_function": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
+      "specialization_tags": [
+        "memory"
+      ],
+      "specialization_vector": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F160-LAMBDA",
+      "identity": "LAMBDA",
+      "available": true,
+      "parent_function": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
+      "specialization_tags": [
+        "search"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F161-MU",
+      "identity": "MU",
+      "available": true,
+      "parent_function": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
+      "specialization_tags": [
+        "uncertainty"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F162-NU",
+      "identity": "NU",
+      "available": false,
+      "parent_function": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
+      "specialization_tags": [
+        "coordination"
+      ],
+      "specialization_vector": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "PREP_ONLY"
+    },
+    {
+      "ai_id": "F163-XI",
+      "identity": "XI",
+      "available": true,
+      "parent_function": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
+      "specialization_tags": [
+        "uncertainty"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F164-OMICRON",
+      "identity": "OMICRON",
+      "available": true,
+      "parent_function": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
+      "specialization_tags": [
+        "search"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F165-PI",
+      "identity": "PI",
+      "available": true,
+      "parent_function": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
+      "specialization_tags": [
+        "search"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F166-RHO",
+      "identity": "RHO",
+      "available": true,
+      "parent_function": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
+      "specialization_tags": [
+        "evidence_audit"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "identity": "SIGMA",
+      "available": true,
+      "parent_function": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
+      "specialization_tags": [
+        "uncertainty",
+        "metrology"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0.707107
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F168-TAU",
+      "identity": "TAU",
+      "available": true,
+      "parent_function": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
+      "specialization_tags": [
+        "counterexample"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F169-UPSILON",
+      "identity": "UPSILON",
+      "available": true,
+      "parent_function": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
+      "specialization_tags": [
+        "engineering"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F170-PHI",
+      "identity": "PHI",
+      "available": true,
+      "parent_function": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
+      "specialization_tags": [
+        "formal_reasoning",
+        "search"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F171-CHI",
+      "identity": "CHI",
+      "available": true,
+      "parent_function": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
+      "specialization_tags": [
+        "counterexample",
+        "engineering",
+        "integration"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0.57735,
+        0,
+        0,
+        0.57735,
+        0,
+        0,
+        0,
+        0,
+        0.57735,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F172-PSI",
+      "identity": "PSI",
+      "available": true,
+      "parent_function": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
+      "specialization_tags": [
+        "search",
+        "uncertainty"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.707107,
+        0,
+        0.707107,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "identity": "OMEGA",
+      "available": true,
+      "parent_function": "Close the funnel with formal proof status, falsification, counter-audit and explicit residual uncertainty.",
+      "specialization_tags": [
+        "formal_reasoning",
+        "evidence_audit",
+        "uncertainty"
+      ],
+      "specialization_vector": [
+        0,
+        0,
+        0.666667,
+        0.666667,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.333333,
+        0,
+        0,
+        0,
+        0
+      ],
+      "vector_source": "DETERMINISTIC_PARENT_FUNCTION_ONTOLOGY_V1",
+      "learning_status": "ELIGIBLE_FOR_GVL_MEASUREMENT"
+    }
+  ],
+  "counts": {
+    "logical_ai": 39,
+    "available_ai": 38,
+    "prep_only_ai": 1
+  },
+  "hard_rules": [
+    "GEOMETRIC_GROWTH_IS_MEASURED_NOT_DECLARED",
+    "NON_REDUNDANCY_NE_INDEPENDENCE",
+    "VECTOR_DISTANCE_NE_EVIDENCE",
+    "QUALITY_BEFORE_QUANTITY",
+    "TRANSFER_BEFORE_GENERALITY",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
