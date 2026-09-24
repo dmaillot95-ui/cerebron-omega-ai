@@ -1,0 +1,52 @@
+{
+  "schema": "CEREBRON_ROLE_DIVERSE_PROMPT_CONTRACT_V2",
+  "status": "PREPARED_BLOCKED_BY_M10",
+  "runtime_changed": false,
+  "objective": "Prevent example substitution, prompt echo and role drift in multi-worker missions.",
+  "input_contract": {
+    "problem_id": "REQUIRED",
+    "problem_text": "REQUIRED_CONCRETE_CLAIM_OR_TASK",
+    "problem_sha256": "REQUIRED",
+    "evidence_context": "OPTIONAL_VERSIONED_REFERENCES_ONLY",
+    "role_id": "REQUIRED",
+    "role_task": "REQUIRED"
+  },
+  "hard_prompt_rules": [
+    "DO_NOT_REPLACE_THE_PROBLEM_WITH_AN_EXAMPLE",
+    "DO_NOT_INVENT_A_DIFFERENT_CLAIM",
+    "DO_NOT_ECHO_INSTRUCTIONS_AS_THE_RESULT",
+    "ANSWER_ONLY_THE_EXACT_PROBLEM_TEXT",
+    "IF_CONTEXT_IS_INSUFFICIENT_RETURN_INSUFFICIENT_EVIDENCE",
+    "PROOF_REQUIRES_EXPLICIT_DERIVATION_OR_CITED_VERIFIED_PROOF_REFERENCE",
+    "CALCULATION_NE_PROOF",
+    "SIMULATION_NE_TEST",
+    "CONSENSUS_NE_TRUTH"
+  ],
+  "output_schema": {
+    "problem_sha256": "string",
+    "worker_id": "string",
+    "role_id": "string",
+    "decision": [
+      "SUPPORTED",
+      "REFUTED",
+      "UNRESOLVED",
+      "INSUFFICIENT_EVIDENCE"
+    ],
+    "result": "string",
+    "assumptions": "array",
+    "evidence_used": "array",
+    "evidence_needed": "array",
+    "failure_modes": "array",
+    "residual_uncertainty": "array",
+    "unrelated_example_used": "boolean",
+    "instruction_echo_detected": "boolean"
+  },
+  "reject_if": [
+    "problem_sha256_mismatch",
+    "unrelated_example_used=true",
+    "instruction_echo_detected=true",
+    "missing_required_fields",
+    "result_does_not_address_problem"
+  ],
+  "scale_gate": "Repeat S5 with V2 contract; only then reconsider 5_to_10."
+}
