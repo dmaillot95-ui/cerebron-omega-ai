@@ -25,15 +25,27 @@
     {
       "id": "C80-M03",
       "title": "All-AI HF memory verification matrix",
-      "status": "CANARY_RUNNING",
+      "status": "COMPLETE",
       "objective": "Verify HF private write/read/SHA for each of 38 available logical AIs using unique versioned A6_MEMORY_KEEPER namespaces.",
-      "guard_run": 35995124491
+      "guard_run": 35995124491,
+      "receipt": "receipts/p03/all-ai-hf-m03.json",
+      "result": "38_PASS_0_FAIL_1_UNAVAILABLE"
     },
     {
       "id": "C80-M04",
       "title": "F66/F74 pointer and rollback rollout",
-      "status": "BLOCKED_BY_M03",
-      "objective": "After per-AI HF round-trip passes, verify public opaque pointer, F66/F74 identity and rollback for each available AI family without exposing private payload."
+      "status": "GUARD_PENDING",
+      "objective": "After per-AI HF round-trip passes, verify public opaque pointer, F66/F74 identity and rollback for each available AI family without exposing private payload.",
+      "guard_run": 35996844931,
+      "f74_commit": "3dcebd021776740fc66fbffa4f55888afba74f55",
+      "f66_commit": "4025a7fc89ee94f109a05bfee94bd579b1839416",
+      "result": "38_F74_POINTERS_AND_38_F66_INDEXES_CREATED"
+    },
+    {
+      "id": "C80-M05",
+      "title": "Second-version rollback test",
+      "status": "BLOCKED_BY_M04_GUARD",
+      "objective": "Create a second version for representative AI families, verify parent/rollback to M03 without destructive overwrite, then generalize if PASS."
     }
   ],
   "updated_at": "2026-09-24",
