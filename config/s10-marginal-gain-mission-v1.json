@@ -117,5 +117,67 @@
     "NO_INDEPENDENCE_CLAIM",
     "SPIRALIX_REQUIRED",
     "GVL_SPECIALIZATION_SELECTION_RECORDED"
-  ]
+  ],
+  "gvl_selection": {
+    "registry": "config/gvl-specialization-registry-v2.json",
+    "baseline_parent_ais": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION"
+    ],
+    "selected": [
+      {
+        "ai_id": "METRION",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "engineering_validation",
+          "metrology_benchmark",
+          "simulation",
+          "constraint_feasibility"
+        ]
+      },
+      {
+        "ai_id": "F166-RHO",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "dependency_correlation",
+          "evidence_audit",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F163-XI",
+        "novelty_vs_baseline": 0.711325,
+        "max_redundancy_vs_baseline": 0.288675,
+        "tags": [
+          "transfer_generalization",
+          "evidence_audit",
+          "science_modeling"
+        ]
+      },
+      {
+        "ai_id": "F172-PSI",
+        "novelty_vs_baseline": 1,
+        "max_redundancy_vs_baseline": 0,
+        "tags": [
+          "hidden_variables",
+          "uncertainty",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F168-TAU",
+        "novelty_vs_baseline": 0.666667,
+        "max_redundancy_vs_baseline": 0.333333,
+        "tags": [
+          "information_gain",
+          "optimization_efficiency",
+          "coordination"
+        ]
+      }
+    ],
+    "selection_frozen_before_run": true
+  }
 }
