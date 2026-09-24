@@ -1,0 +1,58 @@
+{
+  "schema": "CEREBRON_AGENT_QUALITY_READINESS_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "policy": "config/quality-first-scale-policy-v1.json",
+  "current_coalition_size": 5,
+  "scale_5_to_10": "HOLD",
+  "required_passes": 2,
+  "active_workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "endpoint": "SAPHEA:A2_ANALYST",
+      "specialty": "SYSTEM_ARCHITECT",
+      "pass1": "PENDING_RUN_36024003536",
+      "pass2": "BLOCKED_BY_PASS1"
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "endpoint": "SAPHEA:A4_AUDITOR",
+      "specialty": "EVIDENCE_AUDITOR",
+      "pass1": "PENDING_RUN_36024003536",
+      "pass2": "BLOCKED_BY_PASS1"
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "endpoint": "SAPHEA:A5_COUNTER_AUDITOR",
+      "specialty": "COUNTEREXAMPLE_HUNTER",
+      "pass1": "PENDING_RUN_36024003536",
+      "pass2": "BLOCKED_BY_PASS1"
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "endpoint": "SPIRALION:A7_SYNTHESIZER",
+      "specialty": "CONTINUITY_SYNTHESIZER",
+      "pass1": "PENDING_RUN_36024003536",
+      "pass2": "BLOCKED_BY_PASS1"
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "endpoint": "ETHERION:A2_ANALYST",
+      "specialty": "FORMAL_ANALYST",
+      "pass1": "PENDING_RUN_36024003536",
+      "pass2": "BLOCKED_BY_PASS1"
+    }
+  ],
+  "readiness_dimensions": [
+    "REAL_EXECUTION",
+    "SPIRALIX_TRANSPORT",
+    "ROLE_FIDELITY",
+    "SEMANTIC_FIDELITY",
+    "EVIDENCE_DISCIPLINE",
+    "MEMORY_CONTINUITY",
+    "LINEAGE_HONESTY",
+    "AUDIT_RESISTANCE"
+  ],
+  "coalition_ready_for_10": false,
+  "rule": "No worker count increase until all five current workers pass both quality missions and the coalition shows positive nonredundant information gain."
+}
