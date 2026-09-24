@@ -193,10 +193,15 @@
     {
       "id": "G12",
       "name": "NATIVE_AI",
-      "purpose": "registered native AI model projects and specialized dual-core AI execution",
+      "purpose": "registered native AI model projects; F145-F146 currently configured/routable, F147-F151 pending activation gates",
       "farms": [
         145,
-        146
+        146,
+        147,
+        148,
+        149,
+        150,
+        151
       ]
     },
     {
@@ -294,9 +299,8 @@
     }
   ],
   "registry_snapshot": {
-    "count": 146,
-    "max_id": 146,
-    "sha": "0f720039f5d0773823441fb33cdd034bc769060e",
+    "count": 151,
+    "max_id": 151,
     "date": "2026-09-24"
   },
   "dynamic_fallback": {
@@ -307,7 +311,7 @@
       "status",
       "evidence"
     ],
-    "current_range": "NONE_FOR_F001_F146_AFTER_EXPLICIT_CLASSIFICATION",
+    "current_range": "NONE_FOR_F001_F151_AFTER_EXPLICIT_CLASSIFICATION",
     "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY",
     "future_rule": "NEW_FARM_MUST_ENTER_A_FUNCTIONAL_GROUP_OR_EXPLICIT_FALLBACK_WITH_REASON"
   }
