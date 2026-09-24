@@ -9,7 +9,13 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 from pathlib import Path
+
+# Allow both `python -m tools.pi_search` and direct `python tools/pi_search.py`.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from tools.pi_response_sweep import circle_sweep, fibonacci_sphere, refine_circle
 from tools.pi_needle import sample_needles, coverage_stats
