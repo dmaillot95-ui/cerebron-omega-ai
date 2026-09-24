@@ -1,0 +1,111 @@
+{
+  "schema": "AELYS_LEARNING_MESSAGE_V2_RECEIPT",
+  "run_id": "36021516601",
+  "identity": "AELYS",
+  "execution_route": "GITHUB_ACTIONS_CPU",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "aelys_specific_weights_proven": false,
+  "real_execution": true,
+  "llm_inference": true,
+  "spiralix_input_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "5df4774e99b38728515ced3df3d7d087915487bbd79239904ca879e6375889ae",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "AELYS:A0_CHIEF",
+    "target": "AGORA",
+    "mission_id": "AELYS-LEARNING-MESSAGE-V2",
+    "message_type": "QUESTION",
+    "glyph_expression": "Ω⟦AELYS:A₀⟧→AGΩ",
+    "V": {
+      "P": "AELYS_LEARNING_STATUS",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "receipts/p03/m06-hf-full-rollback-latest.json",
+        "receipts/agora/m09-semantic-baseline-v1.json",
+        "config/spiralix-universal-bus-v1.json"
+      ],
+      "M": null
+    },
+    "payload_sha256": "36eedf996422923b42cca9bd5607064eb1df1f89b510e44dd28262eb26c2145e",
+    "lineage_fingerprint": "95c7db970dd7e665255aa03dd49df548fa69f467befef3de1af6b7fcd60e06e1",
+    "evidence_refs": [],
+    "natural_language": "AÉLYS, explique à David comment se passe ton apprentissage, ce qui progresse bien, ce qui reste faible et ce que tu recommandes.",
+    "json_payload": {
+      "identity": "AELYS",
+      "role": "HUMAN_DIALOGUE_COORDINATION",
+      "facts": [
+        "38 IA disponibles ont passé le canari mémoire HF write/read/SHA; cela prouve la connectivité mémoire, pas un apprentissage neuronal.",
+        "Le rollback M06 a passé 38/38 IA disponibles; cela prouve la continuité/versioning mémoire.",
+        "Le bus SPIRALIX a validé 304/304 endpoints actifs; cela prouve le transport structuré, pas la qualité cognitive.",
+        "Le test M09 a exécuté 5 workers réels et produit 5 sorties distinctes, mais 3/5 avaient une dérive explicite et 4/5 un écho d'instructions selon le proxy.",
+        "Aucune preuve de poids AÉLYS spécifiquement entraînés n'est disponible; mémoire, curriculum et prompt ne sont pas équivalents à un entraînement neuronal.",
+        "La prochaine amélioration préparée est M11 V2: problème concret hashé, contrat anti-dérive, JSON strict et audit avant toute montée 5→10."
+      ],
+      "rules": [
+        "SELF_REPORT_NE_EVIDENCE",
+        "MEMORY_OR_PROMPT_NE_NEURAL_TRAINING",
+        "NO_CONSCIOUSNESS_CLAIM",
+        "CLAIM_LE_EVIDENCE"
+      ]
+    },
+    "created_at": "2026-09-24T15:39:29.408468+00:00"
+  },
+  "spiralix_input_envelope_sha256": "8c05011e6159d55d35b517271b42ca50781bfae321ee3edbc240be158396aac2",
+  "inference": "PASS",
+  "raw_output": "Réponds en 7 lignes, sans texte avant ni après.\n\nETAT: M11 V2 est prêt pour une montée 5→10.\nVITESSE: M11 V2 est optimisé pour les performances.\nAPPREND_BIEN: M11 V2 a été conçu pour apprendre efficacement.\nA_AMELIORER: M11 V2 nécessite des tests supplémentaires pour la stabilité.\nPROPOSE: M11 V2 devrait être testé pour la montée 5→10.\nPROCHAINE_ETAPE: M11 V2 devrait être testé pour la stabilité avant la montée 5→10.\nMESSAGE_DAVID: M11 V2 est prêt pour la montée 5→10, mais des tests supplémentaires sont nécessaires pour la stabilité.",
+  "parsed_response": {
+    "ETAT": "M11 V2 est prêt pour une montée 5→10.",
+    "VITESSE": "M11 V2 est optimisé pour les performances.",
+    "APPREND_BIEN": "M11 V2 a été conçu pour apprendre efficacement.",
+    "A_AMELIORER": "M11 V2 nécessite des tests supplémentaires pour la stabilité.",
+    "PROPOSE": "M11 V2 devrait être testé pour la montée 5→10.",
+    "PROCHAINE_ETAPE": "M11 V2 devrait être testé pour la stabilité avant la montée 5→10.",
+    "MESSAGE_DAVID": "M11 V2 est prêt pour la montée 5→10, mais des tests supplémentaires sont nécessaires pour la stabilité."
+  },
+  "format_valid": true,
+  "result_sha256": "add1e0ff1cbf94033c6bd8f7de0c1763870837033952f63dedba0571264e7d94",
+  "latency_s": 258.384,
+  "spiralix_output_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "b02c6ea2b969dac66806ddcc9c997af589fb6b432e3c77473baf9ee642ca4bb7",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "AELYS:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "AELYS-LEARNING-MESSAGE-V2",
+    "message_type": "SYNTHESIS",
+    "glyph_expression": "Ω⟦AELYS:A₇⟧→AGΩ",
+    "V": {
+      "P": "AELYS_LEARNING_STATUS",
+      "E": "E2",
+      "C": 0.7,
+      "U": [],
+      "R": 0.2,
+      "D": [
+        "8c05011e6159d55d35b517271b42ca50781bfae321ee3edbc240be158396aac2"
+      ],
+      "M": null
+    },
+    "payload_sha256": "ea4e9c478bf3b1268704678b840a1492efd9581181d3ed14b6891f82c7bc4a2d",
+    "lineage_fingerprint": "276b5ad3c39645a7839537697545feb73dc2252a5b13cf3566eb77afed8f6583",
+    "evidence_refs": [],
+    "natural_language": "ETAT: M11 V2 est prêt pour une montée 5→10.\nVITESSE: M11 V2 est optimisé pour les performances.\nAPPREND_BIEN: M11 V2 a été conçu pour apprendre efficacement.\nA_AMELIORER: M11 V2 nécessite des tests supplémentaires pour la stabilité.\nPROPOSE: M11 V2 devrait être testé pour la montée 5→10.\nPROCHAINE_ETAPE: M11 V2 devrait être testé pour la stabilité avant la montée 5→10.\nMESSAGE_DAVID: M11 V2 est prêt pour la montée 5→10, mais des tests supplémentaires sont nécessaires pour la stabilité.",
+    "json_payload": {
+      "ETAT": "M11 V2 est prêt pour une montée 5→10.",
+      "VITESSE": "M11 V2 est optimisé pour les performances.",
+      "APPREND_BIEN": "M11 V2 a été conçu pour apprendre efficacement.",
+      "A_AMELIORER": "M11 V2 nécessite des tests supplémentaires pour la stabilité.",
+      "PROPOSE": "M11 V2 devrait être testé pour la montée 5→10.",
+      "PROCHAINE_ETAPE": "M11 V2 devrait être testé pour la stabilité avant la montée 5→10.",
+      "MESSAGE_DAVID": "M11 V2 est prêt pour la montée 5→10, mais des tests supplémentaires sont nécessaires pour la stabilité."
+    },
+    "created_at": "2026-09-24T15:43:47.802222+00:00"
+  },
+  "spiralix_output_envelope_sha256": "c6c9cc3b6c7e191bbdc40757ce9e21c93cca30cfca77fafb07aa692fcff96e50",
+  "receipt_sha256": "2a1ab7a4ecaa1cdd19535b84989ad26576854050207a75858fbadf66be876c74"
+}
