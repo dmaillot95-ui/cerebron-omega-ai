@@ -1,0 +1,76 @@
+{
+  "schema": "GREEK_AI_INSTALLATION_STATUS_V1",
+  "timestamp_scope": "2026-09-24",
+  "runtime_changed": false,
+  "expected_new_repositories": 21,
+  "installed_scaffolds": [
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172
+  ],
+  "missing_repositories": [
+    162
+  ],
+  "guard_pass_complete": [
+    152,
+    154
+  ],
+  "guard_pending": [
+    153,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172
+  ],
+  "common_scaffold": [
+    "README",
+    "architecture",
+    "project_config",
+    "model_candidates",
+    "memory_contract",
+    "role_benchmark",
+    "training_readiness_gates",
+    "training_source_gate",
+    "tests",
+    "architecture_validator",
+    "architecture_guard",
+    "training_source_guard"
+  ],
+  "rules": [
+    "M6_NEVER_IN_TRAIN",
+    "RUNTIME_FREEZE",
+    "CLAIM_LE_EVIDENCE",
+    "NO_INHERITED_ELYSION_EVIDENCE",
+    "SCAFFOLD_NE_TRAINED_MODEL"
+  ]
+}
