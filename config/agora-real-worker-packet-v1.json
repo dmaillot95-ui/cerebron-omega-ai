@@ -1,0 +1,48 @@
+{
+  "schema": "CEREBRON_AGORA_REAL_WORKER_PACKET_V1",
+  "status": "ACTIVE_CONTRACT",
+  "required": {
+    "mission": [
+      "mission_id",
+      "problem",
+      "started_at",
+      "ended_at"
+    ],
+    "worker": [
+      "worker_id",
+      "parent_ai",
+      "agora_role",
+      "execution_route",
+      "model_or_tool_id",
+      "result_sha256",
+      "lineage_fingerprint",
+      "status"
+    ],
+    "audit": [
+      "auditor_id",
+      "audit_status",
+      "counter_audit_status",
+      "unsupported_claims",
+      "dependency_flags"
+    ],
+    "synthesis": [
+      "capsule_sha256",
+      "agreements",
+      "disagreements",
+      "residuals",
+      "next_actions"
+    ]
+  },
+  "admissible_worker_status": [
+    "EXECUTED_SUCCESS",
+    "CORRELATED_SUCCESS"
+  ],
+  "forbidden_publish_status": [
+    "PLANNED_NOT_EXECUTED",
+    "NON_EXECUTED",
+    "EXECUTED_PENDING_RESULT"
+  ],
+  "evidence_rule": "Correlated workers may contribute search diversity but are not independent evidence.",
+  "training_rule": "RAW_AGORA_NE_TRAIN; only validated GOLD/RED lessons can cross the training gate.",
+  "privacy_rule": "No private payload, prompt secret, credential, private weight or adapter bytes in AGORA packet."
+}
