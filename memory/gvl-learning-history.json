@@ -36,10 +36,26 @@
       "measurement": "5_OF_5_WORKER_QUALITY_PASS_AFTER_SYSTEM_ARCHITECT_REPAIR",
       "critical_regression_count": 0,
       "note": "Same transfer family as failed C1; proves repair but is not counted as a new independent held-out growth cycle."
+    },
+    {
+      "cycle_id": "GVL-C2-B3-CAUSAL-CONFOUNDING",
+      "source_run_id": 36038241741,
+      "task_class": "CAUSAL_CONFOUNDING",
+      "held_out_transfer": true,
+      "benchmark_family": "B3",
+      "quality_before": 0.93,
+      "quality_after": 0.96,
+      "transfer_gain": 0.03,
+      "ratio": 1.032258,
+      "effective_gain": 0.03,
+      "critical_regression_count": 0,
+      "measurement": "CONTROLLED_BASELINE_VS_GVL_SAME_5_WORKERS",
+      "receipt": "receipts/gvl/gvl-b3-36038241741.json",
+      "note": "First distinct held-out positive GVL ratio after repair front. Counts toward geometric-like gate."
     }
   ],
   "current_claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
-  "next_requirement": "Complete distinct held-out GVL A/B benchmark families and obtain at least four consecutive positive transfer ratios with zero critical regression.",
+  "next_requirement": "Obtain at least three more consecutive positive held-out GVL transfer ratios on distinct frozen benchmark families with zero critical regression.",
   "diagnostics": [
     {
       "id": "GVL-DIAG-001",
@@ -52,5 +68,7 @@
   "vector_ontology_version": "V2_32D_EXPLICIT_ROLE_ONTOLOGY",
   "benchmark": "config/gvl-growth-benchmark-v1.json",
   "benchmark_version": "GVL_GROWTH_BENCHMARK_V1",
-  "next_held_out_task_family": "B3_CAUSAL_CONFOUNDING_AFTER_CURRENT_REPAIR_FRONT_CLOSES"
+  "next_held_out_task_family": "B3_CAUSAL_CONFOUNDING_AFTER_CURRENT_REPAIR_FRONT_CLOSES",
+  "positive_consecutive_held_out_ratios": 1,
+  "geometric_like_gate_progress": "1_OF_4"
 }
