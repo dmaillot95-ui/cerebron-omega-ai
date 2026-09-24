@@ -1,2 +1,6 @@
-trigger=2026-09-21T10:35Z
-purpose=launch-five-real-ai-workers-canary
+CEREBRON 5 REAL AI WORKERS CANARY TRIGGER
+campaign=C80
+message=8
+purpose=qualify_GITHUB_ACTIONS_CPU_with_real_HF_pinned_weights
+runtime_changed=false
+zero_paid_overage=public_standard_runner_only
