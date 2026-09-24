@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M14_GATED_PARALLEL_PROGRESS.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M15_QUALITY_FIRST_REPAIR_V3.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -46,11 +46,9 @@
     "m11_plan": "config/m11-prompt-repair-plan-v1.json",
     "status": "BLOCKED_BY_M10"
   },
-  "current_message": "M14_IN_PROGRESS",
+  "current_message": "M15_IN_PROGRESS",
   "active_runs": {
-    "m06_full_rollback": 36017852411,
-    "m10_semantic_audit": 36015400305,
-    "nu_scaffold_guard": 36017814035
+    "m11_quality_pass1_v3": 36027613868
   },
   "m05_result": "7_OF_7_PASS_GUARD_PENDING",
   "m06": "PREPARED_NOT_TRIGGERED",
@@ -60,5 +58,12 @@
   "completed": {
     "m05": "COMPLETE_GUARD_PASS",
     "m11_preflight": "SUCCESS"
-  }
+  },
+  "quality_first": {
+    "current_scale": 5,
+    "pass1": "RUNNING",
+    "transfer_pass2": "BLOCKED_BY_PASS1",
+    "scale_5_to_10": "HOLD"
+  },
+  "next_action": "Inspect M11 V3 deterministic score; if pass1 passes, run transfer pass2 at scale 5; otherwise repair again without scaling."
 }
