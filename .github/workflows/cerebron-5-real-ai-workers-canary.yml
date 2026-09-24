@@ -47,6 +47,9 @@ jobs:
           (p/"receipt.json").write_text(json.dumps(r,indent=2)+"\n")
           print(json.dumps({k:r.get(k) for k in ["real_execution","llm_inference","inference","output","latency_s","receipt_sha256"]}))
           if not r["llm_inference"]: raise SystemExit(2)
+      - name: Wrap receipt in mandatory SPIRALIX
+        if: always()
+        run: python tools/spiralix_receipt_bridge.py --receipt "artifacts/${{ matrix.worker }}/receipt.json" --target BURST20 --message-type RESULT
       - uses: actions/upload-artifact@v4
         if: always()
         with:
