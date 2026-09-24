@@ -31,11 +31,14 @@ class PlatformTests(unittest.TestCase):
         self.assertEqual(result["revision"], MODEL_REVISION)
         self.assertAlmostEqual(sum(result["scores"].values()), 1.0, places=5)
 
-    def test_registry_has_exactly_144_unique_farms(self):
+    def test_registry_matches_declared_cap_and_is_contiguous(self):
         root = PLATFORM.parent
-        farms = json.loads((root / "config/farms.json").read_text())["farms"]
-        self.assertEqual(len(farms), 144)
-        self.assertEqual({f["id"] for f in farms}, set(range(1, 145)))
+        registry = json.loads((root / "config/farms.json").read_text())
+        farms = registry["farms"]
+        expected = registry["max_farms"]
+        self.assertEqual(len(farms), expected)
+        self.assertEqual({f["id"] for f in farms}, set(range(1, expected + 1)))
+        self.assertEqual(registry["policy"]["farm_cap"], expected)
 
     def test_rover_mission_produces_evidence_and_artifact(self):
         created = create_mission("Concevoir un rover lunaire autonome et calculer sa traction")
