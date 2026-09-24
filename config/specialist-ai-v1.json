@@ -186,7 +186,7 @@
     "HF_PRIVATE_MEMORY_DEFAULT_DURABLE_BACKEND",
     "REGISTRY_COUNT_IS_DYNAMIC_VERIFIED_STATE",
     "NEW_FARM_REQUIRES_VERIFIED_REPOSITORY_BEFORE_REGISTRY_INSERT",
-    "F145_F146_ARE_REGISTERED_REAL_REPOSITORIES"
+    "F145_F151_NATIVE_AI_REPOSITORIES_ARE_REGISTERED_REAL_REPOSITORIES"
   ],
   "AELYS": {
     "mission": "HUMAN_DIALOGUE_COORDINATION",
@@ -316,5 +316,80 @@
       "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
       "AUDIT_OUTPUT_NOT_AUTO_GOLD"
     ]
+  },
+  "SAELION": {
+    "mission": "NATIVE_DUAL_CORE_EXPLORATION_LEARNING_SELECTION_COMPRESSION",
+    "status": "REGISTERED_F147_PENDING_ACTIVATION",
+    "farm_id": 147,
+    "memory_namespace": "SAELION",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "PLANNED_SHARED_ARCHITECTURE_ABLATION_REQUIRED",
+    "activation_gates": [
+      "MEMORY_CANARY",
+      "RUNTIME_OR_ROLE_ARCHITECTURE",
+      "COLD_BENCHMARK",
+      "RED_TEAM"
+    ],
+    "active": false
+  },
+  "ALPHA": {
+    "mission": "NATIVE_DUAL_CORE_DIVERGENCE_OPENING_CONSTRUCTION",
+    "status": "REGISTERED_F148_PENDING_ACTIVATION",
+    "farm_id": 148,
+    "memory_namespace": "ALPHA",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "PLANNED_SHARED_ARCHITECTURE_ABLATION_REQUIRED",
+    "activation_gates": [
+      "MEMORY_CANARY",
+      "RUNTIME_OR_ROLE_ARCHITECTURE",
+      "COLD_BENCHMARK",
+      "RED_TEAM"
+    ],
+    "active": false
+  },
+  "OMEGA": {
+    "mission": "NATIVE_DUAL_CORE_PROOF_AUDIT_FALSIFICATION",
+    "status": "REGISTERED_F149_PENDING_ACTIVATION",
+    "farm_id": 149,
+    "memory_namespace": "OMEGA",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "PLANNED_SHARED_ARCHITECTURE_ABLATION_REQUIRED",
+    "activation_gates": [
+      "MEMORY_CANARY",
+      "RUNTIME_OR_ROLE_ARCHITECTURE",
+      "COLD_BENCHMARK",
+      "RED_TEAM"
+    ],
+    "active": false
+  },
+  "DELTA": {
+    "mission": "NATIVE_DUAL_CORE_SCIENTIFIC_MODELING_SIMULATION_VALIDATION",
+    "status": "REGISTERED_F150_PENDING_ACTIVATION",
+    "farm_id": 150,
+    "memory_namespace": "DELTA",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "PLANNED_SHARED_ARCHITECTURE_ABLATION_REQUIRED",
+    "activation_gates": [
+      "MEMORY_CANARY",
+      "RUNTIME_OR_ROLE_ARCHITECTURE",
+      "COLD_BENCHMARK",
+      "RED_TEAM"
+    ],
+    "active": false
+  },
+  "NEXUS": {
+    "mission": "NATIVE_DUAL_CORE_KNOWLEDGE_CONNECTION_ORCHESTRATION",
+    "status": "REGISTERED_F151_PENDING_ACTIVATION",
+    "farm_id": 151,
+    "memory_namespace": "NEXUS",
+    "memory_backend": "cerebron-omega/cerebron-private-memory",
+    "dual_core_policy": "PLANNED_SHARED_ARCHITECTURE_ABLATION_REQUIRED",
+    "activation_gates": [
+      "MEMORY_CANARY",
+      "RUNTIME_OR_ROLE_ARCHITECTURE",
+      "COLD_BENCHMARK",
+      "RED_TEAM"
+    ],
+    "active": false
   }
 }
