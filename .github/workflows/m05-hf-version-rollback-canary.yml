@@ -14,7 +14,7 @@ jobs:
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_REPO: cerebron-omega/cerebron-private-memory
-      M03_RUN: '35995124491'
+      M03_RUN: '35996621664'
       M05_RUN: ${{ github.run_id }}
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +32,6 @@ jobs:
           token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
           m03_run=os.environ["M03_RUN"]; m05_run=os.environ["M05_RUN"]
           cfg=json.loads(Path("config/m05-rollback-sample-v1.json").read_text())
-          m03=json.loads(Path("receipts/p03/all-ai-hf-m03.json").read_text())
           old={x["ai_id"]:x for x in m03["results"] if x.get("status")=="PASS"}
           api=HfApi(token=token)
           info=api.repo_info(repo_id=repo,repo_type="model")
@@ -94,7 +93,10 @@ jobs:
 
           out["summary"]={"sample":len(out["results"]),"passed":sum(x["status"]=="PASS" for x in out["results"]),
                           "failed":sum(x["status"]=="FAIL" for x in out["results"])}
-          Path("receipts/p03/m05-hf-rollback.json").write_text(json.dumps(out,indent=2)+"\n")
+          Path("receipts/p03/m05-hf-rollback").mkdir(parents=True,exist_ok=True)
+          versioned=Path("receipts/p03/m05-hf-rollback")/f"{m05_run}.json"
+          versioned.write_text(json.dumps(out,indent=2)+"\n")
+          Path("receipts/p03/m05-hf-rollback-latest.json").write_text(json.dumps({"schema":"CEREBRON_M05_ROLLBACK_LATEST_V1","run_id":m05_run,"receipt":str(versioned)},indent=2)+"\n")
           if out["status"]!="PASS": raise SystemExit(2)
           PY
       - name: Persist receipt
@@ -102,7 +104,7 @@ jobs:
         run: |
           git config user.name cerebron-bot
           git config user.email actions@users.noreply.github.com
-          git add receipts/p03/m05-hf-rollback.json
+          git add receipts/p03/m05-hf-rollback/ receipts/p03/m05-hf-rollback-latest.json
           git diff --cached --quiet && exit 0
           git commit -m "M05 receipt: HF version and rollback canary"
           for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
