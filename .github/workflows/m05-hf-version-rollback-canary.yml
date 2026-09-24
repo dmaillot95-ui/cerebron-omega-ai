@@ -32,6 +32,9 @@ jobs:
           token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
           m03_run=os.environ["M03_RUN"]; m05_run=os.environ["M05_RUN"]
           cfg=json.loads(Path("config/m05-rollback-sample-v1.json").read_text())
+          m03=json.loads(Path(cfg["parent_receipt"]).read_text())
+          if str(m03.get("run_id"))!=m03_run:
+              raise SystemExit("PINNED_PARENT_RUN_MISMATCH")
           old={x["ai_id"]:x for x in m03["results"] if x.get("status")=="PASS"}
           api=HfApi(token=token)
           info=api.repo_info(repo_id=repo,repo_type="model")
