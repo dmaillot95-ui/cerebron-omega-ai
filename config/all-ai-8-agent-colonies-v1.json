@@ -30,7 +30,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A1_EXPLORER",
@@ -43,7 +47,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A2_ANALYST",
@@ -56,7 +64,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A3_EXECUTOR",
@@ -69,7 +81,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A4_AUDITOR",
@@ -82,7 +98,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A5_COUNTER_AUDITOR",
@@ -95,7 +115,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A6_MEMORY_KEEPER",
@@ -108,7 +132,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "CEREBRON:A7_SYNTHESIZER",
@@ -121,12 +149,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "CEREBRON:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "SAPHEA",
@@ -146,7 +180,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A1_EXPLORER",
@@ -159,7 +197,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A2_ANALYST",
@@ -172,7 +214,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A3_EXECUTOR",
@@ -185,7 +231,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A4_AUDITOR",
@@ -198,7 +248,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A5_COUNTER_AUDITOR",
@@ -211,7 +265,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A6_MEMORY_KEEPER",
@@ -224,7 +282,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA:A7_SYNTHESIZER",
@@ -237,12 +299,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "SPIRALION",
@@ -262,7 +330,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A1_EXPLORER",
@@ -275,7 +347,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A2_ANALYST",
@@ -288,7 +364,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A3_EXECUTOR",
@@ -301,7 +381,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A4_AUDITOR",
@@ -314,7 +398,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A5_COUNTER_AUDITOR",
@@ -327,7 +415,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A6_MEMORY_KEEPER",
@@ -340,7 +432,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SPIRALION:A7_SYNTHESIZER",
@@ -353,12 +449,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SPIRALION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "ETHERION",
@@ -378,7 +480,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A1_EXPLORER",
@@ -391,7 +497,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A2_ANALYST",
@@ -404,7 +514,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A3_EXECUTOR",
@@ -417,7 +531,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A4_AUDITOR",
@@ -430,7 +548,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A5_COUNTER_AUDITOR",
@@ -443,7 +565,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A6_MEMORY_KEEPER",
@@ -456,7 +582,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ETHERION:A7_SYNTHESIZER",
@@ -469,12 +599,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ETHERION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "HYPERION",
@@ -494,7 +630,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A1_EXPLORER",
@@ -507,7 +647,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A2_ANALYST",
@@ -520,7 +664,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A3_EXECUTOR",
@@ -533,7 +681,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A4_AUDITOR",
@@ -546,7 +698,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A5_COUNTER_AUDITOR",
@@ -559,7 +715,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A6_MEMORY_KEEPER",
@@ -572,7 +732,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "HYPERION:A7_SYNTHESIZER",
@@ -585,12 +749,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "HYPERION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "ASTRION",
@@ -610,7 +780,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A1_EXPLORER",
@@ -623,7 +797,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A2_ANALYST",
@@ -636,7 +814,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A3_EXECUTOR",
@@ -649,7 +831,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A4_AUDITOR",
@@ -662,7 +848,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A5_COUNTER_AUDITOR",
@@ -675,7 +865,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A6_MEMORY_KEEPER",
@@ -688,7 +882,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ASTRION:A7_SYNTHESIZER",
@@ -701,12 +899,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ASTRION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "METRION",
@@ -726,7 +930,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A1_EXPLORER",
@@ -739,7 +947,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A2_ANALYST",
@@ -752,7 +964,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A3_EXECUTOR",
@@ -765,7 +981,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A4_AUDITOR",
@@ -778,7 +998,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A5_COUNTER_AUDITOR",
@@ -791,7 +1015,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A6_MEMORY_KEEPER",
@@ -804,7 +1032,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "METRION:A7_SYNTHESIZER",
@@ -817,12 +1049,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "METRION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "AFAH",
@@ -842,7 +1080,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A1_EXPLORER",
@@ -855,7 +1097,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A2_ANALYST",
@@ -868,7 +1114,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A3_EXECUTOR",
@@ -881,7 +1131,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A4_AUDITOR",
@@ -894,7 +1148,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A5_COUNTER_AUDITOR",
@@ -907,7 +1165,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A6_MEMORY_KEEPER",
@@ -920,7 +1182,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AFAH:A7_SYNTHESIZER",
@@ -933,12 +1199,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AFAH:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "AELYS",
@@ -958,7 +1230,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A1_EXPLORER",
@@ -971,7 +1247,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A2_ANALYST",
@@ -984,7 +1264,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A3_EXECUTOR",
@@ -997,7 +1281,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A4_AUDITOR",
@@ -1010,7 +1298,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A5_COUNTER_AUDITOR",
@@ -1023,7 +1315,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A6_MEMORY_KEEPER",
@@ -1036,7 +1332,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "AELYS:A7_SYNTHESIZER",
@@ -1049,12 +1349,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "AELYS:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "ELYRA",
@@ -1074,7 +1380,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A1_EXPLORER",
@@ -1087,7 +1397,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A2_ANALYST",
@@ -1100,7 +1414,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A3_EXECUTOR",
@@ -1113,7 +1431,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A4_AUDITOR",
@@ -1126,7 +1448,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A5_COUNTER_AUDITOR",
@@ -1139,7 +1465,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A6_MEMORY_KEEPER",
@@ -1152,7 +1482,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYRA:A7_SYNTHESIZER",
@@ -1165,12 +1499,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYRA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "SAPHEA_MICRO",
@@ -1190,7 +1530,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A1_EXPLORER",
@@ -1203,7 +1547,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A2_ANALYST",
@@ -1216,7 +1564,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A3_EXECUTOR",
@@ -1229,7 +1581,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A4_AUDITOR",
@@ -1242,7 +1598,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A5_COUNTER_AUDITOR",
@@ -1255,7 +1615,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A6_MEMORY_KEEPER",
@@ -1268,7 +1632,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAPHEA_MICRO:A7_SYNTHESIZER",
@@ -1281,12 +1649,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAPHEA_MICRO:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "ELYSION",
@@ -1306,7 +1680,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A1_EXPLORER",
@@ -1319,7 +1697,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A2_ANALYST",
@@ -1332,7 +1714,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A3_EXECUTOR",
@@ -1345,7 +1731,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A4_AUDITOR",
@@ -1358,7 +1748,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A5_COUNTER_AUDITOR",
@@ -1371,7 +1765,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A6_MEMORY_KEEPER",
@@ -1384,7 +1782,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSION:A7_SYNTHESIZER",
@@ -1397,12 +1799,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "ELYSIUM",
@@ -1422,7 +1830,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A1_EXPLORER",
@@ -1435,7 +1847,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A2_ANALYST",
@@ -1448,7 +1864,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A3_EXECUTOR",
@@ -1461,7 +1881,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A4_AUDITOR",
@@ -1474,7 +1898,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A5_COUNTER_AUDITOR",
@@ -1487,7 +1915,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A6_MEMORY_KEEPER",
@@ -1500,7 +1932,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "ELYSIUM:A7_SYNTHESIZER",
@@ -1513,12 +1949,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "ELYSIUM:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "SAELION",
@@ -1538,7 +1980,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A1_EXPLORER",
@@ -1551,7 +1997,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A2_ANALYST",
@@ -1564,7 +2014,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A3_EXECUTOR",
@@ -1577,7 +2031,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A4_AUDITOR",
@@ -1590,7 +2048,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A5_COUNTER_AUDITOR",
@@ -1603,7 +2065,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A6_MEMORY_KEEPER",
@@ -1616,7 +2082,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "SAELION:A7_SYNTHESIZER",
@@ -1629,12 +2099,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "SAELION:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "NEXUS",
@@ -1654,7 +2130,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A1_EXPLORER",
@@ -1667,7 +2147,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A2_ANALYST",
@@ -1680,7 +2164,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A3_EXECUTOR",
@@ -1693,7 +2181,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A4_AUDITOR",
@@ -1706,7 +2198,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A5_COUNTER_AUDITOR",
@@ -1719,7 +2215,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A6_MEMORY_KEEPER",
@@ -1732,7 +2232,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "NEXUS:A7_SYNTHESIZER",
@@ -1745,12 +2249,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "NEXUS:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F148-ALPHA",
@@ -1770,7 +2280,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A1_EXPLORER",
@@ -1783,7 +2297,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A2_ANALYST",
@@ -1796,7 +2314,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A3_EXECUTOR",
@@ -1809,7 +2331,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A4_AUDITOR",
@@ -1822,7 +2348,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A5_COUNTER_AUDITOR",
@@ -1835,7 +2365,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A6_MEMORY_KEEPER",
@@ -1848,7 +2382,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F148-ALPHA:A7_SYNTHESIZER",
@@ -1861,12 +2399,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F148-ALPHA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F152-BETA",
@@ -1886,7 +2430,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A1_EXPLORER",
@@ -1899,7 +2447,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A2_ANALYST",
@@ -1912,7 +2464,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A3_EXECUTOR",
@@ -1925,7 +2481,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A4_AUDITOR",
@@ -1938,7 +2498,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A5_COUNTER_AUDITOR",
@@ -1951,7 +2515,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A6_MEMORY_KEEPER",
@@ -1964,7 +2532,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F152-BETA:A7_SYNTHESIZER",
@@ -1977,12 +2549,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F152-BETA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F153-GAMMA",
@@ -2002,7 +2580,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A1_EXPLORER",
@@ -2015,7 +2597,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A2_ANALYST",
@@ -2028,7 +2614,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A3_EXECUTOR",
@@ -2041,7 +2631,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A4_AUDITOR",
@@ -2054,7 +2648,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A5_COUNTER_AUDITOR",
@@ -2067,7 +2665,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A6_MEMORY_KEEPER",
@@ -2080,7 +2682,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F153-GAMMA:A7_SYNTHESIZER",
@@ -2093,12 +2699,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F153-GAMMA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F150-DELTA",
@@ -2118,7 +2730,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A1_EXPLORER",
@@ -2131,7 +2747,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A2_ANALYST",
@@ -2144,7 +2764,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A3_EXECUTOR",
@@ -2157,7 +2781,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A4_AUDITOR",
@@ -2170,7 +2798,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A5_COUNTER_AUDITOR",
@@ -2183,7 +2815,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A6_MEMORY_KEEPER",
@@ -2196,7 +2832,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F150-DELTA:A7_SYNTHESIZER",
@@ -2209,12 +2849,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F150-DELTA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F154-EPSILON",
@@ -2234,7 +2880,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A1_EXPLORER",
@@ -2247,7 +2897,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A2_ANALYST",
@@ -2260,7 +2914,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A3_EXECUTOR",
@@ -2273,7 +2931,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A4_AUDITOR",
@@ -2286,7 +2948,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A5_COUNTER_AUDITOR",
@@ -2299,7 +2965,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A6_MEMORY_KEEPER",
@@ -2312,7 +2982,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F154-EPSILON:A7_SYNTHESIZER",
@@ -2325,12 +2999,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F154-EPSILON:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F155-ZETA",
@@ -2350,7 +3030,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A1_EXPLORER",
@@ -2363,7 +3047,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A2_ANALYST",
@@ -2376,7 +3064,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A3_EXECUTOR",
@@ -2389,7 +3081,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A4_AUDITOR",
@@ -2402,7 +3098,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A5_COUNTER_AUDITOR",
@@ -2415,7 +3115,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A6_MEMORY_KEEPER",
@@ -2428,7 +3132,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F155-ZETA:A7_SYNTHESIZER",
@@ -2441,12 +3149,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F155-ZETA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F156-ETA",
@@ -2466,7 +3180,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A1_EXPLORER",
@@ -2479,7 +3197,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A2_ANALYST",
@@ -2492,7 +3214,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A3_EXECUTOR",
@@ -2505,7 +3231,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A4_AUDITOR",
@@ -2518,7 +3248,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A5_COUNTER_AUDITOR",
@@ -2531,7 +3265,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A6_MEMORY_KEEPER",
@@ -2544,7 +3282,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F156-ETA:A7_SYNTHESIZER",
@@ -2557,12 +3299,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F156-ETA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F157-THETA",
@@ -2582,7 +3330,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A1_EXPLORER",
@@ -2595,7 +3347,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A2_ANALYST",
@@ -2608,7 +3364,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A3_EXECUTOR",
@@ -2621,7 +3381,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A4_AUDITOR",
@@ -2634,7 +3398,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A5_COUNTER_AUDITOR",
@@ -2647,7 +3415,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A6_MEMORY_KEEPER",
@@ -2660,7 +3432,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F157-THETA:A7_SYNTHESIZER",
@@ -2673,12 +3449,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F157-THETA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F158-IOTA",
@@ -2698,7 +3480,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A1_EXPLORER",
@@ -2711,7 +3497,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A2_ANALYST",
@@ -2724,7 +3514,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A3_EXECUTOR",
@@ -2737,7 +3531,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A4_AUDITOR",
@@ -2750,7 +3548,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A5_COUNTER_AUDITOR",
@@ -2763,7 +3565,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A6_MEMORY_KEEPER",
@@ -2776,7 +3582,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F158-IOTA:A7_SYNTHESIZER",
@@ -2789,12 +3599,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F158-IOTA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F159-KAPPA",
@@ -2814,7 +3630,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A1_EXPLORER",
@@ -2827,7 +3647,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A2_ANALYST",
@@ -2840,7 +3664,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A3_EXECUTOR",
@@ -2853,7 +3681,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A4_AUDITOR",
@@ -2866,7 +3698,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A5_COUNTER_AUDITOR",
@@ -2879,7 +3715,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A6_MEMORY_KEEPER",
@@ -2892,7 +3732,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F159-KAPPA:A7_SYNTHESIZER",
@@ -2905,12 +3749,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F159-KAPPA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F160-LAMBDA",
@@ -2930,7 +3780,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A1_EXPLORER",
@@ -2943,7 +3797,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A2_ANALYST",
@@ -2956,7 +3814,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A3_EXECUTOR",
@@ -2969,7 +3831,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A4_AUDITOR",
@@ -2982,7 +3848,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A5_COUNTER_AUDITOR",
@@ -2995,7 +3865,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A6_MEMORY_KEEPER",
@@ -3008,7 +3882,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F160-LAMBDA:A7_SYNTHESIZER",
@@ -3021,12 +3899,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F160-LAMBDA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F161-MU",
@@ -3046,7 +3930,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A1_EXPLORER",
@@ -3059,7 +3947,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A2_ANALYST",
@@ -3072,7 +3964,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A3_EXECUTOR",
@@ -3085,7 +3981,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A4_AUDITOR",
@@ -3098,7 +3998,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A5_COUNTER_AUDITOR",
@@ -3111,7 +4015,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A6_MEMORY_KEEPER",
@@ -3124,7 +4032,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F161-MU:A7_SYNTHESIZER",
@@ -3137,12 +4049,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F161-MU:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F162-NU",
@@ -3162,7 +4080,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A1_EXPLORER",
@@ -3175,7 +4097,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A2_ANALYST",
@@ -3188,7 +4114,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A3_EXECUTOR",
@@ -3201,7 +4131,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A4_AUDITOR",
@@ -3214,7 +4148,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A5_COUNTER_AUDITOR",
@@ -3227,7 +4165,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A6_MEMORY_KEEPER",
@@ -3240,7 +4182,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         },
         {
           "agent_id": "F162-NU:A7_SYNTHESIZER",
@@ -3253,12 +4199,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F162-NU:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": false,
+          "transport": "PREP_ONLY_NO_EXECUTION"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F163-XI",
@@ -3278,7 +4230,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A1_EXPLORER",
@@ -3291,7 +4247,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A2_ANALYST",
@@ -3304,7 +4264,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A3_EXECUTOR",
@@ -3317,7 +4281,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A4_AUDITOR",
@@ -3330,7 +4298,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A5_COUNTER_AUDITOR",
@@ -3343,7 +4315,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A6_MEMORY_KEEPER",
@@ -3356,7 +4332,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F163-XI:A7_SYNTHESIZER",
@@ -3369,12 +4349,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F163-XI:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F164-OMICRON",
@@ -3394,7 +4380,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A1_EXPLORER",
@@ -3407,7 +4397,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A2_ANALYST",
@@ -3420,7 +4414,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A3_EXECUTOR",
@@ -3433,7 +4431,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A4_AUDITOR",
@@ -3446,7 +4448,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A5_COUNTER_AUDITOR",
@@ -3459,7 +4465,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A6_MEMORY_KEEPER",
@@ -3472,7 +4482,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F164-OMICRON:A7_SYNTHESIZER",
@@ -3485,12 +4499,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F164-OMICRON:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F165-PI",
@@ -3510,7 +4530,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A1_EXPLORER",
@@ -3523,7 +4547,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A2_ANALYST",
@@ -3536,7 +4564,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A3_EXECUTOR",
@@ -3549,7 +4581,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A4_AUDITOR",
@@ -3562,7 +4598,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A5_COUNTER_AUDITOR",
@@ -3575,7 +4615,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A6_MEMORY_KEEPER",
@@ -3588,7 +4632,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F165-PI:A7_SYNTHESIZER",
@@ -3601,12 +4649,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F165-PI:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F166-RHO",
@@ -3626,7 +4680,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A1_EXPLORER",
@@ -3639,7 +4697,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A2_ANALYST",
@@ -3652,7 +4714,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A3_EXECUTOR",
@@ -3665,7 +4731,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A4_AUDITOR",
@@ -3678,7 +4748,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A5_COUNTER_AUDITOR",
@@ -3691,7 +4765,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A6_MEMORY_KEEPER",
@@ -3704,7 +4782,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F166-RHO:A7_SYNTHESIZER",
@@ -3717,12 +4799,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F166-RHO:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F167-SIGMA",
@@ -3742,7 +4830,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A1_EXPLORER",
@@ -3755,7 +4847,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A2_ANALYST",
@@ -3768,7 +4864,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A3_EXECUTOR",
@@ -3781,7 +4881,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A4_AUDITOR",
@@ -3794,7 +4898,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A5_COUNTER_AUDITOR",
@@ -3807,7 +4915,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A6_MEMORY_KEEPER",
@@ -3820,7 +4932,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F167-SIGMA:A7_SYNTHESIZER",
@@ -3833,12 +4949,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F167-SIGMA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F168-TAU",
@@ -3858,7 +4980,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A1_EXPLORER",
@@ -3871,7 +4997,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A2_ANALYST",
@@ -3884,7 +5014,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A3_EXECUTOR",
@@ -3897,7 +5031,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A4_AUDITOR",
@@ -3910,7 +5048,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A5_COUNTER_AUDITOR",
@@ -3923,7 +5065,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A6_MEMORY_KEEPER",
@@ -3936,7 +5082,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F168-TAU:A7_SYNTHESIZER",
@@ -3949,12 +5099,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F168-TAU:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F169-UPSILON",
@@ -3974,7 +5130,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A1_EXPLORER",
@@ -3987,7 +5147,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A2_ANALYST",
@@ -4000,7 +5164,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A3_EXECUTOR",
@@ -4013,7 +5181,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A4_AUDITOR",
@@ -4026,7 +5198,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A5_COUNTER_AUDITOR",
@@ -4039,7 +5215,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A6_MEMORY_KEEPER",
@@ -4052,7 +5232,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F169-UPSILON:A7_SYNTHESIZER",
@@ -4065,12 +5249,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F169-UPSILON:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F170-PHI",
@@ -4090,7 +5280,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A1_EXPLORER",
@@ -4103,7 +5297,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A2_ANALYST",
@@ -4116,7 +5314,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A3_EXECUTOR",
@@ -4129,7 +5331,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A4_AUDITOR",
@@ -4142,7 +5348,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A5_COUNTER_AUDITOR",
@@ -4155,7 +5365,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A6_MEMORY_KEEPER",
@@ -4168,7 +5382,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F170-PHI:A7_SYNTHESIZER",
@@ -4181,12 +5399,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F170-PHI:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F171-CHI",
@@ -4206,7 +5430,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A1_EXPLORER",
@@ -4219,7 +5447,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A2_ANALYST",
@@ -4232,7 +5464,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A3_EXECUTOR",
@@ -4245,7 +5481,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A4_AUDITOR",
@@ -4258,7 +5498,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A5_COUNTER_AUDITOR",
@@ -4271,7 +5515,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A6_MEMORY_KEEPER",
@@ -4284,7 +5532,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F171-CHI:A7_SYNTHESIZER",
@@ -4297,12 +5549,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F171-CHI:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F172-PSI",
@@ -4322,7 +5580,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A1_EXPLORER",
@@ -4335,7 +5597,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A2_ANALYST",
@@ -4348,7 +5614,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A3_EXECUTOR",
@@ -4361,7 +5631,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A4_AUDITOR",
@@ -4374,7 +5648,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A5_COUNTER_AUDITOR",
@@ -4387,7 +5665,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A6_MEMORY_KEEPER",
@@ -4400,7 +5682,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F172-PSI:A7_SYNTHESIZER",
@@ -4413,12 +5699,18 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F172-PSI:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     },
     {
       "ai_id": "F149-OMEGA",
@@ -4438,7 +5730,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A0_CHIEF",
+          "spiralix_role_glyph": "A₀",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A1_EXPLORER",
@@ -4451,7 +5747,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A1_EXPLORER",
+          "spiralix_role_glyph": "A₁",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A2_ANALYST",
@@ -4464,7 +5764,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A2_ANALYST",
+          "spiralix_role_glyph": "A₂",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A3_EXECUTOR",
@@ -4477,7 +5781,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A3_EXECUTOR",
+          "spiralix_role_glyph": "A₃",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A4_AUDITOR",
@@ -4490,7 +5798,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A4_AUDITOR",
+          "spiralix_role_glyph": "A₄",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A5_COUNTER_AUDITOR",
@@ -4503,7 +5815,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A5_COUNTER_AUDITOR",
+          "spiralix_role_glyph": "A₅",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A6_MEMORY_KEEPER",
@@ -4516,7 +5832,11 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A6_MEMORY_KEEPER",
+          "spiralix_role_glyph": "A₆",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         },
         {
           "agent_id": "F149-OMEGA:A7_SYNTHESIZER",
@@ -4529,12 +5849,26 @@
             "log_or_result",
             "artifact_or_receipt",
             "provenance"
-          ]
+          ],
+          "spiralix_endpoint_id": "F149-OMEGA:A7_SYNTHESIZER",
+          "spiralix_role_glyph": "A₇",
+          "spiralix_required": true,
+          "transport": "SPIRALIX_ENVELOPE_V1"
         }
       ],
       "local_compression": "8_SLOTS_TO_1_LOCAL_CAPSULE",
       "hf_writer": "A6_MEMORY_KEEPER",
-      "runtime_changed": false
+      "runtime_changed": false,
+      "spiralix_mode": "CEREBRON-M",
+      "spiralix_bus": "config/spiralix-universal-bus-v1.json"
     }
-  ]
+  ],
+  "spiralix": {
+    "status": "MANDATORY_FOR_AVAILABLE_ENDPOINTS",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "bus": "config/spiralix-universal-bus-v1.json",
+    "active_endpoints": 304,
+    "prep_only_endpoints": 8
+  }
 }
