@@ -1267,5 +1267,10 @@
     "QUALITY_BEFORE_QUANTITY",
     "TRANSFER_BEFORE_GENERALITY",
     "CLAIM_LE_EVIDENCE"
-  ]
+  ],
+  "lesson_memory": {
+    "schema": "config/gvl-lesson-capsule-schema-v1.json",
+    "index": "memory/gvl-lesson-index.json",
+    "rule": "Promoted lessons are compact invariant capsules; duplicate invariants are merged/referenced, not copied."
+  }
 }
