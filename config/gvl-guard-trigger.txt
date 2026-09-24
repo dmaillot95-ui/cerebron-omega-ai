@@ -1,4 +1,5 @@
-GVL V2 24D GUARD
+GVL V2 32D AUTHORITATIVE GUARD
 schema=CEREBRON_GEOMETRIC_VECTOR_LEARNING_V2
-dimension=24
+registry=config/gvl-specialization-registry-v2.json
+dimension=32
 runtime_changed=false
