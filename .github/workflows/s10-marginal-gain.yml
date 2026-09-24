@@ -1,0 +1,112 @@
+name: S10 Marginal Gain 5-to-10 Test
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/s10-marginal-gain-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  wave_a:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - SAPHEA-A
+          - SAPHEA-B
+          - SAPHEA-C
+          - SPIRALION-A
+          - ETHERION-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-smollm3-3b-a07cc9a04f16550a088caea529712d1d335b0ac1
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute baseline worker
+        run: python tools/s10_marginal_worker.py --worker "${{ matrix.worker }}" --wave A --run-id "${{ github.run_id }}" --output "artifacts/A/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s10-wave-a-${{ matrix.worker }}
+          path: artifacts/A/${{ matrix.worker }}/receipt.json
+
+  wave_b:
+    needs: wave_a
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker:
+          - METRION-A
+          - RHO-A
+          - XI-A
+          - PSI-A
+          - TAU-A
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-smollm3-3b-a07cc9a04f16550a088caea529712d1d335b0ac1
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute GVL-complementary worker
+        run: python tools/s10_marginal_worker.py --worker "${{ matrix.worker }}" --wave B --run-id "${{ github.run_id }}" --output "artifacts/B/${{ matrix.worker }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s10-wave-b-${{ matrix.worker }}
+          path: artifacts/B/${{ matrix.worker }}/receipt.json
+
+  score:
+    needs:
+      - wave_a
+      - wave_b
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: s10-wave-a-*
+          path: downloaded/A
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: s10-wave-b-*
+          path: downloaded/B
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Score marginal information gain
+        run: python tools/s10_marginal_score.py --wave-a-glob "downloaded/A/**/receipt.json" --wave-b-glob "downloaded/B/**/receipt.json" --run-id "${{ github.run_id }}" --output "receipts/workers/s10-marginal-gain-${{ github.run_id }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s10-marginal-score-${{ github.run_id }}
+          path: receipts/workers/s10-marginal-gain-${{ github.run_id }}.json
+      - name: Persist S10 score
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/workers/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: S10 marginal information gain"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
