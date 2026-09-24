@@ -34,18 +34,36 @@
     {
       "id": "C80-M04",
       "title": "F66/F74 pointer and rollback rollout",
-      "status": "GUARD_PENDING",
+      "status": "COMPLETE",
       "objective": "After per-AI HF round-trip passes, verify public opaque pointer, F66/F74 identity and rollback for each available AI family without exposing private payload.",
       "guard_run": 35996844931,
       "f74_commit": "3dcebd021776740fc66fbffa4f55888afba74f55",
       "f66_commit": "4025a7fc89ee94f109a05bfee94bd579b1839416",
-      "result": "38_F74_POINTERS_AND_38_F66_INDEXES_CREATED"
+      "result": "38_F74_POINTERS_AND_38_F66_INDEXES_VERIFIED",
+      "guard_job": 107623684781,
+      "guard_conclusion": "success"
     },
     {
       "id": "C80-M05",
       "title": "Second-version rollback test",
-      "status": "BLOCKED_BY_M04_GUARD",
-      "objective": "Create a second version for representative AI families, verify parent/rollback to M03 without destructive overwrite, then generalize if PASS."
+      "status": "ROLLBACK_CANARY_RUNNING",
+      "objective": "Write M05 second private versions and prove M03 rollback targets remain readable and SHA-identical.",
+      "guard_run": 35997393013,
+      "sample": [
+        "CEREBRON",
+        "SAPHEA",
+        "ELYSION",
+        "ELYRA",
+        "F148-ALPHA",
+        "F167-SIGMA",
+        "F149-OMEGA"
+      ]
+    },
+    {
+      "id": "C80-M06",
+      "title": "Generalize second-version rollback to all available AIs",
+      "status": "BLOCKED_BY_M05",
+      "objective": "If M05 sample passes, expand version-parent-rollback protocol to all 38 available AIs."
     }
   ],
   "updated_at": "2026-09-24",
