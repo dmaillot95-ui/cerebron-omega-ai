@@ -1,0 +1,42 @@
+{
+  "schema": "CEREBRON_80_M17_PASS2_TARGETED_REPAIR",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 17,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "pass1": {
+    "run_id": 36027613868,
+    "quality_pass1": true,
+    "worker_quality_passes": 5,
+    "spiralix_workers": 5,
+    "no_prompt_echo_workers": 5,
+    "false_independence_workers": 0
+  },
+  "pass2": {
+    "run_id": 36028613557,
+    "official_receipt": "receipts/workers/s5-quality-transfer-pass2-v3-36028613557.json",
+    "independent_audit": "receipts/workers/s5-quality-transfer-pass2-v3-independent-audit-36028613557.json",
+    "quality_pass2": false,
+    "worker_quality_passes": 4,
+    "failed_worker": "SAPHEA-A",
+    "failed_role": "SYSTEM_ARCHITECT",
+    "failure": "Incorrect evidence hierarchy: simulation-alone validation conditionally promoted to real-system validation."
+  },
+  "repair": {
+    "overlay": "config/role-overlays-v1.json",
+    "canary_run": 36030254643,
+    "canary_problem": "FEA structural simulation predicts FoS 1.8; no representative physical load test.",
+    "status": "INFERENCE_RUNNING",
+    "rerun_policy": "Only rerun the full 5-worker transfer after this canary passes."
+  },
+  "scorer_hardening": {
+    "commit": "dab49f091057e153a00fa98669a29da53ec744d6",
+    "purpose": "Catch conditional false-validation claims such as simulation alone validates if assumptions are met."
+  },
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "DENY",
+    "reason": "Pass2 requires 5/5; current verified result is 4/5."
+  },
+  "next_action": "Read SAPHEA-A repair canary. If PASS, rerun Pass2 with role overlay integrated. If FAIL, revise SYSTEM_ARCHITECT overlay and retest only SAPHEA-A."
+}
