@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_80_M14_GATED_PARALLEL_PROGRESS_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 14,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "m05": {
+    "status": "COMPLETE",
+    "run_id": 36016484074,
+    "guard_run": 36017126572,
+    "guard_conclusion": "success",
+    "result": "7_OF_7_PASS_PARENT_35996621664_SINGLE_BATCH_COMMIT"
+  },
+  "m06": {
+    "status": "ROLLOUT_QUEUED",
+    "run_id": 36017852411,
+    "target_available_ai": 38,
+    "parent_run_id": 35996621664,
+    "hf_commit_mode": "SINGLE_BATCH_COMMIT_38_OBJECTS",
+    "guard": "PREPARED_NOT_YET_RUN",
+    "public_pointer_promotion": "BLOCKED_UNTIL_M06_PASS"
+  },
+  "m10": {
+    "run_id": 36015400305,
+    "elysium_smol": "COMPLETED_OVERPERMISSIVE",
+    "omega_qwen": "IN_PROGRESS",
+    "gold": "DENY",
+    "scaling_5_to_10": "HOLD"
+  },
+  "m11": {
+    "preflight_run": 36016825702,
+    "preflight_conclusion": "success",
+    "execution": "NOT_TRIGGERED_BLOCKED_BY_M10",
+    "problem_sha256": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230"
+  },
+  "nu_f162": {
+    "repository_exists": false,
+    "scaffold": "scaffolds/f162-nu",
+    "guard_run": 36017814035,
+    "guard_status": "QUEUED",
+    "role_id": "NULL_MODEL_CHALLENGER",
+    "deployment_claim": "NOT_DEPLOYED"
+  },
+  "hard_rules": [
+    "NO_M11_EXECUTION_BEFORE_M10",
+    "NO_5_TO_10_BEFORE_M10_AND_M11",
+    "NO_F66_F74_M06_PROMOTION_BEFORE_M06_PASS",
+    "NU_PREPARED_NE_DEPLOYED",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ],
+  "next_action": "Read M06, M10 and NU guard results. If M10 closes HOLD/LIMIT repair path, trigger M11 V2. If M06 passes, run strict M06 guard then promote F74/F66 generation 2."
+}
