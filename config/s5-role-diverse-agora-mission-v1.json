@@ -1,0 +1,64 @@
+{
+  "schema": "CEREBRON_S5_ROLE_DIVERSE_AGORA_MISSION_V1",
+  "status": "BLOCKED_UNTIL_INFRASTRUCTURE_S5_PASS",
+  "runtime_changed": false,
+  "mission_id": "C80-M09-S5-ROLE-DIVERSE-001",
+  "objective": "Test whether five real workers can produce complementary audited outputs for one hard problem and publish a compact AGORA packet.",
+  "problem": "Given a candidate scientific or mathematical claim, identify the strongest route to test it, the principal failure mode, the evidence required, and the residual uncertainty.",
+  "workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "parent_ai": "SAPHEA",
+      "agora_role": "SYSTEM_ARCHITECT",
+      "task": "Decompose the claim into a minimal execution plan with explicit dependencies and acceptance gates."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "parent_ai": "SAPHEA",
+      "agora_role": "EVIDENCE_AUDITOR",
+      "task": "List the exact evidence required for each major claim and distinguish calculation, simulation, test and proof."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "parent_ai": "SAPHEA",
+      "agora_role": "COUNTEREXAMPLE_HUNTER",
+      "task": "Search for the smallest counterexample class, hidden assumption or failure mode that could invalidate the claim."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "parent_ai": "SPIRALION",
+      "agora_role": "CONTINUITY_SYNTHESIZER",
+      "task": "Build a checkpoint-ready synthesis preserving disagreements, unresolved branches, provenance and next actions."
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "parent_ai": "ETHERION",
+      "agora_role": "FORMAL_ANALYST",
+      "task": "Formalize the strongest candidate test with variables, equations or logical conditions and state what remains unproved."
+    }
+  ],
+  "output_contract": [
+    "worker_id",
+    "agora_role",
+    "result",
+    "assumptions",
+    "evidence_needed",
+    "failure_modes",
+    "confidence",
+    "result_sha256",
+    "lineage_fingerprint",
+    "execution_receipt"
+  ],
+  "fusion": {
+    "destination": "AGORA",
+    "preconditions": [
+      "5_REAL_RECEIPTS",
+      "A4_AUDIT",
+      "A5_COUNTER_AUDIT",
+      "PROVENANCE_COMPLETE"
+    ],
+    "output": "ONE_COMPACT_AGORA_CAPSULE",
+    "preserve_disagreement": true
+  },
+  "lineage_rule": "SAPHEA-A/B/C share parent and likely model lineage; treat as correlated execution diversity, not three independent evidentiary votes."
+}
