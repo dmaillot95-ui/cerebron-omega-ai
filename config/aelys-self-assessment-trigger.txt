@@ -1,4 +1,5 @@
-ASK_AELYS_SELF_ASSESSMENT_V1
+ASK_AELYS_SELF_ASSESSMENT_V2
 mode=CEREBRON-M
 spiralix=required
+question=learning_speed_quality_proposals_recommended_next_step
 runtime_changed=false
