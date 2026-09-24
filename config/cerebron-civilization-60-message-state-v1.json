@@ -32,7 +32,7 @@
   },
   "runtime_modified": false,
   "next_message": 7,
-  "next_objective": "REPRODUCE_CURRENT_F151_REALITY_AND_PROVENANCE_THROUGH_F67_F72_WITHOUT_EDITING_FAILURES_TO_PASS",
+  "next_objective": "VERIFY_MEMORY_CLASSES_NAMESPACES_M6_DENIAL_AND_PROMOTION_PATHS_FOR_ALL_ACTIVE_AND_PENDING_NATIVE_AI",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -99,20 +99,18 @@
     "pending_dual_core_count": 7,
     "runtime_modified": false
   },
-  "message_6_status": "PASS_GOVERNANCE_PROMOTION_HOLD",
+  "message_6_status": "PASS_WITH_HISTORICAL_FORUM_RUNTIME_SCOPE_LIMIT",
   "message_6_evidence": {
-    "evidence_commit": "69f4227a3c9f5a6c6eb304ef6e48bffea5b557bc",
-    "transfer_contract_commit": "dbdb4d4d6e4eaf3f217a0c903d2825758cf7517e",
-    "agora_school_run_id": 35953959891,
-    "agora_school_result": "SUCCESS",
-    "external_agora_run_id": 35953957480,
-    "external_agora_result": "SUCCESS",
-    "f67_decision": "HOLD",
-    "f72_reality_gate": "FAIL",
-    "f72_observed_old_packet_count": 144,
-    "current_registry_count": 151,
-    "audit_ci_run_id": 35958416712,
-    "audit_ci_status": "QUEUED_AT_CHECKPOINT",
+    "evidence_commit": "18fe4a93b90a90978fb39966ef00c713465e286e",
+    "transfer_audit_run_id": 35958285046,
+    "transfer_audit_job_id": 107501161153,
+    "transfer_audit_result": "SUCCESS",
+    "school_canary_run_id": 35953959891,
+    "school_canary_artifact_id": 10789906204,
+    "external_agora_ci_run_id": 35953957480,
+    "active_roles": 14,
+    "pending_roles": 5,
+    "historical_forum_roles": 8,
     "runtime_modified": false
   }
 }
