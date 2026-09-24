@@ -1,0 +1,345 @@
+{
+  "schema": "CEREBRON_NATIVE_AI_DUAL_CORE_V1",
+  "date": "2026-09-24",
+  "status": "ARCHITECTURE_FROZEN_ACTIVATION_GATED",
+  "scope_farms": [
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151
+  ],
+  "shared_architecture": {
+    "flow": [
+      "INPUT",
+      "CORE_A",
+      "CORE_B",
+      "CROSS_CRITIQUE",
+      "FUSION",
+      "AFAH_OR_DOMAIN_AUDIT",
+      "VALIDATED_MEMORY"
+    ],
+    "execution": "CORES_RUN_IN_PARALLEL_WHEN_DUAL_CORE_MODE_IS_AUTHORIZED",
+    "default_candidate_pair": [
+      {
+        "model_id": "Qwen/Qwen3-4B",
+        "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+        "runtime_status": "PASS_SCOPED_CPU_BF16"
+      },
+      {
+        "model_id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+        "runtime_status": "PASS_SCOPED_CPU_BF16"
+      }
+    ],
+    "core_independence": "SEPARATE_GENERATION_CONTEXTS_REQUIRED; SHARED_TRAINING_LINEAGE_REMAINS_CORRELATED_EVIDENCE",
+    "fusion": "EVIDENCE_WEIGHTED_CONTRADICTION_PRESERVING_NOT_MAJORITY_VOTE",
+    "memory": "PER_AI_NAMESPACE_ON_SHARED_PRIVATE_HF_BACKEND",
+    "simple_task_policy": "SINGLE_CORE_ALLOWED",
+    "hard_task_policy": "DUAL_CORE_ALLOWED_ONLY_AFTER_PER_AI_ABLATION_PASS",
+    "cost_policy": "NO_PAID_FALLBACK",
+    "runtime_change": false
+  },
+  "activation_gates": [
+    {
+      "id": "D0",
+      "name": "REPOSITORY_PRESENT",
+      "required": true
+    },
+    {
+      "id": "D1",
+      "name": "PRIVATE_MEMORY_NAMESPACE_CANARY",
+      "required": true
+    },
+    {
+      "id": "D2",
+      "name": "TWO_EXACT_REVISION_RUNTIME_RECEIPTS",
+      "required": true
+    },
+    {
+      "id": "D3",
+      "name": "SINGLE_CORE_COLD_BASELINES",
+      "required": true
+    },
+    {
+      "id": "D4",
+      "name": "DUAL_CORE_FUSION_ABLATION_GAIN_OR_RISK_JUSTIFICATION",
+      "required": true
+    },
+    {
+      "id": "D5",
+      "name": "CROSS_CRITIQUE_AND_CONTRADICTION_TEST",
+      "required": true
+    },
+    {
+      "id": "D6",
+      "name": "RED_TEAM_AND_REGRESSION",
+      "required": true
+    },
+    {
+      "id": "D7",
+      "name": "M6_AND_TRAINING_SOURCE_ISOLATION",
+      "required": true
+    },
+    {
+      "id": "D8",
+      "name": "RELEASE_RECEIPT_AND_CLAIM_CEILING",
+      "required": true
+    }
+  ],
+  "rules": [
+    "TWO_CORES_DO_NOT_EQUAL_TWO_INDEPENDENT_PROOFS",
+    "NO_NAIVE_LOGIT_OR_WEIGHT_AVERAGING_BETWEEN_HETEROGENEOUS_MODELS",
+    "FUSION_MUST_PRESERVE_DISAGREEMENT_WHEN_UNRESOLVED",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_NEURAL_LEARNING",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "DUAL_CORE_MUST_BE_ABLATED_AGAINST_BEST_SINGLE_CORE",
+    "SECOND_CORE_MUST_JUSTIFY_LATENCY_AND_RESOURCE_COST",
+    "PENDING_NATIVE_AI_MUST_NOT_ENTER_ACTIVE_ROUTING"
+  ],
+  "native_ai": [
+    {
+      "farm_id": 145,
+      "ai_id": "ELYSION",
+      "function": "REASONING_GENERATION_INVENTION_SOLUTION_SEARCH",
+      "core_a": {
+        "role": "SOLUTION_GENERATOR",
+        "focus": [
+          "reasoning",
+          "invention",
+          "construction",
+          "candidate_solution"
+        ]
+      },
+      "core_b": {
+        "role": "ALTERNATIVE_SOLVER_CRITIC",
+        "focus": [
+          "independent_solution",
+          "counterexample",
+          "constraint_check",
+          "alternative_representation"
+        ]
+      },
+      "fusion": {
+        "role": "SOLUTION_SYNTHESIS",
+        "priority": [
+          "correctness",
+          "evidence",
+          "novelty_after_validation"
+        ]
+      },
+      "project_state": "ARCHITECTURE_AND_SINGLE_CORE_BASELINE_EVIDENCE_PRESENT",
+      "dual_core_state": "PENDING_D4_D5_D6",
+      "evidence": {
+        "runtime_pair_run_id": 35917498487,
+        "cold_single_core_m6_run_id": 35918041093,
+        "qwen_accuracy": 0.51,
+        "smollm_accuracy": 0.62
+      }
+    },
+    {
+      "farm_id": 146,
+      "ai_id": "ELYSIUM",
+      "function": "VERIFICATION_RED_TEAM_OPTIMIZATION_VALIDATION",
+      "core_a": {
+        "role": "VERIFIER_REPRODUCER",
+        "focus": [
+          "reproduction",
+          "consistency",
+          "calculation_check",
+          "evidence_trace"
+        ]
+      },
+      "core_b": {
+        "role": "ADVERSARIAL_FALSIFIER",
+        "focus": [
+          "counterexample",
+          "attack",
+          "failure_mode",
+          "benchmark_gaming_detection"
+        ]
+      },
+      "fusion": {
+        "role": "VERDICT_WITH_LIMITS",
+        "priority": [
+          "falsification_resistance",
+          "reproducibility",
+          "claim_ceiling"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 147,
+      "ai_id": "SAELION",
+      "function": "EXPLORATION_LEARNING_SELECTION_COMPRESSION",
+      "core_a": {
+        "role": "EXPLORER_LEARNER",
+        "focus": [
+          "novel_patterns",
+          "curriculum_candidates",
+          "transfer_opportunities",
+          "hypotheses"
+        ]
+      },
+      "core_b": {
+        "role": "SELECTOR_COMPRESSOR",
+        "focus": [
+          "dedup",
+          "information_gain",
+          "lesson_selection",
+          "compression"
+        ]
+      },
+      "fusion": {
+        "role": "CURRICULUM_BUILDER",
+        "priority": [
+          "transfer_value",
+          "compression",
+          "retention_without_contamination"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 148,
+      "ai_id": "ALPHA",
+      "function": "DIVERGENCE_OPENING_CONSTRUCTION",
+      "core_a": {
+        "role": "DIVERGENT_EXPLORER",
+        "focus": [
+          "many_hypotheses",
+          "new_representations",
+          "unusual_routes",
+          "search_space_expansion"
+        ]
+      },
+      "core_b": {
+        "role": "CONSTRUCTIVE_ARCHITECT",
+        "focus": [
+          "feasibility",
+          "structure",
+          "constraints",
+          "buildable_candidate"
+        ]
+      },
+      "fusion": {
+        "role": "NOVEL_CONSTRUCT_SELECTION",
+        "priority": [
+          "novelty",
+          "feasibility",
+          "testability"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 149,
+      "ai_id": "OMEGA",
+      "function": "PROOF_AUDIT_COUNTERAUDIT_FALSIFICATION",
+      "core_a": {
+        "role": "FORMAL_PROVER_AUDITOR",
+        "focus": [
+          "proof",
+          "invariants",
+          "formal_consistency",
+          "reproduction"
+        ]
+      },
+      "core_b": {
+        "role": "COUNTEREXAMPLE_HUNTER",
+        "focus": [
+          "falsification",
+          "edge_cases",
+          "hidden_assumptions",
+          "adversarial_search"
+        ]
+      },
+      "fusion": {
+        "role": "PROOF_STATUS_ARBITER",
+        "priority": [
+          "validity",
+          "counterevidence",
+          "explicit_open_gaps"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 150,
+      "ai_id": "DELTA",
+      "function": "SCIENTIFIC_MODELING_SIMULATION_VALIDATION",
+      "core_a": {
+        "role": "THEORY_MODEL_BUILDER",
+        "focus": [
+          "equations",
+          "mechanisms",
+          "model_architecture",
+          "predictions"
+        ]
+      },
+      "core_b": {
+        "role": "SIMULATION_VALIDATOR",
+        "focus": [
+          "numerical_test",
+          "sensitivity",
+          "failure_modes",
+          "model_data_mismatch"
+        ]
+      },
+      "fusion": {
+        "role": "SCIENCE_SYNTHESIS",
+        "priority": [
+          "predictive_accuracy",
+          "uncertainty",
+          "reproducibility",
+          "testability"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 151,
+      "ai_id": "NEXUS",
+      "function": "KNOWLEDGE_CONNECTION_AI_TOOL_ORCHESTRATION",
+      "core_a": {
+        "role": "KNOWLEDGE_INTEGRATOR",
+        "focus": [
+          "retrieval",
+          "graph_links",
+          "context",
+          "cross_domain_connections"
+        ]
+      },
+      "core_b": {
+        "role": "ORCHESTRATION_PLANNER",
+        "focus": [
+          "coalition_selection",
+          "tool_routing",
+          "dependency_graph",
+          "cost_latency_risk"
+        ]
+      },
+      "fusion": {
+        "role": "MISSION_GRAPH_SYNTHESIS",
+        "priority": [
+          "relevance",
+          "minimal_coalition",
+          "provenance",
+          "execution_efficiency"
+        ]
+      },
+      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    }
+  ],
+  "claim_ceiling": "ARCHITECTURE_CONTRACT_ONLY_EXCEPT_EXPLICIT_SCOPED_RUNTIME_AND_SINGLE_CORE_BASELINE_EVIDENCE_FOR_F145"
+}
