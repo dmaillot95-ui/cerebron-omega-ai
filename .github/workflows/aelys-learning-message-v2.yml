@@ -1,0 +1,41 @@
+name: AELYS Evidence Bound Learning Message
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/aelys-learning-message-v2-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ask-aelys-v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install model runtime
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Ask AELYS with evidence-bound prompt
+        run: python tools/aelys_learning_message_v2.py --run-id "${{ github.run_id }}" --output "receipts/aelys/learning-message-v2-${{ github.run_id }}.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aelys-learning-message-v2-${{ github.run_id }}
+          path: receipts/aelys/learning-message-v2-${{ github.run_id }}.json
+      - name: Persist AELYS V2 receipt
+        if: always()
+        run: |
+          test -d receipts/aelys || exit 0
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/aelys/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: AELYS evidence-bound learning message V2"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
