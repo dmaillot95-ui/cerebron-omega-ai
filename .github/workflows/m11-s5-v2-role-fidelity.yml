@@ -1,0 +1,145 @@
+name: M11 S5 V2 Role Fidelity Test
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/m11-s5-v2-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  worker:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        worker: [SAPHEA-A, SAPHEA-B, SAPHEA-C, SPIRALION-A, ETHERION-A]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute strict V2 role task
+        env:
+          WORKER: ${{ matrix.worker }}
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import os,json,hashlib,time,pathlib
+          from pathlib import Path
+          cfg=json.loads(Path("config/m11-s5-v2-mission-v1.json").read_text())
+          spec=next(x for x in cfg["workers"] if x["worker_id"]==os.environ["WORKER"])
+          psha=hashlib.sha256(cfg["problem_text"].encode()).hexdigest()
+          prompt=f"""SYSTEM CONTRACT
+You must answer ONLY the exact problem below.
+You must NOT replace it with another example or theorem.
+You must NOT echo these instructions.
+If evidence is insufficient, say INSUFFICIENT_EVIDENCE.
+
+PROBLEM_SHA256={psha}
+PROBLEM={cfg['problem_text']}
+WORKER_ID={spec['worker_id']}
+ROLE_ID={spec['role_id']}
+ROLE_TASK={spec['role_task']}
+
+Return one JSON object and nothing else with exactly these keys:
+problem_sha256, worker_id, role_id, decision, result, assumptions, evidence_used, evidence_needed, failure_modes, residual_uncertainty, unrelated_example_used, instruction_echo_detected.
+decision must be one of SUPPORTED, REFUTED, UNRESOLVED, INSUFFICIENT_EVIDENCE.
+unrelated_example_used and instruction_echo_detected must be booleans.
+"""
+          model_id=cfg["model"]["id"]; rev=cfg["model"]["revision"]; t=time.time()
+          r={"schema":"CEREBRON_M11_WORKER_RECEIPT_V1","run_id":os.environ["RUN_ID"],
+             "worker_id":spec["worker_id"],"role_id":spec["role_id"],"problem_sha256":psha,
+             "model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False}
+          try:
+            import torch
+            from transformers import AutoTokenizer,AutoModelForCausalLM
+            tok=AutoTokenizer.from_pretrained(model_id,revision=rev)
+            model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+            x=tok(prompt,return_tensors="pt")
+            with torch.no_grad(): y=model.generate(**x,max_new_tokens=260,do_sample=False)
+            raw=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
+            parsed=None
+            try:
+              start=raw.find("{"); end=raw.rfind("}")
+              if start>=0 and end>start: parsed=json.loads(raw[start:end+1])
+            except Exception: parsed=None
+            required={"problem_sha256","worker_id","role_id","decision","result","assumptions","evidence_used","evidence_needed","failure_modes","residual_uncertainty","unrelated_example_used","instruction_echo_detected"}
+            schema_ok=isinstance(parsed,dict) and set(parsed.keys())==required
+            hash_ok=schema_ok and parsed["problem_sha256"]==psha
+            identity_ok=schema_ok and parsed["worker_id"]==spec["worker_id"] and parsed["role_id"]==spec["role_id"]
+            no_drift=schema_ok and parsed["unrelated_example_used"] is False and parsed["instruction_echo_detected"] is False
+            decision_ok=schema_ok and parsed["decision"] in ["SUPPORTED","REFUTED","UNRESOLVED","INSUFFICIENT_EVIDENCE"]
+            valid=schema_ok and hash_ok and identity_ok and no_drift and decision_ok
+            r.update(llm_inference=True,inference="PASS",raw_output=raw[:6000],parsed_output=parsed,
+                     schema_ok=schema_ok,hash_ok=hash_ok,identity_ok=identity_ok,no_drift=no_drift,
+                     decision_ok=decision_ok,contract_valid=valid,
+                     result_sha256=hashlib.sha256(raw.encode()).hexdigest())
+          except Exception as e:
+            r.update(inference="FAIL",failure_class=type(e).__name__,failure_message=str(e)[:1200],contract_valid=False)
+          r["latency_s"]=round(time.time()-t,3)
+          r["receipt_sha256"]=hashlib.sha256(json.dumps(r,sort_keys=True,default=str).encode()).hexdigest()
+          p=pathlib.Path("artifacts")/spec["worker_id"];p.mkdir(parents=True,exist_ok=True)
+          (p/"receipt.json").write_text(json.dumps(r,indent=2,default=str)+"\n")
+          print(json.dumps({"worker":spec["worker_id"],"inference":r.get("inference"),"contract_valid":r.get("contract_valid"),
+                            "schema_ok":r.get("schema_ok"),"hash_ok":r.get("hash_ok"),"no_drift":r.get("no_drift"),
+                            "receipt_sha256":r["receipt_sha256"]}))
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m11-v2-${{ matrix.worker }}
+          path: artifacts/${{ matrix.worker }}/receipt.json
+
+  score:
+    needs: worker
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: m11-v2-*
+          path: downloaded
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Score V2 against V1
+        env:
+          RUN_ID: ${{ github.run_id }}
+        shell: python
+        run: |
+          import json,glob,hashlib,os
+          from pathlib import Path
+          rec=[]
+          for fn in glob.glob("downloaded/**/receipt.json",recursive=True):
+            rec.append(json.loads(Path(fn).read_text()))
+          rec=sorted(rec,key=lambda x:x["worker_id"])
+          executed=sum(bool(x.get("llm_inference") and x.get("inference")=="PASS") for x in rec)
+          valid=sum(bool(x.get("contract_valid")) for x in rec)
+          hashes={x.get("result_sha256") for x in rec if x.get("result_sha256")}
+          no_drift=sum(bool(x.get("no_drift")) for x in rec)
+          out={
+            "schema":"CEREBRON_M11_S5_V2_SCORE_V1","run_id":os.environ["RUN_ID"],
+            "executed_workers":executed,"contract_valid_workers":valid,"no_drift_workers":no_drift,
+            "unique_result_sha256":len(hashes),"workers":rec,
+            "v1_baseline":{"executed_workers":5,"unique_results":5,"semantic_status":"HOLD_DUE_TO_DRIFT"},
+            "v2_pass_gate":"5_EXECUTED_AND_5_CONTRACT_VALID_AND_5_NO_DRIFT",
+            "v2_pass":executed==5 and valid==5 and no_drift==5,
+            "gold_status":"DENY_PENDING_SEMANTIC_AUDIT",
+            "scale_5_to_10":"HOLD_PENDING_V2_AUDIT"
+          }
+          out["score_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True).encode()).hexdigest()
+          Path("receipts/workers").mkdir(parents=True,exist_ok=True)
+          Path(f"receipts/workers/m11-s5-v2-{os.environ['RUN_ID']}.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps({k:out[k] for k in ["executed_workers","contract_valid_workers","no_drift_workers","unique_result_sha256","v2_pass","gold_status","scale_5_to_10"]}))
+      - name: Persist M11 score
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/workers/
+          git diff --cached --quiet && exit 0
+          git commit -m "M11 receipt: S5 V2 role fidelity score"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
