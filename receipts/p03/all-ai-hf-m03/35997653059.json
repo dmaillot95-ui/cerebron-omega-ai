@@ -1,0 +1,402 @@
+{
+  "schema": "CEREBRON_ALL_AI_HF_M03_RECEIPT_V1",
+  "run_id": "35997653059",
+  "checked_at": "2026-09-24T12:13:32.424286+00:00",
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "results": [
+    {
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "c6a1877950ca700844c7690bbeaea0fc3dff8ddb6a63984b076ca452eb9034be",
+      "remote_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "SAPHEA",
+      "identity": "SAPHEA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "06ba95c858af79a0ba327baf05a7e773d2a1adf466b25107965f711947899ccf",
+      "remote_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "identity": "SPIRALION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "dce35851ad50112994e113ab5a4459bbaf2354a943fbbea24aedc2453a2c3c68",
+      "remote_object": "ai/spiralion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "ETHERION",
+      "identity": "ETHERION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "de1fa7b606c7201b16127f11768a03fec1bf4a4787cb2dba0ff53aab09cbffd8",
+      "remote_object": "ai/etherion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "HYPERION",
+      "identity": "HYPERION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "cf1391e474d00d0f42eebf100159a8c35484a7a9e03ac3aec50ea625b6014234",
+      "remote_object": "ai/hyperion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "ASTRION",
+      "identity": "ASTRION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "f48561abdb6df3dc5a407e59307702faaf5c8e41a27e06d080a1d7032ff48e26",
+      "remote_object": "ai/astrion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "c364191067e6bc8e7ae571b0fe2d76d811ff50bd2e9964d2496bf37d707535c5",
+      "remote_object": "ai/metrion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "4d8cedcd8ee2b8db50c3af881e6984b25b0aeff513dd48e60e353cb04160e048",
+      "remote_object": "ai/afah/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "374bb80fa7b6f045548bc8ea21b1eb53fcbc2a3a69014041a71e7f991c165241",
+      "remote_object": "ai/aelys/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "ELYRA",
+      "identity": "ELYRA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "8055723824f709b64cd461aa3ff7f3cf132b2a082dc8058940a246aeea07732f",
+      "remote_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "identity": "SAPHEA_MICRO",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "2f77692dbb7e07a29dda7bf715b49d097d62288c7feb91c139b0710498279f5b",
+      "remote_object": "ai/saphea-micro/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "ELYSION",
+      "identity": "ELYSION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "82cb138d429a57dd5fce1043ff1035537a8e9aedcb4120f44a1dd69521ab1daf",
+      "remote_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "identity": "ELYSIUM",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "dd3931313625a5d150bfc6f3ef97ff3cfca11ea09f775b5c116f9c2f01d336cd",
+      "remote_object": "ai/elysium/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "SAELION",
+      "identity": "SAELION",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "2417d5a07d6f701589ab2fb8d0031809c5d72117e8c021a836c79af41c3922b4",
+      "remote_object": "ai/saelion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "NEXUS",
+      "identity": "NEXUS",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "fdea0269337b8b6e028c86bb1100426eeec0b5b410233b960541d99d39b40f3b",
+      "remote_object": "ai/nexus/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "bcb045f68837d1c4fb1262a3c32c65b5f4a7b3f0e2388b9ce313da81d4634bf0",
+      "remote_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F152-BETA",
+      "identity": "BETA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "d50a408c10dfb48462be003079302869527ea7fb4ad8a29407edb618b87e9383",
+      "remote_object": "ai/f152-beta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F153-GAMMA",
+      "identity": "GAMMA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "e22056a4ed99b48f5a3af46ff2487626734c16d1a48adc85986a55d682c9eb0f",
+      "remote_object": "ai/f153-gamma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F150-DELTA",
+      "identity": "DELTA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "5bae67b7aab4d4a9ea09961c83e4c802f5f71503b5bb01da153a185265a898e7",
+      "remote_object": "ai/f150-delta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F154-EPSILON",
+      "identity": "EPSILON",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "fde20e715e6d13e969e02fc59e4c57da11591b17ad46bad61c69989b9468f19d",
+      "remote_object": "ai/f154-epsilon/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F155-ZETA",
+      "identity": "ZETA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "5ef47d5ecdd4ef757c6a9a0a12740ca1cef4c918665410e3ae9a4868ee7d47e0",
+      "remote_object": "ai/f155-zeta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F156-ETA",
+      "identity": "ETA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "9e132087996d1e5fd22fd856b235ebd9272d6d607be7008dab674b4535123792",
+      "remote_object": "ai/f156-eta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F157-THETA",
+      "identity": "THETA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "2d5febf33bed5c8aeec6138d00c943d4549c6578760c4d9127d8f577fa9f753b",
+      "remote_object": "ai/f157-theta/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F158-IOTA",
+      "identity": "IOTA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "862c4f364cefa419b0e01a44f98d27d346a628bbebb164817a762d0be805153a",
+      "remote_object": "ai/f158-iota/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F159-KAPPA",
+      "identity": "KAPPA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "26e1f91b9ee3ebc51e8a628da4419e6dea45025874c0385a950f944831d4e3ad",
+      "remote_object": "ai/f159-kappa/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F160-LAMBDA",
+      "identity": "LAMBDA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "8e587bc4a6fd8ebebd3a2b3e7cca020df7513814f30c66140e07c23af6952d7a",
+      "remote_object": "ai/f160-lambda/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F161-MU",
+      "identity": "MU",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "4535aecead1acd5a6c6f26276803aedb1d82d5a762121178c58849646c1b8337",
+      "remote_object": "ai/f161-mu/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F162-NU",
+      "identity": "NU",
+      "status": "UNAVAILABLE",
+      "reason": "REPOSITORY_MISSING"
+    },
+    {
+      "ai_id": "F163-XI",
+      "identity": "XI",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "abb15a4b922e212d36db815bda58fca2788f61f23400c951ef5f5db4ff7d2623",
+      "remote_object": "ai/f163-xi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F164-OMICRON",
+      "identity": "OMICRON",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "07598312c4414a6d2f5f7ffd27c2637f7010f3911f92ae5d4f251ce7e07ba7bd",
+      "remote_object": "ai/f164-omicron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F165-PI",
+      "identity": "PI",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "ac76a88e852563ba837b77dce918eaf230f6c834edc0507c68151f10f7c3e078",
+      "remote_object": "ai/f165-pi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F166-RHO",
+      "identity": "RHO",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "e94712c8d5dd8412566d3fe3b04ad51f571ad2030e384102824b7f63d48c07d2",
+      "remote_object": "ai/f166-rho/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "identity": "SIGMA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "42c49b55ead367835b235c9900a8acb0d762c910fd5a50c62d76c1b2c2fb0e8e",
+      "remote_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F168-TAU",
+      "identity": "TAU",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "9efc743d69658913aa55489c122499a26de48d51aa66817bf74e7f500f304c5f",
+      "remote_object": "ai/f168-tau/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F169-UPSILON",
+      "identity": "UPSILON",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "fe8bf3c6e6d970ea8ffced71dd78a76accb6d8112227c42b22d1bfc4cd8d0bdc",
+      "remote_object": "ai/f169-upsilon/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F170-PHI",
+      "identity": "PHI",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "fc12a335f7ec02c8d9ee42b6c81da38a7ee90220c10bd11ebcf9c1755343c99e",
+      "remote_object": "ai/f170-phi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F171-CHI",
+      "identity": "CHI",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "202b163448b94bbba550cb16a665c41df476ebaf13445db965ac2391f3f53ba5",
+      "remote_object": "ai/f171-chi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F172-PSI",
+      "identity": "PSI",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "2fba059bbcdacc5fd7cb0a65ce2fc80bccac47ad1d666240f8c274d953c3776b",
+      "remote_object": "ai/f172-psi/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "identity": "OMEGA",
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "715052dbf2b0ca4bfc28bc0dc427f92faf041230669f9614189f14e3f250a506",
+      "remote_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997653059.json"
+    }
+  ],
+  "status": "PASS",
+  "summary": {
+    "logical_ai": 39,
+    "available_tested": 38,
+    "unavailable": 1,
+    "passed": 38,
+    "failed": 0
+  }
+}
