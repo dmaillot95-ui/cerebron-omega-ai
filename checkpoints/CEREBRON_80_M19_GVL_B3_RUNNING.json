@@ -1,0 +1,39 @@
+{
+  "schema": "CEREBRON_80_M19_GVL_B3_RUNNING",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 19,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "quality": {
+    "pass1": {
+      "run_id": 36027613868,
+      "status": "PASS_5_OF_5"
+    },
+    "pass2r": {
+      "run_id": 36034245620,
+      "status": "PASS_5_OF_5",
+      "receipt": "receipts/workers/s5-quality-transfer-pass2-v3-36034245620.json"
+    }
+  },
+  "gvl": {
+    "schema": "CEREBRON_GEOMETRIC_VECTOR_LEARNING_V2",
+    "registry": "config/gvl-specialization-registry-v2.json",
+    "dimension": 32,
+    "guard_run": 36037885406,
+    "guard_status": "SUCCESS",
+    "geometric_growth_claim": "DENY"
+  },
+  "b3": {
+    "run_id": 36038241741,
+    "class": "CAUSAL_CONFOUNDING",
+    "design": "5_BASELINE_THEN_5_GVL_SEQUENTIAL_AB",
+    "max_parallel": 5,
+    "status": "QUEUED_BASELINE"
+  },
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST_ONLY",
+    "actual_scale_change": false
+  },
+  "next_action": "Complete B3 A/B and measure Q_before, Q_after, transfer_gain and ratio. Do not call growth geometric before four consecutive held-out positive ratios."
+}
