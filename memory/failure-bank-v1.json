@@ -1,0 +1,107 @@
+{
+  "schema": "CEREBRON_FAILURE_BANK_V1",
+  "status": "ACTIVE",
+  "entries": [
+    {
+      "FAILURE_ID": "FAIL-C80-M11-PASS2-SAPHEA-A",
+      "MISSION_ID": "C80-M11",
+      "AI_ID": "SAPHEA",
+      "AGENT_ID": "SAPHEA-A",
+      "FAILURE_CLASS": "F_TRANSFER",
+      "FAILURE_SIGNATURE": "CRITICAL_EPISTEMIC_ERROR_SIMULATION_EQ_VALIDATION",
+      "ROOT_CAUSE": "SYSTEM_ARCHITECT evidence hierarchy was insufficient for representative-validation claims.",
+      "EVIDENCE_REFS": [
+        "run:36028613557",
+        "receipts/workers/s5-quality-transfer-pass2-v3-36028613557.json",
+        "run:36034245620"
+      ],
+      "IMPACT": "Pass2 quality fell to 4/5 and scaling remained blocked.",
+      "SCOPE": "SYSTEM_ARCHITECT transfer on simulation-versus-validation.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "config/system-architect-evidence-contract-v1.json",
+        "same-scale repair canary",
+        "Pass2R"
+      ],
+      "REPAIR_STATUS": "REPAIRED_SAME_SCALE_RETEST_PASS",
+      "TRANSFER_RISK": "MEDIUM_UNTIL_DISTINCT_HELD_OUT_CONFIRMATION",
+      "PARENT_SHA": "e6c7ede250753e51365a9039bb55370e88b01486",
+      "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-M05-NAMEERROR",
+      "MISSION_ID": "C80-M05",
+      "AI_ID": "CEREBRON",
+      "AGENT_ID": "A3_EXECUTOR",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "WORKFLOW_CODE_DEFECT_NAMEERROR",
+      "ROOT_CAUSE": "Workflow code defect during rollback test.",
+      "EVIDENCE_REFS": [
+        "run:35997690829",
+        "memory/task-ledger.json#C80-M05"
+      ],
+      "IMPACT": "Rollback verification failed before cognitive evaluation.",
+      "SCOPE": "M05 workflow implementation.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "workflow correction",
+        "rerun"
+      ],
+      "REPAIR_STATUS": "REPAIRED",
+      "TRANSFER_RISK": "LOW_AFTER_CORRECTION",
+      "PARENT_SHA": "eb974c3ddb97d2c0f3443ca07d6a2eecea9d01d8",
+      "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-M05-HF429",
+      "MISSION_ID": "C80-M05",
+      "AI_ID": "CEREBRON",
+      "AGENT_ID": "A6_MEMORY_KEEPER",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "HF_RATE_LIMIT_429",
+      "ROOT_CAUSE": "External Hugging Face commit-rate limit reached.",
+      "EVIDENCE_REFS": [
+        "run:35997726599",
+        "config/hf-rate-limit-policy-v1.json",
+        "run:36016484074"
+      ],
+      "IMPACT": "Persistent-memory rollback test temporarily blocked.",
+      "SCOPE": "HF private memory writes.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "ONE_HF_COMMIT_FOR_7_OBJECTS",
+        "rate-limit policy",
+        "retry"
+      ],
+      "REPAIR_STATUS": "REPAIRED_RETEST_PASS_7_OF_7",
+      "TRANSFER_RISK": "EXTERNAL_RATE_LIMIT_REMAINS",
+      "PARENT_SHA": "838a2941045aab24ba35677b0a47ad4330a60a49",
+      "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "FAILURE_ID": "FAIL-GVL-V1-FALSE-REDUNDANCY",
+      "MISSION_ID": "C80-GVL",
+      "AI_ID": "CEREBRON",
+      "AGENT_ID": "GVL_VECTOR_ENGINE",
+      "FAILURE_CLASS": "F_RED",
+      "FAILURE_SIGNATURE": "FUNCTIONALLY_DISTINCT_AI_COLLAPSED_TO_REDUNDANCY_1_0",
+      "ROOT_CAUSE": "Lexical V1 vectors confused vocabulary overlap with functional redundancy.",
+      "EVIDENCE_REFS": [
+        "run:36032486589",
+        "memory/gvl-learning-history.json#GVL-DIAG-001",
+        "config/gvl-specialization-registry-v2.json"
+      ],
+      "IMPACT": "Could have produced incorrect coalition pruning.",
+      "SCOPE": "GVL specialization selection.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "replace lexical vectors with explicit 32D role ontology"
+      ],
+      "REPAIR_STATUS": "CORRECTED_V2",
+      "TRANSFER_RISK": "LOW_WITH_ONTOLOGY_GUARD",
+      "PARENT_SHA": "309f330f5bd5d9c44b22588a2e804289a17dc5b0",
+      "TIMESTAMP": "2026-09-24"
+    }
+  ],
+  "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
+}
