@@ -24,3 +24,4 @@ jobs:
         with:
           name: gvl-vector-canary-${{ github.run_id }}
           path: artifacts/gvl-vector-canary.json
+# ontology-v2-24d
