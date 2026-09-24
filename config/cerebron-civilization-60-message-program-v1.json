@@ -79,5 +79,114 @@
     "number": 1,
     "action": "INSTALL_AND_VERIFY_COMMON_MEMORY_ROUTING_FOR_ALL_CURRENT_AI; RESERVE_FUTURE_AI_WITHOUT_SIMULATION"
   },
-  "chatgpt_task_schedule_unchanged": true
+  "chatgpt_task_schedule_unchanged": true,
+  "date": "2026-09-24",
+  "current_active_ai": [
+    "CEREBRON",
+    "SIGMA",
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO",
+    "ELYSION",
+    "ELYSIUM"
+  ],
+  "planned_not_active": [
+    "SAELION",
+    "ALPHA",
+    "OMEGA",
+    "DELTA",
+    "NEXUS"
+  ],
+  "registered_farms": {
+    "count": 146,
+    "max_id": 146,
+    "native_ai_farms": [
+      145,
+      146
+    ]
+  },
+  "hf_agent_pool": {
+    "max_slots": 20,
+    "identity": "EXECUTION_CAPACITY_NOT_20_INDEPENDENT_NEURAL_AIS"
+  },
+  "common_private_memory": "cerebron-omega/cerebron-private-memory",
+  "model_asset_memory": "cerebron-omega/cerebron-sigma-memory",
+  "learning_classes": {
+    "logical_roles": "MEMORY_ROUTING_PROMPT_TOOLING_ONLY_UNLESS_REAL_TRAINABLE_MODEL_EXISTS",
+    "native_ai_models": "REVERSIBLE_ADAPTER_OR_WEIGHTS_ONLY_AFTER_GATES",
+    "hf_slots": "EPHEMERAL_EXECUTION_CAPACITY_WITH_VALIDATED_OUTPUT_PROMOTION_ONLY",
+    "farms": "CAPABILITY_ROOTS_NOT_NEURAL_MODELS_BY_DEFAULT"
+  },
+  "dual_core": {
+    "policy": "ENABLE_WHEN_ABLATION_SHOWS_MEASURED_GAIN_OR_RISK_JUSTIFIES_SECOND_CORE",
+    "default_candidate_pair": [
+      "Qwen/Qwen3-4B",
+      "HuggingFaceTB/SmolLM3-3B"
+    ],
+    "flow": [
+      "CORE_A",
+      "CORE_B",
+      "CROSS_CRITIQUE",
+      "FUSION",
+      "AUDIT",
+      "VALIDATED_MEMORY"
+    ],
+    "shared_lineage_note": "TWO_OUTPUTS_DO_NOT_EQUAL_TWO_INDEPENDENT_PROOFS"
+  },
+  "invariants": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "MEMORY!=LEARNING",
+    "PROMPT!=TRAINING",
+    "SIMULATION!=TEST",
+    "M6_NEVER_IN_TRAIN",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "NO_RUNTIME_MUTATION_DURING_60_MESSAGE_PROGRAM",
+    "NO_PAID_OVERAGE",
+    "NO_SIMULATED_AGENT",
+    "SAME_LINEAGE_NOT_INDEPENDENT",
+    "ABLATION_BEFORE_ADDITION",
+    "TRANSFER_BEFORE_GENERALITY"
+  ],
+  "message_contract": {
+    "each_message": [
+      "LOAD_STATE",
+      "EXECUTE_REAL_WORK",
+      "AUDIT",
+      "WRITE_EVIDENCE",
+      "UPDATE_STATE",
+      "SET_NEXT_MESSAGE"
+    ],
+    "completion_requires": "REAL_EVIDENCE_OR_EXPLICIT_BLOCKER",
+    "resume_command": "SUITE"
+  },
+  "final_test": {
+    "message": 60,
+    "mode": "USER_QUESTION_CIVILIZATION_GROUP_RUN",
+    "requirement": "Use only real available AI/models/farms/HF slots with receipts; preserve individual outputs before fusion.",
+    "compare": [
+      "best_single",
+      "best_dual_core",
+      "minimal_specialist_coalition",
+      "civilization_fusion"
+    ],
+    "report": [
+      "task_score",
+      "evidence_quality",
+      "contradictions",
+      "latency",
+      "resource_use",
+      "information_gain",
+      "failures",
+      "claim_ceiling"
+    ]
+  }
 }
