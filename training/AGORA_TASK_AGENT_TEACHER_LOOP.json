@@ -102,5 +102,65 @@
     "SAME_LINEAGE != INDEPENDENT_EVIDENCE",
     "NO REAL EXECUTION => NON_EXECUTED"
   ],
-  "next_gate": "IMPLEMENT_REAL_TRAINING_WORKER_FOR_FIRST_SAPHEA"
+  "next_gate": "IMPLEMENT_REAL_TRAINING_WORKER_FOR_FIRST_SAPHEA",
+  "target_roster": {
+    "existing": [
+      "CEREBRON",
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "AELYS",
+      "ELYRA",
+      "SAPHEA_MICRO",
+      "ELYSION",
+      "ELYSIUM",
+      "SAELION",
+      "NEXUS"
+    ],
+    "greek": [
+      "ALPHA",
+      "BETA",
+      "GAMMA",
+      "DELTA",
+      "EPSILON",
+      "ZETA",
+      "ETA",
+      "THETA",
+      "IOTA",
+      "KAPPA",
+      "LAMBDA",
+      "MU",
+      "NU",
+      "XI",
+      "OMICRON",
+      "PI",
+      "RHO",
+      "SIGMA",
+      "TAU",
+      "UPSILON",
+      "PHI",
+      "CHI",
+      "PSI",
+      "OMEGA"
+    ],
+    "missing_or_unavailable_behavior": "PREP_ONLY_OR_NON_EXECUTED"
+  },
+  "inheritance_policy": {
+    "config": "config/greek-agora-training-v1.json",
+    "default": [
+      "I1_KNOWLEDGE",
+      "I2_CURRICULUM"
+    ],
+    "adapter_inheritance": "ONLY_AFTER_COMPATIBILITY_AND_SCRATCH_VS_INHERITED_ABLATION",
+    "full_weight_inheritance": "DENY_BY_DEFAULT",
+    "cross_architecture_weights": "DENY",
+    "negative_transfer": "ROLLBACK"
+  },
+  "forum_required": true,
+  "agora_required": true,
+  "runtime_changed": false
 }
