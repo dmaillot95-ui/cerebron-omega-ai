@@ -2,7 +2,7 @@
   "schema": "CEREBRON_80_LATEST_V1",
   "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
   "completed_message": 9,
-  "latest_checkpoint": "checkpoints/CEREBRON_80_M19_GVL_V2_AND_PASS2R.json",
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M19_GVL_B3_RUNNING.json",
   "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
   "task_ledger": "memory/task-ledger.json",
   "latest_guard": {
@@ -48,29 +48,32 @@
   },
   "current_message": "M19_IN_PROGRESS",
   "active_runs": {
-    "pass2r": 36034245620
+    "gvl_b3": 36038241741
   },
   "m05_result": "7_OF_7_PASS_GUARD_PENDING",
   "m06": "PREPARED_NOT_TRIGGERED",
   "m10": "ELYSIUM_OVERPERMISSIVE_OMEGA_RUNNING_GOLD_DENY",
   "m11": "PREFLIGHT_QUEUED_EXECUTION_NOT_TRIGGERED",
-  "scaling_5_to_10": "HOLD",
+  "scaling_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST_NOT_YET_SCALED",
   "completed": {
     "m05": "COMPLETE_GUARD_PASS",
     "m11_preflight": "SUCCESS"
   },
   "quality_first": {
     "current_scale": 5,
-    "pass1": "PASS",
+    "pass1": "PASS_5_OF_5",
     "saphea_a_repair": "PASS",
-    "pass2r": "QUEUED",
-    "scale_5_to_10": "HOLD"
+    "pass2r": "PASS_5_OF_5",
+    "scale_5_to_10": "ELIGIBLE_FOR_MARGINAL_GAIN_TEST_ONLY"
   },
-  "next_action": "Read Pass2R score and GVL V2 guard; no scale before both pass and marginal gain is positive.",
+  "next_action": "Complete GVL B3 controlled A/B at scale 5; measure baseline versus GVL transfer gain. Do not scale 5->10 unless marginal gain is positive and quality gates remain satisfied.",
   "gvl": {
     "version": "2.0.0",
-    "dimension": 24,
-    "status": "V2_GUARD_PENDING",
-    "geometric_growth": "NOT_DEMONSTRATED"
+    "dimension": 32,
+    "status": "V2_GUARD_PASS",
+    "guard_run": 36037885406,
+    "controlplane_canary": "PASS_703_PAIRS",
+    "geometric_growth": "NOT_DEMONSTRATED",
+    "active_benchmark": "B3_CAUSAL_CONFOUNDING_AB"
   }
 }
