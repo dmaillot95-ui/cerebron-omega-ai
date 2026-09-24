@@ -1,0 +1,74 @@
+{
+  "schema": "CEREBRON_F66_F74_POINTER_ROLLOUT_V1",
+  "status": "BLOCKED_BY_M03_HF_CANARY",
+  "runtime_changed": false,
+  "prerequisite": {
+    "matrix": "config/all-ai-memory-matrix-v1.json",
+    "required_receipt": "receipts/p03/all-ai-hf-m03.json",
+    "rule": "Only AI entries with HF write/read/SHA PASS may receive F74/F66 pointers."
+  },
+  "repositories": {
+    "F66": "dmaillot95-ui/cerebron-farm-66-knowledge-graph-vector-index",
+    "F74": "dmaillot95-ui/cerebron-farm-74-session-memory-encyclopedia"
+  },
+  "precedent": {
+    "legacy_memory_id": "C01-SIGMA-SIGMA-FORMALIZER-M1",
+    "f66_path": "index/private-pointers/C01-SIGMA-SIGMA-FORMALIZER-M1.json",
+    "f74_path": "memory/private-pointers/C01-SIGMA-SIGMA-FORMALIZER-M1.json",
+    "proves": [
+      "OPAQUE_POINTER_PATTERN",
+      "PARENT_GENERATION_FIELD",
+      "ROLLBACK_GENERATION_FIELD"
+    ],
+    "does_not_prove": "Per-AI rollout for current 39-AI roster"
+  },
+  "target_pattern": {
+    "f74": "memory/private-pointers/{ai_id}/{memory_id}.json",
+    "f66": "index/private-pointers/{ai_id}/{memory_id}.json",
+    "hf": "ai/{ai_id}/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/{run_id}.json"
+  },
+  "public_fields": [
+    "memory_id",
+    "ai_id",
+    "agent_slot",
+    "generation",
+    "parent_generation",
+    "payload_sha256",
+    "provider",
+    "private_repo_id",
+    "private_object_path",
+    "validation_status",
+    "rollback_generation",
+    "source_run_id",
+    "privacy"
+  ],
+  "forbidden_public_fields": [
+    "private_payload",
+    "training_examples",
+    "private_prompt",
+    "credentials",
+    "token",
+    "private_weights",
+    "private_adapter_bytes"
+  ],
+  "write_order": [
+    "VERIFY_M03_HF_PASS",
+    "CREATE_F74_NEW_VERSION_POINTER",
+    "READBACK_F74",
+    "CREATE_F66_INDEX_POINTER_TO_EXACT_F74_COMMIT",
+    "READBACK_F66",
+    "VERIFY_F66_F74_IDENTITY",
+    "VERIFY_HF_SHA_REFERENCE",
+    "VERIFY_ROLLBACK_POINTER",
+    "PERSIST_NON_SENSITIVE_RECEIPT"
+  ],
+  "overwrite_rule": "APPEND_NEW_POINTER_VERSION_OR_NEW_MEMORY_ID; NEVER_DESTROY_ONLY_PRIOR_POINTER",
+  "unavailable_rule": "NO_POINTER_CREATED",
+  "hard_rules": [
+    "NO_PRIVATE_PAYLOAD_ON_GITHUB",
+    "NO_ORPHAN_POINTER",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "CLAIM_LE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
