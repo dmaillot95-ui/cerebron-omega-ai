@@ -24,9 +24,28 @@
     "CONSENSUS != TRUTH",
     "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
     "CLAIM <= EVIDENCE",
-    "VERIFY BEFORE COMMIT"
+    "VERIFY BEFORE COMMIT",
+    "F67_F72_REPOSITORY_PRESENT_DOES_NOT_EQUAL_PROMOTION_READY",
+    "F72_FAIL_OR_HOLD_BLOCKS_GOLD_PROMOTION"
   ],
   "target_farm": "F67",
   "evidence_gate": "F72",
-  "note": "Master-hosted MVP until F67/F72 repositories physically exist."
+  "note": "F67 and F72 repositories now physically exist and expose agora/state.json. Master-hosted forum remains the control-plane MVP until bridge/migration and current evidence gates are revalidated.",
+  "repository_state": {
+    "F67": {
+      "repo": "dmaillot95-ui/cerebron-farm-67-cross-farm-communication",
+      "present": true,
+      "agora_state_present": true,
+      "current_decision": "HOLD",
+      "current_residual": "COLLECT_REAL_OUTPUT"
+    },
+    "F72": {
+      "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+      "present": true,
+      "agora_state_present": true,
+      "current_decision": "HOLD",
+      "current_reality_gate": "FAIL",
+      "current_residual": "REALITY_FAILURE"
+    }
+  }
 }
