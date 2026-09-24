@@ -1,0 +1,19 @@
+{
+  "schema": "CEREBRON_80_LATEST_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "completed_message": 2,
+  "latest_checkpoint": "checkpoints/CEREBRON_80_M02_SUCCESSOR_HANDOFF.json",
+  "parent_checkpoint": "checkpoints/CEREBRON_80_M01_CRYSTAL_BASELINE.json",
+  "task_ledger": "memory/task-ledger.json",
+  "latest_guard": {
+    "name": "Successor Handoff Guard",
+    "run_id": 35980515906,
+    "job_id": 107571014468,
+    "conclusion": "success"
+  },
+  "next_message": "M03",
+  "next_objective": "Create the all-AI memory namespace manifest and verification matrix; map which AI families have HF private write/read/SHA proof and which remain gated.",
+  "resume_rule": "READ_LATEST_THEN_LEDGER_THEN_CHECKPOINT; CONTINUE_NEXT_MESSAGE; NEVER_RESTART_FROM_ZERO",
+  "crystal_rule": "APPEND_OR_VERSION_ONLY; PRESERVE_PARENT_SHA_ROLLBACK_NEGATIVE_EVIDENCE",
+  "runtime_changed": false
+}
