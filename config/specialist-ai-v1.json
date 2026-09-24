@@ -186,7 +186,10 @@
     "HF_PRIVATE_MEMORY_DEFAULT_DURABLE_BACKEND",
     "REGISTRY_COUNT_IS_DYNAMIC_VERIFIED_STATE",
     "NEW_FARM_REQUIRES_VERIFIED_REPOSITORY_BEFORE_REGISTRY_INSERT",
-    "F145_F151_NATIVE_AI_REPOSITORIES_ARE_REGISTERED_REAL_REPOSITORIES"
+    "F145_F151_NATIVE_AI_REPOSITORIES_ARE_REGISTERED_REAL_REPOSITORIES",
+    "DUAL_CORE_ACTIVATION_REQUIRES_D0_D8",
+    "DUAL_CORE_MUST_BEAT_OR_JUSTIFY_COST_VS_BEST_SINGLE_CORE",
+    "PENDING_NATIVE_AI_NOT_ACTIVE_ROUTING"
   ],
   "AELYS": {
     "mission": "HUMAN_DIALOGUE_COORDINATION",
@@ -302,7 +305,8 @@
       "M6_NEVER_IN_TRAIN",
       "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
       "FUSION_NOT_CONSENSUS_PROOF"
-    ]
+    ],
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "ELYSIUM": {
     "mission": "NATIVE_DUAL_CORE_VERIFICATION_RED_TEAM_OPTIMIZATION",
@@ -315,7 +319,8 @@
       "M6_NEVER_IN_TRAIN",
       "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
       "AUDIT_OUTPUT_NOT_AUTO_GOLD"
-    ]
+    ],
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "SAELION": {
     "mission": "NATIVE_DUAL_CORE_EXPLORATION_LEARNING_SELECTION_COMPRESSION",
@@ -330,7 +335,8 @@
       "COLD_BENCHMARK",
       "RED_TEAM"
     ],
-    "active": false
+    "active": false,
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "ALPHA": {
     "mission": "NATIVE_DUAL_CORE_DIVERGENCE_OPENING_CONSTRUCTION",
@@ -345,7 +351,8 @@
       "COLD_BENCHMARK",
       "RED_TEAM"
     ],
-    "active": false
+    "active": false,
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "OMEGA": {
     "mission": "NATIVE_DUAL_CORE_PROOF_AUDIT_FALSIFICATION",
@@ -360,7 +367,8 @@
       "COLD_BENCHMARK",
       "RED_TEAM"
     ],
-    "active": false
+    "active": false,
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "DELTA": {
     "mission": "NATIVE_DUAL_CORE_SCIENTIFIC_MODELING_SIMULATION_VALIDATION",
@@ -375,7 +383,8 @@
       "COLD_BENCHMARK",
       "RED_TEAM"
     ],
-    "active": false
+    "active": false,
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
   },
   "NEXUS": {
     "mission": "NATIVE_DUAL_CORE_KNOWLEDGE_CONNECTION_ORCHESTRATION",
@@ -390,6 +399,8 @@
       "COLD_BENCHMARK",
       "RED_TEAM"
     ],
-    "active": false
-  }
+    "active": false,
+    "dual_core_contract": "config/native-ai-dual-core-v1.json"
+  },
+  "native_ai_dual_core_contract": "config/native-ai-dual-core-v1.json"
 }
