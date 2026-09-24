@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CEREBRON HF agent execution receipt v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "execution_id",
+    "slot_id",
+    "farm_id",
+    "model_id",
+    "model_revision",
+    "provider",
+    "runtime_provider",
+    "prompt_hash",
+    "data_lineage",
+    "result_hash",
+    "latency_ms",
+    "completion_status",
+    "binding_scope",
+    "independent_evidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "CEREBRON_HF_AGENT_EXECUTION_RECEIPT_V1"
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slot_id": {
+      "type": "string",
+      "pattern": "^HF-A(0[1-9]|1[0-9]|20)$"
+    },
+    "farm_id": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 146
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "provider": {
+      "const": "huggingface"
+    },
+    "runtime_provider": {
+      "type": "string",
+      "enum": [
+        "GITHUB_ACTIONS_CPU",
+        "HF_SERVERLESS",
+        "EXTERNAL_GPU"
+      ]
+    },
+    "prompt_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "data_lineage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "latency_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "completion_status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAIL"
+      ]
+    },
+    "binding_scope": {
+      "type": "string",
+      "enum": [
+        "EPHEMERAL_CANARY",
+        "TASK_SCOPED",
+        "PERSISTENT_AFTER_ADMISSION"
+      ]
+    },
+    "independent_evidence": {
+      "type": "boolean"
+    },
+    "model_lineage": {
+      "type": "string"
+    },
+    "raw_output": {
+      "type": "string"
+    },
+    "claim_scope": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
