@@ -4167,5 +4167,18 @@
       "EVIDENTIARY_INDEPENDENCE",
       "NEURAL_TRAINING"
     ]
+  },
+  "gvl_extension": {
+    "status": "OPTIONAL_FOR_NORMAL_MESSAGES_REQUIRED_FOR_PROMOTED_LESSONS",
+    "contract": "config/geometric-vector-learning-v1.json",
+    "fields": [
+      "coaxial_alignment",
+      "specialization_vector",
+      "novelty_score",
+      "redundancy_refs",
+      "transfer_gain",
+      "effective_gain"
+    ],
+    "rule": "GVL metadata augments SPIRALIX lesson capsules without changing the base envelope schema."
   }
 }
