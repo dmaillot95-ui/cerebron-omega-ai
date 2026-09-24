@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_CIVILIZATION_MESSAGE_06_AGORA_TRANSFER_V1",
-  "status": "PASS_GOVERNANCE_WITH_HISTORICAL_FORUM_SCOPE_LIMIT",
+  "status": "PASS_GOVERNANCE_WITH_HISTORICAL_RUNTIME_SCOPE_LIMIT",
   "program_message": 6,
   "active_roles": [
     "CEREBRON",
@@ -21,28 +21,23 @@
   "pending_roles": [
     {
       "ai_id": "SAELION",
-      "farm_id": 147,
-      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+      "farm_id": 147
     },
     {
       "ai_id": "ALPHA",
-      "farm_id": 148,
-      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+      "farm_id": 148
     },
     {
       "ai_id": "OMEGA",
-      "farm_id": 149,
-      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+      "farm_id": 149
     },
     {
       "ai_id": "DELTA",
-      "farm_id": 150,
-      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+      "farm_id": 150
     },
     {
       "ai_id": "NEXUS",
-      "farm_id": 151,
-      "status": "REPOSITORY_PRESENT_NOT_ACTIVE"
+      "farm_id": 151
     }
   ],
   "transfer_contract": "config/agora-transfer-contract-v1.json",
@@ -60,59 +55,78 @@
     "TARGET_NAMESPACE_WRITE",
     "RECALL_TEST"
   ],
-  "cross_ai_copy": {
-    "default": "DENY_DIRECT_COPY",
-    "transferred_content_independent_evidence": false,
-    "M6_source": "DENY",
-    "RAW_AGORA_source": "DENY",
-    "M4_promotion": "REQUIRES_REPRODUCTION_F72_AFAH"
+  "memory_promotion": {
+    "raw_forum": "M0_OR_M1_ONLY_NO_TRAINING",
+    "tested_lesson": "M2_REPLAY_CANDIDATE",
+    "gold": "M4_ONLY_AFTER_FULL_PROMOTION",
+    "model": "M5_SEPARATE_ASSET",
+    "cold_benchmark": "M6_SEALED_DENY_TRAINING",
+    "evidence": "M7_DURABLE"
+  },
+  "cross_ai_transfer": {
+    "direct_copy": "DENY",
+    "provenance_required": true,
+    "sha256_required": true,
+    "audit_required": true,
+    "dedup_required": true,
+    "contamination_check_required": true,
+    "m6_source_forbidden": true,
+    "raw_agora_source_forbidden": true,
+    "transferred_content_independent_evidence": false
+  },
+  "agora_transfer_audit": {
+    "workflow": "CEREBRON AGORA Transfer Audit",
+    "run_id": 35958285046,
+    "job_id": 107501161153,
+    "head_sha": "d62edaa22f0f307d606db3496454681bbcfd5e14",
+    "conclusion": "success"
+  },
+  "adaptive_school_canary": {
+    "workflow": "AGORA Adaptive School Canary",
+    "run_id": 35953959891,
+    "job_id": 107488199253,
+    "head_sha": "76690cd81a3b38326671a873ba58d5f94e4b8432",
+    "conclusion": "success",
+    "artifact_id": 10789906204,
+    "artifact_digest": "sha256:bd8b2a14bb2fb5d27d5b49c8bbc37b191e80663669d828a5faa03a0d141986bb",
+    "verified": [
+      "ASTRION failure lesson",
+      "ASTRION recovery",
+      "METRION contradiction",
+      "profile isolation",
+      "unaided retest requirement"
+    ]
+  },
+  "external_ingress_ci": {
+    "workflow": "CEREBRON HF20 Mode and External AGORA CI",
+    "run_id": 35953957480,
+    "job_id": 107488191568,
+    "head_sha": "0268fd3319053122e2322b3d2d5a1112753c3d57",
+    "conclusion": "success",
+    "rules": [
+      "UNDER_TEST_EXTERNAL",
+      "SHA256_MATCH",
+      "PROVENANCE_REQUIRED",
+      "NO_AUTO_GOLD",
+      "NO_AUTO_TRAINING",
+      "INDEPENDENT_EVIDENCE_FALSE_BY_DEFAULT"
+    ]
   },
   "runtime_scope": {
-    "historical_forum_runtime": "runtime/agora_forum.py",
-    "historical_forum_supported_role_count": 8,
-    "full_active_role_count": 14,
-    "full_14_role_support_through_historical_runtime": false,
+    "full_governance_active_role_count": 14,
+    "historical_internal_forum_role_count": 8,
+    "historical_internal_forum_roles": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "CEREBRON"
+    ],
+    "full_14_role_internal_forum_runtime_support": false,
     "runtime_modified": false
   },
-  "proofs": {
-    "transfer_audit": {
-      "run_id": 35958285046,
-      "job_id": 107501161153,
-      "head_sha": "d62edaa22f0f307d606db3496454681bbcfd5e14",
-      "conclusion": "success"
-    },
-    "school_canary": {
-      "run_id": 35953959891,
-      "job_id": 107488199253,
-      "head_sha": "76690cd81a3b38326671a873ba58d5f94e4b8432",
-      "conclusion": "success",
-      "artifact_id": 10789906204,
-      "artifact_digest": "sha256:bd8b2a14bb2fb5d27d5b49c8bbc37b191e80663669d828a5faa03a0d141986bb",
-      "demonstrated": [
-        "ASTRION failure lesson",
-        "ASTRION recovery",
-        "METRION contradiction",
-        "isolation and adaptation"
-      ]
-    },
-    "external_ingress_hf20": {
-      "run_id": 35953957480,
-      "job_id": 107488191568,
-      "head_sha": "0268fd3319053122e2322b3d2d5a1112753c3d57",
-      "conclusion": "success",
-      "claim_scope": "external AGORA/HF20 compile and unit-test validation; external contribution remains UNDER_TEST and non-independent by default"
-    }
-  },
-  "hard_rules": [
-    "FORUM_IS_NOT_GOLD",
-    "FORUM_IS_NOT_TRAINING",
-    "NO_AUTOMATIC_CROSS_NAMESPACE_COPY",
-    "TRANSFERRED_EVIDENCE_IS_NOT_INDEPENDENT_EVIDENCE",
-    "CONSENSUS_IS_NOT_TRUTH",
-    "M6_NEVER_IN_TRAIN",
-    "PLANNED_ROLE_NOT_EXECUTED_ROLE"
-  ],
-  "runtime_modified": false,
-  "weights_changed": false,
-  "claim_limit": "AGORA governance, school, transfer rules and external ingress are validated. Historical internal forum runtime is still 8-role scoped and is not claimed as universal 14-role runtime support."
+  "claim_limit": "AGORA governance, school and external ingress are verified. The historical internal forum runtime remains an 8-role component and is not claimed to natively execute all 14 active roles."
 }
