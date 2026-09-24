@@ -262,5 +262,16 @@
     "NO_REAL_RUN_EQ_NON_EXECUTED",
     "CLAIM_LE_EVIDENCE",
     "RUNTIME_FREEZE"
-  ]
+  ],
+  "spiralix_transport": {
+    "status": "MANDATORY",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "universal_bus": "config/spiralix-universal-bus-v1.json",
+    "input_envelope": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "output_envelope": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "natural_language_projection": "REQUIRED",
+    "json_projection": "REQUIRED",
+    "missing_envelope": "REJECT_FROM_AGORA_FORUM_OR_TRAINING_PIPELINE"
+  }
 }
