@@ -24,7 +24,8 @@
     "CONSENSUS != TRUTH",
     "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
     "CLAIM <= EVIDENCE",
-    "VERIFY BEFORE COMMIT"
+    "VERIFY BEFORE COMMIT",
+    "NO_FORUM_MESSAGE_WITHOUT_SPIRALIX_ENVELOPE"
   ],
   "target_farm": "F67",
   "evidence_gate": "F72",
@@ -44,5 +45,13 @@
       "SYNTHESIZE"
     ],
     "unavailable": "NON_EXECUTED"
+  },
+  "universal_bus": {
+    "status": "MANDATORY",
+    "config": "config/spiralix-universal-bus-v1.json",
+    "envelope_schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "reject_missing_envelope": true,
+    "required_active_endpoints": 304,
+    "natural_language_projection_required": true
   }
 }

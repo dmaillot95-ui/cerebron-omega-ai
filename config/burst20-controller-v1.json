@@ -110,7 +110,9 @@
     "ended_at",
     "success",
     "result_sha256",
-    "lineage_fingerprint"
+    "lineage_fingerprint",
+    "spiralix_envelope_sha256",
+    "spiralix_source_endpoint"
   ],
   "accounting": {
     "planned_worker": "NOT_EXECUTED",
@@ -128,5 +130,13 @@
     "RUNTIME_FREEZE",
     "CLAIM_LE_EVIDENCE",
     "NO_DESTRUCTIVE_OVERWRITE"
-  ]
+  ],
+  "spiralix_bus": {
+    "required": true,
+    "config": "config/spiralix-universal-bus-v1.json",
+    "input_envelope": true,
+    "output_envelope": true,
+    "max_workers": 20,
+    "rule": "Every selected/executed Burst20 worker must receive and return a SPIRALIX envelope; planned workers still remain NOT_EXECUTED."
+  }
 }

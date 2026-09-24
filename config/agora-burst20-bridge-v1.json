@@ -6,15 +6,17 @@
   "receipt_schema": "config/real-worker-receipt-schema-v1.json",
   "flow": [
     "MISSION",
+    "SPIRALIX_INPUT_ENVELOPE",
     "MINIMAL_USEFUL_COALITION",
     "REAL_EXECUTION",
+    "SPIRALIX_RESULT_ENVELOPES",
     "PER_WORKER_RECEIPTS",
     "LINEAGE_CORRELATION_TAGGING",
     "AUDIT",
     "COUNTER_AUDIT",
     "LOCAL_CAPSULES",
-    "AGORA_PUBLICATION",
-    "FORUM_CHALLENGE",
+    "AGORA_SPIRALIX_PUBLICATION",
+    "FORUM_SPIRALIX_CHALLENGE",
     "A6_MEMORY_KEEPER_BATCH",
     "VALIDATED_LESSON_ONLY_TO_MEMORY"
   ],
@@ -34,5 +36,11 @@
   ],
   "max_real_workers": 20,
   "memory_writers_max_parallel": 4,
-  "default_memory_writer": "A6_MEMORY_KEEPER"
+  "default_memory_writer": "A6_MEMORY_KEEPER",
+  "spiralix": {
+    "required": true,
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "bus": "config/spiralix-universal-bus-v1.json",
+    "missing_envelope": "REJECT_FROM_AGORA_FORUM_PUBLICATION"
+  }
 }

@@ -13,7 +13,9 @@
     "ended_at",
     "success",
     "result_sha256",
-    "lineage_fingerprint"
+    "lineage_fingerprint",
+    "spiralix_envelope_sha256",
+    "spiralix_source_endpoint"
   ],
   "conditional": {
     "llm": [
@@ -50,5 +52,11 @@
     "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
     "RAW_AGORA_NE_TRAIN",
     "NO_DESTRUCTIVE_OVERWRITE"
-  ]
+  ],
+  "spiralix": {
+    "required": true,
+    "bus": "config/spiralix-universal-bus-v1.json",
+    "envelope_schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "rule": "REAL_EXECUTION_RECEIPT_REFERENCES_EXACT_SPIRALIX_ENVELOPE_SHA256"
+  }
 }

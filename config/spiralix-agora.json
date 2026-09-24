@@ -23,7 +23,8 @@
     "SHARED_DEPENDENCY != INDEPENDENT_EVIDENCE",
     "COLLAPSE != VALIDATION",
     "CLAIM <= EVIDENCE",
-    "VERIFY BEFORE COMMIT"
+    "VERIFY BEFORE COMMIT",
+    "NO_AGORA_MESSAGE_WITHOUT_SPIRALIX_ENVELOPE"
   ],
   "hyperion_bridge": {
     "farm_id": 75,
@@ -83,5 +84,13 @@
     "membership": "ALL_REAL_AVAILABLE_GREEK_AIS",
     "unavailable": "NON_EXECUTED",
     "inherit_only_validated_lessons": true
+  },
+  "universal_bus": {
+    "status": "MANDATORY",
+    "config": "config/spiralix-universal-bus-v1.json",
+    "envelope_schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "reject_missing_envelope": true,
+    "required_active_endpoints": 304,
+    "natural_language_projection_required": true
   }
 }
