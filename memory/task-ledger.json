@@ -46,7 +46,7 @@
     {
       "id": "C80-M05",
       "title": "Second-version rollback test",
-      "status": "CORRECTED_CANARY_RUNNING",
+      "status": "CORRECTED_CANARY_IN_PROGRESS",
       "objective": "Write M05 second private versions and prove M03 rollback targets remain readable and SHA-identical.",
       "guard_run": 35997393013,
       "sample": [
@@ -58,20 +58,40 @@
         "F167-SIGMA",
         "F149-OMEGA"
       ],
-      "corrected_run": 35997726599,
+      "corrected_run": 35998647929,
       "previous_negative_runs": [
         35997393013,
         35997686804
       ],
       "negative_classification": "DATA_INTEGRITY_PASS_PARENT_METADATA_MISMATCH",
       "parent_run_pinned": 35996621664,
-      "parent_receipt": "receipts/p03/all-ai-hf-m03/35996621664.json"
+      "parent_receipt": "receipts/p03/all-ai-hf-m03/35996621664.json",
+      "negative_evidence": [
+        {
+          "run": 35997393013,
+          "class": "DATA_INTEGRITY_PASS_PARENT_METADATA_MISMATCH"
+        },
+        {
+          "run": 35997686804,
+          "class": "DATA_INTEGRITY_PASS_PARENT_METADATA_MISMATCH"
+        },
+        {
+          "run": 35997690829,
+          "class": "WORKFLOW_CODE_DEFECT_NAMEERROR"
+        },
+        {
+          "run": 35997726599,
+          "class": "HF_RATE_LIMIT_429"
+        }
+      ],
+      "retry_policy": "config/hf-rate-limit-policy-v1.json"
     },
     {
       "id": "C80-M06",
       "title": "Generalize second-version rollback to all available AIs",
-      "status": "BLOCKED_BY_M05",
-      "objective": "If M05 sample passes, expand version-parent-rollback protocol to all 38 available AIs."
+      "status": "BLOCKED_BY_M05_CORRECTED_PASS",
+      "objective": "If M05 sample passes, expand version-parent-rollback protocol to all 38 available AIs.",
+      "plan": "config/m06-full-rollback-rollout-plan-v1.json"
     }
   ],
   "updated_at": "2026-09-24",
