@@ -165,7 +165,37 @@
     "TRANSFERRED_EVIDENCE_IS_NOT_INDEPENDENT_EVIDENCE",
     "M6_NEVER_IN_TRAIN",
     "PLANNED_ROLE_NOT_EXECUTED_ROLE",
-    "NO_RUNTIME_CHANGE_IN_CIVILIZATION_FOUNDATION"
+    "NO_RUNTIME_CHANGE_IN_CIVILIZATION_FOUNDATION",
+    "LIVE_F72_FAIL_BLOCKS_M4_PROMOTION",
+    "STALE_REALITY_PACKET_MUST_BE_REPRODUCED_NOT_EDITED_TO_PASS"
   ],
-  "claim_ceiling": "AGORA configuration, school, external ingress and transfer governance are defined. Historical internal forum runtime remains limited to 8 roles."
+  "claim_ceiling": "AGORA configuration, school, external ingress and transfer governance are defined. Historical internal forum runtime remains limited to 8 roles.",
+  "live_gate_observations": {
+    "observed_at": "2026-09-24",
+    "F67": {
+      "repo": "dmaillot95-ui/cerebron-farm-67-cross-farm-communication",
+      "state_sha": "4ee0837c362e0bf01ae84676244ba02fcea1d60c",
+      "iteration": 459,
+      "decision": "HOLD",
+      "audit": "PENDING",
+      "red_team": "PENDING",
+      "reproduction": "PENDING",
+      "reality_gate": "PENDING",
+      "transfer": "PENDING",
+      "nextlock": "COLLECT_REAL_OUTPUT"
+    },
+    "F72": {
+      "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+      "state_sha": "0cc4f98a04731abe7ea99c2cca74a3d047456849",
+      "iteration": 461,
+      "decision": "HOLD",
+      "reproduction": "FAIL",
+      "reality_gate": "FAIL",
+      "observed_old_packet_count": 144,
+      "current_registry_count": 151,
+      "nextlock": "REALITY_FAILURE",
+      "rule": "DO_NOT_PROMOTE_UNTIL_NEW_151_FARM_REALITY_PACKET_IS_REPRODUCED"
+    }
+  },
+  "current_promotion_gate": "BLOCKED_BY_F67_PENDING_AND_F72_REALITY_FAIL"
 }
