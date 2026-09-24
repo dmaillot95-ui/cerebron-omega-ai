@@ -25,9 +25,24 @@ jobs:
       - name: Write second versions and verify rollback targets
         run: |
           python - <<'PY'
-          import os,json,hashlib,datetime
+          import os,json,hashlib,datetime,time
           from pathlib import Path
           from huggingface_hub import HfApi,hf_hub_download
+
+          def retry(label, fn, attempts=6):
+              last=None
+              for n in range(attempts):
+                  try:
+                      return fn()
+                  except Exception as e:
+                      last=e
+                      msg=str(e)
+                      if "429" not in msg and "Too Many Requests" not in msg:
+                          raise
+                      delay=min(60, 5*(2**n))
+                      print(f"{label}=RATE_LIMIT_RETRY_{n+1} delay={delay}s")
+                      time.sleep(delay)
+              raise last
 
           token=os.environ["HF_TOKEN"]; repo=os.environ["HF_REPO"]
           m03_run=os.environ["M03_RUN"]; m05_run=os.environ["M05_RUN"]
@@ -37,7 +52,7 @@ jobs:
               raise SystemExit("PINNED_PARENT_RUN_MISMATCH")
           old={x["ai_id"]:x for x in m03["results"] if x.get("status")=="PASS"}
           api=HfApi(token=token)
-          info=api.repo_info(repo_id=repo,repo_type="model")
+          info=retry("HF_REPO_INFO",lambda: api.repo_info(repo_id=repo,repo_type="model"))
           if not getattr(info,"private",False): raise SystemExit("HF_PRIVATE_REPO=FAIL")
           out={"schema":"CEREBRON_M05_ROLLBACK_RECEIPT_V1","run_id":m05_run,"parent_run_id":m03_run,
                "checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -47,7 +62,7 @@ jobs:
               aid=item["ai_id"]; parent=old[aid]
               parent_path=parent["remote_object"]; parent_sha=parent["payload_sha256"]
               # prove old generation still exists and is unchanged before writing new generation
-              old_file=hf_hub_download(repo_id=repo,filename=parent_path,repo_type="model",token=token,force_download=True)
+              old_file=retry("PARENT_READ_"+aid,lambda: hf_hub_download(repo_id=repo,filename=parent_path,repo_type="model",token=token,force_download=True))
               old_bytes=Path(old_file).read_bytes()
               old_sha=hashlib.sha256(old_bytes).hexdigest()
               if old_sha!=parent_sha: raise SystemExit("PARENT_SHA_PREWRITE_FAIL:"+aid)
@@ -74,14 +89,14 @@ jobs:
               raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
               new_sha=hashlib.sha256(raw).hexdigest()
               local="/tmp/"+aid.replace("/","-")+".json";Path(local).write_bytes(raw)
-              api.upload_file(path_or_fileobj=local,path_in_repo=new_path,repo_id=repo,repo_type="model",
-                              commit_message="M05 versioned rollback fixture "+aid)
-              new_file=hf_hub_download(repo_id=repo,filename=new_path,repo_type="model",token=token,force_download=True)
+              retry("NEW_WRITE_"+aid,lambda: api.upload_file(path_or_fileobj=local,path_in_repo=new_path,repo_id=repo,repo_type="model",
+                              commit_message="M05 versioned rollback fixture "+aid))
+              new_file=retry("NEW_READ_"+aid,lambda: hf_hub_download(repo_id=repo,filename=new_path,repo_type="model",token=token,force_download=True))
               new_got=Path(new_file).read_bytes()
               if hashlib.sha256(new_got).hexdigest()!=new_sha: raise SystemExit("NEW_SHA_FAIL:"+aid)
 
               # rollback proof: re-read parent after second-version write and verify exact old SHA
-              rb_file=hf_hub_download(repo_id=repo,filename=parent_path,repo_type="model",token=token,force_download=True)
+              rb_file=retry("ROLLBACK_READ_"+aid,lambda: hf_hub_download(repo_id=repo,filename=parent_path,repo_type="model",token=token,force_download=True))
               rb_bytes=Path(rb_file).read_bytes()
               rb_sha=hashlib.sha256(rb_bytes).hexdigest()
               ok=(rb_sha==parent_sha)
@@ -93,6 +108,7 @@ jobs:
                 "parent_unchanged_after_new_write":"PASS" if ok else "FAIL"
               })
               if not ok: out["status"]="FAIL"
+              time.sleep(3)
 
           out["summary"]={"sample":len(out["results"]),"passed":sum(x["status"]=="PASS" for x in out["results"]),
                           "failed":sum(x["status"]=="FAIL" for x in out["results"])}
@@ -107,6 +123,7 @@ jobs:
         run: |
           git config user.name cerebron-bot
           git config user.email actions@users.noreply.github.com
+          test -d receipts/p03/m05-hf-rollback || exit 0
           git add receipts/p03/m05-hf-rollback/ receipts/p03/m05-hf-rollback-latest.json
           git diff --cached --quiet && exit 0
           git commit -m "M05 receipt: HF version and rollback canary"
