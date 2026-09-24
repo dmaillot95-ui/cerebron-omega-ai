@@ -1,0 +1,22 @@
+{
+  "schema": "CEREBRON_M10_PARTIAL_AUDIT_FINDING_V1",
+  "run_id": 36015400305,
+  "auditor_id": "ELYSIUM-SMOL-AUDITOR",
+  "status": "PARTIAL_FINDING_PRESERVED",
+  "real_execution": true,
+  "llm_inference": true,
+  "artifact_id": 10814817045,
+  "audit_sha256": "2f524f0f34860fcead42424033a1ec5039527dea59a0a5d3e8644b5d9e600eca",
+  "receipt_sha256": "451dd7ab967a06ec11008ee1ab51fb8e207c4800145cbc1d8cd9b40c4a7bbe66",
+  "observed_judgment": "ACCEPT/GOLD",
+  "deterministic_conflict": [
+    "M09 source packet contains unrelated triangle example.",
+    "M09 source packet contains unrelated sum-of-squares example.",
+    "M09 source packet contains unrelated prime-number/example scaffolding.",
+    "Therefore source packet remains SEMANTIC_HOLD."
+  ],
+  "classification": "AUDITOR_OVERPERMISSIVE",
+  "promotion": "NO_GOLD",
+  "scaling_5_to_10": "HOLD",
+  "note": "This is a partial finding; OMEGA/Qwen counter-audit is still running and final M10 decision remains pending."
+}
