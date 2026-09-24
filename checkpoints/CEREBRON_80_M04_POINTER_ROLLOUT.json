@@ -1,0 +1,29 @@
+{
+  "schema": "CEREBRON_80_M04_POINTER_ROLLOUT_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 4,
+  "status": "COMPLETE",
+  "runtime_changed": false,
+  "guard": {
+    "run_id": 35996844931,
+    "job_id": 107623684781,
+    "conclusion": "success"
+  },
+  "f74": {
+    "commit": "3dcebd021776740fc66fbffa4f55888afba74f55",
+    "pointer_count": 38
+  },
+  "f66": {
+    "commit": "4025a7fc89ee94f109a05bfee94bd579b1839416",
+    "index_count": 38
+  },
+  "verified": "38 F66 indexes point to exact F74 commit and matching HF payload SHA",
+  "limits": [
+    "First-version semantics only; rollback not yet proven for current roster.",
+    "NU F162 unavailable."
+  ],
+  "next_message": {
+    "id": "M05",
+    "objective": "Create second private versions for representative AI families and prove parent/rollback to unchanged M03 versions."
+  }
+}
