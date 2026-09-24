@@ -2,8 +2,8 @@
   "schema": "cerebron-farm-preservation-manifest-v1",
   "status": "PRESERVATION_EXTENDED_TO_CURRENT_REGISTRY",
   "scope": {
-    "farms": "F01-F146",
-    "count": 146,
+    "farms": "F01-F151",
+    "count": 151,
     "source": "config/farms.json"
   },
   "preserve": [
@@ -102,7 +102,7 @@
     },
     {
       "phase": 8,
-      "target": "F125-F146",
+      "target": "F125-F151",
       "checks": [
         "tree inventory",
         "critical files",
@@ -129,10 +129,10 @@
     "push_access": 74
   },
   "current_registry_snapshot": {
-    "count": 146,
-    "max_id": 146,
+    "count": 151,
+    "max_id": 151,
     "registry_file": "config/farms.json",
-    "repository_presence_claim": "NOT_REASSERTED_BY_THIS_MANIFEST",
-    "rule": "PRESERVE_REGISTERED_IDENTITIES_WITHOUT_INVENTING_EXECUTION_OR_REPOSITORY_AUDIT_EVIDENCE"
+    "repository_presence_claim": "F147-F151_VERIFIED_PRESENT; OTHER_CURRENT_IDS_PRESERVED_WITH_EXISTING_EVIDENCE",
+    "rule": "PRESERVE_REGISTERED_IDENTITIES_WITHOUT_INVENTING_EXECUTION_EVIDENCE"
   }
 }
