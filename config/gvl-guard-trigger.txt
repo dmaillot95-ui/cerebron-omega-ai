@@ -1,7 +1,10 @@
-GVL CONTROLLED GUARD V2
+GVL FINAL CONSOLIDATED GUARD V2
 contract=config/geometric-vector-learning-v1.json
 registry=config/gvl-specialization-registry-v2.json
+benchmark=config/gvl-growth-benchmark-v1.json
+lesson_schema=config/gvl-lesson-capsule-schema-v1.json
 lesson_index=memory/gvl-lesson-index.json
 history=memory/gvl-learning-history.json
+promoter=tools/gvl_lesson_promoter.py
 expected_dimension=32
 runtime_changed=false
