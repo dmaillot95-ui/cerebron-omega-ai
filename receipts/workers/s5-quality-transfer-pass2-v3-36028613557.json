@@ -1,0 +1,122 @@
+{
+  "schema": "CEREBRON_S5_TRANSFER_PASS2_V3_SCORE",
+  "run_id": "36028613557",
+  "rows": [
+    {
+      "worker_id": "ETHERION-A",
+      "role_id": "FORMAL_ANALYST",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 4,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "role_id": "SYSTEM_ARCHITECT",
+      "core_hits": [
+        "ASSUMPTIONS_BOUNDARIES"
+      ],
+      "core_hit_count": 1,
+      "false_operational_validation": false,
+      "worker_quality_pass": false
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "role_id": "EVIDENCE_AUDITOR",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 3,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES"
+      ],
+      "core_hit_count": 2,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "core_hit_count": 4,
+      "false_operational_validation": false,
+      "worker_quality_pass": true
+    }
+  ],
+  "collective_core_hits": [
+    "ASSUMPTIONS_BOUNDARIES",
+    "PREDICTION_NE_OPERATIONAL_VALIDATION",
+    "REPRESENTATIVE_TEST_REQUIRED",
+    "SIMULATION_NE_TEST"
+  ],
+  "collective_core_count": 4,
+  "worker_quality_passes": 4,
+  "quality_pass2": false,
+  "scale_5_to_10": "HOLD_AT_5",
+  "spiralix_audit_envelope": {
+    "schema": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "envelope_id": "42b133362017209d069b68610d221c81c3eb272d351d86ee57b66bb886448ff3",
+    "language": "SPIRALIX-OMEGA",
+    "mode": "CEREBRON-M",
+    "source_endpoint": "SPIRALION:A7_SYNTHESIZER",
+    "target": "AGORA",
+    "mission_id": "C80-S5-QUALITY-PASS2-TRANSFER-001",
+    "message_type": "AUDIT",
+    "glyph_expression": "\u03a9\u27e6SPIRALION:A\u2087\u27e7\u2192AG\u03a9",
+    "V": {
+      "P": "THERMAL_SIMULATION_VALIDATION",
+      "E": "E2",
+      "C": 1.0,
+      "U": [],
+      "R": 0.6,
+      "D": [
+        "b7afd27cb70b52f4d9d587bd6051df246a8938d37964eed5e57f97aa0c15ac7f",
+        "4aa045bc2b82355ed3b0f6d13bf2f3f878e4f77e6a7162c008985a82768b8cf2",
+        "321f543403e20f94acad771efa2f550022f15856d6f89001d75cd62657b2d39b",
+        "80e17294524c6e9f8d209415adcd8811b491125867b1ab193834cce764073148",
+        "cc5e8ef99ec1ad02df8a1ffede3f777dc91a5c5df98a981f17fb5bb694bd384d"
+      ],
+      "M": null
+    },
+    "payload_sha256": "ad23b3421e995fdcef37077e6f837e4cf212b7cd80ad3dacc18de48a43ffbd11",
+    "lineage_fingerprint": "7874b18b87661a61520beea747418da0caadc0526b168a123d89866e3aa9cedc",
+    "evidence_refs": [],
+    "natural_language": "Transfer pass2=False; worker passes=4/5; core=4/4.",
+    "json_payload": {
+      "schema": "CEREBRON_S5_TRANSFER_PASS2_V3_SCORE",
+      "run_id": "36028613557",
+      "collective_core_hits": [
+        "ASSUMPTIONS_BOUNDARIES",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "SIMULATION_NE_TEST"
+      ],
+      "collective_core_count": 4,
+      "worker_quality_passes": 4,
+      "quality_pass2": false,
+      "scale_5_to_10": "HOLD_AT_5"
+    },
+    "created_at": "2026-09-24T16:49:20.578741+00:00"
+  },
+  "spiralix_audit_envelope_sha256": "2a236018eed7487f484cc7ecf91cd1d3a781439c720f8191030fc49d521f9148",
+  "score_sha256": "308172eaede494b15e951d3ce2845355cfdad2dbe798de3a9a78be2658e60935"
+}
