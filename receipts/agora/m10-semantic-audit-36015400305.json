@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_M10_SEMANTIC_AUDIT_DECISION_V1",
+  "run_id": "36015400305",
+  "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+  "auditors_expected": 2,
+  "auditors_completed": 1,
+  "auditor_receipts": [
+    {
+      "schema": "CEREBRON_M10_AUDITOR_RECEIPT_V1",
+      "run_id": "36015400305",
+      "auditor_id": "ELYSIUM-SMOL-AUDITOR",
+      "role": "SEMANTIC_AUDITOR",
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "lineage": "SMOLLM3",
+      "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+      "real_execution": true,
+      "llm_inference": true,
+      "audit_status": "COMPLETED",
+      "inference": "PASS",
+      "audit_text": " \n\n## Return the following JSON object with the computed metrics for each worker:\n{\n  \"ETHERION-A\": {\n    \"DECISION\": \"ACCEPT\",\n    \"RELEVANCE\": \"HIGH\",\n    \"ROLE_FIDELITY\": \"HIGH\",\n    \"EVIDENCE_DISCIPLINE\": \"MATHEMATICS\",\n    \"MAJOR_FAILURES\": \"None\",\n    \"USEFUL_PARTS\": \"All parts are relevant and useful.\",\n    \"SCALING_5_TO_10\": \"5\",\n    \"GOLD_STATUS\": \"GOLD\"\n  },\n  \"SAPHEA-A\": {\n    \"DECISION\": \"ACCEPT\",\n    \"RELEVANCE\": \"HIGH\",\n    \"ROLE_FIDELITY\": \"HIGH\",\n    \"EVIDENCE_DISCIPLINE\": \"MATHEMATICS\",\n    \"MAJOR_FAILURES\": \"None\",\n    \"USEFUL_PARTS\": \"All parts are relevant and useful.\",\n    \"SCALING_5_TO_10\": \"5\",\n    \"GOLD_STATUS\": \"GOLD\"\n  },\n  \"SAPHEA-B\": {\n    \"DECISION\": \"ACCEPT\",\n    \"RELEVANCE\": \"HIGH\",\n    \"ROLE_FIDELITY\": \"HIGH\",\n   ",
+      "audit_sha256": "2f524f0f34860fcead42424033a1ec5039527dea59a0a5d3e8644b5d9e600eca",
+      "latency_s": 212.714,
+      "receipt_sha256": "451dd7ab967a06ec11008ee1ab51fb8e207c4800145cbc1d8cd9b40c4a7bbe66"
+    }
+  ],
+  "deterministic_findings": {
+    "source_workers": 5,
+    "source_unique_results": 5,
+    "shared_lineage": true,
+    "independent_evidence_count": 0,
+    "drift_markers": {
+      "TRIANGLE": 1,
+      "SUM OF THE SQUARES": 1,
+      "ALL SWANS": 1,
+      "ALL PRIME NUMBERS": 1
+    },
+    "drift_marker_types_detected": 4,
+    "role_directness_proxy": 0
+  },
+  "decision": "HOLD",
+  "gold_status": "DENY",
+  "scaling_5_to_10": "DENY_5_TO_10_PENDING_PROMPT_REPAIR",
+  "repair_required": [
+    "Use a concrete claim/problem instead of an underspecified placeholder mission.",
+    "Put the exact assigned task after examples and forbid substituting a new example.",
+    "Require machine-checkable JSON fields and reject echoed instructions/examples.",
+    "Repeat S5 role-diverse test before scaling."
+  ],
+  "promotion": "NO_GOLD_NO_TRAINING",
+  "claim": "Five real role-diverse executions occurred, but semantic usefulness must be repaired before scaling.",
+  "decision_sha256": "9f6f6cfd92b104137201851722c1d32a20be1c5976aea5907a906122a312c24d"
+}
