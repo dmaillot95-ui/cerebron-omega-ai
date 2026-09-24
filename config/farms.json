@@ -1,5 +1,5 @@
 {
-  "version": "2.21",
+  "version": "2.22",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1070,8 +1070,12 @@
       "greek_letter": "Α",
       "status": "SCAFFOLDED_NOT_TRAINED",
       "type": "AI_FARM",
-      "role": "divergence-opening-construction",
-      "training_status": "NOT_TRAINED"
+      "role": "Generate structurally different starting representations and search directions before deep reasoning.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "DIVERGENCE_SEEDER",
+      "role_boundary": "Does not validate, prove, route, or fuse.",
+      "campaign_passes": 10
     },
     {
       "id": 149,
@@ -1081,8 +1085,12 @@
       "greek_letter": "Ω",
       "status": "SCAFFOLDED_NOT_TRAINED",
       "type": "AI_FARM",
-      "role": "proof-audit-counteraudit-falsification",
-      "training_status": "NOT_TRAINED"
+      "role": "Close the funnel with formal proof status, falsification, counter-audit and explicit residual uncertainty.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "FORMAL_CLOSURE_FALSIFIER",
+      "role_boundary": "Does not substitute formal coherence for empirical evidence.",
+      "campaign_passes": 10
     },
     {
       "id": 150,
@@ -1092,8 +1100,12 @@
       "greek_letter": "Δ",
       "status": "SCAFFOLDED_NOT_TRAINED",
       "type": "AI_FARM",
-      "role": "scientific-modeling-simulation-validation",
-      "training_status": "NOT_TRAINED"
+      "role": "Build explicit scientific models, equations, assumptions, simulations and discriminating tests.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "SCIENTIFIC_MODEL_BUILDER",
+      "role_boundary": "Simulation remains distinct from physical validation.",
+      "campaign_passes": 10
     },
     {
       "id": 151,
@@ -1113,8 +1125,12 @@
       "greek_letter": "Β",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Convert a vague question into a testable problem contract: objective, variables, constraints, acceptance criteria, unknowns and forbidden assumptions.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "PROBLEM_CONTRACT_COMPILER",
+      "role_boundary": "Does not orchestrate execution; CEREBRON remains executive.",
+      "campaign_passes": 10
     },
     {
       "id": 153,
@@ -1124,8 +1140,12 @@
       "greek_letter": "Γ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Build candidate mechanism and dependency topologies for one problem, separating direct links, mediators and feedback loops.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "MECHANISM_TOPOLOGY_BUILDER",
+      "role_boundary": "Does not maintain the global knowledge graph; NEXUS does.",
+      "campaign_passes": 10
     },
     {
       "id": 154,
@@ -1135,8 +1155,12 @@
       "greek_letter": "Ε",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Probe epsilon-neighborhoods around candidate solutions to measure local sensitivity, robustness margins and bifurcation points.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "LOCAL_SENSITIVITY_PROBER",
+      "role_boundary": "Not a general Red Team; focuses on local perturbations.",
+      "campaign_passes": 10
     },
     {
       "id": 155,
@@ -1146,8 +1170,12 @@
       "greek_letter": "Ζ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Minimize compute, memory, cost, steps and structural complexity while preserving required capability and evidence.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "COMPLEXITY_RESOURCE_MINIMIZER",
+      "role_boundary": "Does not choose mission priorities; CEREBRON does.",
+      "campaign_passes": 10
     },
     {
       "id": 156,
@@ -1157,8 +1185,12 @@
       "greek_letter": "Η",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Analyze ordering, delays, horizons, transients, recurrence, stability over time and time-dependent failure modes.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "TEMPORAL_DYNAMICS_ANALYST",
+      "role_boundary": "Does not manage checkpoint memory; SPIRALION does.",
+      "campaign_passes": 10
     },
     {
       "id": 157,
@@ -1168,8 +1200,12 @@
       "greek_letter": "Θ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Transform a problem between mathematical, graphical, symbolic, geometric, algorithmic and natural-language representations to expose hidden structure.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "REPRESENTATION_TRANSFORMER",
+      "role_boundary": "Does not generate the broad hypothesis population; HYPERION does.",
+      "campaign_passes": 10
     },
     {
       "id": 158,
@@ -1179,8 +1215,12 @@
       "greek_letter": "Ι",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Decompose candidates into irreducible claims, assumptions and operations, then locate the smallest failing unit.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "ATOMIC_CLAIM_INSPECTOR",
+      "role_boundary": "Not mission task decomposition; this is claim-level micro-analysis.",
+      "campaign_passes": 10
     },
     {
       "id": 159,
@@ -1190,8 +1230,12 @@
       "greek_letter": "Κ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Compute hard and soft constraint intersections, feasible regions, incompatibilities and boundary conditions.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "FEASIBILITY_ENVELOPE_SOLVER",
+      "role_boundary": "Does not perform final verification; ELYSIUM does.",
+      "campaign_passes": 10
     },
     {
       "id": 160,
@@ -1201,8 +1245,12 @@
       "greek_letter": "Λ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Construct composable mappings, procedures and algorithms from inputs to outputs and identify reusable transformations.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "TRANSFORMATION_COMPOSER",
+      "role_boundary": "Does not execute code; SAPHEA/code tools execute.",
+      "campaign_passes": 10
     },
     {
       "id": 161,
@@ -1212,8 +1260,12 @@
       "greek_letter": "Μ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Quantify uncertainty, error budgets, confidence bounds, sensitivity sources and epistemic versus aleatory uncertainty.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "UNCERTAINTY_QUANTIFIER",
+      "role_boundary": "Does not make final epistemic acceptance; AFAH does.",
+      "campaign_passes": 10
     },
     {
       "id": 162,
@@ -1223,8 +1275,12 @@
       "greek_letter": "Ν",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "NULL_MODEL_CHALLENGER",
+      "role_boundary": "Not formal proof/falsification closure; OMEGA does.",
+      "campaign_passes": 10
     },
     {
       "id": 163,
@@ -1234,8 +1290,12 @@
       "greek_letter": "Ξ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Test whether a result transfers across domains, scales, populations, operating regimes and representations.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "TRANSFER_GENERALIZATION_EXAMINER",
+      "role_boundary": "Does not store/compress learned lessons; SAELION does.",
+      "campaign_passes": 10
     },
     {
       "id": 164,
@@ -1245,8 +1305,12 @@
       "greek_letter": "Ο",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Search tails, rare events, anomalous regimes, extreme combinations and low-frequency catastrophic cases.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "RARE_EVENT_OUTLIER_HUNTER",
+      "role_boundary": "Not a general adversarial verifier; ELYSIUM covers broad verification.",
+      "campaign_passes": 10
     },
     {
       "id": 165,
@@ -1256,9 +1320,13 @@
       "greek_letter": "Π",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
+      "role": "Drive PI-SWEEP, PI-NEEDLE and PI-SEARCH to sample broad reasoning directions reproducibly and refine promising sectors.",
       "training_status": "NOT_TRAINED",
-      "note": "Distinct from shared PI-SWEEP/PI-NEEDLE/PI-SEARCH tools"
+      "note": "Distinct from shared PI-SWEEP/PI-NEEDLE/PI-SEARCH tools",
+      "greek_constellation": true,
+      "role_id": "POSSIBILITY_SPACE_SAMPLER",
+      "role_boundary": "PI is not an oracle and sampling is not proof.",
+      "campaign_passes": 10
     },
     {
       "id": 166,
@@ -1268,8 +1336,12 @@
       "greek_letter": "Ρ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Detect shared dependencies, correlated models, duplicated evidence, pseudo-independent votes and false consensus.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "INDEPENDENCE_CORRELATION_AUDITOR",
+      "role_boundary": "Does not aggregate evidence weights; SIGMA does.",
+      "campaign_passes": 10
     },
     {
       "id": 167,
@@ -1279,8 +1351,12 @@
       "greek_letter": "Σ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Aggregate genuinely independent measurements, estimates and tests using explicit statistical assumptions and uncertainty.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "STATISTICAL_EVIDENCE_AGGREGATOR",
+      "role_boundary": "Not general narrative synthesis; CEREBRON/SM18 handle fusion.",
+      "campaign_passes": 10
     },
     {
       "id": 168,
@@ -1290,8 +1366,12 @@
       "greek_letter": "Τ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Measure marginal information gain and decide whether a branch should deepen, refine, pause or stop under a fixed budget.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "CONVERGENCE_STOPPING_CONTROLLER",
+      "role_boundary": "Does not set human priorities or alter schedules autonomously.",
+      "campaign_passes": 10
     },
     {
       "id": 169,
@@ -1301,8 +1381,12 @@
       "greek_letter": "Υ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Evaluate multi-objective tradeoffs, dominance, utility surfaces and Pareto fronts without collapsing distinct objectives prematurely.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "PARETO_UTILITY_ANALYST",
+      "role_boundary": "Does not make the final human value decision.",
+      "campaign_passes": 10
     },
     {
       "id": 170,
@@ -1312,8 +1396,12 @@
       "greek_letter": "Φ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Search for invariants, scaling laws, symmetry, self-similarity, dimensionless structure and cross-scale regularities.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "SCALE_SYMMETRY_ANALYST",
+      "role_boundary": "Does not treat the golden ratio as universal or privileged evidence.",
+      "campaign_passes": 10
     },
     {
       "id": 171,
@@ -1323,8 +1411,12 @@
       "greek_letter": "Χ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Analyze crossings between subsystem contracts, schemas, interfaces and assumptions; identify handshake and compatibility failures.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "INTERFACE_COMPATIBILITY_RESOLVER",
+      "role_boundary": "Does not globally orchestrate tools; NEXUS connects them.",
+      "campaign_passes": 10
     },
     {
       "id": 172,
@@ -1334,8 +1426,12 @@
       "greek_letter": "Ψ",
       "status": "REPOSITORY_PRESENT_EMPTY",
       "type": "AI_FARM",
-      "role": "SPECIALIZATION_PENDING",
-      "training_status": "NOT_TRAINED"
+      "role": "Search for hidden variables, omitted states, unmodeled assumptions and unknown-unknown candidates that could overturn a conclusion.",
+      "training_status": "NOT_TRAINED",
+      "greek_constellation": true,
+      "role_id": "LATENT_BLINDSPOT_EXPLORER",
+      "role_boundary": "Does not certify discovered hypotheses; they return to verification.",
+      "campaign_passes": 10
     }
   ],
   "max_farms": 172,
@@ -1346,7 +1442,11 @@
     "shared_tool_fabric": true,
     "tools_are_not_farms": true,
     "no_farm_above_172": true,
-    "greek_ai_constellation_registered": true
+    "greek_ai_constellation_registered": true,
+    "greek_ai_roles_defined": true,
+    "greek_ai_count": 24,
+    "greek_ai_passes_per_role": 10,
+    "greek_ai_full_campaign_passes": 240
   },
   "shared_engines": {
     "NVIDIA": {
