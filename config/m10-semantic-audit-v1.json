@@ -1,0 +1,46 @@
+{
+  "schema": "CEREBRON_M10_SEMANTIC_AUDIT_V1",
+  "status": "READY",
+  "runtime_changed": false,
+  "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+  "source_run_id": 36006247528,
+  "objective": "Audit relevance, instruction adherence, evidence discipline, role fidelity and hallucination/drift before any AGORA GOLD promotion or 5->10 scaling.",
+  "deterministic_findings": {
+    "executed_workers": 5,
+    "unique_results": 5,
+    "shared_lineage": true,
+    "independent_evidence_count": 0,
+    "observed_issue": "Several outputs drift into unrelated examples or meta-instructions rather than directly solving the assigned generic claim-testing mission."
+  },
+  "auditors": [
+    {
+      "id": "ELYSIUM-SMOL-AUDITOR",
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "role": "SEMANTIC_AUDITOR",
+      "lineage": "SMOLLM3"
+    },
+    {
+      "id": "OMEGA-QWEN-COUNTERAUDITOR",
+      "model": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "role": "FORMAL_COUNTER_AUDITOR",
+      "lineage": "QWEN3"
+    }
+  ],
+  "decision_states": [
+    "ACCEPT",
+    "LIMIT",
+    "HOLD",
+    "REJECT"
+  ],
+  "gold_gate": "DENY_UNLESS_BOTH_AUDITORS_AND_DETERMINISTIC_CHECKS_SUPPORT_ACCEPT_OR_LIMIT_WITH_EXPLICIT_SCOPE",
+  "scaling_gate": "DENY_5_TO_10_IF_ROLE_DIVERSITY_DOES_NOT_TRANSLATE_INTO_RELEVANT_INFORMATION_GAIN",
+  "failure_handling": "Model/resource failure is recorded in receipt but workflow remains evidence-producing; no false PASS.",
+  "hard_rules": [
+    "DIVERSITY_NE_QUALITY",
+    "CONSENSUS_NE_TRUTH",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
