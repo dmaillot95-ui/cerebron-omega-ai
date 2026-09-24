@@ -1,0 +1,81 @@
+name: CEREBRON All-AI Council Repair Canary
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/all-ai-strategy-council-canary-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        ai: [CEREBRON, AELYS, ETHERION, METRION, F166-RHO]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Cache compact council model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-qwen25-05b-ec7ddfa904d4d447eedd0b7f126df16957734abb
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute repaired council perspective
+        run: python tools/all_ai_strategy_council_worker.py --ai "${{ matrix.ai }}" --run-id "${{ github.run_id }}" --output "artifacts/canary/${{ matrix.ai }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: council-canary-${{ matrix.ai }}
+          path: artifacts/canary/${{ matrix.ai }}/receipt.json
+  audit:
+    needs: canary
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: council-canary-*
+          path: downloaded/canary
+      - name: Audit repair
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          rows=[]
+          for p in glob.glob("downloaded/canary/**/receipt.json",recursive=True):
+              r=json.load(open(p))
+              rows.append({"ai_id":r["ai_id"],"inference":r.get("inference"),"parse_ok":r.get("parse_ok"),
+                           "format_contract_version":r.get("format_contract_version"),
+                           "output_sha256":r.get("output_sha256")})
+          rows.sort(key=lambda x:x["ai_id"])
+          out={"schema":"CEREBRON_ALL_AI_COUNCIL_REPAIR_CANARY_V1","run_id":os.environ["GITHUB_RUN_ID"],
+               "receipt_count":len(rows),"parse_pass_count":sum(bool(x["parse_ok"]) for x in rows),
+               "all_pass":len(rows)==5 and all(x["inference"]=="PASS" and x["parse_ok"] for x in rows),"rows":rows}
+          out["sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          q=pathlib.Path("receipts/council/all-ai-council-repair-canary.json");q.parent.mkdir(parents=True,exist_ok=True)
+          q.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if not out["all_pass"]: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: all-ai-council-repair-canary-${{ github.run_id }}
+          path: receipts/council/all-ai-council-repair-canary.json
+      - name: Persist repair canary
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/council/all-ai-council-repair-canary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: all-AI council repair canary"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
