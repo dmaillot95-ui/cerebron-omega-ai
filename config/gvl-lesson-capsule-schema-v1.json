@@ -1,0 +1,35 @@
+{
+  "schema": "CEREBRON_GVL_LESSON_CAPSULE_SCHEMA_V1",
+  "status": "ACTIVE_CONTRACT",
+  "runtime_changed": false,
+  "required": [
+    "lesson_id",
+    "source_ai",
+    "source_role",
+    "problem_class",
+    "invariant",
+    "scope",
+    "evidence_refs",
+    "failure_modes",
+    "specialization_vector",
+    "novelty_score",
+    "transfer_gain",
+    "promotion_status",
+    "parent_sha",
+    "rollback_pointer"
+  ],
+  "promotion_status_values": [
+    "CANDIDATE",
+    "MERGED_REDUNDANT",
+    "TRANSFER_PENDING",
+    "PROMOTED_VALIDATED",
+    "REJECTED"
+  ],
+  "rules": [
+    "If invariant already exists in coaxial axis, MERGE_REDUNDANT and add evidence refs; do not create duplicate lesson content.",
+    "If novelty_score < 0.15, default MERGED_REDUNDANT unless explicit replication purpose exists.",
+    "PROMOTED_VALIDATED requires held-out transfer gain > 0 and counter-audit PASS.",
+    "specialization_vector is control-plane metadata, not evidence and not a neural embedding.",
+    "parent_sha and rollback_pointer are mandatory for persistent promotion."
+  ]
+}
