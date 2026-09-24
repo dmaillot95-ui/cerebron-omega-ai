@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_SPIRALIX_UNIVERSAL_BUS_V1",
   "version": "1.0.0",
-  "status": "MANDATORY_CONTRACT_CANARY_PENDING",
+  "status": "MANDATORY_VALIDATED_304",
   "runtime_changed": false,
   "language": "SPIRALIX-OMEGA",
   "encoding_layer": "GLYPH-VECTOR-OMEGA",
@@ -4151,6 +4151,21 @@
     "NO_AUTO_GOLD",
     "NO_AUTO_TRAINING",
     "NO_DESTRUCTIVE_OVERWRITE",
-    "NU_F162_PREP_ONLY_UNTIL_REPOSITORY_EXISTS"
-  ]
+    "NU_F162_PREP_ONLY_UNTIL_REPOSITORY_EXISTS",
+    "TRANSPORT_PASS_NE_COGNITIVE_PASS"
+  ],
+  "validation": {
+    "run_id": 36018645306,
+    "conclusion": "success",
+    "receipt": "receipts/spiralix/universal-bus-canary.json",
+    "active_endpoints_tested": 304,
+    "prep_only_endpoints": 8,
+    "scope": "ENCODING_DECODING_ROUTING_CONTRACT_ONLY",
+    "not_proved": [
+      "SEMANTIC_QUALITY",
+      "AGENT_INTELLIGENCE",
+      "EVIDENTIARY_INDEPENDENCE",
+      "NEURAL_TRAINING"
+    ]
+  }
 }
