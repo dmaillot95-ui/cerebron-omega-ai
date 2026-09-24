@@ -1,0 +1,6 @@
+GVL B3 CAUSAL CONFOUNDING A-B
+baseline_workers=5
+gvl_workers=5
+max_parallel=5
+registry=32D
+runtime_changed=false
