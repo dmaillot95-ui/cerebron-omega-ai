@@ -1,0 +1,133 @@
+{
+  "schema": "CEREBRON_GVL_V2_CONTROLPLANE_CANARY_V1",
+  "status": "PASS",
+  "checked_ref": "main",
+  "gvl_blob_sha": "95521429ee62b1d95bac8fcd305bfa3360b31f84",
+  "registry_blob_sha": "f6578fa4c2636af910267a24f87110f17ff42ecd",
+  "history_blob_sha": "5c326bf54813caf8101268cb5511e2995889defc",
+  "lesson_index_blob_sha": "1f84c9a9d3c60c8bd76dc8b57460645bb0990b39",
+  "dimension": 32,
+  "logical_ai": 39,
+  "available_ai": 38,
+  "pair_count": 703,
+  "cerebron_aelys_redundancy": 0.288675,
+  "highest_redundancy_pairs": [
+    {
+      "ai_a": "F161-MU",
+      "ai_b": "F167-SIGMA",
+      "redundancy": 1,
+      "complementarity": 0
+    },
+    {
+      "ai_a": "ETHERION",
+      "ai_b": "ELYSION",
+      "redundancy": 0.866025,
+      "complementarity": 0.133975
+    },
+    {
+      "ai_a": "AFAH",
+      "ai_b": "F149-OMEGA",
+      "redundancy": 0.75,
+      "complementarity": 0.25
+    },
+    {
+      "ai_a": "ASTRION",
+      "ai_b": "F153-GAMMA",
+      "redundancy": 0.666667,
+      "complementarity": 0.333333
+    },
+    {
+      "ai_a": "ASTRION",
+      "ai_b": "F171-CHI",
+      "redundancy": 0.666667,
+      "complementarity": 0.333333
+    }
+  ],
+  "nonredundant_example_selection": [
+    {
+      "rank": 1,
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "tags": [
+        "evidence_audit",
+        "formal_reasoning",
+        "counterexample",
+        "synthesis_compression"
+      ],
+      "novelty_vs_previous": 1
+    },
+    {
+      "rank": 2,
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "tags": [
+        "coordination",
+        "problem_contract",
+        "integration_interfaces",
+        "information_gain"
+      ],
+      "novelty_vs_previous": 1
+    },
+    {
+      "rank": 3,
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "tags": [
+        "engineering_validation",
+        "metrology_benchmark",
+        "simulation",
+        "constraint_feasibility"
+      ],
+      "novelty_vs_previous": 1
+    },
+    {
+      "rank": 4,
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "tags": [
+        "search_exploration",
+        "representation_transform",
+        "invention"
+      ],
+      "novelty_vs_previous": 1
+    },
+    {
+      "rank": 5,
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "tags": [
+        "human_dialogue",
+        "synthesis_compression",
+        "coordination"
+      ],
+      "novelty_vs_previous": 0.711325
+    }
+  ],
+  "growth": {
+    "held_out_transfer_cycles": 1,
+    "ratios": [
+      0.8
+    ],
+    "geometric_like_claim_allowed": false,
+    "claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED"
+  },
+  "lesson_dedup": {
+    "candidate_lessons": 2,
+    "merged_redundant": 1,
+    "transfer_pending": 1,
+    "promoted_validated": 0
+  },
+  "checks": {
+    "schema": true,
+    "version": true,
+    "registry_schema": true,
+    "dimension": true,
+    "logical_ai": true,
+    "available_ai": true,
+    "vectors_32d": true,
+    "cerebron_aelys_not_false_duplicate": true,
+    "lesson_dedup": true,
+    "no_unvalidated_promotions": true,
+    "geometric_not_overclaimed": true
+  }
+}
