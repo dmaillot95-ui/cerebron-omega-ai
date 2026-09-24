@@ -37,5 +37,8 @@
       "counted_as_learning_growth_cycle": false
     }
   ],
-  "vector_ontology_version": "V2_32D_EXPLICIT_ROLE_ONTOLOGY"
+  "vector_ontology_version": "V2_32D_EXPLICIT_ROLE_ONTOLOGY",
+  "benchmark": "config/gvl-growth-benchmark-v1.json",
+  "benchmark_version": "GVL_GROWTH_BENCHMARK_V1",
+  "next_held_out_task_family": "B3_CAUSAL_CONFOUNDING_AFTER_CURRENT_REPAIR_FRONT_CLOSES"
 }
