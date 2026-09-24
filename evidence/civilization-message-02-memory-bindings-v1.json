@@ -154,5 +154,12 @@
     "claim_limit": "Logical routing isolation verified; per-AI credentials/cryptographic storage isolation not present."
   },
   "neural_learning_claim": false,
-  "runtime_modified": false
+  "runtime_modified": false,
+  "revalidation": {
+    "run_id": 35952748885,
+    "status": "SUCCESS",
+    "artifact_id": 10789177358,
+    "artifact_digest": "sha256:1e66e17dde1fbfbcf8a7d3523f01948020c027b64cf86b97c2b1f172ca7ba2a6",
+    "head_sha": "4435126a29731422577082dfde8a0d4cf1e0982e"
+  }
 }
