@@ -28,5 +28,21 @@
   ],
   "target_farm": "F67",
   "evidence_gate": "F72",
-  "note": "Master-hosted MVP until F67/F72 repositories physically exist."
+  "note": "Master-hosted MVP until F67/F72 repositories physically exist.",
+  "greek_ai_bridge": {
+    "status": "REGISTERED",
+    "config": "config/greek-agora-training-v1.json",
+    "membership": "ALL_REAL_AVAILABLE_GREEK_AIS",
+    "roles": [
+      "ASK",
+      "ANSWER",
+      "CHALLENGE",
+      "AUDIT",
+      "COUNTER_AUDIT",
+      "REPRODUCE",
+      "TEACH",
+      "SYNTHESIZE"
+    ],
+    "unavailable": "NON_EXECUTED"
+  }
 }
