@@ -1,0 +1,76 @@
+{
+  "schema": "CEREBRON_M09_SEMANTIC_BASELINE_V1",
+  "source_run_id": 36006247528,
+  "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+  "packet_blob_sha": "607955f5e23cc7b7b74d9fcffc38c5a2442ed997",
+  "executed_workers": 5,
+  "successful_workers": 5,
+  "roles": 5,
+  "unique_result_sha256": 5,
+  "unique_lineage_fingerprints": 1,
+  "independent_evidence_count": 0,
+  "metrics": {
+    "drift_workers": 3,
+    "instruction_echo_proxy_workers": 4,
+    "clean_by_simple_proxy": 0
+  },
+  "workers": [
+    {
+      "worker_id": "ETHERION-A",
+      "role": "FORMAL_ANALYST",
+      "result_sha256": "c684fc617f784583ad05e6dd19298a8d65052f88d6f699ef6e2bf3b654bc19f4",
+      "drift_markers": [
+        "SUM_OF_SQUARES"
+      ],
+      "drift_detected": true,
+      "instruction_echo_proxy": false
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "role": "SYSTEM_ARCHITECT",
+      "result_sha256": "69a80c0792652761613545be2400fce6b69879d567f4b888e2c74e80f5158e24",
+      "drift_markers": [
+        "TRIANGLE",
+        "SWAN_EXAMPLE"
+      ],
+      "drift_detected": true,
+      "instruction_echo_proxy": true
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "role": "EVIDENCE_AUDITOR",
+      "result_sha256": "7da404537c91e902de0b4ec58d9f700a24a18fbd001c315e4f39ffeeaa68b208",
+      "drift_markers": [
+        "PRIME_EXAMPLE"
+      ],
+      "drift_detected": true,
+      "instruction_echo_proxy": true
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "role": "COUNTEREXAMPLE_HUNTER",
+      "result_sha256": "74e782c8ee111c26385f0702eda19d95bc8227eefbe34224519bfa0215c47d1d",
+      "drift_markers": [],
+      "drift_detected": false,
+      "instruction_echo_proxy": true
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "role": "CONTINUITY_SYNTHESIZER",
+      "result_sha256": "8c632d326db897f0e608aa226a0c74e493d9fbb3611a0004581b9165b56bfe10",
+      "drift_markers": [],
+      "drift_detected": false,
+      "instruction_echo_proxy": true
+    }
+  ],
+  "interpretation": "Execution and role prompt diversity are proven; semantic fidelity is not. V2 must reduce drift/echo while retaining five real executions.",
+  "v2_target": {
+    "executed_workers": 5,
+    "contract_valid_workers": 5,
+    "no_drift_workers": 5,
+    "problem_hash_match_workers": 5,
+    "unrelated_example_rate": 0,
+    "instruction_echo_rate": 0
+  },
+  "promotion": "NO_GOLD"
+}
