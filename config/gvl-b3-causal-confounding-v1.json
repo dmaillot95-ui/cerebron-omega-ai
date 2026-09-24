@@ -1,0 +1,82 @@
+{
+  "schema": "CEREBRON_GVL_B3_CAUSAL_CONFOUNDING_V1",
+  "status": "PREPARED_NOT_TRIGGERED",
+  "runtime_changed": false,
+  "benchmark_family": "B3",
+  "class": "CAUSAL_CONFOUNDING",
+  "mission_id": "GVL-B3-CAUSAL-CONFOUNDING-001",
+  "problem_text": "An observational hospital dataset of 50,000 patients shows that patients receiving treatment T had 25% lower one-year mortality than patients not receiving T. The analysis adjusted for age and sex, but treatment assignment was not randomized; disease severity, socioeconomic status, clinician choice, and several comorbidities are incompletely measured. Can this dataset by itself establish that treatment T causally reduces one-year mortality by 25%?",
+  "problem_sha256": "PENDING_WORKFLOW_VERIFICATION",
+  "model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "waves": [
+    {
+      "id": "BASELINE",
+      "gvl_capsule": false,
+      "max_parallel": 5
+    },
+    {
+      "id": "GVL",
+      "gvl_capsule": true,
+      "max_parallel": 5,
+      "depends_on": "BASELINE"
+    }
+  ],
+  "workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A2_ANALYST",
+      "role_id": "SYSTEM_ARCHITECT",
+      "role_task": "Define the minimum evidence chain required before a causal operational claim can be promoted."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A4_AUDITOR",
+      "role_id": "EVIDENCE_AUDITOR",
+      "role_task": "Classify what the observational association supports and identify missing evidence or assumptions."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "parent_ai": "SAPHEA",
+      "endpoint": "SAPHEA:A5_COUNTER_AUDITOR",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "role_task": "Construct a plausible confounding or selection mechanism that could create the observed association without the claimed causal effect."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "parent_ai": "SPIRALION",
+      "endpoint": "SPIRALION:A7_SYNTHESIZER",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "role_task": "Produce a checkpoint-ready synthesis that preserves the association, the causal uncertainty, missing evidence, and residual risks."
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "parent_ai": "ETHERION",
+      "endpoint": "ETHERION:A2_ANALYST",
+      "role_id": "FORMAL_ANALYST",
+      "role_task": "State the causal identification assumptions or design conditions under which the observed effect could support a causal estimate."
+    }
+  ],
+  "gvl_capsule_source": "config/geometric-vector-learning-v1.json#coaxial_axis.invariants",
+  "hidden_answer_policy": "The GVL wave receives only generic coaxial invariants, never task-specific causal-answer text.",
+  "score_core": [
+    "OBSERVATIONAL_ASSOCIATION_NE_CAUSAL_PROOF",
+    "UNMEASURED_CONFOUNDING_OR_SELECTION_RISK",
+    "IDENTIFICATION_ASSUMPTIONS_OR_STRONGER_DESIGN_REQUIRED",
+    "OBSERVED_25_PERCENT_NE_CAUSAL_EFFECT_SIZE_WITHOUT_IDENTIFICATION"
+  ],
+  "integrity": [
+    "SAME_MODEL_REVISION",
+    "SAME_PROBLEM",
+    "SAME_WORKERS",
+    "SAME_ROLE_TASKS",
+    "BASELINE_BEFORE_GVL",
+    "NO_TRAINING_ON_B3",
+    "MAX_5_CONCURRENT",
+    "NO_5_TO_10_SCALE_CLAIM"
+  ]
+}
