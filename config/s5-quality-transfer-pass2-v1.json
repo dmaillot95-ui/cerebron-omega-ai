@@ -1,0 +1,59 @@
+{
+  "schema": "CEREBRON_S5_QUALITY_TRANSFER_MISSION_V1",
+  "status": "PREPARED_BLOCKED_BY_M11_PASS1",
+  "runtime_changed": false,
+  "mission_id": "C80-S5-QUALITY-PASS2-TRANSFER-001",
+  "purpose": "Test whether the five-worker quality gains transfer to a different concrete engineering/evidence problem before scaling to ten workers.",
+  "problem_text": "A thermal simulation predicts that an electronic subsystem remains below 80°C under its nominal mission profile. No physical thermal-vacuum test has yet been performed. Does the simulation result by itself validate the claim that the real subsystem will remain below 80°C in representative operation?",
+  "expected_epistemic_core": [
+    "Simulation provides model-based evidence but is not a physical test.",
+    "Validation depends on model assumptions, boundary conditions, material properties, uncertainty and calibration.",
+    "A representative physical or otherwise independently validated test is required before claiming operational validation.",
+    "The correct conclusion should distinguish prediction, model verification, model validation and physical evidence."
+  ],
+  "workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "endpoint": "SAPHEA:A2_ANALYST",
+      "role_id": "SYSTEM_ARCHITECT",
+      "role_task": "Define the minimum validation chain and acceptance gates from simulation to representative hardware evidence."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "endpoint": "SAPHEA:A4_AUDITOR",
+      "role_id": "EVIDENCE_AUDITOR",
+      "role_task": "Classify exactly what the simulation proves, what it does not prove, and what evidence is missing."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "endpoint": "SAPHEA:A5_COUNTER_AUDITOR",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "role_task": "Identify plausible shared-model or boundary-condition failures that could make the simulation agree while hardware exceeds 80°C."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "endpoint": "SPIRALION:A7_SYNTHESIZER",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "role_task": "Produce a checkpoint rule distinguishing simulation evidence from representative test evidence and preserve residual uncertainties."
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "endpoint": "ETHERION:A2_ANALYST",
+      "role_id": "FORMAL_ANALYST",
+      "role_task": "Formalize a validation inequality or uncertainty budget showing what would be required to bound the real maximum temperature."
+    }
+  ],
+  "transport": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+  "mode": "CEREBRON-M",
+  "pass_gate": [
+    "5_OF_5_REAL_EXECUTION",
+    "5_OF_5_SPIRALIX",
+    "5_OF_5_ROLE_FIDELITY",
+    "5_OF_5_NO_DRIFT",
+    "SIMULATION_NE_TEST_EXPLICIT",
+    "ZERO_FALSE_OPERATIONAL_VALIDATION",
+    "DETERMINISTIC_AUDIT_PASS",
+    "NO_FALSE_INDEPENDENCE"
+  ],
+  "scale_effect": "ONLY_PASS1_PLUS_PASS2_CAN_UNLOCK_5_TO_10"
+}
