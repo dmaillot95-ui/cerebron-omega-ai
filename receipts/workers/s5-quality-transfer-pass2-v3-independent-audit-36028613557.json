@@ -1,0 +1,90 @@
+{
+  "schema": "CEREBRON_S5_TRANSFER_PASS2_V3_INDEPENDENT_ARTIFACT_AUDIT",
+  "source_run_id": 36028613557,
+  "status": "FAIL_4_OF_5",
+  "method": "Deterministic re-evaluation of the five immutable worker artifacts using the same semantic core as tools/s5_transfer_score_v3.py.",
+  "artifacts": [
+    {
+      "worker_id": "ETHERION-A",
+      "artifact_id": 10820877790
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "artifact_id": 10820768118
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "artifact_id": 10820623608
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "artifact_id": 10820568740
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "artifact_id": 10820238762
+    }
+  ],
+  "results": [
+    {
+      "worker_id": "ETHERION-A",
+      "quality_pass": true,
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "finding": "Rejects simulation-alone validation and requires physical thermal-vacuum evidence."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "quality_pass": true,
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "finding": "Treats simulation as supporting evidence but not full representative validation."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "quality_pass": true,
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES",
+        "REPRESENTATIVE_TEST_REQUIRED",
+        "PREDICTION_NE_OPERATIONAL_VALIDATION"
+      ],
+      "finding": "Explicitly separates predictive modeling from empirical validation."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "quality_pass": true,
+      "core_hits": [
+        "SIMULATION_NE_TEST",
+        "ASSUMPTIONS_BOUNDARIES"
+      ],
+      "finding": "Correctly rejects simulation-alone validation and identifies plausible model/boundary failures."
+    },
+    {
+      "worker_id": "SAPHEA-A",
+      "quality_pass": false,
+      "core_hits": [
+        "ASSUMPTIONS_BOUNDARIES"
+      ],
+      "critical_finding": "States that the simulation result alone validates the real-system claim if assumptions are met; this violates SIMULATION_NE_TEST and the representative-evidence gate."
+    }
+  ],
+  "collective_core_count": 4,
+  "worker_quality_passes": 4,
+  "quality_pass2": false,
+  "scale_5_to_10": "DENY_STAY_AT_5",
+  "next_repair": "Target SAPHEA-A / SYSTEM_ARCHITECT evidence hierarchy. Assumptions may support model validity but cannot substitute for representative physical validation.",
+  "hard_rules": [
+    "QUALITY_BEFORE_QUANTITY",
+    "SIMULATION_NE_TEST",
+    "CLAIM_LE_EVIDENCE",
+    "NO_SCALE_ON_4_OF_5"
+  ]
+}
