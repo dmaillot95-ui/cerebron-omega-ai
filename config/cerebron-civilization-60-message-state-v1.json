@@ -1,10 +1,11 @@
 {
   "schema": "CEREBRON_CIVILIZATION_60_MESSAGE_STATE_V1",
   "program": "config/cerebron-civilization-60-message-program-v1.json",
-  "current_message": 2,
+  "current_message": 3,
   "completed_messages": [
     1,
-    2
+    2,
+    3
   ],
   "phase": "FOUNDATION",
   "message_1_status": "PASS",
@@ -27,8 +28,8 @@
     "elysion_m6_baseline_result": "SUCCESS"
   },
   "runtime_modified": false,
-  "next_message": 3,
-  "next_objective": "VERIFY_HF20_SLOT_SEMANTICS_RUNTIME_GATES_AND_EXECUTION_RECEIPTS",
+  "next_message": 4,
+  "next_objective": "VERIFY_FARM_FUNCTION_ROUTING_AND_NATIVE_AI_F145_F146_DIRECT_ROUTE",
   "resume_command": "SUITE",
   "message_2_status": "PASS_WITH_DECLARED_ISOLATION_LIMIT",
   "message_2_evidence": {
@@ -40,6 +41,19 @@
     "revalidation_artifact_digest": "sha256:1e66e17dde1fbfbcf8a7d3523f01948020c027b64cf86b97c2b1f172ca7ba2a6",
     "active_ai_count": 14,
     "isolation_mode": "LOGICAL_NAMESPACE_POLICY_NOT_SEPARATE_STORAGE_ACL",
+    "runtime_modified": false
+  },
+  "message_3_status": "PASS_SCOPED",
+  "message_3_evidence": {
+    "hf20_pool_audit_run": 35953143135,
+    "pool_audit_job": 107485765676,
+    "hf_a01_job": 107485985625,
+    "hf_a01_receipt_artifact": 10789317767,
+    "hf_a01_receipt_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88",
+    "executed_slots": 1,
+    "non_executed_slots": 19,
+    "platform_ci_run": 35953133114,
+    "platform_ci_result": "SUCCESS",
     "runtime_modified": false
   }
 }
