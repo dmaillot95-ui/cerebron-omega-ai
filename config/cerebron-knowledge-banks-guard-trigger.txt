@@ -1,0 +1,3 @@
+guard=knowledge-banks-v1
+s10=STAY_AT_5
+geometric=1_OF_4
