@@ -1,0 +1,49 @@
+{
+  "schema": "CEREBRON_80_M13_CONTROLLED_CONVERGENCE_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 13,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "m05": {
+    "run_id": 36016484074,
+    "receipt": "receipts/p03/m05-hf-rollback/36016484074.json",
+    "result": "7_OF_7_PASS",
+    "parent_run_id": 35996621664,
+    "hf_commit_mode": "SINGLE_BATCH_COMMIT_7_OBJECTS",
+    "guard_run": 36017126572,
+    "guard_status": "QUEUED"
+  },
+  "m06": {
+    "workflow": ".github/workflows/m06-hf-full-rollback-rollout.yml",
+    "status": "PREPARED_NOT_TRIGGERED_BLOCKED_BY_M05_GUARD",
+    "target_available_ai": 38
+  },
+  "m10": {
+    "run_id": 36015400305,
+    "elysium_smol": "COMPLETED_OVERPERMISSIVE",
+    "omega_qwen": "IN_PROGRESS",
+    "deterministic_gate": "SEMANTIC_HOLD",
+    "gold": "DENY",
+    "scaling_5_to_10": "HOLD"
+  },
+  "m09_baseline": {
+    "receipt": "receipts/agora/m09-semantic-baseline-v1.json",
+    "drift_workers": 3,
+    "instruction_echo_proxy_workers": 4,
+    "clean_by_simple_proxy": 0
+  },
+  "m11": {
+    "problem_sha256": "268482a63cb1616367e9c0e2d2204f8c1b82cb00e60b8be28dacf9fcae81f230",
+    "preflight_run": 36016825702,
+    "preflight_status": "QUEUED",
+    "execution": "NOT_TRIGGERED",
+    "target": "5_EXECUTED_5_CONTRACT_VALID_5_NO_DRIFT"
+  },
+  "hard_rules": [
+    "NO_GOLD",
+    "NO_5_TO_10",
+    "NO_M11_EXECUTION_BEFORE_M10",
+    "NO_M06_BEFORE_M05_GUARD",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
