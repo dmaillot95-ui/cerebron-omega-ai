@@ -1,0 +1,8 @@
+CEREBRON ALL-AI STRATEGY COUNCIL
+mission=C80-ALL-AI-STRATEGY-COUNCIL-001
+available_logical_ai=38
+representative_slot=A2_ANALYST
+max_parallel=20
+shared_model=Qwen/Qwen2.5-0.5B-Instruct
+independent_evidence_claim=false
+goal=next-roadmap-advice-plus-assistant-contribution-audit
