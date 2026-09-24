@@ -1,0 +1,85 @@
+{
+  "schema": "CEREBRON_QUALITY_FIRST_SCALE_POLICY_V1",
+  "status": "ACTIVE",
+  "runtime_changed": false,
+  "origin": "AELYS_RECOMMENDATION_AUDITED_AND_ADOPTED_AS_ENGINEERING_POLICY",
+  "principle": "Improve reliability, memory use, specialization and semantic fidelity of the current coalition before increasing worker count.",
+  "current_scale": 5,
+  "scale_targets": [
+    10,
+    20
+  ],
+  "dimensions": [
+    {
+      "id": "Q1",
+      "name": "REAL_EXECUTION",
+      "gate": "worker/model/run/log/artifact receipt required"
+    },
+    {
+      "id": "Q2",
+      "name": "SPIRALIX_TRANSPORT",
+      "gate": "valid input and output CEREBRON_SPIRALIX_ENVELOPE_V1"
+    },
+    {
+      "id": "Q3",
+      "name": "ROLE_FIDELITY",
+      "gate": "output addresses assigned role task"
+    },
+    {
+      "id": "Q4",
+      "name": "SEMANTIC_FIDELITY",
+      "gate": "no unrelated example substitution or instruction echo"
+    },
+    {
+      "id": "Q5",
+      "name": "EVIDENCE_DISCIPLINE",
+      "gate": "claims bounded by explicit evidence and uncertainty"
+    },
+    {
+      "id": "Q6",
+      "name": "MEMORY_CONTINUITY",
+      "gate": "versioned checkpoint/parent/rollback when persistent memory is used"
+    },
+    {
+      "id": "Q7",
+      "name": "LINEAGE_HONESTY",
+      "gate": "shared model/data dependencies tagged correlated"
+    },
+    {
+      "id": "Q8",
+      "name": "AUDIT_RESISTANCE",
+      "gate": "survives deterministic audit and counter-audit without critical finding"
+    }
+  ],
+  "scale_5_to_10": {
+    "required_consecutive_quality_passes": 2,
+    "pass_1": "M11_S5_V2_EXACT_PROBLEM",
+    "pass_2": "S5_V2_TRANSFER_PROBLEM_DIFFERENT_DOMAIN_OR_FORMULATION",
+    "each_pass_requires": [
+      "5_OF_5_REAL_EXECUTION",
+      "5_OF_5_SPIRALIX",
+      "5_OF_5_ROLE_FIDELITY",
+      "5_OF_5_SEMANTIC_FIDELITY",
+      "ZERO_CRITICAL_EVIDENCE_VIOLATIONS",
+      "DETERMINISTIC_AUDIT_PASS",
+      "NO_FALSE_INDEPENDENCE"
+    ],
+    "scale_decision": "ONLY_IF_SECOND_PASS_CONFIRMS_TRANSFER_AND_MARGINAL_INFORMATION_GAIN_POSITIVE"
+  },
+  "scale_10_to_20": {
+    "required": "Same quality gates plus measured nonredundant information gain from workers 6-10 and no resource/quota regression."
+  },
+  "stop_rules": [
+    "IF_QUALITY_FAILS_DO_NOT_ADD_WORKERS",
+    "IF_NEW_WORKERS_ADD_REDUNDANCY_NOT_INFORMATION_STOP_SCALING",
+    "IF_AUDITOR_DISAGREES_WITH_DETERMINISTIC_FAILURE_GATE_KEEP_HOLD",
+    "AGENT_COUNT_NE_INTELLIGENCE"
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "SELF_REPORT_NE_EVIDENCE",
+    "RUNTIME_FREEZE"
+  ]
+}
