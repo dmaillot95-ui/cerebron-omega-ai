@@ -1,0 +1,62 @@
+{
+  "schema": "CEREBRON_80_M20_S10_MARGINAL_GAIN_RUNNING",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 20,
+  "status": "IN_PROGRESS",
+  "runtime_changed": false,
+  "quality": {
+    "pass1": {
+      "run_id": 36027613868,
+      "status": "PASS_5_OF_5"
+    },
+    "pass2r": {
+      "run_id": 36034245620,
+      "status": "PASS_5_OF_5",
+      "receipt": "receipts/workers/s5-quality-transfer-pass2-v3-36034245620.json"
+    }
+  },
+  "gvl": {
+    "schema": "CEREBRON_GEOMETRIC_VECTOR_LEARNING_V2",
+    "dimension": 32,
+    "guard_run": 36037885406,
+    "guard_status": "SUCCESS",
+    "b3": {
+      "run_id": 36038241741,
+      "quality_before": 0.93,
+      "quality_after": 0.96,
+      "transfer_gain": 0.03,
+      "ratio": 1.032258,
+      "critical_errors": 0
+    },
+    "geometric_gate_progress": "1_OF_4",
+    "geometric_growth_claim": "DENY"
+  },
+  "s10": {
+    "run_id": 36042832474,
+    "design": "5_BASELINE_THEN_5_GVL_COMPLEMENTARY",
+    "wave_A": [
+      "SAPHEA-A",
+      "SAPHEA-B",
+      "SAPHEA-C",
+      "SPIRALION-A",
+      "ETHERION-A"
+    ],
+    "wave_B": [
+      "METRION-A",
+      "RHO-A",
+      "XI-A",
+      "PSI-A",
+      "TAU-A"
+    ],
+    "max_parallel": 5,
+    "independent_evidence_count_expected": 0,
+    "status": "QUEUED",
+    "pass_gate": "AT_LEAST_2_NEW_FINDING_CATEGORIES_AND_3_USEFUL_EXTENSION_WORKERS_ZERO_CRITICAL_ERRORS"
+  },
+  "scaling": {
+    "current_scale": 5,
+    "scale_5_to_10": "TESTING_MARGINAL_GAIN_ONLY",
+    "actual_scale_change": false
+  },
+  "next_action": "Inspect S10 wave A, then wave B, then deterministic marginal gain score. Scale remains 5 until a positive receipt is persisted."
+}
