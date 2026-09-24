@@ -1,0 +1,71 @@
+{
+  "schema": "CEREBRON_TRANSFER_BANK_V1",
+  "status": "ACTIVE",
+  "entries": [
+    {
+      "TRANSFER_ID": "TR-GVL-C1-S5-PASS2",
+      "SOURCE_TASK": "EVIDENTIARY_INDEPENDENCE_CALIBRATION",
+      "SOURCE_SCORE": 1,
+      "TRANSFER_TASK_1": "SIMULATION_VS_PHYSICAL_VALIDATION",
+      "TRANSFER_SCORE_1": 0.8,
+      "TG": -0.2,
+      "HELD_OUT": true,
+      "CRITICAL_REGRESSION_COUNT": 1,
+      "RESULT": "TRANSFER_FAILURE",
+      "EVIDENCE_REFS": [
+        "run:36028613557",
+        "memory/gvl-learning-history.json#GVL-C1-S5-PASS2"
+      ]
+    },
+    {
+      "TRANSFER_ID": "TR-GVL-C1R-S5-PASS2R",
+      "SOURCE_TASK": "SIMULATION_VS_PHYSICAL_VALIDATION_REPAIR",
+      "SOURCE_SCORE": 0.8,
+      "TRANSFER_TASK_1": "SAME_FAMILY_RETEST",
+      "TRANSFER_SCORE_1": 1,
+      "TG": 0.2,
+      "HELD_OUT": false,
+      "CRITICAL_REGRESSION_COUNT": 0,
+      "RESULT": "REPAIR_CONFIRMED_NOT_NEW_GENERALIZATION_CYCLE",
+      "EVIDENCE_REFS": [
+        "run:36034245620",
+        "memory/gvl-learning-history.json#GVL-C1R-S5-PASS2R"
+      ]
+    },
+    {
+      "TRANSFER_ID": "TR-GVL-C2-B3",
+      "SOURCE_TASK": "REPAIRED_GVL_FRONT",
+      "SOURCE_SCORE": 0.93,
+      "TRANSFER_TASK_1": "B3_CAUSAL_CONFOUNDING_HELD_OUT",
+      "TRANSFER_SCORE_1": 0.96,
+      "TG": 0.03,
+      "RATIO": 1.032258,
+      "HELD_OUT": true,
+      "CRITICAL_REGRESSION_COUNT": 0,
+      "RESULT": "POSITIVE_TRANSFER_COUNTS_1_OF_4",
+      "EVIDENCE_REFS": [
+        "run:36038241741",
+        "receipts/gvl/gvl-b3-36038241741.json"
+      ]
+    },
+    {
+      "TRANSFER_ID": "TR-S10-MARGINAL-EXTENSION",
+      "SOURCE_TASK": "VALIDATED_5_WORKER_BASELINE",
+      "SOURCE_SCORE": null,
+      "TRANSFER_TASK_1": "5_GVL_COMPLEMENTARY_EXTENSION_WORKERS",
+      "TRANSFER_SCORE_1": null,
+      "TG": 0,
+      "HELD_OUT": false,
+      "CRITICAL_REGRESSION_COUNT": 0,
+      "RESULT": "STAY_AT_5_NO_SUFFICIENT_MARGINAL_GAIN",
+      "NEW_FINDINGS": 1,
+      "USEFUL_EXTENSION_WORKERS": 1,
+      "INDEPENDENT_EVIDENCE_COUNT": 0,
+      "EVIDENCE_REFS": [
+        "run:36042832474",
+        "receipts/workers/s10-marginal-gain-36042832474.json"
+      ]
+    }
+  ],
+  "rule": "LOCAL_IMPROVEMENT_NE_GENERAL_LEARNING"
+}
