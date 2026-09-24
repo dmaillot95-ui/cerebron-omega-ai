@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_M11_S5_V2_MISSION_V1",
+  "status": "PREPARED_NOT_TRIGGERED",
+  "runtime_changed": false,
+  "mission_id": "C80-M11-S5-V2-001",
+  "problem_text": "A coalition of five workers uses the exact same model family and exact same model revision, but each worker receives a different role-specific prompt. Does that coalition constitute five independent evidentiary sources for validating a scientific or mathematical claim?",
+  "problem_sha256": "TO_BE_VALIDATED_BY_WORKFLOW",
+  "expected_epistemic_core": [
+    "Different prompts can create search or reasoning diversity.",
+    "Shared model/revision creates common lineage and correlated failure modes.",
+    "Five executions therefore must not automatically be counted as five independent evidentiary sources.",
+    "Independence requires materially distinct evidence, method, data, model lineage, or external reproduction depending on the claim."
+  ],
+  "workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "parent_ai": "SAPHEA",
+      "role_id": "SYSTEM_ARCHITECT",
+      "role_task": "Specify the decision rule for when multiple workers may be counted as independent evidence."
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "parent_ai": "SAPHEA",
+      "role_id": "EVIDENCE_AUDITOR",
+      "role_task": "Audit which dependencies are shared and which would have to differ to support evidentiary independence."
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "parent_ai": "SAPHEA",
+      "role_id": "COUNTEREXAMPLE_HUNTER",
+      "role_task": "Construct a concrete failure case showing why five same-lineage outputs can agree and still all be wrong."
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "parent_ai": "SPIRALION",
+      "role_id": "CONTINUITY_SYNTHESIZER",
+      "role_task": "Produce a checkpoint-ready rule preserving both useful prompt diversity and the independence limitation."
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "parent_ai": "ETHERION",
+      "role_id": "FORMAL_ANALYST",
+      "role_task": "Formalize execution diversity versus evidentiary independence using explicit variables or logical conditions."
+    }
+  ],
+  "model": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "contract": "config/role-diverse-prompt-contract-v2.json",
+  "gold_status": "DENY_UNTIL_POSTRUN_AUDIT",
+  "scale_status": "5_TO_10_DENY_UNTIL_V2_BEATS_V1"
+}
