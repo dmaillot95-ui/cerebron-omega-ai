@@ -1,0 +1,81 @@
+{
+  "schema": "CEREBRON_5_REAL_AI_WORKERS_RECEIPT_V1",
+  "run_id": 36002999588,
+  "status": "PASS",
+  "route": "GITHUB_ACTIONS_CPU",
+  "repository_visibility": "PUBLIC",
+  "runner": "ubuntu-latest",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "workers": [
+    {
+      "worker_id": "SAPHEA-A",
+      "job_id": 107643974721,
+      "artifact_id": 10809496404,
+      "llm_inference": true,
+      "inference": "PASS",
+      "output_sha256": "2980e9309a4936d61598183a32f2d30b182452301f614833a19cb6434b2de52f",
+      "latency_s": 184.628,
+      "receipt_sha256": "3ddf13403e39d4eda1f94c0f15e8257f3fcbee878c1366027e1d05a99881153d"
+    },
+    {
+      "worker_id": "SAPHEA-B",
+      "job_id": 107643974523,
+      "artifact_id": 10809800579,
+      "llm_inference": true,
+      "inference": "PASS",
+      "output_sha256": "2980e9309a4936d61598183a32f2d30b182452301f614833a19cb6434b2de52f",
+      "latency_s": 174.626,
+      "receipt_sha256": "63ab15dd0c80c98f1f6cdda7614843f780ee765355f1bf08e4f029b2ddc92f84"
+    },
+    {
+      "worker_id": "SAPHEA-C",
+      "job_id": 107643974662,
+      "artifact_id": 10810400186,
+      "llm_inference": true,
+      "inference": "PASS",
+      "output_sha256": "2980e9309a4936d61598183a32f2d30b182452301f614833a19cb6434b2de52f",
+      "latency_s": 145.971,
+      "receipt_sha256": "8213e98f9dea3cb2bf253e9f831033f332c848a382976f56eb1c34e1ff6bf821"
+    },
+    {
+      "worker_id": "SPIRALION-A",
+      "job_id": 107643974557,
+      "artifact_id": 10809825663,
+      "llm_inference": true,
+      "inference": "PASS",
+      "output_sha256": "2980e9309a4936d61598183a32f2d30b182452301f614833a19cb6434b2de52f",
+      "latency_s": 167.521,
+      "receipt_sha256": "2d2737df66c2708387c9b6d97648832dd28dfcf8a54dfa3d761657ee82596e20"
+    },
+    {
+      "worker_id": "ETHERION-A",
+      "job_id": 107643974451,
+      "artifact_id": 10809905831,
+      "llm_inference": true,
+      "inference": "PASS",
+      "output_sha256": "2980e9309a4936d61598183a32f2d30b182452301f614833a19cb6434b2de52f",
+      "latency_s": 229.617,
+      "receipt_sha256": "50e5a49bb5b32ea74c4ba940f18ab0ada11212d27d314e8ae94f2c063e230f0d"
+    }
+  ],
+  "summary": {
+    "required": 5,
+    "jobs_success": 5,
+    "real_execution": 5,
+    "llm_inference_pass": 5,
+    "artifacts_present": 5,
+    "unique_receipt_sha256": 5,
+    "unique_output_sha256": 1,
+    "output_diversity": "NONE_ON_DETERMINISTIC_IDENTICAL_PROMPT",
+    "lineage": "SAME_MODEL_REVISION_CORRELATED"
+  },
+  "claim": "GitHub Actions CPU is proven to execute five real pinned-model LLM workers for this canary pattern.",
+  "not_proved": [
+    "Five independent evidentiary sources",
+    "Useful role diversity",
+    "Ten or twenty worker scalability",
+    "Model quality superiority",
+    "Training"
+  ]
+}
