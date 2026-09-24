@@ -1,0 +1,29 @@
+{
+  "schema": "CEREBRON_80_M09_ROLE_DIVERSE_AGORA_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 9,
+  "status": "EXECUTION_COMPLETE_SEMANTIC_HOLD",
+  "runtime_changed": false,
+  "run_id": 36006247528,
+  "source_packet": "agora/packets/s5-role-diverse-36006247528.json",
+  "execution": {
+    "workers": 5,
+    "successful": 5,
+    "roles": 5,
+    "unique_results": 5,
+    "unique_lineage_fingerprints": 1,
+    "independent_evidence_count": 0
+  },
+  "semantic_observation": [
+    "Role-diverse prompting produced five distinct outputs.",
+    "Several outputs drifted into unrelated examples or meta-instructions.",
+    "Diversity alone is insufficient for promotion."
+  ],
+  "promotion": "HOLD_PENDING_M10_SEMANTIC_AUDIT",
+  "scaling": "HOLD_5_TO_10",
+  "next_message": {
+    "id": "M10",
+    "run_id": 36015400305,
+    "objective": "Cross-lineage semantic audit and counter-audit; repair prompts before scaling if usefulness is insufficient."
+  }
+}
