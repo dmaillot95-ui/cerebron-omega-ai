@@ -1,0 +1,79 @@
+{
+  "schema": "CEREBRON_AI_8_AGENT_TOPOLOGY_V1",
+  "status": "ARCHITECTURE_REGISTERED_EXECUTION_GATED",
+  "runtime_changed": false,
+  "purpose": "Give every CEREBRON AI a uniform eight-agent local colony while preserving each AI's unique specialist function.",
+  "per_ai_agent_slots": 8,
+  "agent_template": [
+    {
+      "slot": "A0_CHIEF",
+      "function": "coordinate local mission, dependencies, budget and handoff; cannot self-certify"
+    },
+    {
+      "slot": "A1_EXPLORER",
+      "function": "generate alternative branches using the parent AI specialization and PI-SEARCH when relevant"
+    },
+    {
+      "slot": "A2_ANALYST",
+      "function": "formalize, calculate, model or structure the strongest branches within the parent AI role"
+    },
+    {
+      "slot": "A3_EXECUTOR",
+      "function": "invoke real permitted tools/farms/models and preserve receipts; NON_EXECUTED if unavailable"
+    },
+    {
+      "slot": "A4_AUDITOR",
+      "function": "verify claims, provenance, units, contracts and evidence ceiling"
+    },
+    {
+      "slot": "A5_COUNTER_AUDITOR",
+      "function": "actively seek counterexamples, hidden dependencies, leakage, regressions and false consensus"
+    },
+    {
+      "slot": "A6_MEMORY_KEEPER",
+      "function": "read/write versioned AGORA/FORUM/Memory Omega/HF pointers with SHA and lineage; never overwrite history"
+    },
+    {
+      "slot": "A7_SYNTHESIZER",
+      "function": "compress eight-agent output to one local capsule with disagreements and residuals preserved"
+    }
+  ],
+  "roster_source": "training/AGORA_TASK_AGENT_TEACHER_LOOP.json",
+  "activation": {
+    "default": "PLANNED_UNTIL_REAL_WORKER_RECEIPT",
+    "active_claim_requires": [
+      "run_id_or_equivalent",
+      "worker_or_model_id",
+      "log_or_result",
+      "artifact_or_receipt",
+      "provenance"
+    ],
+    "unavailable": "NON_EXECUTED"
+  },
+  "burst_pool": {
+    "max_agents": 20,
+    "purpose": "Cross-AI/farm direct burst for a difficult mission after local 8-agent passes identify the highest-value branches.",
+    "composition": "Select up to 20 real workers from distinct useful roles/farms/models; do not fill slots merely to reach 20.",
+    "hf_direct_memory": "Each real burst worker may read/write only its authorized HF private namespace through opaque GitHub pointers.",
+    "independence_rule": "Shared base/model/data lineage must be marked correlated and does not count as independent evidence.",
+    "fallback": "If fewer than 20 real workers are available, run the smaller real coalition and record actual count."
+  },
+  "local_cycle": [
+    "CHIEF_ASSIGN",
+    "EXPLORER_DIVERGE",
+    "ANALYST_FORMALIZE",
+    "EXECUTOR_REAL_RUN",
+    "AUDITOR_CHECK",
+    "COUNTER_AUDITOR_ATTACK",
+    "MEMORY_KEEPER_VERSION",
+    "SYNTHESIZER_CAPSULE"
+  ],
+  "hard_rules": [
+    "RUNTIME_FREEZE",
+    "NO_SIMULATED_AGENT",
+    "NO_OVERWRITE_HISTORY",
+    "CLAIM_LE_EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "SHARED_LINEAGE_NE_INDEPENDENT_EVIDENCE"
+  ]
+}
