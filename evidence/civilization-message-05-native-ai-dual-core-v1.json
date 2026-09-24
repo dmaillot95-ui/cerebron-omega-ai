@@ -1,0 +1,122 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_05_NATIVE_AI_DUAL_CORE_V1",
+  "status": "PASS_ARCHITECTURE_ONLY_DUAL_CORE_NOT_ACTIVATED",
+  "program_message": 5,
+  "contract": "config/native-ai-dual-core-v1.json",
+  "scope_farms": [
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151
+  ],
+  "native_ai": [
+    {
+      "farm_id": 145,
+      "ai_id": "ELYSION",
+      "core_a": "SOLUTION_GENERATOR",
+      "core_b": "ALTERNATIVE_SOLVER_CRITIC",
+      "fusion": "SOLUTION_SYNTHESIS",
+      "dual_core_state": "PENDING_D4_D5_D6"
+    },
+    {
+      "farm_id": 146,
+      "ai_id": "ELYSIUM",
+      "core_a": "VERIFIER_REPRODUCER",
+      "core_b": "ADVERSARIAL_FALSIFIER",
+      "fusion": "VERDICT_WITH_LIMITS",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 147,
+      "ai_id": "SAELION",
+      "core_a": "EXPLORER_LEARNER",
+      "core_b": "SELECTOR_COMPRESSOR",
+      "fusion": "CURRICULUM_BUILDER",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 148,
+      "ai_id": "ALPHA",
+      "core_a": "DIVERGENT_EXPLORER",
+      "core_b": "CONSTRUCTIVE_ARCHITECT",
+      "fusion": "NOVEL_CONSTRUCT_SELECTION",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 149,
+      "ai_id": "OMEGA",
+      "core_a": "FORMAL_PROVER_AUDITOR",
+      "core_b": "COUNTEREXAMPLE_HUNTER",
+      "fusion": "PROOF_STATUS_ARBITER",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 150,
+      "ai_id": "DELTA",
+      "core_a": "THEORY_MODEL_BUILDER",
+      "core_b": "SIMULATION_VALIDATOR",
+      "fusion": "SCIENCE_SYNTHESIS",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    },
+    {
+      "farm_id": 151,
+      "ai_id": "NEXUS",
+      "core_a": "KNOWLEDGE_INTEGRATOR",
+      "core_b": "ORCHESTRATION_PLANNER",
+      "fusion": "MISSION_GRAPH_SYNTHESIS",
+      "dual_core_state": "PENDING_D1_TO_D8"
+    }
+  ],
+  "common_flow": [
+    "INPUT",
+    "CORE_A",
+    "CORE_B",
+    "CROSS_CRITIQUE",
+    "FUSION",
+    "AFAH_OR_DOMAIN_AUDIT",
+    "VALIDATED_MEMORY"
+  ],
+  "activation_gates": [
+    "D0_REPOSITORY_PRESENT",
+    "D1_PRIVATE_MEMORY_NAMESPACE_CANARY",
+    "D2_TWO_EXACT_REVISION_RUNTIME_RECEIPTS",
+    "D3_SINGLE_CORE_COLD_BASELINES",
+    "D4_DUAL_CORE_FUSION_ABLATION_GAIN_OR_RISK_JUSTIFICATION",
+    "D5_CROSS_CRITIQUE_AND_CONTRADICTION_TEST",
+    "D6_RED_TEAM_AND_REGRESSION",
+    "D7_M6_AND_TRAINING_SOURCE_ISOLATION",
+    "D8_RELEASE_RECEIPT_AND_CLAIM_CEILING"
+  ],
+  "current_pair_candidates": [
+    "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+    "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1"
+  ],
+  "audit": {
+    "workflow": "CEREBRON Native AI Dual Core Audit",
+    "run_id": 35956692338,
+    "job_id": 107496421447,
+    "head_sha": "27a87240343cb94ee294b8311c9ec866c3fdc319",
+    "conclusion": "success"
+  },
+  "f145_existing_evidence": {
+    "runtime_pair_run_id": 35917498487,
+    "cold_single_core_m6_run_id": 35918041093,
+    "qwen_accuracy": 0.51,
+    "smollm_accuracy": 0.62,
+    "dual_core_fusion_ablation": "NOT_YET_EXECUTED"
+  },
+  "rules": [
+    "TWO_CORES_DO_NOT_EQUAL_TWO_INDEPENDENT_PROOFS",
+    "FUSION_NOT_MAJORITY_VOTE",
+    "DISAGREEMENT_MUST_BE_PRESERVED_WHEN_UNRESOLVED",
+    "DUAL_CORE_MUST_BE_ABLATED_AGAINST_BEST_SINGLE_CORE",
+    "PENDING_NATIVE_AI_MUST_NOT_ENTER_ACTIVE_ROUTING",
+    "M6_NEVER_IN_TRAIN"
+  ],
+  "runtime_modified": false,
+  "weights_changed": false,
+  "claim_limit": "Architecture and governance are validated. No native AI is claimed dual-core validated until its own ablation, cross-critique, red-team and release gates pass."
+}
