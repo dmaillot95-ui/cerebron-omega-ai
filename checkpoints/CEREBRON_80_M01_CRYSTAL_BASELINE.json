@@ -1,0 +1,71 @@
+{
+  "schema": "CEREBRON_80_M01_CRYSTAL_BASELINE_V1",
+  "campaign": "CEREBRON_80_MESSAGE_CAMPAIGN_V1",
+  "message": 1,
+  "status": "PASS_WITH_ONE_BLOCKER",
+  "runtime_changed": false,
+  "registry": {
+    "max_farms": 172,
+    "registry_version": "2.24",
+    "greek_target": 24,
+    "greek_infrastructure_present": 23,
+    "greek_new_scaffolds_guards_pass": 20,
+    "missing_repository": [
+      {
+        "farm_id": 162,
+        "identity": "NU",
+        "repo": "cerebron-farm-162-nu"
+      }
+    ]
+  },
+  "agents": {
+    "topology": "config/ai-8-agent-topology-v1.json",
+    "per_ai_slots": 8,
+    "burst_pool_max": 20,
+    "execution_claim": "CONFIGURED_ONLY_UNLESS_RUN_LOG_ARTIFACT_EXISTS"
+  },
+  "memory": {
+    "route": "config/private-memory-route.json",
+    "fabric": "config/memory-fabric-v1.json",
+    "crystal": "config/crystal-preservation-v1.json",
+    "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+    "verified_scope": "SCOPED_NOT_GLOBAL",
+    "receipts": [
+      "receipts/colonies/wave01-hf-memory-gate.json",
+      "receipts/p03/hf-memory-health.json",
+      "receipts/p03/unified-memory-recall-v2.json"
+    ],
+    "proved": [
+      "authenticated_private_access",
+      "scoped_write_read_sha",
+      "opaque_pointer_route_for_tested_scope",
+      "rollback_pointer_for_tested_scope"
+    ],
+    "not_yet_proved": [
+      "per_ai_hf_roundtrip_for_all_greek_ais",
+      "8_agent_per_ai_real_execution",
+      "20_agent_burst_real_execution"
+    ],
+    "overwrite_policy": "APPEND_OR_VERSION_NEVER_DESTRUCTIVE_OVERWRITE"
+  },
+  "agora_forum": {
+    "greek_training_config": "config/greek-agora-training-v1.json",
+    "agora": "config/spiralix-agora.json",
+    "forum": "config/spiralix-forum.json",
+    "membership_policy": "ALL_REAL_AVAILABLE_AIS",
+    "unavailable": "NON_EXECUTED"
+  },
+  "next_message": {
+    "id": "M02",
+    "objective": "Build a machine-checkable successor handoff packet and crystal validator; reconcile master HEAD, registry, memory receipts and rollback invariants."
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "NO_SIMULATED_AGENT",
+    "RUNTIME_FREEZE"
+  ]
+}
