@@ -301,6 +301,29 @@
       "ratio": 1.032258,
       "critical_errors": 0,
       "geometric_gate_progress": "1_OF_4"
+    },
+    {
+      "id": "C80-S10",
+      "title": "Controlled S10 marginal gain test",
+      "status": "WAVE_A_RUNNING",
+      "run_id": 36042832474,
+      "baseline_workers": [
+        "SAPHEA-A",
+        "SAPHEA-B",
+        "SAPHEA-C",
+        "SPIRALION-A",
+        "ETHERION-A"
+      ],
+      "extension_workers": [
+        "METRION-A",
+        "RHO-A",
+        "XI-A",
+        "PSI-A",
+        "TAU-A"
+      ],
+      "gvl_dimension": 32,
+      "independent_evidence_count_expected": 0,
+      "scale_5_to_10": "TEST_ONLY_NO_SCALE_YET"
     }
   ],
   "updated_at": "2026-09-24",
