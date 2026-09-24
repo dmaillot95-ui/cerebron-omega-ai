@@ -1,0 +1,98 @@
+{
+  "schema": "CEREBRON_M05_NEGATIVE_EVIDENCE_WRAPPER_V1",
+  "original_run_id": "35997686804",
+  "classification": "DATA_INTEGRITY_PASS_PARENT_METADATA_MISMATCH",
+  "issue": "Receipt parent_run_id does not match actual parent object run embedded in parent_object paths.",
+  "preserve": true,
+  "original_receipt": {
+    "schema": "CEREBRON_M05_ROLLBACK_RECEIPT_V1",
+    "run_id": "35997686804",
+    "parent_run_id": "35995124491",
+    "checked_at": "2026-09-24T12:13:29.420168+00:00",
+    "results": [
+      {
+        "ai_id": "CEREBRON",
+        "family": "EXECUTIVE",
+        "status": "PASS",
+        "parent_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "d572052be3633672b4f3a3626fa96551ec62d0aafb362190e7dd170b7a7e0ad4",
+        "new_object": "ai/cerebron/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "7a37315e2579cd09cf395a0946edcd8cc94e8f6ccc2174d81bac5af85a118ec4",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "SAPHEA",
+        "family": "SPECIALIST_ROUTER",
+        "status": "PASS",
+        "parent_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "a204e3194601895281cba15fe3d1a760ba45bfde81abbacd8321f7e20de90057",
+        "new_object": "ai/saphea/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "d8fb9f221ff74a44f6b05c156a8d7a8d3236c5af44ac75f0dd67af5644f1ffeb",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "ELYSION",
+        "family": "NATIVE_LLM_PROJECT",
+        "status": "PASS",
+        "parent_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "52d49a9114315665e4015783a9c3e3cb354de71bea0f87f471f593b6580d7aa0",
+        "new_object": "ai/elysion/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "acf54eb5f7e39dd246bd726d4b727e60b75d7b703d6f98d10b366c42be5c553a",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "ELYRA",
+        "family": "SIMULATION_ACTION",
+        "status": "PASS",
+        "parent_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "330356a6e8b83dc5fe3b3fd6b81d7d4a98f6354bd83a2955105e9e7398727f48",
+        "new_object": "ai/elyra/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "bc9547a17eb0e5d129e4773cce3aeafdff04bf595d59944762f378b78558c7cb",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "F148-ALPHA",
+        "family": "GREEK_OPENING",
+        "status": "PASS",
+        "parent_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "c0bde4f37113b74f8ebd29cfd07cd2e624715ff14f336a543255d445f41728c8",
+        "new_object": "ai/f148-alpha/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "578847d727a88ef5144ce050205ca32cda560fc1d77d0b042bdadfd44d3f6c03",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "F167-SIGMA",
+        "family": "GREEK_AGGREGATION",
+        "status": "PASS",
+        "parent_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "8821e287e680b519c482ea96345c6cf2829e13962c7d8d1958713be652dc0611",
+        "new_object": "ai/f167-sigma/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "cf187edd51981b4f386a2cda0bda99bf19822ebe9f15b25d23af0c03cc297161",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      },
+      {
+        "ai_id": "F149-OMEGA",
+        "family": "GREEK_CLOSURE",
+        "status": "PASS",
+        "parent_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35996621664.json",
+        "parent_sha256": "7b37ca3e80d3dd6c7e33e59f7d6a269a1292cabe7ac0b593dacdd571be706e5f",
+        "new_object": "ai/f149-omega/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/35997686804.json",
+        "new_sha256": "9120d6ad28be5c393f4df9f8530fd10638a2424120d8cbd46a06e8dbe31fb883",
+        "rollback_read": "PASS",
+        "parent_unchanged_after_new_write": "PASS"
+      }
+    ],
+    "status": "PASS",
+    "summary": {
+      "sample": 7,
+      "passed": 7,
+      "failed": 0
+    }
+  }
+}
