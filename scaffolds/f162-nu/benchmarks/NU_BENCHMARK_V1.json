@@ -1,0 +1,30 @@
+{
+  "schema": "NU_BENCHMARK_V1",
+  "status": "FROZEN_TEMPLATE_NO_RESULTS",
+  "role_id": "NULL_MODEL_CHALLENGER",
+  "domains": [
+    "null_hypothesis",
+    "baseline_model",
+    "no_effect_explanation",
+    "complexity_penalty",
+    "nested_model_comparison",
+    "overfitting_detection"
+  ],
+  "m6_rule": "M6_NEVER_IN_TRAIN",
+  "modes": [
+    "BASE_MODEL_ALONE",
+    "NU_PRETRAIN_SCAFFOLD",
+    "NU_TRAINED",
+    "NU_PLUS_MINIMAL_COALITION"
+  ],
+  "metrics": [
+    "role_accuracy",
+    "critical_error_rate",
+    "calibration",
+    "transfer",
+    "regression",
+    "latency",
+    "provenance_completeness"
+  ],
+  "result_status": "NO_EXECUTED_BASELINE_YET"
+}

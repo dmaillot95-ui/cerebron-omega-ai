@@ -1,0 +1,58 @@
+{
+  "schema": "NU_ARCHITECTURE_V1",
+  "farm_id": 162,
+  "name": "NU",
+  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING",
+  "greek_constellation": true,
+  "role_id": "NULL_MODEL_CHALLENGER",
+  "mission": "Construct the simplest null, baseline or no-effect explanation and test whether added complexity is justified by evidence.",
+  "boundary": "Does not perform final formal closure or falsification; OMEGA does that.",
+  "shared_base_family": "CEREBRON_GREEK_SHARED_BASE",
+  "runtime_changed": false,
+  "campaign": {
+    "passes": 10,
+    "compression": "LOCAL_CAPSULE_TO_HYPERFUNNEL"
+  },
+  "layers": [
+    {
+      "id": "L0",
+      "name": "BASE_MODEL"
+    },
+    {
+      "id": "L1",
+      "name": "NU_CORE"
+    },
+    {
+      "id": "L2",
+      "name": "ADAPTERS"
+    },
+    {
+      "id": "L3",
+      "name": "MEMORY_INTERFACE"
+    },
+    {
+      "id": "L4",
+      "name": "PI_SEARCH_INTERFACE"
+    },
+    {
+      "id": "L5",
+      "name": "TOOLS_AND_FARMS"
+    },
+    {
+      "id": "L6",
+      "name": "CEREBRON_BOUNDARY"
+    },
+    {
+      "id": "L7",
+      "name": "AFAH_REDTEAM"
+    }
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "RUNTIME_FREEZE",
+    "SHARED_BASE!=INDEPENDENT_EVIDENCE"
+  ]
+}

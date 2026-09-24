@@ -1,0 +1,20 @@
+{
+  "schema": "NU_PROJECT_V1",
+  "farm_id": 162,
+  "project_id": "MODEL-NU-001",
+  "role_id": "NULL_MODEL_CHALLENGER",
+  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING",
+  "runtime_changed": false,
+  "weights_changed": false,
+  "training_authorized": false,
+  "shared_base_family": "CEREBRON_GREEK_SHARED_BASE",
+  "campaign_passes": 10,
+  "required_shared_tools": [
+    "PI-SEARCH"
+  ],
+  "rules": [
+    "M6_NEVER_IN_TRAIN",
+    "CLAIM_LE_EVIDENCE",
+    "REAL_EXECUTION_RECEIPT_REQUIRED"
+  ]
+}
