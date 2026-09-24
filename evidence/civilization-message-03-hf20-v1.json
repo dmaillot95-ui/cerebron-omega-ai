@@ -1,0 +1,87 @@
+{
+  "schema": "CEREBRON_CIVILIZATION_MESSAGE_03_HF20_V1",
+  "status": "PASS_SCOPED_SINGLE_SLOT_EXECUTION",
+  "program_message": 3,
+  "pool": {
+    "configured_slots": 20,
+    "default_active": 0,
+    "permanent_neural_identities": false,
+    "permanent_model_bindings": 0,
+    "permanent_farm_bindings": 0,
+    "routing_policy": "MINIMAL_USEFUL_COALITION",
+    "independence_rule": "SLOT_ID_ALONE_IS_NOT_INDEPENDENT_EVIDENCE"
+  },
+  "configuration_audit": {
+    "status": "PASS",
+    "checks": [
+      "HF-A01..HF-A20 exact unique slot IDs",
+      "all ROUTABLE_RUNTIME_GATED",
+      "no permanent model binding",
+      "no permanent farm binding",
+      "receipt contract complete",
+      "Qwen3-4B exact revision runtime-qualified",
+      "SmolLM3-3B exact revision runtime-qualified",
+      "GitHub Actions CPU scoped-qualified"
+    ]
+  },
+  "real_execution": {
+    "workflow": "CEREBRON HF20 Execution Receipt Canary",
+    "run_id": 35953143135,
+    "head_sha": "7574222e580fff719b11c8070c0c085249bec85e",
+    "pool_audit_job_id": 107485765676,
+    "execution_job_id": 107485985625,
+    "slot_id": "HF-A01",
+    "execution_id": "HF20-CANARY-35953143135-8efb76bd",
+    "farm_id": 145,
+    "model_id": "Qwen/Qwen3-4B",
+    "model_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "model_lineage": "Qwen3",
+    "provider": "huggingface",
+    "runtime_provider": "GITHUB_ACTIONS_CPU",
+    "prompt_hash": "808799162186cf7a85c6e4549500735519b0532a64397b80fca904a17849933f",
+    "data_lineage": "SYNTHETIC_CANARY_NO_USER_DATA_NO_M6",
+    "raw_output": "HF20_CANARY_OK",
+    "result_hash": "63b0c170ea22505ba9bd82956bf94e68de8d8a5c6ea4aaedd517048a4beb71f1",
+    "latency_ms": 3174,
+    "completion_status": "SUCCESS",
+    "binding_scope": "EPHEMERAL_CANARY",
+    "independent_evidence": false,
+    "artifact_id": 10789317767,
+    "artifact_digest": "sha256:fc1e5614df0a3fff530d9750a1b0994d12dca3dd6a18ece18b300b49fa118f88"
+  },
+  "other_slots": {
+    "executed": [],
+    "non_executed": [
+      "HF-A02",
+      "HF-A03",
+      "HF-A04",
+      "HF-A05",
+      "HF-A06",
+      "HF-A07",
+      "HF-A08",
+      "HF-A09",
+      "HF-A10",
+      "HF-A11",
+      "HF-A12",
+      "HF-A13",
+      "HF-A14",
+      "HF-A15",
+      "HF-A16",
+      "HF-A17",
+      "HF-A18",
+      "HF-A19",
+      "HF-A20"
+    ],
+    "rule": "One successful canary does not activate or qualify the other slots."
+  },
+  "memory": {
+    "backend": "cerebron-omega/cerebron-private-memory",
+    "namespace_pattern": "agent-run/{execution_id}/{slot_id}",
+    "durable_promotion": "AUDIT_PROVENANCE_DEDUP_MEMORY_CLASS_REQUIRED",
+    "m6_training": "DENY"
+  },
+  "runtime_modified": false,
+  "neural_learning": false,
+  "weights_changed": false,
+  "claim_limit": "HF20 routing capacity is configured and one slot has a real execution receipt. This is not evidence of 20 active agents or 20 independent models."
+}
