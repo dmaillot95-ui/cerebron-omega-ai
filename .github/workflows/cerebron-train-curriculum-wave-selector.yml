@@ -1,0 +1,47 @@
+name: CEREBRON Train Curriculum Wave Selector
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evolution/select_train_curriculum_wave_v1.py'
+      - 'memory/failure-bank-v1.json'
+      - 'config/cerebron-failure-curriculum-routing-v1.json'
+      - '.github/workflows/cerebron-train-curriculum-wave-selector.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Select next train-only curriculum wave
+        run: |
+          python -m py_compile evolution/select_train_curriculum_wave_v1.py
+          python evolution/select_train_curriculum_wave_v1.py
+      - name: Verify selection boundary
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/train-curriculum-wave-selection-v1.json"))
+          assert x["status"]=="SELECTED_NOT_EXECUTED"
+          assert x["selected_count"]<=8
+          assert all(r["source_split"]=="train" for r in x["selected"])
+          assert all(r["training_eligible"] is False for r in x["selected"])
+          assert all(r["execution_status"]=="NOT_EXECUTED" for r in x["selected"])
+          assert x["training_released"] is False
+          print("TRAIN_CURRICULUM_WAVE_SELECTOR=PASS",x["selected_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: train-curriculum-wave-selection-v1
+          path: artifacts/train-curriculum-wave-selection-v1.json
+          if-no-files-found: error
+          retention-days: 30
