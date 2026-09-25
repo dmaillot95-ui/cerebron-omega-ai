@@ -6,7 +6,7 @@
   "branch": "feat/saphea-first-lora-v1",
   "branch_head_at_trigger": "bfd670b3d21ea337fdcb2bf091348cb38b09e9d9",
   "run_id": 36100266729,
-  "state": "CLOSED_G6_PASS_HOLD_G7",
+  "state": "G6_PLUS_TRANSFER_ABLATION_PASS_HOLD_AUDIT",
   "base_model": {
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
     "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
@@ -54,22 +54,17 @@
     "NO_AUTO_PROMOTION"
   ],
   "promotion_requires_later": [
-    "COLD_GAIN_POSITIVE",
-    "NOVEL_TRANSFER_GAIN",
-    "ABLATION_SUPPORTS_VALUE",
-    "NO_CRITICAL_REGRESSION",
     "INDEPENDENT_AUDIT",
     "RED_TEAM",
     "F72_REVIEW",
     "AFAH_FINAL_AUTHORITY"
   ],
   "exact_resume": [
-    "M43 G6 is closed PASS; do not retrain the same canary.",
-    "Build a novel-transfer benchmark disjoint from GOLD and M6; do not alter M6.",
-    "Run adapter vs base on that frozen transfer benchmark.",
-    "Run ablation base vs adapter and verify gain attribution.",
-    "Run independent audit and red-team before F72/AFAH promotion review.",
-    "If transfer gain is non-positive or critical regression appears, rollback and retain evidence."
+    "Do not retrain SAPHEA G1.",
+    "Run independent-codepath reproduction on frozen transfer/adversarial data.",
+    "Run red-team near-miss evidence cases with deny-training.",
+    "Only after audit and red-team PASS route to F72 and AFAH.",
+    "No general capability claim; scope remains epistemic-status classification."
   ],
   "previous_attempt": {
     "run_id": 36099976977,
@@ -100,5 +95,19 @@
     "hf_private_readback_sha_pass": true,
     "promotion": "NOT_PROMOTED",
     "claim_ceiling": "SCOPED_REAL_LORA_WEIGHT_CHANGE_ONLY"
+  },
+  "transfer_result": {
+    "run_id": 36101181888,
+    "dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
+    "record_count": 108,
+    "base_score": 20,
+    "adapter_score": 40,
+    "transfer_gain": 20,
+    "helpful_changes": 22,
+    "harmful_changes": 2,
+    "critical_regression": false,
+    "ablation_supports_value": true,
+    "prompt_overlap_with_gold_m6": 0,
+    "id_overlap_with_gold_m6": 0
   }
 }
