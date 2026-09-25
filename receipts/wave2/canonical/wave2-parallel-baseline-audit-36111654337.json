@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_WAVE2_PARALLEL_BASELINE_CANONICAL_AUDIT_V1",
+  "run_id": 36111654337,
+  "source_head": "83d437b2b688aabddc6c00a63c835ce17f1f26e1",
+  "roles": [
+    "SPIRALION",
+    "HYPERION",
+    "ASTRION",
+    "SAPHEA_MICRO"
+  ],
+  "receipt_count": 4,
+  "real_inference_count": 4,
+  "training_executed_count": 0,
+  "benchmark_deny_training_count": 4,
+  "unique_lineage_fingerprints": 2,
+  "independent_evidence_count": 0,
+  "scores": {
+    "SPIRALION": {
+      "score": 9,
+      "max": 12,
+      "accuracy": 0.75,
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "benchmark_sha256": "25f422f0fb9a8c83d97000fa9d952847f0280987a4c02d039721e8ace4b6523d",
+      "receipt_sha256": "ae458973977d920115eb2cdde57d3c774bef118b17eb7a4ee71c9c3ea41fff2b",
+      "artifact_id": 10853966169,
+      "artifact_digest": "sha256:c955ba636f5740d4ba6d01352e431ecb4342b4dbbf5972737f7dd6c854a781c6"
+    },
+    "HYPERION": {
+      "score": 8,
+      "max": 12,
+      "accuracy": 0.6666666666666666,
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "benchmark_sha256": "0f0bfcd614860a6638e3eeeadf3ae37573f9900d5882f13789c54b856b58b40b",
+      "receipt_sha256": "46686d5333e4f2fb520b578929353f5497644008467a5886f6173ba877d934be",
+      "artifact_id": 10853622999,
+      "artifact_digest": "sha256:54bf361e3e29c0959b62d3df581f03acc061c8557b7461916a7ab5b2e469793e"
+    },
+    "ASTRION": {
+      "score": 3,
+      "max": 12,
+      "accuracy": 0.25,
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "benchmark_sha256": "01c7b164ebf1cabbec70e8c49a1987f1658c89c11011c9eb26838b9335fec18b",
+      "receipt_sha256": "5b75618a86de57bc57daf5fe4ab595734aa7a653879e3b282a0f1f42790828f4",
+      "artifact_id": 10853742191,
+      "artifact_digest": "sha256:d8db8331d0c9d18cba5b59ee2785510835155a10353660857992a237299ab88b"
+    },
+    "SAPHEA_MICRO": {
+      "score": 5,
+      "max": 14,
+      "accuracy": 0.35714285714285715,
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "benchmark_sha256": "9bc5a80cc3d649162e9fa0feb0193d9882a5b1a0f594ba1ee01bbc8e8b0fb01f",
+      "receipt_sha256": "6154b966de73b8b5b02d50768f706baf5f04adfed8a19f7f8694c162487c482d",
+      "artifact_id": 10853537363,
+      "artifact_digest": "sha256:8d29626c38509e4abed488aaa34a02eb2e3fe97e92e154959bd15879e36b9e6e"
+    }
+  },
+  "interpretation": {
+    "strongest_scoped_baseline": "SPIRALION_9_OF_12",
+    "note": "Scores are role-specific cold baselines with different tasks and two model lineages; do not rank them as general intelligence.",
+    "smollm_roles": [
+      "SPIRALION",
+      "HYPERION"
+    ],
+    "qwen_roles": [
+      "ASTRION",
+      "SAPHEA_MICRO"
+    ]
+  },
+  "next_gate": "WAVE2_ROLE_SPECIFIC_QUARANTINE_DATA_BUILD_AUDIT_F72_AFAH",
+  "claim_ceiling": "FOUR_REAL_SCOPED_BASELINES_TWO_CORRELATED_MODEL_LINEAGES_NO_TRAINING_NO_GENERAL_CAPABILITY"
+}
