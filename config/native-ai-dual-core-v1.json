@@ -321,13 +321,13 @@
           "retention_without_contamination"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_READY",
+      "project_state": "D3_PRIVATE_COLD_BASELINES_IN_PROGRESS",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "READY_PRIVATE_M6_V2",
+        "D3": "IN_PROGRESS_PRIVATE_M6_V2",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
@@ -341,7 +341,8 @@
         "m6_v2_run_id": 36138516577,
         "m6_v2_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
         "m6_v2_receipt_sha256": "31bd7ae5b8a63604aec7c94efb704e549bb08dc00e21ddc0541f3f40262529ed",
-        "m6_v2_exact_prompts_public": false
+        "m6_v2_exact_prompts_public": false,
+        "d3_run_id": 36138864930
       }
     },
     {
@@ -511,13 +512,13 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_READY",
+      "project_state": "D3_PRIVATE_COLD_BASELINES_IN_PROGRESS",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "READY_PRIVATE_M6_V2",
+        "D3": "IN_PROGRESS_PRIVATE_M6_V2",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
@@ -531,7 +532,8 @@
         "m6_v2_run_id": 36138516577,
         "m6_v2_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
         "m6_v2_receipt_sha256": "53e7041ed96f4e44d4bc5b4df6e168ef38a79d29923eb6a30f36777622ee9023",
-        "m6_v2_exact_prompts_public": false
+        "m6_v2_exact_prompts_public": false,
+        "d3_run_id": 36138864930
       }
     }
   ],
