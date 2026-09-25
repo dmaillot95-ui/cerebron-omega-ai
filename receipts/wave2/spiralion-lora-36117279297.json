@@ -1,0 +1,40 @@
+{
+  "schema": "CEREBRON_WAVE2_ROLE_LORA_PUBLIC_POINTER_V1",
+  "run_id": 36117279297,
+  "role": "SPIRALION",
+  "real_training": true,
+  "training_executed": true,
+  "base_model_id": "HuggingFaceTB/SmolLM3-3B",
+  "base_revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "release_sha256": "eaf6e53d1097758d7ce70d73ccdc5c3a39de0f9d25c4c59d76889b1b699bc439",
+  "split_sha256": "ceeb718ef75daa43f4d0d600cc1046cfe60544a3cf2c2c093ab02636805949e1",
+  "evaluation_mode": "NEXT_TOKEN_CODE_CLASSIFICATION",
+  "cold_dataset_sha256": {
+    "M6": "45e13750a41e24b671ea252daff6b7a62b5039dd88051a0850140d1a600a1249",
+    "TRANSFER": "2bf8be3c386cbbfa6a2bb7df8d67ab3f55c5325cc16c2bd5b4bc5d44fb2918e3",
+    "RED": "bfdf3ac755acb9e7dcd5e4ce122899185f48c3bc5a6e1023ee8d519ffbbd394f"
+  },
+  "cold_deny_training": true,
+  "weights_changed": true,
+  "adapter_sha256": "d60d5956bfe4461614ff682c89abc5826781f9624b6ec77369473977084343fb",
+  "adapter_config_sha256": "9a110673d604b735dba40aa7f61e8c5cd7cfba3bbac6667167c5a0f9eaf4bdb9",
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "hf_private_object_prefix": "wave2/SPIRALION/LORA-V1/run-36117279297",
+  "hf_private_readback_sha_pass": true,
+  "gains": {
+    "VALIDATION": 0,
+    "M6": 1,
+    "TRANSFER": 0,
+    "RED": 0
+  },
+  "any_critical_regression": false,
+  "validation_gate_pass": true,
+  "cold_gate_pass": false,
+  "decision": "ROLLBACK_RETAIN_EVIDENCE",
+  "promotion": "NOT_PROMOTED",
+  "pending": [
+    "NEW_DATA_OR_METHOD"
+  ],
+  "report_sha256": "870378d7ce500d89e798597ba840dd14bffec4a731947fdea8712f1b92eacc32",
+  "claim_ceiling": "REAL_SCOPED_LORA_NEXT_TOKEN_CLASSIFIER_WITH_FROZEN_COLD_TESTS_NO_GENERAL_CAPABILITY"
+}
