@@ -1,12 +1,12 @@
 SAPHEA FIRST REAL LORA REPAIR CANARY
-version=v3-anti-forgetting-stratified
-source_transfer_failure_run=36101503838
+version=v4-conservative-ablation
+source_validation_failure_run=36102432058
 training_source=GOLD_ONLY
 transfer_benchmark_training=DENY
 max_length=512
-lora_r=8
-lora_alpha=16
-learning_rate=0.00003
+lora_r=4
+lora_alpha=8
+learning_rate=0.00001
 split=25_train_5_validation_per_label
-m6_sha=cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63
-promotion=HOLD_G7_FROZEN_TRANSFER_RETEST_REQUIRED
+stop_rule=IF_VALIDATION_REGRESSION_THEN_END_THIS_HPARAM_FAMILY
+promotion=HOLD_G7_NEW_COLD_TRANSFER_REQUIRED
