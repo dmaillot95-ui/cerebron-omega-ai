@@ -1,0 +1,201 @@
+{
+  "schema": "CEREBRON_SELF_EVOLUTION_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE_GUARDED_CORE_NO_AUTOMATIC_WEIGHT_TRAINING",
+  "objective": "Turn audited failures and execution traces into measurable prompt/router/skill improvements before weight training, then admit only proven gains to later PEFT/LoRA stages.",
+  "current_learning_population": {
+    "available_ai": 38,
+    "unavailable": [
+      "NU"
+    ],
+    "operationally_protected_farms": [
+      172,
+      173,
+      174
+    ],
+    "learning_allowed": [
+      "PSI",
+      "AELYS",
+      "ELYRA"
+    ],
+    "operational_mutation_f172_f173_f174": false
+  },
+  "upstream_inspiration": [
+    {
+      "repo": "NousResearch/hermes-agent-self-evolution",
+      "license": "MIT",
+      "reuse": "architecture ideas: trace-driven mutation, constraints, eval splits, fitness, rollback; no vendored source"
+    },
+    {
+      "repo": "stanfordnlp/dspy",
+      "license": "MIT",
+      "reuse": "optional optimizer backend: GEPA/MIPROv2/SIMBA; manual enable only"
+    },
+    {
+      "repo": "EleutherAI/lm-evaluation-harness",
+      "license": "MIT",
+      "reuse": "task registry and decontamination design ideas; native implementation"
+    },
+    {
+      "repo": "huggingface/peft",
+      "license": "Apache-2.0",
+      "reuse": "later adapter/LoRA backend; not reimplemented here"
+    },
+    {
+      "repo": "getzep/graphiti",
+      "license": "Apache-2.0",
+      "reuse": "future temporal graph memory ideas only"
+    },
+    {
+      "repo": "langchain-ai/langgraph",
+      "license": "MIT",
+      "reuse": "future durable checkpoint/resume ideas only"
+    }
+  ],
+  "no_vendored_third_party_code": true,
+  "pipeline": [
+    "TRACE_FAILURE_OR_SUCCESS",
+    "BUILD_CANDIDATE_DATASET",
+    "STABLE_TRAIN_VAL_HOLDOUT_SPLIT",
+    "DECONTAMINATE_HOLDOUT_AND_COLD",
+    "GENERATE_VARIANTS",
+    "HARD_CONSTRAINTS",
+    "VAL_EVALUATION",
+    "PARETO_SELECTION",
+    "FROZEN_HOLDOUT",
+    "COLD_TRANSFER_REDTEAM",
+    "PROMOTE_PROMPT_ROUTER_SKILL_OR_ROLLBACK",
+    "OPTIONAL_GOLD_RED_DATASET_RELEASE",
+    "OPTIONAL_REAL_ADAPTER_TRAINING",
+    "ABLATION",
+    "NEXT_GENERATION"
+  ],
+  "optimizer_backends": {
+    "native_deterministic": {
+      "status": "ACTIVE",
+      "paid_provider_required": false
+    },
+    "dspy_gepa": {
+      "status": "OPTIONAL_MANUAL",
+      "automatic_external_calls": false,
+      "automatic_paid_provider": false
+    },
+    "dspy_miprov2": {
+      "status": "OPTIONAL_MANUAL",
+      "automatic_external_calls": false,
+      "automatic_paid_provider": false
+    }
+  },
+  "dataset": {
+    "split_policy": "STABLE_SHA256_60_20_20",
+    "train_pct": 60,
+    "validation_pct": 20,
+    "holdout_pct": 20,
+    "cold_never_training": true,
+    "transfer_never_training": true,
+    "redteam_answers_never_training": true,
+    "m6_deny_training": true
+  },
+  "decontamination": {
+    "exact_normalized_hash": true,
+    "token_ngram_size": 5,
+    "jaccard_threshold": 0.8,
+    "action_on_match": "REJECT_OR_MOVE_OUT_OF_TRAIN",
+    "compare_against": [
+      "VALIDATION",
+      "HOLDOUT",
+      "COLD",
+      "TRANSFER",
+      "REDTEAM"
+    ]
+  },
+  "hard_constraints": {
+    "non_empty": true,
+    "max_prompt_growth_ratio": 0.25,
+    "preserve_required_markers": true,
+    "no_benchmark_answer_leakage": true,
+    "no_claim_upgrade_without_evidence": true,
+    "no_operational_mutation_f172_f173_f174": true
+  },
+  "pareto_objectives": {
+    "maximize": [
+      "FORMAT_PASS_RATE",
+      "ROLE_FIDELITY",
+      "COLD_SCORE",
+      "TRANSFER_SCORE",
+      "REDTEAM_SURVIVAL"
+    ],
+    "minimize": [
+      "CRITICAL_REGRESSION_RATE",
+      "TOKEN_COST",
+      "LATENCY",
+      "PROMPT_SIZE"
+    ],
+    "rule": "No scalar score may hide a critical regression."
+  },
+  "promotion_gate": [
+    "HARD_CONSTRAINTS_PASS",
+    "VALIDATION_NOT_WORSE",
+    "HOLDOUT_GAIN_POSITIVE",
+    "COLD_GAIN_POSITIVE",
+    "TRANSFER_GAIN_POSITIVE",
+    "REDTEAM_NOT_WORSE",
+    "NO_CRITICAL_REGRESSION",
+    "ABLATION_SUPPORTS_CAUSAL_VALUE",
+    "LINEAGE_AND_ARTIFACT_HASHES_PRESENT"
+  ],
+  "current_pilot_baseline": {
+    "run_id": 36171338416,
+    "status": "SUCCESS",
+    "model_lineages": 2,
+    "real_inferences": 16,
+    "parse_pass": 6,
+    "target_count": 8,
+    "training_released": false,
+    "independent_evidence": false,
+    "audit_sha256": "71f1350200e95dfa00ff594adb0e2ef7a209969757b2d89a7af6604d42b9836e",
+    "artifacts": [
+      {
+        "id": 10880407465,
+        "digest": "sha256:d90ba2db62b3febd85d9f9b416374bfa67a1617c213968acb1c4fb44e04c1605"
+      },
+      {
+        "id": 10880242836,
+        "digest": "sha256:fa1fddc164808b731b9a0d1624204574f7e05bf1dc346c868819830b87580d55"
+      },
+      {
+        "id": 10880748400,
+        "digest": "sha256:93d419f3ea7f82093a86e5740e02e8918439ec72a8178c6e4970bf210f39a76c"
+      }
+    ],
+    "interpretation": "Execution diversity is proven; structured-format reliability is weak and becomes a first self-evolution target."
+  },
+  "first_targets": [
+    {
+      "id": "SE1_FORMAT_RELIABILITY",
+      "baseline": "6/16",
+      "target": ">=14/16 on fresh holdout with both lineages"
+    },
+    {
+      "id": "SE2_ROLE_FIDELITY",
+      "baseline": "historical mean proxy 0.2456 in shared-prompt council",
+      "target": "positive gain on frozen role-fidelity suite"
+    },
+    {
+      "id": "SE3_ROUTER_FUSION",
+      "baseline": "D4 gains <=0 for several candidates",
+      "target": ">0 gain over best single on fresh holdout"
+    },
+    {
+      "id": "SE4_TRANSFER",
+      "baseline": "multiple LoRA rollbacks",
+      "target": "positive transfer with no critical regression"
+    }
+  ],
+  "claim_boundary": {
+    "self_evolution_core_present_does_not_mean_models_improved": true,
+    "prompt_gain_does_not_mean_weight_training": true,
+    "memory_write_does_not_mean_training": true,
+    "geometric_growth_claim": "NOT_ESTABLISHED"
+  }
+}
