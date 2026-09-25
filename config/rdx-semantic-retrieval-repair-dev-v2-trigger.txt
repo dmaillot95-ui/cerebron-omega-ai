@@ -1,1 +1,7 @@
-RDX SEMANTIC RETRIEVAL REPAIR DEV V2\nsource_run=36156985796\nclassification=DEV_NOT_COLD\nfresh_holdout=false\ntraining=false\n
+RDX SEMANTIC RETRIEVAL REPAIR DEV V2
+source_run=36156985796
+previous_mechanical_fail_run=36157461751
+retry_reason=PYTHON_IMPORT_PATH_FIX_ONLY
+classification=DEV_NOT_COLD
+fresh_holdout=false
+training=false
