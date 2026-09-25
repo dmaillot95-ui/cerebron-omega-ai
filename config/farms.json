@@ -1138,7 +1138,7 @@
       "name": "CEREBRON RDX EXCHANGE",
       "repo": "cerebron-rdx-exchange",
       "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
-      "status": "REGISTERED_PENDING_REPOSITORY_VERIFICATION",
+      "status": "REPOSITORY_PRESENT_EMPTY_OR_BRANCH_UNVERIFIED",
       "type": "RDX_PRODUCT_FARM",
       "role": "continuous-rd-production-storage-verification-marketplace-evidence-api",
       "rules": [
@@ -1149,7 +1149,9 @@
         "REPORTS_ARE_GENERATED_VIEWS_NOT_PRIMARY_MEMORY",
         "NO_FAKE_CLIENTS_OR_SALES",
         "NO_RUNTIME_ACTIVATION_BEFORE_REPOSITORY_VERIFICATION"
-      ]
+      ],
+      "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange",
+      "url": "https://github.com/dmaillot95-ui/cerebron-rdx-exchange"
     }
   ],
   "max_farms": 152,
