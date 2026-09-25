@@ -1511,23 +1511,29 @@
       "repo": "cerebron-farm-174-elyra-visual-simulation",
       "domain": "elyra-visual-simulation",
       "identity": "ELYRA",
-      "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+      "status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
       "type": "VISUAL_SIMULATION_FARM",
       "role": "Prepare replayable visual and video simulation contracts for ELYRA without claiming executed simulation or physical validation.",
       "training_status": "NOT_TRAINED",
       "simulation_status": "NOT_EXECUTED",
       "physical_test_status": "NOT_TESTED",
       "repository_exists": true,
-      "repository_initialized": false,
+      "repository_initialized": true,
       "local_scaffold": "scaffolds/f174-elyra-visual-simulation",
-      "infrastructure_status": "LOCAL_SCAFFOLD_VALIDATED_TARGET_REPOSITORY_EMPTY",
+      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_SIMULATION_NOT_EXECUTED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
-        "crystal_guard_run_id": 36155316425
+        "crystal_guard_run_id": 36155316425,
+        "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
+        "dedicated_repo_head": "fd2327d3016475cdf84561e5d4bdcee89a28f2e5",
+        "dedicated_repo_selftest_run_id": 36156887593
       },
-      "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json"
+      "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json",
+      "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
+      "dedicated_repo_head": "fd2327d3016475cdf84561e5d4bdcee89a28f2e5",
+      "dedicated_repo_selftest_run_id": 36156887593
     }
   ],
   "max_farms": 174,
@@ -1558,11 +1564,14 @@
       173,
       174
     ],
-    "extension_repository_empty_ids": [
+    "extension_repository_empty_ids": [],
+    "extension_repository_initialized_ids": [
+      173,
       174
     ],
-    "extension_repository_initialized_ids": [
-      173
+    "extension_repository_selftest_pass_ids": [
+      173,
+      174
     ]
   },
   "shared_engines": {
