@@ -11,20 +11,22 @@ def parse_labels(raw):
     out={}; cur=None
     for line in raw.splitlines():
         s=line.strip()
-        if not s: continue
-        # Accept plain labels and common Markdown wrappers such as **PRIORITY:**.
-        cleaned=re.sub(r"^[\\s>#*\\-]+","",s)
+        if not s:
+            continue
+        # No regex here: normalize common Markdown wrappers deterministically.
+        plain=s.lstrip(" \t>#*-").replace("**","").replace("__","").replace("`","").strip()
         hit=False
         for lab in LABELS:
-            m=re.match(r"^\\*{0,2}"+re.escape(lab)+r"\\*{0,2}\\s*:\\s*\\*{0,2}(.*)$",cleaned,re.I)
-            if m:
+            prefix=lab+":"
+            if plain.upper().startswith(prefix):
                 cur=lab
-                out[lab]=m.group(1).strip().strip("*").strip()
+                out[lab]=plain[len(prefix):].strip()
                 hit=True
                 break
         if not hit and cur:
-            continuation=re.sub(r"^[\\s>#*\\-]+","",s).strip()
-            out[cur]=(out[cur]+" "+continuation).strip()
+            continuation=plain.strip()
+            if continuation:
+                out[cur]=(out[cur]+" "+continuation).strip()
     return out
 
 def main():
@@ -74,7 +76,7 @@ RISK:
          "ai_id":a.ai,"identity":spec["identity"],"parent_function":spec["parent_function"],
          "specialization_tags":spec["specialization_tags"],"specialization_vector":spec["specialization_vector"],
          "endpoint":endpoint,"model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False,
-         "format_contract_version":"V2_MARKDOWN_TOLERANT",
+         "format_contract_version":"V3_NO_REGEX_MARKDOWN_TOLERANT",
          "spiralix_input_envelope":inp,"spiralix_input_sha256":sha256_obj(inp)}
     t=time.time()
     try:
