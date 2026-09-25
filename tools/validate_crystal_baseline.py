@@ -38,7 +38,9 @@ if expected >= 174:
     assert by_id[173]["repository_exists"] is True
     assert by_id[173]["repository_initialized"] is True
     assert by_id[173]["status"]=="BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED"
-    assert by_id[173]["dedicated_repo_selftest_run_id"]==36153266774
+    assert by_id[173]["dedicated_repo_selftest_run_id"]==36155830169
+    assert by_id[173]["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
+    assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
     assert (R/by_id[173]["local_scaffold"]).exists()
 
     assert by_id[174]["repository_exists"] is True
