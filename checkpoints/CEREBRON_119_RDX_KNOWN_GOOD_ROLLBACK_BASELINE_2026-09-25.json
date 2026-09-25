@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_119_RDX_KNOWN_GOOD_ROLLBACK_BASELINE_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_FAIL_CLOSED_ROLLBACK_BASELINE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "f597e337f8f7aff023bd6c65a1e89484570c2b14",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "1ca8fdc6ac5b6af42d870af33d183ebb9489c90b",
+    "full_validation": {
+      "run_id": 36187701320,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36187701323,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36187701257,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "1ca8fdc6ac5b6af42d870af33d183ebb9489c90b",
+    "file_count": 16,
+    "release_aggregate_sha256": "57afb1bd40b9fc7a6ecf4f15c147704e1542736fadf5b06cab7ba3d6c2df437d",
+    "release_attestation_sha256": "ea548596c8b9ca24b636a490c8058fa5712e522cb8ac2efb6614289a7dbeeb1e",
+    "release_manifest_gate": "PASS",
+    "release_attestation_gate": "PASS",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_attestation": "PASS",
+    "release_sigstore_verification": "PASS"
+  },
+  "fail_closed_negative_tests": {
+    "production_promotion_canaries": "PASS_5_OF_5_REJECTED",
+    "rollback_canary": "PASS_1_OF_1_REJECTED",
+    "rejected_rollback_case": "VERIFIED_PRODUCTION_WITHOUT_KNOWN_GOOD"
+  },
+  "rollback_control": {
+    "policy_schema": "RDX_PRODUCTION_ROLLBACK_POLICY_V1",
+    "registry_schema": "RDX_KNOWN_GOOD_RELEASE_REGISTRY_V1",
+    "mode": "FAIL_CLOSED",
+    "current_known_good_count": 0,
+    "active_known_good_release": null,
+    "registration_mode": "PROPOSAL_ONLY_NO_AUTO_APPLY",
+    "future_live_workflow_generates_known_good_proposal": true,
+    "requires_registered_live_proof": true,
+    "requires_signed_release_attestation": true,
+    "requires_signed_live_proof": true,
+    "requires_source_commit_match": true,
+    "requires_release_aggregate_match": true
+  },
+  "production_control": {
+    "production_deployment_verified": false,
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "known_good_active": null
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "next_exact": [
+    "Keep rollback registry empty until a real signed live proof is reviewed.",
+    "After real deployment, generate proof registration proposal and known-good release proposal; do not auto-apply.",
+    "Require reviewed known-good baseline before any public production=true claim.",
+    "Do not modify F172-F174."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NEGATIVE_TESTS_BEFORE_PROMOTION",
+    "ROLLBACK_BASELINE_BEFORE_VERIFIED_PRODUCTION",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
