@@ -1,0 +1,8 @@
+SAPHEA FIRST REAL LORA CANARY
+version=v1
+base=Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb
+gold_sha=efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa
+m6_sha=cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63
+m6_training=DENY
+adapter_storage=HF_PRIVATE_ONLY
+promotion=AFAH_GATED
