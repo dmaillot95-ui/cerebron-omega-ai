@@ -1,0 +1,81 @@
+name: CEREBRON Wave1 F72 AFAH Data Gate
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave1-f72-afah-data-gate-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile complete data-gate chain
+        run: |
+          python -m py_compile tools/wave1_quarantine_candidate_builder.py
+          python -m py_compile tools/wave1_quarantine_semantic_audit.py
+          python -m py_compile tools/wave1_f72_afah_data_gate.py
+      - name: Regenerate candidates
+        run: |
+          python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Reproduce independent semantic audit
+        run: |
+          python tools/wave1_quarantine_semantic_audit.py             --input artifacts/wave1-quarantine-candidates-v1.json             --output artifacts/wave1-quarantine-semantic-audit-v1.json
+      - name: Execute F72 then AFAH fail-closed data gate
+        run: |
+          python tools/wave1_f72_afah_data_gate.py             --candidates artifacts/wave1-quarantine-candidates-v1.json             --audit artifacts/wave1-quarantine-semantic-audit-v1.json             --output artifacts/wave1-f72-afah-data-gate-v1.json
+      - name: Build public gate receipt
+        run: |
+          mkdir -p receipts/wave1
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          d=json.loads(pathlib.Path("artifacts/wave1-f72-afah-data-gate-v1.json").read_text())
+          assert d["f72_pass"] is True
+          assert d["afah_pass"] is True
+          assert d["training_released"] is False
+          assert d["decision"]=="ADMIT_AS_SYNTHETIC_GOLD_CANDIDATE_POOL_NOT_TRAINING_RELEASED"
+          receipt={
+            "schema":"CEREBRON_WAVE1_F72_AFAH_DATA_GATE_POINTER_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_manifest_sha256":d["source_manifest_sha256"],
+            "source_audit_sha256":d["source_audit_sha256"],
+            "f72_pass":True,
+            "afah_pass":True,
+            "decision":d["decision"],
+            "training_released":False,
+            "admission_class":d["admission_class"],
+            "report_sha256":d["report_sha256"],
+            "next_gate":"VERSIONED_ROLE_SPLITS_AND_FRESH_M6_TRANSFER_ADVERSARIAL",
+            "claim_ceiling":d["claim_ceiling"]
+          }
+          raw=json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          p=pathlib.Path("receipts/wave1")/f"wave1-f72-afah-data-gate-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave1-f72-afah-data-gate-${{ github.run_id }}
+          path: |
+            artifacts/wave1-quarantine-candidates-v1.json
+            artifacts/wave1-quarantine-semantic-audit-v1.json
+            artifacts/wave1-f72-afah-data-gate-v1.json
+            receipts/wave1/wave1-f72-afah-data-gate-${{ github.run_id }}.json
+          if-no-files-found: error
+      - name: Persist public gate pointer only
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/wave1-f72-afah-data-gate-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: wave1 F72 AFAH data gate ${{ github.run_id }}"
+          git pull --rebase origin feat/wave1-parallel-ai-baselines-v1
+          git push
