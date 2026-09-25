@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_108_RDX_RELEASE_INTEGRITY_AND_DEPLOYMENT_PROOF_READY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_RELEASE_INTEGRITY_DEPLOYMENT_READINESS_COORDINATION_ONLY_NO_F172_F173_F174_EDITS",
+  "master": {
+    "branch": "feat/cerebron-ai-platform-mvp",
+    "parent_head": "b5c2b68b83b228c6659630dee93800a74ae77a86"
+  },
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "current_head": "3fec0cfb81dce5cb94a680139230ca40c0694267",
+    "current_head_validation": "NOT_SEPARATELY_RETESTED_AFTER_STATUS_AND_README_ONLY_DELTA",
+    "last_fully_validated_head": "c782585a5e55f05124e69f661bb55875605d77a5",
+    "full_validation_run_id": 36173205646,
+    "full_validation": "PASS",
+    "pages_validation_run_id": 36173205722,
+    "pages_validation": "PASS",
+    "deployment_readiness": "PASS",
+    "public_pack_projection": "PASS",
+    "evidence_gate": "PASS",
+    "site_contract": "PASS",
+    "hosting_portability": "PASS",
+    "rdx_000001": {
+      "status": "SOURCED",
+      "evidence_ceiling": "E2_SOURCE_LINKED_NOT_VERIFIED",
+      "publication_status": "NOT_VERIFIED_NOT_PUBLISHED"
+    }
+  },
+  "release_integrity": {
+    "schema": "RDX_RELEASE_MANIFEST_V1",
+    "algorithm": "SHA-256",
+    "last_verified_file_count": 14,
+    "last_verified_aggregate_sha256": "d2bdf1106b466bdded3f2e268ab034f4b5371a08b503afacee342f2bb4544e8b",
+    "generator": "scripts/build-release-manifest.mjs",
+    "validator": "scripts/validate-release-manifest.mjs",
+    "public_endpoint": "api/v1/release-manifest.json",
+    "note": "AGGREGATE_APPLIES_TO_LAST_FULLY_VALIDATED_BUILD_BEFORE_LATER_STATUS_DOC_DELTA"
+  },
+  "deployment": {
+    "github_pages_build": "READY",
+    "production_deployment_verified": false,
+    "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+    "push_mode": "VALIDATE_AND_BUILD_ONLY",
+    "deploy_mode": "MANUAL_WORKFLOW_DISPATCH_AFTER_OWNER_ENABLEMENT",
+    "live_verifier": "scripts/verify-live-deployment.mjs",
+    "proof_schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V1",
+    "proof_artifact": "rdx-production-deployment-proof",
+    "live_verification": "WAITING_FOR_FIRST_REAL_DEPLOYMENT"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_TO_OTHER_RECURSIVE_IMPROVEMENT_AI",
+    "F173": "DELEGATED_TO_OTHER_RECURSIVE_IMPROVEMENT_AI",
+    "F174": "DELEGATED_TO_OTHER_RECURSIVE_IMPROVEMENT_AI",
+    "local_session_must_not_parallel_edit": true,
+    "coordination_manifest": "config/coordination/F172-F174-recursive-ai-handoff.json"
+  },
+  "global_governance": {
+    "f72_global": "FAIL_CLOSED",
+    "m4_gold": "BLOCKED",
+    "neural_training": "BLOCKED",
+    "m6_training": "DENY",
+    "private_client_training_default": "DENY"
+  },
+  "next_exact": [
+    "Do not modify F172-F174 unless explicitly re-assigned.",
+    "Keep RDX public bundle gates green.",
+    "Owner enables GitHub Pages Source=GitHub Actions once.",
+    "After enablement, manually dispatch RDX GitHub Pages Public Preview with deploy=true.",
+    "Require deploy PASS plus verify-live PASS before setting production_deployment_verified=true.",
+    "Do not promote RDX-000001 above SOURCED/E2 until evidence, audits and human review justify it.",
+    "Continue waiting for real ARCHITECTON R&D handoffs before claiming execution."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "SIMULATION!=TEST",
+    "MEMORY!=TRAINING",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FALSE_TRAINING_CLAIM"
+  ]
+}
