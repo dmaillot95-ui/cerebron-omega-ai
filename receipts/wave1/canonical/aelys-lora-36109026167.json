@@ -1,0 +1,39 @@
+{
+  "schema": "CEREBRON_WAVE1_ROLE_LORA_PUBLIC_POINTER_V1",
+  "run_id": 36109026167,
+  "role": "AELYS",
+  "real_training": true,
+  "training_executed": true,
+  "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+  "release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+  "split_sha256": "cc6a0f40a80d1ea4523b22360b90316fbbb210ca49b86bf7bef15b75e7158187",
+  "cold_dataset_sha256": {
+    "M6": "5cca8b830595c64b7491f8b5f9428776051ab8f726d696872e682aad58232d8d",
+    "TRANSFER": "a38f28b7d0e6873b64b4b96c404c87604b506f1115f0074c0f02eaf0d4a3099d",
+    "RED": "384ffbb0f0a68870f5ba38b9ddab5067f8c2714330c3643ed2e2a63cbb36568d"
+  },
+  "cold_deny_training": true,
+  "weights_changed": true,
+  "adapter_sha256": "fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb",
+  "adapter_config_sha256": "3b86bccce025278a9dc04507708947c0ae7b7cc2320f0bad116a535d58901d2b",
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "hf_private_object_prefix": "wave1/AELYS/LORA-V1/run-36109026167",
+  "hf_private_readback_sha_pass": true,
+  "gains": {
+    "VALIDATION": 6,
+    "M6": 0,
+    "TRANSFER": -4,
+    "RED": 0
+  },
+  "any_critical_regression": true,
+  "validation_gate_pass": true,
+  "cold_gate_pass": false,
+  "decision": "ROLLBACK_RETAIN_EVIDENCE",
+  "promotion": "NOT_PROMOTED",
+  "pending": [
+    "REPAIR_OR_NEW_DATA"
+  ],
+  "report_sha256": "5eada4ce379f45385834a6bc8faa29f04464886fdf94b44f45d3246643e7a1c8",
+  "claim_ceiling": "REAL_SCOPED_LORA_WEIGHT_CHANGE_AND_COLD_EVALUATION_ONLY_NO_GENERAL_CAPABILITY"
+}
