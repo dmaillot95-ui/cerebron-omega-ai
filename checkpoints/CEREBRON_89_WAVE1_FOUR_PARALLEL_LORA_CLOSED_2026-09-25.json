@@ -1,0 +1,113 @@
+{
+  "schema": "CEREBRON_89_WAVE1_FOUR_PARALLEL_LORA_CLOSED_V1",
+  "date": "2026-09-25",
+  "parent": "checkpoints/CEREBRON_88_WAVE1_FOUR_PARALLEL_LORA_RUNNING_2026-09-25.json",
+  "main_head_before_checkpoint": "88aff82c91aba0fa48bd28f5f7b19bc84e81d593",
+  "wave1": {
+    "canonical_run": 36109026167,
+    "run_conclusion": "SUCCESS",
+    "audit_job": 107992214097,
+    "audit_conclusion": "SUCCESS",
+    "audit_artifact_id": 10852812182,
+    "audit_artifact_digest": "sha256:e6d17a185d7159ca465fe4d85b067a05a97d4a4937c40f7895fc71f976a3db75",
+    "release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+    "shared_base_lineage": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "independent_evidence_count": 0,
+    "roles": {
+      "AFAH": {
+        "decision": "G6_VERIFIED_RESEARCH_ONLY",
+        "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+        "gains": {
+          "VALIDATION": 12,
+          "M6": 2,
+          "TRANSFER": 6,
+          "RED": 4
+        },
+        "critical_regression": false,
+        "hf_private_readback": true,
+        "f72_run": 36110722530,
+        "f72_status": "SUPPORTED_E2",
+        "f72_result_sha256": "71dfa080d9d27687a9b40c1f8c55f875ecf2ddfd36ba188f3be62864b79c014f",
+        "final_policy_run": 36111258146,
+        "final_policy_review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290",
+        "runtime_activation": false,
+        "g7_promoted": false
+      },
+      "AELYS": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb",
+        "gains": {
+          "VALIDATION": 6,
+          "M6": 0,
+          "TRANSFER": -4,
+          "RED": 0
+        },
+        "critical_regression": true,
+        "hf_private_readback": true
+      },
+      "ETHERION": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97",
+        "gains": {
+          "VALIDATION": 9,
+          "M6": -2,
+          "TRANSFER": -1,
+          "RED": -2
+        },
+        "critical_regression": true,
+        "hf_private_readback": true
+      },
+      "METRION": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "6e51db22126ae3218429dc4afe62df4a43d8d824b6ee374b305315a70afb682f",
+        "gains": {
+          "VALIDATION": 9,
+          "M6": 7,
+          "TRANSFER": 0,
+          "RED": -2
+        },
+        "critical_regression": true,
+        "hf_private_readback": true
+      }
+    }
+  },
+  "failures_recorded": [
+    "FAIL-WAVE1-LORA-TOOL-DROPO-001",
+    "FAIL-WAVE1-AELYS-LORA-TRANSFER-001",
+    "FAIL-WAVE1-ETHERION-LORA-TRANSFER-001",
+    "FAIL-WAVE1-METRION-LORA-TRANSFER-001"
+  ],
+  "invariant": [
+    "FOUR_REAL_TRAININGS_DO_NOT_EQUAL_FOUR_INDEPENDENT_EVIDENCE_SOURCES",
+    "ROLLBACKS_RETAIN_PRIVATE_ADAPTER_EVIDENCE_BUT_ARE_NOT_RUNTIME_ACTIVE",
+    "AFAH_G6_IS_RESEARCH_ONLY_NOT_G7",
+    "NO_DEFAULT_RUNTIME_REPLACEMENT",
+    "DUPLICATE_RUNS_DO_NOT_COUNT_AS_CONFIRMATION"
+  ],
+  "next_wave_policy": {
+    "mode": "PARALLEL_BASELINE_AND_DATA_GATES",
+    "exclude_already_closed": [
+      "AELYS",
+      "ETHERION",
+      "AFAH",
+      "METRION",
+      "ELYRA",
+      "SAPHEA"
+    ],
+    "greek_native_dual_model_lane": "SEPARATE",
+    "ordinary_next_candidates": [
+      "SPIRALION",
+      "HYPERION",
+      "ASTRION",
+      "SAPHEA_MICRO"
+    ],
+    "rule": "DO_NOT_TRAIN_IF_VALIDATED_GOLD_OR_COLD_SPLITS_ARE_MISSING"
+  },
+  "exact_resume": [
+    "Audit readiness for SPIRALION, HYPERION, ASTRION and SAPHEA_MICRO together.",
+    "Launch shared-base cold baselines in parallel only if no stronger existing baseline exists.",
+    "Build/admit role-specific data in parallel using the same quarantine -> audit -> F72/AFAH discipline.",
+    "Keep Greek native dual-model AIs out of this single-model LoRA lane.",
+    "Do not repair Wave1 rollback roles until materially new data or method exists."
+  ]
+}
