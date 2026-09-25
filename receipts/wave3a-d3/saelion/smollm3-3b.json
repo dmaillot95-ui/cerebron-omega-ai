@@ -1,0 +1,47 @@
+{
+  "schema": "SAELION_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36138864930,
+  "ai_id": "SAELION",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "revision_verified": true,
+  "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 36,
+  "accuracy": 0.5,
+  "domain": {
+    "calibration": {
+      "correct": 4,
+      "total": 12
+    },
+    "compression_fidelity": {
+      "correct": 4,
+      "total": 12
+    },
+    "lesson_selection": {
+      "correct": 8,
+      "total": 12
+    },
+    "memory_hygiene": {
+      "correct": 4,
+      "total": 12
+    },
+    "negative_transfer_detection": {
+      "correct": 8,
+      "total": 12
+    },
+    "transfer": {
+      "correct": 8,
+      "total": 12
+    }
+  },
+  "elapsed_s": 2514.469,
+  "max_rss_kb": 6672616,
+  "private_result_path": "saelion/D3-results/run-36138864930/smollm3-3b.json",
+  "private_result_sha256": "5ebcb4b1d226ee2ae7885992eb53260c0c48a2eceb05f5917c0e0d67b554adba",
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "receipt_sha256": "56abd3d3359ec18a968cfe7fba5bbc508851bbb7d3de4518ded1e976e7e37fc9"
+}

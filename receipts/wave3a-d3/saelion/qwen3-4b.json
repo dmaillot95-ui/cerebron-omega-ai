@@ -1,0 +1,47 @@
+{
+  "schema": "SAELION_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36138864930,
+  "ai_id": "SAELION",
+  "model_id": "Qwen/Qwen3-4B",
+  "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "revision_verified": true,
+  "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 45,
+  "accuracy": 0.625,
+  "domain": {
+    "calibration": {
+      "correct": 5,
+      "total": 12
+    },
+    "compression_fidelity": {
+      "correct": 8,
+      "total": 12
+    },
+    "lesson_selection": {
+      "correct": 8,
+      "total": 12
+    },
+    "memory_hygiene": {
+      "correct": 8,
+      "total": 12
+    },
+    "negative_transfer_detection": {
+      "correct": 8,
+      "total": 12
+    },
+    "transfer": {
+      "correct": 8,
+      "total": 12
+    }
+  },
+  "elapsed_s": 2458.186,
+  "max_rss_kb": 8714608,
+  "private_result_path": "saelion/D3-results/run-36138864930/qwen3-4b.json",
+  "private_result_sha256": "bab41f3e11053ec61fef34dd68296ec37c6cd31d4012142385c4ee9c1a306534",
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "receipt_sha256": "ddf9e2b9d43c1d4f62c573fdfe846115d8c73bd503ebec4d1a3b96c725dcd56a"
+}
