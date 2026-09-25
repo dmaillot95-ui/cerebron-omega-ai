@@ -1,0 +1,69 @@
+{
+  "schema": "CEREBRON_114_RDX_BROWSER_PROVENANCE_VERIFICATION_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_CLIENT_SIDE_RELEASE_PROVENANCE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "2470c3c157cd14375b06ee56597fb304e3de2c5a",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "a5400c11efd343a66abe3a814708d185110ad89d",
+    "full_validation": {
+      "run_id": 36177473426,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36177473424,
+      "status": "PASS"
+    },
+    "public_pack_projection": {
+      "run_id": 36177473427,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36177473595,
+      "status": "PASS"
+    },
+    "pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_integrity": {
+    "source_commit": "a5400c11efd343a66abe3a814708d185110ad89d",
+    "file_count": 16,
+    "aggregate_sha256": "8822d65dbcf3bc8d32c1415b6eaba8780659d2f9023463a65bfdea08ca278911",
+    "browser_js_syntax": "PASS",
+    "static_security": "PASS",
+    "internal_links": "PASS",
+    "static_release_build_contract": "PASS"
+  },
+  "browser_verifier": {
+    "page": "verify.html",
+    "manifest_schema": "RDX_RELEASE_MANIFEST_V1",
+    "provenance_schema": "RDX_BUILD_PROVENANCE_V1",
+    "verifies_all_manifest_files_sha256": true,
+    "reconstructs_aggregate_sha256": true,
+    "verifies_manifest_source_commit_equals_provenance_source_commit": true,
+    "fail_closed_on_provenance_mismatch": true
+  },
+  "claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Keep browser verifier fail-closed on source provenance mismatch.",
+    "Extend static link validation to internal fragment anchors.",
+    "After owner enables GitHub Pages, require deploy PASS plus live proof V2 PASS.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
