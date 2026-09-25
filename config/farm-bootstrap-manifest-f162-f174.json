@@ -73,13 +73,23 @@
     {
       "farm_id": 174,
       "target_repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
-      "target_state": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
+      "target_state": "VIDEO_RENDER_CANARY_EXECUTED",
       "source_root": "scaffolds/f174-elyra-visual-simulation",
       "files": [
         {
-          "path": "scaffolds/f174-elyra-visual-simulation/README.md",
-          "blob_sha": "0065342a64d67ad7ad89ff7762abc792ea4e765b",
-          "size": 873
+          "path": "scaffolds/f174-elyra-visual-simulation/.github/workflows/f174-selftest.yml",
+          "blob_sha": "c2cf7f46ef3b0fa39382c6e9b958c6ee6064a27c",
+          "size": 1652
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/.github/workflows/f174-video-canary.yml",
+          "blob_sha": "24b8d4d6fbf0620fd4c01e2fe41341c9098dda91",
+          "size": 3299
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/.github/workflows/f174-visual-canary.yml",
+          "blob_sha": "58ccd0c32a1c1e89df6ffd25aec72c0be59d910e",
+          "size": 1317
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/architecture/ELYRA_VISUAL_SIMULATION_V1.json",
@@ -88,18 +98,43 @@
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/config/project.json",
-          "blob_sha": "03ca2dddffe8340e1238368c8eedb4c7ffb397a2",
-          "size": 1679
+          "blob_sha": "a9df0d980229696b006f92076f00ce6db7e891df",
+          "size": 2381
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/README.md",
+          "blob_sha": "d377bfc5b793c60c6d5755f81a7086aec6e45cb2",
+          "size": 934
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/render/video_canary.py",
+          "blob_sha": "7ba794f5a3424f252d96c31fa79ee623196f787e",
+          "size": 2823
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/simulation/visual_canary.py",
+          "blob_sha": "d1c5ea67295a1ec2fd8b284f8e75974df7829ac8",
+          "size": 2008
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/tests/test_scaffold.py",
-          "blob_sha": "f154aa1104040128d62b86ad9f43077ccec7079c",
-          "size": 657
+          "blob_sha": "61b0cc3e302c136a28922d8322c3050eb9e75f46",
+          "size": 476
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/tests/test_video_canary.py",
+          "blob_sha": "67b1ccbe0bb8396cb43c36e38c1d819d92a6fc2e",
+          "size": 441
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/tests/test_visual_canary.py",
+          "blob_sha": "4c721cfe74581e13423d62e2c7136bd199205cd6",
+          "size": 485
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/validate_architecture.py",
-          "blob_sha": "22eff3e57d969b450f93bc2a31f296f72265bb00",
-          "size": 954
+          "blob_sha": "b71207d6c5beb78f92b6496160797a20199b21b4",
+          "size": 1096
         }
       ]
     }
