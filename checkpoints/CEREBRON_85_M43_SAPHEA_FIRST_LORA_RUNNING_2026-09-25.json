@@ -6,7 +6,7 @@
   "branch": "feat/saphea-first-lora-v1",
   "branch_head_at_trigger": "bfd670b3d21ea337fdcb2bf091348cb38b09e9d9",
   "run_id": 36100266729,
-  "state": "RUNNING_REPAIRED_CANARY",
+  "state": "CLOSED_G6_PASS_HOLD_G7",
   "base_model": {
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
     "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
@@ -64,13 +64,12 @@
     "AFAH_FINAL_AUTHORITY"
   ],
   "exact_resume": [
-    "Check run 36099976977.",
-    "If training stack/compile/data gate fails: classify F_TOOL or F_DATA; do not infer model failure.",
-    "If weights_changed=false: neural-learning claim DENIED.",
-    "If weights_changed=true: neural-learning scoped claim may be made only for SAPHEA epistemic adapter.",
-    "If cold_gain<=0 or critical_regression=true: ROLLBACK_AND_RETAIN_EVIDENCE.",
-    "If cold_gain>0 and no critical regression: hold at G6 pending transfer/ablation/audit; do not promote automatically.",
-    "Verify HF private readback before accepting the adapter receipt."
+    "M43 G6 is closed PASS; do not retrain the same canary.",
+    "Build a novel-transfer benchmark disjoint from GOLD and M6; do not alter M6.",
+    "Run adapter vs base on that frozen transfer benchmark.",
+    "Run ablation base vs adapter and verify gain attribution.",
+    "Run independent audit and red-team before F72/AFAH promotion review.",
+    "If transfer gain is non-positive or critical regression appears, rollback and retain evidence."
   ],
   "previous_attempt": {
     "run_id": 36099976977,
@@ -85,5 +84,21 @@
     "prefix_truncation": "TAIL_PRESERVING",
     "max_length": 256,
     "note": "Current branch source guarantees target supervision even when the rendered prompt exceeds context."
+  },
+  "branch_head_after_receipt": "ff2f84ebd54f3bbfc179cd1c6165ae5c07ab01f7",
+  "result": {
+    "weights_changed": true,
+    "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "baseline_m6_score": 18,
+    "posttrain_m6_score": 30,
+    "cold_gain": 12,
+    "accuracy_before": 0.3,
+    "accuracy_after": 0.5,
+    "validation_loss_before": 0.48301953449845314,
+    "validation_loss_after": 0.11578285936266183,
+    "critical_regression": false,
+    "hf_private_readback_sha_pass": true,
+    "promotion": "NOT_PROMOTED",
+    "claim_ceiling": "SCOPED_REAL_LORA_WEIGHT_CHANGE_ONLY"
   }
 }
