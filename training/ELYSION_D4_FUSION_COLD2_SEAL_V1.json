@@ -1,0 +1,18 @@
+{
+  "schema": "ELYSION_D4_FUSION_COLD2_SEAL_V1",
+  "date": "2026-09-25",
+  "dataset_path": "benchmarks/ELYSION_D4_FUSION_COLD2_V1.json",
+  "dataset_blob_sha": "d0e63e007594669f8a622f1eb097a69d2c0018d8",
+  "preregistration_commit": "7dc5e865780195a06ee1d9d3316647abbee16ed3",
+  "classification": "COLD_TRANSFER_SEALED",
+  "training_eligible": false,
+  "policy_tuning_eligible": false,
+  "single_use_after_policy_freeze": true,
+  "rules": [
+    "NO_EDIT_AFTER_SEAL",
+    "NO_POLICY_TUNING_ON_COLD2",
+    "NO_NEURAL_TRAINING_ON_COLD2",
+    "VERIFY_DISJOINTNESS_FROM_DEV_AND_M6_BEFORE_FIRST_RUN",
+    "ONLY_FIRST_CANONICAL_RUN_COUNTS_AS_UNTOUCHED_COLD_EVIDENCE"
+  ]
+}
