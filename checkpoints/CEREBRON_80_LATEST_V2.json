@@ -23,7 +23,7 @@
       "stop_reason": "STAY_AT_5_NO_SUFFICIENT_MARGINAL_GAIN"
     },
     "knowledge_banks": "CONFIGURED",
-    "dual_core": "SUPPORTED_NO_VERIFIED_ASSIGNMENTS",
+    "dual_core": "CANDIDATE_ARCHITECTURE_PRESENT_PLATFORM_BRANCH; ELYSION_D0_D3_PASS; FULL_DUAL_CORE_NOT_VALIDATED",
     "strategy_council": {
       "mission": "C80-ALL-AI-STRATEGY-COUNCIL-001",
       "run_id": 36046943012,
@@ -35,7 +35,7 @@
     "Audit all-AI strategy council contributions.",
     "Retest METRION parser/schema robustness at same scale.",
     "Run next distinct frozen held-out GVL transfer family.",
-    "Register concrete dual-core assignments only after manifest verification.",
-    "Continue M06 memory rollout without destroying prior rollback evidence."
+    "Continue M06 memory rollout without destroying prior rollback evidence.",
+    "Complete ELYSION D4/D5/D6/D8 ablation, contradiction, red-team and release gates before active dual-core claim."
   ]
 }
