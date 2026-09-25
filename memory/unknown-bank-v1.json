@@ -86,6 +86,25 @@
         "METRION"
       ],
       "STATUS": "OPEN_TRANSFER_ABLATION_AUDIT_REQUIRED"
+    },
+    {
+      "UNKNOWN_ID": "UNK-SAPHEA-LORA-CLASS-BALANCE-001",
+      "CLASS": "U1",
+      "STATE": "MEASURED_FAILURE_CAUSE_PARTIAL",
+      "DESCRIPTION": "SAPHEA G6 LoRA shows strong class-prior collapse under frozen transfer/red-team tests. It is unknown whether the dominant cause is training-example representation bias, LoRA capacity/learning rate, prompt-field alias shift, or interaction among them.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "run:36100266729",
+        "run:36101181888",
+        "run:36101503838"
+      ],
+      "ROUTE_TO": [
+        "SAPHEA",
+        "AFAH",
+        "METRION",
+        "F166-RHO"
+      ],
+      "STATUS": "OPEN_REPAIR_ABLATION_REQUIRED"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
