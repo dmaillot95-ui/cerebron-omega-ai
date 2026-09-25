@@ -1,0 +1,37 @@
+{
+  "schema": "CEREBRON_RDX_SEMANTIC_RETRIEVAL_CANARY_V1",
+  "run_id": 36156985796,
+  "status": "FAIL",
+  "source_farm_id": 152,
+  "linked_memory_farm_id": 115,
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "repo_private": true,
+  "embedding_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "corpus_size": 12,
+  "query_count": 10,
+  "corpus_manifest_sha256": "61601a318107775238a26c9768ecce031ee01d7f1e4a98c1a7a1765fe5e8504d",
+  "authenticated_write_read_sha": "PASS",
+  "top1_correct": 8,
+  "top1_accuracy": 0.8,
+  "mean_reciprocal_rank": 0.9,
+  "failed_queries": [
+    {
+      "query_id": "Q2",
+      "expected_domain": "m6_isolation",
+      "expected_rank": 2,
+      "top1_domain": "rollback"
+    },
+    {
+      "query_id": "Q3",
+      "expected_domain": "provenance",
+      "expected_rank": 2,
+      "top1_domain": "evidence_gate"
+    }
+  ],
+  "training": "NOT_EXECUTED",
+  "weights_changed": false,
+  "classification": "DEV_CANARY_FAIL_REPAIR_REQUIRED",
+  "claim_ceiling": "SYNTHETIC_PRIVATE_RDX_SEMANTIC_RETRIEVAL_CANARY_FAILED_TOP1_THRESHOLD; NOT_PRODUCTION_SCALE_NOT_F115_FULL_RUNTIME",
+  "receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30"
+}
