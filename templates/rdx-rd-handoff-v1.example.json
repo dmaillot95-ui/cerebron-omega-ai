@@ -1,0 +1,90 @@
+{
+  "schema": "CEREBRON_RDX_RD_HANDOFF_V1",
+  "handoff_id": "HANDOFF-SXX-YYYYMMDD-NNN",
+  "project_id": "SXX",
+  "producer": {
+    "session_role": "R&D_EXECUTION_PLANE",
+    "farm_id_or_null": null,
+    "ai_or_model": "TO_FILL",
+    "role": "TO_FILL",
+    "mission": "TO_FILL"
+  },
+  "canonical_ids": [
+    "SRC-SXX-0001",
+    "RESULT-SXX-0001",
+    "CLAIM-SXX-0001",
+    "TEST-SXX-0001",
+    "EXEC-SXX-0001"
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "ART-SXX-0001",
+      "kind": "receipt_or_report_or_data",
+      "sha256": "TO_FILL_64_HEX",
+      "location": "TO_FILL",
+      "visibility": "PRIVATE_OR_PUBLIC"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-SXX-0001",
+      "origin": "OWNED_OR_EXTERNAL",
+      "citation_or_location": "TO_FILL",
+      "rights_status": "UNKNOWN"
+    }
+  ],
+  "executions": [
+    {
+      "exec_id": "EXEC-SXX-0001",
+      "status": "PASS_OR_FAIL_OR_PARTIAL_OR_HOLD",
+      "input_refs": [
+        "SRC-SXX-0001"
+      ],
+      "output_refs": [
+        "RESULT-SXX-0001"
+      ],
+      "artifact_refs": [
+        "ART-SXX-0001"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLAIM-SXX-0001",
+      "text": "TO_FILL",
+      "evidence_refs": [
+        "RESULT-SXX-0001",
+        "TEST-SXX-0001"
+      ],
+      "limitations": [
+        "TO_FILL"
+      ],
+      "evidence_level": "E0_TO_E8"
+    }
+  ],
+  "dedup": {
+    "status": "PENDING"
+  },
+  "rights": {
+    "shared_training_allowed": false,
+    "train_valid_split_ready": false,
+    "m6_exclusion_e2e": false
+  },
+  "human_review": {
+    "complete": false,
+    "reviewer": null
+  },
+  "open_work": [
+    "TO_FILL"
+  ],
+  "m6_contamination": false,
+  "transfer": {
+    "status": "PENDING"
+  },
+  "ablation": {
+    "status": "PENDING"
+  },
+  "afah_review": {
+    "status": "PENDING"
+  }
+}
