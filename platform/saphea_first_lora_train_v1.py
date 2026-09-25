@@ -92,13 +92,16 @@ def render_prompt(tok, prompt: str) -> str:
 
 def encode_supervised(tok, prompt: str, target: str):
     prefix = render_prompt(tok, prompt)
-    full = prefix + target + (tok.eos_token or "")
     prefix_ids = tok(prefix, add_special_tokens=False)["input_ids"]
-    full_ids = tok(full, add_special_tokens=False, truncation=True, max_length=MAX_LENGTH)["input_ids"]
-    if len(full_ids) <= len(prefix_ids):
-        raise RuntimeError("TARGET_TRUNCATED")
-    labels = [-100] * min(len(prefix_ids), len(full_ids)) + full_ids[len(prefix_ids):]
-    labels = labels[:len(full_ids)]
+    target_ids = tok(target + (tok.eos_token or ""), add_special_tokens=False)["input_ids"]
+    if len(target_ids) >= MAX_LENGTH:
+        raise RuntimeError("TARGET_TOO_LONG")
+    max_prefix = MAX_LENGTH - len(target_ids)
+    # Keep the tail of the rendered prompt so the evidence facts and requested labels survive.
+    if len(prefix_ids) > max_prefix:
+        prefix_ids = prefix_ids[-max_prefix:]
+    full_ids = prefix_ids + target_ids
+    labels = [-100] * len(prefix_ids) + target_ids
     return full_ids, labels
 
 
