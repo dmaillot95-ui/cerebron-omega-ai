@@ -2,11 +2,6 @@ name: CEREBRON Format Contract Evolution V1
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'evolution/format_contract_evolver_v1.py'
-      - '.github/workflows/cerebron-format-contract-evolution-v1.yml'
 
 permissions:
   contents: read
@@ -25,7 +20,7 @@ jobs:
             model_id: HuggingFaceTB/SmolLM3-3B
             revision: a07cc9a04f16550a088caea529712d1d335b0ac1
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
