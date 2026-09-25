@@ -1,0 +1,80 @@
+{
+  "schema": "CEREBRON_115_RDX_SIGNED_LIVE_PROOF_REGISTRATION_PROPOSAL_READY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SIGNED_LIVE_PROOF_REGISTRATION_PROPOSAL_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "99f36eaec27775683d38f62447f6cb33f77ab08c",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "31f7c87c7fa2ca6991913339f99e495d9e46ee22",
+    "full_validation": {
+      "run_id": 36183076670,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36183076619,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36183076652,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "31f7c87c7fa2ca6991913339f99e495d9e46ee22",
+    "manifest_file_count": 16,
+    "release_aggregate_sha256": "311be6aceb073f247a34c8ab9953812ca572896a9dbfd4568c8d6271dcc477fc",
+    "release_attestation_sha256": "e692320427027830e7742ffbc4b2889faaa371917f8a88ac6bacecb30cbf32a7",
+    "source_checkout_gate": "PASS",
+    "release_manifest_gate": "PASS",
+    "release_attestation_gate": "PASS",
+    "github_sigstore_attestation": "PASS",
+    "github_sigstore_verification": "PASS",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_control": {
+    "production_promotion_gate": "PASS",
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "fail_closed": true,
+    "live_proof_schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "live_proof_requires_signed_release_attestation": true,
+    "registration_proposal_schema": "RDX_PRODUCTION_PROOF_REGISTRATION_PROPOSAL_V1",
+    "registration_mode": "PROPOSAL_ONLY_NO_AUTO_APPLY",
+    "registration_proposal_artifact": "rdx-production-proof-registration-proposal",
+    "registry": "data/deployments/production-proof-registry.json"
+  },
+  "workflow_after_real_deploy": [
+    "Verify signed GitHub/Sigstore release attestation.",
+    "Deploy public dist.",
+    "Run live endpoint and full-bundle SHA verification.",
+    "Require signed release attestation metadata inside live proof.",
+    "Build registration proposal artifact only.",
+    "Human or controlled reviewer approves before registry integration.",
+    "Production promotion gate validates registry evidence.",
+    "No automatic production claim."
+  ],
+  "product_claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_publication": false,
+    "automatic_ai_execution": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
