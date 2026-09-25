@@ -1,0 +1,169 @@
+name: SAPHEA LoRA Repair V2 Train
+on:
+  push:
+    branches: ['feat/saphea-lora-repair-v2']
+    paths:
+      - 'config/saphea-lora-repair-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      PYTHONPATH: platform
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned CPU repair stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece huggingface_hub
+
+      - name: Compile frozen experiment
+        run: |
+          python -m py_compile platform/saphea_epistemic_dataset_v1.py
+          python -m py_compile platform/saphea_epistemic_repair_gold_v2.py
+          python -m py_compile platform/saphea_repair_benchmark_v3.py
+          python -m py_compile platform/saphea_lora_repair_train_v2.py
+
+      - name: Rebuild original M6 and generate repair GOLD
+        run: |
+          python platform/saphea_epistemic_dataset_v1.py
+          python platform/saphea_epistemic_repair_gold_v2.py
+
+      - name: Verify repair GOLD isolation and experiment invariants
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          old=json.loads((root/"saphea-epistemic-gold-v1.json").read_text())
+          m6=json.loads((root/"saphea-epistemic-m6-v1.json").read_text())
+          new=json.loads((root/"saphea-epistemic-repair-gold-v2.json").read_text())
+          assert len(new["records"])==180
+          assert new["per_label"]==30
+          assert new["training_eligible"] is True
+          assert new["cold_benchmark_content_used"] is False
+          assert m6["deny_training"] is True
+          old_ids={r["id"] for r in old["records"]}; m6_ids={r["id"] for r in m6["records"]}
+          new_ids={r["id"] for r in new["records"]}
+          assert not (new_ids & old_ids)
+          assert not (new_ids & m6_ids)
+          old_prompts={r["prompt_sha256"] if "prompt_sha256" in r else __import__("hashlib").sha256(r["prompt"].encode()).hexdigest() for r in old["records"]}
+          m6_prompts={__import__("hashlib").sha256(r["prompt"].encode()).hexdigest() for r in m6["records"]}
+          new_prompts={r["prompt_sha256"] for r in new["records"]}
+          assert not (new_prompts & old_prompts)
+          assert not (new_prompts & m6_prompts)
+          print("SAPHEA_REPAIR_GOLD_ISOLATION=PASS",new["dataset_sha256"])
+          PY
+
+      - name: Train data-only repair candidate
+        run: python platform/saphea_lora_repair_train_v2.py
+
+      - name: Verify candidate report and write private adapter
+        run: |
+          mkdir -p receipts/training
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from huggingface_hub import HfApi,hf_hub_download
+
+          root=pathlib.Path("platform/artifacts")
+          report=json.loads((root/"saphea-lora-repair-v2-training.json").read_text())
+          adapter_dir=root/"saphea-lora-repair-v2-adapter"
+          af=adapter_dir/"adapter_model.safetensors"
+          cf=adapter_dir/"adapter_config.json"
+          assert report["weights_changed"] is True
+          assert report["experiment"]=="DATA_REPRESENTATION_ONLY_ABLATION"
+          assert report["hyperparameters"]["r"]==16
+          assert report["hyperparameters"]["alpha"]==32
+          assert report["hyperparameters"]["learning_rate"]==0.0001
+          assert hashlib.sha256(af.read_bytes()).hexdigest()==report["adapter_sha256"]
+          assert hashlib.sha256(cf.read_bytes()).hexdigest()==report["adapter_config_sha256"]
+
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+          run_id=os.environ["GITHUB_RUN_ID"]
+          prefix=f"colony/C03-SIGMA/agents/SAPHEA/adapters/G1R-DATA-V2/run-{run_id}"
+          api.upload_folder(folder_path=str(adapter_dir),path_in_repo=prefix,repo_id=repo,repo_type="model",commit_message=f"SAPHEA repair v2 {run_id}")
+          for name,expected in [("adapter_model.safetensors",report["adapter_sha256"]),("adapter_config.json",report["adapter_config_sha256"])]:
+              got=pathlib.Path(hf_hub_download(repo_id=repo,filename=prefix+"/"+name,repo_type="model",token=token,force_download=True))
+              if hashlib.sha256(got.read_bytes()).hexdigest()!=expected:
+                  raise SystemExit("HF_READBACK_SHA_MISMATCH:"+name)
+
+          receipt={
+            "schema":"SAPHEA_LORA_REPAIR_V2_PUBLIC_POINTER_V1",
+            "run_id":int(run_id),
+            "code_commit":os.environ["GITHUB_SHA"],
+            "experiment":"DATA_REPRESENTATION_ONLY_ABLATION",
+            "base_model_id":report["base_model_id"],
+            "base_revision":report["base_revision"],
+            "repair_gold_sha256":report["repair_gold_sha256"],
+            "adapter_sha256":report["adapter_sha256"],
+            "adapter_config_sha256":report["adapter_config_sha256"],
+            "hf_private_repo":repo,
+            "hf_private_object_prefix":prefix,
+            "hf_private_readback_sha_pass":True,
+            "m6_score":report["m6_score"],
+            "m6_max":report["m6_max"],
+            "m6_dev_guard_pass":report["m6_dev_guard_pass"],
+            "m6_guard_regression":report["m6_guard_regression"],
+            "validation_loss_before":report["validation_loss_before"],
+            "validation_loss_after":report["validation_loss_after"],
+            "promotion":"NOT_PROMOTED",
+            "next_gate":"FROZEN_REPAIR_BENCHMARK_V3_THREE_WAY_COMPARISON",
+            "claim_ceiling":report["claim_ceiling"],
+          }
+          p=pathlib.Path("receipts/training")/f"saphea-lora-repair-v2-{run_id}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+
+      - name: Remove private adapter from workspace before public artifact
+        run: rm -rf platform/artifacts/saphea-lora-repair-v2-adapter
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saphea-lora-repair-v2-${{ github.run_id }}
+          path: |
+            platform/artifacts/saphea-epistemic-repair-gold-v2.json
+            platform/artifacts/saphea-lora-repair-v2-training.json
+            receipts/training/saphea-lora-repair-v2-${{ github.run_id }}.json
+          if-no-files-found: warn
+
+      - name: Persist repair metadata
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/saphea-lora-repair-v2-${{ github.run_id }}.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAPHEA LoRA repair v2 ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/saphea-lora-repair-v2 && git push && exit 0
+            sleep 5
+          done
+          exit 1
+
+      - name: Enforce M6 development guard after evidence persistence
+        run: |
+          python - <<'PY'
+          import glob,json
+          files=glob.glob("receipts/training/saphea-lora-repair-v2-*.json")
+          if not files: raise SystemExit("REPAIR_RECEIPT_MISSING")
+          d=json.load(open(sorted(files)[-1]))
+          print("SAPHEA_REPAIR_M6_GUARD",d["m6_dev_guard_pass"],d["m6_score"],d["m6_max"])
+          if not d["m6_dev_guard_pass"]:
+              raise SystemExit(4)
+          PY
