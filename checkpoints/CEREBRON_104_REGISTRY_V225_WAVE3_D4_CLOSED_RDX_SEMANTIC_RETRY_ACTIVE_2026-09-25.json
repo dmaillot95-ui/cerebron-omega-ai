@@ -1,0 +1,123 @@
+{
+  "schema": "CEREBRON_104_REGISTRY_V225_WAVE3_D4_CLOSED_RDX_SEMANTIC_RETRY_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.25",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "duplicate_ids": [],
+    "absent_ids_153_172": "SPARSE_NOT_SYNTHESIZED",
+    "f152": "REGISTERED_WITH_RDX_MEMORY_EVIDENCE",
+    "f173_f174": "OBSERVED_OTHER_SESSION_NO_MODIFICATION"
+  },
+  "rdx": {
+    "ingress": {
+      "run_id": 36142030500,
+      "status": "PASS",
+      "receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7"
+    },
+    "write_read_recall": {
+      "run_id": 36143467119,
+      "status": "PASS",
+      "receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f"
+    },
+    "semantic_v1": {
+      "run_id": 36156985796,
+      "status": "SCIENTIFIC_FAIL",
+      "top1_accuracy": 0.8,
+      "mrr": 0.9,
+      "failed_queries": [
+        "Q2_M6_ISOLATION_RANK2",
+        "Q3_PROVENANCE_RANK2"
+      ],
+      "source_run_receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30"
+    },
+    "semantic_repair_dev_v2": {
+      "previous_run_id": 36157461751,
+      "previous_run_state": "MECHANICAL_FAIL_MODULE_IMPORT_DO_NOT_COUNT",
+      "retry_run_id": 36160793369,
+      "retry_state": "IN_PROGRESS",
+      "change": "PYTHON_IMPORT_PATH_FIX_ONLY",
+      "fresh_holdout_consumed": false,
+      "training": false
+    }
+  },
+  "native_ai": {
+    "SAELION": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "qwen_correct": 45,
+      "smol_correct": 36,
+      "oracle_union_correct": 45,
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "DELTA": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "qwen_correct": 48,
+      "smol_correct": 44,
+      "oracle_union_correct": 48,
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "NEXUS": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 4,
+      "d4_fusion_dev_run_id": 36155230931,
+      "d4_fusion_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_best_single_correct": 22,
+      "dev_best_policy_correct": 22,
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "ALPHA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 3,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_best_single_correct": 21,
+      "dev_best_policy_correct": 21,
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "OMEGA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 12,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_best_single_correct": 21,
+      "dev_best_policy_correct": 21,
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    }
+  },
+  "promotion": {
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "rdx_neural_training": "BLOCKED",
+    "rule": "NO_NEURAL_LEARNING_CLAIM_WITHOUT_REAL_WEIGHT_OR_ADAPTER_CHANGE_AND_COLD_GAIN"
+  },
+  "next_exact": [
+    "Close RDX semantic repair retry run 36160793369.",
+    "If DEV repair shows positive gain and thresholds pass, freeze policy and create one NEW fresh private holdout V2; otherwise HOLD without consuming a fresh holdout.",
+    "Do not reopen SAELION/DELTA dual-core; do not give ALPHA/OMEGA/NEXUS a fresh holdout after DEV gain 0.",
+    "Keep F118 GOLD and all RDX neural training blocked while F72 remains FAIL.",
+    "Do not modify F173/F174 or ARCHITECTON R&D execution work from the other session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "MECHANICAL_FAILURE_NOT_SCIENTIFIC_FAILURE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
