@@ -1,13 +1,14 @@
 {
   "schema": "CEREBRON_DUAL_CORE_CONTRACT_V1",
   "status": "BRANCH_SCOPED_ARCHITECTURE_VERIFIED_ACTIVATION_GATED",
-  "purpose": "Support logical AIs with two coordinated internal cores without double-counting identity, execution, memory or evidence.",
+  "purpose": "Define Greek native AIs that contain two distinct model cores, with cross-critique/fusion, without double-counting their outputs as independent proof.",
   "modes": [
-    "SINGLE_CORE",
-    "DUAL_CORE"
+    "SINGLE_MODEL_CORE",
+    "DUAL_MODEL_CORE"
   ],
   "rules": [
-    "A dual-core AI remains one logical AI unless an explicit registry says otherwise.",
+    "DUAL_CORE_MEANS_TWO_MODELS_NOT_TWO_ROLES.",
+    "A Greek dual-core AI is one logical AI containing two distinct model cores.",
     "Two cores are not two independent evidence lines by default.",
     "Each core execution requires its own worker/model/run/log/artifact/receipt/provenance before it can be called executed.",
     "Shared model, data, source, method or memory dependencies must be declared.",
@@ -17,7 +18,7 @@
     "Platform-branch candidate assignments are architecture contracts, not active dual-core execution until D4/D5/D6/D8 pass."
   ],
   "verified_assignments": [],
-  "assignment_status": "CANDIDATE_ASSIGNMENTS_FOUND_ON_PLATFORM_BRANCH; NO_D4_D6_D8_COMPLETE_DUAL_CORE_ACTIVATION",
+  "assignment_status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED; ELYSION_TWO_MODEL_RUNTIME_D2_PASS; OTHER_GREEK_AI_BINDINGS_PENDING",
   "source_branch": "feat/cerebron-ai-platform-mvp",
   "source_contract": "config/native-ai-dual-core-v1.json",
   "candidate_assignments": [
@@ -35,7 +36,19 @@
         "D7": "PARTIAL",
         "D8": "PENDING"
       },
-      "state": "SINGLE_CORE_BASELINES_PRESENT_DUAL_CORE_NOT_YET_VALIDATED"
+      "state": "SINGLE_CORE_BASELINES_PRESENT_DUAL_CORE_NOT_YET_VALIDATED",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_EXACT_MODEL_RUNTIME_RECEIPTS_PASS"
     },
     {
       "farm_id": 146,
@@ -45,7 +58,19 @@
         "D1": "PASS",
         "D2": "PENDING_PER_AI_BINDING"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     },
     {
       "farm_id": 147,
@@ -54,7 +79,19 @@
         "D0": "PASS",
         "D1": "PASS"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     },
     {
       "farm_id": 148,
@@ -63,7 +100,19 @@
         "D0": "PASS",
         "D1": "PASS"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     },
     {
       "farm_id": 149,
@@ -72,7 +121,19 @@
         "D0": "PASS",
         "D1": "PASS"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     },
     {
       "farm_id": 150,
@@ -81,7 +142,19 @@
         "D0": "PASS",
         "D1": "PASS"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     },
     {
       "farm_id": 151,
@@ -90,7 +163,36 @@
         "D0": "PASS",
         "D1": "PASS"
       },
-      "state": "ARCHITECTURE_ONLY"
+      "state": "ARCHITECTURE_ONLY",
+      "architecture_class": "GREEK_NATIVE_DUAL_MODEL_AI",
+      "model_pair_target": {
+        "model_a": {
+          "model_id": "Qwen/Qwen3-4B",
+          "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+        },
+        "model_b": {
+          "model_id": "HuggingFaceTB/SmolLM3-3B",
+          "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+        }
+      },
+      "model_binding_status": "TWO_MODEL_ARCHITECTURE_DECLARED_BINDING_NOT_YET_VERIFIED"
     }
-  ]
+  ],
+  "definition": {
+    "dual_core": "ONE_GREEK_NATIVE_AI_CONTAINING_TWO_DISTINCT_MODEL_CORES",
+    "core_a": "MODEL_SLOT_A",
+    "core_b": "MODEL_SLOT_B",
+    "roles_are_functions_not_cores": true,
+    "default_model_pair": {
+      "model_a": {
+        "model_id": "Qwen/Qwen3-4B",
+        "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+      },
+      "model_b": {
+        "model_id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      }
+    },
+    "evidence_rule": "A Greek AI is VERIFIED_DUAL_MODEL only when both exact model revisions have runtime receipts bound to that AI. Two role labels alone do not qualify."
+  }
 }
