@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_96_F152_MULTI_AI_WAVE3A_RUNNING_V1",
+  "date": "2026-09-25",
+  "registry": {
+    "farm_count": 152,
+    "latest_farm": {
+      "id": 152,
+      "code": "F152",
+      "name": "CEREBRON RDX EXCHANGE",
+      "repo": "cerebron-rdx-exchange",
+      "status": "REGISTERED_PENDING_REPOSITORY_VERIFICATION"
+    },
+    "registry_commit": "889d70c58f3e2375b58dc68dff2d65274ff18a6f"
+  },
+  "active_ai": {
+    "ELYSIUM": {
+      "state": "D4_FUSION_REPAIR_DEV_V2_IN_PROGRESS",
+      "run_id": 36137547428,
+      "previous_fresh_d4_decision": "HOLD_NO_MEASURED_GAIN"
+    },
+    "SAELION": {
+      "d2_run_id": 36138362585,
+      "d2": "PASS",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+      "d3_run_id": 36138864930,
+      "d3": "IN_PROGRESS"
+    },
+    "NEXUS": {
+      "d2_run_id": 36138369400,
+      "d2": "PASS",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
+      "d3_run_id": 36138864930,
+      "d3": "IN_PROGRESS"
+    }
+  },
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "NO_DUPLICATE_RUNS",
+    "MULTI_AI_PARALLEL_WHEN_RESOURCE_EFFICIENT",
+    "AGENT_COUNT!=INTELLIGENCE"
+  ],
+  "next_exact": [
+    "Close ELYSIUM DEV V2 repair from run 36137547428.",
+    "Close SAELION/NEXUS D3 from run 36138864930.",
+    "If each D3 passes, trigger existing Wave3A SAELION NEXUS D4 complementarity precheck once.",
+    "Keep F152 inactive until repository presence is verified."
+  ]
+}
