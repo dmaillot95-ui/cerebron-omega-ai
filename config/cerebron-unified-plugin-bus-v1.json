@@ -93,6 +93,19 @@
         "artifact_digest": "sha256:442d3bd1801a627c41378d75f6d06eaa43731817e81a5a510f27ecb9367b8348",
         "external_calls_executed": false,
         "production_live_claimed": false
+      },
+      "local_http_loopback_canary": {
+        "status": "PASS",
+        "run_id": 36164204308,
+        "transport": "HTTP_LOOPBACK",
+        "bind": "127.0.0.1",
+        "http_status": 200,
+        "presentation_status": "HOLD",
+        "result_sha256": "c9b21d56586df27bd4dee8e9964b170fb241fdec9b9f91822068d86ed77b8450",
+        "artifact_id": 10876727408,
+        "artifact_digest": "sha256:03fad961a41073e42bd096830a93eb3caf6ef53e4995fae2077a6221c4c2f733",
+        "external_endpoint_used": false,
+        "production_live_claimed": false
       }
     },
     "ELYRA": {
@@ -161,7 +174,8 @@
     "memory_is_not_training": true,
     "simulation_is_not_test": true,
     "f174_repository_initialized_not_simulation_execution": true,
-    "f173_local_canaries_do_not_imply_external_runtime": true
+    "f173_local_canaries_do_not_imply_external_runtime": true,
+    "f173_http_loopback_does_not_imply_external_runtime": true
   },
   "activation_gate": [
     "PROVIDER_RUNTIME_QUALIFIED",
