@@ -1,0 +1,105 @@
+{
+  "schema": "CEREBRON_92_WAVE2_CLOSED_V1",
+  "date": "2026-09-25",
+  "state": "WAVE2_CLOSED_ALL_ROLLBACK_NO_MODEL_REVIEW",
+  "main_head_before_checkpoint": "c0d20737b3cbda8be22df88adbc3f2585f839cd3",
+  "wave2": {
+    "branch": "feat/wave2-parallel-ai-baselines-v1",
+    "branch_head": "97798f8d630117ce731b1ab226f1ae5a0cfbb83c",
+    "package_run_id": 36114213946,
+    "training_run_id": 36117279297,
+    "training_run_status": "SUCCESS",
+    "release_sha256": "eaf6e53d1097758d7ce70d73ccdc5c3a39de0f9d25c4c59d76889b1b699bc439",
+    "audit_artifact_id": 10858596960,
+    "audit_artifact_digest": "sha256:52c341f886f7c0a9207aaa7fd4548269ff414fb7e3a62683a1774bce28edb0eb",
+    "audit_sha256": "54accefb1425e0fa1bde8d6243202bbff5de2d9d9074a59d811ac67d2715ef9d",
+    "training_executed_count": 4,
+    "weights_changed_count": 4,
+    "hf_private_readback_pass_count": 4,
+    "g6_candidate_count": 0,
+    "rollback_count": 4,
+    "unique_base_lineage_count": 2,
+    "independent_evidence_count": 0,
+    "roles": {
+      "SPIRALION": {
+        "model_id": "HuggingFaceTB/SmolLM3-3B",
+        "adapter_sha256": "d60d5956bfe4461614ff682c89abc5826781f9624b6ec77369473977084343fb",
+        "gains": {
+          "VALIDATION": 0,
+          "M6": 1,
+          "TRANSFER": 0,
+          "RED": 0
+        },
+        "critical_regression": false,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE"
+      },
+      "HYPERION": {
+        "model_id": "HuggingFaceTB/SmolLM3-3B",
+        "adapter_sha256": "cbe55939d9ffc02338c86d960f0b3dcbe6e958b5720eced0608ac91cff98e290",
+        "gains": {
+          "VALIDATION": 0,
+          "M6": 0,
+          "TRANSFER": 0,
+          "RED": 0
+        },
+        "critical_regression": false,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE"
+      },
+      "ASTRION": {
+        "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "adapter_sha256": "282eca1e4682ff1778281d9f944a83627a86c001ac838c86c4bb6179d8a4a2fa",
+        "gains": {
+          "VALIDATION": 8,
+          "M6": -7,
+          "TRANSFER": 6,
+          "RED": 0
+        },
+        "critical_regression": true,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE"
+      },
+      "SAPHEA_MICRO": {
+        "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "adapter_sha256": "283cfe1c08ba297b744da7cc33a628f560b7e9766d383434ca2b630f2187586f",
+        "gains": {
+          "VALIDATION": 3,
+          "M6": -1,
+          "TRANSFER": -1,
+          "RED": 0
+        },
+        "critical_regression": false,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE"
+      }
+    },
+    "f72_model_review": "SKIPPED_NO_G6_CANDIDATE",
+    "afah_final_model_review": "SKIPPED_NO_F72_CANDIDATE",
+    "runtime_activation": false,
+    "g7_promoted": false
+  },
+  "coverage": {
+    "available_ai_count": 38,
+    "neural_training_executed_count": 10,
+    "wave2_pipeline_active_count": 0,
+    "pending_dual_model_count": 7,
+    "pending_specialist_count": 20,
+    "pending_orchestrator_count": 1,
+    "coverage_registry_commit": "5b5b5fcb194c90d2c862e17e504eb7bc72ddc793",
+    "training_fabric_commit": "c0d20737b3cbda8be22df88adbc3f2585f839cd3"
+  },
+  "next_exact": {
+    "wave": "WAVE3A",
+    "first_ai": "ELYSION",
+    "branch": "feat/cerebron-ai-platform-mvp",
+    "first_gate": "D4_DUAL_CORE_FUSION_ABLATION_GAIN_OR_RISK_JUSTIFICATION",
+    "workflow": ".github/workflows/elysion-d4-complementarity.yml",
+    "prerequisite_state": "D0_D1_D2_D3_PASS_D7_PARTIAL",
+    "rule": "TRIGGER_D4_ONCE_ONLY_AFTER_VERIFYING_NO_EQUIVALENT_RUN"
+  },
+  "do_not_repeat": [
+    "DO_NOT_RERUN_WAVE2_36117279297",
+    "DO_NOT_ROUTE_WAVE2_ROLLBACKS_TO_F72",
+    "DO_NOT_ROUTE_WAVE2_ROLLBACKS_TO_AFAH_FINAL_MODEL_GATE",
+    "DO_NOT_MODIFY_M6_TRANSFER_RED_TO_FORCE_PASS",
+    "DO_NOT_ACTIVATE_WAVE2_ADAPTERS_AT_RUNTIME"
+  ],
+  "claim_ceiling": "FOUR_REAL_SCOPED_WAVE2_LORA_TRAININGS_ALL_ROLLED_BACK_NO_G6_MODEL_PROMOTION"
+}
