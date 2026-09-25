@@ -4,14 +4,14 @@
   "project_id": "ELYRA-VISUAL-001",
   "identity": "ELYRA",
   "role_id": "VISUAL_SIMULATION_VIDEO",
-  "status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
+  "status": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
   "target_repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
   "target_repo_exists": true,
   "target_repo_initialized": true,
   "runtime_changed": false,
   "weights_changed": false,
   "training_status": "NOT_TRAINED",
-  "visual_simulation_executed": false,
+  "visual_simulation_executed": true,
   "physical_test_status": "NOT_TESTED",
   "paid_provider_auto_activation": false,
   "rules": [
@@ -19,9 +19,24 @@
     "GENERATED_VISUAL_NE_PHYSICAL_VALIDATION",
     "REAL_EXECUTION_RECEIPT_REQUIRED"
   ],
-  "dedicated_repo_head": "fd2327d3016475cdf84561e5d4bdcee89a28f2e5",
-  "dedicated_repo_selftest_run_id": 36156887593,
+  "dedicated_repo_head": "7e11aa760be6badfca60f1ff1e60997a12aabb84",
+  "dedicated_repo_selftest_run_id": 36160671044,
   "repository_initialized_at": "2026-09-25",
   "bootstrap_source": "dmaillot95-ui/cerebron-omega-ai:scaffolds/f174-elyra-visual-simulation",
-  "bootstrap_manifest_source": "config/farm-bootstrap-manifest-f162-f174.json"
+  "bootstrap_manifest_source": "config/farm-bootstrap-manifest-f162-f174.json",
+  "selftest_status": "PASS",
+  "simulation_scope": "DETERMINISTIC_VISUAL_STATE_SEQUENCE_CANARY",
+  "video_render_executed": false,
+  "physical_model_claimed": false,
+  "physical_validation_claimed": false,
+  "visual_canary": {
+    "run_id": 36160498658,
+    "head_sha": "b96f106ba9eb5b7ce87c5c67a4f6dce003fc7c2a",
+    "scenario_id": "F174-CANARY-001",
+    "frames": 8,
+    "result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
+    "artifact_id": 10875238594,
+    "artifact_name": "f174-visual-canary",
+    "artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc"
+  }
 }
