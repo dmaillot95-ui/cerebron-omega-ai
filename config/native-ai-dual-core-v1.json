@@ -218,14 +218,14 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D2_PASS_M6_SEALED_D3_IN_PROGRESS",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
+      "project_state": "D3_PASS_D4_PRECHECK_READY",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_PASS",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
-        "D3": "IN_PROGRESS",
-        "D4": "BLOCKED_PENDING_D3",
+        "D3": "PASS_PRIVATE_M6_V2",
+        "D4": "READY_COMPLEMENTARITY_PRECHECK",
         "D5": "BLOCKED_PENDING_D4",
         "D6": "BLOCKED_PENDING_D4",
         "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
@@ -246,7 +246,12 @@
         "d3_run_id": 36130283226,
         "m6_release_run_id": 36130067318,
         "m6_sha256": "4ade0334a5a4a08d9f6e623b7bfe8059f3e1fe7f382c2db38c3ab4b7707384d0",
-        "m6_receipt_sha256": "f6a6cc7b634990a48e1397e25bb2f250aa6b30b45f794669fce305f4a537f858"
+        "m6_receipt_sha256": "f6a6cc7b634990a48e1397e25bb2f250aa6b30b45f794669fce305f4a537f858",
+        "d3_audit_sha256": "ca15b2d01221e5fdc119610e1f1e34c391dc1386273e16e9e0df5e5820cc03f6",
+        "d3_m6_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
+        "d3_qwen_accuracy": 0.7083333333333334,
+        "d3_smol_accuracy": 0.8333333333333334,
+        "d3_best_single": "HuggingFaceTB/SmolLM3-3B"
       }
     },
     {
