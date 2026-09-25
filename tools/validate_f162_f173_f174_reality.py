@@ -4,6 +4,15 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 farms=json.loads((ROOT/"config/farms.json").read_text())
+bootstrap=json.loads((ROOT/"config/farm-bootstrap-manifest-f162-f174.json").read_text())
+assert bootstrap["schema"]=="CEREBRON_MISSING_REPO_BOOTSTRAP_V1"
+assert {t["farm_id"] for t in bootstrap["targets"]}=={162,174}
+for target in bootstrap["targets"]:
+    for item in target["files"]:
+        p=ROOT/item["path"]
+        assert p.exists(), f"missing bootstrap source {p}"
+        actual=subprocess.check_output(["git","hash-object",str(p)],cwd=ROOT,text=True).strip()
+        assert actual==item["blob_sha"], (item["path"], actual, item["blob_sha"])
 
 by_id={f["id"]:f for f in farms["farms"]}
 assert farms["max_farms"]==174
