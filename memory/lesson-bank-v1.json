@@ -137,6 +137,45 @@
       "LIMITS": "Deterministic validation of an AGORA control-plane invariant only. It does not validate imported scientific packet content, does not establish independent model evidence, and is not a neural-improvement claim.",
       "PROMOTION_STATUS": "L5_VALIDATED_CONTROL_PLANE",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "LESSON_ID": "LESSON-TRANSFER-PROMOTION-001",
+      "CLASS": "L5_VALIDATED",
+      "MISSION_ID": "CEREBRON_SELF_EVOLUTION_G1",
+      "TITLE": "Validation gain alone cannot promote an adapter.",
+      "DESCRIPTION": "Across historical SAPHEA, AELYS, ETHERION and METRION adapter runs, positive validation or in-family signals were insufficient when cold gain was non-positive, transfer failed, Red Team regressed, or a critical regression remained. A deterministic cross-model validator reproduced all six expected rejections with zero false promotions.",
+      "EVIDENCE_REFS": [
+        "run:36176491967",
+        "artifact:10881898840",
+        "artifact_digest:sha256:cb73e080521a4b2be1e11bae06860408cbf11df044851643b4b49201e2b164b9",
+        "validation_sha256:2a39f4253fa711ed11bcc03c9e3c732ead4589127a004ed64d8ba22017cc3df8",
+        "failure:FAIL-M43-SAPHEA-G7-CLASS-COLLAPSE-001",
+        "failure:FAIL-M43-SAPHEA-TRANSFER-001",
+        "failure:FAIL-WAVE1-AELYS-LORA-TRANSFER-001",
+        "failure:FAIL-WAVE1-ETHERION-LORA-TRANSFER-001",
+        "failure:FAIL-WAVE1-METRION-LORA-TRANSFER-001"
+      ],
+      "MEASURED": {
+        "historical_adapter_cases": 6,
+        "model_identity_families": [
+          "SAPHEA",
+          "AELYS",
+          "ETHERION",
+          "METRION"
+        ],
+        "positive_signal_rejected_count": 6,
+        "strict_gate_false_promotions": 0,
+        "negative_control_count": 4,
+        "negative_control_false_accepts": 0,
+        "positive_control_pass": true
+      },
+      "INVARIANT": "PROMOTION_REQUIRES_COLD_TRANSFER_REDTEAM_AND_NO_CRITICAL_REGRESSION",
+      "POSITIVE_RULE": "Promote only when cold gain is positive, transfer gain is positive, Red Team is not worse, and no critical regression is present.",
+      "NEGATIVE_RULE": "Validation or in-family gain alone is insufficient and must never override transfer, adversarial, or critical-regression failures.",
+      "TRAINING_USE": "MODEL_PROMOTION_POLICY_AND_EPISTEMIC_CONTROL_ONLY",
+      "LIMITS": "Deterministic policy validation over recorded historical adapter outcomes. It does not show that any adapter improved in this run, does not establish a new model capability, and does not authorize weight training by itself.",
+      "PROMOTION_STATUS": "L5_VALIDATED_CROSS_MODEL_POLICY",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
