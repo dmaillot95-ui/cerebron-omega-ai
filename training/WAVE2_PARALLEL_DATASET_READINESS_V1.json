@@ -1,0 +1,62 @@
+{
+  "schema": "CEREBRON_WAVE2_PARALLEL_DATASET_READINESS_V1",
+  "date": "2026-09-25",
+  "status": "QUARANTINE_PREPARED_NO_TRAINING_RELEASED",
+  "roles": {
+    "SPIRALION": {
+      "labels": [
+        "CONTINUE",
+        "ISOLATE_CONTRADICTION",
+        "COMPRESS",
+        "VERIFY_NEXT"
+      ],
+      "candidate_count": 96,
+      "training_release": false
+    },
+    "HYPERION": {
+      "labels": [
+        "ALTERNATIVE",
+        "COUNTERFACTUAL",
+        "MECHANISM",
+        "DIVERSIFY"
+      ],
+      "candidate_count": 96,
+      "training_release": false
+    },
+    "ASTRION": {
+      "labels": [
+        "REQUIREMENTS",
+        "PHYSICS_MODEL",
+        "CALCULATE",
+        "TEST"
+      ],
+      "candidate_count": 96,
+      "training_release": false
+    },
+    "SAPHEA_MICRO": {
+      "labels": [
+        "ROUTE",
+        "MATH",
+        "CODE",
+        "RESEARCH",
+        "INVENT",
+        "RED_TEAM",
+        "FUSION"
+      ],
+      "candidate_count": 168,
+      "training_release": false
+    }
+  },
+  "total_candidates": 456,
+  "rules": [
+    "QUARANTINE_IS_NOT_GOLD",
+    "BASELINE_BENCHMARK_DENY_TRAINING",
+    "EXACT_BASELINE_PROMPT_OVERLAP_DENY",
+    "ALL_RECORDS_HASHED_AND_PROVENANCED",
+    "SEMANTIC_AUDIT_AND_TAMPER_COUNTER_AUDIT_REQUIRED",
+    "F72_REAL_FARM_REVIEW_REQUIRED",
+    "AFAH_POLICY_ADMISSION_REQUIRED",
+    "FRESH_M6_TRANSFER_RED_REQUIRED_BEFORE_TRAINING_RELEASE",
+    "NO_AUTO_PROMOTION"
+  ]
+}
