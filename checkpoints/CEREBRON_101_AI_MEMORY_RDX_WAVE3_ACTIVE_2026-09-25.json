@@ -1,0 +1,73 @@
+{
+  "schema": "CEREBRON_101_AI_MEMORY_RDX_WAVE3_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "memory": {
+    "audit_run_id": 36143095219,
+    "audit_status": "PASS",
+    "audit_receipt_sha256": "367cafbca3c9b0b71392f80e0958255e61e5153d7f8434584db193d87182c88f",
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "m6_training": "DENY",
+    "rdx_ingress_run_id": 36142030500,
+    "rdx_ingress": "PASS_MEMORY_RAG_GOLD_BLOCKED",
+    "rdx_write_read_recall_run_id": 36143467119,
+    "rdx_write_read_recall": "QUEUED"
+  },
+  "wave3a": {
+    "run_id": 36138864930,
+    "state": "BASELINES_COMPLETE_AUDIT_QUEUED",
+    "audit_job_id": 108099162015,
+    "SAELION": {
+      "qwen": "45/72",
+      "smol": "36/72",
+      "preliminary_best": "Qwen/Qwen3-4B"
+    },
+    "NEXUS": {
+      "qwen": "52/72",
+      "smol": "48/72",
+      "preliminary_best": "Qwen/Qwen3-4B"
+    },
+    "d4": "BLOCKED_PENDING_D3_AUDIT"
+  },
+  "wave3b": {
+    "run_id": 36142921827,
+    "state": "IN_PROGRESS",
+    "completed": {
+      "DELTA_QWEN": {
+        "correct": 48,
+        "total": 72,
+        "accuracy": 0.6666666666666666
+      },
+      "OMEGA_QWEN": {
+        "correct": 54,
+        "total": 72,
+        "accuracy": 0.75
+      }
+    },
+    "remaining": [
+      "OMEGA_SMOL",
+      "DELTA_SMOL",
+      "ALPHA_SMOL",
+      "ALPHA_QWEN"
+    ],
+    "d4": "BLOCKED_PENDING_D3"
+  },
+  "elysium": {
+    "d4": "HOLD_NO_ROBUST_GAIN",
+    "d5": "BLOCKED",
+    "d6": "BLOCKED"
+  },
+  "coordination": {
+    "other_session": "R&D_EXECUTION_PLANE",
+    "this_session": "RDX_REGISTRY_MEMORY_TRAINING_INTEGRATION_PLANE",
+    "collision_rule": "DO_NOT_MODIFY_OTHER_SESSION_ACTIVE_RD_OBJECTS"
+  },
+  "next_exact": [
+    "Close Wave3A audit; trigger D4 precheck once only if audit PASS.",
+    "Close Wave3B D3 comparison after all six baselines finish; then trigger Wave3B D4 once only if D3 PASS.",
+    "Close RDX write/read/recall canary; upgrade runtime memory claim only if SHA/pointer recall PASS.",
+    "Keep RDX GOLD and neural training blocked while F72 FAIL.",
+    "Do not interfere with ARCHITECTON R&D execution session."
+  ]
+}
