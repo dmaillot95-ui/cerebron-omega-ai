@@ -267,8 +267,10 @@
   },
   "semantic_retrieval_canary": {
     "run_id": 36156985796,
-    "state": "IN_PROGRESS",
+    "state": "FAIL_REPAIR_REQUIRED",
     "linked_memory_farm_id": 115,
+    "top1_accuracy": 0.8,
+    "mean_reciprocal_rank": 0.9,
     "training": "NOT_EXECUTED",
     "weights_changed": false
   }
