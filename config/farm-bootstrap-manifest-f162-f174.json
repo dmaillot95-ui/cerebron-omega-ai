@@ -103,8 +103,8 @@
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/README.md",
-          "blob_sha": "d377bfc5b793c60c6d5755f81a7086aec6e45cb2",
-          "size": 934
+          "blob_sha": "bb67989dc905ecfb6c32e66693ec7239fc953264",
+          "size": 1212
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/render/video_canary.py",
