@@ -180,7 +180,11 @@ jobs:
             "provenance_complete":provenance_complete,
             "evidence_count":len(evidence),
             "selected":[{k:e.get(k) for k in ("kind","artifact_sha256","model_or_method","evidence_source","prompt_lineage","_source")} for e in selected],
-            "rules":["THREE_DISTINCT_LINEAGES_REQUIRED","IMPORTED_STATUS_ALONE_IS_NOT_EVIDENCE","ARTIFACT_SHA256_REQUIRED"]
+            "validation_scope":"AGORA_GATE_INVARIANT_ONLY",
+            "validated_subject":"SCIENTIFIC_GATE_BOOLEAN_INVARIANT",
+            "content_packet_hashes":[],
+            "content_validation_bound":False,
+            "rules":["THREE_DISTINCT_LINEAGES_REQUIRED","IMPORTED_STATUS_ALONE_IS_NOT_EVIDENCE","ARTIFACT_SHA256_REQUIRED","GATE_INVARIANT_EVIDENCE_DOES_NOT_VALIDATE_IMPORTED_CONTENT"]
           }
           raw=json.dumps(receipt,sort_keys=True,indent=2).encode()
           receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
@@ -229,16 +233,23 @@ jobs:
           if os.path.exists(validation_path):
               try: local_validation.update(json.load(open(validation_path)))
               except Exception: local_validation["status"]="INVALID"
-          scientific_ok=(local_validation.get("status")=="PASS"
+          gate_invariant_ok=(local_validation.get("status")=="PASS"
               and local_validation.get("independent_reproduction") is True
               and local_validation.get("alternative_method") is True
               and local_validation.get("falsification") is True
               and local_validation.get("provenance_complete") is True)
+          content_validation_bound=(local_validation.get("validation_scope")=="AGORA_IMPORTED_PACKET_CONTENT"
+              and local_validation.get("content_validation_bound") is True
+              and bool(local_validation.get("content_packet_hashes")))
+          scientific_ok=gate_invariant_ok and imported_gate_summary and content_validation_bound
           cyber_ok=gates["cyber_vigie"] in ("PASS","NORMAL")
           eligible=scientific_ok and cyber_ok
           quarantine = gates["cyber_vigie"] not in ("PASS","NORMAL","PENDING")
           manual=json.load(open(".agora-collective/manual-bootstrap.json"))
-          state={"schema":"CEREBRON_AGORA_COLLECTIVE_V2","civilization_manual":manual,"state_id":"COLLECTIVE:"+os.environ["GITHUB_RUN_ID"],"packets_ingested":len(packets),"ingress_status":json.load(open(".agora-collective/ingress-status.json")),"gates":gates,"security_state":"QUARANTINE" if quarantine else ("NORMAL" if cyber_ok else "HOLD"),"promotion":"ELIGIBLE" if eligible else "BLOCKED_PENDING_INDEPENDENT_VALIDATION","memory_write":"ELIGIBLE" if eligible else "BLOCKED_PENDING_INDEPENDENT_VALIDATION","imported_gate_summary_pass":imported_gate_summary,"local_independent_validation":local_validation,"scientific_ok":scientific_ok,"rollback":"REQUIRED" if quarantine else "NOT_REQUIRED","mentor_egress":"READY_FOR_REVIEW","nextlock":"ROLLBACK_TO_LAST_VALIDATED" if quarantine else ("PROMOTE_AUDITED_LESSON" if eligible else "INDEPENDENT_REPRODUCTION_AND_VALIDATION"),"rules":["CLAIM<=EVIDENCE","CONSENSUS!=PROOF","IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION","IMPORTED_PASS!=LOCAL_PASS","NO_PROMOTION_FROM_IMPORTED_STATUS","LOCAL_VALIDATION_RECEIPT_REQUIRED"]}
+          block_reason=("CONTENT_VALIDATION_UNBOUND" if gate_invariant_ok and not content_validation_bound
+              else ("IMPORTED_GATES_NOT_ALL_PASS" if gate_invariant_ok and content_validation_bound and not imported_gate_summary
+              else "INDEPENDENT_VALIDATION_MISSING"))
+          state={"schema":"CEREBRON_AGORA_COLLECTIVE_V3","civilization_manual":manual,"state_id":"COLLECTIVE:"+os.environ["GITHUB_RUN_ID"],"packets_ingested":len(packets),"ingress_status":json.load(open(".agora-collective/ingress-status.json")),"gates":gates,"security_state":"QUARANTINE" if quarantine else ("NORMAL" if cyber_ok else "HOLD"),"promotion":"ELIGIBLE" if eligible else "BLOCKED_"+block_reason,"memory_write":"ELIGIBLE" if eligible else "BLOCKED_"+block_reason,"imported_gate_summary_pass":imported_gate_summary,"local_independent_validation":local_validation,"gate_invariant_ok":gate_invariant_ok,"content_validation_bound":content_validation_bound,"scientific_ok":scientific_ok,"rollback":"REQUIRED" if quarantine else "NOT_REQUIRED","mentor_egress":"READY_FOR_REVIEW","nextlock":"ROLLBACK_TO_LAST_VALIDATED" if quarantine else ("PROMOTE_AUDITED_LESSON" if eligible else "BIND_CONTENT_EVIDENCE_AND_REVALIDATE"),"rules":["CLAIM<=EVIDENCE","CONSENSUS!=PROOF","IMPORTED_EVIDENCE!=INDEPENDENT_REPRODUCTION","IMPORTED_PASS!=LOCAL_PASS","NO_PROMOTION_FROM_IMPORTED_STATUS","LOCAL_VALIDATION_RECEIPT_REQUIRED","GATE_INVARIANT_EVIDENCE_DOES_NOT_VALIDATE_IMPORTED_CONTENT"]}
           json.dump(state,open(".agora-collective/state.json","w"),indent=2)
           PY
           cat .agora-collective/state.json
