@@ -1,0 +1,54 @@
+name: CEREBRON Resource Governor Guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'config/cerebron-resource-governor-v1.json'
+      - 'tools/cerebron_resource_governor.py'
+      - 'config/anti-redundancy-scheduler.json'
+      - 'tools/anti_redundancy_scheduler.py'
+      - '.github/workflows/cerebron-resource-governor-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate anti-redundancy layer
+        run: python tools/anti_redundancy_scheduler.py
+      - name: Validate resource governor
+        run: |
+          python -m py_compile tools/cerebron_resource_governor.py
+          python tools/cerebron_resource_governor.py --selftest
+      - name: Enforce hard ceilings
+        run: |
+          python - <<'PY'
+          import json
+          c=json.load(open("config/cerebron-resource-governor-v1.json"))
+          x=json.load(open("artifacts/cerebron-resource-governor-selftest.json"))
+          assert c["limits"]["default_heavy_model_parallelism"]==2
+          assert c["limits"]["hard_heavy_model_parallelism"]==4
+          assert c["limits"]["training_parallelism_max"]==4
+          assert c["limits"]["logical_ai_queue_capacity"]==38
+          assert c["protected_operational_boundaries"]["farms"]==[172,173,174]
+          assert c["protected_operational_boundaries"]["operational_mutation"] is False
+          assert all(w["heavy_count"]<=2 for w in x["waves"])
+          assert x["task_count"]==38
+          assert x["claim_boundary"]=="PLAN_ONLY_NOT_EXECUTION"
+          print("RESOURCE_GOVERNOR_GUARD=PASS waves",x["wave_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-resource-governor-selftest
+          path: artifacts/cerebron-resource-governor-selftest.json
+          if-no-files-found: error
+          retention-days: 30
