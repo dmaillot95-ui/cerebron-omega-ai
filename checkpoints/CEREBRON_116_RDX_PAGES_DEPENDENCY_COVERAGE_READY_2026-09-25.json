@@ -1,0 +1,75 @@
+{
+  "schema": "CEREBRON_116_RDX_PAGES_DEPENDENCY_COVERAGE_READY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_PAGES_TRIGGER_COVERAGE_AND_SIGNED_RELEASE_CHAIN_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "98ad71e0426202661e4bc587e0d2934d7a7a4e38",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "478f8cfdebd41a01bbbb99a085a2045267d2e978",
+    "full_validation": {
+      "run_id": 36183235648,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36183235706,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "pages_trigger_coverage": {
+    "dist": true,
+    "data_packs": true,
+    "data_architecton": true,
+    "data_deployments": true,
+    "config": true,
+    "schema": true,
+    "templates": true,
+    "scripts_all": true,
+    "vercel_json": true,
+    "pages_workflow_self": true,
+    "intent": "NO_RELEASE_DEPENDENCY_CAN_CHANGE_WITHOUT_PAGES_REBUILD"
+  },
+  "release_chain": {
+    "source_commit": "478f8cfdebd41a01bbbb99a085a2045267d2e978",
+    "file_count": 16,
+    "aggregate_sha256": "15f1bd1641e30560c5afa4888517eaf8ba9ef9c7f3dff7d12b0e1e0dd4b89b71",
+    "release_attestation_sha256": "7e5e3c3c8dc9ca992c51fead6ce88ca367256bf0a5dd48e365673168e7d4429d",
+    "source_checkout_gate": "PASS",
+    "release_manifest_gate": "PASS",
+    "release_attestation_gate": "PASS",
+    "github_sigstore_attestation": "PASS",
+    "github_sigstore_verification": "PASS",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_control": {
+    "fail_closed_promotion_gate": "PASS",
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "live_proof_schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "registration_proposal_schema": "RDX_PRODUCTION_PROOF_REGISTRATION_PROPOSAL_V1",
+    "registration_mode": "PROPOSAL_ONLY_NO_AUTO_APPLY"
+  },
+  "product_claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_publication": false,
+    "automatic_ai_execution": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
