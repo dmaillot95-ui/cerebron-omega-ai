@@ -701,7 +701,7 @@
         "planned fieldwise batched generation with deterministic assembler",
         "fieldwise six-output batched generation: SAPHEA 6/6 but 824.807s; timed out before AELYS"
       ],
-      "REPAIR_STATUS": "OPEN_REPAIR_ON_DEMAND_V3_1_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_STRUCTURAL_INTERFACE_BY_V3_2",
       "CURRICULUM_TARGETS": [
         "STRUCTURED_OUTPUT_RELIABILITY",
         "INTERFACE_DECOMPOSITION",
@@ -725,7 +725,26 @@
         "holdout_executed": false,
         "artifact_uploaded": false,
         "interpretation": "FIELDWISE_DECOMPOSITION_CAN_COMPLETE_STRUCTURE_BUT_FULL_SIX_FIELD_REGENERATION_IS_TOO_SLOW_ON_CURRENT_CPU_RUNNER"
-      }
+      },
+      "CLOSURE_EVIDENCE": {
+        "run_id": 36182772075,
+        "status": "SUCCESS",
+        "artifact_id": 10884838486,
+        "artifact_digest": "sha256:bd4a5ee1da223882eabd3959058d3e4306aff94d90907b5527e8a4aa351fe1df",
+        "audit_sha256": "34db43a142028a055a36901670176447d608c5a65db32eaac0ec100397a85f92",
+        "validation_complete_count": 2,
+        "qwen_holdout_complete_count": 2,
+        "smollm_holdout_complete_count": 2,
+        "runtime_sentinel_insertions": 9,
+        "substantive_fabrication_count": 0,
+        "new_inference": false,
+        "weight_change": false
+      },
+      "RESIDUAL_LIMITS": [
+        "Substantive field quality and completeness are not guaranteed by non-empty structure.",
+        "Observed truncated substantive text remains a separate quality issue for later audit.",
+        "No neural/model capability improvement is claimed."
+      ]
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
