@@ -1,0 +1,22 @@
+{
+  "schema": "ELYRA_VISUAL_SIMULATION_PROJECT_V1",
+  "farm_id": 174,
+  "project_id": "ELYRA-VISUAL-001",
+  "identity": "ELYRA",
+  "role_id": "VISUAL_SIMULATION_VIDEO",
+  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+  "target_repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+  "target_repo_exists": true,
+  "target_repo_initialized": false,
+  "runtime_changed": false,
+  "weights_changed": false,
+  "training_status": "NOT_TRAINED",
+  "visual_simulation_executed": false,
+  "physical_test_status": "NOT_TESTED",
+  "paid_provider_auto_activation": false,
+  "rules": [
+    "SIMULATION_NE_TEST",
+    "GENERATED_VISUAL_NE_PHYSICAL_VALIDATION",
+    "REAL_EXECUTION_RECEIPT_REQUIRED"
+  ]
+}
