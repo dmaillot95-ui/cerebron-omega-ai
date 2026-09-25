@@ -131,6 +131,31 @@
       "TRANSFER_RISK": "MEDIUM_UNTIL_CANARY_AND_FULL_COUNCIL_RETEST",
       "PARENT_SHA": "f045d0c0b3a2c95e69a978c517eb57adce996180",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-REPAIR-REGEX-001",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "ALL_AVAILABLE_LOGICAL_AI",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "REGEX_BAD_CHARACTER_RANGE_IN_MARKDOWN_TOLERANT_PARSER",
+      "ROOT_CAUSE": "Repair regex used an invalid escaped hyphen placement in a character class, causing inference wrapper failure before model evaluation.",
+      "EVIDENCE_REFS": [
+        "run:36075032169",
+        "artifact:council-canary-CEREBRON",
+        "artifact:council-canary-ETHERION"
+      ],
+      "IMPACT": "5/5 repair canary workers failed before semantic evaluation.",
+      "SCOPE": "Council parser only; model outputs were not evaluated in this run.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "move hyphen to end of regex character class",
+        "same-scale 5-AI canary rerun"
+      ],
+      "REPAIR_STATUS": "CORRECTED_RERUN_REQUIRED",
+      "TRANSFER_RISK": "LOW_IF_RERUN_PASSES",
+      "PARENT_SHA": "38902e1e8a6df3efce1188b2ba1a7ed27e07d058",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
