@@ -384,13 +384,13 @@
           "testability"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_READY",
+      "project_state": "D3_PRIVATE_COLD_BASELINES_QUEUED",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_QUEUED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "READY_PRIVATE_M6_V2",
+        "D3": "QUEUED_PRIVATE_M6_V2",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
@@ -404,7 +404,8 @@
         "m6_v2_run_id": 36140085018,
         "m6_v2_sha256": "ccb4ef540bc8af61d86cee8974f773f5ee1f81614d1e71847bc7214f888f42a8",
         "m6_v2_receipt_sha256": "580d3c90be1bb9630e9c3cc6ecab77e78c78b8ee66c7c8ac0639932d651a1143",
-        "m6_v2_exact_prompts_public": false
+        "m6_v2_exact_prompts_public": false,
+        "d3_run_id": 36142921827
       }
     },
     {
@@ -437,13 +438,13 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_READY",
+      "project_state": "D3_PRIVATE_COLD_BASELINES_QUEUED",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_QUEUED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "READY_PRIVATE_M6_V2",
+        "D3": "QUEUED_PRIVATE_M6_V2",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
@@ -457,7 +458,8 @@
         "m6_v2_run_id": 36140085018,
         "m6_v2_sha256": "c4d5f9be45d3f12560df67ab091278ad13a10ee297a8a83f6e3578d9e2383248",
         "m6_v2_receipt_sha256": "1add2d825a9f43bbdfab59952d13389746fc1eba47203f3f7a772a5a5d852c19",
-        "m6_v2_exact_prompts_public": false
+        "m6_v2_exact_prompts_public": false,
+        "d3_run_id": 36142921827
       }
     },
     {
@@ -491,13 +493,13 @@
           "testability"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_READY",
+      "project_state": "D3_PRIVATE_COLD_BASELINES_QUEUED",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_QUEUED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "READY_PRIVATE_M6_V2",
+        "D3": "QUEUED_PRIVATE_M6_V2",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
@@ -511,7 +513,8 @@
         "m6_v2_run_id": 36140085018,
         "m6_v2_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
         "m6_v2_receipt_sha256": "6f5f6fa1f629e950756b42f7b83d84237280c8baaf82f120b86c69d97a1d2b42",
-        "m6_v2_exact_prompts_public": false
+        "m6_v2_exact_prompts_public": false,
+        "d3_run_id": 36142921827
       }
     },
     {
