@@ -592,6 +592,59 @@
       "REPRODUCIBLE": true,
       "REPAIR_STATUS": "RESOLVED_WITH_NONSEMANTIC_DETERMINISTIC_CASE_TAGS",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-AGORA-CONTENT-SCOPE-PROMOTION-001",
+      "MISSION_ID": "CEREBRON_SELF_EVOLUTION_G1",
+      "AI_ID": "AGORA",
+      "AGENT_ID": "COLLECTIVE_STATE_GATE",
+      "FAILURE_CLASS": "F_EVIDENCE_SCOPE",
+      "FAILURE_SIGNATURE": "GATE_INVARIANT_PROOF_FALSELY_UNLOCKED_IMPORTED_CONTENT_PROMOTION",
+      "ROOT_CAUSE": "Three local independent methods proved only the Boolean promotion-gate invariant, but the collective-state compiler treated that control-plane validation as scientific validation of imported farm packet content.",
+      "EVIDENCE_REFS": [
+        "run:36174153740",
+        "artifact:10881980056",
+        "workflow:.github/workflows/agora-collective-5m.yml",
+        "corrective_commit:d25b39ad47a7563a6ee6cbe8ce04f7b62d9327f2",
+        "corrective_run:36174630729",
+        "corrective_artifact:10881995706",
+        "corrective_receipt_sha256:4ee72762f8e340054713efe12d6ddcc6dceb69186b2c58cf3d2aa0a17218f925"
+      ],
+      "IMPACT": "Before repair, AGORA could report promotion and memory-write ELIGIBLE while imported reproduction, reality and ablation gates were FAIL. This risked promoting content beyond its evidence.",
+      "SCOPE": "AGORA collective control-plane evidence scope and imported-content promotion only.",
+      "REPRODUCIBLE": true,
+      "MEASURED_BEFORE": {
+        "imported_gate_summary_pass": false,
+        "reproduction": "FAIL",
+        "reality": "FAIL",
+        "ablation": "FAIL",
+        "transfer": "PASS",
+        "local_gate_invariant_validation": "PASS",
+        "promotion": "ELIGIBLE",
+        "scientific_ok": true
+      },
+      "REPAIR_ATTEMPTS": [
+        "mark local validation scope AGORA_GATE_INVARIANT_ONLY",
+        "add content_packet_hashes and content_validation_bound fields",
+        "require content-specific binding before scientific_ok",
+        "block promotion and memory write when content validation is unbound",
+        "rerun AGORA on corrected workflow"
+      ],
+      "REPAIR_STATUS": "CLOSED_BY_SCOPE_BOUND_PROMOTION_V3",
+      "CLOSURE_EVIDENCE": {
+        "run_id": 36174630729,
+        "schema": "CEREBRON_AGORA_COLLECTIVE_V3",
+        "gate_invariant_ok": true,
+        "content_validation_bound": false,
+        "imported_gate_summary_pass": false,
+        "scientific_ok": false,
+        "promotion": "BLOCKED_CONTENT_VALIDATION_UNBOUND",
+        "memory_write": "BLOCKED_CONTENT_VALIDATION_UNBOUND",
+        "artifact_id": 10881995706,
+        "artifact_digest": "sha256:15bc76c141b6b905a913cf2c486736c456e0daebd258b5b9e82d49064559b4ac"
+      },
+      "TRANSFER_RISK": "LOW_FOR_FALSE_PROMOTION_AFTER_V3; CONTENT_VALIDATION_STILL_REQUIRED",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
