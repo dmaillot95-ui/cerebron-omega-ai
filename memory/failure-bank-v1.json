@@ -217,6 +217,30 @@
       "TRANSFER_RISK": "MEDIUM_UNTIL_5_OF_5_PARSE_PASS",
       "PARENT_SHA": "a8251d24996852e8d3463910601953620716b98a",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-PATCH-NEWLINE-001",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "CANARY_5",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "LITERAL_BACKSLASH_N_INSERTED_IN_QWEN3_WORKER_PATCH",
+      "ROOT_CAUSE": "Automated source patch inserted escaped newline text into Python source around dtype and chat-template logic.",
+      "EVIDENCE_REFS": [
+        "commit:fc4060f65e8acdc0bf97c89cb9ca2ca37c1d3cb8",
+        "run:36081824638"
+      ],
+      "IMPACT": "Queued V5 run may fail at Python syntax before model execution; no model result may be inferred from it.",
+      "SCOPE": "Council worker source patch only.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "replace literal backslash-n with real line breaks",
+        "retrigger same five-AI canary"
+      ],
+      "REPAIR_STATUS": "CORRECTED_RETRIGGER_REQUIRED",
+      "TRANSFER_RISK": "LOW_AFTER_COMPILE_AND_CANARY_PASS",
+      "PARENT_SHA": "77e3d0bd3acb308d44ae5fdddf94f761cd2c1335",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
