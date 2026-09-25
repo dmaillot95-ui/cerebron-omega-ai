@@ -1,0 +1,135 @@
+name: Wave3A SAELION NEXUS D4 Complementarity Precheck
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/wave3a-saelion-nexus-d4-complementarity-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  precheck:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ai: SAELION
+            slug: saelion
+          - ai: NEXUS
+            slug: nexus
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Compare exact private D3 rows
+        env:
+          AI: ${{ matrix.ai }}
+          SLUG: ${{ matrix.slug }}
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from collections import defaultdict
+          from huggingface_hub import hf_hub_download
+
+          ai=os.environ["AI"]; slug=os.environ["SLUG"]
+          comp_path=pathlib.Path(f"receipts/wave3a-d3/{slug}/{slug}-d3-baseline-comparison.json")
+          if not comp_path.exists(): raise SystemExit("D3_COMPARISON_MISSING")
+          comp=json.loads(comp_path.read_text())
+          if comp.get("status")!="PASS" or comp.get("ai_id")!=ai: raise SystemExit("D3_NOT_PASS")
+          rows=comp["models"]
+          if len(rows)!=2: raise SystemExit("D3_EXPECTED_TWO_MODELS")
+
+          data={}
+          for r in rows:
+              fn=pathlib.Path(hf_hub_download(
+                  repo_id=os.environ["HF_REPO"],filename=r["private_result_path"],
+                  repo_type="model",token=os.environ["HF_TOKEN"],force_download=True
+              ))
+              raw=fn.read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=r["private_result_sha256"]:
+                  raise SystemExit("PRIVATE_RESULT_SHA_MISMATCH")
+              data[r["model_id"]]=json.loads(raw)["rows"]
+
+          q={x["id"]:x for x in data["Qwen/Qwen3-4B"]}
+          s={x["id"]:x for x in data["HuggingFaceTB/SmolLM3-3B"]}
+          if set(q)!=set(s) or len(q)!=72: raise SystemExit("TASK_SET_MISMATCH")
+
+          both=qo=so=neither=disagree=0
+          domain=defaultdict(lambda:{"qwen":0,"smol":0,"oracle":0,"total":0})
+          public=[]
+          for i in sorted(q):
+              a=q[i]; b=s[i]
+              if a["domain"]!=b["domain"] or a["expected"]!=b["expected"]: raise SystemExit("ROW_MISMATCH")
+              qc=bool(a["correct"]); sc=bool(b["correct"])
+              both+=int(qc and sc); qo+=int(qc and not sc); so+=int(sc and not qc); neither+=int(not qc and not sc)
+              disagree+=int(a["prediction"]!=b["prediction"])
+              d=domain[a["domain"]]; d["total"]+=1; d["qwen"]+=int(qc); d["smol"]+=int(sc); d["oracle"]+=int(qc or sc)
+              public.append({
+                "id_sha256":hashlib.sha256(i.encode()).hexdigest(),
+                "domain":a["domain"],"qwen_correct":qc,"smol_correct":sc,
+                "predictions_disagree":a["prediction"]!=b["prediction"]
+              })
+
+          qn=both+qo; sn=both+so; oracle=both+qo+so; best=max(qn,sn)
+          out={
+            "schema":f"{ai}_D4_COMPLEMENTARITY_PRECHECK_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "ai_id":ai,
+            "source_d3_run_id":comp["run_id"],
+            "source_d3_audit_sha256":comp["audit_sha256"],
+            "m6_sha256":comp["m6_sha256"],
+            "task_count":72,
+            "qwen_correct":qn,"smol_correct":sn,
+            "both_correct":both,"qwen_only_correct":qo,"smol_only_correct":so,"both_wrong":neither,
+            "prediction_disagreement_count":disagree,
+            "oracle_union_correct":oracle,
+            "oracle_gain_over_best_single":oracle-best,
+            "domain":dict(sorted(domain.items())),
+            "decision":"CONTINUE_D4_FUSION_CANARY" if oracle>best else "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+            "independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "public_rows_fingerprint_sha256":hashlib.sha256(json.dumps(public,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "claim_ceiling":"D4_COMPLEMENTARITY_PRECHECK_ONLY_NO_RUNTIME_ACTIVATION"
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path(f"out/{slug}-d4-complementarity.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.slug }}-d4-complementarity
+          path: out/${{ matrix.slug }}-d4-complementarity.json
+          if-no-files-found: error
+
+  persist:
+    needs: precheck
+    if: always() && needs.precheck.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: '*-d4-complementarity'
+          path: downloaded
+          merge-multiple: true
+      - name: Persist both prechecks
+        run: |
+          mkdir -p receipts/wave3a-d4/saelion receipts/wave3a-d4/nexus
+          cp downloaded/saelion-d4-complementarity.json receipts/wave3a-d4/saelion/
+          cp downloaded/nexus-d4-complementarity.json receipts/wave3a-d4/nexus/
+      - name: Commit
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave3a-d4/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAELION NEXUS D4 complementarity ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
