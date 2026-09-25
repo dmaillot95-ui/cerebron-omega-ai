@@ -1,0 +1,16 @@
+{
+  "schema": "CEREBRON_FORMAT_EVOLUTION_FAST_V2_LAUNCH",
+  "date": "2026-09-25",
+  "authorized": true,
+  "reason": "Recursive generation controller selected FORMAT_CONTRACT_EVOLUTION_FAST_V2 because structured parse baseline is 6/16, below target 14/16.",
+  "controller_run_id": 36177730585,
+  "controller_artifact_id": 10883275832,
+  "supersedes_expensive_v1_for_future_runs": true,
+  "historical_v1_run_id": 36173645350,
+  "historical_v1_status_at_launch": "IN_PROGRESS",
+  "protocol": "ONE_SELECTION_LINEAGE_THEN_TWO_LINEAGE_FROZEN_HOLDOUT",
+  "weight_change": false,
+  "training_released": false,
+  "operational_mutation_f172_f173_f174": false,
+  "launch_head": "18f3f3b87f34d558125967de1c74757e619d1a4f"
+}
