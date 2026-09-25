@@ -49,7 +49,7 @@ if expected >= 174:
     assert by_id[173]["local_session_replay_canary"]["external_calls_executed"] is False
     assert by_id[173]["local_session_replay_canary"]["production_live_claimed"] is False
     assert by_id[173]["production_status"]=="NOT_DEPLOYED"
-    assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
+    assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36163898021
     assert (R/by_id[173]["local_scaffold"]).exists()
 
     assert by_id[174]["repository_exists"] is True
