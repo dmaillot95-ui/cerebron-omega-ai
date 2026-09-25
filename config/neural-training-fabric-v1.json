@@ -160,9 +160,6 @@
       "hf_private_readback_sha_pass": true,
       "promotion": "NOT_PROMOTED",
       "pending": [
-        "INDEPENDENT_AUDIT",
-        "RED_TEAM",
-        "F72_REVIEW",
         "AFAH_FINAL_AUTHORITY"
       ],
       "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY",
@@ -176,6 +173,29 @@
         "ablation_supports_value": true,
         "critical_regression": false,
         "status": "PASS_SCOPED_SYNTHETIC"
+      },
+      "counter_audit": {
+        "run_id": 36101824432,
+        "internal_independent_codepath_reproduction": true,
+        "audit_base_score": 9,
+        "audit_adapter_score": 12,
+        "audit_max": 36,
+        "audit_gain": 3,
+        "redteam_base_score": 22,
+        "redteam_adapter_score": 29,
+        "redteam_max": 72,
+        "redteam_gain": 7,
+        "redteam_pass": true,
+        "counter_audit_pass": true,
+        "independence_limit": "same base-model lineage and same GitHub project; not external independent scientific evidence"
+      },
+      "f72_review": {
+        "run_id": 36102560865,
+        "status": "SUPPORTED",
+        "evidence_level": "E2",
+        "review_pass": true,
+        "result_sha256": "14ade8931dd4b8ee8c4b232baf5edd8066cf38d4ac41dc4ddb14184b42f8cee3",
+        "route": "AFAH_SCOPED_PROMOTION_REVIEW"
       }
     }
   ],
