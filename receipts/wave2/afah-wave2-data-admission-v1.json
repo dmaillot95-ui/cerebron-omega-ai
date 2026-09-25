@@ -1,0 +1,60 @@
+{
+  "schema": "AFAH_WAVE2_DATA_ADMISSION_REVIEW_V1",
+  "authority": "AFAH_POLICY_GATE",
+  "authority_mode": "DETERMINISTIC_POLICY_GATE_NOT_DEDICATED_AFAH_MODEL_INFERENCE",
+  "checks": {
+    "manifest_consistent": true,
+    "baseline_real_four": true,
+    "baseline_training_zero": true,
+    "baseline_independent_zero": true,
+    "quarantine_456": true,
+    "quarantine_no_fail": true,
+    "quarantine_tamper_pass": true,
+    "quarantine_no_baseline_overlap": true,
+    "quarantine_training_locked": true,
+    "f72_farm": true,
+    "f72_supported": true,
+    "f72_training_locked": true,
+    "f72_route": true
+  },
+  "all_required_gates_pass": true,
+  "decision": "ADMIT_WAVE2_SYNTHETIC_CANDIDATE_POOL",
+  "admission": {
+    "schema": "CEREBRON_WAVE2_DATA_ADMISSION_V1",
+    "state": "ADMITTED_SYNTHETIC_CANDIDATE_POOL",
+    "manifest_sha256": "c4c1b1db4a6e074c3d88b8cbe20c38a969f8f45d236bb25bc549c82b2722d744",
+    "record_count": 456,
+    "roles": {
+      "SPIRALION": 96,
+      "HYPERION": 96,
+      "ASTRION": 96,
+      "SAPHEA_MICRO": 168
+    },
+    "training_released": false,
+    "allowed_next_steps": [
+      "VERSIONED_ROLE_SPLITS",
+      "FRESH_BLIND_M6",
+      "FRESH_TRANSFER",
+      "FRESH_ADVERSARIAL"
+    ],
+    "forbidden": [
+      "BASELINE_TO_TRAIN",
+      "M6_TO_TRAIN",
+      "TRANSFER_TO_TRAIN",
+      "ADVERSARIAL_TO_TRAIN",
+      "AUTO_PROMOTION"
+    ],
+    "claim_ceiling": "AUDITED_SYNTHETIC_CANDIDATE_DATA_ONLY_NOT_EMPIRICAL_GROUND_TRUTH_NOT_TRAINING_RELEASE"
+  },
+  "source_content_sha256": {
+    "baseline": "445d9a22c274182911232f8af9cd854f4e66bcb99b9fa747ae4444407566fb24",
+    "quarantine": "3ca99b95eeac6ac68b81d8c182cff4b90a33c2135e9720fa93dd233d0cd7cca3",
+    "f72": "5cd5bc09436a42ed6fb3a85e738a31c2836a2444c5d589846ac0b98a38861651"
+  },
+  "limitations": [
+    "Candidate records are deterministic synthetic contract data, not empirical ground truth.",
+    "F72 is a real farm review but not external third-party validation.",
+    "Training remains locked until fresh blind M6, transfer and adversarial suites are created and leakage-audited."
+  ],
+  "review_sha256": "e48495a3c7fa1ad25470628dfc8db59dfff1888ada1d41752e2a09b2e99a3da7"
+}
