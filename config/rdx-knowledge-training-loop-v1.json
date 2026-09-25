@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_PASS_SEMANTIC_HYBRID_REJECTED_GOLD_BLOCKED_BY_F72_POST_REGISTRY_REALITY_PASS",
+  "status": "RDX_MEMORY_PASS_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS_F72_FAIL_CLOSED",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -330,13 +330,20 @@
     "f71_run_id": 36162578051,
     "f72_run_id": 36162737723,
     "remaining_requirements": [
-      "FRESH_ABLATION",
-      "FRESH_TRANSFER",
-      "AFAH_REVIEW",
-      "PROMOTION_POLICY_REVIEW"
+      "INTEGRATE_VERIFIED_RDX_OBJECTS",
+      "ESTABLISH_TRAINING_RIGHTS",
+      "COMPLETE_REQUIRED_HUMAN_REVIEW",
+      "FRESH_ABLATION_ON_ACTUAL_GOLD_CANDIDATE",
+      "FRESH_TRANSFER_ON_ACTUAL_GOLD_CANDIDATE",
+      "AFAH_REVIEW_ON_ACTUAL_GOLD_CANDIDATE"
     ],
     "m4_gold": "BLOCKED",
     "neural_training": "BLOCKED",
-    "rule": "SCOPED_REGISTRY_REALITY_PASS_DOES_NOT_EQUAL_GLOBAL_F72_PASS"
+    "rule": "SCOPED_REGISTRY_REALITY_PASS_DOES_NOT_EQUAL_GLOBAL_F72_PASS",
+    "promotion_policy_review": "PASS_HOLD",
+    "promotion_policy_review_run_id": 36163491199,
+    "promotion_policy_review_receipt_sha256": "712d0d94b793f904dda5ed7d90d9e664cf7f384a2b18c84f6715b19f1a8ed7f4",
+    "candidate_ready": false,
+    "decision": "HOLD_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS"
   }
 }
