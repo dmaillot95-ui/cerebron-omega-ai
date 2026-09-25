@@ -1,0 +1,36 @@
+{
+  "schema": "CEREBRON_RDX_KNOWLEDGE_INGRESS_CANARY_RECEIPT_V1",
+  "date": "2026-09-25",
+  "run_id": 36142030500,
+  "job_id": 108093938511,
+  "conclusion": "SUCCESS",
+  "artifact_id": 10867197860,
+  "artifact_digest": "sha256:79cbf52385649ef9e807f00d9a31f3addc8392753623f7ecb1f552647af82a6b",
+  "receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7",
+  "source_farm_id": 152,
+  "memory": {
+    "admissible": true,
+    "shared": true,
+    "tenant_only": false,
+    "namespace": "RDX_SHARED",
+    "classes": [
+      "M1",
+      "M7"
+    ],
+    "rag_available": true
+  },
+  "gold": {
+    "eligible": false,
+    "class": null,
+    "blockers": [
+      "F72",
+      "GLOBAL_PROMOTION"
+    ]
+  },
+  "training": {
+    "executed": false,
+    "weights_changed": false,
+    "adapter_changed": false
+  },
+  "claim_ceiling": "RDX_MEMORY_RAG_INGRESS_CANARY_PASS_GOLD_AND_TRAINING_BLOCKED_BY_F72"
+}
