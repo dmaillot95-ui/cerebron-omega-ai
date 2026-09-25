@@ -10,6 +10,7 @@ on:
       - 'memory/failure-bank-v1.json'
       - 'config/all-ai-neural-training-coverage-v1.json'
       - 'config/gvl-specialization-registry-v2.json'
+      - 'config/cerebron-failure-curriculum-routing-v1.json'
       - '.github/workflows/corrective-curriculum-g1.yml'
 
 permissions:
