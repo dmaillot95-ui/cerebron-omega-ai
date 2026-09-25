@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_91_WAVE2_ADMITTED_AND_RESOURCE_QUALIFIED_V1",
+  "date": "2026-09-25",
+  "wave2": {
+    "baseline_run": 36111654337,
+    "baseline_scores": {
+      "SPIRALION": "9/12",
+      "HYPERION": "8/12",
+      "ASTRION": "3/12",
+      "SAPHEA_MICRO": "5/14"
+    },
+    "quarantine_run": 36112884799,
+    "manifest_sha256": "c4c1b1db4a6e074c3d88b8cbe20c38a969f8f45d236bb25bc549c82b2722d744",
+    "quarantine": "456/456 semantic PASS; 19/19 tamper detected; 0 exact baseline overlap",
+    "f72": {
+      "run_id": 36113384989,
+      "status": "SUPPORTED_E2",
+      "result_sha256": "4ed12347e94ced51fadcb6b9aee0cc589499f79ee0cf1a45e0d7b187489118a7"
+    },
+    "afah": {
+      "run_id": 36113724966,
+      "decision": "ADMIT_WAVE2_SYNTHETIC_CANDIDATE_POOL",
+      "review_sha256": "e48495a3c7fa1ad25470628dfc8db59dfff1888ada1d41752e2a09b2e99a3da7",
+      "training_released": false
+    },
+    "smollm3_resource_canary": {
+      "run_id": 36113661917,
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "real_training_step": true,
+      "weights_changed": true,
+      "trainable_parameter_count": 958464,
+      "elapsed_s": 50.741,
+      "max_rss_kb": 15000368,
+      "decision": "RESOURCE_CANARY_PASS"
+    },
+    "package_run": {
+      "run_id": 36114043066,
+      "status": "QUEUED_AT_CHECKPOINT",
+      "expected_cold_total": 380,
+      "next_if_pass": "TRIGGER_FOUR_PARALLEL_REAL_LORA"
+    },
+    "training_branch": "feat/wave2-parallel-ai-baselines-v1",
+    "trainer": "platform/wave2_role_lora_train_v1.py",
+    "training_workflow": ".github/workflows/wave2-parallel-role-lora-v1.yml",
+    "max_parallel": 4,
+    "no_auto_promotion": true
+  },
+  "openai_agents": {
+    "branch": "feat/openai-agents-cerebron-experimental-v1",
+    "authorization_intent": "AUTHORIZED_FOR_FUTURE_PAID_ASTRA_R_AND_D",
+    "current_execution": false,
+    "max_spend_usd": 0,
+    "ci_after_authorization_run": 36113421886,
+    "ci_status": "SUCCESS_ZERO_SPEND",
+    "unlock_requires": [
+      "EXPLICIT_NONZERO_BUDGET_CAP",
+      "OPENAI_API_KEY_RUNTIME_ONLY",
+      "PROJECT_SPEND_LIMIT",
+      "CEREBRON_ENABLE_OPENAI_AGENTS=1"
+    ]
+  },
+  "invariants": [
+    "ASTRA_FUTURE_RD_AUTHORIZED_BUT_NO_CURRENT_PAID_CALL",
+    "M6_TRANSFER_RED_DENY_TRAINING",
+    "SMOLLM3_TRAINING_REQUIRES_RESOURCE_CANARY_PASS",
+    "SHARED_MODEL_LINEAGE_NOT_INDEPENDENT_EVIDENCE",
+    "NO_AUTO_PROMOTION"
+  ],
+  "exact_resume": [
+    "Check Wave2 package run 36114043066.",
+    "If PASS, read training/WAVE2_PARALLEL_TRAINING_RELEASE_V1.json and its release SHA.",
+    "Only then create config/wave2-parallel-lora-trigger.txt and run four role LoRAs.",
+    "For SPIRALION/HYPERION require SmolLM3 resource canary receipt.",
+    "Do not activate paid Astra until a concrete nonzero budget cap is explicitly set."
+  ]
+}
