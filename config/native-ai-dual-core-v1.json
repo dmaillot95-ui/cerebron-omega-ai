@@ -402,16 +402,16 @@
           "testability"
         ]
       },
-      "project_state": "D4_FUSION_DEV_QUEUED",
-      "dual_core_state": "D4_FUSION_DEV_QUEUED",
+      "project_state": "D4_HOLD_NO_ROBUST_GAIN",
+      "dual_core_state": "D4_FUSION_DEV_HOLD",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "FUSION_DEV_QUEUED",
-        "D5": "BLOCKED_PENDING_D4_FUSION",
-        "D6": "BLOCKED_PENDING_D4_FUSION",
+        "D4": "HOLD_NO_ROBUST_GAIN",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -434,7 +434,15 @@
         "d4_oracle_union_correct": 47,
         "d4_oracle_gain_over_best_single": 3,
         "d4_decision": "CONTINUE_D4_FUSION_CANARY",
-        "d4_fusion_dev_run_id": 36155520110
+        "d4_fusion_dev_run_id": 36155520110,
+        "d4_fusion_dev_receipt_sha256": "ad92509cc54dc80a3de9cf0b7323ea10d5ff92c635241a16b68984bf1d29978c",
+        "d4_fusion_dev_qwen_correct": 21,
+        "d4_fusion_dev_smol_correct": 10,
+        "d4_fusion_dev_best_single_correct": 21,
+        "d4_fusion_dev_best_policy_correct": 21,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
       }
     },
     {
@@ -467,16 +475,16 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "D4_FUSION_DEV_QUEUED",
-      "dual_core_state": "D4_FUSION_DEV_QUEUED",
+      "project_state": "D4_HOLD_NO_ROBUST_GAIN",
+      "dual_core_state": "D4_FUSION_DEV_HOLD",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "FUSION_DEV_QUEUED",
-        "D5": "BLOCKED_PENDING_D4_FUSION",
-        "D6": "BLOCKED_PENDING_D4_FUSION",
+        "D4": "HOLD_NO_ROBUST_GAIN",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -499,7 +507,15 @@
         "d4_oracle_union_correct": 66,
         "d4_oracle_gain_over_best_single": 12,
         "d4_decision": "CONTINUE_D4_FUSION_CANARY",
-        "d4_fusion_dev_run_id": 36155520110
+        "d4_fusion_dev_run_id": 36155520110,
+        "d4_fusion_dev_receipt_sha256": "0a06849deeb377a4ba3bbb07dd883b3f2abf93a5699d8346bf92b32c632c95e2",
+        "d4_fusion_dev_qwen_correct": 21,
+        "d4_fusion_dev_smol_correct": 13,
+        "d4_fusion_dev_best_single_correct": 21,
+        "d4_fusion_dev_best_policy_correct": 21,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
       }
     },
     {
