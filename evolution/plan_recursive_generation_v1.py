@@ -16,6 +16,7 @@ selfcfg=load("config/cerebron-self-evolution-v1.json")
 admission=load("training/CEREBRON_G1_LESSON_ADMISSION_POLICY_V1.json")
 cross=load("config/lesson-cross-audit-v1.json")
 ablation=load("config/lesson-ablation-pilot-v1.json")
+fieldwise_v3=load("config/cerebron-fieldwise-format-v3.json")
 
 available=[e for e in coverage["entries"] if e.get("available") is True]
 auto=set(lessons.get("auto_propagation_allowed",[]))
@@ -49,10 +50,14 @@ format_target=14/16
 
 priorities=[]
 if format_rate < format_target:
+    next_format_action=("FIELDWISE_FORMAT_PROTOCOL_V3"
+        if fieldwise_v3.get("status") in ("PREPARED_NOT_EXECUTED","ACTIVE_TESTING")
+        else "FORMAT_REPAIR_REVIEW")
     priorities.append({
       "priority":1,
-      "action":"FORMAT_CONTRACT_EVOLUTION_FAST_V2",
-      "reason":f"structured parse baseline {parse_pass}/{real_inf} below 14/16",
+      "action":next_format_action,
+      "reason":f"structured parse baseline {parse_pass}/{real_inf} below 14/16; monolithic V1/V2 produced no validated gain",
+      "fieldwise_v3_status":fieldwise_v3.get("status"),
       "weight_change":False
     })
 if effective_train_validated < min_train_records:
