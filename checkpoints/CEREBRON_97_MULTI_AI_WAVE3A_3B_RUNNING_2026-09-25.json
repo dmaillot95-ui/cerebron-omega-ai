@@ -1,0 +1,67 @@
+{
+  "schema": "CEREBRON_97_MULTI_AI_WAVE3A_3B_RUNNING_V1",
+  "date": "2026-09-25",
+  "farm_count": 152,
+  "f152": {
+    "name": "CEREBRON RDX EXCHANGE",
+    "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange",
+    "status": "REPOSITORY_PRESENT_EMPTY_OR_BRANCH_UNVERIFIED"
+  },
+  "active": {
+    "ELYSIUM": {
+      "run_id": 36137547428,
+      "stage": "D4_FUSION_REPAIR_DEV_V2",
+      "status": "IN_PROGRESS"
+    },
+    "SAELION": {
+      "d2_run_id": 36138362585,
+      "d2": "PASS",
+      "m6_run_id": 36138516577,
+      "m6": "PASS_PRIVATE",
+      "d3_run_id": 36138864930,
+      "d3": "IN_PROGRESS"
+    },
+    "NEXUS": {
+      "d2_run_id": 36138369400,
+      "d2": "PASS",
+      "m6_run_id": 36138516577,
+      "m6": "PASS_PRIVATE",
+      "d3_run_id": 36138864930,
+      "d3": "IN_PROGRESS",
+      "partial_smol_correct": 48,
+      "partial_smol_total": 72
+    },
+    "ALPHA": {
+      "d2_run_id": 36139915737,
+      "d2": "QUEUED",
+      "m6_run_id": 36140085018,
+      "m6": "QUEUED"
+    },
+    "OMEGA": {
+      "d2_run_id": 36139940897,
+      "d2": "QUEUED",
+      "m6_run_id": 36140085018,
+      "m6": "QUEUED"
+    },
+    "DELTA": {
+      "d2_run_id": 36139946295,
+      "d2": "QUEUED",
+      "m6_run_id": 36140085018,
+      "m6": "QUEUED"
+    }
+  },
+  "guardrails": [
+    "NO_DUPLICATE_RUNS",
+    "M6_NEVER_IN_TRAIN",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "QUEUE_IS_NOT_FAILURE",
+    "D4_REQUIRES_MEASURED_GAIN_OVER_BEST_SINGLE"
+  ],
+  "next_exact": [
+    "Close ELYSIUM D4 DEV V2 repair when receipt appears.",
+    "Close SAELION/NEXUS D3 and trigger existing D4 complementarity precheck only after D3 PASS.",
+    "Close ALPHA/OMEGA/DELTA D2 and M6 before creating D3 cold baselines.",
+    "Do not initialize or modify F152 product repository from this session unless requested; ASTRA parallel session owns product build."
+  ]
+}
