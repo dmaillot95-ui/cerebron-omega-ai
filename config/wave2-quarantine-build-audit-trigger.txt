@@ -1,0 +1,8 @@
+CEREBRON WAVE2 QUARANTINE BUILD AUDIT
+roles=SPIRALION,HYPERION,ASTRION,SAPHEA_MICRO
+record_count=456
+training=DENY
+baseline_overlap=DENY
+semantic_audit=INDEPENDENT_RULE_CODEPATH
+tamper_cases=19
+next_gate=F72_REAL_FARM
