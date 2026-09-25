@@ -1,0 +1,190 @@
+name: ELYSIUM D3 Private Cold Baseline Pair
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysium-d3-private-baseline-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - slug: qwen3-4b
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - slug: smollm3-3b
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      MODEL_ID: ${{ matrix.model_id }}
+      MODEL_REVISION: ${{ matrix.revision }}
+      MODEL_SLUG: ${{ matrix.slug }}
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Execute private frozen M6 baseline
+        run: |
+          mkdir -p receipts/elysium/d3
+          python - <<'PY'
+          import hashlib,json,os,pathlib,re,resource,tempfile,time,torch
+          from collections import defaultdict
+          from huggingface_hub import HfApi,hf_hub_download
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          rel=json.loads(pathlib.Path("receipts/elysium/elysium-m6-v2-release.json").read_text())
+          if rel["state"]!="SEALED" or rel["deny_training"] is not True or rel["training_eligible"] is not False:
+              raise SystemExit("M6_RELEASE_INVALID")
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          fn=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=rel["private_path"],repo_type="model",token=token,force_download=True))
+          raw=fn.read_bytes()
+          if hashlib.sha256(raw).hexdigest()!=rel["dataset_sha256"]: raise SystemExit("M6_SHA_MISMATCH")
+          suite=json.loads(raw)
+          if suite.get("deny_training") is not True or suite.get("training_eligible") is not False: raise SystemExit("M6_DENY_FAIL")
+          tasks=suite["tasks"]
+          if len(tasks)!=72: raise SystemExit("M6_COUNT_FAIL")
+
+          mid=os.environ["MODEL_ID"]; rev=os.environ["MODEL_REVISION"]; slug=os.environ["MODEL_SLUG"]
+          info=HfApi().model_info(mid,revision=rev)
+          if info.sha!=rev: raise SystemExit("REVISION_MISMATCH")
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+          model.eval()
+
+          def norm(s):
+              m=re.search(r"\b(PASS|FAIL|INSUFFICIENT)\b",s.upper())
+              return m.group(1) if m else ""
+
+          rows=[]; by=defaultdict(lambda:{"correct":0,"total":0}); t0=time.time()
+          for i,t in enumerate(tasks,1):
+              msgs=[
+                {"role":"system","content":"You are ELYSIUM verification baseline. Return only PASS, FAIL, or INSUFFICIENT. /no_think"},
+                {"role":"user","content":t["prompt"]}
+              ]
+              try:
+                  p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError:
+                  p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+              x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=6,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              out=tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+              pred=norm(out); ok=(pred==t["expected"])
+              by[t["domain"]]["total"]+=1; by[t["domain"]]["correct"]+=int(ok)
+              rows.append({
+                "id":t["id"],"domain":t["domain"],"expected":t["expected"],"prediction":pred,"correct":ok,
+                "output_sha256":hashlib.sha256(out.encode()).hexdigest()
+              })
+              if i%12==0:
+                  print(f"PROGRESS {slug} {i}/72 correct={sum(int(r['correct']) for r in rows)}",flush=True)
+
+          correct=sum(int(r["correct"]) for r in rows)
+          for v in by.values(): v["accuracy"]=v["correct"]/v["total"]
+          summary={
+            "schema":"ELYSIUM_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "model_id":mid,"revision":rev,"revision_verified":True,
+            "m6_sha256":rel["dataset_sha256"],"m6_deny_training":True,"weights_changed":False,
+            "task_count":72,"correct":correct,"accuracy":correct/72.0,
+            "domain":dict(sorted(by.items())),
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "claim_ceiling":"SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM"
+          }
+          private={"schema":"ELYSIUM_D3_PRIVATE_RESULT_V1","summary":summary,"rows":rows}
+          praw=(json.dumps(private,indent=2,ensure_ascii=False)+"\n").encode()
+          psha=hashlib.sha256(praw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as tf:
+              tf.write(praw); src=tf.name
+          private_path=f"elysium/D3-results/run-{os.environ['GITHUB_RUN_ID']}/{slug}.json"
+          api=HfApi(token=token)
+          api.upload_file(path_or_fileobj=src,path_in_repo=private_path,repo_id=os.environ["HF_REPO"],repo_type="model",commit_message=f"ELYSIUM D3 baseline {slug}")
+          dst=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=private_path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(dst.read_bytes()).hexdigest()!=psha: raise SystemExit("PRIVATE_READBACK_SHA_FAIL")
+          summary["private_result_path"]=private_path
+          summary["private_result_sha256"]=psha
+          summary["hf_private_readback_sha_pass"]=True
+          summary["receipt_sha256"]=hashlib.sha256(json.dumps(summary,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path(f"receipts/elysium/d3/{slug}.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(summary,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-d3-${{ matrix.slug }}
+          path: receipts/elysium/d3/${{ matrix.slug }}.json
+          if-no-files-found: error
+
+  compare:
+    needs: baseline
+    if: always() && needs.baseline.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: elysium-d3-*
+          path: downloaded
+          merge-multiple: true
+      - name: Compare exact single-core baselines
+        run: |
+          mkdir -p receipts/elysium/d3
+          python - <<'PY'
+          import glob,hashlib,json,os,pathlib,shutil
+          rows=[json.load(open(p)) for p in glob.glob("downloaded/*.json")]
+          if len(rows)!=2: raise SystemExit("D3_EXPECTED_TWO_SUMMARIES")
+          expected={
+            ("Qwen/Qwen3-4B","1cfa9a7208912126459214e8b04321603b3df60c"),
+            ("HuggingFaceTB/SmolLM3-3B","a07cc9a04f16550a088caea529712d1d335b0ac1")
+          }
+          if {(r["model_id"],r["revision"]) for r in rows}!=expected: raise SystemExit("MODEL_PAIR_MISMATCH")
+          if len({r["m6_sha256"] for r in rows})!=1: raise SystemExit("M6_LINEAGE_MISMATCH")
+          best=max(r["accuracy"] for r in rows)
+          out={
+            "schema":"ELYSIUM_D3_PRIVATE_COLD_BASELINE_COMPARISON_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS",
+            "m6_sha256":rows[0]["m6_sha256"],
+            "models":sorted(rows,key=lambda x:x["model_id"]),
+            "best_single_accuracy":best,
+            "best_single_models":sorted([r["model_id"] for r in rows if r["accuracy"]==best]),
+            "independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "selection_decision":"NO_DUAL_CORE_PROMOTION_FROM_D3_ALONE",
+            "claim_ceiling":"TWO_SINGLE_CORE_PRIVATE_M6_BASELINES_NO_DUAL_CORE_GAIN_CLAIM"
+          }
+          out["audit_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/elysium/d3/elysium-d3-baseline-comparison.json").write_text(json.dumps(out,indent=2)+"\n")
+          for p in glob.glob("downloaded/*.json"):
+              shutil.copy2(p,pathlib.Path("receipts/elysium/d3")/pathlib.Path(p).name)
+          print(json.dumps(out,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-d3-baseline-comparison
+          path: receipts/elysium/d3/
+      - name: Persist D3 public receipts
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/elysium/d3/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: ELYSIUM D3 private cold baselines ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
