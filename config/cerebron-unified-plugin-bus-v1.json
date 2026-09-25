@@ -79,6 +79,16 @@
       "farm_status": {
         "113": "EXISTING_ELYRA_BODY_AVATAR_REFERENCE",
         "174": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED"
+      },
+      "visual_canary": {
+        "status": "PASS",
+        "run_id": 36160498658,
+        "result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
+        "artifact_id": 10875238594,
+        "artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc",
+        "scope": "DETERMINISTIC_VISUAL_STATE_SEQUENCE_CANARY",
+        "video_render_executed": false,
+        "physical_validation_claimed": false
       }
     },
     "AFAH": {
