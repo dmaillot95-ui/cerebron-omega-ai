@@ -1,0 +1,70 @@
+{
+  "schema": "CEREBRON_86_M43_SAPHEA_G6_VERIFIED_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_85_M43_SAPHEA_FIRST_LORA_RUNNING_2026-09-25.json",
+  "mission": "M43_SAPHEA_FIRST_REAL_REVERSIBLE_LORA",
+  "status": "G6_VERIFIED_G7_HOLD",
+  "successful_run": {
+    "run_id": 36100266729,
+    "job_id": 107961061331,
+    "branch": "feat/saphea-first-lora-v1",
+    "trigger_head": "bfd670b3d21ea337fdcb2bf091348cb38b09e9d9",
+    "branch_head_after_receipt": "2b5d99c7e2f28830f8628a7d3edd65fa11ddd59a",
+    "artifact_id": 10848864759,
+    "artifact_digest": "sha256:f5eb6008c342d9921b160af28282b6bee684040539ee8fe2b47506acb5b46fca"
+  },
+  "failed_preceding_run": {
+    "run_id": 36099976977,
+    "status": "F_TOOL_NO_TRAINING_OCCURRED",
+    "failure_id": "FAIL-M43-SAPHEA-FIRST-LORA-001",
+    "repaired": true
+  },
+  "evidence": {
+    "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "gold_sha256": "efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa",
+    "m6_sha256": "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63",
+    "m6_training": "DENY",
+    "train_records": 150,
+    "validation_records": 30,
+    "trainable_params": 1081344,
+    "trainable_fraction": 0.0021840298504761666,
+    "adapter_tensor_sha_changed": true,
+    "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "adapter_config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+    "hf_private_readback_sha_pass": true,
+    "baseline_m6_score": 18,
+    "posttrain_m6_score": 30,
+    "cold_gain": 12,
+    "critical_regression": false,
+    "validation_loss_before": 0.48301953449845314,
+    "validation_loss_after": 0.11578285936266183,
+    "validation_loss_improved": true,
+    "optimizer_steps": 19
+  },
+  "claim_ceiling": "REAL_REVERSIBLE_SAPHEA_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_EPISTEMIC_CLASSIFICATION; NOT_PROMOTED; NO_GENERAL_CAPABILITY_CLAIM",
+  "completed_gates": [
+    "BASELINE_M6",
+    "REAL_WEIGHT_CHANGE",
+    "ADAPTER_SHA",
+    "HF_PRIVATE_WRITE_READBACK",
+    "COLD_GAIN_POSITIVE",
+    "NO_CRITICAL_REGRESSION"
+  ],
+  "open_gates": [
+    "NOVEL_TRANSFER_GAIN",
+    "ABLATION_SUPPORTS_VALUE",
+    "INDEPENDENT_AUDIT",
+    "RED_TEAM",
+    "F72_REVIEW",
+    "AFAH_FINAL_AUTHORITY"
+  ],
+  "exact_resume": [
+    "Build a genuinely distinct transfer benchmark that does not reuse GOLD/M6 prompt templates.",
+    "Evaluate immutable base and the exact private adapter on the same transfer set.",
+    "Treat base-vs-adapter as explicit adapter ablation.",
+    "Include adversarial/red-team cases with misleading evidence fields.",
+    "Require positive transfer gain and no critical regression before any G7 consideration.",
+    "Do not merge feature branch or promote SAPHEA automatically."
+  ]
+}
