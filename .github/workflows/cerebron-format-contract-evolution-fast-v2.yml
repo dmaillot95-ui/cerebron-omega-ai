@@ -1,0 +1,151 @@
+name: CEREBRON Format Contract Evolution Fast V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/format-evolution-fast-v2-launch.json'
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify launch
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("control/format-evolution-fast-v2-launch.json"))
+          assert x["schema"]=="CEREBRON_FORMAT_EVOLUTION_FAST_V2_LAUNCH"
+          assert x["authorized"] is True
+          assert x["weight_change"] is False
+          print("FORMAT_EVOLUTION_FAST_V2_LAUNCH=PASS")
+          PY
+          python -m py_compile evolution/format_contract_evolver_fast_v2.py
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: format-fast-v2-qwen3-1cfa9a7208912126459214e8b04321603b3df60c
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Select format on validation only
+        run: |
+          python evolution/format_contract_evolver_fast_v2.py \
+            --stage select \
+            --model-id "Qwen/Qwen3-4B" \
+            --revision "1cfa9a7208912126459214e8b04321603b3df60c" \
+            --run-id "${{ github.run_id }}" \
+            --output-root artifacts/format-fast-v2/select
+      - uses: actions/upload-artifact@v4
+        with:
+          name: format-fast-v2-selection-${{ github.run_id }}
+          path: artifacts/format-fast-v2/select
+          if-no-files-found: error
+          retention-days: 30
+
+  holdout:
+    needs: select
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-${{ github.run_id }}
+          path: downloaded-selection
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: format-fast-v2-${{ matrix.key }}-${{ matrix.revision }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Frozen cross-lineage holdout
+        run: |
+          python evolution/format_contract_evolver_fast_v2.py \
+            --stage holdout \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --winner-file downloaded-selection/winner.json \
+            --output-root "artifacts/format-fast-v2/holdout/${{ matrix.key }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: format-fast-v2-holdout-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/format-fast-v2/holdout/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: holdout
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: format-fast-v2-holdout-*
+          path: downloaded
+      - name: Audit cross-lineage holdout
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          rows=[json.load(open(p)) for p in glob.glob("downloaded/**/summary.json",recursive=True)]
+          fail=[]
+          if len(rows)!=2: fail.append("holdout_summary_count")
+          if len({(r["model_id"],r["model_revision"]) for r in rows})!=2: fail.append("lineage_count")
+          if any(r.get("weight_change") is not False for r in rows): fail.append("weight_boundary")
+          if any(r.get("training_released") is not False for r in rows): fail.append("training_boundary")
+          winners={r.get("winner") for r in rows}
+          if len(winners)!=1: fail.append("winner_mismatch")
+          candidate_strict_both=(len(rows)==2 and all(r.get("candidate_strict_gain") for r in rows))
+          candidate_nonworse_both=(len(rows)==2 and all(r.get("candidate_not_worse") for r in rows))
+          out={
+            "schema":"CEREBRON_FORMAT_EVOLUTION_FAST_V2_AUDIT",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS" if not fail else "FAIL",
+            "winner":next(iter(winners)) if len(winners)==1 else None,
+            "model_results":rows,
+            "candidate_nonworse_both_lineages":candidate_nonworse_both,
+            "candidate_strict_gain_both_lineages":candidate_strict_both,
+            "promotion_decision":"PROMOTE_FORMAT_CONTRACT" if candidate_strict_both else "HOLD_NO_CROSS_LINEAGE_STRICT_GAIN",
+            "weight_change":False,
+            "training_released":False,
+            "claim_ceiling":"PROMPT_FORMAT_CONTRACT_ONLY",
+            "failures":fail
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/format-fast-v2-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: format-fast-v2-audit-${{ github.run_id }}
+          path: artifacts/format-fast-v2-audit.json
+          if-no-files-found: error
+          retention-days: 30
