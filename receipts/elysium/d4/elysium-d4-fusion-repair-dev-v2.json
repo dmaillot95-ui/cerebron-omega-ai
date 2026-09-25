@@ -1,0 +1,135 @@
+{
+  "schema": "ELYSIUM_D4_FUSION_REPAIR_DEV_V2",
+  "run_id": 36137547428,
+  "classification": "DEV_POLICY_TUNING_NOT_COLD",
+  "weights_changed": false,
+  "task_count": 24,
+  "dev_sha256": "606c22e8f26c0ecb52dc28fa514c9d5680fd39cbb049a17e6f5dcf1446240567",
+  "qwen_correct": 12,
+  "smol_correct": 12,
+  "best_single_correct": 12,
+  "candidate_policies": {
+    "QWEN_PRIMARY": {
+      "correct": 12,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 1,
+      "domain": {
+        "claim_verification": {
+          "correct": 3,
+          "total": 6
+        },
+        "error_detection": {
+          "correct": 3,
+          "total": 6
+        },
+        "reproduction": {
+          "correct": 3,
+          "total": 6
+        },
+        "robustness": {
+          "correct": 3,
+          "total": 6
+        }
+      }
+    },
+    "SMOL_PRIMARY": {
+      "correct": 12,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 1,
+      "domain": {
+        "claim_verification": {
+          "correct": 2,
+          "total": 6
+        },
+        "error_detection": {
+          "correct": 3,
+          "total": 6
+        },
+        "reproduction": {
+          "correct": 3,
+          "total": 6
+        },
+        "robustness": {
+          "correct": 4,
+          "total": 6
+        }
+      }
+    },
+    "RECIPROCAL_ELSE_QWEN": {
+      "correct": 12,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 1,
+      "domain": {
+        "claim_verification": {
+          "correct": 3,
+          "total": 6
+        },
+        "error_detection": {
+          "correct": 3,
+          "total": 6
+        },
+        "reproduction": {
+          "correct": 3,
+          "total": 6
+        },
+        "robustness": {
+          "correct": 3,
+          "total": 6
+        }
+      }
+    },
+    "RECIPROCAL_ELSE_SMOL": {
+      "correct": 12,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 1,
+      "domain": {
+        "claim_verification": {
+          "correct": 2,
+          "total": 6
+        },
+        "error_detection": {
+          "correct": 3,
+          "total": 6
+        },
+        "reproduction": {
+          "correct": 3,
+          "total": 6
+        },
+        "robustness": {
+          "correct": 4,
+          "total": 6
+        }
+      }
+    }
+  },
+  "selected_policy": "SMOL_PRIMARY",
+  "selected_metrics": {
+    "correct": 12,
+    "gain_over_best_single": 0,
+    "max_domain_regression_vs_best_single": 1,
+    "domain": {
+      "claim_verification": {
+        "correct": 2,
+        "total": 6
+      },
+      "error_detection": {
+        "correct": 3,
+        "total": 6
+      },
+      "reproduction": {
+        "correct": 3,
+        "total": 6
+      },
+      "robustness": {
+        "correct": 4,
+        "total": 6
+      }
+    }
+  },
+  "decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN",
+  "claim_ceiling": "DEV_POLICY_TUNING_ONLY_NOT_COLD_EVIDENCE",
+  "independent_evidence_count": 0,
+  "elapsed_s": 1805.151,
+  "max_rss_kb": 8867096,
+  "receipt_sha256": "e4b3590aaa9756bfab08486862ce6ef9e87d161fc3d3ad7ab6d275194eeff5c7"
+}
