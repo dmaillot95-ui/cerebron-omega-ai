@@ -134,12 +134,12 @@ def loss_on_records(model, tok, records):
     return sum(losses) / max(1, len(losses))
 
 
-def evaluate_m6(model, tok, m6):
+def evaluate_records(model, tok, records):
     model.eval()
     rows = []
     by_label = {k: {"pass": 0, "total": 0} for k in LABELS}
     with torch.no_grad():
-        for rec in m6["records"]:
+        for rec in records:
             rendered = render_prompt(tok, rec["prompt"])
             inputs = tok(rendered, return_tensors="pt")
             out = model.generate(
@@ -154,19 +154,15 @@ def evaluate_m6(model, tok, m6):
             ).strip()
             pred = normalize(answer)
             ok = pred == rec["target"]
-            rows.append(
-                {"id": rec["id"], "target": rec["target"], "answer": answer, "prediction": pred, "pass": ok}
-            )
+            rows.append({"id": rec["id"], "target": rec["target"], "answer": answer, "prediction": pred, "pass": ok})
             by_label[rec["target"]]["total"] += 1
             by_label[rec["target"]]["pass"] += int(ok)
     score = sum(int(r["pass"]) for r in rows)
-    return {
-        "score": score,
-        "max_score": len(rows),
-        "accuracy": score / max(1, len(rows)),
-        "by_label": by_label,
-        "results": rows,
-    }
+    return {"score": score, "max_score": len(rows), "accuracy": score / max(1, len(rows)), "by_label": by_label, "results": rows}
+
+
+def evaluate_m6(model, tok, m6):
+    return evaluate_records(model, tok, m6["records"])
 
 
 def main():
@@ -249,6 +245,7 @@ def main():
 
     init_adapter_sha = tensor_state_sha(model)
     val_loss_before = loss_on_records(model, tok, val_records)
+    val_generation_before = evaluate_records(model, tok, val_records)
 
     optimizer = torch.optim.AdamW(
         [p for p in model.parameters() if p.requires_grad],
@@ -285,6 +282,17 @@ def main():
         raise SystemExit("ADAPTER_WEIGHTS_UNCHANGED")
 
     val_loss_after = loss_on_records(model, tok, val_records)
+    val_generation_after = evaluate_records(model, tok, val_records)
+    val_per_label_delta = {
+        k: val_generation_after["by_label"][k]["pass"] - val_generation_before["by_label"][k]["pass"]
+        for k in LABELS
+    }
+    validation_critical_regression = any(v < -1 for v in val_per_label_delta.values())
+    validation_gate_pass = (
+        val_loss_after < val_loss_before
+        and val_generation_after["score"] >= val_generation_before["score"]
+        and not validation_critical_regression
+    )
     post = evaluate_m6(model, tok, m6)
 
     ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
@@ -306,8 +314,8 @@ def main():
     critical_regression = any(v < -2 for v in per_label_delta.values())
     cold_gain = post["score"] - baseline["score"]
 
-    if cold_gain > 0 and not critical_regression:
-        training_decision = "G6_TRAINING_VERIFIED_HOLD_G7_PENDING_TRANSFER_ABLATION_AUDIT"
+    if validation_gate_pass and cold_gain > 0 and not critical_regression:
+        training_decision = "G6_REPAIR_CANDIDATE_VERIFIED_HOLD_G7_PENDING_FROZEN_TRANSFER_RETEST"
     else:
         training_decision = "ROLLBACK_RETAIN_EVIDENCE"
 
@@ -370,6 +378,15 @@ def main():
         "posttrain_by_label": post["by_label"],
         "per_label_pass_delta": per_label_delta,
         "critical_regression": critical_regression,
+        "validation_split_method": "STRATIFIED_25_TRAIN_5_VALIDATION_PER_LABEL",
+        "validation_generation_before_score": val_generation_before["score"],
+        "validation_generation_after_score": val_generation_after["score"],
+        "validation_generation_max": val_generation_after["max_score"],
+        "validation_generation_before_by_label": val_generation_before["by_label"],
+        "validation_generation_after_by_label": val_generation_after["by_label"],
+        "validation_per_label_delta": val_per_label_delta,
+        "validation_critical_regression": validation_critical_regression,
+        "validation_gate_pass": validation_gate_pass,
         "validation_loss_before": val_loss_before,
         "validation_loss_after": val_loss_after,
         "validation_loss_improved": val_loss_after < val_loss_before,
@@ -388,6 +405,7 @@ def main():
             "AFAH_FINAL_AUTHORITY",
         ],
         "elapsed_s": round(time.perf_counter() - started, 3),
+        "repair_basis": "ANTI_FORGETTING_METHODOLOGY_ONLY_NO_TRANSFER_BENCHMARK_USED_FOR_TRAINING",
         "claim_ceiling": "REAL_LORA_WEIGHT_CHANGE_IF_WEIGHTS_CHANGED_TRUE; NO_GENERAL_CAPABILITY_CLAIM",
     }
     REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
