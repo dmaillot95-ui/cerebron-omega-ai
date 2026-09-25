@@ -1,0 +1,84 @@
+{
+  "schema": "AFAH_SAPHEA_G1_PROMOTION_REVIEW_V1",
+  "authority": "AFAH",
+  "authority_mode": "DETERMINISTIC_POLICY_GATE_NOT_DEDICATED_AFAH_MODEL_INFERENCE",
+  "checks": {
+    "p03_unified_recall_pass": true,
+    "real_training_required": true,
+    "base_immutable": true,
+    "weights_changed": true,
+    "hf_artifact_write_read_pass": true,
+    "adapter_sha_present": true,
+    "cold_gain_positive": true,
+    "m6_deny_training": true,
+    "transfer_gain_positive": true,
+    "transfer_frozen": true,
+    "transfer_disjoint": true,
+    "ablation_supports_value": true,
+    "no_critical_regression": true,
+    "counter_audit_pass": true,
+    "red_team_pass": true,
+    "internal_independent_codepath_pass": true,
+    "external_independence_not_overclaimed": true,
+    "f72_review_pass": true,
+    "f72_supported_e2": true,
+    "f72_routes_to_afah": true
+  },
+  "all_required_gates_pass": true,
+  "decision": "PROMOTE_SCOPED_G7",
+  "promotion": {
+    "schema": "SAPHEA_G1_EPISTEMIC_ADAPTER_PROMOTION_V1",
+    "ai_id": "SAPHEA",
+    "generation": "G1",
+    "scope": "CEREBRON_EPISTEMIC_STATUS_CLASSIFICATION_ONLY",
+    "state": "SCOPED_G7_PROMOTED",
+    "base_model": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "immutable": true
+    },
+    "adapter": {
+      "sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+      "config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+      "private_repo": "cerebron-omega/cerebron-private-memory",
+      "private_object_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729"
+    },
+    "routing": {
+      "mode": "SCOPED_OPT_IN",
+      "allowed_task": "epistemic-status-classification",
+      "general_default": false
+    },
+    "rollback": {
+      "target": "G0_BASE_MODEL_NO_ADAPTER",
+      "automatic_on_critical_regression": true
+    },
+    "evidence": {
+      "training_run": 36100266729,
+      "cold_baseline": 18,
+      "cold_posttrain": 30,
+      "transfer_run": 36101181888,
+      "transfer_base": 20,
+      "transfer_adapter": 40,
+      "counter_audit_run": 36101824432,
+      "f72_run": 36102560865,
+      "f72_status": "SUPPORTED",
+      "f72_level": "E2"
+    },
+    "claim_ceiling": "SCOPED_EPISTEMIC_CLASSIFICATION_G7_SUPPORTED_E2",
+    "external_independent_reproduction": "NOT_PRESENT",
+    "no_general_capability_claim": true
+  },
+  "source_content_sha256": {
+    "training": "6684adf789c8c7bd94f97a14dd2bcae3bf9b1cebdfeebe91ebb8d65318062f05",
+    "transfer": "17b4a0a0daeb2fe858a611d1b1a091888ecd7fdbeae4cf23f3271051da782e13",
+    "counter_audit": "3b74338fb80b5ef85b226ff252e768303152653735c68a39733c102831325372",
+    "f72": "3010743de7b0c4a0319e39afbeff10ee3193067505f115da25e9217ecdb93091"
+  },
+  "limitations": [
+    "No external independent scientific reproduction.",
+    "All capability evidence is scoped to synthetic epistemic-status classification.",
+    "Promotion does not modify immutable base weights.",
+    "Promotion does not imply general SAPHEA intelligence or generalization."
+  ],
+  "review_sha256": "4c4bb04b946962bcb977a276e909db3b48f525e4001ff1a99323a3b71f38fa74"
+}

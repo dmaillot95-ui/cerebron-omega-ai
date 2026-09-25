@@ -1,0 +1,42 @@
+{
+  "schema": "SAPHEA_G1_EPISTEMIC_ADAPTER_PROMOTION_V1",
+  "ai_id": "SAPHEA",
+  "generation": "G1",
+  "scope": "CEREBRON_EPISTEMIC_STATUS_CLASSIFICATION_ONLY",
+  "state": "SCOPED_G7_PROMOTED",
+  "base_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "immutable": true
+  },
+  "adapter": {
+    "sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+    "private_repo": "cerebron-omega/cerebron-private-memory",
+    "private_object_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729"
+  },
+  "routing": {
+    "mode": "SCOPED_OPT_IN",
+    "allowed_task": "epistemic-status-classification",
+    "general_default": false
+  },
+  "rollback": {
+    "target": "G0_BASE_MODEL_NO_ADAPTER",
+    "automatic_on_critical_regression": true
+  },
+  "evidence": {
+    "training_run": 36100266729,
+    "cold_baseline": 18,
+    "cold_posttrain": 30,
+    "transfer_run": 36101181888,
+    "transfer_base": 20,
+    "transfer_adapter": 40,
+    "counter_audit_run": 36101824432,
+    "f72_run": 36102560865,
+    "f72_status": "SUPPORTED",
+    "f72_level": "E2"
+  },
+  "claim_ceiling": "SCOPED_EPISTEMIC_CLASSIFICATION_G7_SUPPORTED_E2",
+  "external_independent_reproduction": "NOT_PRESENT",
+  "no_general_capability_claim": true
+}
