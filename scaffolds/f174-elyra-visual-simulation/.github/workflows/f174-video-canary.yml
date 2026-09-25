@@ -1,0 +1,91 @@
+name: F174 ELYRA Video Render Canary
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "render/**"
+      - "tests/test_video_canary.py"
+      - ".github/workflows/f174-video-canary.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  render-video-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -n 1
+
+      - name: Render deterministic PPM frames
+        run: python render/video_canary.py --frames 24 --out-dir artifacts/frames
+
+      - name: Encode MP4 canary
+        run: |
+          ffmpeg -y -loglevel error             -framerate 12             -i artifacts/frames/frame_%03d.ppm             -c:v libx264             -pix_fmt yuv420p             -movflags +faststart             artifacts/f174_elyra_video_canary.mp4
+
+      - name: Create evidence metadata
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          video=Path("artifacts/f174_elyra_video_canary.mp4")
+          raw=video.read_bytes()
+          frames=sorted(Path("artifacts/frames").glob("frame_*.ppm"))
+          frame_hashes=[hashlib.sha256(p.read_bytes()).hexdigest() for p in frames]
+          sequence_sha=hashlib.sha256("\n".join(frame_hashes).encode()).hexdigest()
+          result={
+            "schema":"F174_VIDEO_RENDER_CANARY_RESULT_V1",
+            "scenario_id":"F174-VIDEO-CANARY-001",
+            "render_kind":"DETERMINISTIC_SYNTHETIC_AVATAR_MP4",
+            "frames":len(frames),
+            "fps":12,
+            "resolution":"320x180",
+            "video_sha256":hashlib.sha256(raw).hexdigest(),
+            "frame_sequence_sha256":sequence_sha,
+            "video_bytes":len(raw),
+            "physical_model_claimed":False,
+            "physical_validation_claimed":False,
+            "production_video_claimed":False,
+            "training_executed":False
+          }
+          Path("artifacts/f174_video_canary_metadata.json").write_text(json.dumps(result,indent=2)+"\n")
+          print(json.dumps(result,sort_keys=True))
+          PY
+
+      - name: Verify evidence boundaries
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("artifacts/f174_video_canary_metadata.json"))
+          assert p["render_kind"]=="DETERMINISTIC_SYNTHETIC_AVATAR_MP4"
+          assert p["frames"]==24
+          assert p["fps"]==12
+          assert p["physical_model_claimed"] is False
+          assert p["physical_validation_claimed"] is False
+          assert p["production_video_claimed"] is False
+          assert p["training_executed"] is False
+          assert len(p["video_sha256"])==64
+          assert len(p["frame_sequence_sha256"])==64
+          print("F174_VIDEO_CANARY_BOUNDARIES=PASS")
+          PY
+
+      - name: Upload video canary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: f174-video-render-canary
+          path: |
+            artifacts/f174_elyra_video_canary.mp4
+            artifacts/f174_video_canary_metadata.json
+          if-no-files-found: error
+          retention-days: 30
