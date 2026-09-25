@@ -218,14 +218,14 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D4_COMPLEMENTARITY_PASS_FRESH_FUSION_CANARY_READY",
-      "dual_core_state": "D4_COMPLEMENTARITY_CONFIRMED_NOT_YET_FUSION_GAIN",
+      "project_state": "D4_FRESH_FUSION_CANARY_IN_PROGRESS",
+      "dual_core_state": "D4_FRESH_PRIVATE_FUSION_CANARY_RUNNING",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS_PRIVATE_M6_V2",
-        "D4": "COMPLEMENTARITY_PASS_FRESH_FUSION_CANARY_REQUIRED",
+        "D4": "IN_PROGRESS_FRESH_PRIVATE_FUSION_CANARY",
         "D5": "BLOCKED_PENDING_D4_FUSION_GAIN",
         "D6": "BLOCKED_PENDING_D4_FUSION_GAIN",
         "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
@@ -268,7 +268,10 @@
           "oracle_gain_over_best_single": 5
         },
         "d4_parallel_legacy_run_id": 36134272612,
-        "d4_parallel_legacy_evidence_status": "DO_NOT_COUNT_WRONG_D3_LINEAGE"
+        "d4_parallel_legacy_evidence_status": "DO_NOT_COUNT_WRONG_D3_LINEAGE",
+        "d4_fresh_fusion_run_id": 36134498167,
+        "d4_fresh_fusion_policy": "AGREE_ELSE_IF_BOTH_JUDGES_SELECT_QWEN_USE_QWEN_ELSE_SMOL_PRIMARY",
+        "d4_fresh_fusion_holdout": "FRESH_PRIVATE_RUNTIME_GENERATED"
       }
     },
     {
