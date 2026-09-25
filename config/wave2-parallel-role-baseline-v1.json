@@ -1,0 +1,333 @@
+{
+  "schema": "CEREBRON_WAVE2_PARALLEL_ROLE_BASELINE_V1",
+  "date": "2026-09-25",
+  "status": "READY_TO_EXECUTE",
+  "branch": "feat/wave2-parallel-ai-baselines-v1",
+  "rules": [
+    "BASELINE_IS_NOT_TRAINING",
+    "BENCHMARK_RECORDS_DENY_TRAINING",
+    "ROLE_RECEIPTS_SEPARATE",
+    "SHARED_MODEL_LINEAGES_ARE_CORRELATED",
+    "NO_AUTO_PROMOTION",
+    "NO_TRAINING_WITHOUT_VALIDATED_GOLD_AND_FROZEN_COLD_SPLITS"
+  ],
+  "roles": {
+    "SPIRALION": {
+      "specialization": "cumulative reasoning checkpoint continuity and contradiction management",
+      "model": {
+        "id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      },
+      "labels": [
+        "CONTINUE",
+        "ISOLATE_CONTRADICTION",
+        "COMPRESS",
+        "VERIFY_NEXT"
+      ],
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "tasks": [
+        [
+          "S01",
+          "CONTINUE",
+          "A verified checkpoint contains a finished proof step and one explicit residual. The next response should resume from that residual without rebuilding prior sections."
+        ],
+        [
+          "S02",
+          "ISOLATE_CONTRADICTION",
+          "Two new receipts make mutually incompatible claims while the prior checkpoint remains valid."
+        ],
+        [
+          "S03",
+          "COMPRESS",
+          "A session has forty verified notes with repeated statements and must be reduced to a compact state preserving proofs, unknowns and dependencies."
+        ],
+        [
+          "S04",
+          "VERIFY_NEXT",
+          "A continuation depends on one unverified external constant before any new deduction can be trusted."
+        ],
+        [
+          "S05",
+          "CONTINUE",
+          "A long research chain has a stable checkpoint and a newly assigned subproblem directly downstream of it."
+        ],
+        [
+          "S06",
+          "ISOLATE_CONTRADICTION",
+          "One artifact says PASS and another says FAIL for the same pinned input and code revision."
+        ],
+        [
+          "S07",
+          "COMPRESS",
+          "Five near-duplicate summaries contain the same result and should become one nonredundant checkpoint."
+        ],
+        [
+          "S08",
+          "VERIFY_NEXT",
+          "A claimed improvement has no cold-test receipt yet, so the immediate next action is evidence acquisition."
+        ],
+        [
+          "S09",
+          "CONTINUE",
+          "The exact previous residual is known and no new conflict or missing dependency has appeared."
+        ],
+        [
+          "S10",
+          "ISOLATE_CONTRADICTION",
+          "A newly produced conclusion conflicts with a previously verified invariant."
+        ],
+        [
+          "S11",
+          "COMPRESS",
+          "A memory packet exceeds context budget but its verified facts, failures and open questions must survive."
+        ],
+        [
+          "S12",
+          "VERIFY_NEXT",
+          "A simulation result is present but the mission requires deciding whether it transfers to a physical claim."
+        ]
+      ]
+    },
+    "HYPERION": {
+      "specialization": "divergent hypotheses alternative mechanisms and counterfactual search",
+      "model": {
+        "id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      },
+      "labels": [
+        "ALTERNATIVE",
+        "COUNTERFACTUAL",
+        "MECHANISM",
+        "DIVERSIFY"
+      ],
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "tasks": [
+        [
+          "H01",
+          "ALTERNATIVE",
+          "A dominant explanation exists, but the task asks for a distinct plausible explanation compatible with the same observation."
+        ],
+        [
+          "H02",
+          "COUNTERFACTUAL",
+          "The task asks what would change if one key assumption were reversed while all other conditions stayed fixed."
+        ],
+        [
+          "H03",
+          "MECHANISM",
+          "Several correlations are known and the next objective is to propose a causal process that could generate them."
+        ],
+        [
+          "H04",
+          "DIVERSIFY",
+          "Five candidate solutions are minor variants of the same method and the search needs genuinely different approaches."
+        ],
+        [
+          "H05",
+          "ALTERNATIVE",
+          "A proposed architecture has one known design path and the mission requests another architecture with different tradeoffs."
+        ],
+        [
+          "H06",
+          "COUNTERFACTUAL",
+          "The question asks whether the conclusion still holds if gravity is absent from the model."
+        ],
+        [
+          "H07",
+          "MECHANISM",
+          "Observed instability needs a physically interpretable chain of causes rather than another numerical fit."
+        ],
+        [
+          "H08",
+          "DIVERSIFY",
+          "A brainstorming set has converged prematurely on one representation and needs orthogonal representations."
+        ],
+        [
+          "H09",
+          "ALTERNATIVE",
+          "A theorem attempt fails on one lemma and the task asks for a different proof route."
+        ],
+        [
+          "H10",
+          "COUNTERFACTUAL",
+          "The experiment succeeded; now assess the hypothetical case where the control variable had been held constant."
+        ],
+        [
+          "H11",
+          "MECHANISM",
+          "A component overheats repeatedly and the goal is a causal failure mechanism explaining the pattern."
+        ],
+        [
+          "H12",
+          "DIVERSIFY",
+          "Multiple agents copied the same idea; the next action is to generate non-overlapping candidate families."
+        ]
+      ]
+    },
+    "ASTRION": {
+      "specialization": "aerospace R&D systems physics trajectory propulsion and validation",
+      "model": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      },
+      "labels": [
+        "REQUIREMENTS",
+        "PHYSICS_MODEL",
+        "CALCULATE",
+        "TEST"
+      ],
+      "training_readiness": "BLOCKED_NO_VALIDATED_AEROSPACE_GOLD",
+      "tasks": [
+        [
+          "R01",
+          "REQUIREMENTS",
+          "A spacecraft concept has no frozen payload mass, mission delta-v or lifetime target."
+        ],
+        [
+          "R02",
+          "PHYSICS_MODEL",
+          "Mission requirements are frozen, but thermal and propulsion interactions have not yet been represented mathematically."
+        ],
+        [
+          "R03",
+          "CALCULATE",
+          "A validated rocket-equation model and all inputs are available; the needed output is propellant mass."
+        ],
+        [
+          "R04",
+          "TEST",
+          "A thruster design is numerically promising and now needs a controlled hot-fire experiment with acceptance criteria."
+        ],
+        [
+          "R05",
+          "REQUIREMENTS",
+          "A lunar cargo vehicle proposal lacks landing accuracy and payload throughput requirements."
+        ],
+        [
+          "R06",
+          "PHYSICS_MODEL",
+          "A reentry concept has geometry and boundary conditions but no aerodynamic heating model."
+        ],
+        [
+          "R07",
+          "CALCULATE",
+          "Orbital radii and gravitational parameter are fixed for a Hohmann transfer computation."
+        ],
+        [
+          "R08",
+          "TEST",
+          "A structural simulation passes but the mission requires validating the joint under representative load."
+        ],
+        [
+          "R09",
+          "REQUIREMENTS",
+          "A space tug concept has no defined duty cycle, refueling interval or target orbit class."
+        ],
+        [
+          "R10",
+          "PHYSICS_MODEL",
+          "A cryogenic tank system needs a boil-off and heat-leak model before sizing insulation."
+        ],
+        [
+          "R11",
+          "CALCULATE",
+          "A nozzle model, chamber conditions and gas properties are fixed; compute the performance metric."
+        ],
+        [
+          "R12",
+          "TEST",
+          "A guidance algorithm works in simulation and needs hardware-in-the-loop validation before operational claims."
+        ]
+      ]
+    },
+    "SAPHEA_MICRO": {
+      "specialization": "routing compact specialist selection and minimal useful coalition",
+      "model": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      },
+      "labels": [
+        "ROUTE",
+        "MATH",
+        "CODE",
+        "RESEARCH",
+        "INVENT",
+        "RED_TEAM",
+        "FUSION"
+      ],
+      "training_readiness": "BLOCKED_DESIGN_ACTIVE_NO_VERSIONED_MICRO_GOLD",
+      "tasks": [
+        [
+          "P01",
+          "ROUTE",
+          "A new task arrives and must first be assigned to the smallest useful specialist set."
+        ],
+        [
+          "P02",
+          "MATH",
+          "The task is proving an algebraic identity with no need for web research or code execution."
+        ],
+        [
+          "P03",
+          "CODE",
+          "A failing Python test has a traceback and the next step is debugging the implementation."
+        ],
+        [
+          "P04",
+          "RESEARCH",
+          "A claim depends on a current external paper and its provenance must be retrieved."
+        ],
+        [
+          "P05",
+          "INVENT",
+          "The goal is generating a novel mechanical architecture under explicit constraints."
+        ],
+        [
+          "P06",
+          "RED_TEAM",
+          "A proposed result looks plausible but needs active search for counterexamples and hidden assumptions."
+        ],
+        [
+          "P07",
+          "FUSION",
+          "Several specialist outputs are available and must be merged without counting correlated evidence twice."
+        ],
+        [
+          "P08",
+          "ROUTE",
+          "A mixed request contains math, code and research, and orchestration must select only the necessary modules."
+        ],
+        [
+          "P09",
+          "MATH",
+          "A finite combinatorial recurrence requires symbolic derivation rather than implementation work."
+        ],
+        [
+          "P10",
+          "CODE",
+          "The requested work is to implement and test a deterministic parser."
+        ],
+        [
+          "P11",
+          "RESEARCH",
+          "A product specification may have changed recently and must be verified from sources."
+        ],
+        [
+          "P12",
+          "INVENT",
+          "The task asks for multiple radically different propulsion concepts before evaluation."
+        ],
+        [
+          "P13",
+          "RED_TEAM",
+          "A benchmark gain may be leakage and the mission is to falsify that explanation."
+        ],
+        [
+          "P14",
+          "FUSION",
+          "Independent and correlated findings must be synthesized into one evidence-weighted decision."
+        ]
+      ]
+    }
+  }
+}
