@@ -97,31 +97,101 @@
         "m6_accuracy": 0.3
       },
       "ELYSION": {
-        "class": "DUAL_CORE_CANDIDATE",
-        "status": "D0_D3_PASS_D4_D6_D8_PENDING",
+        "class": "GREEK_NATIVE_DUAL_MODEL_CORE_CANDIDATE",
+        "status": "TWO_MODEL_RUNTIME_D2_PASS_SINGLE_CORE_BASELINES_D3_PASS_DUAL_FUSION_D4_D6_D8_PENDING",
         "single_core_baselines": {
           "qwen": 0.51,
           "smollm": 0.62
         },
-        "rule": "DUAL_CORE_MUST_BE_ABLATED_AGAINST_BEST_SINGLE_CORE"
+        "rule": "DUAL_CORE_MUST_BE_ABLATED_AGAINST_BEST_SINGLE_CORE",
+        "model_pair": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "ELYSIUM": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "SAELION": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "ALPHA": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "OMEGA": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "DELTA": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "NEXUS": {
-        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+        "status": "GREEK_DUAL_MODEL_ARCHITECTURE_DECLARED_MODEL_BINDING_PENDING",
+        "model_pair_target": {
+          "model_a": {
+            "model_id": "Qwen/Qwen3-4B",
+            "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+          },
+          "model_b": {
+            "model_id": "HuggingFaceTB/SmolLM3-3B",
+            "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+          }
+        }
       },
       "AELYS": {
         "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
@@ -178,13 +248,14 @@
       "repair_canary_v2": 36075666669,
       "repair_canary_v2_status": "IN_PROGRESS_AT_CHECKPOINT",
       "scale_policy": "DO_NOT_RERUN_38_UNTIL_5_OF_5_CANARY_PASS"
-    }
+    },
+    "dual_core_semantics": "DOUBLE_COEUR = GREEK_AI_WITH_TWO_DISTINCT_MODELS; NOT_TWO_LOGICAL_ROLES"
   },
   "next_missions_order": [
     "M41_VERIFY_COUNCIL_REPAIR_CANARY_V2_5_OF_5; if fail, repair same layer and rerun same 5 only.",
     "M42_IF_CANARY_PASS_RERUN_ALL_AI_COUNCIL_38_AND_AUDIT_ROLE_FIDELITY_NOVELTY_REDUNDANCY_TRANSFER_PROPOSALS.",
     "M43_SAPHEA_FIRST_REAL_LORA_OR_QLORA: train on sealed GOLD, persist adapter SHA, evaluate unchanged M6 60, rollback on no measured gain.",
-    "M44_ELYSION_D4_D5_D6: dual-core vs best single-core 0.62, contradiction preservation, red-team, latency/resource cost.",
+    "M44_ELYSION_D4_D5_D6: execute BOTH bound models Qwen3-4B + SmolLM3-3B, cross-critique/fusion, compare against best single-model baseline 0.62, preserve contradictions, measure latency/resource cost.",
     "M45_GVL_HELD_OUT_C3: distinct frozen benchmark family, zero critical regression; only then gate may move 1/4->2/4.",
     "M46_BUILD_COLD_SPECIALTY_BENCHMARKS_FOR_AELYS_ETHERION_AFAH_METRION_BEFORE_ANY_DEDICATED_MODEL_TRAINING.",
     "M47_DIAGNOSE_SECONDARY_MODEL_BENCHMARK_FAILURES_SMOLLM17_GRANITE_OLMO_ONE_BY_ONE_REPAIR_BEFORE_PROMOTION.",
