@@ -1,0 +1,75 @@
+{
+  "schema": "CEREBRON_93_ELYSION_D4_HOLD_REPAIR_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "branch_head_before_checkpoint": "a9db791a7ccb0cab98ac5679d6253b3431a2bc5a",
+  "source_wave2_checkpoint_commit": "ac7eeb2142a875a2ed0b7ace6d0d784e3cf1994f",
+  "elysion": {
+    "d4_precheck": {
+      "run_id": 36122176363,
+      "conclusion": "SUCCESS",
+      "artifact_id": 10857519097,
+      "artifact_digest": "sha256:8ee2574cb3b28d253a0848e697800fd04f11323d03791321659c82f914021074",
+      "qwen_correct": 51,
+      "smol_correct": 62,
+      "oracle_union_correct": 72,
+      "oracle_gain_over_best_single": 10,
+      "decision": "CONTINUE_D4_FUSION_CANARY"
+    },
+    "d4_true_dual_core": {
+      "run_id": 36123625873,
+      "conclusion": "SUCCESS",
+      "artifact_id": 10860072136,
+      "artifact_digest": "sha256:7afc5d8d49d48c63e6fb36edaece94fa916fe2587bac88c39320957128231ef2",
+      "receipt_sha256": "903741858e1c01948a6233a8ca0f1f2a9227d577725b615578f9155709595860",
+      "private_result_sha256": "a07394d2fd0abb97a1f66dd46a84a8aeb8aea8f95e83747bf9e1d12d43f7964d",
+      "subset_sha256": "7b7abe5bae849a7f626cbaa5b681cac8c77977b94e1854ed3202f7c78b53e535",
+      "metrics": {
+        "task_count": 24,
+        "model_a_correct": 17,
+        "model_b_correct": 8,
+        "best_single_correct": 17,
+        "fusion_correct": 9,
+        "fusion_gain_over_best_single": -8,
+        "resolved": 10,
+        "coverage": 0.4166666666666667,
+        "wrong_commitments": 1,
+        "best_single_wrong": 7,
+        "wrong_commitment_reduction": 6,
+        "consensus_count": 9,
+        "cross_critique_converged_count": 1,
+        "unresolved_count": 14
+      },
+      "decision": "D4_CANARY_HOLD_NO_MEASURED_GAIN",
+      "weights_changed": false,
+      "m6_deny_training": true,
+      "independent_evidence_count": 0
+    },
+    "current_state": "D4_HOLD_REPAIR_REQUIRED_BEFORE_D5_D6",
+    "runtime_activation": false,
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4"
+  },
+  "repair_rules": [
+    "DO_NOT_RETUNE_ON_M6",
+    "M6_RESULT_IS_FROZEN_EVIDENCE_OF_CURRENT_POLICY",
+    "BUILD_SEPARATE_DEV_SET_FOR_FUSION_POLICY_REPAIR",
+    "FREEZE_REPAIRED_POLICY_BEFORE_NEW_COLD_TRANSFER_TEST",
+    "ABLATION_BEFORE_ADDITION",
+    "NO_RUNTIME_ACTIVATION_BEFORE_D4_PASS"
+  ],
+  "next_exact": [
+    "Create ELYSION D4 fusion DEV set separate from M6.",
+    "Evaluate primary-core plus critic/veto fusion on DEV only.",
+    "Freeze repaired fusion policy if DEV improves risk-adjusted performance.",
+    "Create or identify a fresh untouched cold transfer set.",
+    "Run repaired policy once on fresh cold transfer.",
+    "Only if D4 passes, open D5 cross-critique and D6 red-team."
+  ],
+  "do_not_repeat": [
+    "Do not rerun 36123625873 unchanged.",
+    "Do not tune prompts or fusion thresholds against M6 results.",
+    "Do not mark ELYSION dual-core verified.",
+    "Do not open D5 or D6 while D4 is HOLD."
+  ]
+}
