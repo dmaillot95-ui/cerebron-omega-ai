@@ -1,0 +1,66 @@
+{
+  "schema": "CEREBRON_126_RDX_HUMAN_REVIEW_PRE_REGISTRY_NEGATIVE_CANARY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_HUMAN_REVIEW_PRE_REGISTRY_NEGATIVE_CANARY_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "78c306bdb0890a7c9cefd9b56431cee7f02d8a35",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "6366e1b07568b636cfa9a51b02c34d0adcc19c92",
+    "full_validation": {
+      "run_id": 36190376401,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36190376349,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "6366e1b07568b636cfa9a51b02c34d0adcc19c92",
+    "file_count": 16,
+    "aggregate_sha256": "55a1c5ba6e1a3a6d0369d48aa7d99c700ae6ae07d378ab89690e3a7a66e105ea",
+    "release_attestation_sha256": "5abbf5a0846d1da875591f0971c7c2f93646cef09e4688f2f03f665091b733a7",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_chain": "PASS"
+  },
+  "human_review_workflow": {
+    "manual_only": true,
+    "auto_apply": false,
+    "workflow_contract": "PASS",
+    "actual_live_review_executed": false
+  },
+  "pre_registry_negative_canary": {
+    "status": "PASS",
+    "rejected_count": 2,
+    "rejected": [
+      "SYNTHETIC_APPROVE_BLOCKED_PRE_REGISTRY",
+      "REJECT_DECISION_CANNOT_BUILD_REGISTRY_UPDATE"
+    ],
+    "production_registry_unchanged": true,
+    "interpretation": "SYNTHETIC_CONTRACT_TEST_ONLY_NOT_HUMAN_REVIEW_OR_LIVE_EVIDENCE"
+  },
+  "aggregate_fail_closed_controls": {
+    "production_negative_canaries": "PASS_8_OF_8_REJECTED",
+    "pre_registry_negative_canaries": "PASS_2_OF_2_REJECTED",
+    "known_good_negative_control": "PASS",
+    "production_deployment_verified": false,
+    "proofs_registered": 0
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "SYNTHETIC_CANARY!=LIVE_EVIDENCE",
+    "NO_SIMULATED_HUMAN_APPROVAL",
+    "NO_AUTO_APPLY_PRODUCTION_REGISTRY",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
