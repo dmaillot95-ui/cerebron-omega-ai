@@ -4,7 +4,7 @@
   "project_id": "AELYS-LIVE-001",
   "identity": "AELYS",
   "role_id": "LIVE_INTERACTION_RUNTIME",
-  "status": "LOCAL_LIVE_LOOP_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
+  "status": "LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "target_repo": "dmaillot95-ui/cerebron-farm-173-aelys-live",
   "target_repo_exists": true,
   "target_repo_initialized": true,
@@ -19,8 +19,8 @@
     "CLAIM_LE_EVIDENCE",
     "REAL_EXECUTION_RECEIPT_REQUIRED"
   ],
-  "dedicated_repo_head": "3aaf23084b1414e4c2fe5da06fedfbc25aa868b6",
-  "dedicated_repo_selftest_run_id": 36162643249,
+  "dedicated_repo_head": "6742951eb3f5f4a4804f8cb79aaae579b09be5a6",
+  "dedicated_repo_selftest_run_id": 36163651569,
   "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED",
   "unified_plugin_bus_guard_run_id": 36156083228,
   "local_live_loop_canary": {
@@ -32,5 +32,30 @@
     "external_calls_executed": false,
     "production_live_claimed": false
   },
-  "external_runtime_status": "UNQUALIFIED"
+  "external_runtime_status": "UNQUALIFIED",
+  "local_tts_canary": {
+    "run_id": 36163338754,
+    "engine": "espeak-ng",
+    "duration_s": 3.78254,
+    "wav_bytes": 166854,
+    "wav_sha256": "71eea3f77b68a77b5ca773950c961f63d38b4f33ed06cffcab57c325e56a2e9e",
+    "artifact_id": 10875663863,
+    "artifact_digest": "sha256:67cbd7aabeae0682b36da8d2df7407e01efc5e09d32b17e961acb5df94a37687",
+    "external_service_used": false,
+    "paid_provider_used": false,
+    "production_live_claimed": false,
+    "voice_identity_claimed": false
+  },
+  "local_session_replay_canary": {
+    "run_id": 36163483531,
+    "events": 3,
+    "final_trace_hash": "abcc5451ebbcb0965a9f220d8b445b2504ff97471e8dba1cbc1426ce9dc783b8",
+    "result_sha256": "785eef06fa1357f513dbbee3f5dd87e9f36949a4e63588df67c4fffe6c404510",
+    "artifact_id": 10876263729,
+    "artifact_digest": "sha256:442d3bd1801a627c41378d75f6d06eaa43731817e81a5a510f27ecb9367b8348",
+    "external_calls_executed": false,
+    "production_live_claimed": false,
+    "avatar_runtime": "UNQUALIFIED",
+    "presentation_status": "HOLD"
+  }
 }
