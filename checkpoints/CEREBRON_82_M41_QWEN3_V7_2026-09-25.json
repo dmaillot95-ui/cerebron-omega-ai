@@ -1,0 +1,107 @@
+{
+  "schema": "CEREBRON_82_M41_QWEN3_V7_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "mission": "M41_CLOSE_ALL_AI_COUNCIL_CANARY_BEFORE_38",
+  "parent": "checkpoints/CEREBRON_81_M41_COUNCIL_REPAIR_2026-09-25.json",
+  "hard_rules": [
+    "REPAIR_BEFORE_SCALE",
+    "DO_NOT_RERUN_38_UNTIL_5_OF_5_INFERENCE_AND_PARSE_PASS",
+    "UNPARSEABLE_OUTPUT_IS_UNSCORABLE_NOT_ZERO_SCORE",
+    "SHARED_MODEL_OUTPUTS_ARE_CORRELATED_ADVISORY_PERSPECTIVES",
+    "DOUBLE_CORE_MEANS_ONE_GREEK_AI_WITH_TWO_DISTINCT_MODELS_NOT_TWO_ROLES"
+  ],
+  "evidence": {
+    "compact_model_v4": {
+      "run_id": 36076654497,
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "inference_pass": "5_OF_5",
+      "parse_pass": "0_OF_5",
+      "diagnosis": "MODEL_TOO_SMALL_FOR_STRATEGY_COUNCIL_CONTRACT; OUTPUT_CONTRACT_ECHO_AND_FIELD_REORGANIZATION",
+      "decision": "REJECT_FOR_COUNCIL_STRATEGY_USE"
+    },
+    "qwen3_model": {
+      "model": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "runtime_mode": "CPU_BF16",
+      "thinking": "DISABLED",
+      "cache_key": "hf-qwen3-4b-1cfa9a7208912126459214e8b04321603b3df60c"
+    },
+    "qwen3_source_failures": [
+      {
+        "run_id": 36081824638,
+        "status": "F_TOOL_SOURCE_PATCH_INVALID"
+      },
+      {
+        "run_id": 36081865788,
+        "status": "F_TOOL_SOURCE_PATCH_INVALID"
+      },
+      {
+        "run_id": 36081903987,
+        "status": "F_TOOL_SYNTAX_ERROR_LITERAL_BACKSLASH_N"
+      }
+    ],
+    "qwen3_v6": {
+      "run_id": 36082174094,
+      "syntax_preflight": "PASS",
+      "first_completed_ai": "CEREBRON",
+      "first_job_id": 107906303804,
+      "inference": "PASS",
+      "parse_ok": false,
+      "prompt_echo": false,
+      "artifact_id": 10842840701,
+      "artifact_digest": "sha256:cd19490d19f892e60773624d1de5647be1a555c5c5b380bd49b0a5dd78ee2050",
+      "raw_semantic_summary": {
+        "priority": "verify GVL frozen held-out transfer families",
+        "proposal": "cross-validate frozen transfer families",
+        "test": "measure transfer accuracy improvement",
+        "stop": "do not scale coalition before marginal gain",
+        "dual_core": "YES with primary model plus ablation validator",
+        "risk": "held-out overfitting/generalization risk"
+      },
+      "parse_failure_cause": [
+        "FULLWIDTH_UNICODE_COLON",
+        "PRIORITIZE_ALIAS"
+      ],
+      "quality_interpretation": "MATERIALLY_BETTER_THAN_0_5B_AND_NOT_PROMPT_ECHO",
+      "cache_saved": true,
+      "status": "OBSOLETE_FOR_GATE_AFTER_V7_PARSER_PATCH"
+    },
+    "qwen3_v7": {
+      "run_id": 36082948475,
+      "parser": [
+        "NORMALIZE_FULLWIDTH_COLON",
+        "PRIORITIZE_TO_PRIORITY",
+        "PRIORITISE_TO_PRIORITY",
+        "UNIQUE_VALUE_ALIASES",
+        "DUAL_CORE_ALIASES"
+      ],
+      "syntax_preflight": true,
+      "model_cache": "WARM",
+      "max_parallel": 5,
+      "status": "QUEUED_AT_CHECKPOINT",
+      "gate": "5_OF_5_INFERENCE_PASS_AND_5_OF_5_PARSE_PASS"
+    }
+  },
+  "scoring": {
+    "schema": "CEREBRON_ALL_AI_STRATEGY_COUNCIL_AUDIT_V2",
+    "rule": "parse failure => UNSCORABLE",
+    "dimensions": [
+      "coverage",
+      "actionability",
+      "role_alignment",
+      "specificity",
+      "novelty",
+      "redundancy"
+    ],
+    "claim_ceiling": "MISSION_DESCRIPTIVE_PROXY_NOT_GENERAL_CAPABILITY"
+  },
+  "exact_resume": [
+    "Check run 36082948475 only as the V7 gate run.",
+    "Ignore older Qwen3 source-defect runs for model-quality conclusions.",
+    "If V7 is 5/5 inference PASS and 5/5 parse PASS, close M41.",
+    "Then modify full 38 workflow for Qwen3 cache reuse and bounded concurrency before triggering M42.",
+    "Use audit V2; never reuse the first alphabetical/tied ranking.",
+    "If V7 format fails, inspect only failing raw outputs and add deterministic aliases without fabricating missing fields.",
+    "Do not increase operational coalition scale above 5."
+  ]
+}
