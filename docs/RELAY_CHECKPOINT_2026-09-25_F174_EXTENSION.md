@@ -17,16 +17,14 @@ Mode : REALITY / EVIDENCE / APPEND-ONLY
 État réel :
 - registre présent ;
 - scaffold local présent et validé ;
-- dépôt cible attendu : `dmaillot95-ui/cerebron-farm-162-nu` ;
-- dépôt dédié : manquant ;
-- entraînement : NOT_TRAINED ;
-- déploiement : non revendiqué.
+- dépôt cible : `dmaillot95-ui/cerebron-farm-162-nu` ;
+- dépôt dédié : toujours manquant ;
+- entraînement : `NOT_TRAINED` ;
+- déploiement : non revendiqué ;
+- manifeste de bootstrap : `config/farm-bootstrap-manifest-f162-f174.json`.
 
 Statut :
 `PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING`
-
-Scaffold :
-`scaffolds/f162-nu`
 
 ## F173 — AÉLYS LIVE
 
@@ -34,57 +32,80 @@ Dépôt :
 `dmaillot95-ui/cerebron-farm-173-aelys-live`
 
 État réel :
-- dépôt GitHub existe et possède une branche `main` ;
-- base d'intégration F173 installée ;
-- selftest dédié corrigé : SUCCESS, run `36155830169` ;
-- HEAD vérifié : `1c296ae0ba430fc3706de7ad2d81a2a088ed613c` ;
-- adaptateurs live/TikTok/TTS/avatar : UNQUALIFIED ;
-- entraînement : NOT_TRAINED ;
-- production live : NOT_DEPLOYED ;
-- le bus maître `config/cerebron-unified-plugin-bus-v1.json` existe et son Guard est PASS ; le runtime des providers reste UNQUALIFIED.
+- dépôt GitHub initialisé ;
+- contrats locaux qualifiés ;
+- selftest dédié : SUCCESS, run `36156589051` ;
+- HEAD de preuve : `6a99ba8807ffd77fca95249c3f206b6c636dd024` ;
+- routage RDX corrigé vers `RDX_EXCHANGE` ;
+- F152 reste BETA et est interdit comme fournisseur RDX ;
+- TikTok / TTS / avatar / endpoints distants : `UNQUALIFIED` ;
+- entraînement : `NOT_TRAINED` ;
+- production live : `NOT_DEPLOYED`.
 
 Statut :
-`BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED`
-
-Scaffold :
-`scaffolds/f173-aelys-live`
+`BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED`
 
 ## F174 — ELYRA VISUAL SIMULATION
 
 Dépôt :
 `dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation`
 
-État réel :
-- dépôt GitHub existe ;
-- dépôt dédié actuellement vide / non initialisé ;
-- scaffold local CÉRÉBRON présent et validé ;
-- entraînement : NOT_TRAINED ;
-- simulation visuelle exécutée : false ;
-- test physique : NOT_TESTED.
+État réel vérifié :
+- dépôt GitHub initialisé ;
+- premier commit : `e270fa591e6f16afee3d9ae7a3f1d458539ec085` ;
+- selftest dédié : SUCCESS, run `36156887593` ;
+- HEAD du bootstrap qualifié : `fd2327d3016475cdf84561e5d4bdcee89a28f2e5` ;
+- entraînement : `NOT_TRAINED` ;
+- simulation visuelle de production : `NOT_EXECUTED` ;
+- test physique : `NOT_TESTED`.
 
 Statut :
-`PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY`
+`DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED`
 
-Scaffold :
-`scaffolds/f174-elyra-visual-simulation`
+Un canary déterministe de simulation visuelle a été ajouté.  
+Run courant au moment de ce checkpoint : `36160498658`.  
+Ne pas déclarer ce canary PASS tant que sa conclusion GitHub n'est pas SUCCESS.
 
-## Preuves GitHub Actions
+## Unified Plugin Bus
 
-- F173 dépôt dédié Selftest corrigé : run 36155830169 — SUCCESS
-- CÉRÉBRON Unified Plugin Bus Guard : run 36156083228 — SUCCESS
-- F162/F173/F174 Reality Guard : run 36155160206 — SUCCESS
-- CÉRÉBRON Omega Core : run 36155316250 — SUCCESS
-- CÉRÉBRON Main Integration Gate : run 36155316281 — SUCCESS
-- Civilization Crystal Baseline Guard : run 36155316425 — SUCCESS
-- Greek AI Constellation Guard : run 36155137209 — SUCCESS
+Le bus maître :
+`config/cerebron-unified-plugin-bus-v1.json`
+
+Routages vérifiés :
+- `rdx.search → RDX_EXCHANGE`
+- `rdx.fetch → RDX_EXCHANGE`
+- `presenter.compose → AELYS`
+- `avatar.speak → ELYRA`
+- `visual.simulate → ELYRA`
+
+Attention :
+- `visual.simulate` est seulement une capacité déclarée ;
+- provider ELYRA : `runtime_status = UNQUALIFIED` ;
+- dépôt F174 initialisé != simulation qualifiée ;
+- simulation != test physique.
+
+Preuve du bus après ajout F174 :
+- Unified Plugin Bus Guard : run `36160423763` — SUCCESS
+- Omega Core : run `36160423651` — SUCCESS
+- Main Integration Gate : run `36160423637` — SUCCESS
+
+## Reality Guard F162/F173/F174
+
+Preuves après promotion F174 :
+- Reality Guard : run `36157098863` — SUCCESS
+- Omega Core : run `36157098882` — SUCCESS
+- Main Integration Gate : run `36157098777` — SUCCESS
+
+Preuves ultérieures :
+- Reality Guard : run `36157182970` — SUCCESS
+- Omega Core : run `36157182957` — SUCCESS
+- Main Integration Gate : run `36157183132` — SUCCESS
 
 ## Règles
 
-Les dépôts F173/F174 existants ne doivent pas être confondus avec une capacité exécutée.
-
 `REPOSITORY_EXISTS != REPOSITORY_INITIALIZED`
 
-`SCAFFOLD_VALIDATED != RUNTIME_EXECUTED`
+`REPOSITORY_INITIALIZED != RUNTIME_EXECUTED`
 
 `VISUAL_SIMULATION != PHYSICAL_TEST`
 
@@ -92,39 +113,20 @@ Les dépôts F173/F174 existants ne doivent pas être confondus avec une capacit
 
 `CLAIM <= EVIDENCE`
 
-## Prochaine étape
+## Prochaines actions
 
-F173 est déjà initialisée : ne pas la réinitialiser ni écraser son architecture dédiée.
+F162 :
+1. créer le dépôt dédié quand un outil de création de dépôt est disponible ;
+2. recopier le scaffold canonique selon le manifeste ;
+3. exécuter les guards avant promotion.
 
-Pour F173 :
-1. qualifier séparément les adaptateurs live réels ;
-2. résoudre/registrer le bus maître réel avant de déclarer un binding confirmé ;
-3. ne jamais passer à LIVE/EXECUTED sans canary/run/artifact.
+F173 :
+1. qualifier un par un les runtimes externes réels ;
+2. exiger canary + trace/artifact ;
+3. ne jamais passer à LIVE sans exécution réelle.
 
-Pour F174, lorsqu'un outil pouvant initialiser un dépôt GitHub vide est disponible :
-1. créer le premier commit ;
-2. recopier ou réconcilier le scaffold canonique depuis le dépôt maître ;
-3. exécuter le guard dédié ;
-4. seulement après SUCCESS, passer `repository_initialized=true` ;
-5. ne jamais confondre simulation visuelle et test physique.
-
-Pour F162 :
-- créer d'abord le dépôt dédié ;
-- recopier `scaffolds/f162-nu` ;
-- valider avant tout changement de statut.
-
-
-## Correction de routage F173 → RDX
-
-Le premier scaffold F173 associait à tort `rdx.search` / `rdx.fetch` à `F152_RDX`.
-
-Vérification du registre maître :
-- F152 = BETA ;
-- F152 ne doit pas être utilisé comme fournisseur RDX.
-
-Correction appliquée :
-- provider : `RDX_EXCHANGE` ;
-- dépôt : `dmaillot95-ui/cerebron-rdx-exchange` ;
-- runtime : `UNBOUND` / non qualifié ;
-- appels externes automatiques : false ;
-- F152 est BETA et explicitement exclu du routage RDX.
+F174 :
+1. terminer le canary visuel déterministe ;
+2. archiver son artefact + SHA ;
+3. seulement après SUCCESS, enregistrer un statut de canary exécuté ;
+4. ne pas appeler ce canary validation physique ou vidéo de production.
