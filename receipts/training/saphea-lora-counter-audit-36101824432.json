@@ -1,0 +1,27 @@
+{
+  "schema": "SAPHEA_LORA_COUNTER_AUDIT_PUBLIC_RECEIPT_V1",
+  "run_id": 36101824432,
+  "source_training_run": 36100266729,
+  "source_transfer_run": 36101181888,
+  "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+  "audit_subset_count": 36,
+  "base_audit_score": 9,
+  "adapter_audit_score": 12,
+  "audit_max": 36,
+  "audit_gain": 3,
+  "independent_codepath_reproduction_pass": true,
+  "redteam_count": 72,
+  "base_redteam_score": 22,
+  "adapter_redteam_score": 29,
+  "redteam_max": 72,
+  "redteam_gain": 7,
+  "redteam_pass": true,
+  "counter_audit_pass": true,
+  "independence_note": "Independent evaluator/oracle code path, but same base model lineage and same GitHub project; not external independent scientific evidence.",
+  "promotion": "NOT_PROMOTED",
+  "next_gates": [
+    "F72_REVIEW",
+    "AFAH_FINAL_AUTHORITY"
+  ],
+  "claim_ceiling": "INTERNAL_INDEPENDENT_CODEPATH_REPRODUCTION_PLUS_SYNTHETIC_REDTEAM"
+}
