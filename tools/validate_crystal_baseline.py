@@ -37,15 +37,23 @@ assert (R/by_id[162]["local_scaffold"]).exists()
 if expected >= 174:
     assert by_id[173]["repository_exists"] is True
     assert by_id[173]["repository_initialized"] is True
-    assert by_id[173]["status"]=="BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED"
-    assert by_id[173]["dedicated_repo_selftest_run_id"]==36155830169
+    assert by_id[173]["status"]=="BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED"
+    assert by_id[173]["dedicated_repo_selftest_run_id"]==36156589051
     assert by_id[173]["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
     assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
     assert (R/by_id[173]["local_scaffold"]).exists()
 
     assert by_id[174]["repository_exists"] is True
-    assert by_id[174]["repository_initialized"] is False
-    assert by_id[174]["status"]=="PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY"
+    assert by_id[174]["repository_initialized"] is True
+    assert by_id[174]["status"]=="VISUAL_STATE_SEQUENCE_CANARY_EXECUTED"
+    assert by_id[174]["dedicated_repo_selftest_run_id"]==36160671044
+    assert by_id[174]["simulation_status"]=="VISUAL_STATE_SEQUENCE_CANARY_EXECUTED"
+    assert by_id[174]["visual_simulation_executed"] is True
+    assert by_id[174]["video_render_executed"] is False
+    assert by_id[174]["physical_validation_claimed"] is False
+    assert by_id[174]["physical_test_status"]=="NOT_TESTED"
+    assert by_id[174]["visual_canary"]["run_id"]==36160498658
+    assert by_id[174]["visual_canary"]["result_sha256"]=="edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9"
     assert (R/by_id[174]["local_scaffold"]).exists()
 
 missing=[f["id"] for f in farms["farms"] if f.get("repository_exists") is False]
