@@ -71,13 +71,32 @@ Run : `36163483531`
 - production_live_claimed : false
 - avatar runtime : UNQUALIFIED
 
+### Canary HTTP loopback local
+
+Run : `36164204308`
+
+- transport : `HTTP_LOOPBACK`
+- bind : `127.0.0.1`
+- HTTP status : `200`
+- presentation status : `HOLD`
+- résultat SHA-256 : `c9b21d56586df27bd4dee8e9964b170fb241fdec9b9f91822068d86ed77b8450`
+- artifact ID : `10876727408`
+- artifact digest : `sha256:03fad961a41073e42bd096830a93eb3caf6ef53e4995fae2077a6221c4c2f733`
+- external_endpoint_used : false
+- paid_provider_used : false
+- production_live_claimed : false
+- raw_user_ref_persisted : false
+- selftest post-HTTP : SUCCESS, run `36164296182`
+
+Ce canary prouve un transport HTTP localhost réel. Il ne qualifie aucun endpoint Internet ou service externe.
+
 RDX route :
 `RDX_EXCHANGE`
 
 F152 reste BETA et interdit comme route RDX.
 
 Statut :
-`LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED`
+`LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED`
 
 ## F174 — ELYRA VISUAL / VIDEO SIMULATION
 
@@ -148,14 +167,20 @@ Le MP4 canary est une preuve d'exécution du renderer, pas une qualification pro
 
 ## Guards finaux
 
-Après ajout des canaries F173 live-loop + TTS + session replay :
-- F162/F173/F174 Reality Guard : run `36163893188` — SUCCESS
-- Unified Plugin Bus Guard : run `36163898021` — SUCCESS
-- Civilization Crystal Baseline Guard : run `36163902368` — SUCCESS
-- CÉRÉBRON Omega Core : run `36163902310` — SUCCESS
-- CÉRÉBRON Main Integration Gate : run `36163902337` — SUCCESS
+Après ajout du canary HTTP localhost F173 :
+- F162/F173/F174 Reality Guard : run `36164473392` — SUCCESS
+- Unified Plugin Bus Guard : run `36164478011` — SUCCESS
+- Civilization Crystal Baseline Guard : run `36164481524` — SUCCESS
+- CÉRÉBRON Omega Core : run `36164481716` — SUCCESS
+- CÉRÉBRON Main Integration Gate : run `36164481772` — SUCCESS
 
-Preuves F174 MP4 antérieures conservées dans le registre.
+Preuves locales F173 précédentes conservées :
+- live-loop : run `36162553038`
+- TTS offline : run `36163338754`
+- session replay : run `36163483531`
+- selftest global post-HTTP : run `36164296182`
+
+Preuves F174 visual/MP4 conservées dans le registre.
 
 ## Réalité actuelle
 
@@ -163,7 +188,7 @@ F162 :
 `LOCAL_SCAFFOLD_PRESENT / DEDICATED_REPOSITORY_MISSING`
 
 F173 :
-`LOCAL_LOOP_PASS / LOCAL_TTS_PASS / SESSION_REPLAY_PASS / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE / NOT_TRAINED`
+`LOCAL_LOOP_PASS / LOCAL_TTS_PASS / SESSION_REPLAY_PASS / HTTP_LOOPBACK_PASS / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE / NOT_TRAINED`
 
 F174 :
 `VISUAL_CANARY_PASS / MP4_RENDER_CANARY_PASS / NOT_PRODUCTION / NOT_PHYSICALLY_VALIDATED / NOT_TRAINED`
@@ -189,6 +214,7 @@ F173 :
 - live-loop local : PASS ;
 - TTS local offline : PASS ;
 - session replay déterministe : PASS ;
+- HTTP localhost : PASS ;
 - prochaine preuve utile : qualifier un runtime externe réel isolé (client privé, TikTok ou avatar runtime), avec canary + trace ;
 - ne pas passer à LIVE tant qu'un endpoint/runtime externe réel n'est pas exécuté et validé.
 
