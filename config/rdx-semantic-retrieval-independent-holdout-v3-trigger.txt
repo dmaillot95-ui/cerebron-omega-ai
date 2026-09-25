@@ -1,0 +1,8 @@
+RDX SEMANTIC RETRIEVAL INDEPENDENT HOLDOUT V3
+policy=SEMANTIC_ONLY
+selected_after_fresh_holdout_run=36161387023
+selection_receipt_sha256=04a93068314f1740d27c150f20e79f3fd6ec46f9dd1ccd6f412d33d6380c3bcd
+new_generator_family=true
+exact_prompts_public=false
+independent_after_policy_selection=true
+training=false
