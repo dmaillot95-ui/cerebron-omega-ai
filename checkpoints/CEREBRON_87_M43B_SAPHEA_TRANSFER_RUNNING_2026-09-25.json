@@ -1,0 +1,48 @@
+{
+  "schema": "CEREBRON_87_M43B_SAPHEA_TRANSFER_RUNNING_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_86_M43_SAPHEA_G6_VERIFIED_2026-09-25.json",
+  "mission": "M43B_SAPHEA_TRANSFER_ABLATION_REDTEAM",
+  "status": "RUNNING_QUEUED_AT_CHECKPOINT",
+  "run_id": 36101503838,
+  "trigger_head": "98db81a54491d3ab89c21e4fb361f657bff16a49",
+  "branch": "feat/saphea-first-lora-v1",
+  "source_adapter": {
+    "run_id": 36100266729,
+    "sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+    "hf_private_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729"
+  },
+  "benchmark": {
+    "normal_transfer_records": 60,
+    "red_team_records": 24,
+    "total": 84,
+    "memory_class": "M6_COLD_TRANSFER",
+    "deny_training": true,
+    "scope": "SAME_EPISTEMIC_LABELS_NEW_PROMPT_FIELD_REPRESENTATIONS",
+    "construction": "SEPARATE_CODEPATH_NEW_FIELDS_NEW_WORDING_NO_GOLD_M6_TEMPLATE_IMPORT"
+  },
+  "ablation": {
+    "baseline": "IMMUTABLE_QWEN2_5_0_5B",
+    "candidate": "SAME_BASE_PLUS_EXACT_PRIVATE_SAPHEA_LORA",
+    "same_benchmark": true,
+    "transfer_gain_required_positive": true,
+    "redteam_gain_required_nonnegative": true,
+    "critical_regression_allowed": false
+  },
+  "evidence_policy": {
+    "negative_scientific_result": "RETAIN_NOT_TOOL_FAILURE",
+    "independent_codepath": true,
+    "independent_model_evidence": false,
+    "promotion": "NOT_PROMOTED"
+  },
+  "exact_resume": [
+    "Check run 36101503838 only.",
+    "Verify exact private adapter readback SHA before evaluation.",
+    "Compare base and adapter on identical 60-record cold transfer set.",
+    "Compare base and adapter on identical 24-record Red Team set.",
+    "If transfer_gain<=0 or critical_regression=true: block G7 and retain evidence; do not tune on this benchmark.",
+    "If transfer gain positive, Red Team non-worse, and no critical regression: hold for independent audit + F72 + AFAH; still not promoted.",
+    "Never train on M43B benchmark."
+  ]
+}
