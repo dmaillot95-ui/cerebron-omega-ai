@@ -1,0 +1,45 @@
+{
+  "schema": "CEREBRON_ALL_AI_COUNCIL_REPAIR_CANARY_V1",
+  "run_id": "36082948475",
+  "receipt_count": 5,
+  "parse_pass_count": 5,
+  "all_pass": true,
+  "rows": [
+    {
+      "ai_id": "AELYS",
+      "inference": "PASS",
+      "parse_ok": true,
+      "format_contract_version": "V7_QWEN3_UNICODE_ALIAS_STRICT",
+      "output_sha256": "33365729e140b288ec7113ce4c5646c8c3f9ea445a85c46d262771f4515c1cde"
+    },
+    {
+      "ai_id": "CEREBRON",
+      "inference": "PASS",
+      "parse_ok": true,
+      "format_contract_version": "V7_QWEN3_UNICODE_ALIAS_STRICT",
+      "output_sha256": "1d7b036026a39ee56abbfe84d46e271e4b4aacd61885bc256a19229ff4c279da"
+    },
+    {
+      "ai_id": "ETHERION",
+      "inference": "PASS",
+      "parse_ok": true,
+      "format_contract_version": "V7_QWEN3_UNICODE_ALIAS_STRICT",
+      "output_sha256": "eec9a127f097b433aceb2730d5824931f54a48e6c4b1311339c9736e0b7f51ac"
+    },
+    {
+      "ai_id": "F166-RHO",
+      "inference": "PASS",
+      "parse_ok": true,
+      "format_contract_version": "V7_QWEN3_UNICODE_ALIAS_STRICT",
+      "output_sha256": "69a6898ec311e310aaea6e562d56ebe6397cfff8be8d87df1d07de640034c32f"
+    },
+    {
+      "ai_id": "METRION",
+      "inference": "PASS",
+      "parse_ok": true,
+      "format_contract_version": "V7_QWEN3_UNICODE_ALIAS_STRICT",
+      "output_sha256": "c0b6df88c33d9656d2b6fe15500a728c4c90ad67f6b5628426739091cf03618f"
+    }
+  ],
+  "sha256": "f79e04b3fdf2aad78a8da99c30b1f0183d578d737e474312f3aff7642d7f53e3"
+}
