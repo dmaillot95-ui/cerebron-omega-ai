@@ -1,0 +1,55 @@
+{
+  "schema": "CEREBRON_EPISTEMIC_SENTINEL_FORMAT_V3_2",
+  "date": "2026-09-25",
+  "status": "PREPARED_NOT_EXECUTED",
+  "purpose": "Complete structurally incomplete corrective records without new model inference by preserving explicit uncertainty when confidence/unknown fields are omitted.",
+  "source_failure": "FAIL-FORMAT-MONOLITHIC-SIXFIELD-001",
+  "source_runs": [
+    36177878435,
+    36179580251,
+    36182424742
+  ],
+  "sentinels": {
+    "CONFIDENCE": "LOW: confidence omitted by model; review required",
+    "UNKNOWN": "UNRESOLVED: model omitted explicit unknowns; review required"
+  },
+  "allowed_runtime_fallback_fields": [
+    "CONFIDENCE",
+    "UNKNOWN"
+  ],
+  "forbidden_runtime_fallback_fields": [
+    "ATTEMPT",
+    "ASSUMPTIONS",
+    "EVIDENCE_NEEDED",
+    "COUNTEREXAMPLE_OR_LIMIT"
+  ],
+  "rule": "Runtime may add only epistemic metadata sentinels; it must never fabricate substantive answer, assumption, evidence, or limit content.",
+  "validation": {
+    "source_artifact_id": 10882824691,
+    "targets": [
+      "SAPHEA",
+      "AELYS"
+    ]
+  },
+  "holdout": {
+    "qwen_artifact_id": 10883795907,
+    "smollm_artifact_id": 10883830939,
+    "targets": [
+      "ETHERION",
+      "PSI"
+    ]
+  },
+  "promotion_gate": [
+    "NO_NEW_MODEL_INFERENCE",
+    "NO_SUBSTANTIVE_FIELD_FABRICATION",
+    "ALL_RECORDS_STRUCTURALLY_COMPLETE_AFTER_SENTINELS",
+    "ORIGINAL_OUTPUT_HASH_PRESERVED",
+    "SENTINEL_FIELDS_EXPLICITLY_MARKED_AS_RUNTIME_GENERATED",
+    "CROSS_LINEAGE_HOLDOUT_COMPLETE"
+  ],
+  "promotion_ceiling": "INTERFACE_NORMALIZATION_ONLY_NO_MODEL_CAPABILITY_GAIN",
+  "new_inference": false,
+  "weight_change": false,
+  "training_released": false,
+  "operational_mutation_f172_f173_f174": false
+}
