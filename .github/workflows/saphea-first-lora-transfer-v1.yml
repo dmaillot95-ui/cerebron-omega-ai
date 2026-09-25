@@ -1,0 +1,146 @@
+name: SAPHEA First LoRA Transfer V1
+on:
+  push:
+    branches: ['feat/saphea-first-lora-v1']
+    paths:
+      - 'config/saphea-first-lora-transfer-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      PYTHONPATH: platform
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      ADAPTER_PREFIX: colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned CPU evaluation stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece huggingface_hub
+
+      - name: Compile
+        run: |
+          python -m py_compile platform/saphea_epistemic_dataset_v1.py
+          python -m py_compile platform/saphea_epistemic_transfer_v1.py
+          python -m py_compile platform/saphea_first_lora_transfer_eval_v1.py
+
+      - name: Rebuild deterministic GOLD and M6 only for overlap audit
+        run: python platform/saphea_epistemic_dataset_v1.py
+
+      - name: Build frozen disjoint transfer benchmark
+        run: python platform/saphea_epistemic_transfer_v1.py
+
+      - name: Verify transfer benchmark isolation
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          t=json.loads((root/"saphea-epistemic-transfer-v1.json").read_text())
+          assert t["deny_training"] is True
+          assert t["record_count"]==108
+          assert t["prompt_overlap_with_gold_m6"]==0
+          assert t["id_overlap_with_gold_m6"]==0
+          assert t["source_gold_sha256"]=="efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa"
+          assert t["source_m6_sha256"]=="cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63"
+          print("SAPHEA_TRANSFER_ISOLATION=PASS",t["dataset_sha256"])
+          PY
+
+      - name: Download exact verified adapter from private Hugging Face
+        run: |
+          mkdir -p /tmp/saphea-adapter
+          python - <<'PY'
+          import hashlib,os,pathlib
+          from huggingface_hub import hf_hub_download
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]; prefix=os.environ["ADAPTER_PREFIX"]
+          expected={
+            "adapter_model.safetensors":"0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+            "adapter_config.json":"3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+          }
+          dstroot=pathlib.Path("/tmp/saphea-adapter")
+          for name,sha in expected.items():
+              src=hf_hub_download(repo_id=repo,filename=prefix+"/"+name,repo_type="model",token=token,force_download=True)
+              data=pathlib.Path(src).read_bytes()
+              got=hashlib.sha256(data).hexdigest()
+              if got!=sha:
+                  raise SystemExit("ADAPTER_SHA_MISMATCH:"+name)
+              (dstroot/name).write_bytes(data)
+          print("SAPHEA_ADAPTER_PRIVATE_READBACK=PASS")
+          PY
+
+      - name: Evaluate base versus adapter on frozen transfer
+        run: python platform/saphea_first_lora_transfer_eval_v1.py --adapter-dir /tmp/saphea-adapter
+
+      - name: Build public transfer receipt
+        run: |
+          mkdir -p receipts/training
+          python - <<'PY'
+          import json,os,pathlib
+          r=json.loads(pathlib.Path("platform/artifacts/saphea-first-lora-transfer-eval-v1.json").read_text())
+          out={
+            "schema":"SAPHEA_FIRST_LORA_TRANSFER_PUBLIC_RECEIPT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_training_run":36100266729,
+            "source_adapter_sha256":r["adapter_sha256"],
+            "transfer_dataset_sha256":r["transfer_dataset_sha256"],
+            "transfer_record_count":r["transfer_record_count"],
+            "transfer_deny_training":r["transfer_deny_training"],
+            "prompt_overlap_with_gold_m6":r["prompt_overlap_with_gold_m6"],
+            "id_overlap_with_gold_m6":r["id_overlap_with_gold_m6"],
+            "base_score":r["base_score"],
+            "adapter_score":r["adapter_score"],
+            "max_score":r["adapter_max"],
+            "transfer_gain":r["transfer_gain"],
+            "prediction_changed_count":r["prediction_changed_count"],
+            "helpful_change_count":r["helpful_change_count"],
+            "harmful_change_count":r["harmful_change_count"],
+            "critical_regression":r["critical_regression"],
+            "ablation_supports_value":r["ablation_supports_value"],
+            "decision":r["decision"],
+            "promotion":"NOT_PROMOTED",
+            "pending_gates":r["pending_gates"],
+            "claim_ceiling":r["claim_ceiling"],
+          }
+          p=pathlib.Path("receipts/training")/f"saphea-first-lora-transfer-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Remove private adapter from workspace
+        if: always()
+        run: rm -rf /tmp/saphea-adapter
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saphea-first-lora-transfer-${{ github.run_id }}
+          path: |
+            platform/artifacts/saphea-epistemic-transfer-v1.json
+            platform/artifacts/saphea-first-lora-transfer-eval-v1.json
+            receipts/training/saphea-first-lora-transfer-${{ github.run_id }}.json
+          if-no-files-found: warn
+
+      - name: Persist public transfer metadata
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/saphea-first-lora-transfer-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAPHEA LoRA transfer ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/saphea-first-lora-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
