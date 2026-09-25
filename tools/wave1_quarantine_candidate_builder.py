@@ -127,7 +127,7 @@ def fill(t,rng):
       unit=rng.choice(["m","V","kg","mm","°C"]),
       unit1=u1,unit2=u2,
       value=rng.choice(VALUES),unc=rng.choice([0.01,0.05,0.1,0.5,1.0]),
-      n=rng.choice([4,6,8,12])
+      n=rng.choice([4,6,8,12]),\n      limit=rng.choice(["missing execution receipt","missing physical validation","missing provenance","missing artifact SHA","unverified external dependency"])
     )
 
 def main():
