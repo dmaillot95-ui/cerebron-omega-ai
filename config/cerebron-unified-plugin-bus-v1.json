@@ -63,7 +63,16 @@
       "capabilities": [
         "presenter.compose"
       ],
-      "runtime_status": "BASE_INSTALLED_ADAPTERS_UNQUALIFIED"
+      "runtime_status": "LOCAL_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
+      "local_live_loop_canary": {
+        "status": "PASS",
+        "run_id": 36162553038,
+        "result_sha256": "a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4",
+        "artifact_id": 10876417068,
+        "artifact_digest": "sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303",
+        "external_calls_executed": false,
+        "production_live_claimed": false
+      }
     },
     "ELYRA": {
       "kind": "LOGICAL_PROVIDER",
