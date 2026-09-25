@@ -1,0 +1,106 @@
+{
+  "schema": "CEREBRON_FAILURE_CURRICULUM_ROUTING_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE",
+  "purpose": "Route measured failure classes to the smallest useful set of specialists for corrective curriculum. Routing is not execution and is not independent evidence.",
+  "rules": [
+    "ROUTING!=EXECUTION",
+    "CURRICULUM_TARGET!=TRAINING_RELEASE",
+    "SOURCE_AI_REMAINS_ATTACHED",
+    "CLASS_SPECIALISTS_ARE_ADDITIVE_NOT_REPLACEMENTS",
+    "COALITION_MINIMALE_UTILE"
+  ],
+  "class_routes": {
+    "F_TRANSFER": {
+      "specialists": [
+        "XI",
+        "MU",
+        "OMICRON",
+        "AFAH"
+      ],
+      "reason": "Generalization, uncertainty, rare-event failure and final audit."
+    },
+    "F_TOOL": {
+      "specialists": [
+        "CHI",
+        "BETA",
+        "IOTA",
+        "CEREBRON"
+      ],
+      "reason": "Interfaces, contracts, atomic localization and orchestration."
+    },
+    "F_RED": {
+      "specialists": [
+        "RHO",
+        "PSI",
+        "OMEGA",
+        "AFAH"
+      ],
+      "reason": "Dependency audit, blind spots, falsification and final audit."
+    },
+    "F_FORMAT": {
+      "specialists": [
+        "BETA",
+        "CHI",
+        "CEREBRON"
+      ],
+      "reason": "Output contract, interface compatibility and orchestration."
+    },
+    "F_ROLE": {
+      "specialists": [
+        "RHO",
+        "TAU",
+        "ZETA",
+        "AFAH",
+        "CEREBRON"
+      ],
+      "reason": "Correlation audit, stopping/routing, resource minimization and role-level governance."
+    },
+    "F_EVIDENCE_SCOPE": {
+      "specialists": [
+        "RHO",
+        "IOTA",
+        "OMEGA",
+        "AFAH",
+        "CEREBRON"
+      ],
+      "reason": "Evidence dependency, atomic claim scope, falsification, audit and orchestration."
+    }
+  },
+  "explicit_failure_overrides": {
+    "FAIL-AGORA-CONTENT-SCOPE-PROMOTION-001": {
+      "specialists": [
+        "RHO",
+        "IOTA",
+        "OMEGA",
+        "AFAH",
+        "CEREBRON"
+      ],
+      "axes": [
+        "EVIDENCE_SCOPE_BINDING",
+        "CONTROL_PLANE_VS_CONTENT_PLANE",
+        "PACKET_HASH_BINDING",
+        "FAIL_CLOSED_PROMOTION",
+        "CONSENSUS_VS_INDEPENDENT_EVIDENCE"
+      ]
+    },
+    "FAIL-C80-M42-SPECIALIZATION-COLLAPSE-001": {
+      "specialists": [
+        "RHO",
+        "TAU",
+        "ZETA",
+        "AFAH",
+        "CEREBRON"
+      ],
+      "axes": [
+        "ROLE_FIDELITY",
+        "SHARED_LINEAGE_DETECTION",
+        "ROUTING_DIVERSITY",
+        "CONSENSUS_VS_CORRELATION"
+      ]
+    }
+  },
+  "max_specialists_per_failure": 5,
+  "no_agent_execution_claim": true,
+  "no_training_release": true
+}
