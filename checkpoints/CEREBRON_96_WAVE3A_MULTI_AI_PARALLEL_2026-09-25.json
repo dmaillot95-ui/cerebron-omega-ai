@@ -1,0 +1,44 @@
+{
+  "schema": "CEREBRON_96_WAVE3A_MULTI_AI_PARALLEL_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "active": {
+    "ELYSIUM": {
+      "state": "D4_REPAIR_DEV_V2_IN_PROGRESS",
+      "run_id": 36137547428,
+      "d4_last_cold_decision": "HOLD_NO_MEASURED_GAIN"
+    },
+    "SAELION": {
+      "d2_run_id": 36138362585,
+      "d2_state": "PASS",
+      "d2_audit_sha256": "52463129e1a4a0e4149175d37841be7d07c833e598647c0ce96bcae077cdf521",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+      "d3_run_id": 36138864930,
+      "d3_state": "QUEUED"
+    },
+    "NEXUS": {
+      "d2_run_id": 36138369400,
+      "d2_state": "PASS",
+      "d2_audit_sha256": "d76c65abf109ec4d629dd63790ae66e15eb83866be1be4699b3e3af3c0d2a4fc",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
+      "d3_run_id": 36138864930,
+      "d3_state": "QUEUED"
+    }
+  },
+  "rules": [
+    "QUEUED_IS_NOT_FAILURE",
+    "NO_DUPLICATE_RERUN_WHILE_QUEUED_OR_IN_PROGRESS",
+    "M6_DENY_TRAINING",
+    "EXACT_PROMPTS_PRIVATE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "D4_REQUIRES_MEASURED_GAIN_OVER_BEST_SINGLE"
+  ],
+  "next_exact": [
+    "Read ELYSIUM D4 repair DEV V2 result when complete.",
+    "Run SAELION and NEXUS D3 four baselines when GitHub schedules them.",
+    "On D3 PASS update farm G4 and central contract.",
+    "Only then compute separate SAELION and NEXUS complementarity prechecks."
+  ]
+}
