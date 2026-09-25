@@ -1,0 +1,28 @@
+{
+  "schema": "SAELION_M6_V2_PRIVATE_RELEASE_RECEIPT",
+  "run_id": 36138516577,
+  "ai_id": "SAELION",
+  "created_now": true,
+  "private_path": "saelion/M6/SAELION-M6-V2.json",
+  "dataset_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+  "task_count": 72,
+  "domain_counts": {
+    "calibration": 12,
+    "compression_fidelity": 12,
+    "lesson_selection": 12,
+    "memory_hygiene": 12,
+    "negative_transfer_detection": 12,
+    "transfer": 12
+  },
+  "label_counts": {
+    "FAIL": 24,
+    "INSUFFICIENT": 24,
+    "PASS": 24
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "exact_prompts_public": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING",
+  "receipt_sha256": "31bd7ae5b8a63604aec7c94efb704e549bb08dc00e21ddc0541f3f40262529ed"
+}

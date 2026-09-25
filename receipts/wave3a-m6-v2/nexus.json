@@ -1,0 +1,28 @@
+{
+  "schema": "NEXUS_M6_V2_PRIVATE_RELEASE_RECEIPT",
+  "run_id": 36138516577,
+  "ai_id": "NEXUS",
+  "created_now": true,
+  "private_path": "nexus/M6/NEXUS-M6-V2.json",
+  "dataset_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
+  "task_count": 72,
+  "domain_counts": {
+    "contradiction_routing": 12,
+    "dependency_tracking": 12,
+    "entity_linking": 12,
+    "evidence_provenance": 12,
+    "graph_retrieval": 12,
+    "tool_routing": 12
+  },
+  "label_counts": {
+    "FAIL": 24,
+    "INSUFFICIENT": 24,
+    "PASS": 24
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "exact_prompts_public": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING",
+  "receipt_sha256": "53e7041ed96f4e44d4bc5b4df6e168ef38a79d29923eb6a30f36777622ee9023"
+}
