@@ -1,5 +1,7 @@
 MEMORY PROMOTION AUDIT V2
-farm_count_expected=152
+registry_entry_count_expected=154
+registry_max_id_expected=174
+sparse_ids_allowed=true
 f152_rdx_ingress=CONFIGURED
 m6_training=DENY
 f72_expected=FAIL
