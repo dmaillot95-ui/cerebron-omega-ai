@@ -20,9 +20,11 @@ f173=by_id[173]
 assert f173["repo"]=="cerebron-farm-173-aelys-live"
 assert f173["identity"]=="AELYS"
 assert f173["repository_exists"] is True
-assert f173["repository_initialized"] is False
+assert f173["repository_initialized"] is True
 assert f173["training_status"]=="NOT_TRAINED"
 assert f173["production_status"]=="NOT_DEPLOYED"
+assert f173["dedicated_repo_selftest_run_id"]==36153266774
+assert f173["master_plugin_bus_status"]=="UNCONFIRMED_REFERENCED_FILE_MISSING"
 
 f174=by_id[174]
 assert f174["repo"]=="cerebron-farm-174-elyra-visual-simulation"
@@ -42,7 +44,7 @@ print(json.dumps({
   "status":"PASS",
   "registry_max_farm":174,
   "f162":"PREPARED_REPOSITORY_MISSING",
-  "f173":"PREPARED_TARGET_REPOSITORY_EMPTY",
+  "f173":"BASE_INSTALLED_SELFTEST_PASS_RUNTIME_UNQUALIFIED",
   "f174":"PREPARED_TARGET_REPOSITORY_EMPTY",
   "training_claims":0,
   "execution_claims":0
