@@ -22,7 +22,7 @@ assert bus["providers"]["RDX_EXCHANGE"]["runtime_status"]=="UNBOUND"
 assert by_id[173]["identity"]=="AELYS"
 assert by_id[173]["repository_initialized"] is True
 assert bus["providers"]["AELYS"]["farm_id"]==173
-assert by_id[173]["status"]=="LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
+assert by_id[173]["status"]=="LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
 assert by_id[173]["local_live_loop_canary"]["run_id"]==36162553038
 assert by_id[173]["external_runtime_status"]=="UNQUALIFIED"
 assert by_id[173]["production_status"]=="NOT_DEPLOYED"
@@ -40,6 +40,15 @@ assert bus["providers"]["AELYS"]["local_session_replay_canary"]["run_id"]==36163
 assert bus["providers"]["AELYS"]["local_session_replay_canary"]["final_trace_hash"]=="abcc5451ebbcb0965a9f220d8b445b2504ff97471e8dba1cbc1426ce9dc783b8"
 assert bus["providers"]["AELYS"]["local_session_replay_canary"]["external_calls_executed"] is False
 assert bus["providers"]["AELYS"]["local_session_replay_canary"]["production_live_claimed"] is False
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["status"]=="PASS"
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["run_id"]==36164204308
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["transport"]=="HTTP_LOOPBACK"
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["bind"]=="127.0.0.1"
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["http_status"]==200
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["result_sha256"]=="c9b21d56586df27bd4dee8e9964b170fb241fdec9b9f91822068d86ed77b8450"
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["external_endpoint_used"] is False
+assert bus["providers"]["AELYS"]["local_http_loopback_canary"]["production_live_claimed"] is False
+assert bus["invariants"]["f173_http_loopback_does_not_imply_external_runtime"] is True
 assert bus["invariants"]["f173_local_canaries_do_not_imply_external_runtime"] is True
 assert bus["providers"]["AELYS"]["runtime_status"]=="LOCAL_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED"
 
@@ -79,7 +88,7 @@ print(json.dumps({
   "rdx_provider":"RDX_EXCHANGE",
   "rdx_runtime":"UNBOUND",
   "f152_identity":"BETA",
-  "f173_runtime":"LOCAL_LOOP_TTS_REPLAY_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
+  "f173_runtime":"LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "f174_runtime":"UNQUALIFIED_MP4_CANARY_EXECUTED_PRODUCTION_FALSE_PHYSICAL_FALSE",
   "automatic_external_calls":False,
   "automatic_training":False
