@@ -1,0 +1,170 @@
+{
+  "schema": "CEREBRON_UNIFIED_PLUGIN_BUS_V1",
+  "version": "1.0",
+  "date": "2026-09-25",
+  "status": "REGISTERED_CONTROL_PLANE_HF_BASE_ALREADY_CONNECTED",
+  "authority": "AFAH",
+  "objective": "Expose CEREBRON components through one typed plugin-like contract while keeping private payloads in the verified Hugging Face private data plane.",
+  "control_plane": {
+    "provider": "GitHub",
+    "repo": "dmaillot95-ui/cerebron-omega-ai",
+    "branch": "feat/cerebron-ai-platform-mvp"
+  },
+  "private_data_plane": {
+    "provider": "Hugging Face",
+    "repo_type": "model",
+    "repo_id": "cerebron-omega/cerebron-private-memory",
+    "visibility": "PRIVATE",
+    "existing_connection_status": "CONNECTED_VERIFIED_PRIVATE_HF",
+    "secret_source": "HF_TOKEN_ENV_ONLY",
+    "secret_commit_policy": "NEVER_COMMIT"
+  },
+  "namespaces": {
+    "aelys_live": {
+      "root": "colony/AELYS-LIVE/",
+      "presenter_memory": "colony/AELYS-LIVE/agents/AELYS/memory/",
+      "presenter_checkpoints": "colony/AELYS-LIVE/agents/AELYS/checkpoints/",
+      "presentation_catalog": "colony/AELYS-LIVE/agents/AELYS/presentations/",
+      "elyra_runtime_state": "colony/AELYS-LIVE/agents/ELYRA/runtime/",
+      "audit": "colony/AELYS-LIVE/audit/",
+      "purpose": "Private interactive R&D presenter state for TikTok/public LIVE or authenticated client showroom."
+    }
+  },
+  "plugin_contract": {
+    "request_envelope": [
+      "request_id",
+      "caller_id",
+      "capability",
+      "namespace",
+      "payload_ref_or_query",
+      "provenance_ref",
+      "evidence_requirement",
+      "timestamp"
+    ],
+    "response_envelope": [
+      "request_id",
+      "provider_id",
+      "status",
+      "result_ref_or_payload",
+      "provenance",
+      "evidence_level",
+      "claim_ceiling",
+      "sha256"
+    ],
+    "capabilities": [
+      "rdx.search",
+      "rdx.fetch",
+      "memory.canonical_lookup",
+      "memory.semantic_recall",
+      "memory.lineage_check",
+      "evidence.fetch",
+      "governor.check",
+      "presenter.compose",
+      "avatar.speak",
+      "audit.review"
+    ]
+  },
+  "providers": [
+    {
+      "id": "F152_RDX",
+      "capabilities": ["rdx.search", "rdx.fetch"],
+      "repo": "dmaillot95-ui/cerebron-rdx-exchange"
+    },
+    {
+      "id": "F114_CANONICAL_INDEX",
+      "capabilities": ["memory.canonical_lookup"],
+      "repo": "dmaillot95-ui/cerebron-farm-114-encyclopedic-memory-index"
+    },
+    {
+      "id": "F115_VECTOR_MEMORY",
+      "capabilities": ["memory.semantic_recall"],
+      "repo": "dmaillot95-ui/cerebron-farm-115-vector-semantic-memory",
+      "scope_limit": "PRODUCTION_RAG_QUALITY_NOT_YET_PROVEN"
+    },
+    {
+      "id": "F116_DEDUP_FUSION",
+      "capabilities": ["memory.lineage_check"],
+      "repo": "dmaillot95-ui/cerebron-farm-116-dedup-knowledge-fusion",
+      "scope_limit": "SEMANTIC_DEDUP_NOT_YET_PROVEN"
+    },
+    {
+      "id": "F119_EVIDENCE_ARCHIVE",
+      "capabilities": ["evidence.fetch"],
+      "repo": "dmaillot95-ui/cerebron-farm-119-evidence-scientific-archive"
+    },
+    {
+      "id": "F120_MEMORY_GOVERNOR",
+      "capabilities": ["governor.check"],
+      "repo": "dmaillot95-ui/cerebron-farm-120-memory-governor-freeze"
+    },
+    {
+      "id": "NEXUS_ROUTER",
+      "capabilities": ["rdx.search", "memory.semantic_recall", "evidence.fetch"],
+      "role": "MINIMUM_RELEVANT_CONTEXT_ROUTER"
+    },
+    {
+      "id": "AELYS_PRESENTER",
+      "capabilities": ["presenter.compose"],
+      "role": "INTERACTIVE_RD_PRESENTER"
+    },
+    {
+      "id": "ELYRA_AVATAR",
+      "capabilities": ["avatar.speak"],
+      "role": "VOICE_FACE_BODY_OUTPUT"
+    },
+    {
+      "id": "AFAH_AUDIT",
+      "capabilities": ["audit.review"],
+      "role": "FINAL_AUDIT_AUTHORITY"
+    }
+  ],
+  "live_route": [
+    "CLIENT_OR_TIKTOK_EVENT",
+    "AELYS_LIVE_GATEWAY",
+    "NEXUS_ROUTER",
+    "F114_CANONICAL_INDEX",
+    "F115_VECTOR_MEMORY",
+    "F119_EVIDENCE_ARCHIVE",
+    "F116_LINEAGE_CHECK",
+    "F120_MEMORY_GOVERNOR",
+    "AELYS_PRESENTER",
+    "ELYRA_AVATAR",
+    "CLIENT_OR_LIVE_OUTPUT"
+  ],
+  "write_route": [
+    "CANDIDATE_MEMORY",
+    "CLASSIFY",
+    "REJECT_SECRET",
+    "PROVENANCE",
+    "SHA256",
+    "F116_DEDUP",
+    "F119_EVIDENCE",
+    "F120_GOVERNOR",
+    "HF_PRIVATE_WRITE",
+    "HF_PRIVATE_READBACK",
+    "SHA256_VERIFY",
+    "PUBLIC_OPAQUE_POINTER_ONLY"
+  ],
+  "gates": {
+    "global_f72": "FAIL",
+    "m4_gold": "BLOCKED",
+    "rdx_neural_training": "DENY_UNTIL_GLOBAL_F72_AND_AFAH_AND_GOLD",
+    "m6_training": "DENY",
+    "secrets_training": "NEVER_TRAIN"
+  },
+  "invariants": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "MEMORY_NE_TRAINING",
+    "SIMULATION_NE_TEST",
+    "PLUGIN_CALL_NE_INDEPENDENT_EVIDENCE",
+    "NO_PRIVATE_PAYLOAD_IN_PUBLIC_GITHUB",
+    "NO_DUPLICATE_FARM_FOR_EXISTING_HF_MEMORY_PLANE"
+  ],
+  "hf_materialization_state": {
+    "namespace_manifest_uploaded": false,
+    "reason": "THIS_COMMIT_REGISTERS_THE_CONTROL_PLANE_BINDING_ONLY; HUGGING_FACE_WRITE_REQUIRES_AUTHORIZED_HF_CONNECTION_OR_EXISTING_GITHUB_ACTION_HF_TOKEN_EXECUTION",
+    "next_safe_action": "UPLOAD_A_CONTENT_ADDRESSED_NAMESPACE_MANIFEST_THROUGH_THE_EXISTING_PRIVATE_HF_WRITE_READ_VERIFY_PATH"
+  }
+}
