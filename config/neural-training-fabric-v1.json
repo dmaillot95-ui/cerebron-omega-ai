@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G6_RESEARCH_ONLY",
+  "status": "TRAINING_EXECUTED_SCOPED_MULTI_AI_WITH_RESEARCH_ONLY_GATES",
   "name": "CEREBRON Neural Training Fabric",
   "principles": [
     "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
@@ -47,7 +47,19 @@
     },
     "ETHERION": {
       "target": "difficult science math R&D",
-      "training": "verified technical reasoning SFT"
+      "training": "verified technical reasoning SFT",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36109026167,
+      "adapter_sha256": "2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": -2,
+        "TRANSFER": -1,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "HYPERION": {
       "target": "divergent hypotheses and alternative methods",
@@ -59,16 +71,53 @@
     },
     "METRION": {
       "target": "engineering calculation simulation validation",
-      "training": "engineering GOLD SFT/LoRA"
+      "training": "engineering GOLD SFT/LoRA",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36109026167,
+      "adapter_sha256": "6e51db22126ae3218429dc4afe62df4a43d8d824b6ee374b305315a70afb682f",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": 7,
+        "TRANSFER": 0,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "AFAH": {
       "target": "epistemic final audit",
-      "training": "audit/critique preference or SFT; never substitute for evidence"
+      "training": "audit/critique preference or SFT; never substitute for evidence",
+      "status": "REAL_LORA_G6_CANDIDATE_F72_SUPPORTED_FINAL_POLICY_PENDING",
+      "run_id": 36109026167,
+      "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+      "gains": {
+        "VALIDATION": 12,
+        "M6": 2,
+        "TRANSFER": 6,
+        "RED": 4
+      },
+      "critical_regression": false,
+      "hf_private_readback_sha_pass": true,
+      "f72_run_id": 36110722530,
+      "f72_status": "SUPPORTED_E2",
+      "runtime_activation": "DENY_PENDING_FINAL_POLICY"
     },
     "AELYS": {
       "target": "dialogue coordination human interaction",
       "training": "dialogue/coordination SFT",
-      "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36109026167,
+      "adapter_sha256": "fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb",
+      "gains": {
+        "VALIDATION": 6,
+        "M6": 0,
+        "TRANSFER": -4,
+        "RED": 0
+      },
+      "critical_regression": true,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "ELYRA": {
       "target": "embodied perception and action",
@@ -271,5 +320,24 @@
       "decision": "G7_BLOCKED_ROLLBACK_OR_REPAIR"
     },
     "final_checkpoint": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json"
+  },
+  "wave1_parallel_lora": {
+    "canonical_run_id": 36109026167,
+    "dataset_release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+    "training_executed_count": 4,
+    "weights_changed_count": 4,
+    "hf_private_readback_pass_count": 4,
+    "g6_candidate_roles": [
+      "AFAH"
+    ],
+    "rollback_roles": [
+      "AELYS",
+      "ETHERION",
+      "METRION"
+    ],
+    "independent_evidence_count": 0,
+    "shared_base_lineage": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "final_policy_run_id": 36111064497,
+    "final_policy_status": "QUEUED"
   }
 }
