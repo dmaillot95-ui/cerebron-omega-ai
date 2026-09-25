@@ -1,0 +1,43 @@
+name: F174 ELYRA Visual Canary
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "simulation/**"
+      - "tests/test_visual_canary.py"
+      - ".github/workflows/f174-visual-canary.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  visual-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Execute deterministic visual simulation canary
+        run: python simulation/visual_canary.py --scenario F174-CANARY-001 --steps 8
+      - name: Verify result boundaries
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("artifacts/f174_visual_canary.json"))
+          assert p["simulation_kind"]=="DETERMINISTIC_VISUAL_STATE_SEQUENCE"
+          assert p["physical_model_claimed"] is False
+          assert p["physical_validation_claimed"] is False
+          assert len(p["frames"])==8
+          assert len(p["result_sha256"])==64
+          print("F174_VISUAL_CANARY_BOUNDARIES=PASS")
+          PY
+      - name: Upload canary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: f174-visual-canary
+          path: artifacts/f174_visual_canary.json
+          if-no-files-found: error
+          retention-days: 30
