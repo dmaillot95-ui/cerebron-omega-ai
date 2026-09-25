@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_NATIVE_AI_DUAL_CORE_V1",
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "status": "ARCHITECTURE_FROZEN_ACTIVATION_GATED",
   "scope_farms": [
     145,
@@ -131,22 +131,44 @@
           "novelty_after_validation"
         ]
       },
-      "project_state": "ARCHITECTURE_AND_SINGLE_CORE_BASELINE_EVIDENCE_PRESENT",
-      "dual_core_state": "PENDING_D4_D5_D6",
+      "project_state": "D4_TRUE_DUAL_CORE_CANARY_HOLD",
+      "dual_core_state": "D4_HOLD_REPAIR_REQUIRED_BEFORE_D5_D6",
       "evidence": {
         "runtime_pair_run_id": 35917498487,
         "cold_single_core_m6_run_id": 35918041093,
         "qwen_accuracy": 0.51,
-        "smollm_accuracy": 0.62
+        "smollm_accuracy": 0.62,
+        "d4_precheck_run_id": 36122176363,
+        "d4_true_fusion_run_id": 36123625873,
+        "d4_true_fusion_artifact_id": 10860072136,
+        "d4_true_fusion_artifact_digest": "sha256:7afc5d8d49d48c63e6fb36edaece94fa916fe2587bac88c39320957128231ef2",
+        "d4_receipt_sha256": "903741858e1c01948a6233a8ca0f1f2a9227d577725b615578f9155709595860",
+        "d4_subset_sha256": "7b7abe5bae849a7f626cbaa5b681cac8c77977b94e1854ed3202f7c78b53e535",
+        "d4_metrics": {
+          "task_count": 24,
+          "a_correct": 17,
+          "b_correct": 8,
+          "best_single_correct": 17,
+          "fusion_correct": 9,
+          "fusion_gain_over_best_single": -8,
+          "resolved": 10,
+          "coverage": 0.4166666666666667,
+          "wrong_commitments": 1,
+          "best_single_wrong": 7,
+          "wrong_commitment_reduction": 6,
+          "consensus_count": 9,
+          "cross_critique_converged_count": 1,
+          "unresolved_count": 14
+        }
       },
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "PENDING",
-        "D5": "PENDING",
-        "D6": "PENDING",
+        "D4": "HOLD_NO_MEASURED_GAIN_REPAIR_REQUIRED",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PARTIAL_SOURCE_GATE_PASS_FULL_TRAIN_ASSEMBLER_E2E_PENDING",
         "D8": "PENDING"
       }
