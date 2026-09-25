@@ -1,0 +1,64 @@
+name: RDX Knowledge Ingress Canary V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/rdx-knowledge-ingress-canary-trigger.txt'
+      - 'runtime/rdx_knowledge_ingest_v1.py'
+      - 'tests/test_rdx_knowledge_ingest_v1.py'
+      - 'config/rdx-knowledge-training-loop-v1.json'
+      - 'config/memory-promotion-policy-v1.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test runtime
+        run: python -m pip install --quiet pytest
+      - name: Test RDX ingress fail-closed rules
+        run: python -m pytest -q tests/test_rdx_knowledge_ingest_v1.py
+      - name: Produce owned-memory canary receipt
+        run: |
+          mkdir -p artifacts
+          cat > /tmp/rdx-owned.json <<'JSON'
+          {
+            "schema":"RDX_ATOMIC_RECORD_V1",
+            "rdx_id":"RDX-CANARY-001",
+            "object_id":"CLAIM-001",
+            "object_type":"CLAIM",
+            "content":"Synthetic canary claim used only to test RDX memory routing.",
+            "provenance":{"source_ids":["SRC-CANARY-001"],"origin":"CEREBRON_OWNED_SYNTHETIC","producer":"F152"},
+            "rights":{"class":"OWNED","shared_training_allowed":true},
+            "validated":true,
+            "dedup_pass":true,
+            "license_origin_pass":true,
+            "m6_contamination":false,
+            "afah_pass":true
+          }
+          JSON
+          python runtime/rdx_knowledge_ingest_v1.py /tmp/rdx-owned.json --output artifacts/rdx-ingress-canary-v1.json
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path("artifacts/rdx-ingress-canary-v1.json")
+          d=json.loads(p.read_text())
+          assert d["memory"]["admissible"] is True
+          assert d["memory"]["shared"] is True
+          assert d["memory"]["rag_available"] is True
+          assert d["gold"]["eligible"] is False
+          assert d["training"]["eligible"] is False
+          assert d["gate_snapshot"]["f72_current"]=="FAIL"
+          d["receipt_sha256"]=hashlib.sha256(json.dumps(d,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          p.write_text(json.dumps(d,indent=2)+"\n")
+          print("RDX_INGRESS_CANARY",d["memory"],d["gold"],d["receipt_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rdx-knowledge-ingress-canary-v1
+          path: artifacts/rdx-ingress-canary-v1.json
+          if-no-files-found: error
