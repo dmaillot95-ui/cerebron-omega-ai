@@ -4,10 +4,6 @@ on:
     branches: ['feat/cerebron-ai-platform-mvp']
     paths:
       - 'config/memory-promotion-audit-v2-trigger.txt'
-      - 'scripts/audit_memory_promotion.py'
-      - 'config/memory-promotion-policy-v1.json'
-      - 'config/rdx-knowledge-training-loop-v1.json'
-      - 'config/farms.json'
   workflow_dispatch:
 permissions:
   contents: read
