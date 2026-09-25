@@ -1,7 +1,8 @@
 RDX SEMANTIC RETRIEVAL REPAIR DEV V2
 source_run=36156985796
-previous_mechanical_fail_run=36157461751
-retry_reason=PYTHON_IMPORT_PATH_FIX_ONLY
+mechanical_fail_runs=36157461751,36160793369
+retry_reason=HF_REPO_ENV_FOR_IMPORTED_FIXTURE
+scientific_inputs_changed=false
 classification=DEV_NOT_COLD
 fresh_holdout=false
 training=false
