@@ -1,0 +1,77 @@
+{
+  "schema": "CEREBRON_118_RDX_FAIL_CLOSED_NEGATIVE_CANARIES_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_FAIL_CLOSED_NEGATIVE_CANARIES_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "304542a2ec36977d1c19d944ecc83e1b55b38fdc",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "2d062be04f642a3d2eab86397e983a6062a5d445",
+    "full_validation": {
+      "run_id": 36187462667,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36187462615,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "2d062be04f642a3d2eab86397e983a6062a5d445",
+    "file_count": 16,
+    "aggregate_sha256": "f9b3f94d69735b9155cdfce9067c96547bc32d4668049864d943eccfb8731156",
+    "release_attestation_sha256": "adf6f78c5e4c4588a8629418628b0696158b83f9837582490aabb194f86b43fb",
+    "source_checkout_gate": "PASS",
+    "release_manifest_gate": "PASS",
+    "release_attestation_gate": "PASS",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_attestation": "PASS",
+    "release_sigstore_verification": "PASS"
+  },
+  "negative_canaries": {
+    "gate": "scripts/validate-production-fail-closed-negative.mjs",
+    "status": "PASS",
+    "rejected_count": 5,
+    "rejected": [
+      "PUBLIC_TRUE_WITHOUT_LIVE_PROOF",
+      "WRONG_SOURCE_COMMIT",
+      "WRONG_RELEASE_AGGREGATE",
+      "UNSIGNED_LIVE_PROOF",
+      "UNSIGNED_REGISTRATION_PROPOSAL"
+    ],
+    "interpretation": "PASS_MEANS_ALL_FORBIDDEN_CASES_WERE_REJECTED"
+  },
+  "production_control": {
+    "promotion_gate": "PASS",
+    "mode": "FAIL_CLOSED",
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "signed_live_proof_required": true,
+    "registration_proposal_mode": "PROPOSAL_ONLY_NO_AUTO_APPLY",
+    "production_deployment_verified": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "next_exact": [
+    "Keep five fail-closed negative canaries mandatory.",
+    "Add controlled rollback/known-good release policy before first real deployment.",
+    "Do not register or promote production without signed live proof and review.",
+    "Do not modify F172-F174."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NEGATIVE_TESTS_BEFORE_PROMOTION",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
