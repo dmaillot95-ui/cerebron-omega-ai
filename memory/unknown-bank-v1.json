@@ -68,6 +68,24 @@
         "METRION"
       ],
       "STATUS": "OPEN_ROLE_FIDELITY_COLD_TEST_REQUIRED"
+    },
+    {
+      "UNKNOWN_ID": "UNK-SAPHEA-G7-TRANSFER-001",
+      "CLASS": "U1",
+      "STATE": "G6_MEASURED_G7_UNMEASURED",
+      "DESCRIPTION": "SAPHEA LoRA has real adapter weight change and positive sealed-M6 gain, but usefulness on a genuinely new held-out transfer family and under adapter ablation/red-team remains unmeasured.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "run:36100266729",
+        "config/neural-training-fabric-v1.json"
+      ],
+      "ROUTE_TO": [
+        "SAPHEA",
+        "AFAH",
+        "F166-RHO",
+        "METRION"
+      ],
+      "STATUS": "OPEN_TRANSFER_ABLATION_AUDIT_REQUIRED"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
