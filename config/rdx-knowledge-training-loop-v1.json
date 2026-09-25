@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_PASS_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS_F72_FAIL_CLOSED",
+  "status": "RDX_MEMORY_PASS_SEMANTIC_BASELINE_RETAINED_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS_F72_FAIL_CLOSED",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -339,11 +339,64 @@
     },
     "policy_fusion_dev_v5": {
       "run_id": 36164464446,
-      "status": "QUEUED",
-      "classification": "PUBLIC_BILINGUAL_DEV_POLICY_ABLATION_NOT_COLD",
+      "receipt_sha256": "a01152ae867583f8d674dae0e62f12216fb7b9bc6a0155d905d37f7171cbe2ac",
+      "selected_policy": "BASELINE_ONLY",
+      "decision": "DEV_POLICY_HOLD_NO_ROBUST_FUSION_GAIN",
       "fresh_holdout_consumed": false,
-      "training": "NOT_EXECUTED"
-    }
+      "training": "NOT_EXECUTED",
+      "policy_summary": {
+        "BASELINE_ONLY": {
+          "overall_top1": 0.6944444444444444,
+          "overall_mrr": 0.7970027657527657,
+          "critical_domains_pass": false,
+          "en_top1": 0.7777777777777778,
+          "fr_top1": 0.6111111111111112
+        },
+        "MULTILINGUAL_ONLY": {
+          "overall_top1": 0.75,
+          "overall_mrr": 0.8465608465608465,
+          "critical_domains_pass": false,
+          "en_top1": 0.6666666666666666,
+          "fr_top1": 0.8333333333333334
+        },
+        "LANG_ROUTER": {
+          "overall_top1": 0.8055555555555556,
+          "overall_mrr": 0.8865740740740741,
+          "critical_domains_pass": false,
+          "en_top1": 0.7777777777777778,
+          "fr_top1": 0.8333333333333334
+        },
+        "RRF_BASE_MULTI": {
+          "overall_top1": 0.75,
+          "overall_mrr": 0.8449074074074074,
+          "critical_domains_pass": false,
+          "en_top1": 0.8333333333333334,
+          "fr_top1": 0.6666666666666666
+        },
+        "RRF_BASE_MULTI_LEX": {
+          "overall_top1": 0.75,
+          "overall_mrr": 0.8451719576719577,
+          "critical_domains_pass": false,
+          "en_top1": 0.8888888888888888,
+          "fr_top1": 0.6111111111111112
+        },
+        "LANG_WEIGHTED_RRF": {
+          "overall_top1": 0.75,
+          "overall_mrr": 0.8541666666666666,
+          "critical_domains_pass": false,
+          "en_top1": 0.8333333333333334,
+          "fr_top1": 0.6666666666666666
+        },
+        "LANG_WEIGHTED_BLEND": {
+          "overall_top1": 0.8333333333333334,
+          "overall_mrr": 0.9037037037037037,
+          "critical_domains_pass": false,
+          "en_top1": 0.8333333333333334,
+          "fr_top1": 0.8333333333333334
+        }
+      }
+    },
+    "next_rule": "DO_NOT_CONSUME_NEW_HOLDOUT_UNTIL_NEW_DEV_CANDIDATE_OR_REAL_CORPUS_EVIDENCE_JUSTIFIES_IT"
   },
   "f72_gate": {
     "status": "GLOBAL_FAIL_CLOSED",
