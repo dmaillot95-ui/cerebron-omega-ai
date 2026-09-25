@@ -1,5 +1,5 @@
 {
-  "version": "2.24",
+  "version": "2.25",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1300,9 +1300,15 @@
       "role_id": "NULL_MODEL_CHALLENGER",
       "role_boundary": "Not formal proof/falsification closure; OMEGA does.",
       "campaign_passes": 10,
-      "infrastructure_status": "LOCAL_SCAFFOLD_PRESENT_REPOSITORY_MISSING",
+      "infrastructure_status": "LOCAL_SCAFFOLD_VALIDATED_REPOSITORY_MISSING",
       "local_scaffold": "scaffolds/f162-nu",
-      "repository_exists": false
+      "repository_exists": false,
+      "evidence": {
+        "reality_guard_run_id": 36155160206,
+        "omega_core_run_id": 36155316250,
+        "main_integration_run_id": 36155316281,
+        "crystal_guard_run_id": 36155316425
+      }
     },
     {
       "id": 163,
@@ -1478,7 +1484,13 @@
       "repository_exists": true,
       "repository_initialized": false,
       "local_scaffold": "scaffolds/f173-aelys-live",
-      "infrastructure_status": "LOCAL_SCAFFOLD_PREPARED_TARGET_REPOSITORY_EMPTY"
+      "infrastructure_status": "LOCAL_SCAFFOLD_VALIDATED_TARGET_REPOSITORY_EMPTY",
+      "evidence": {
+        "reality_guard_run_id": 36155160206,
+        "omega_core_run_id": 36155316250,
+        "main_integration_run_id": 36155316281,
+        "crystal_guard_run_id": 36155316425
+      }
     },
     {
       "id": 174,
@@ -1494,7 +1506,13 @@
       "repository_exists": true,
       "repository_initialized": false,
       "local_scaffold": "scaffolds/f174-elyra-visual-simulation",
-      "infrastructure_status": "LOCAL_SCAFFOLD_PREPARED_TARGET_REPOSITORY_EMPTY"
+      "infrastructure_status": "LOCAL_SCAFFOLD_VALIDATED_TARGET_REPOSITORY_EMPTY",
+      "evidence": {
+        "reality_guard_run_id": 36155160206,
+        "omega_core_run_id": 36155316250,
+        "main_integration_run_id": 36155316281,
+        "crystal_guard_run_id": 36155316425
+      }
     }
   ],
   "max_farms": 174,
