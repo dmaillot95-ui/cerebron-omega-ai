@@ -1,3 +1,2 @@
-repair=qwen3-4b-v5-source-verified
+repair=qwen3-4b-v6-preflight-serialized
 sample=5
-worker_sha=561ad2ecd4422828ff32130ac69ea7c29b369beb
