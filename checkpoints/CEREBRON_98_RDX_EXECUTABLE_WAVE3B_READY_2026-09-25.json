@@ -1,0 +1,87 @@
+{
+  "schema": "CEREBRON_98_RDX_EXECUTABLE_WAVE3B_READY_V1",
+  "date": "2026-09-25",
+  "farm_count": 152,
+  "rdx": {
+    "farm_id": 152,
+    "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange",
+    "repository_state": "PRESENT_EMPTY_PRODUCT_SESSION_OWNS_BUILD",
+    "knowledge_training_contract": "config/rdx-knowledge-training-loop-v1.json",
+    "ingress_runtime": "runtime/rdx_knowledge_ingest_v1.py",
+    "ingress_tests": "tests/test_rdx_knowledge_ingest_v1.py",
+    "ingress_canary_run_id": 36142030500,
+    "ingress_canary_state": "QUEUED",
+    "expected_current_behavior": {
+      "owned_validated_research": "MEMORY_RAG_ADMISSIBLE",
+      "gold": "BLOCKED_BY_F72_FAIL",
+      "neural_training": false
+    }
+  },
+  "elysium": {
+    "d4_repair_dev_v2_run_id": 36137547428,
+    "decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN",
+    "qwen_correct": 12,
+    "smol_correct": 12,
+    "best_policy_correct": 12,
+    "gain_over_best_single": 0,
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4"
+  },
+  "wave3a": {
+    "ai_ids": [
+      "SAELION",
+      "NEXUS"
+    ],
+    "d3_run_id": 36138864930,
+    "state": "IN_PROGRESS",
+    "nexus_smol_partial": {
+      "correct": 48,
+      "total": 72
+    }
+  },
+  "wave3b": {
+    "ai_ids": [
+      "ALPHA",
+      "OMEGA",
+      "DELTA"
+    ],
+    "d2": {
+      "ALPHA": {
+        "run_id": 36139915737,
+        "status": "PASS"
+      },
+      "OMEGA": {
+        "run_id": 36139940897,
+        "status": "PASS"
+      },
+      "DELTA": {
+        "run_id": 36139946295,
+        "status": "PASS"
+      }
+    },
+    "m6": {
+      "run_id": 36140085018,
+      "status": "PASS",
+      "ALPHA": "ccb4ef540bc8af61d86cee8974f773f5ee1f81614d1e71847bc7214f888f42a8",
+      "OMEGA": "c4d5f9be45d3f12560df67ab091278ad13a10ee297a8a83f6e3578d9e2383248",
+      "DELTA": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef"
+    },
+    "d3_workflow": ".github/workflows/wave3b-alpha-omega-delta-d3-private-cold-baselines.yml",
+    "d3_state": "READY_NOT_TRIGGERED_WAITING_FOR_WAVE3A_CAPACITY",
+    "d4_workflow": ".github/workflows/wave3b-alpha-omega-delta-d4-complementarity-precheck.yml",
+    "d4_state": "PREPARED_BLOCKED_PENDING_D3"
+  },
+  "memory_training": {
+    "f72_current": "FAIL",
+    "global_promotion": "BLOCKED",
+    "rule": "RDX_MAY_ENTER_MEMORY_RAG_NOW_BUT_NOT_M4_OR_NEURAL_TRAINING_UNTIL_F72_AND_AFAH_PASS",
+    "neural_claim_rule": "WEIGHTS_OR_ADAPTER_MUST_CHANGE_AND_COLD_GAIN_MUST_BE_MEASURED"
+  },
+  "next_exact": [
+    "Check RDX ingress canary run 36142030500; persist receipt only if tests PASS.",
+    "Check Wave3A D3 run 36138864930; if completed PASS, close SAELION/NEXUS D3 and trigger their existing D4 complementarity precheck once.",
+    "After Wave3A heavy jobs release capacity, trigger Wave3B D3 exactly once.",
+    "Keep ELYSIUM D5/D6 blocked; do not consume another fresh holdout until a new DEV policy demonstrates positive gain.",
+    "Do not modify F152 product repo from this session unless explicitly requested."
+  ]
+}
