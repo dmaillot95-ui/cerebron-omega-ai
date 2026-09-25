@@ -1,0 +1,37 @@
+name: CEREBRON Recursive Coaxial Vector Learning Guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'training/CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1.json'
+      - 'tools/validate_recursive_coaxial_learning.py'
+      - 'config/all-ai-neural-training-coverage-v1.json'
+      - 'config/gvl-specialization-registry-v2.json'
+      - 'config/neural-training-fabric-v1.json'
+      - 'config/memory-fabric-v1.json'
+      - '.github/workflows/recursive-coaxial-learning-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate all-AI recursive learning scope
+        run: python tools/validate_recursive_coaxial_learning.py
+      - name: Upload readiness artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recursive-coaxial-learning-readiness
+          path: artifacts/recursive_coaxial_learning_readiness.json
+          if-no-files-found: error
+          retention-days: 30
