@@ -1,0 +1,76 @@
+name: ELYSION D4 Complementarity Precheck
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysion-d4-complementarity-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  precheck:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet huggingface_hub
+      - name: Compare exact private baseline rows
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from collections import defaultdict
+          from huggingface_hub import hf_hub_download
+
+          repo=os.environ["HF_REPO"]; token=os.environ["HF_TOKEN"]
+          paths={
+            "qwen":("elysion/M6-results/35918041093/qwen3-4b.json","6b5b8b1dfa24e93dc12f594449755c8fe9ab054450c6ac48f7718b2279cc0ae1"),
+            "smol":("elysion/M6-results/35918041093/smollm3-3b.json","9026e3995150ca07723d0afc1b229e7f0b9e209e4a3033e32b6c81cb715549f1"),
+          }
+          data={}
+          for k,(p,expected) in paths.items():
+            fn=pathlib.Path(hf_hub_download(repo_id=repo,filename=p,repo_type="model",token=token,force_download=True))
+            raw=fn.read_bytes()
+            if hashlib.sha256(raw).hexdigest()!=expected:
+              raise SystemExit(k+"_PRIVATE_SHA_MISMATCH")
+            data[k]=json.loads(raw)
+
+          q={x["id"]:x for x in data["qwen"]["results"]}
+          s={x["id"]:x for x in data["smol"]["results"]}
+          if set(q)!=set(s) or len(q)!=100: raise SystemExit("TASK_SET_MISMATCH")
+          both=qo=so=neither=disagree=0
+          domain=defaultdict(lambda:{"qwen":0,"smol":0,"oracle":0,"qwen_rescue":0,"total":0})
+          rows=[]
+          for i in sorted(q):
+            a=q[i]; b=s[i]
+            if a["domain"]!=b["domain"] or a["expected"]!=b["expected"]: raise SystemExit("ROW_MISMATCH")
+            qc=bool(a["correct"]); sc=bool(b["correct"])
+            both+=qc and sc; qo+=qc and not sc; so+=sc and not qc; neither+=not qc and not sc
+            disagree+=a["normalized"]!=b["normalized"]
+            d=domain[a["domain"]]; d["total"]+=1; d["qwen"]+=qc; d["smol"]+=sc; d["oracle"]+=qc or sc; d["qwen_rescue"]+=qc and not sc
+            rows.append({"id":i,"domain":a["domain"],"qwen_correct":qc,"smol_correct":sc,"answers_disagree":a["normalized"]!=b["normalized"]})
+          oracle=both+qo+so
+          out={
+            "schema":"ELYSION_D4_COMPLEMENTARITY_PRECHECK_V1",
+            "m6_sha256":"bc2324c1afffe780c3deb3cc25e70f9838f86253bb4ea27f88fec0cb209b59f6",
+            "task_count":100,"qwen_correct":both+qo,"smol_correct":both+so,
+            "both_correct":both,"qwen_only_correct":qo,"smol_only_correct":so,"both_wrong":neither,
+            "answer_disagreement_count":disagree,"oracle_union_correct":oracle,
+            "oracle_gain_over_best_single":oracle-max(both+qo,both+so),
+            "domain":dict(domain),
+            "decision":"CONTINUE_D4_FUSION_CANARY" if oracle>max(both+qo,both+so) else "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+            "independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "rows":rows
+          }
+          raw=(json.dumps(out,indent=2)+"\n").encode()
+          out["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("receipts/elysion/elysion-d4-complementarity.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps({k:out[k] for k in ["qwen_correct","smol_correct","both_correct","qwen_only_correct","smol_only_correct","both_wrong","answer_disagreement_count","oracle_union_correct","oracle_gain_over_best_single","decision"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysion-d4-complementarity
+          path: receipts/elysion/elysion-d4-complementarity.json
