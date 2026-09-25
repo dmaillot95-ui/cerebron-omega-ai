@@ -12,6 +12,7 @@ on:
       - 'training/CEREBRON_G1_LESSON_ADMISSION_POLICY_V1.json'
       - 'config/lesson-cross-audit-v1.json'
       - 'config/lesson-ablation-pilot-v1.json'
+      - 'config/cerebron-fieldwise-format-v3.json'
       - '.github/workflows/cerebron-recursive-generation-controller.yml'
 
 permissions:
