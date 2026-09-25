@@ -72,9 +72,14 @@
         174
       ],
       "capabilities": [
-        "avatar.speak"
+        "avatar.speak",
+        "visual.simulate"
       ],
-      "runtime_status": "UNQUALIFIED"
+      "runtime_status": "UNQUALIFIED",
+      "farm_status": {
+        "113": "EXISTING_ELYRA_BODY_AVATAR_REFERENCE",
+        "174": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED"
+      }
     },
     "AFAH": {
       "kind": "LOGICAL_IDENTITY",
@@ -94,7 +99,8 @@
     "governor.check": "F120",
     "presenter.compose": "AELYS",
     "avatar.speak": "ELYRA",
-    "audit.review": "AFAH"
+    "audit.review": "AFAH",
+    "visual.simulate": "ELYRA"
   },
   "invariants": {
     "f152_identity": "BETA",
@@ -102,7 +108,8 @@
     "unknown_capability": "DENY",
     "repository_binding_is_not_runtime_execution": true,
     "memory_is_not_training": true,
-    "simulation_is_not_test": true
+    "simulation_is_not_test": true,
+    "f174_repository_initialized_not_simulation_execution": true
   },
   "activation_gate": [
     "PROVIDER_RUNTIME_QUALIFIED",
