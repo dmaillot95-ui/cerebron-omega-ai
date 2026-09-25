@@ -1,2 +1,2 @@
-repair=short-eight-line-contract-v4
+repair=qwen3-4b-v5-alias-strict
 sample=5
