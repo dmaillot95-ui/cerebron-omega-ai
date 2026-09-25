@@ -1,0 +1,46 @@
+name: Memory Promotion Audit V2
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/memory-promotion-audit-v2-trigger.txt'
+      - 'scripts/audit_memory_promotion.py'
+      - 'config/memory-promotion-policy-v1.json'
+      - 'config/rdx-knowledge-training-loop-v1.json'
+      - 'config/farms.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run memory promotion audit
+        run: |
+          mkdir -p artifacts
+          python scripts/audit_memory_promotion.py | tee artifacts/memory-promotion-audit-v2.json
+          python - <<'PY'
+          import json,pathlib,hashlib
+          p=pathlib.Path("artifacts/memory-promotion-audit-v2.json")
+          d=json.loads(p.read_text())
+          assert d["status"]=="PASS"
+          assert d["farm_count"]==152
+          assert d["max_farm_id"]==152
+          assert d["m6_training"]=="DENY"
+          assert d["f72_current"]=="FAIL"
+          assert d["m4_promotion"]=="BLOCKED_BY_F72"
+          assert d["rdx_memory_ingress"]=="CONFIGURED"
+          assert d["rdx_auto_training"] is False
+          d["receipt_sha256"]=hashlib.sha256(json.dumps(d,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          p.write_text(json.dumps(d,indent=2)+"\n")
+          print("MEMORY_PROMOTION_AUDIT_V2",d["receipt_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: memory-promotion-audit-v2
+          path: artifacts/memory-promotion-audit-v2.json
+          if-no-files-found: error
