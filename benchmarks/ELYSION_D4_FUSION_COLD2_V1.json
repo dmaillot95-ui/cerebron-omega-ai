@@ -1,0 +1,164 @@
+{
+  "schema": "ELYSION_D4_FUSION_COLD2_V1",
+  "date": "2026-09-25",
+  "classification": "COLD_TRANSFER_SEALED",
+  "training_eligible": false,
+  "policy_tuning_eligible": false,
+  "deny_neural_training": true,
+  "deny_policy_tuning": true,
+  "single_use_after_policy_freeze": true,
+  "purpose": "Fresh transfer test for a fusion policy frozen using DEV only.",
+  "rules": [
+    "NO_POLICY_CHANGE_AFTER_READING_RESULTS",
+    "NO_MODEL_WEIGHT_UPDATE",
+    "NO_MEMORY_PROMOTION_BEFORE_SCORING",
+    "VERIFY_EXACT_PROMPT_DISJOINTNESS_FROM_DEV_AND_M6",
+    "ONE_CANONICAL_FIRST_RUN"
+  ],
+  "tasks": [
+    {
+      "id": "C201",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 58 + 67.",
+      "expected": "125"
+    },
+    {
+      "id": "C202",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 17 * 8.",
+      "expected": "136"
+    },
+    {
+      "id": "C203",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 225 / 15.",
+      "expected": "15"
+    },
+    {
+      "id": "C204",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 3^5.",
+      "expected": "243"
+    },
+    {
+      "id": "C205",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A model improves on training data but worsens on both transfer and red-team sets. Which claim is supported? A: General improvement. B: Training fit improved but generalization is not supported. C: G7 is proven. D: The red-team set should be deleted.",
+      "expected": "B"
+    },
+    {
+      "id": "C206",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. Three reports cite the same underlying dataset and reach the same conclusion. How many independent data lineages are demonstrated? A: Three. B: One unless other independence is shown. C: Zero automatically. D: Six.",
+      "expected": "B"
+    },
+    {
+      "id": "C207",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A physical simulation matches its own synthetic generator exactly. What is established? A: Real-world validation. B: Internal consistency in that simulator, not physical calibration. C: Universal law. D: Independent experiment.",
+      "expected": "B"
+    },
+    {
+      "id": "C208",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A benchmark was used to choose among ten prompt variants. Can it still be called untouched cold evidence for the chosen prompt? A: Yes. B: No, selection used it. C: Only if the score is high. D: Only with more agents.",
+      "expected": "B"
+    },
+    {
+      "id": "C209",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need the current release notes for a software library.",
+      "expected": "WEB"
+    },
+    {
+      "id": "C210",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need to inspect whether a particular commit changed a workflow file.",
+      "expected": "GITHUB"
+    },
+    {
+      "id": "C211",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need to sort and aggregate one million local rows.",
+      "expected": "PYTHON"
+    },
+    {
+      "id": "C212",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need a previously stored project checkpoint from prior conversations.",
+      "expected": "MEMORY"
+    },
+    {
+      "id": "C213",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. Core A scores 18/24, Core B scores 14/24, fusion scores 18/24 but doubles latency with no risk reduction. What does ablation support? A: Keep fusion by default. B: Prefer A for that scope. C: Count two proofs. D: Promote fusion globally.",
+      "expected": "B"
+    },
+    {
+      "id": "C214",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A critic catches two errors but also changes three correct answers into wrong ones. What is the first conclusion? A: Critic gate needs repair. B: Promote immediately. C: Ignore harmful replacements. D: Call the critic independent proof.",
+      "expected": "A"
+    },
+    {
+      "id": "C215",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A candidate passes validation but has zero transfer gain where the gate requires strictly positive transfer. What is the gate status? A: PASS. B: FAIL or HOLD. C: G7. D: Runtime default.",
+      "expected": "B"
+    },
+    {
+      "id": "C216",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A training run changes no weights. Which statement is correct? A: Neural learning is verified. B: Neural training success is not established. C: It is automatically G6. D: It proves transfer.",
+      "expected": "B"
+    },
+    {
+      "id": "C217",
+      "domain": "numeric_reasoning",
+      "prompt": "Return only the integer result. A test has 64 cases and 75 percent pass. How many pass?",
+      "expected": "48"
+    },
+    {
+      "id": "C218",
+      "domain": "numeric_reasoning",
+      "prompt": "Return only the integer result. A fusion resolves 21 of 28 cases. What is coverage percent rounded to the nearest integer?",
+      "expected": "75"
+    },
+    {
+      "id": "C219",
+      "domain": "numeric_reasoning",
+      "prompt": "Return only the integer result. A baseline has 13 errors and a repaired system has 8. How many errors were removed?",
+      "expected": "5"
+    },
+    {
+      "id": "C220",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. Two model cores disagree and neither critique resolves the conflict. What should a contradiction-preserving system do? A: Pretend consensus. B: Preserve unresolved status or abstain. C: Pick the longer answer. D: Count both as true.",
+      "expected": "B"
+    },
+    {
+      "id": "C221",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A new fusion policy was selected using DEV. What must happen before a cold test? A: Keep changing the policy during the test. B: Freeze the policy. C: Add the cold answers to memory. D: Train on the cold set.",
+      "expected": "B"
+    },
+    {
+      "id": "C222",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A cold test is passed once, then its answers are used to revise the policy and it is run again. How should the second run be treated? A: Fresh independent cold evidence. B: Post-selection evidence, not untouched cold. C: A proof. D: A new model lineage.",
+      "expected": "B"
+    },
+    {
+      "id": "C223",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A second core improves accuracy by one point but increases critical-error rate. Which rule dominates? A: Accuracy alone. B: No critical-regression gate. C: Majority vote. D: Model size.",
+      "expected": "B"
+    },
+    {
+      "id": "C224",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. Four successful workflows share the same model, code, and dataset. How many independent evidence lines are proven by workflow count alone? A: Four. B: One. C: Zero independent lines are proven by count alone. D: Eight.",
+      "expected": "C"
+    }
+  ]
+}
