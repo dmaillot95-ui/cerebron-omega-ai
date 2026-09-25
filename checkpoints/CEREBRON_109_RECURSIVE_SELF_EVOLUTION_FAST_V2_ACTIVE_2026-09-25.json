@@ -1,0 +1,106 @@
+{
+  "schema": "CEREBRON_109_RECURSIVE_SELF_EVOLUTION_FAST_V2_ACTIVE",
+  "date": "2026-09-25",
+  "state": "FORMAT_EVOLUTION_FAST_V2_RUNNING_TRAIN_FAILURE_CURRICULUM_READY",
+  "head": "a223901d062a3fffc58dd891053b9bf7d4717c6a",
+  "learning_population": {
+    "available_ai": 38,
+    "unavailable": [
+      "NU"
+    ],
+    "learning_allowed_special_cases": [
+      "PSI_F172",
+      "AELYS_F173",
+      "ELYRA_F174"
+    ],
+    "operational_mutation_f172_f173_f174": false
+  },
+  "validated_lessons": {
+    "count": 2,
+    "ids": [
+      "LESSON-AGORA-EVIDENCE-SCOPE-001",
+      "LESSON-TRANSFER-PROMOTION-001"
+    ],
+    "split": "holdout",
+    "effective_training_eligible": 0,
+    "derivative_training_allowed": false
+  },
+  "corpus": {
+    "canonical_records": 31,
+    "train": 16,
+    "validation": 6,
+    "holdout": 9,
+    "reserved_eval_records": 15,
+    "reserved_eval_derivative_generation_allowed": 0,
+    "training_eligible": 2,
+    "effective_training_eligible": 0,
+    "weight_training_released": false
+  },
+  "train_failure_curriculum": {
+    "source_failure_count": 12,
+    "task_count": 36,
+    "all_sources_train_split": true,
+    "reserved_eval_derivative_count": 0,
+    "run_id": 36177826469,
+    "artifact_id": 10883590434,
+    "artifact_digest": "sha256:59d88e570651f5a1daac8f7a25c190814647519d146759116b75bac07e769bad"
+  },
+  "selected_wave": {
+    "run_id": 36177931993,
+    "artifact_id": 10883600652,
+    "artifact_digest": "sha256:09ad4564cb2fed2e79e19224725b11045c09aa1b92b411c08f7aad811e6f5d9e",
+    "selected_count": 8,
+    "priority_order": [
+      "FAIL-C80-M42-SPECIALIZATION-COLLAPSE-001",
+      "FAIL-WAVE1-ETHERION-LORA-TRANSFER-001",
+      "FAIL-WAVE1-METRION-LORA-TRANSFER-001",
+      "FAIL-M43-SAPHEA-G7-CLASS-COLLAPSE-001",
+      "FAIL-C80-M11-PASS2-SAPHEA-A",
+      "FAIL-M43-SAPHEA-TRANSFER-001",
+      "FAIL-GVL-V1-FALSE-REDUNDANCY",
+      "FAIL-AGORA-CONTENT-SCOPE-PROMOTION-001"
+    ],
+    "execution_status": "NOT_EXECUTED",
+    "training_eligible": false
+  },
+  "recursive_controller": {
+    "run_id": 36177730585,
+    "artifact_id": 10883275832,
+    "artifact_digest": "sha256:738814dea6eed033dd29aeaf90dafbf7dc60e8dc8b70d69f46e5e1120e428885",
+    "next_safe_action": "FORMAT_CONTRACT_EVOLUTION_FAST_V2",
+    "format_baseline": "6/16",
+    "format_target": "14/16",
+    "open_failure_count": 5,
+    "weight_training_candidate_ready": false,
+    "weight_training_released": false
+  },
+  "format_evolution_fast_v2": {
+    "run_id": 36177878435,
+    "head_sha": "8c22ca5f69eab142c4611611184e955550f0255d",
+    "status": "in_progress",
+    "conclusion": null,
+    "protocol": "QWEN3_SELECTION_THEN_QWEN3_AND_SMOLLM3_FROZEN_HOLDOUT",
+    "weight_change": false,
+    "training_released": false
+  },
+  "historical_format_v1": {
+    "run_id": 36173645350,
+    "status": "IN_PROGRESS_AT_CHECKPOINT",
+    "future_auto_trigger": "RETIRED",
+    "replacement": "FORMAT_EVOLUTION_FAST_V2"
+  },
+  "lesson_ablation": {
+    "config": "config/lesson-ablation-pilot-v1.json",
+    "worker": "evolution/lesson_ablation_pilot_v1.py",
+    "workflow": ".github/workflows/cerebron-lesson-ablation-pilot-v1.yml",
+    "status": "PREPARED_NOT_LAUNCHED",
+    "reason": "Run after format evolution result to keep one main model experiment variable at a time."
+  },
+  "hard_truth": {
+    "new_weight_change": false,
+    "neural_improvement_claim": false,
+    "geometric_growth_claim": "NOT_ESTABLISHED",
+    "next_weight_training_requires": "ENOUGH_EFFECTIVE_TRAIN_GOLD_RED_PLUS_DATASET_SEAL_PLUS_COLD_TRANSFER_REDTEAM_ABLATION"
+  },
+  "resume": "FETCH -> VERIFY run 36177878435 -> if completed inspect selection/holdout audit -> promote format only on strict cross-lineage holdout gain -> then launch lesson ablation pilot -> continue train-only curriculum admission"
+}
