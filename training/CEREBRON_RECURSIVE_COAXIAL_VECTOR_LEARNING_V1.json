@@ -1,0 +1,612 @@
+{
+  "schema": "CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE_CONTROL_CONTRACT_NO_WEIGHT_CHANGE_BY_THIS_FILE",
+  "objective": "Accelerate measurable collective learning by recursively converting audited AGORA outcomes into role-specific training data, routing by 32D specialization vectors, training reversible adapters on distinct model lineages where useful, and feeding validated gains back into the next generation.",
+  "claim_boundary": "GEOMETRIC_GROWTH_IS_A_TARGET_AND_METRIC, NOT A CURRENT CAPABILITY CLAIM.",
+  "protected_scope": {
+    "do_not_modify_farms": [
+      172,
+      173,
+      174
+    ],
+    "do_not_train_identities_this_session": [
+      "PSI",
+      "AELYS",
+      "ELYRA"
+    ],
+    "unavailable": [
+      "NU"
+    ],
+    "note": "These identities remain outside this session even if they appear in global registries."
+  },
+  "target_population": {
+    "count": 35,
+    "expected_count": 35,
+    "targets": [
+      {
+        "ai_id": "CEREBRON",
+        "identity": "CEREBRON",
+        "coverage_state": "PENDING_ORCHESTRATOR_POLICY_TRAINING",
+        "planned_wave": "FINAL_ORCHESTRATOR_WAVE",
+        "training_mode": "ROUTING_COORDINATION_POLICY_AFTER_SPECIALISTS",
+        "specialization_tags": [
+          "coordination",
+          "problem_contract",
+          "integration_interfaces",
+          "information_gain"
+        ]
+      },
+      {
+        "ai_id": "SAPHEA",
+        "identity": "SAPHEA",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+        "specialization_tags": [
+          "execution_selection",
+          "coordination",
+          "synthesis_compression"
+        ]
+      },
+      {
+        "ai_id": "SPIRALION",
+        "identity": "SPIRALION",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "memory_continuity",
+          "synthesis_compression",
+          "integration_interfaces"
+        ]
+      },
+      {
+        "ai_id": "ETHERION",
+        "identity": "ETHERION",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+        "specialization_tags": [
+          "science_modeling",
+          "formal_reasoning",
+          "invention",
+          "search_exploration"
+        ]
+      },
+      {
+        "ai_id": "HYPERION",
+        "identity": "HYPERION",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "invention",
+          "search_exploration",
+          "causal_mechanism"
+        ]
+      },
+      {
+        "ai_id": "ASTRION",
+        "identity": "ASTRION",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "science_modeling",
+          "engineering_validation",
+          "integration_interfaces"
+        ]
+      },
+      {
+        "ai_id": "METRION",
+        "identity": "METRION",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+        "specialization_tags": [
+          "engineering_validation",
+          "metrology_benchmark",
+          "simulation",
+          "constraint_feasibility"
+        ]
+      },
+      {
+        "ai_id": "AFAH",
+        "identity": "AFAH",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+        "specialization_tags": [
+          "evidence_audit",
+          "formal_reasoning",
+          "counterexample",
+          "synthesis_compression"
+        ]
+      },
+      {
+        "ai_id": "SAPHEA_MICRO",
+        "identity": "SAPHEA_MICRO",
+        "coverage_state": "NEURAL_TRAINING_EXECUTED",
+        "planned_wave": "COMPLETED_OR_REPAIR",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "execution_selection",
+          "optimization_efficiency",
+          "metrology_benchmark"
+        ]
+      },
+      {
+        "ai_id": "ELYSION",
+        "identity": "ELYSION",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3A",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "invention",
+          "formal_reasoning",
+          "search_exploration"
+        ]
+      },
+      {
+        "ai_id": "ELYSIUM",
+        "identity": "ELYSIUM",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3A",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "evidence_audit",
+          "counterexample",
+          "transfer_generalization"
+        ]
+      },
+      {
+        "ai_id": "SAELION",
+        "identity": "SAELION",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3A",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "synthesis_compression",
+          "memory_continuity",
+          "information_gain"
+        ]
+      },
+      {
+        "ai_id": "NEXUS",
+        "identity": "NEXUS",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3A",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "integration_interfaces",
+          "search_exploration",
+          "memory_continuity"
+        ]
+      },
+      {
+        "ai_id": "F148-ALPHA",
+        "identity": "ALPHA",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3B",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "search_exploration",
+          "representation_transform",
+          "invention"
+        ]
+      },
+      {
+        "ai_id": "F152-BETA",
+        "identity": "BETA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE4",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "problem_contract",
+          "constraint_feasibility",
+          "evidence_audit"
+        ]
+      },
+      {
+        "ai_id": "F153-GAMMA",
+        "identity": "GAMMA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE4",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "causal_mechanism",
+          "integration_interfaces",
+          "science_modeling"
+        ]
+      },
+      {
+        "ai_id": "F150-DELTA",
+        "identity": "DELTA",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3B",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "science_modeling",
+          "simulation",
+          "engineering_validation",
+          "evidence_audit"
+        ]
+      },
+      {
+        "ai_id": "F154-EPSILON",
+        "identity": "EPSILON",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE4",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "sensitivity_robustness",
+          "uncertainty",
+          "metrology_benchmark"
+        ]
+      },
+      {
+        "ai_id": "F155-ZETA",
+        "identity": "ZETA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE4",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "optimization_efficiency",
+          "information_gain",
+          "constraint_feasibility"
+        ]
+      },
+      {
+        "ai_id": "F156-ETA",
+        "identity": "ETA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE4",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "temporal_dynamics",
+          "uncertainty",
+          "simulation"
+        ]
+      },
+      {
+        "ai_id": "F157-THETA",
+        "identity": "THETA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE5",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "representation_transform",
+          "formal_reasoning",
+          "search_exploration"
+        ]
+      },
+      {
+        "ai_id": "F158-IOTA",
+        "identity": "IOTA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE5",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "problem_contract",
+          "counterexample",
+          "formal_reasoning"
+        ]
+      },
+      {
+        "ai_id": "F159-KAPPA",
+        "identity": "KAPPA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE5",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "constraint_feasibility",
+          "engineering_validation",
+          "problem_contract"
+        ]
+      },
+      {
+        "ai_id": "F160-LAMBDA",
+        "identity": "LAMBDA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE5",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "representation_transform",
+          "integration_interfaces",
+          "optimization_efficiency"
+        ]
+      },
+      {
+        "ai_id": "F161-MU",
+        "identity": "MU",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE5",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "uncertainty",
+          "metrology_benchmark",
+          "statistics_aggregation"
+        ]
+      },
+      {
+        "ai_id": "F163-XI",
+        "identity": "XI",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE6",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "transfer_generalization",
+          "evidence_audit",
+          "science_modeling"
+        ]
+      },
+      {
+        "ai_id": "F164-OMICRON",
+        "identity": "OMICRON",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE6",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "rare_events",
+          "uncertainty",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F165-PI",
+        "identity": "PI",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE6",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "search_exploration",
+          "information_gain",
+          "invention"
+        ]
+      },
+      {
+        "ai_id": "F166-RHO",
+        "identity": "RHO",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE6",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "dependency_correlation",
+          "evidence_audit",
+          "counterexample"
+        ]
+      },
+      {
+        "ai_id": "F167-SIGMA",
+        "identity": "SIGMA",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE6",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "statistics_aggregation",
+          "uncertainty",
+          "metrology_benchmark"
+        ]
+      },
+      {
+        "ai_id": "F168-TAU",
+        "identity": "TAU",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE7",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "information_gain",
+          "optimization_efficiency",
+          "coordination"
+        ]
+      },
+      {
+        "ai_id": "F169-UPSILON",
+        "identity": "UPSILON",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE7",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "tradeoff_pareto",
+          "constraint_feasibility",
+          "uncertainty"
+        ]
+      },
+      {
+        "ai_id": "F170-PHI",
+        "identity": "PHI",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE7",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "invariants_scaling",
+          "formal_reasoning",
+          "science_modeling"
+        ]
+      },
+      {
+        "ai_id": "F171-CHI",
+        "identity": "CHI",
+        "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+        "planned_wave": "WAVE7",
+        "training_mode": "ROLE_SPECIFIC_LORA",
+        "specialization_tags": [
+          "integration_interfaces",
+          "counterexample",
+          "engineering_validation"
+        ]
+      },
+      {
+        "ai_id": "F149-OMEGA",
+        "identity": "OMEGA",
+        "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+        "planned_wave": "WAVE3B",
+        "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+        "specialization_tags": [
+          "formal_reasoning",
+          "evidence_audit",
+          "counterexample",
+          "uncertainty"
+        ]
+      }
+    ]
+  },
+  "coaxial_architecture": {
+    "central_axis": [
+      "CANONICAL_GOLD_RED_LESSONS",
+      "PROVENANCE_AND_LINEAGE",
+      "FAILURE_BANK",
+      "COLD_BENCHMARK_BOUNDARIES",
+      "TRANSFER_AND_REDTEAM_RESULTS"
+    ],
+    "role_residual_axis": "GVL_32D_SPECIALIZATION_VECTOR",
+    "vector_registry": "config/gvl-specialization-registry-v2.json",
+    "semantic_memory_reference": "F115_VECTOR_SEMANTIC_MEMORY",
+    "rule": "Shared central knowledge may teach multiple AIs, but each AI receives role-residual curriculum selected by specialization vector and measured failure modes."
+  },
+  "recursive_generation_loop": [
+    "G_N_BASELINE",
+    "PARALLEL_AGORA_ATTEMPTS",
+    "AUDIT_COUNTER_AUDIT_REPRODUCTION",
+    "DEDUP_AND_DEPENDENCY_FINGERPRINT",
+    "GOLD_RED_LESSON_PROMOTION",
+    "VECTOR_ROUTE_TO_TARGET_AIS",
+    "ROLE_SPECIFIC_DATASET_SEAL",
+    "SCRATCH_VS_INHERITED_ABLATION",
+    "REAL_ADAPTER_OR_WEIGHT_TRAINING_IF_RELEASED",
+    "COLD_NO_RAG",
+    "TRANSFER_NO_RAG",
+    "RED_TEAM",
+    "REGRESSION",
+    "PROMOTE_OR_ROLLBACK",
+    "FAILURES_TO_NEXT_CURRICULUM",
+    "G_N_PLUS_1"
+  ],
+  "parallel_lanes": [
+    {
+      "lane": "A_GENERATOR",
+      "purpose": "construct solution/hypothesis",
+      "independence_requirement": "distinct prompt/role; model lineage recorded"
+    },
+    {
+      "lane": "B_ALTERNATIVE",
+      "purpose": "different representation or method",
+      "independence_requirement": "prefer distinct model lineage for high-value tasks"
+    },
+    {
+      "lane": "C_FALSIFIER",
+      "purpose": "counterexample/red-team",
+      "independence_requirement": "must not receive hidden expected answer"
+    },
+    {
+      "lane": "D_REPRODUCER",
+      "purpose": "independent reproduction",
+      "independence_requirement": "separate execution trace and dependency fingerprint"
+    },
+    {
+      "lane": "E_TRANSFER",
+      "purpose": "cross-domain unseen transfer",
+      "independence_requirement": "sealed from training data"
+    },
+    {
+      "lane": "F_ABLATION",
+      "purpose": "compare adapter vs base/scratch/inherited",
+      "independence_requirement": "same benchmark, controlled change only"
+    }
+  ],
+  "agora_learning": {
+    "raw_agora_is_training_data": false,
+    "admission_chain": [
+      "TRACE",
+      "AUDIT",
+      "COUNTER_AUDIT",
+      "REPRODUCTION",
+      "GOLD_OR_RED",
+      "DATASET_VERSION",
+      "TRAINING_RELEASE"
+    ],
+    "peer_learning": true,
+    "failure_to_curriculum": true,
+    "contradiction_preserved": true,
+    "anti_false_novelty": true
+  },
+  "training_policy": {
+    "default": "REVERSIBLE_LORA_OR_ADAPTER",
+    "full_weight_training": "DENY_BY_DEFAULT",
+    "parallel_training_max": 4,
+    "per_ai_parallel_candidates": 2,
+    "minimum_distinct_model_lineages_for_high_value_dual_path": 2,
+    "no_paid_provider_auto_activation": true,
+    "m6_deny_training": true,
+    "memory_is_not_training": true,
+    "weights_changed_required_for_training_claim": true,
+    "adapter_sha_required": true,
+    "base_revision_required": true,
+    "dataset_sha_required": true
+  },
+  "promotion_gate": {
+    "required": [
+      "WEIGHTS_OR_ADAPTER_CHANGED",
+      "ARTIFACT_SHA256",
+      "HF_PRIVATE_READBACK_SHA_IF_USED",
+      "COLD_GAIN_POSITIVE",
+      "TRANSFER_GAIN_POSITIVE",
+      "REDTEAM_NOT_WORSE",
+      "ABLATION_SUPPORTS_CAUSAL_VALUE",
+      "NO_CRITICAL_REGRESSION",
+      "DEPENDENCY_FINGERPRINT",
+      "FAILURE_BANK_UPDATED",
+      "AFAH_OR_EQUIVALENT_FINAL_POLICY_GATE"
+    ],
+    "otherwise": "ROLLBACK_RETAIN_EVIDENCE"
+  },
+  "geometric_growth_metric": {
+    "name": "SUSTAINED_GEOMETRIC_CAPABILITY_RATIO",
+    "definition": "For a fixed sealed benchmark family, compute per-generation post/pre score ratios on COLD, TRANSFER and REDTEAM-survival, then geometric-mean them. Claim sustained geometric improvement only after at least 3 consecutive generations each exceed 1.0 with no critical regression.",
+    "minimum_generations_for_claim": 3,
+    "current_claim": "NOT_ESTABLISHED",
+    "forbidden_shortcuts": [
+      "MORE_AGENTS_EQUALS_GEOMETRIC_GROWTH",
+      "MORE_MEMORY_EQUALS_GEOMETRIC_GROWTH",
+      "TRAINING_LOSS_DROP_EQUALS_GEOMETRIC_GROWTH",
+      "SINGLE_BENCHMARK_GAIN_EQUALS_GEOMETRIC_GROWTH"
+    ]
+  },
+  "scheduling": {
+    "rule": "COALITION_MINIMALE_UTILE",
+    "order": [
+      "REPAIR_ONLY_WHEN_MATERIALLY_NEW_DATA_OR_METHOD_EXISTS",
+      "WAVE3A_DUAL_CORE_ELYSION_ELYSIUM_SAELION_NEXUS",
+      "WAVE3B_DUAL_CORE_ALPHA_DELTA_OMEGA",
+      "WAVE4_SPECIALISTS",
+      "WAVE5_SPECIALISTS",
+      "WAVE6_SPECIALISTS",
+      "WAVE7_SPECIALISTS_EXCLUDING_PSI_F172",
+      "CEREBRON_ORCHESTRATOR_LAST"
+    ],
+    "no_repeat_wave2_run": 36117279297
+  },
+  "success_metrics": [
+    "COLD_GAIN",
+    "TRANSFER_GAIN",
+    "REDTEAM_SURVIVAL",
+    "REGRESSION_RATE",
+    "ROLLBACK_RATE",
+    "INDEPENDENT_LINEAGE_COUNT",
+    "DEDUP_RATIO",
+    "FAILURE_RECURRENCE_RATE",
+    "LESSON_REUSE_RATE",
+    "TIME_TO_VERIFIED_GAIN"
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "ABLATION_BEFORE_ADDITION",
+    "TRANSFER_BEFORE_GENERALITY",
+    "MEMORY!=TRAINING",
+    "CONSENSUS!=INDEPENDENT_EVIDENCE",
+    "NO_TOUCH_F172_F173_F174_THIS_SESSION"
+  ]
+}
