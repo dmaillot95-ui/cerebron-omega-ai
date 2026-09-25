@@ -22,7 +22,15 @@ assert bus["providers"]["RDX_EXCHANGE"]["runtime_status"]=="UNBOUND"
 assert by_id[173]["identity"]=="AELYS"
 assert by_id[173]["repository_initialized"] is True
 assert bus["providers"]["AELYS"]["farm_id"]==173
-assert bus["providers"]["AELYS"]["runtime_status"]=="BASE_INSTALLED_ADAPTERS_UNQUALIFIED"
+assert by_id[173]["status"]=="LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
+assert by_id[173]["local_live_loop_canary"]["run_id"]==36162553038
+assert by_id[173]["external_runtime_status"]=="UNQUALIFIED"
+assert by_id[173]["production_status"]=="NOT_DEPLOYED"
+assert bus["providers"]["AELYS"]["local_live_loop_canary"]["status"]=="PASS"
+assert bus["providers"]["AELYS"]["local_live_loop_canary"]["run_id"]==36162553038
+assert bus["providers"]["AELYS"]["local_live_loop_canary"]["external_calls_executed"] is False
+assert bus["providers"]["AELYS"]["local_live_loop_canary"]["production_live_claimed"] is False
+assert bus["providers"]["AELYS"]["runtime_status"]=="LOCAL_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED"
 
 assert by_id[174]["identity"]=="ELYRA"
 assert by_id[174]["repository_initialized"] is True
@@ -60,7 +68,7 @@ print(json.dumps({
   "rdx_provider":"RDX_EXCHANGE",
   "rdx_runtime":"UNBOUND",
   "f152_identity":"BETA",
-  "f173_runtime":"BASE_INSTALLED_ADAPTERS_UNQUALIFIED",
+  "f173_runtime":"LOCAL_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "f174_runtime":"UNQUALIFIED_MP4_CANARY_EXECUTED_PRODUCTION_FALSE_PHYSICAL_FALSE",
   "automatic_external_calls":False,
   "automatic_training":False
