@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_MEMORY_BINDINGS_V1",
   "date": "2026-09-25",
-  "status": "WRITE_READ_RECALL_PROVEN_SEMANTIC_BASELINE_PROMISING_HYBRID_REJECTED_NOT_PRODUCTION",
+  "status": "WRITE_READ_RECALL_PROVEN_SEMANTIC_INDEPENDENT_HOLD_NOT_PRODUCTION",
   "source": {
     "farm_id": 152,
     "repo": "cerebron-rdx-exchange",
@@ -121,7 +121,7 @@
     "TARGET_AI_DATASET"
   ],
   "current_limits": [
-    "SEMANTIC_ONLY_PROMISING_ON_ONE_SYNTHETIC_FRESH_HOLDOUT_NOT_PRODUCTION_QUALIFIED",
+    "SEMANTIC_ONLY_PASSES_TOP1_GATE_ON_INDEPENDENT_V3_BUT_MRR_0.946759_BELOW_0.95_GATE",
     "F115_FULL_RUNTIME_NOT_PROVEN",
     "F72_CURRENT_FAIL_BLOCKS_F118_GOLD_PROMOTION",
     "NO_RDX_NEURAL_TRAINING_CLAIM"
@@ -172,6 +172,14 @@
     "rrf_gain": -0.125,
     "current_candidate": "SEMANTIC_ONLY",
     "hybrid_rrf": "REJECTED",
-    "production_qualified": false
+    "production_qualified": false,
+    "independent_v3": {
+      "run_id": 36161829258,
+      "receipt_sha256": "4383fe6f1eb2894d68433004101a0fdb6d0449b67f1e540baa3f83bd90487516",
+      "top1_accuracy": 0.9166666666666666,
+      "mrr": 0.9467592592592593,
+      "critical_domains_pass": true,
+      "decision": "HOLD_BELOW_MRR_GATE"
+    }
   }
 }
