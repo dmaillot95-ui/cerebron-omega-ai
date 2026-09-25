@@ -118,6 +118,35 @@
         "receipts/training/saphea-first-lora-transfer-36101181888.json",
         "adapter_sha256:0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080"
       ]
+    },
+    {
+      "TRANSFER_ID": "TR-SAPHEA-LORA-XFER-REDTEAM-V2",
+      "SOURCE_TASK": "SAPHEA_G6_ADAPTER",
+      "SOURCE_SCORE": 0.5,
+      "TRANSFER_TASK_1": "FROZEN_60_TRANSFER_PLUS_24_REDTEAM_V2",
+      "TRANSFER_SCORE_1": 0.5,
+      "BASE_TRANSFER_SCORE": 0.16666666666666666,
+      "TG": 0.3333333333333333,
+      "HELD_OUT": true,
+      "REDTEAM_BASE_SCORE": 0.16666666666666666,
+      "REDTEAM_ADAPTER_SCORE": 0.16666666666666666,
+      "REDTEAM_GAIN": 0,
+      "CRITICAL_REGRESSION_COUNT": 1,
+      "ABLATION_SUPPORTS_VALUE": false,
+      "RESULT": "G7_BLOCKED_CLASS_COLLAPSE",
+      "PER_LABEL_DELTA": {
+        "ROUTED_ONLY": 10,
+        "FARM_EXECUTED": 0,
+        "NO_NEURAL_LEARNING": 0,
+        "NEURAL_LEARNING_VERIFIED": -10,
+        "SIMULATION_ONLY": 10,
+        "CLAIM_BLOCKED": 10
+      },
+      "EVIDENCE_REFS": [
+        "run:36101503838",
+        "artifact:10849268717",
+        "receipts/training/saphea-first-lora-transfer-36101503838.json"
+      ]
     }
   ],
   "rule": "LOCAL_IMPROVEMENT_NE_GENERAL_LEARNING"
