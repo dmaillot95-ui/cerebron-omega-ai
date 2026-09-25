@@ -1,0 +1,54 @@
+{
+  "schema": "ELYSIUM_D3_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36130067318,
+  "farm_id": 146,
+  "ai_id": "ELYSIUM",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "revision_verified": true,
+  "m6_sha256": "4ade0334a5a4a08d9f6e623b7bfe8059f3e1fe7f382c2db38c3ab4b7707384d0",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 44,
+  "accuracy": 0.6111111111111112,
+  "domain": {
+    "calibration": {
+      "correct": 5,
+      "total": 12,
+      "accuracy": 0.4166666666666667
+    },
+    "claim_verification": {
+      "correct": 8,
+      "total": 12,
+      "accuracy": 0.6666666666666666
+    },
+    "counterexample_search": {
+      "correct": 11,
+      "total": 12,
+      "accuracy": 0.9166666666666666
+    },
+    "error_detection": {
+      "correct": 4,
+      "total": 12,
+      "accuracy": 0.3333333333333333
+    },
+    "reproduction": {
+      "correct": 4,
+      "total": 12,
+      "accuracy": 0.3333333333333333
+    },
+    "robustness": {
+      "correct": 12,
+      "total": 12,
+      "accuracy": 1.0
+    }
+  },
+  "elapsed_s": 1953.106,
+  "max_rss_kb": 6651728,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "private_result_path": "elysium/D3-results/run-36130067318/smollm3-3b.json",
+  "private_result_sha256": "d4afd0d4653a7798bab7edce7ac4ef0f116529004b4274b05d7e50090f14b70e",
+  "hf_private_readback_sha_pass": true,
+  "receipt_sha256": "5a6107dc1aa6abac1023404b386addf7dc7d459f4c190b6a0d3fef5a5a24d4bb"
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "ELYSIUM_M6_RELEASE_RECEIPT_V1",
+  "run_id": 36130067318,
+  "farm_id": 146,
+  "ai_id": "ELYSIUM",
+  "source_d2_repo": "dmaillot95-ui/cerebron-farm-146-elysium",
+  "source_d2_run_id": 36129514044,
+  "source_d2_audit_sha256": "58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+  "state": "SEALED",
+  "private_repo": "cerebron-omega/cerebron-private-memory",
+  "private_path": "elysium/M6/ELYSIUM-M6-V1.json",
+  "dataset_sha256": "4ade0334a5a4a08d9f6e623b7bfe8059f3e1fe7f382c2db38c3ab4b7707384d0",
+  "task_count": 72,
+  "domain_counts": {
+    "calibration": 12,
+    "claim_verification": 12,
+    "counterexample_search": 12,
+    "error_detection": 12,
+    "reproduction": 12,
+    "robustness": 12
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_SYNTHETIC_M6_VERIFICATION_BENCHMARK_NO_TRAINING",
+  "receipt_sha256": "f6a6cc7b634990a48e1397e25bb2f250aa6b30b45f794669fce305f4a537f858"
+}
