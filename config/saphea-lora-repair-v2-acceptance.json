@@ -1,0 +1,60 @@
+{
+  "schema": "SAPHEA_LORA_REPAIR_V2_ACCEPTANCE_V1",
+  "frozen_at": "2026-09-25",
+  "status": "FROZEN_BEFORE_REPAIR_TRAINING",
+  "experiment": "DATA_REPRESENTATION_ONLY_ABLATION",
+  "invariant_hyperparameters": {
+    "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "learning_rate": 0.0001,
+    "epochs": 1,
+    "gradient_accumulation_steps": 8,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "changed_factor_only": "TRAINING_GOLD_REPRESENTATION_AND_CONTRAST_STRUCTURE",
+  "training_data": {
+    "record_count": 180,
+    "per_label": 30,
+    "source": "platform/saphea_epistemic_repair_gold_v2.py",
+    "forbidden_sources": [
+      "M6_ORIGINAL_60",
+      "TRANSFER_108_INSPECTED",
+      "TRANSFER_REDTEAM_84_INSPECTED",
+      "AUDIT_72_INSPECTED"
+    ]
+  },
+  "dev_guards": {
+    "original_m6_min_score": 30,
+    "original_m6_max": 60,
+    "note": "Original M6 is now a development guard, not fresh promotion evidence."
+  },
+  "promotion_benchmark_v3": {
+    "source": "platform/saphea_repair_benchmark_v3.py",
+    "normal_count": 72,
+    "red_team_count": 24,
+    "deny_training": true,
+    "compare": [
+      "IMMUTABLE_BASE",
+      "G6_ADAPTER_0187A8E3",
+      "REPAIR_CANDIDATE"
+    ],
+    "candidate_normal_accuracy_min": 0.5,
+    "candidate_redteam_accuracy_min": 0.5,
+    "candidate_min_per_label_accuracy": 0.25,
+    "candidate_gain_over_old_g6_min_correct": 5,
+    "candidate_redteam_gain_over_old_g6_min_correct": 4,
+    "critical_regression_allowed": false
+  },
+  "decision": {
+    "pass": "ELIGIBLE_FOR_F72_AFAH_SCOPED_G7_REVIEW",
+    "fail": "HOLD_G6_REPAIR_OR_ROLLBACK",
+    "no_auto_promotion": true,
+    "independent_model_evidence": false
+  }
+}
