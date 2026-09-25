@@ -1,0 +1,109 @@
+name: CEREBRON Robust Format Reparse Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/robust-format-reparse-launch.json'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  reparse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-36177878435
+          path: selection
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - name: Robustly reparse existing outputs
+        run: |
+          python - <<'PY'
+          import ast,glob,json,re,hashlib,pathlib
+          KEYS=["ATTEMPT","ASSUMPTIONS","EVIDENCE_NEEDED","COUNTEREXAMPLE_OR_LIMIT","CONFIDENCE","UNKNOWN"]
+
+          def canon(label):
+              s=re.sub(r"[^A-Z]","",str(label).upper())
+              if s.startswith("ATTEMPT"): return "ATTEMPT"
+              if s.startswith("ASSUMPT"): return "ASSUMPTIONS"
+              if "EVIDENCE" in s and ("NEED" in s or "REQ" in s): return "EVIDENCE_NEEDED"
+              if "COUNTEREXAMPLE" in s or "LIMIT" in s: return "COUNTEREXAMPLE_OR_LIMIT"
+              if s.startswith("CONFID"): return "CONFIDENCE"
+              if s.startswith("UNKNOWN") or "UNRESOLVED" in s: return "UNKNOWN"
+              return None
+
+          def reparse(raw):
+              out={}
+              # 1) JSON / Python-dict-like key-value pairs, tolerant to single quotes and key spelling.
+              for m in re.finditer(r'''["']?([^"'\n:{}]+)["']?\s*:\s*["']([^"'\n}]*)["']''',raw):
+                  k=canon(m.group(1))
+                  if k and m.group(2).strip(): out[k]=m.group(2).strip()
+              # 2) Flexible XML-like open/close tags; closing tag spelling may drift.
+              tag_matches=list(re.finditer(r"<\s*([^>/]+)\s*>\s*(.*?)(?=<\s*/|<\s*[^>]+>|$)",raw,re.S))
+              for m in tag_matches:
+                  k=canon(m.group(1))
+                  if k and m.group(2).strip(): out.setdefault(k,m.group(2).strip())
+              # 3) Plain key-value lines with fuzzy canonical labels.
+              cur=None
+              for line in raw.splitlines():
+                  s=line.strip().replace("**","").replace("__","").replace(chr(96),"").replace("：",":")
+                  if not s: continue
+                  if ":" in s:
+                      h,v=s.split(":",1)
+                      k=canon(h)
+                      if k:
+                          cur=k
+                          if v.strip(): out.setdefault(k,v.strip())
+                          continue
+                  if cur and not s.startswith("<"):
+                      out[cur]=(out.get(cur,"")+" "+s).strip()
+              return out
+
+          rows=[]
+          for p in sorted(glob.glob("selection/receipts/*.json")):
+              r=json.load(open(p))
+              old=r.get("parsed",{})
+              new=reparse(r.get("raw_output",""))
+              rows.append({
+                "target_ai":r.get("target_ai"),
+                "contract":r.get("contract"),
+                "old_nonempty":sum(bool(str(old.get(k,"")).strip()) for k in KEYS),
+                "new_nonempty":sum(bool(str(new.get(k,"")).strip()) for k in KEYS),
+                "old_complete":all(str(old.get(k,"")).strip() for k in KEYS),
+                "new_complete":all(str(new.get(k,"")).strip() for k in KEYS),
+                "new_keys":[k for k in KEYS if str(new.get(k,"")).strip()],
+                "raw_sha256":r.get("output_sha256")
+              })
+          report={
+            "schema":"CEREBRON_ROBUST_FORMAT_REPARSE_DIAGNOSTIC_V1",
+            "source_run_id":36177878435,
+            "receipt_count":len(rows),
+            "old_complete_count":sum(r["old_complete"] for r in rows),
+            "new_complete_count":sum(r["new_complete"] for r in rows),
+            "old_total_nonempty_fields":sum(r["old_nonempty"] for r in rows),
+            "new_total_nonempty_fields":sum(r["new_nonempty"] for r in rows),
+            "rows":rows,
+            "new_inference":False,
+            "weight_change":False,
+            "training_released":False
+          }
+          raw=json.dumps(report,sort_keys=True,separators=(",",":")).encode()
+          report["report_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/robust-format-reparse.json").write_text(json.dumps(report,indent=2)+"\n")
+          print(json.dumps(report,sort_keys=True))
+          assert len(rows)==6
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robust-format-reparse
+          path: artifacts/robust-format-reparse.json
+          if-no-files-found: error
+          retention-days: 30
