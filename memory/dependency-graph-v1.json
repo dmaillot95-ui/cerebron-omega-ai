@@ -19,6 +19,24 @@
       "type": "D_DATA",
       "value": "shared frozen readiness-validation problem",
       "critical": true
+    },
+    {
+      "id": "MODEL-QWEN3-4B-1CFA9A7",
+      "type": "D_MODEL",
+      "value": "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+      "critical": true
+    },
+    {
+      "id": "RUN-36084488477",
+      "type": "D_TEST",
+      "value": "M42 all-AI strategy council 38 perspectives in five shared-load shards",
+      "critical": true
+    },
+    {
+      "id": "PROBLEM-C80-M42-SHARED-ROUTE",
+      "type": "D_DATA",
+      "value": "shared strategy council line-of-route and eight-field output contract",
+      "critical": true
     }
   ],
   "groups": [
@@ -46,6 +64,59 @@
       "independent_evidence_count": 0,
       "independent_evidence": false,
       "reason": "Shared model revision and common mission lineage."
+    },
+    {
+      "group_id": "M42_COUNCIL_SHARED_LINEAGE",
+      "members": [
+        "CEREBRON",
+        "SAPHEA",
+        "SPIRALION",
+        "ETHERION",
+        "HYPERION",
+        "ASTRION",
+        "METRION",
+        "AFAH",
+        "AELYS",
+        "ELYRA",
+        "SAPHEA_MICRO",
+        "ELYSION",
+        "ELYSIUM",
+        "SAELION",
+        "NEXUS",
+        "F148-ALPHA",
+        "F152-BETA",
+        "F153-GAMMA",
+        "F150-DELTA",
+        "F154-EPSILON",
+        "F155-ZETA",
+        "F156-ETA",
+        "F157-THETA",
+        "F158-IOTA",
+        "F159-KAPPA",
+        "F160-LAMBDA",
+        "F161-MU",
+        "F163-XI",
+        "F164-OMICRON",
+        "F165-PI",
+        "F166-RHO",
+        "F167-SIGMA",
+        "F168-TAU",
+        "F169-UPSILON",
+        "F170-PHI",
+        "F171-CHI",
+        "F172-PSI",
+        "F149-OMEGA"
+      ],
+      "shared_critical_dependencies": [
+        "MODEL-QWEN3-4B-1CFA9A7",
+        "RUN-36084488477",
+        "PROBLEM-C80-M42-SHARED-ROUTE"
+      ],
+      "worker_count": 38,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0,
+      "independent_evidence": false,
+      "reason": "All perspectives share the same model revision, mission route, and prompt contract."
     }
   ],
   "independence_dimensions": [
