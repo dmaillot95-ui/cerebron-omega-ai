@@ -1,0 +1,119 @@
+{
+  "schema": "CEREBRON_102_REGISTRY_154_RDX_SEMANTIC_FUSION_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.24",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "sparse_ids_absent": [
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172
+    ],
+    "f152": "REGISTERED",
+    "f173": "OBSERVED_OTHER_SESSION_NO_MODIFICATION",
+    "f174": "OBSERVED_OTHER_SESSION_NO_MODIFICATION"
+  },
+  "f152": {
+    "status": "RDX_PRIVATE_WRITE_READ_SHA_RECALL_PASS_PRODUCT_BUILD_SEPARATE",
+    "ingress_run_id": 36142030500,
+    "write_read_recall_run_id": 36143467119,
+    "write_read_recall_receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f",
+    "semantic_retrieval_canary_run_id": 36156985796,
+    "semantic_retrieval_state": "IN_PROGRESS"
+  },
+  "memory_audit": {
+    "run_id": 36156845720,
+    "status": "PASS",
+    "receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
+    "artifact_id": 10873189740,
+    "artifact_digest": "sha256:e37308434cb4bdf047fb31a11196f8e561c2b46c525a2881909783c72369992a",
+    "registry_entry_count": 154,
+    "registry_max_id": 174,
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "m6_training": "DENY"
+  },
+  "native_ai": {
+    "SAELION": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "qwen_correct": 45,
+      "smol_correct": 36,
+      "oracle_union_correct": 45,
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "NEXUS": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 4,
+      "d4_fusion_dev_run_id": 36155230931,
+      "d4_fusion_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_qwen_correct": 22,
+      "dev_smol_correct": 16,
+      "dev_best_policy_correct": 22,
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "DELTA": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "qwen_correct": 48,
+      "smol_correct": 44,
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "ALPHA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 3,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "IN_PROGRESS"
+    },
+    "OMEGA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 12,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "IN_PROGRESS"
+    }
+  },
+  "next_exact": [
+    "Close RDX semantic retrieval canary run 36156985796; if PASS, record synthetic semantic retrieval evidence but do not claim production F115 runtime.",
+    "Close ALPHA/OMEGA fusion DEV run 36155520110. Consume a fresh private holdout only for an AI whose DEV policy shows measured positive gain and acceptable domain regression.",
+    "Do not relaunch NEXUS D4; its DEV policy gain is zero and no fresh holdout was consumed.",
+    "Keep SAELION and DELTA single-core Qwen unless new independent evidence justifies reopening D4.",
+    "Keep F118 M4 GOLD and RDX neural training blocked while F72 remains FAIL.",
+    "Do not fill sparse farm IDs F153-F172 unless canonical farms are actually created and verified.",
+    "Do not modify F173/F174 work owned by the other session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
