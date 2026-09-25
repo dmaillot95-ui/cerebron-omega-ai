@@ -7,7 +7,7 @@
   "repo": "cerebron-farm-173-aelys-live",
   "repo_full_name": "dmaillot95-ui/cerebron-farm-173-aelys-live",
   "planned_url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
-  "status": "RESERVED_REPOSITORY_NOT_YET_CREATED",
+  "status": "REGISTERED_REPOSITORY_PRESENT_SELFTEST_PASS_ADAPTERS_UNQUALIFIED",
   "type": "LIVE_PRESENTATION_INTEGRATION_FARM",
   "domain": "interactive-rd-presentation-live-avatar-client-showroom-tiktok",
   "role": "bridge-client-or-live-events-to-cerebron-rdx-memory-aelys-elyra",
@@ -83,5 +83,14 @@
     "presenter/aelys_presenter.py",
     "avatar/elyra_adapter.py",
     "tests/test_fail_closed.py"
-  ]
+  ],
+  "url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
+  "evidence": {
+    "repository_verified": true,
+    "selftest_run_id": 36153266774,
+    "selftest_job_id": 108131546356,
+    "head_sha": "eefc374f7639c86c87dafbb174d006c804343b9b",
+    "pytest": "PASS",
+    "governance_locks": "PASS"
+  }
 }

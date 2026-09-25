@@ -217,10 +217,13 @@
       "farm_id": 173,
       "code": "F173",
       "repo_full_name": "dmaillot95-ui/cerebron-farm-173-aelys-live",
-      "planned_url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
-      "status": "RESERVED_REPOSITORY_NOT_YET_CREATED",
+      "url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
+      "status": "REGISTERED_BASE_SELFTEST_PASS_ADAPTERS_UNQUALIFIED",
       "reservation_manifest": "config/farm-reservations/F173-aelys-live.json",
-      "activation_rule": "VERIFY_REPOSITORY_THEN_REGISTER_ACTIVE_FARM"
+      "selftest_run_id": 36153266774,
+      "selftest_head_sha": "eefc374f7639c86c87dafbb174d006c804343b9b",
+      "activation_scope": "PLUGIN_CONTRACT_AND_FAIL_CLOSED_BASE_ONLY",
+      "live_runtime": "UNQUALIFIED"
     }
   }
 }

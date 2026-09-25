@@ -1,5 +1,5 @@
 {
-  "version": "2.22",
+  "version": "2.23",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1187,17 +1187,57 @@
           118
         ]
       }
+    },
+    {
+      "id": 173,
+      "code": "F173",
+      "name": "AÉLYS LIVE",
+      "repo": "cerebron-farm-173-aelys-live",
+      "repo_full_name": "dmaillot95-ui/cerebron-farm-173-aelys-live",
+      "url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
+      "domain": "interactive-rd-presentation-live-avatar-client-showroom-tiktok",
+      "status": "REPOSITORY_PRESENT_BASE_SELFTEST_PASS_ADAPTERS_UNQUALIFIED",
+      "type": "LIVE_PRESENTATION_INTEGRATION_FARM",
+      "role": "bridge-client-or-live-events-to-cerebron-rdx-memory-aelys-elyra",
+      "memory_binding": {
+        "provider": "Hugging Face private",
+        "repo_id": "cerebron-omega/cerebron-private-memory",
+        "namespace": "colony/AELYS-LIVE/"
+      },
+      "plugin_bus": "config/cerebron-unified-plugin-bus-v1.json",
+      "evidence": {
+        "selftest_run_id": 36153266774,
+        "selftest_job_id": 108131546356,
+        "head_sha": "eefc374f7639c86c87dafbb174d006c804343b9b",
+        "pytest": "PASS",
+        "governance_locks": "PASS",
+        "tiktok_adapter": "UNQUALIFIED",
+        "private_client_adapter": "UNQUALIFIED",
+        "tts_avatar_runtime": "UNQUALIFIED",
+        "claim_ceiling": "BASE_INTEGRATION_AND_FAIL_CLOSED_SELFTEST_ONLY_NO_LIVE_RUNTIME_QUALIFICATION"
+      },
+      "rules": [
+        "REALITY>COHERENCE",
+        "EVIDENCE>CONFIDENCE",
+        "CLAIM_LE_EVIDENCE",
+        "MEMORY_NE_TRAINING",
+        "SIMULATION_NE_TEST",
+        "NO_PRIVATE_CLIENT_DATA_IN_PUBLIC_GITHUB",
+        "NO_AUTOMATIC_TRAINING_FROM_LIVE_CHAT",
+        "UNKNOWN_CAPABILITY_DENY",
+        "EXTERNAL_ADAPTER_REQUIRES_EXECUTABLE_CANARY"
+      ]
     }
   ],
-  "max_farms": 152,
+  "max_farms": 173,
   "policy": {
-    "farm_cap": 146,
+    "farm_cap": 173,
     "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
     "tools_are_not_farms": true,
-    "current_registered_farm_count": 146,
-    "current_highest_farm_id": 146,
+    "current_registered_farm_count": 153,
+    "current_highest_farm_id": 173,
     "new_farm_admission": "REPOSITORY_MUST_EXIST_AND_BE_VERIFIED_BEFORE_REGISTRY_INSERT",
     "future_ids_are_not_active_until_verified": true
   },
@@ -1324,5 +1364,5 @@
       ]
     }
   },
-  "farm_ceiling": 152
+  "farm_ceiling": 173
 }
