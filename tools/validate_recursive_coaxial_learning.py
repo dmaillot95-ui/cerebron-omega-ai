@@ -19,7 +19,7 @@ warnings=[]
 
 if contract["schema"]!="CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1":
     errors.append("BAD_SCHEMA")
-if contract["protected_scope"]["do_not_modify_farms"] != [172,173,174]:
+if contract["protected_scope"]["operational_do_not_modify_farms"] != [172,173,174]:
     errors.append("PROTECTED_FARMS_CHANGED")
 if contract["training_policy"]["m6_deny_training"] is not True:
     errors.append("M6_NOT_DENIED")
@@ -28,15 +28,15 @@ if memory["classes"]["M6"].get("deny_training") is not True:
 if gvl.get("dimension") != 32:
     errors.append("GVL_DIMENSION_NOT_32")
 
-blocked={"PSI","AELYS","ELYRA","NU"}
+blocked={"NU"}
 eligible=[e for e in coverage["entries"] if e.get("available") is True and e.get("identity") not in blocked]
 targets=contract["target_population"]["targets"]
 target_ids={t["ai_id"] for t in targets}
 eligible_ids={e["ai_id"] for e in eligible}
 if target_ids != eligible_ids:
     errors.append("TARGET_COVERAGE_MISMATCH")
-if len(targets)!=35 or contract["target_population"]["expected_count"]!=35:
-    errors.append("TARGET_COUNT_NOT_35")
+if len(targets)!=38 or contract["target_population"]["expected_count"]!=38:
+    errors.append("TARGET_COUNT_NOT_38")
 if any(t["identity"] in blocked for t in targets):
     errors.append("PROTECTED_OR_UNAVAILABLE_IDENTITY_IN_TARGETS")
 
@@ -81,7 +81,7 @@ wave_order=[
     ("WAVE4",["BETA","GAMMA","EPSILON","ZETA","ETA"]),
     ("WAVE5",["THETA","IOTA","KAPPA","LAMBDA","MU"]),
     ("WAVE6",["XI","OMICRON","PI","RHO","SIGMA"]),
-    ("WAVE7",["TAU","UPSILON","PHI","CHI"]),
+    ("WAVE7",["TAU","UPSILON","PHI","CHI","PSI"]),
     ("FINAL",["CEREBRON"]),
 ]
 queue=[]
@@ -110,6 +110,22 @@ for req in ["WEIGHTS_OR_ADAPTER_CHANGED","COLD_GAIN_POSITIVE","TRANSFER_GAIN_POS
     if req not in required_prom:
         errors.append("MISSING_PROMOTION_REQUIREMENT:"+req)
 
+# Learning-only exception for F172/F173/F174.
+special=contract.get("special_case_learning",{})
+if set(special) != {"PSI","AELYS","ELYRA"}:
+    errors.append("SPECIAL_CASE_LEARNING_SCOPE_MISMATCH")
+else:
+    if special["PSI"].get("runtime_or_site_mutation") is not False:
+        errors.append("PSI_OPERATIONAL_MUTATION_ALLOWED")
+    if special["AELYS"].get("runtime_or_site_mutation") is not False:
+        errors.append("AELYS_OPERATIONAL_MUTATION_ALLOWED")
+    if special["AELYS"].get("prior_failed_adapter_must_not_be_reactivated") is not True:
+        errors.append("AELYS_ROLLBACK_REACTIVATION_GUARD_MISSING")
+    if special["ELYRA"].get("runtime_or_site_mutation") is not False:
+        errors.append("ELYRA_OPERATIONAL_MUTATION_ALLOWED")
+    if special["ELYRA"].get("must_preserve_physical_claim_boundary") is not True:
+        errors.append("ELYRA_PHYSICAL_CLAIM_GUARD_MISSING")
+
 growth=contract["geometric_growth_metric"]
 if growth["current_claim"]!="NOT_ESTABLISHED" or growth["minimum_generations_for_claim"]<3:
     errors.append("GEOMETRIC_GROWTH_OVERCLAIM")
@@ -122,8 +138,8 @@ if history.get("canonical_run_id") == contract["scheduling"]["no_repeat_wave2_ru
 report={
     "schema":"CEREBRON_RECURSIVE_COAXIAL_VECTOR_READINESS_V1",
     "status":"PASS" if not errors else "FAIL",
-    "protected_farms":[172,173,174],
-    "protected_mutations_detected":0,
+    "operationally_protected_farms":[172,173,174],
+    "operational_mutations_detected":0,
     "target_ai_count":len(targets),
     "gvl_dimension":gvl.get("dimension"),
     "parallel_lane_count":len(parallel),
