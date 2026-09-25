@@ -164,6 +164,8 @@ contamination=contamination_scan(train_candidates,eval_references,ngram_size=5,t
 blocked_train_ids={m.candidate_id for m in contamination if m.blocked}
 for r in canonical:
     r["decontamination_blocked"]=r["record_id"] in blocked_train_ids
+    r["derivative_generation_allowed"]=r["split"]=="train"
+    r["reserved_eval_sterile_for_training"]=r["split"] in ("validation","holdout")
     r["effective_training_eligible"]=bool(
         r["training_eligible"] and r["split"]=="train" and not r["decontamination_blocked"]
     )
@@ -189,6 +191,8 @@ report={
   "validation_reserved_eligible_count":eligible_splits["validation"],
   "decontamination_match_count":len(contamination),
   "blocked_train_record_count":len(blocked_train_ids),
+  "reserved_eval_record_count":sum(r["split"] in ("validation","holdout") for r in canonical),
+  "reserved_eval_derivative_generation_allowed_count":sum(r.get("derivative_generation_allowed") is True and r["split"] in ("validation","holdout") for r in canonical),
   "decontamination_matches":[m.__dict__ for m in contamination],
   "weight_training_released":False,
   "release_reason":"Requires explicit dataset seal plus minimum target coverage; corpus build alone never releases training.",
@@ -202,5 +206,5 @@ print(json.dumps({k:report[k] for k in [
   "status","source_counts","raw_record_count","canonical_record_count",
   "duplicate_count","split_counts","training_eligible_count",
   "training_eligible_split_counts","effective_training_eligible_count",
-  "decontamination_match_count","blocked_train_record_count","weight_training_released"
+  "decontamination_match_count","blocked_train_record_count","reserved_eval_record_count","reserved_eval_derivative_generation_allowed_count","weight_training_released"
 ]},sort_keys=True))
