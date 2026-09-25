@@ -1,23 +1,25 @@
 {
   "schema": "CEREBRON_MEMORY_PROMOTION_AUDIT_V2_RECEIPT",
   "date": "2026-09-25",
-  "run_id": 36155304088,
-  "job_id": 108138259383,
+  "run_id": 36156845720,
+  "job_id": 108143357562,
   "status": "PASS",
-  "artifact_id": 10873431435,
-  "artifact_digest": "sha256:065a3bf32141e02cc56112f2800db170b61f44f5eba0238074e27fd7a0c2fb6e",
+  "artifact_id": 10873189740,
+  "artifact_digest": "sha256:e37308434cb4bdf047fb31a11196f8e561c2b46c525a2881909783c72369992a",
   "receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
   "checks": {
     "registry_entry_count": 154,
-    "max_farm_id": 174,
+    "registry_max_id": 174,
     "sparse_ids_allowed": true,
+    "active_namespaces": 14,
+    "pending_namespaces": 5,
     "m6_training": "DENY",
     "f72_current": "FAIL",
     "m4_promotion": "BLOCKED_BY_F72",
     "rdx_memory_ingress": "CONFIGURED",
-    "rdx_auto_training": false
+    "rdx_auto_training": false,
+    "errors": []
   },
-  "supersedes_run_id": 36143095219,
-  "failed_mechanical_run_not_scientific_failure": 36155091980,
-  "claim_ceiling": "MEMORY_POLICY_CONFIGURATION_AUDIT_PASS_FOR_SPARSE_REGISTRY_THROUGH_F174_NO_NEURAL_TRAINING_CLAIM"
+  "registry_note": "F152 registered; F173 and F174 registered; IDs F153-F172 absent/reserved and not synthesized.",
+  "claim_ceiling": "MEMORY_POLICY_AND_CURRENT_REGISTRY_AUDIT_PASS; DOES_NOT_OPEN_F72_OR_M4_GOLD"
 }
