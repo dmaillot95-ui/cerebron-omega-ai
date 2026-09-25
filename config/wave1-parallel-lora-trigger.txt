@@ -1,4 +1,5 @@
 CEREBRON WAVE1 PARALLEL REAL LORA
+version=v2-dropout-typo-fixed
 release_sha=1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb
 roles=AELYS,ETHERION,AFAH,METRION
 mode=SEPARATE_ADAPTER_PER_ROLE
@@ -8,3 +9,5 @@ cold=M6,TRANSFER,RED
 cold_training=DENY
 hf_private=true
 auto_promotion=false
+previous_run=36108840820
+previous_failure=F_TOOL_NAMEERROR_LORA_DROPO
