@@ -1,0 +1,96 @@
+{
+  "schema": "CEREBRON_90_WAVE2_AND_OPENAI_AGENTS_EXPERIMENTAL_V1",
+  "date": "2026-09-25",
+  "wave2": {
+    "branch": "feat/wave2-parallel-ai-baselines-v1",
+    "baseline_run_id": 36111654337,
+    "canonical_receipt": "receipts/wave2/canonical/wave2-parallel-baseline-audit-36111654337.json",
+    "baseline_status": "FOUR_REAL_BASELINES_COMPLETE_AUDIT_JOB_REDUNDANTLY_QUEUED",
+    "roles": {
+      "SPIRALION": {
+        "score": 9,
+        "max": 12,
+        "accuracy": 0.75,
+        "model": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      },
+      "HYPERION": {
+        "score": 8,
+        "max": 12,
+        "accuracy": 0.6666666666666666,
+        "model": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      },
+      "ASTRION": {
+        "score": 3,
+        "max": 12,
+        "accuracy": 0.25,
+        "model": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      },
+      "SAPHEA_MICRO": {
+        "score": 5,
+        "max": 14,
+        "accuracy": 0.35714285714285715,
+        "model": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      }
+    },
+    "unique_model_lineages": 2,
+    "independent_evidence_count": 0,
+    "training_executed_count": 0,
+    "quarantine": {
+      "candidate_count": 456,
+      "role_counts": {
+        "SPIRALION": 96,
+        "HYPERION": 96,
+        "ASTRION": 96,
+        "SAPHEA_MICRO": 168
+      },
+      "run_id": 36112884799,
+      "status": "QUEUED_AT_CHECKPOINT",
+      "training_released": false,
+      "next_gate": "SEMANTIC_AUDIT_COUNTER_AUDIT_THEN_F72_REAL_FARM_THEN_AFAH"
+    }
+  },
+  "openai_agents_experimental": {
+    "branch": "feat/openai-agents-cerebron-experimental-v1",
+    "status": "STATIC_CONTRACT_PASS_ZERO_SPEND",
+    "ci_run_id": 36112564314,
+    "ci_job_id": 107999127970,
+    "enabled": false,
+    "max_spend_usd": 0,
+    "network_calls_executed": 0,
+    "paid_calls_executed": 0,
+    "max_concurrent_subagents": 5,
+    "api_endpoint": "https://api.openai.com/v1/agents/sessions",
+    "beta_header": "OpenAI-Beta: agents=v1",
+    "current_model_ids": [
+      "gpt-6-astra",
+      "gpt-5.6-sol",
+      "gpt-5.6-luna"
+    ],
+    "mcp_enabled": false,
+    "hosted_sandbox_enabled": false,
+    "runtime_secret_required": false,
+    "docs": "docs/OPENAI_AGENTS_EXPERIMENTAL_V1.md",
+    "config": "config/openai-agents-experimental-v1.json",
+    "validator": "tools/validate_openai_agents_experimental_v1.py",
+    "claim_ceiling": "STATIC_VALIDATED_INTEGRATION_CONTRACT_ONLY_NO_API_SESSION_NO_SUBAGENT_EXECUTION_NO_COST"
+  },
+  "invariants": [
+    "NO_PAID_OPENAI_API_ACTIVATION_WITHOUT_EXPLICIT_USER_AUTHORIZATION",
+    "AGENT_COUNT_NOT_INTELLIGENCE",
+    "SUBAGENTS_NOT_INDEPENDENT_EVIDENCE_BY_DEFAULT",
+    "WORKFLOW_SUCCESS_NOT_SCIENTIFIC_SUCCESS",
+    "WAVE2_BENCHMARKS_DENY_TRAINING",
+    "OPENAI_AGENTS_BRANCH_REMAINS_ISOLATED_FROM_MAIN_RUNTIME"
+  ],
+  "exact_resume": [
+    "Check Wave2 quarantine run 36112884799.",
+    "Do not rerun the four Wave2 baseline model jobs.",
+    "If Wave2 quarantine audit passes 456/456 and 19/19 tamper detection, route the pinned receipt to real F72 farm, then deterministic AFAH policy admission.",
+    "Keep OpenAI Agents experiment disabled and zero-spend unless explicit user authorization for paid API is given.",
+    "Do not invent gpt-6-sol or gpt-6-luna API IDs; current verified IDs are gpt-6-astra, gpt-5.6-sol, gpt-5.6-luna."
+  ]
+}
