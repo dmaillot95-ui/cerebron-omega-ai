@@ -1,0 +1,81 @@
+{
+  "schema": "CEREBRON_90_WAVE2_PARALLEL_BASELINES_AND_DATA_QUEUED_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_89_WAVE1_CLOSED_2026-09-25.json",
+  "wave": "WAVE2_SPIRALION_HYPERION_ASTRION_SAPHEA_MICRO",
+  "branch": "feat/wave2-parallel-ai-baselines-v1",
+  "branch_head": "38ea2be81efea8ad8c7a37e14c6f6ffbaa4896da",
+  "baseline_run": {
+    "run_id": 36111654337,
+    "status": "QUEUED_AT_CHECKPOINT",
+    "roles": [
+      "SPIRALION",
+      "HYPERION",
+      "ASTRION",
+      "SAPHEA_MICRO"
+    ],
+    "models": {
+      "SPIRALION": "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "HYPERION": "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "ASTRION": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "SAPHEA_MICRO": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb"
+    },
+    "rules": [
+      "BASELINE_NOT_TRAINING",
+      "BENCHMARK_DENY_TRAINING",
+      "SHARED_MODEL_LINEAGES_CORRELATED"
+    ]
+  },
+  "quarantine_run": {
+    "run_id": 36111846274,
+    "status": "QUEUED_AT_CHECKPOINT",
+    "target_record_count": 456,
+    "role_counts": {
+      "SPIRALION": 96,
+      "HYPERION": 96,
+      "ASTRION": 96,
+      "SAPHEA_MICRO": 168
+    },
+    "pipeline": "BUILD_PLUS_INDEPENDENT_SEMANTIC_AUDIT_PLUS_TAMPER_COUNTER_AUDIT",
+    "tamper_case_count": 19,
+    "training_released": false
+  },
+  "prepared_post_gates": {
+    "f72_worker_repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+    "f72_worker": "worker/wave2_data_evidence_review_v1.py",
+    "f72_workflow": ".github/workflows/wave2-data-evidence-review-v1.yml",
+    "afah_gate": "tools/afah_wave2_data_admission_v1.py",
+    "afah_workflow": ".github/workflows/afah-wave2-data-admission-v1.yml",
+    "split_builder": "tools/wave2_versioned_split_builder_v1.py",
+    "cold_builder": "tools/wave2_cold_suite_builder_v1.py",
+    "release_gate": "tools/wave2_dataset_release_gate_v1.py",
+    "release_workflow": ".github/workflows/wave2-dataset-package-release-v1.yml",
+    "cold_total_target": 380
+  },
+  "wave1_final_reference": {
+    "afah_state": "G6_VERIFIED_RESEARCH_ONLY",
+    "afah_adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+    "afah_runtime_activation": false,
+    "rollbacks": [
+      "AELYS",
+      "ETHERION",
+      "METRION"
+    ]
+  },
+  "hard_rules": [
+    "DO_NOT_RERUN_WAVE1",
+    "DO_NOT_COUNT_DUPLICATE_RUNS_AS_INDEPENDENT_EVIDENCE",
+    "DO_NOT_TRIGGER_F72_WAVE2_UNTIL_BASELINE_AND_QUARANTINE_RECEIPTS_EXIST",
+    "DO_NOT_RELEASE_TRAINING_BEFORE_F72_AND_AFAH_PASS",
+    "GREEK_DUAL_CORE_AIS_REMAIN_SEPARATE_TWO_MODEL_WAVE"
+  ],
+  "exact_resume": [
+    "Check Wave2 baseline run 36111654337.",
+    "Check Wave2 quarantine build-audit run 36111846274.",
+    "If both pass, pin the Wave2 branch commit containing both persisted receipts and exact manifest SHA.",
+    "Create and trigger F72 Wave2 request using those exact receipt paths and pinned commit.",
+    "If F72 returns SUPPORTED E2, trigger AFAH Wave2 data admission.",
+    "Copy the admitted pointer onto the Wave2 branch, then trigger the prepared dataset package release.",
+    "Only after release gate passes prepare/trigger role-specific LoRA canaries; preserve model lineage correlation declarations."
+  ]
+}
