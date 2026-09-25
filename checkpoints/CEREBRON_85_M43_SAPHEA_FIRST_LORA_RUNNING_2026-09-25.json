@@ -1,0 +1,75 @@
+{
+  "schema": "CEREBRON_85_M43_SAPHEA_FIRST_LORA_RUNNING_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_84_M42_CLOSED_2026-09-25.json",
+  "mission": "M43_SAPHEA_FIRST_REAL_REVERSIBLE_LORA",
+  "branch": "feat/saphea-first-lora-v1",
+  "branch_head_at_trigger": "3a762a5d0e3f1521f78b96c05127378ab11ba901",
+  "run_id": 36099976977,
+  "state": "RUNNING",
+  "base_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "immutable": true
+  },
+  "data_gates": {
+    "gold_records": 180,
+    "gold_sha256": "efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa",
+    "m6_records": 60,
+    "m6_sha256": "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63",
+    "m6_training": "DENY",
+    "baseline_score": "18/60",
+    "baseline_run": 35907245194
+  },
+  "adapter": {
+    "type": "PEFT_LORA",
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "base_weights_overwrite": false,
+    "private_storage": "cerebron-omega/cerebron-private-memory",
+    "private_path_pattern": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-{RUN_ID}/",
+    "github_storage": "METADATA_POINTER_ONLY"
+  },
+  "pinned_stack": {
+    "torch": "2.14.0 CPU",
+    "transformers": "5.17.0",
+    "peft": "0.21.0"
+  },
+  "hard_gates": [
+    "GOLD_SHA_MATCH",
+    "M6_SHA_MATCH",
+    "M6_DENY_TRAINING_TRUE",
+    "GOLD_M6_DISJOINT",
+    "BASELINE_REPRODUCES_18_OF_60",
+    "ONLY_LORA_PARAMS_TRAINABLE",
+    "ADAPTER_TENSOR_SHA_CHANGES",
+    "ADAPTER_FILE_SHA_VERIFIED",
+    "HF_PRIVATE_REPO_CONFIRMED",
+    "HF_PRIVATE_WRITE_READBACK_SHA_PASS",
+    "NO_AUTO_PROMOTION"
+  ],
+  "promotion_requires_later": [
+    "COLD_GAIN_POSITIVE",
+    "NOVEL_TRANSFER_GAIN",
+    "ABLATION_SUPPORTS_VALUE",
+    "NO_CRITICAL_REGRESSION",
+    "INDEPENDENT_AUDIT",
+    "RED_TEAM",
+    "F72_REVIEW",
+    "AFAH_FINAL_AUTHORITY"
+  ],
+  "exact_resume": [
+    "Check run 36099976977.",
+    "If training stack/compile/data gate fails: classify F_TOOL or F_DATA; do not infer model failure.",
+    "If weights_changed=false: neural-learning claim DENIED.",
+    "If weights_changed=true: neural-learning scoped claim may be made only for SAPHEA epistemic adapter.",
+    "If cold_gain<=0 or critical_regression=true: ROLLBACK_AND_RETAIN_EVIDENCE.",
+    "If cold_gain>0 and no critical regression: hold at G6 pending transfer/ablation/audit; do not promote automatically.",
+    "Verify HF private readback before accepting the adapter receipt."
+  ]
+}
