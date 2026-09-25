@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_MEMORY_BINDINGS_V1",
   "date": "2026-09-25",
-  "status": "CONFIGURED_FARMS_SCAFFOLDED_RUNTIME_WRITE_READ_NOT_YET_PROVEN",
+  "status": "PRIVATE_WRITE_READ_SHA_AND_POINTER_RECALL_PROVEN_SEMANTIC_RAG_QUALITY_NOT_YET_PROVEN",
   "source": {
     "farm_id": 152,
     "repo": "cerebron-rdx-exchange",
@@ -121,10 +121,9 @@
     "TARGET_AI_DATASET"
   ],
   "current_limits": [
-    "F114_TO_F120_ARE_SCAFFOLDED_IN_REGISTRY",
-    "THIS_BINDING_DOES_NOT_PROVE_EXTERNAL_WRITE_READ_RECALL",
+    "SEMANTIC_VECTOR_RETRIEVAL_QUALITY_NOT_YET_PROVEN",
     "F72_CURRENT_FAIL_BLOCKS_F118_GOLD_PROMOTION",
-    "NO_RDX_NEURAL_TRAINING_CLAIM_FROM_BINDING_ALONE"
+    "NO_RDX_NEURAL_TRAINING_CLAIM"
   ],
   "rules": [
     "MEMORY_NOT_TRAINING",
@@ -133,5 +132,16 @@
     "CONTENT_ADDRESS_BY_SHA256",
     "DEDUP_BEFORE_COUNTING",
     "CLAIM_LE_EVIDENCE"
-  ]
+  ],
+  "runtime_proof": {
+    "run_id": 36143467119,
+    "receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f",
+    "namespace": "RDX_SHARED",
+    "classes": [
+      "M1",
+      "M7"
+    ],
+    "write_read_sha": "PASS",
+    "pointer_recall": "PASS"
+  }
 }
