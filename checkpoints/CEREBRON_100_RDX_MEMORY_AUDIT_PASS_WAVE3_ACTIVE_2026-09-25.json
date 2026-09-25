@@ -1,0 +1,131 @@
+{
+  "schema": "CEREBRON_100_RDX_MEMORY_AUDIT_PASS_WAVE3_ACTIVE_V1",
+  "date": "2026-09-25",
+  "farm_count": 152,
+  "memory": {
+    "promotion_audit": {
+      "run_id": 36143095219,
+      "job_id": 108097439157,
+      "status": "PASS",
+      "artifact_id": 10868321773,
+      "artifact_digest": "sha256:d4d91d1a81f872cf9e1876e8dbb413aa8cac8ecf717cbf32f9efb24dd5159221",
+      "receipt_sha256": "367cafbca3c9b0b71392f80e0958255e61e5153d7f8434584db193d87182c88f",
+      "checks": {
+        "farm_count": 152,
+        "max_farm_id": 152,
+        "m6_training": "DENY",
+        "f72_current": "FAIL",
+        "m4_promotion": "BLOCKED_BY_F72",
+        "rdx_memory_ingress": "CONFIGURED",
+        "rdx_auto_training": false
+      },
+      "duplicate_runs_not_independent_evidence": [
+        36143223031,
+        36143282648
+      ]
+    },
+    "rdx_ingress": {
+      "run_id": 36142030500,
+      "status": "PASS",
+      "receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7",
+      "memory_rag": "PASS",
+      "gold": "BLOCKED_BY_F72",
+      "neural_training": "NOT_EXECUTED"
+    },
+    "rdx_write_read_recall": {
+      "run_id": 36143467119,
+      "status": "QUEUED",
+      "claim_limit": "WILL_TEST_PRIVATE_WRITE_READ_SHA_AND_POINTER_RECALL_ONLY_NOT_SEMANTIC_RETRIEVAL_QUALITY"
+    },
+    "bindings": {
+      "source_farm": 152,
+      "immediate": [
+        114,
+        115,
+        116,
+        119,
+        120
+      ],
+      "conditional_replay": [
+        117
+      ],
+      "gold": [
+        118
+      ],
+      "manifest": "config/rdx-memory-bindings-v1.json"
+    }
+  },
+  "wave3a": {
+    "run_id": 36138864930,
+    "state": "BASELINES_COMPLETE_AUDIT_QUEUED",
+    "audit_job_id": 108099162015,
+    "SAELION": {
+      "qwen": {
+        "correct": 45,
+        "total": 72,
+        "accuracy": 0.625
+      },
+      "smol": {
+        "correct": 36,
+        "total": 72,
+        "accuracy": 0.5
+      },
+      "preliminary_best_single": "Qwen/Qwen3-4B",
+      "d3_gate": "NOT_PASS_UNTIL_AUDIT"
+    },
+    "NEXUS": {
+      "qwen": {
+        "correct": 52,
+        "total": 72,
+        "accuracy": 0.7222222222222222
+      },
+      "smol": {
+        "correct": 48,
+        "total": 72,
+        "accuracy": 0.6666666666666666
+      },
+      "preliminary_best_single": "Qwen/Qwen3-4B",
+      "d3_gate": "NOT_PASS_UNTIL_AUDIT"
+    },
+    "d4": "BLOCKED_PENDING_D3_AUDIT"
+  },
+  "wave3b": {
+    "run_id": 36142921827,
+    "state": "PARTIALLY_RUNNING",
+    "active_jobs": [
+      "DELTA_QWEN_BASELINE",
+      "OMEGA_SMOL_BASELINE",
+      "DELTA_SMOL_RUNTIME_INSTALL"
+    ],
+    "queued_jobs": [
+      "ALPHA_SMOL_BASELINE",
+      "ALPHA_QWEN_BASELINE",
+      "OMEGA_QWEN_BASELINE"
+    ],
+    "d4_workflow": ".github/workflows/wave3b-alpha-omega-delta-d4-complementarity-precheck.yml",
+    "d4": "BLOCKED_PENDING_D3"
+  },
+  "elysium": {
+    "d4": "HOLD_NO_ROBUST_GAIN",
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4"
+  },
+  "next_exact": [
+    "Wait for Wave3A audit job 108099162015; if PASS, close D3 for SAELION/NEXUS and trigger existing D4 complementarity precheck exactly once.",
+    "Do not duplicate Wave3B run 36142921827; close each AI only after its persisted D3 comparison receipt exists.",
+    "Close RDX write/read/recall run 36143467119; only then upgrade memory runtime claim from configured to write/read/recall proven.",
+    "Ignore duplicate memory audit runs 36143223031 and 36143282648 as independent evidence.",
+    "Keep F118 GOLD and all RDX neural training blocked while F72 remains FAIL."
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
