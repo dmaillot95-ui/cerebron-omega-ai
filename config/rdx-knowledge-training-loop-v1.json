@@ -321,6 +321,28 @@
       "decision": "INDEPENDENT_HOLDOUT_HOLD_SEMANTIC_BASELINE",
       "production_qualified": false,
       "training": "NOT_EXECUTED"
+    },
+    "multilingual_dev_v4": {
+      "run_id": 36164021509,
+      "receipt_sha256": "750eea725eb23e025f55fb8381da8c642db05852dd2d628315cfc91b0b6510fb",
+      "baseline_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "multilingual_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "baseline_fr_top1_accuracy": 0.6111111111111112,
+      "multilingual_fr_top1_accuracy": 0.8333333333333334,
+      "fr_gain": 0.2222222222222222,
+      "baseline_en_top1_accuracy": 0.7777777777777778,
+      "multilingual_en_top1_accuracy": 0.6666666666666666,
+      "en_regression": 0.11111111111111116,
+      "decision": "DEV_HOLD_BASELINE_NO_ROBUST_MULTILINGUAL_GAIN",
+      "fresh_holdout_consumed": false,
+      "training": "NOT_EXECUTED"
+    },
+    "policy_fusion_dev_v5": {
+      "run_id": 36164464446,
+      "status": "QUEUED",
+      "classification": "PUBLIC_BILINGUAL_DEV_POLICY_ABLATION_NOT_COLD",
+      "fresh_holdout_consumed": false,
+      "training": "NOT_EXECUTED"
     }
   },
   "f72_gate": {
@@ -345,5 +367,21 @@
     "promotion_policy_review_receipt_sha256": "712d0d94b793f904dda5ed7d90d9e664cf7f384a2b18c84f6715b19f1a8ed7f4",
     "candidate_ready": false,
     "decision": "HOLD_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS"
+  },
+  "rd_handoff": {
+    "contract": "config/rdx-rd-handoff-contract-v1.json",
+    "validator": "runtime/rdx_rd_handoff_v1.py",
+    "tests": "tests/test_rdx_rd_handoff_v1.py",
+    "canary_run_id": 36164294092,
+    "canary_status": "PASS",
+    "pytest": "4_PASSED",
+    "stages": [
+      "MEMORY_INGEST_READY",
+      "F72_REVIEW_CANDIDATE",
+      "M4_GOLD_ELIGIBLE",
+      "TRAIN_DATASET"
+    ],
+    "auto_gold": false,
+    "auto_train": false
   }
 }
