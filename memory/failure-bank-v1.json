@@ -509,6 +509,73 @@
         "hf_private_readback_sha_pass": true
       },
       "STOP_RULE": "Do not continue this same-GOLD LoRA hyperparameter family. New training requires materially new audited training data and a fresh cold benchmark."
+    },
+    {
+      "FAILURE_ID": "FAIL-WAVE1-LORA-TOOL-DROPO-001",
+      "MISSION_ID": "WAVE1_PARALLEL_ROLE_LORA",
+      "AI_ID": "AELYS|ETHERION|AFAH|METRION",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "NameError_LORA_DROPO_PRE_GRADIENT",
+      "ROOT_CAUSE": "Shared trainer referenced LORA_DROPO instead of defined LORA_DROPOUT.",
+      "EVIDENCE_REFS": [
+        "run:36108840820",
+        "corrective_commit:232750e3f3ed38cfc33c8b4134b3efbbe3f73319"
+      ],
+      "IMPACT": "All four first-attempt jobs failed before any gradient update; not model-learning failures.",
+      "REPRODUCIBLE": true,
+      "REPAIR_STATUS": "RESOLVED_TYPO_FIXED_CANONICAL_RUN_36109026167",
+      "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-WAVE1-AELYS-LORA-TRANSFER-001",
+      "MISSION_ID": "WAVE1_PARALLEL_ROLE_LORA",
+      "AI_ID": "AELYS",
+      "FAILURE_CLASS": "F_TRANSFER",
+      "FAILURE_SIGNATURE": "VALIDATION_PLUS6_M6_ZERO_TRANSFER_MINUS4_RED_ZERO_CRITICAL_REGRESSION",
+      "ROOT_CAUSE": "Scoped LoRA improved in-family validation but did not transfer to the frozen representation family and introduced a critical per-label regression.",
+      "EVIDENCE_REFS": [
+        "run:36109026167",
+        "artifact:10852865508",
+        "adapter_sha256:fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb"
+      ],
+      "IMPACT": "Adapter retained as private evidence only; no promotion or runtime activation.",
+      "REPRODUCIBLE": true,
+      "REPAIR_STATUS": "ROLLBACK_RETAIN_EVIDENCE_NEW_DATA_OR_METHOD_REQUIRED",
+      "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-WAVE1-ETHERION-LORA-TRANSFER-001",
+      "MISSION_ID": "WAVE1_PARALLEL_ROLE_LORA",
+      "AI_ID": "ETHERION",
+      "FAILURE_CLASS": "F_TRANSFER",
+      "FAILURE_SIGNATURE": "VALIDATION_PLUS9_M6_MINUS2_TRANSFER_MINUS1_RED_MINUS2_CRITICAL_REGRESSION",
+      "ROOT_CAUSE": "Scoped LoRA improved in-family validation but degraded all three frozen cold suites.",
+      "EVIDENCE_REFS": [
+        "run:36109026167",
+        "artifact:10852643185",
+        "adapter_sha256:2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97"
+      ],
+      "IMPACT": "Adapter retained as private evidence only; no promotion or runtime activation.",
+      "REPRODUCIBLE": true,
+      "REPAIR_STATUS": "ROLLBACK_RETAIN_EVIDENCE_NEW_DATA_OR_METHOD_REQUIRED",
+      "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-WAVE1-METRION-LORA-TRANSFER-001",
+      "MISSION_ID": "WAVE1_PARALLEL_ROLE_LORA",
+      "AI_ID": "METRION",
+      "FAILURE_CLASS": "F_TRANSFER",
+      "FAILURE_SIGNATURE": "VALIDATION_PLUS9_M6_PLUS7_TRANSFER_ZERO_RED_MINUS2_CRITICAL_REGRESSION",
+      "ROOT_CAUSE": "Scoped LoRA improved M6 but failed transfer gain and degraded adversarial performance with critical per-label regression.",
+      "EVIDENCE_REFS": [
+        "run:36109026167",
+        "artifact:10852642737",
+        "adapter_sha256:6e51db22126ae3218429dc4afe62df4a43d8d824b6ee374b305315a70afb682f"
+      ],
+      "IMPACT": "Adapter retained as private evidence only; no promotion or runtime activation.",
+      "REPRODUCIBLE": true,
+      "REPAIR_STATUS": "ROLLBACK_RETAIN_EVIDENCE_NEW_DATA_OR_METHOD_REQUIRED",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
