@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_122_RDX_SYNTHETIC_CANARY_REGISTRY_BLOCK_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SYNTHETIC_CANARY_REGISTRY_BLOCK_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "cbb27a8d5d2d4293bd8b42ef963cc2710053e96d",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "939e185ef956441cfb6d91a350740f14d93f3fff",
+    "full_validation": {
+      "run_id": 36188529853,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36188530015,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "939e185ef956441cfb6d91a350740f14d93f3fff",
+    "file_count": 16,
+    "aggregate_sha256": "89ef30f0acd801e1eb6a63a2270801886bf53ca2318a014a229d149ed66c4e81",
+    "release_attestation_sha256": "35a35a319f079f48a80e31d87250f03c4c7b3ca995523f449e8986f1974354a3",
+    "manifest_gate": "PASS",
+    "attestation_gate": "PASS",
+    "reproducible_build_gate": "PASS",
+    "sigstore_release_attestation": "PASS",
+    "sigstore_release_verification": "PASS"
+  },
+  "anti_synthetic_controls": {
+    "production_registry_rejects_synthetic_canary": true,
+    "production_registry_rejects_synthetic_evidence_class": true,
+    "production_registry_rejects_invalid_domain_url": true,
+    "known_good_registry_rejects_synthetic_canary": true,
+    "known_good_registry_rejects_synthetic_evidence_class": true,
+    "known_good_registry_rejects_invalid_domain_url": true,
+    "referenced_live_proof_synthetic_rejected": true
+  },
+  "negative_canaries": {
+    "status": "PASS",
+    "rejected_count": 6,
+    "rejected": [
+      "PUBLIC_TRUE_WITHOUT_LIVE_PROOF",
+      "WRONG_SOURCE_COMMIT",
+      "WRONG_RELEASE_AGGREGATE",
+      "SYNTHETIC_CANARY_IN_REGISTRY",
+      "UNSIGNED_LIVE_PROOF",
+      "UNSIGNED_REGISTRATION_PROPOSAL"
+    ]
+  },
+  "synthetic_integration_canary": {
+    "status": "PASS",
+    "evidence_class": "SYNTHETIC_PIPELINE_CANARY_NOT_LIVE_EVIDENCE",
+    "proposals_generated": true,
+    "auto_apply": false,
+    "production_registry_unchanged": true,
+    "known_good_registry_unchanged": true,
+    "live_evidence_claim": false
+  },
+  "production_control": {
+    "production_deployment_verified": false,
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "active_known_good_release": null
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "SYNTHETIC_CANARY!=LIVE_EVIDENCE",
+    "NO_SYNTHETIC_PROOF_IN_PRODUCTION_REGISTRY",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
