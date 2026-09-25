@@ -132,7 +132,7 @@
         ]
       },
       "project_state": "D4_TRUE_DUAL_CORE_CANARY_HOLD",
-      "dual_core_state": "D4_HOLD_REPAIR_REQUIRED_BEFORE_D5_D6",
+      "dual_core_state": "D4_HOLD_REDESIGN_REQUIRED",
       "evidence": {
         "runtime_pair_run_id": 35917498487,
         "cold_single_core_m6_run_id": 35918041093,
@@ -159,14 +159,29 @@
           "consensus_count": 9,
           "cross_critique_converged_count": 1,
           "unresolved_count": 14
-        }
+        },
+        "d4_repair_dev_run_id": 36129622128,
+        "d4_repair_dev_artifact_id": 10862565523,
+        "d4_repair_dev_artifact_digest": "sha256:045adb2b72b8db8f0296eac9590e0326923ea39ed5a156ab8628c24565445e3e",
+        "d4_repair_dev_receipt_sha256": "0149f28e04a4c05bba53a965e83cf8b9ad32af64fe5f31dc4b7235ab59b067cc",
+        "d4_repair_dev_metrics": {
+          "task_count": 20,
+          "a_correct": 17,
+          "b_correct": 17,
+          "fusion_correct": 16,
+          "fusion_gain_over_a": -1,
+          "replacements": 2,
+          "helpful_replacements": 0,
+          "harmful_replacements": 1
+        },
+        "d4_repair_dev_decision": "DEV_POLICY_FAIL_REDESIGN"
       },
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "HOLD_NO_MEASURED_GAIN_REPAIR_REQUIRED",
+        "D4": "HOLD_REDESIGN_REQUIRED_DEV_REPAIR_FAILED",
         "D5": "BLOCKED_BY_D4",
         "D6": "BLOCKED_BY_D4",
         "D7": "PARTIAL_SOURCE_GATE_PASS_FULL_TRAIN_ASSEMBLER_E2E_PENDING",
