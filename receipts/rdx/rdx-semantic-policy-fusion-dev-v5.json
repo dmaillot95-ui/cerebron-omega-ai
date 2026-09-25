@@ -1,0 +1,5817 @@
+{
+  "schema": "CEREBRON_RDX_SEMANTIC_POLICY_FUSION_DEV_V5",
+  "run_id": 36164464446,
+  "classification": "PUBLIC_DEV_POLICY_ABLATION_NOT_COLD",
+  "source_v4_run_id": 36164021509,
+  "source_v4_receipt_sha256": "750eea725eb23e025f55fb8381da8c642db05852dd2d628315cfc91b0b6510fb",
+  "models": [
+    {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    {
+      "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+    }
+  ],
+  "corpus_size": 18,
+  "query_count": 36,
+  "policies": {
+    "BASELINE_ONLY": {
+      "overall": {
+        "policy": "BASELINE_ONLY",
+        "top1_correct": 25,
+        "top1_accuracy": 0.6944444444444444,
+        "mrr": 0.7970027657527657,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 2,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "evidence_provenance",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 11,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "memory_freeze",
+            "rank": 8,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tool_routing",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          }
+        ]
+      },
+      "en": {
+        "policy": "BASELINE_ONLY_EN",
+        "top1_correct": 14,
+        "top1_accuracy": 0.7777777777777778,
+        "mrr": 0.8703703703703703,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 0,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "evidence_provenance",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "BASELINE_ONLY_FR",
+        "top1_correct": 11,
+        "top1_accuracy": 0.6111111111111112,
+        "mrr": 0.7236351611351611,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 0,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 0,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 0,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 11,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "memory_freeze",
+            "rank": 8,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tool_routing",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          }
+        ]
+      }
+    },
+    "MULTILINGUAL_ONLY": {
+      "overall": {
+        "policy": "MULTILINGUAL_ONLY",
+        "top1_correct": 27,
+        "top1_accuracy": 0.75,
+        "mrr": 0.8465608465608465,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 2,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 2,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 2,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "failure_modes",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "contradiction_tracking",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "en": {
+        "policy": "MULTILINGUAL_ONLY_EN",
+        "top1_correct": 12,
+        "top1_accuracy": 0.6666666666666666,
+        "mrr": 0.7903439153439153,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 0,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 0,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "failure_modes",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "contradiction_tracking",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "MULTILINGUAL_ONLY_FR",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.9027777777777778,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      }
+    },
+    "LANG_ROUTER": {
+      "overall": {
+        "policy": "LANG_ROUTER",
+        "top1_correct": 29,
+        "top1_accuracy": 0.8055555555555556,
+        "mrr": 0.8865740740740741,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 2,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 2,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 2,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 2,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "evidence_provenance",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "en": {
+        "policy": "LANG_ROUTER_EN",
+        "top1_correct": 14,
+        "top1_accuracy": 0.7777777777777778,
+        "mrr": 0.8703703703703703,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 0,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "evidence_provenance",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "LANG_ROUTER_FR",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.9027777777777778,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      }
+    },
+    "RRF_BASE_MULTI": {
+      "overall": {
+        "policy": "RRF_BASE_MULTI",
+        "top1_correct": 27,
+        "top1_accuracy": 0.75,
+        "mrr": 0.8449074074074074,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 2,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 2,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "licensing_rights",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          }
+        ]
+      },
+      "en": {
+        "policy": "RRF_BASE_MULTI_EN",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.8888888888888888,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "RRF_BASE_MULTI_FR",
+        "top1_correct": 12,
+        "top1_accuracy": 0.6666666666666666,
+        "mrr": 0.8009259259259259,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 0,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 0,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 0,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "licensing_rights",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          }
+        ]
+      }
+    },
+    "RRF_BASE_MULTI_LEX": {
+      "overall": {
+        "policy": "RRF_BASE_MULTI_LEX",
+        "top1_correct": 27,
+        "top1_accuracy": 0.75,
+        "mrr": 0.8451719576719577,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 2,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 2,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 1,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "evidence_provenance",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "dependency_graph",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "claim_ceiling",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "dependency_graph",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "gold_promotion",
+            "rank": 5,
+            "ok": false
+          }
+        ]
+      },
+      "en": {
+        "policy": "RRF_BASE_MULTI_LEX_EN",
+        "top1_correct": 16,
+        "top1_accuracy": 0.8888888888888888,
+        "mrr": 0.9153439153439152,
+        "critical_domains_pass": true,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 1,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "evidence_provenance",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "dependency_graph",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "claim_ceiling",
+            "rank": 7,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "RRF_BASE_MULTI_LEX_FR",
+        "top1_correct": 11,
+        "top1_accuracy": 0.6111111111111112,
+        "mrr": 0.7749999999999999,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 0,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 0,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 0,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "dependency_graph",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "gold_promotion",
+            "rank": 5,
+            "ok": false
+          }
+        ]
+      }
+    },
+    "LANG_WEIGHTED_RRF": {
+      "overall": {
+        "policy": "LANG_WEIGHTED_RRF",
+        "top1_correct": 27,
+        "top1_accuracy": 0.75,
+        "mrr": 0.8541666666666666,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 2,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 2,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          }
+        ]
+      },
+      "en": {
+        "policy": "LANG_WEIGHTED_RRF_EN",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.8842592592592592,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "replayability",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 4,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "LANG_WEIGHTED_RRF_FR",
+        "top1_correct": 12,
+        "top1_accuracy": 0.6666666666666666,
+        "mrr": 0.8240740740740741,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 0,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 0,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 0,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          }
+        ]
+      }
+    },
+    "LANG_WEIGHTED_BLEND": {
+      "overall": {
+        "policy": "LANG_WEIGHTED_BLEND",
+        "top1_correct": 30,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.9037037037037037,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 2
+          },
+          "cold_benchmark": {
+            "correct": 2,
+            "total": 2
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 2
+          },
+          "dedup_lineage": {
+            "correct": 2,
+            "total": 2
+          },
+          "dependency_graph": {
+            "correct": 2,
+            "total": 2
+          },
+          "dimensional_consistency": {
+            "correct": 2,
+            "total": 2
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 2
+          },
+          "failure_modes": {
+            "correct": 2,
+            "total": 2
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 2
+          },
+          "licensing_rights": {
+            "correct": 2,
+            "total": 2
+          },
+          "memory_freeze": {
+            "correct": 2,
+            "total": 2
+          },
+          "replayability": {
+            "correct": 2,
+            "total": 2
+          },
+          "rollback": {
+            "correct": 2,
+            "total": 2
+          },
+          "semantic_retrieval": {
+            "correct": 2,
+            "total": 2
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 2
+          },
+          "tenant_privacy": {
+            "correct": 2,
+            "total": 2
+          },
+          "tool_routing": {
+            "correct": 2,
+            "total": 2
+          },
+          "versioning": {
+            "correct": 2,
+            "total": 2
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 5,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "en": {
+        "policy": "LANG_WEIGHTED_BLEND_EN",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.8907407407407408,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 1,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 1,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 0,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 0,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-EN-Q01",
+            "lang": "en",
+            "expected": "claim_ceiling",
+            "top1": "claim_ceiling",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q02",
+            "lang": "en",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q03",
+            "lang": "en",
+            "expected": "contradiction_tracking",
+            "top1": "contradiction_tracking",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q04",
+            "lang": "en",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q05",
+            "lang": "en",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q06",
+            "lang": "en",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q07",
+            "lang": "en",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q08",
+            "lang": "en",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q09",
+            "lang": "en",
+            "expected": "gold_promotion",
+            "top1": "licensing_rights",
+            "rank": 3,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q10",
+            "lang": "en",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q11",
+            "lang": "en",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q12",
+            "lang": "en",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q13",
+            "lang": "en",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q14",
+            "lang": "en",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q15",
+            "lang": "en",
+            "expected": "source_freshness",
+            "top1": "versioning",
+            "rank": 5,
+            "ok": false
+          },
+          {
+            "id": "DEV-EN-Q16",
+            "lang": "en",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q17",
+            "lang": "en",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-EN-Q18",
+            "lang": "en",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      },
+      "fr": {
+        "policy": "LANG_WEIGHTED_BLEND_FR",
+        "top1_correct": 15,
+        "top1_accuracy": 0.8333333333333334,
+        "mrr": 0.9166666666666666,
+        "critical_domains_pass": false,
+        "per_domain": {
+          "claim_ceiling": {
+            "correct": 0,
+            "total": 1
+          },
+          "cold_benchmark": {
+            "correct": 1,
+            "total": 1
+          },
+          "contradiction_tracking": {
+            "correct": 0,
+            "total": 1
+          },
+          "dedup_lineage": {
+            "correct": 1,
+            "total": 1
+          },
+          "dependency_graph": {
+            "correct": 1,
+            "total": 1
+          },
+          "dimensional_consistency": {
+            "correct": 1,
+            "total": 1
+          },
+          "evidence_provenance": {
+            "correct": 0,
+            "total": 1
+          },
+          "failure_modes": {
+            "correct": 1,
+            "total": 1
+          },
+          "gold_promotion": {
+            "correct": 1,
+            "total": 1
+          },
+          "licensing_rights": {
+            "correct": 1,
+            "total": 1
+          },
+          "memory_freeze": {
+            "correct": 1,
+            "total": 1
+          },
+          "replayability": {
+            "correct": 1,
+            "total": 1
+          },
+          "rollback": {
+            "correct": 1,
+            "total": 1
+          },
+          "semantic_retrieval": {
+            "correct": 1,
+            "total": 1
+          },
+          "source_freshness": {
+            "correct": 1,
+            "total": 1
+          },
+          "tenant_privacy": {
+            "correct": 1,
+            "total": 1
+          },
+          "tool_routing": {
+            "correct": 1,
+            "total": 1
+          },
+          "versioning": {
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "rows": [
+          {
+            "id": "DEV-FR-Q01",
+            "lang": "fr",
+            "expected": "claim_ceiling",
+            "top1": "replayability",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q02",
+            "lang": "fr",
+            "expected": "cold_benchmark",
+            "top1": "cold_benchmark",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q03",
+            "lang": "fr",
+            "expected": "contradiction_tracking",
+            "top1": "claim_ceiling",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q04",
+            "lang": "fr",
+            "expected": "dedup_lineage",
+            "top1": "dedup_lineage",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q05",
+            "lang": "fr",
+            "expected": "dependency_graph",
+            "top1": "dependency_graph",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q06",
+            "lang": "fr",
+            "expected": "dimensional_consistency",
+            "top1": "dimensional_consistency",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q07",
+            "lang": "fr",
+            "expected": "evidence_provenance",
+            "top1": "source_freshness",
+            "rank": 2,
+            "ok": false
+          },
+          {
+            "id": "DEV-FR-Q08",
+            "lang": "fr",
+            "expected": "failure_modes",
+            "top1": "failure_modes",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q09",
+            "lang": "fr",
+            "expected": "gold_promotion",
+            "top1": "gold_promotion",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q10",
+            "lang": "fr",
+            "expected": "licensing_rights",
+            "top1": "licensing_rights",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q11",
+            "lang": "fr",
+            "expected": "memory_freeze",
+            "top1": "memory_freeze",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q12",
+            "lang": "fr",
+            "expected": "replayability",
+            "top1": "replayability",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q13",
+            "lang": "fr",
+            "expected": "rollback",
+            "top1": "rollback",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q14",
+            "lang": "fr",
+            "expected": "semantic_retrieval",
+            "top1": "semantic_retrieval",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q15",
+            "lang": "fr",
+            "expected": "source_freshness",
+            "top1": "source_freshness",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q16",
+            "lang": "fr",
+            "expected": "tenant_privacy",
+            "top1": "tenant_privacy",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q17",
+            "lang": "fr",
+            "expected": "tool_routing",
+            "top1": "tool_routing",
+            "rank": 1,
+            "ok": true
+          },
+          {
+            "id": "DEV-FR-Q18",
+            "lang": "fr",
+            "expected": "versioning",
+            "top1": "versioning",
+            "rank": 1,
+            "ok": true
+          }
+        ]
+      }
+    }
+  },
+  "selected_policy": "BASELINE_ONLY",
+  "decision": "DEV_POLICY_HOLD_NO_ROBUST_FUSION_GAIN",
+  "fresh_holdout_consumed": false,
+  "training": "NOT_EXECUTED",
+  "weights_changed": false,
+  "claim_ceiling": "PUBLIC_BILINGUAL_DEV_POLICY_ABLATION_ONLY_NO_PRODUCTION_RAG_CLAIM",
+  "receipt_sha256": "a01152ae867583f8d674dae0e62f12216fb7b9bc6a0155d905d37f7171cbe2ac"
+}
