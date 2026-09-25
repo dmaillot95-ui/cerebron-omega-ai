@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'config/farms.json'
+      - 'config/farm-bootstrap-manifest-f162-f174.json'
       - 'scaffolds/f162-nu/**'
       - 'scaffolds/f173-aelys-live/**'
       - 'scaffolds/f174-elyra-visual-simulation/**'
