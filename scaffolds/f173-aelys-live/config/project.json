@@ -4,10 +4,10 @@
   "project_id": "AELYS-LIVE-001",
   "identity": "AELYS",
   "role_id": "LIVE_INTERACTION_RUNTIME",
-  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+  "status": "LOCAL_FALLBACK_SCAFFOLD_DEDICATED_REPOSITORY_INITIALIZED",
   "target_repo": "dmaillot95-ui/cerebron-farm-173-aelys-live",
   "target_repo_exists": true,
-  "target_repo_initialized": false,
+  "target_repo_initialized": true,
   "runtime_changed": false,
   "weights_changed": false,
   "training_status": "NOT_TRAINED",
@@ -18,5 +18,8 @@
     "EVIDENCE_GT_CONFIDENCE",
     "CLAIM_LE_EVIDENCE",
     "REAL_EXECUTION_RECEIPT_REQUIRED"
-  ]
+  ],
+  "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b",
+  "dedicated_repo_selftest_run_id": 36153266774,
+  "master_plugin_bus_status": "UNCONFIRMED_REFERENCED_FILE_MISSING"
 }
