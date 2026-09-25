@@ -1,0 +1,132 @@
+{
+  "schema": "CEREBRON_MEASURABLE_GATES_V1",
+  "status": "DEFINED",
+  "date": "2026-09-25",
+  "report_artifact": "artifacts/cerebron-relay-control-gates.json",
+  "gates": [
+    {
+      "id": "G01_ROLE_IDENTITY_STATUS",
+      "severity": "CRITICAL",
+      "measures": [
+        "greek_roles_configured",
+        "unique_greek_names",
+        "unique_greek_role_ids",
+        "registry_bindings",
+        "known_unavailable"
+      ],
+      "pass_criteria": [
+        "greek_roles_configured==24",
+        "unique_greek_names==24",
+        "unique_greek_role_ids==24",
+        "registry_bindings==24",
+        "NU remains repository-missing until externally changed and verified"
+      ]
+    },
+    {
+      "id": "G02_COLONY_STRUCTURE",
+      "severity": "CRITICAL",
+      "measures": [
+        "colonies_configured",
+        "required_core_roles_present",
+        "colony_identity_match"
+      ],
+      "pass_criteria": [
+        "colonies_configured==24",
+        "required_core_roles_present==4",
+        "colony_identity_match==24"
+      ],
+      "claim_limit": "configured colony does not imply executed colony"
+    },
+    {
+      "id": "G03_DUAL_CORE_REALITY",
+      "severity": "CRITICAL",
+      "measures": [
+        "dual_core_candidates",
+        "dual_core_verified_assignments",
+        "fully_validated_dual_core"
+      ],
+      "pass_criteria": [
+        "dual_core_candidates==7",
+        "verified assignments are subset of candidates",
+        "full validation requires D4,D5,D6,D8 PASS"
+      ],
+      "claim_limit": "two model slots or two binding receipts do not imply independent evidence"
+    },
+    {
+      "id": "G04_ANTI_FALSE_CONSENSUS",
+      "severity": "CRITICAL",
+      "measures": [
+        "shared_lineage_rule_present",
+        "consensus_rule_present",
+        "overlap_dimensions_defined"
+      ],
+      "pass_criteria": [
+        "shared_lineage_rule_present==true",
+        "consensus_rule_present==true",
+        "overlap_dimensions_defined>=4"
+      ]
+    },
+    {
+      "id": "G05_STOP_RESUME",
+      "severity": "CRITICAL",
+      "measures": [
+        "protocol_states",
+        "freeze_implementation_present",
+        "freeze_canary_present",
+        "systemwide_stop_overclaim_blocked"
+      ],
+      "pass_criteria": [
+        "protocol has RUN,DRAIN,CHECKPOINT,VERIFY,FROZEN,RESUME_VERIFY",
+        "freeze implementation exists",
+        "canary exists",
+        "systemwide_stop_claimed==false until all controlled workflows honor gate"
+      ]
+    },
+    {
+      "id": "G06_EXTENSION_REALITY",
+      "severity": "CRITICAL",
+      "measures": [
+        "f162_status",
+        "f173_external_runtime",
+        "f173_production_claim",
+        "f174_video_canary",
+        "f174_production_claim",
+        "f174_physical_claim"
+      ],
+      "pass_criteria": [
+        "F162 repository_exists==false",
+        "F173 external runtime UNQUALIFIED",
+        "F173 production NOT_DEPLOYED",
+        "F174 video canary executed",
+        "F174 production_video_claimed==false",
+        "F174 physical_validation_claimed==false"
+      ]
+    },
+    {
+      "id": "G07_BUS_CRYSTAL",
+      "severity": "CRITICAL",
+      "measures": [
+        "farm_count",
+        "contiguous_ids",
+        "rdx_provider",
+        "f152_identity",
+        "forbidden_f152_rdx",
+        "unknown_capability_policy"
+      ],
+      "pass_criteria": [
+        "farm_count==174",
+        "ids==1..174",
+        "rdx routes use RDX_EXCHANGE",
+        "F152 identity BETA",
+        "F152_RDX absent",
+        "unknown capability DENY"
+      ]
+    }
+  ],
+  "result_states": [
+    "PASS",
+    "FAIL",
+    "UNKNOWN"
+  ],
+  "rule": "Any unmet critical pass criterion => FAIL. Any required datum not measurable from the checked repository => UNKNOWN and no promotion."
+}
