@@ -1,0 +1,7 @@
+SAPHEA LORA REPAIR V2
+experiment=DATA_REPRESENTATION_ONLY_ABLATION
+training_records=180
+m6_training=DENY
+hyperparameters=UNCHANGED_FROM_G6
+next_gate=FROZEN_BENCHMARK_V3
+promotion=NONE
