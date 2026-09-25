@@ -1,0 +1,153 @@
+name: ELYSIUM M6 V2 Private Seal
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysium-m6-v2-release-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      HF_PATH: elysium/M6/ELYSIUM-M6-V2.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Generate or verify sealed private M6 V2
+        run: |
+          mkdir -p receipts/elysium
+          python - <<'PY'
+          import hashlib,json,os,pathlib,secrets,tempfile
+          from collections import Counter
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]; path=os.environ["HF_PATH"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+
+          files=set(api.list_repo_files(repo_id=repo,repo_type="model"))
+          created_now=False
+          if path in files:
+              fn=pathlib.Path(hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=token,force_download=True))
+              raw=fn.read_bytes()
+              suite=json.loads(raw)
+          else:
+              rng=secrets.SystemRandom()
+              rows=[]
+              def add(domain,prompt,expected):
+                  rows.append({"id":f"E6V2-{len(rows)+1:03d}","domain":domain,"prompt":prompt,"expected":expected})
+
+              for _ in range(4):
+                  a=rng.randint(11,97); b=rng.randint(7,83)
+                  add("claim_verification",f"Claim: {a}+{b}={a+b}. Evidence: direct integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  add("claim_verification",f"Claim: {a}+{b}={a+b+rng.choice([1,2,3])}. Evidence: direct integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  n=rng.randint(12,60)
+                  add("claim_verification",f"Claim: every positive integer has property P. Evidence: property P was checked only for integers 1 through {n}. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              for _ in range(4):
+                  even=2*rng.randint(3,40)
+                  bad=even if even%4 else even+2
+                  add("counterexample_search",f"Claim: all even integers are divisible by 4. Candidate counterexample: {bad}. PASS means the claim survives the supplied evidence. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  n=rng.randint(4,30)
+                  add("counterexample_search",f"Claim: x^2 >= 0 for every listed value. Listed values: {-n}, {-n+1}, 0, {n-1}, {n}. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  n=rng.randint(25,150)
+                  add("counterexample_search",f"Claim: no counterexample exists for all positive integers. Search checked only 1 through {n} and found none. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              for _ in range(4):
+                  x=rng.randint(4,50)
+                  add("error_detection",f"Derivation: x={x}; 2x={2*x}; 2x+1={2*x+1}. All steps use ordinary integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  add("error_detection",f"Derivation: x={x}; 2x={2*x}; then 2x+1={2*x+2}. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  val=rng.randint(20,120)
+                  add("error_detection",f"A derivation result is reported as {val}, but intermediate steps and original inputs are omitted. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              for _ in range(4):
+                  seed=rng.randint(1000,9999); inp=rng.randint(3,12); out=inp*inp
+                  add("reproduction",f"Reference run: code=v1, seed={seed}, input={inp}, output={out}. Reproduction uses code=v1, seed={seed}, input={inp} and output={out}. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  add("reproduction",f"Reference run: code=v1, seed={seed}, input={inp}, output={out}. Reproduction uses the same pinned code, seed and input but reports output={out+rng.choice([1,2])}. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  add("reproduction",f"Reference output is {out}. The reproduction report omits code revision and random seed. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              for _ in range(4):
+                  k=rng.randint(15,90)
+                  add("robustness",f"A method passes {k} internal tests and also passes a frozen external transfer set with no critical regression. The claim is only that it passed those stated tests. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  add("robustness",f"A method passes {k} internal tests but fails the frozen transfer set. The claim says it generalizes to the transfer distribution. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  add("robustness",f"A method passes {k} internal tests. No transfer or red-team test exists, but the claim says it generalizes broadly. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              for _ in range(4):
+                  pct=rng.randint(55,94)
+                  add("calibration","Evidence supports only a scoped finite result. The report states a scoped finite result and explicitly avoids a universal claim. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                  add("calibration",f"Evidence is {pct}% accuracy on an internal sample. The report declares universal correctness with certainty. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                  add("calibration",f"Evidence is {pct}% accuracy on an internal sample. No uncertainty interval or transfer evidence is provided; the report asks whether broad reliability is established. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+              assert len(rows)==72
+              counts=Counter(r["domain"] for r in rows)
+              assert len(counts)==6 and all(v==12 for v in counts.values())
+              suite={
+                "schema":"ELYSIUM_M6_V2",
+                "classification":"M6_COLD_BENCHMARK_SEALED",
+                "deny_training":True,
+                "training_eligible":False,
+                "source":"RUNTIME_GENERATED_PRIVATE_SYNTHETIC_VERIFICATION_SUITE",
+                "generation_policy":"SYSTEM_RANDOM_ONE_TIME_SEAL",
+                "task_count":72,
+                "domain_counts":dict(sorted(counts.items())),
+                "tasks":rows
+              }
+              raw=(json.dumps(suite,indent=2,ensure_ascii=False)+"\n").encode()
+              with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+                  t.write(raw); src=t.name
+              api.upload_file(path_or_fileobj=src,path_in_repo=path,repo_id=repo,repo_type="model",commit_message="Seal ELYSIUM M6 V2")
+              created_now=True
+
+          if suite.get("classification")!="M6_COLD_BENCHMARK_SEALED" or suite.get("deny_training") is not True or suite.get("training_eligible") is not False:
+              raise SystemExit("M6_CLASSIFICATION_FAIL")
+          if len(suite.get("tasks",[]))!=72: raise SystemExit("M6_COUNT_FAIL")
+          raw=(json.dumps(suite,indent=2,ensure_ascii=False)+"\n").encode()
+          sha=hashlib.sha256(raw).hexdigest()
+          fn=pathlib.Path(hf_hub_download(repo_id=repo,filename=path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(fn.read_bytes()).hexdigest()!=sha: raise SystemExit("M6_READBACK_SHA_FAIL")
+          counts=Counter(r["domain"] for r in suite["tasks"])
+          receipt={
+            "schema":"ELYSIUM_M6_V2_RELEASE_RECEIPT",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "state":"SEALED",
+            "created_now":created_now,
+            "private_repo":repo,
+            "private_path":path,
+            "dataset_sha256":sha,
+            "task_count":72,
+            "domain_counts":dict(sorted(counts.items())),
+            "deny_training":True,
+            "training_eligible":False,
+            "exact_prompts_public":False,
+            "hf_private_readback_sha_pass":True,
+            "claim_ceiling":"PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING"
+          }
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/elysium/elysium-m6-v2-release.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-m6-v2-release
+          path: receipts/elysium/elysium-m6-v2-release.json
+          if-no-files-found: error
+      - name: Persist public receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/elysium/elysium-m6-v2-release.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: seal ELYSIUM M6 V2 ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
