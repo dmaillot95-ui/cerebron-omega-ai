@@ -21,5 +21,5 @@
   ],
   "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b",
   "dedicated_repo_selftest_run_id": 36153266774,
-  "master_plugin_bus_status": "UNCONFIRMED_REFERENCED_FILE_MISSING"
+  "master_plugin_bus_status": "DECLARED_GUARD_PENDING_RUNTIME_UNQUALIFIED"
 }
