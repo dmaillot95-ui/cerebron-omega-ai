@@ -1,0 +1,52 @@
+{
+  "schema": "CEREBRON_83_M42_COUNCIL_RUNNING_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_82_M41_QWEN3_V7_2026-09-25.json",
+  "m41": {
+    "status": "CLOSED_PASS",
+    "gate_run_id": 36082948475,
+    "model": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "inference_pass_count": 5,
+    "parse_pass_count": 5,
+    "all_pass": true,
+    "audit_artifact_id": 10843261128,
+    "audit_artifact_digest": "sha256:9255c2c01f62bf9dac72e445881e7e1aa21376a66e83981522d857b6d54ab087",
+    "interpretation": "QWEN3_4B_COUNCIL_FORMAT_AND_RUNTIME_CANARY_VERIFIED_AT_5_AI_SCALE"
+  },
+  "m42": {
+    "status": "RUNNING",
+    "run_id": 36084488477,
+    "trigger_head": "1962c0a8f3b9d5adcc299f188f68d07c029c3fd8",
+    "model": "Qwen/Qwen3-4B",
+    "execution": "5_SHARED_MODEL_LOAD_SHARDS",
+    "shard_sizes": [
+      8,
+      8,
+      8,
+      7,
+      7
+    ],
+    "expected_ai_count": 38,
+    "hard_gate": {
+      "receipt_count": 38,
+      "executed_count": 38,
+      "parse_pass_count": 38,
+      "scorable_count": 38,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0
+    },
+    "score_schema": "CEREBRON_ALL_AI_STRATEGY_COUNCIL_AUDIT_V2",
+    "claim_ceiling": "CORRELATED_ADVISORY_PERSPECTIVES_NOT_INDEPENDENT_EVIDENCE",
+    "current_observation": "ALL_FIVE_SHARDS_IN_EXECUTE_COUNCIL_SHARD_NO_ARTIFACT_OR_FAILURE_YET"
+  },
+  "exact_resume": [
+    "Check run 36084488477.",
+    "Do not retrigger while the five shards are alive.",
+    "When shard artifacts appear, inspect each _shard_summary.json for requested/receipt/inference/parse counts.",
+    "Then inspect final audit and require exactly 38 receipts, 38 executed, 38 parse pass, 38 scorable, 1 lineage, 0 independent evidence.",
+    "If gate passes, persist/fuse recommendations by specialization and dependency, not by a simplistic capability ranking.",
+    "If gate fails, repair only failing outputs or shard mechanics; do not rerun successful evidence unnecessarily.",
+    "Keep operational coalition scale STAY_AT_5 despite 38 advisory perspectives."
+  ]
+}
