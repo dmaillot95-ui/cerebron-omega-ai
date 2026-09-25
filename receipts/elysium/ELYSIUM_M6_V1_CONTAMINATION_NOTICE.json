@@ -1,0 +1,26 @@
+{
+  "schema": "ELYSIUM_M6_V1_CONTAMINATION_NOTICE_V1",
+  "date": "2026-09-25",
+  "status": "DO_NOT_COUNT_AS_COLD_EVIDENCE",
+  "invalidated_assets": {
+    "workflow": ".github/workflows/elysium-wave3a-m6-d3-v1.yml",
+    "run_id": 36130067318,
+    "private_path": "elysium/M6/ELYSIUM-M6-V1.json"
+  },
+  "reason": [
+    "EXACT_M6_PROMPTS_EMBEDDED_IN_PUBLIC_WORKFLOW_SOURCE",
+    "PUBLIC_EXPOSURE_BREAKS_COLD_BENCHMARK_ASSUMPTION",
+    "ANY_D3_RESULT_USING_THIS_V1_IS_DEBUG_ONLY_NOT_COLD_EVIDENCE"
+  ],
+  "superseded_by": {
+    "workflow": ".github/workflows/elysium-m6-v2-private-seal.yml",
+    "run_id": 36130164581,
+    "private_path": "elysium/M6/ELYSIUM-M6-V2.json",
+    "dataset_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
+    "receipt_sha256": "0ad8d4ac99ba1c26e68b1f411112e6df62e20fde8a9b5e2aacf96502b7c78abb",
+    "exact_prompts_public": false,
+    "deny_training": true
+  },
+  "active_d3_run_id": 36130283226,
+  "claim_rule": "ONLY_M6_V2_RESULTS_MAY_SUPPORT_ELYSIUM_D3_COLD_BASELINE_CLAIMS"
+}
