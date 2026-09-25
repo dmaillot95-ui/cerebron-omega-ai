@@ -1,0 +1,62 @@
+{
+  "schema": "SAELION_D4_COMPLEMENTARITY_PRECHECK_V1",
+  "run_id": 36146455180,
+  "ai_id": "SAELION",
+  "source_d3_run_id": 36138864930,
+  "source_d3_audit_sha256": "b3ac7fba392adba79957dbeb0adfc65014cfb51787dbd252934f0b4c92b9e367",
+  "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+  "task_count": 72,
+  "qwen_correct": 45,
+  "smol_correct": 36,
+  "both_correct": 36,
+  "qwen_only_correct": 9,
+  "smol_only_correct": 0,
+  "both_wrong": 27,
+  "prediction_disagreement_count": 12,
+  "oracle_union_correct": 45,
+  "oracle_gain_over_best_single": 0,
+  "domain": {
+    "calibration": {
+      "qwen": 5,
+      "smol": 4,
+      "oracle": 5,
+      "total": 12
+    },
+    "compression_fidelity": {
+      "qwen": 8,
+      "smol": 4,
+      "oracle": 8,
+      "total": 12
+    },
+    "lesson_selection": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "memory_hygiene": {
+      "qwen": 8,
+      "smol": 4,
+      "oracle": 8,
+      "total": 12
+    },
+    "negative_transfer_detection": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "transfer": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    }
+  },
+  "decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+  "independent_evidence_count": 0,
+  "two_models_not_two_independent_proofs": true,
+  "public_rows_fingerprint_sha256": "d7c017982a359846f5a270005f462f3fe87e609405e5d91830ccdb9f00ded01e",
+  "claim_ceiling": "D4_COMPLEMENTARITY_PRECHECK_ONLY_NO_RUNTIME_ACTIVATION",
+  "receipt_sha256": "d96d32c6def8822df44f450f8c76f89ab7a97b3e8b84278421b7218b3213463b"
+}
