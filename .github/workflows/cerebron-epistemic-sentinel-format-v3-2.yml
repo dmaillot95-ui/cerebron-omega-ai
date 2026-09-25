@@ -1,0 +1,155 @@
+name: CEREBRON Epistemic Sentinel Format V3.2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/epistemic-sentinel-format-v3-2-launch.json'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-36177878435
+          path: validation-source
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-holdout-qwen3-36177878435
+          path: qwen-holdout-source
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-holdout-smollm3-36177878435
+          path: smollm-holdout-source
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - name: Normalize existing outputs with epistemic sentinels
+        run: |
+          python - <<'PY'
+          import glob,json,re,hashlib,pathlib
+          cfg=json.load(open("config/cerebron-epistemic-sentinel-format-v3-2.json"))
+          KEYS=["ATTEMPT","ASSUMPTIONS","EVIDENCE_NEEDED","COUNTEREXAMPLE_OR_LIMIT","CONFIDENCE","UNKNOWN"]
+
+          def canon(label):
+              s=re.sub(r"[^A-Z]","",str(label).upper())
+              if s.startswith("ATTEMPT"): return "ATTEMPT"
+              if s.startswith("ASSUMPT"): return "ASSUMPTIONS"
+              if "EVIDENCE" in s and ("NEED" in s or "REQ" in s): return "EVIDENCE_NEEDED"
+              if "COUNTEREXAMPLE" in s or "LIMIT" in s: return "COUNTEREXAMPLE_OR_LIMIT"
+              if s.startswith("CONFID"): return "CONFIDENCE"
+              if s.startswith("UNKNOWN") or "UNRESOLVED" in s: return "UNKNOWN"
+              return None
+
+          def parse(raw):
+              out={}
+              for m in re.finditer(r'''["']?([^"'\n:{}]+)["']?\s*:\s*["']([^"'\n}]*)["']''',raw):
+                  k=canon(m.group(1))
+                  if k and m.group(2).strip(): out[k]=m.group(2).strip()
+              for m in re.finditer(r"<\s*([^>/]+)\s*>\s*(.*?)(?=<\s*/|<\s*[^>]+>|$)",raw,re.S):
+                  k=canon(m.group(1))
+                  if k and m.group(2).strip(): out.setdefault(k,m.group(2).strip())
+              cur=None
+              for line in raw.splitlines():
+                  s=line.strip().replace("**","").replace("__","").replace(chr(96),"").replace("：",":")
+                  if not s: continue
+                  if ":" in s:
+                      h,v=s.split(":",1); k=canon(h)
+                      if k:
+                          cur=k
+                          if v.strip(): out.setdefault(k,v.strip())
+                          continue
+                  if cur and not s.startswith("<"):
+                      out[cur]=(out.get(cur,"")+" "+s).strip()
+              return out
+
+          def process(source_dir,targets,label):
+              receipts=[]
+              files=glob.glob(source_dir+"/**/*.json",recursive=True)
+              allrows=[]
+              for p in files:
+                  try:r=json.load(open(p))
+                  except:continue
+                  if r.get("contract")=="PLAIN6" and r.get("target_ai") in targets:
+                      allrows.append(r)
+              by={r["target_ai"]:r for r in allrows}
+              for target in targets:
+                  if target not in by: raise SystemExit("missing source "+label+":"+target)
+                  src=by[target]; raw=src.get("raw_output","")
+                  fields=parse(raw)
+                  substantive_missing=[k for k in KEYS[:4] if not str(fields.get(k,"")).strip()]
+                  inserted=[]
+                  for k in ("CONFIDENCE","UNKNOWN"):
+                      if not str(fields.get(k,"")).strip():
+                          fields[k]=cfg["sentinels"][k]
+                          inserted.append(k)
+                  complete=all(str(fields.get(k,"")).strip() for k in KEYS)
+                  rec={
+                    "source_group":label,
+                    "target_ai":target,
+                    "model_id":src.get("model_id"),
+                    "model_revision":src.get("model_revision"),
+                    "source_output_sha256":src.get("output_sha256"),
+                    "substantive_missing_fields":substantive_missing,
+                    "runtime_sentinel_fields":inserted,
+                    "final_fields":fields,
+                    "final_complete":complete,
+                    "new_inference":False,
+                    "weight_change":False,
+                    "training_eligible":False
+                  }
+                  rec["receipt_sha256"]=hashlib.sha256(json.dumps(rec,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+                  receipts.append(rec)
+              return receipts
+
+          val=process("validation-source",["SAPHEA","AELYS"],"validation")
+          q=process("qwen-holdout-source",["ETHERION","PSI"],"qwen_holdout")
+          s=process("smollm-holdout-source",["ETHERION","PSI"],"smollm_holdout")
+          rows=val+q+s
+          fail=[]
+          if any(r["substantive_missing_fields"] for r in rows): fail.append("substantive_fields_missing")
+          if any(not r["final_complete"] for r in rows): fail.append("incomplete_after_sentinel")
+          if any(any(k not in ("CONFIDENCE","UNKNOWN") for k in r["runtime_sentinel_fields"]) for r in rows): fail.append("forbidden_runtime_field")
+          if len(rows)!=6: fail.append("receipt_count")
+          out={
+            "schema":"CEREBRON_EPISTEMIC_SENTINEL_FORMAT_V3_2_AUDIT",
+            "status":"PASS" if not fail else "FAIL",
+            "receipt_count":len(rows),
+            "validation_complete_count":sum(r["final_complete"] for r in val),
+            "qwen_holdout_complete_count":sum(r["final_complete"] for r in q),
+            "smollm_holdout_complete_count":sum(r["final_complete"] for r in s),
+            "runtime_sentinel_insertions":sum(len(r["runtime_sentinel_fields"]) for r in rows),
+            "substantive_fabrication_count":sum(len(r["substantive_missing_fields"]) for r in rows),
+            "records":rows,
+            "new_inference":False,
+            "weight_change":False,
+            "training_released":False,
+            "promotion_decision":"PROMOTE_INTERFACE_NORMALIZATION" if not fail else "HOLD",
+            "promotion_ceiling":"INTERFACE_NORMALIZATION_ONLY_NO_MODEL_CAPABILITY_GAIN",
+            "failures":fail
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/epistemic-sentinel-format-v3-2-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: epistemic-sentinel-format-v3-2-audit
+          path: artifacts/epistemic-sentinel-format-v3-2-audit.json
+          if-no-files-found: error
+          retention-days: 30
