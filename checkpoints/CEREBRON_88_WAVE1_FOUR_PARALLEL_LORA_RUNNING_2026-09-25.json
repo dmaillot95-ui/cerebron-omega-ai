@@ -1,0 +1,104 @@
+{
+  "schema": "CEREBRON_88_WAVE1_FOUR_PARALLEL_LORA_RUNNING_V1",
+  "date": "2026-09-25",
+  "mode": "FOUR_REAL_PARALLEL_LORA_SEPARATE_EVIDENCE",
+  "branch": "feat/wave1-parallel-ai-baselines-v1",
+  "branch_head": "4f4d1b47bdb45dff420e16dd03ffa010c7ea8f83",
+  "main_head": "016b179496b6b74e9b319deb3a604d3ff727df67",
+  "source_data": {
+    "quarantine_build_run": 36105250166,
+    "manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+    "semantic_audit_run": 36107794532,
+    "semantic_pass": "432/432",
+    "tamper_pass": "18/18",
+    "f72_run": 36108208786,
+    "f72_status": "SUPPORTED_E2",
+    "f72_result_sha256": "d0f290c94b8cc7e73a494cd429a656763792da877fc3a11c0cbe51d7d5c15470",
+    "afah_run": 36108328129,
+    "afah_decision": "ADMIT_SYNTHETIC_CANDIDATE_POOL",
+    "afah_review_sha256": "27abc2937ded0085a9feb9b50c5a6e3bde5f2acce7521c99774a31a5c02eb730",
+    "dataset_package_run": 36108644676,
+    "release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+    "training_released": true,
+    "cold_total_records": 360,
+    "leakage_checks": "PASS"
+  },
+  "role_data": {
+    "AELYS": {
+      "train": 72,
+      "validation": 24,
+      "m6": 32,
+      "transfer": 32,
+      "red": 16
+    },
+    "ETHERION": {
+      "train": 108,
+      "validation": 36,
+      "m6": 48,
+      "transfer": 48,
+      "red": 24
+    },
+    "AFAH": {
+      "train": 72,
+      "validation": 24,
+      "m6": 32,
+      "transfer": 32,
+      "red": 16
+    },
+    "METRION": {
+      "train": 72,
+      "validation": 24,
+      "m6": 32,
+      "transfer": 32,
+      "red": 16
+    }
+  },
+  "first_attempt": {
+    "run_id": 36108840820,
+    "result": "FAIL_F_TOOL_PRE_GRADIENT",
+    "failure": "NameError LORA_DROPO instead of LORA_DROPOUT",
+    "ai_failure": false,
+    "weights_claim": "DENY"
+  },
+  "canonical_run": {
+    "run_id": 36109026167,
+    "head_sha": "aaea031281cc85b7a826f2c52e10c01bfd541e00",
+    "status": "IN_PROGRESS_AT_CHECKPOINT",
+    "corrected_script_commit": "232750e3f3ed38cfc33c8b4134b3efbbe3f73319",
+    "roles": [
+      "AELYS",
+      "ETHERION",
+      "AFAH",
+      "METRION"
+    ],
+    "all_four_reached": "TRAIN_REAL_SCOPED_LORA",
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "adapter_storage": "HF_PRIVATE_ONLY",
+    "auto_promotion": false
+  },
+  "redundant_run": {
+    "run_id": 36109522298,
+    "status": "QUEUED_AT_CHECKPOINT",
+    "disposition": "IGNORE_AS_REDUNDANT_DUPLICATE_UNLESS_CANONICAL_RUN_INVALID",
+    "reason": "Triggered after corrected canonical run already existed; no cancel action available in connected GitHub tool."
+  },
+  "hard_rules": [
+    "DO_NOT_TREAT_FIRST_ATTEMPT_AS_MODEL_FAILURE",
+    "CANONICAL_EVIDENCE_RUN_IS_36109026167",
+    "FOUR_ADAPTERS_SEPARATE_SHA_AND_RECEIPTS",
+    "SHARED_BASE_MODEL_LINEAGE_MEANS_CORRELATED_NOT_INDEPENDENT_EVIDENCE",
+    "M6_TRANSFER_RED_DENY_TRAINING",
+    "NO_AUTO_PROMOTION",
+    "G6_CANDIDATE_REQUIRES_WEIGHT_CHANGE_VALIDATION_AND_COLD_GATES",
+    "FAILURE_OR_CRITICAL_REGRESSION_MEANS_ROLLBACK_RETAIN_EVIDENCE"
+  ],
+  "exact_resume": [
+    "Check run 36109026167 only.",
+    "For each completed role, read job log and public pointer receipt.",
+    "Record adapter SHA, HF private readback, validation gain, M6 gain, transfer gain, RED gain and any critical per-label regression.",
+    "Do not use run 36109522298 as independent confirmation; it is redundant lineage.",
+    "After all four jobs complete, inspect audit job and classify each role G6_CANDIDATE or ROLLBACK.",
+    "Only G6 candidates may proceed to separate F72/AFAH model review; no runtime promotion automatically."
+  ]
+}
