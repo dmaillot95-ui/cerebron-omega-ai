@@ -1,6 +1,6 @@
 {
   "schema": "CEREBRON_DUAL_CORE_CONTRACT_V1",
-  "status": "SUPPORTED_NO_VERIFIED_ASSIGNMENTS",
+  "status": "BRANCH_SCOPED_ARCHITECTURE_VERIFIED_ACTIVATION_GATED",
   "purpose": "Support logical AIs with two coordinated internal cores without double-counting identity, execution, memory or evidence.",
   "modes": [
     "SINGLE_CORE",
@@ -13,8 +13,84 @@
     "Shared model, data, source, method or memory dependencies must be declared.",
     "Core disagreement must enter CONTRADICTION_BANK rather than be hidden by averaging.",
     "A6_MEMORY_KEEPER remains the default persistent writer.",
-    "No dual-core assignment may be claimed without a repository manifest and verification."
+    "No dual-core assignment may be claimed without a repository manifest and verification.",
+    "Platform-branch candidate assignments are architecture contracts, not active dual-core execution until D4/D5/D6/D8 pass."
   ],
   "verified_assignments": [],
-  "assignment_status": "UNVERIFIED_PENDING_MANIFEST"
+  "assignment_status": "CANDIDATE_ASSIGNMENTS_FOUND_ON_PLATFORM_BRANCH; NO_D4_D6_D8_COMPLETE_DUAL_CORE_ACTIVATION",
+  "source_branch": "feat/cerebron-ai-platform-mvp",
+  "source_contract": "config/native-ai-dual-core-v1.json",
+  "candidate_assignments": [
+    {
+      "farm_id": 145,
+      "ai_id": "ELYSION",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS",
+        "D2": "PASS",
+        "D3": "PASS",
+        "D4": "PENDING",
+        "D5": "PENDING",
+        "D6": "PENDING",
+        "D7": "PARTIAL",
+        "D8": "PENDING"
+      },
+      "state": "SINGLE_CORE_BASELINES_PRESENT_DUAL_CORE_NOT_YET_VALIDATED"
+    },
+    {
+      "farm_id": 146,
+      "ai_id": "ELYSIUM",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS",
+        "D2": "PENDING_PER_AI_BINDING"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    },
+    {
+      "farm_id": 147,
+      "ai_id": "SAELION",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    },
+    {
+      "farm_id": 148,
+      "ai_id": "ALPHA",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    },
+    {
+      "farm_id": 149,
+      "ai_id": "OMEGA",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    },
+    {
+      "farm_id": 150,
+      "ai_id": "DELTA",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    },
+    {
+      "farm_id": 151,
+      "ai_id": "NEXUS",
+      "gate_status": {
+        "D0": "PASS",
+        "D1": "PASS"
+      },
+      "state": "ARCHITECTURE_ONLY"
+    }
+  ]
 }
