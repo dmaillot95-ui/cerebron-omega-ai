@@ -402,14 +402,14 @@
           "testability"
         ]
       },
-      "project_state": "D4_COMPLEMENTARITY_PASS_FUSION_DEV_READY",
-      "dual_core_state": "D4_COMPLEMENTARITY_PASS",
+      "project_state": "D4_FUSION_DEV_QUEUED",
+      "dual_core_state": "D4_FUSION_DEV_QUEUED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+        "D4": "FUSION_DEV_QUEUED",
         "D5": "BLOCKED_PENDING_D4_FUSION",
         "D6": "BLOCKED_PENDING_D4_FUSION",
         "D7": "PENDING",
@@ -433,7 +433,8 @@
         "d4_receipt_sha256": "cbe2b7b531d3fe5e8727b7e5c197b5548f63feaef5c37409978ad8ee94bedf92",
         "d4_oracle_union_correct": 47,
         "d4_oracle_gain_over_best_single": 3,
-        "d4_decision": "CONTINUE_D4_FUSION_CANARY"
+        "d4_decision": "CONTINUE_D4_FUSION_CANARY",
+        "d4_fusion_dev_run_id": 36155520110
       }
     },
     {
@@ -466,14 +467,14 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "D4_COMPLEMENTARITY_PASS_FUSION_DEV_READY",
-      "dual_core_state": "D4_COMPLEMENTARITY_PASS",
+      "project_state": "D4_FUSION_DEV_QUEUED",
+      "dual_core_state": "D4_FUSION_DEV_QUEUED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+        "D4": "FUSION_DEV_QUEUED",
         "D5": "BLOCKED_PENDING_D4_FUSION",
         "D6": "BLOCKED_PENDING_D4_FUSION",
         "D7": "PENDING",
@@ -497,7 +498,8 @@
         "d4_receipt_sha256": "164c1aabd265701b6beeab97a540beab5ec77b1629bf2833fd4cc92680a1863e",
         "d4_oracle_union_correct": 66,
         "d4_oracle_gain_over_best_single": 12,
-        "d4_decision": "CONTINUE_D4_FUSION_CANARY"
+        "d4_decision": "CONTINUE_D4_FUSION_CANARY",
+        "d4_fusion_dev_run_id": 36155520110
       }
     },
     {
@@ -596,14 +598,14 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "D4_COMPLEMENTARITY_PASS_FUSION_CANARY_READY",
-      "dual_core_state": "D4_COMPLEMENTARITY_PASS",
+      "project_state": "D4_FUSION_DEV_IN_PROGRESS",
+      "dual_core_state": "D4_FUSION_DEV_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "COMPLEMENTARITY_PASS_FUSION_CANARY_READY",
+        "D4": "FUSION_DEV_IN_PROGRESS",
         "D5": "BLOCKED_PENDING_D4_FUSION",
         "D6": "BLOCKED_PENDING_D4_FUSION",
         "D7": "PENDING",
@@ -635,7 +637,8 @@
         "d4_receipt_sha256": "4bb615dc7ae684b423cf955be5693dd92d7774132d8b09f9f22fb9889b77df99",
         "d4_oracle_union_correct": 56,
         "d4_oracle_gain_over_best_single": 4,
-        "d4_decision": "CONTINUE_D4_FUSION_CANARY"
+        "d4_decision": "CONTINUE_D4_FUSION_CANARY",
+        "d4_fusion_dev_run_id": 36155230931
       }
     }
   ],
