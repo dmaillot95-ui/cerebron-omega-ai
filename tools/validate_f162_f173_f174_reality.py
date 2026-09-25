@@ -19,6 +19,9 @@ assert farms["max_farms"]==174
 assert farms["policy"]["farm_cap"]==174
 assert farms["policy"]["no_farm_above_174"] is True
 assert farms["policy"]["no_farm_above_172"] is False
+assert 174 not in farms["policy"]["extension_repository_empty_ids"]
+assert set(farms["policy"]["extension_repository_initialized_ids"])=={173,174}
+assert set(farms["policy"]["extension_repository_selftest_pass_ids"])=={173,174}
 
 f162=by_id[162]
 assert f162["status"]=="PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING"
@@ -46,11 +49,14 @@ assert f173["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
 f174=by_id[174]
 assert f174["repo"]=="cerebron-farm-174-elyra-visual-simulation"
 assert f174["identity"]=="ELYRA"
+assert f174["status"]=="DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED"
 assert f174["repository_exists"] is True
-assert f174["repository_initialized"] is False
+assert f174["repository_initialized"] is True
 assert f174["training_status"]=="NOT_TRAINED"
 assert f174["simulation_status"]=="NOT_EXECUTED"
 assert f174["physical_test_status"]=="NOT_TESTED"
+assert f174["dedicated_repo_selftest_run_id"]==36156887593
+assert f174["dedicated_repo_head"]=="fd2327d3016475cdf84561e5d4bdcee89a28f2e5"
 assert f174["bootstrap_manifest"]=="config/farm-bootstrap-manifest-f162-f174.json"
 
 for sub in ["scaffolds/f173-aelys-live","scaffolds/f174-elyra-visual-simulation"]:
@@ -63,7 +69,7 @@ print(json.dumps({
   "registry_max_farm":174,
   "f162":"PREPARED_REPOSITORY_MISSING",
   "f173":"LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED",
-  "f174":"PREPARED_TARGET_REPOSITORY_EMPTY",
+  "f174":"DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
   "training_claims":0,
   "execution_claims":0
 },sort_keys=True))
