@@ -598,16 +598,16 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "D4_FUSION_DEV_IN_PROGRESS",
-      "dual_core_state": "D4_FUSION_DEV_IN_PROGRESS",
+      "project_state": "D4_HOLD_NO_ROBUST_GAIN",
+      "dual_core_state": "D4_FUSION_DEV_HOLD",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "FUSION_DEV_IN_PROGRESS",
-        "D5": "BLOCKED_PENDING_D4_FUSION",
-        "D6": "BLOCKED_PENDING_D4_FUSION",
+        "D4": "HOLD_NO_ROBUST_GAIN",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -638,7 +638,15 @@
         "d4_oracle_union_correct": 56,
         "d4_oracle_gain_over_best_single": 4,
         "d4_decision": "CONTINUE_D4_FUSION_CANARY",
-        "d4_fusion_dev_run_id": 36155230931
+        "d4_fusion_dev_run_id": 36155230931,
+        "d4_fusion_dev_receipt_sha256": "0c87630d9ac9f88c7e87e4bac930e96f122c4af7ca7c38baa220be0077be99e1",
+        "d4_fusion_dev_qwen_correct": 22,
+        "d4_fusion_dev_smol_correct": 16,
+        "d4_fusion_dev_best_single_correct": 22,
+        "d4_fusion_dev_best_policy_correct": 22,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
       }
     }
   ],
