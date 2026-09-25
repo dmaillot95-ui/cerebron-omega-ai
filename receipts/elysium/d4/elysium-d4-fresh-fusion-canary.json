@@ -1,0 +1,80 @@
+{
+  "schema": "ELYSIUM_D4_FRESH_DUAL_CORE_FUSION_CANARY_V1",
+  "run_id": 36134498167,
+  "source_d3_run_id": 36130283226,
+  "source_d4_precheck_run_id": 36134272684,
+  "holdout_created_now": true,
+  "holdout_path": "elysium/D4/ELYSIUM-D4-HOLDOUT-V1.json",
+  "holdout_sha256": "6b842c86d133313b29ff334eb45b7421b517896be8b411b42b1e423793466f73",
+  "holdout_deny_training": true,
+  "exact_prompts_public": false,
+  "weights_changed": false,
+  "model_a": {
+    "id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+  },
+  "model_b": {
+    "id": "HuggingFaceTB/SmolLM3-3B",
+    "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+  },
+  "fusion_policy": "AGREE_ELSE_IF_BOTH_JUDGES_SELECT_QWEN_USE_QWEN_ELSE_SMOL_PRIMARY",
+  "policy_frozen_before_holdout_generation": true,
+  "metrics": {
+    "task_count": 24,
+    "qwen_correct": 20,
+    "smol_correct": 18,
+    "best_single_correct": 20,
+    "fusion_correct": 18,
+    "fusion_gain_over_best_single": -2,
+    "switches_to_qwen": 0,
+    "helpful_switches": 0,
+    "harmful_switches": 0,
+    "critical_domain_regression": false,
+    "domain": {
+      "calibration": {
+        "qwen": 4,
+        "smol": 4,
+        "fusion": 4,
+        "total": 4
+      },
+      "claim_verification": {
+        "qwen": 4,
+        "smol": 4,
+        "fusion": 4,
+        "total": 4
+      },
+      "counterexample_search": {
+        "qwen": 4,
+        "smol": 3,
+        "fusion": 3,
+        "total": 4
+      },
+      "error_detection": {
+        "qwen": 2,
+        "smol": 2,
+        "fusion": 2,
+        "total": 4
+      },
+      "reproduction": {
+        "qwen": 2,
+        "smol": 1,
+        "fusion": 1,
+        "total": 4
+      },
+      "robustness": {
+        "qwen": 4,
+        "smol": 4,
+        "fusion": 4,
+        "total": 4
+      }
+    }
+  },
+  "decision": "D4_FRESH_FUSION_HOLD_NO_MEASURED_GAIN",
+  "independent_evidence_count": 0,
+  "two_models_not_two_independent_proofs": true,
+  "claim_ceiling": "FRESH_PRIVATE_D4_DUAL_CORE_FUSION_CANARY_NO_RUNTIME_ACTIVATION",
+  "private_result_path": "elysium/D4-results/run-36134498167/private.json",
+  "private_result_sha256": "c542f1ebdefaee8327bbb348e12db75be314361b53d771ae763164762e169fcb",
+  "hf_private_readback_sha_pass": true,
+  "receipt_sha256": "5d6b98614925dfe10b8dbae373b50ab1eb2c341f36280a525ffa29df0a143ac4"
+}
