@@ -51,21 +51,20 @@ def main():
       "Stay inside this specialization. Give concrete, testable, nonredundant advice for improving the system. "
       "Respect REALITY>COHERENCE, CLAIM<=EVIDENCE, REPAIR BEFORE SCALE, TRANSFER BEFORE GENERALITY, and QUALITY>QUANTITY."
     )
-    user=f"""CURRENT LINE OF ROUTE:
+    user=f"""CEREBRON LINE OF ROUTE:
 {route}
 
-QUESTIONS:
-{questions}
-
-Return exactly eight labeled lines:
-PRIORITY:
-PROPOSAL:
-TEST:
-STOP:
-UNIQUE_VALUE:
-BENCHMARK:
-DUAL_CORE:
-RISK:
+OUTPUT CONTRACT — EXACTLY 8 PLAIN LINES.
+No Markdown. No bullets. No numbering. No blank lines. Do not repeat a label inside a value.
+Keep each value between 8 and 30 words.
+PRIORITY: state the single highest-leverage next action.
+PROPOSAL: state one concrete implementation or repair.
+TEST: state one exact verification test.
+STOP: state one thing CEREBRON should stop or avoid.
+UNIQUE_VALUE: state your specialization's unique value for the next three cycles.
+BENCHMARK: state one observable or numeric metric deciding whether your contribution is useful.
+DUAL_CORE: for Greek dual-model architecture only, say YES with two model-core functions plus ablation, or NO with reason.
+RISK: state the main unknown or failure mode that could invalidate the proposal.
 """
     problem_sha=hashlib.sha256((route+"\n"+questions).encode()).hexdigest()
     inp=make_envelope(endpoint,"CEREBRON",cfg["mission_id"],"QUESTION",user,
@@ -76,7 +75,7 @@ RISK:
          "ai_id":a.ai,"identity":spec["identity"],"parent_function":spec["parent_function"],
          "specialization_tags":spec["specialization_tags"],"specialization_vector":spec["specialization_vector"],
          "endpoint":endpoint,"model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False,
-         "format_contract_version":"V3_NO_REGEX_MARKDOWN_TOLERANT",
+         "format_contract_version":"V4_SHORT_EIGHT_LINES",
          "spiralix_input_envelope":inp,"spiralix_input_sha256":sha256_obj(inp)}
     t=time.time()
     try:
@@ -89,7 +88,7 @@ RISK:
         except Exception: prompt=system+"\n\n"+user+"\nASSISTANT:\n"
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
-            y=model.generate(**x,max_new_tokens=420,do_sample=False,repetition_penalty=1.05)
+            y=model.generate(**x,max_new_tokens=260,do_sample=False,repetition_penalty=1.15,no_repeat_ngram_size=4)
         raw=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
         parsed=parse_labels(raw)
         echo=any(p in raw.lower() for p in ["return exactly eight","current line of route:","questions:"])
