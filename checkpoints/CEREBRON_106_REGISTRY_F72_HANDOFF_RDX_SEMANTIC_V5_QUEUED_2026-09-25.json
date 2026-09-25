@@ -1,0 +1,154 @@
+{
+  "schema": "CEREBRON_106_REGISTRY_F72_HANDOFF_RDX_SEMANTIC_V5_QUEUED_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "coordination": {
+    "other_session": "ARCHITECTON_R&D_EXECUTION_PLANE",
+    "this_session": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_PLANE",
+    "rule": "DO_NOT_MODIFY_OTHER_SESSION_ACTIVE_RD_OBJECTS_OR_F173_F174"
+  },
+  "registry": {
+    "version": "2.27",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "duplicate_ids": [],
+    "missing_ids": [
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172
+    ],
+    "f152": "REGISTERED",
+    "f173": "REGISTERED_OTHER_SESSION",
+    "f174": "REGISTERED_OTHER_SESSION"
+  },
+  "f72": {
+    "registry_reproduction": {
+      "run_id": 36162578051,
+      "status": "PASS",
+      "receipt_sha256": "bb18d86bc0704d7e14803f1dde17dd1b66b0e593aaac2205db9a7e1b636ac16a"
+    },
+    "scoped_reality": {
+      "run_id": 36162737723,
+      "status": "PASS_SCOPED_ONLY",
+      "receipt_sha256": "4ecc74b6e381ad8b6f6f465b003095615f4b7fa90bef53b48d2cddde2a47c16c"
+    },
+    "global_gate": "FAIL_CLOSED",
+    "gold": "BLOCKED",
+    "neural_training": "BLOCKED",
+    "reason": "NO_TRAIN_ELIGIBLE_RDX_GOLD_OBJECTS"
+  },
+  "rd_handoff": {
+    "contract": "config/rdx-rd-handoff-contract-v1.json",
+    "validator": "runtime/rdx_rd_handoff_v1.py",
+    "tests": "tests/test_rdx_rd_handoff_v1.py",
+    "canary_run_id": 36164294092,
+    "canary_status": "PASS",
+    "pytest": "4_PASSED",
+    "route": [
+      "MEMORY_INGEST_READY",
+      "F72_REVIEW_CANDIDATE",
+      "M4_GOLD_ELIGIBLE",
+      "TRAIN_DATASET"
+    ],
+    "rule": "NO_AUTO_GOLD_NO_AUTO_TRAIN"
+  },
+  "native_ai_d4": {
+    "SAELION": "STOP_NO_COMPLEMENTARITY_QWEN_RETAINED",
+    "DELTA": "STOP_NO_COMPLEMENTARITY_QWEN_RETAINED",
+    "NEXUS": "HOLD_NO_ROBUST_DEV_GAIN",
+    "ALPHA": "HOLD_NO_ROBUST_DEV_GAIN",
+    "OMEGA": "HOLD_NO_ROBUST_DEV_GAIN",
+    "ELYSIUM": "HOLD_NO_ROBUST_GAIN",
+    "ELYSION": "HOLD_REDESIGN_REQUIRED"
+  },
+  "rdx_semantic": {
+    "v1": {
+      "run_id": 36156985796,
+      "status": "FAIL",
+      "top1_accuracy": 0.8,
+      "mrr": 0.9
+    },
+    "dev_v2": {
+      "run_id": 36161040992,
+      "status": "PASS_DEV_ONLY",
+      "selected_policy": "RRF_SEM_LEX",
+      "top1_accuracy": 0.9,
+      "mrr": 0.95
+    },
+    "fresh_v2": {
+      "run_id": 36161387023,
+      "status": "HOLD",
+      "gain": -0.125,
+      "hybrid": "REJECTED"
+    },
+    "independent_v3": {
+      "run_id": 36161829258,
+      "status": "HOLD",
+      "policy": "SEMANTIC_ONLY",
+      "top1_accuracy": 0.9166666666666666,
+      "mrr": 0.9467592592592593,
+      "critical_domains_pass": true
+    },
+    "multilingual_dev_v4": {
+      "run_id": 36164021509,
+      "status": "HOLD",
+      "baseline_fr_top1": 0.6111111111111112,
+      "multilingual_fr_top1": 0.8333333333333334,
+      "fr_gain": 0.2222222222222222,
+      "baseline_en_top1": 0.7777777777777778,
+      "multilingual_en_top1": 0.6666666666666666,
+      "en_regression": 0.11111111111111116,
+      "decision": "DEV_HOLD_BASELINE_NO_ROBUST_MULTILINGUAL_GAIN",
+      "fresh_holdout_consumed": false,
+      "receipt_sha256": "750eea725eb23e025f55fb8381da8c642db05852dd2d628315cfc91b0b6510fb"
+    },
+    "fusion_dev_v5": {
+      "run_id": 36164464446,
+      "status": "QUEUED",
+      "classification": "PUBLIC_BILINGUAL_DEV_POLICY_ABLATION_NOT_COLD",
+      "training": false,
+      "fresh_holdout_consumed": false
+    }
+  },
+  "next_exact": [
+    "Close RDX semantic policy fusion DEV V5 run 36164464446.",
+    "If V5 passes robust bilingual criteria, freeze the selected policy and exact model revisions before one NEW private bilingual holdout generated from a different family.",
+    "If V5 holds, retain semantic-only baseline and do not consume another holdout.",
+    "Wait for verified R&D handoffs; validate them with runtime/rdx_rd_handoff_v1.py before any F72 global review.",
+    "Do not create GOLD from empty or synthetic-only RDX records.",
+    "Keep M6 excluded from all training sources.",
+    "Do not modify F173/F174 or ARCHITECTON active R&D."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "ABLATION_BEFORE_ADDITION",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "NO_RAW_RDX_AUTO_TRAIN",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
