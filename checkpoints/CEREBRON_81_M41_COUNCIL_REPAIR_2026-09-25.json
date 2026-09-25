@@ -1,0 +1,69 @@
+{
+  "schema": "CEREBRON_81_M41_COUNCIL_REPAIR_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "mission": "M41_VERIFY_COUNCIL_REPAIR_CANARY",
+  "parent_checkpoint": "checkpoints/CEREBRON_80_M40_FINAL_2026-09-25.json",
+  "state": {
+    "council_full_run_1": {
+      "run_id": 36046943012,
+      "executed_count": 38,
+      "inference_success_count": 38,
+      "parse_pass_count": 0,
+      "cause": "F_FORMAT_MARKDOWN_LABELS_NOT_ACCEPTED_BY_INITIAL_PARSER",
+      "ranking_valid": false
+    },
+    "canary_v1": {
+      "run_id": 36075032169,
+      "result": "FAIL_5_OF_5",
+      "cause": "F_TOOL_INVALID_REGEX_BAD_CHARACTER_RANGE"
+    },
+    "canary_v2": {
+      "run_id": 36075666669,
+      "result": "FAIL_5_OF_5",
+      "cause": "F_TOOL_OVER_ESCAPED_REGEX_MULTIPLE_REPEAT_POSITION_4"
+    },
+    "canary_v3": {
+      "run_id": 36076314764,
+      "inference_pass": "5_OF_5",
+      "parse_pass": "3_OF_5",
+      "all_pass": false,
+      "passing": [
+        "AELYS",
+        "CEREBRON",
+        "F166-RHO"
+      ],
+      "format_failures": [
+        "ETHERION",
+        "METRION"
+      ],
+      "interpretation": "PARSER_TOOL_FAILURE_CLOSED_MODEL_FORMAT_ADHERENCE_REMAINS",
+      "artifact_digest": "sha256:296ddb81462cbfee484a1d225990bf1f2023991811201972116f057fdda22169"
+    },
+    "repair_v4": {
+      "contract": "EXACTLY_8_PLAIN_LINES_NO_MARKDOWN_NO_BULLETS_NO_NUMBERING_8_TO_30_WORDS_PER_VALUE",
+      "generation": {
+        "max_new_tokens": 260,
+        "repetition_penalty": 1.15,
+        "no_repeat_ngram_size": 4
+      },
+      "parser": "V3_NO_REGEX_DETERMINISTIC_NORMALIZATION",
+      "strategy_score": "V2_UNSCORABLE_ON_PARSE_FAILURE_ROLE_AWARE",
+      "run_id": 36076654497,
+      "run_status": "QUEUED_AT_CHECKPOINT"
+    },
+    "scale_gate": "DO_NOT_RERUN_38_UNTIL_CANARY_V4_5_OF_5_PARSE_PASS",
+    "dual_core_semantics": "DOUBLE_CORE_MEANS_ONE_GREEK_AI_WITH_TWO_DISTINCT_MODELS_NOT_TWO_ROLES",
+    "dual_core_default_pair": [
+      "Qwen/Qwen3-4B",
+      "HuggingFaceTB/SmolLM3-3B"
+    ]
+  },
+  "exact_resume": [
+    "Check run 36076654497.",
+    "If 5/5 inference PASS and 5/5 parse PASS: mark M41 CLOSED and trigger full 38-AI strategy council using corrected Greek dual-model prompt and audit V2.",
+    "If any inference FAIL: classify F_TOOL/F_MODEL and repair only that layer at same five-AI scale.",
+    "If inference PASS but parse FAIL: inspect failing raw outputs, classify F_FORMAT, repair prompt/parser without inventing missing fields, rerun same five only.",
+    "Never reuse first council proxy ranking; it is invalid.",
+    "Do not scale workers above 5 from this mission."
+  ]
+}
