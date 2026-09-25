@@ -77,7 +77,7 @@ def run_one(ai_id,run_id,out_root,cfg,reg,tok,model,torch):
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
             y=model.generate(
-              **x,max_new_tokens=260,do_sample=False,
+              **x,max_new_tokens=160,do_sample=False,
               repetition_penalty=1.15,no_repeat_ngram_size=4
             )
         raw=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
