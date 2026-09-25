@@ -1,0 +1,10 @@
+{
+  "schema": "CEREBRON_FORMAT_SELECTION_DIAGNOSTIC_LAUNCH_V1",
+  "date": "2026-09-25",
+  "authorized": true,
+  "source_run_id": 36177878435,
+  "source_artifact_id": 10882824691,
+  "purpose": "Diagnose why all three format contracts scored 0/2 on Qwen3 validation without running another model.",
+  "weight_change": false,
+  "training_released": false
+}
