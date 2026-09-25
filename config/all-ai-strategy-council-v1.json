@@ -10,7 +10,7 @@
     "4. Continue GVL with distinct frozen held-out transfer families; current geometric gate remains 1/4.",
     "5. Repair before scale: isolate local prompt/role/tool/model failures and retest same scale before adding complexity.",
     "6. Audit each logical AI by unique future contribution, role fidelity, transfer, novelty and redundancy.",
-    "7. Support dual-core architecture only when a verified manifest identifies a dual-core AI and ablation shows added value.",
+    "7. Greek dual-core means ONE Greek native AI containing TWO DISTINCT MODELS. Do not confuse model cores with logical roles. Activate only with exact model bindings, runtime receipts and ablation gain.",
     "8. Finish Control Plane/platform verification end-to-end: farm bridge, model backend, security, AGORA/memory and rollback evidence.",
     "9. Prefer minimal useful coalitions; use intentional redundancy only for replication/audit/stability and mark it explicitly.",
     "10. Do not call architecture, configuration or workflow success cognitive/scientific validation."
@@ -22,7 +22,7 @@
     "What should CEREBRON stop doing or avoid because it wastes resources or creates false confidence?",
     "What unique value can your specialization add over the next three cycles?",
     "What metric should be used to decide whether your future contribution is useful?",
-    "Should a dual-core pattern be used in your area? If yes, state the two complementary core functions and an ablation test; if no, explain why.",
+    "Does your area justify a Greek dual-model core? If yes, specify model-core A function, model-core B function, exact two-model binding evidence required, and an ablation against the best single-model baseline. If no, explain why.",
     "What is the main risk or unknown that could invalidate your proposal?"
   ],
   "model": {
@@ -50,5 +50,14 @@
     "BENCHMARK",
     "DUAL_CORE",
     "RISK"
-  ]
+  ],
+  "dual_core_semantics": {
+    "definition": "ONE_GREEK_NATIVE_AI_WITH_TWO_DISTINCT_MODELS",
+    "not": "TWO_LOGICAL_ROLES",
+    "evidence_requirement": "TWO_EXACT_MODEL_BINDINGS_PLUS_RUNTIME_RECEIPTS_PLUS_ABLATION",
+    "current_default_pair": [
+      "Qwen/Qwen3-4B",
+      "HuggingFaceTB/SmolLM3-3B"
+    ]
+  }
 }
