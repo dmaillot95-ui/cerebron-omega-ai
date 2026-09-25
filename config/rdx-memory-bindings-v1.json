@@ -143,5 +143,13 @@
     ],
     "write_read_sha": "PASS",
     "pointer_recall": "PASS"
+  },
+  "semantic_retrieval_canary": {
+    "run_id": 36156985796,
+    "state": "IN_PROGRESS",
+    "linked_memory_farm_id": 115,
+    "corpus": "CEREBRON_OWNED_SYNTHETIC_PRIVATE",
+    "training": false,
+    "claim_ceiling": "NO_SEMANTIC_RETRIEVAL_QUALITY_CLAIM_UNTIL_RECEIPT_PASS"
   }
 }
