@@ -19,7 +19,8 @@
     "CLAIM_LE_EVIDENCE",
     "REAL_EXECUTION_RECEIPT_REQUIRED"
   ],
-  "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b",
-  "dedicated_repo_selftest_run_id": 36153266774,
-  "master_plugin_bus_status": "DECLARED_GUARD_PENDING_RUNTIME_UNQUALIFIED"
+  "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
+  "dedicated_repo_selftest_run_id": 36155830169,
+  "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED",
+  "unified_plugin_bus_guard_run_id": 36156083228
 }
