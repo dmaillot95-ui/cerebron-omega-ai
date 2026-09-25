@@ -23,8 +23,9 @@ assert f173["repository_exists"] is True
 assert f173["repository_initialized"] is True
 assert f173["training_status"]=="NOT_TRAINED"
 assert f173["production_status"]=="NOT_DEPLOYED"
-assert f173["dedicated_repo_selftest_run_id"]==36153266774
-assert f173["master_plugin_bus_status"]=="DECLARED_GUARD_PENDING_RUNTIME_UNQUALIFIED"
+assert f173["dedicated_repo_selftest_run_id"]==36155830169
+assert f173["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
+assert f173["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
 
 f174=by_id[174]
 assert f174["repo"]=="cerebron-farm-174-elyra-visual-simulation"
