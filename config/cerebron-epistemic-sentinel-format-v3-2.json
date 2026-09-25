@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_EPISTEMIC_SENTINEL_FORMAT_V3_2",
   "date": "2026-09-25",
-  "status": "PREPARED_NOT_EXECUTED",
+  "status": "PROMOTED_INTERFACE_NORMALIZATION",
   "purpose": "Complete structurally incomplete corrective records without new model inference by preserving explicit uncertainty when confidence/unknown fields are omitted.",
   "source_failure": "FAIL-FORMAT-MONOLITHIC-SIXFIELD-001",
   "source_runs": [
@@ -51,5 +51,25 @@
   "new_inference": false,
   "weight_change": false,
   "training_released": false,
-  "operational_mutation_f172_f173_f174": false
+  "operational_mutation_f172_f173_f174": false,
+  "validation_receipt": {
+    "run_id": 36182772075,
+    "status": "SUCCESS",
+    "audit_sha256": "34db43a142028a055a36901670176447d608c5a65db32eaac0ec100397a85f92",
+    "artifact_id": 10884838486,
+    "artifact_digest": "sha256:bd4a5ee1da223882eabd3959058d3e4306aff94d90907b5527e8a4aa351fe1df",
+    "receipt_count": 6,
+    "validation_complete_count": 2,
+    "qwen_holdout_complete_count": 2,
+    "smollm_holdout_complete_count": 2,
+    "runtime_sentinel_insertions": 9,
+    "substantive_fabrication_count": 0,
+    "new_inference": false,
+    "weight_change": false
+  },
+  "known_limitations": [
+    "Structural completeness does not prove semantic correctness.",
+    "Some pre-existing substantive fields may be truncated or low quality; V3.2 does not invent or repair those fields.",
+    "This protocol is an interface normalization only and is not neural/model capability improvement."
+  ]
 }
