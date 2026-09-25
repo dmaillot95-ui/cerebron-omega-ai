@@ -1,0 +1,87 @@
+{
+  "schema": "CEREBRON_FARM_RESERVATION_V1",
+  "date": "2026-09-25",
+  "farm_id": 173,
+  "code": "F173",
+  "name": "AELYS LIVE",
+  "repo": "cerebron-farm-173-aelys-live",
+  "repo_full_name": "dmaillot95-ui/cerebron-farm-173-aelys-live",
+  "planned_url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
+  "status": "RESERVED_REPOSITORY_NOT_YET_CREATED",
+  "type": "LIVE_PRESENTATION_INTEGRATION_FARM",
+  "domain": "interactive-rd-presentation-live-avatar-client-showroom-tiktok",
+  "role": "bridge-client-or-live-events-to-cerebron-rdx-memory-aelys-elyra",
+  "activation_rule": "REPOSITORY_MUST_EXIST_AND_BE_VERIFIED_BEFORE_FARMS_JSON_ACTIVE_INSERT",
+  "plugin_bus": {
+    "registry": "config/cerebron-unified-plugin-bus-v1.json",
+    "capabilities": [
+      "rdx.search",
+      "rdx.fetch",
+      "memory.canonical_lookup",
+      "memory.semantic_recall",
+      "memory.lineage_check",
+      "evidence.fetch",
+      "governor.check",
+      "presenter.compose",
+      "avatar.speak",
+      "audit.review"
+    ]
+  },
+  "memory": {
+    "provider": "Hugging Face private",
+    "repo_id": "cerebron-omega/cerebron-private-memory",
+    "namespace": "colony/AELYS-LIVE/",
+    "secrets_policy": "ENV_ONLY_NEVER_COMMIT"
+  },
+  "routes": {
+    "input": [
+      "PRIVATE_CLIENT_WEB",
+      "TIKTOK_LIVE_ADAPTER",
+      "TEXT",
+      "VOICE"
+    ],
+    "knowledge": [
+      "F152_RDX",
+      "NEXUS_ROUTER",
+      "F114_CANONICAL_INDEX",
+      "F115_VECTOR_MEMORY",
+      "F119_EVIDENCE_ARCHIVE",
+      "F116_LINEAGE_CHECK",
+      "F120_GOVERNOR"
+    ],
+    "output": [
+      "AELYS_PRESENTER",
+      "ELYRA_AVATAR",
+      "VOICE_TTS",
+      "LIVE_OR_PRIVATE_CLIENT_OUTPUT"
+    ]
+  },
+  "gates": {
+    "global_f72": "FAIL",
+    "m4_gold": "BLOCKED",
+    "training": "DENY",
+    "m6_training": "DENY"
+  },
+  "rules": [
+    "REALITY_GT_COHERENCE",
+    "EVIDENCE_GT_CONFIDENCE",
+    "CLAIM_LE_EVIDENCE",
+    "SIMULATION_NE_TEST",
+    "MEMORY_NE_TRAINING",
+    "NO_PRIVATE_CLIENT_DATA_IN_PUBLIC_GITHUB",
+    "NO_AUTOMATIC_TRAINING_FROM_LIVE_CHAT",
+    "NO_ACTIVE_CLAIM_BEFORE_REPOSITORY_VERIFICATION"
+  ],
+  "initial_files_after_repo_creation": [
+    "README.md",
+    "config/plugin-bindings.json",
+    "config/live-routing.json",
+    "schemas/live-event.schema.json",
+    "schemas/live-response.schema.json",
+    "gateway/event_ingress.py",
+    "gateway/plugin_client.py",
+    "presenter/aelys_presenter.py",
+    "avatar/elyra_adapter.py",
+    "tests/test_fail_closed.py"
+  ]
+}
