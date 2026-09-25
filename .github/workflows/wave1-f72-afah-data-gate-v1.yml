@@ -25,6 +25,15 @@ jobs:
       - name: Regenerate candidates
         run: |
           python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Verify locked manifest SHA before F72
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          d=json.loads(pathlib.Path("artifacts/wave1-quarantine-candidates-v1.json").read_text())
+          expected="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert d["manifest_sha256"]==expected,(d["manifest_sha256"],expected)
+          print("LOCKED_MANIFEST_SHA_PASS",expected)
+          PY
       - name: Reproduce independent semantic audit
         run: |
           python tools/wave1_quarantine_semantic_audit.py             --input artifacts/wave1-quarantine-candidates-v1.json             --output artifacts/wave1-quarantine-semantic-audit-v1.json
