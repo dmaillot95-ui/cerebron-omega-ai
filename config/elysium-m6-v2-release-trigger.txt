@@ -1,0 +1,12 @@
+ELYSIUM M6 V2 PRIVATE SEAL
+source_f146_d2_run=36129514044
+source_f146_d2_audit_sha256=58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e
+failed_v1_run=36129831934
+failed_v1_classification=F_SECURITY_HF_TOKEN_MISSING_AND_PUBLIC_PROMPT_LEAK_RISK
+v1_reuse=DENY
+classification=M6_COLD_BENCHMARK_SEALED
+deny_training=true
+training_eligible=false
+exact_prompts_public=false
+task_count=72
+domains=6
