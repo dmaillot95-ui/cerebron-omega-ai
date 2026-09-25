@@ -37,9 +37,9 @@ assert f173["repository_exists"] is True
 assert f173["repository_initialized"] is True
 assert f173["training_status"]=="NOT_TRAINED"
 assert f173["production_status"]=="NOT_DEPLOYED"
-assert f173["dedicated_repo_selftest_run_id"]==36163651569
+assert f173["dedicated_repo_selftest_run_id"]==36164296182
 assert f173["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
-assert f173["status"]=="LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
+assert f173["status"]=="LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
 assert f173["local_contracts_status"]=="QUALIFIED"
 assert f173["local_live_loop_canary_status"]=="PASS"
 assert f173["local_live_loop_canary"]["run_id"]==36162553038
@@ -57,6 +57,15 @@ assert f173["local_session_replay_canary"]["final_trace_hash"]=="abcc5451ebbcb09
 assert f173["local_session_replay_canary"]["result_sha256"]=="785eef06fa1357f513dbbee3f5dd87e9f36949a4e63588df67c4fffe6c404510"
 assert f173["local_session_replay_canary"]["external_calls_executed"] is False
 assert f173["local_session_replay_canary"]["production_live_claimed"] is False
+assert f173["local_http_loopback_canary_status"]=="PASS"
+assert f173["local_http_loopback_canary"]["run_id"]==36164204308
+assert f173["local_http_loopback_canary"]["transport"]=="HTTP_LOOPBACK"
+assert f173["local_http_loopback_canary"]["bind"]=="127.0.0.1"
+assert f173["local_http_loopback_canary"]["http_status"]==200
+assert f173["local_http_loopback_canary"]["presentation_status"]=="HOLD"
+assert f173["local_http_loopback_canary"]["result_sha256"]=="c9b21d56586df27bd4dee8e9964b170fb241fdec9b9f91822068d86ed77b8450"
+assert f173["local_http_loopback_canary"]["external_endpoint_used"] is False
+assert f173["local_http_loopback_canary"]["production_live_claimed"] is False
 assert f173["external_runtime_status"]=="UNQUALIFIED"
 assert f173["rdx_route_provider"]=="RDX_EXCHANGE"
 assert f173["f152_rdx_route_forbidden"] is True
@@ -94,7 +103,7 @@ print(json.dumps({
   "status":"PASS",
   "registry_max_farm":174,
   "f162":"PREPARED_REPOSITORY_MISSING",
-  "f173":"LOCAL_LOOP_TTS_REPLAY_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
+  "f173":"LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "f174":"VIDEO_RENDER_CANARY_EXECUTED_PRODUCTION_FALSE_PHYSICAL_NOT_TESTED",
   "training_claims":0,
   "execution_claims":0
