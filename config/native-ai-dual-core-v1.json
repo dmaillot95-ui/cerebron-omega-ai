@@ -218,14 +218,14 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D4_HOLD_REPAIR_DEV_V2_IN_PROGRESS",
-      "dual_core_state": "D4_HOLD_REPAIR_DEV_V2_RUNNING",
+      "project_state": "D4_HOLD_NO_ROBUST_GAIN",
+      "dual_core_state": "D4_REPAIR_DEV_V2_HOLD",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS_PRIVATE_M6_V2",
-        "D4": "HOLD_REPAIR_DEV_V2_IN_PROGRESS",
+        "D4": "HOLD_NO_ROBUST_GAIN",
         "D5": "BLOCKED_BY_D4",
         "D6": "BLOCKED_BY_D4",
         "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
@@ -290,7 +290,14 @@
         },
         "d4_fresh_fusion_decision": "D4_FRESH_FUSION_HOLD_NO_MEASURED_GAIN",
         "d4_repair_dev_v2_run_id": 36137547428,
-        "d4_repair_dev_v2_state": "IN_PROGRESS"
+        "d4_repair_dev_v2_state": "IN_PROGRESS",
+        "d4_repair_dev_v2_receipt_sha256": "e4b3590aaa9756bfab08486862ce6ef9e87d161fc3d3ad7ab6d275194eeff5c7",
+        "d4_repair_dev_v2_qwen_correct": 12,
+        "d4_repair_dev_v2_smol_correct": 12,
+        "d4_repair_dev_v2_best_single_correct": 12,
+        "d4_repair_dev_v2_best_policy_correct": 12,
+        "d4_repair_dev_v2_gain_over_best_single": 0,
+        "d4_repair_dev_v2_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
       }
     },
     {
@@ -377,12 +384,12 @@
           "testability"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_PASS_M6_PENDING_AUDIT",
+      "dual_core_state": "D2_EXACT_RUNTIME_PASS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "PENDING",
+        "D2": "PASS",
         "D3": "PENDING",
         "D4": "PENDING",
         "D5": "PENDING",
@@ -390,7 +397,11 @@
         "D7": "PENDING",
         "D8": "PENDING"
       },
-      "memory_canary_run_id": 35960696909
+      "memory_canary_run_id": 35960696909,
+      "evidence": {
+        "d2_run_id": 36139915737,
+        "d2_audit_sha256": "e63cb0e4ff6488d3fe85d8cfa7ee6bfcb50ae5cfa8ef12a3a16a090809af0a23"
+      }
     },
     {
       "farm_id": 149,
@@ -422,12 +433,12 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_AUDIT_QUEUED_M6_AUDIT_PENDING",
+      "dual_core_state": "D2_RUNTIME_PAIR_EXECUTED_AUDIT_PENDING",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "PENDING",
+        "D2": "AUDIT_QUEUED",
         "D3": "PENDING",
         "D4": "PENDING",
         "D5": "PENDING",
@@ -435,7 +446,10 @@
         "D7": "PENDING",
         "D8": "PENDING"
       },
-      "memory_canary_run_id": 35960696909
+      "memory_canary_run_id": 35960696909,
+      "evidence": {
+        "d2_run_id": 36139940897
+      }
     },
     {
       "farm_id": 150,
@@ -468,12 +482,12 @@
           "testability"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_PASS_M6_PENDING_AUDIT",
+      "dual_core_state": "D2_EXACT_RUNTIME_PASS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "PENDING",
+        "D2": "PASS",
         "D3": "PENDING",
         "D4": "PENDING",
         "D5": "PENDING",
@@ -481,7 +495,11 @@
         "D7": "PENDING",
         "D8": "PENDING"
       },
-      "memory_canary_run_id": 35960696909
+      "memory_canary_run_id": 35960696909,
+      "evidence": {
+        "d2_run_id": 36139946295,
+        "d2_audit_sha256": "dbc0d7381b261d944712c3e0a4048203acf427d5a7b68bde4bf1e0fbf1264694"
+      }
     },
     {
       "farm_id": 151,
