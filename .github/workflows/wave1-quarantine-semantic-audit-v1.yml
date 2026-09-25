@@ -1,0 +1,91 @@
+name: CEREBRON Wave1 Quarantine Semantic Audit
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave1-quarantine-audit-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile builder and independent audit
+        run: |
+          python -m py_compile tools/wave1_quarantine_candidate_builder.py
+          python -m py_compile tools/wave1_quarantine_semantic_audit.py
+      - name: Regenerate frozen quarantine candidates
+        run: |
+          python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Verify expected manifest SHA
+        env:
+          EXPECTED_MANIFEST_SHA: ${{ vars.WAVE1_QUARANTINE_MANIFEST_SHA }}
+        run: |
+          python - <<'PY'
+          import json,os,pathlib
+          d=json.loads(pathlib.Path("artifacts/wave1-quarantine-candidates-v1.json").read_text())
+          expected=os.environ.get("EXPECTED_MANIFEST_SHA","").strip()
+          if expected:
+              assert d["manifest_sha256"]==expected,(d["manifest_sha256"],expected)
+          print("MANIFEST_SHA",d["manifest_sha256"])
+          PY
+      - name: Run independent semantic counter-audit
+        run: |
+          python tools/wave1_quarantine_semantic_audit.py             --input artifacts/wave1-quarantine-candidates-v1.json             --output artifacts/wave1-quarantine-semantic-audit-v1.json
+      - name: Build public audit pointer
+        run: |
+          mkdir -p receipts/wave1
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          d=json.loads(pathlib.Path("artifacts/wave1-quarantine-semantic-audit-v1.json").read_text())
+          assert d["record_count"]==432
+          assert d["semantic_pass_count"]==432
+          assert d["semantic_fail_count"]==0
+          assert d["unresolved_count"]==0
+          assert d["tamper_detected_count"]==d["tamper_case_count"]
+          assert d["decision"]=="AUDIT_COUNTER_AUDIT_PASS_F72_AFAH_PENDING"
+          receipt={
+            "schema":"CEREBRON_WAVE1_QUARANTINE_AUDIT_POINTER_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_manifest_sha256":d["source_manifest_sha256"],
+            "semantic_pass_count":d["semantic_pass_count"],
+            "semantic_fail_count":d["semantic_fail_count"],
+            "unresolved_count":d["unresolved_count"],
+            "tamper_case_count":d["tamper_case_count"],
+            "tamper_detected_count":d["tamper_detected_count"],
+            "training_released":False,
+            "state":"AUDIT_COUNTER_AUDIT_PASS_F72_AFAH_PENDING",
+            "independent_model_evidence":False,
+            "report_sha256":d["report_sha256"],
+            "claim_ceiling":"SYNTHETIC_CONTRACT_DATA_AUDITED_NOT_YET_GOLD_NOT_TRAINING_RELEASED"
+          }
+          raw=json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          p=pathlib.Path("receipts/wave1")/f"wave1-quarantine-audit-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave1-quarantine-semantic-audit-${{ github.run_id }}
+          path: |
+            artifacts/wave1-quarantine-candidates-v1.json
+            artifacts/wave1-quarantine-semantic-audit-v1.json
+            receipts/wave1/wave1-quarantine-audit-${{ github.run_id }}.json
+          if-no-files-found: error
+      - name: Persist audit pointer only
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/wave1-quarantine-audit-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: wave1 quarantine semantic audit ${{ github.run_id }}"
+          git pull --rebase origin feat/wave1-parallel-ai-baselines-v1
+          git push
