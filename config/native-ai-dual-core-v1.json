@@ -433,12 +433,12 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "D2_AUDIT_QUEUED_M6_AUDIT_PENDING",
-      "dual_core_state": "D2_RUNTIME_PAIR_EXECUTED_AUDIT_PENDING",
+      "project_state": "D2_PASS_M6_PENDING_AUDIT",
+      "dual_core_state": "D2_EXACT_RUNTIME_PASS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "AUDIT_QUEUED",
+        "D2": "PASS",
         "D3": "PENDING",
         "D4": "PENDING",
         "D5": "PENDING",
@@ -448,7 +448,8 @@
       },
       "memory_canary_run_id": 35960696909,
       "evidence": {
-        "d2_run_id": 36139940897
+        "d2_run_id": 36139940897,
+        "d2_audit_sha256": "b715f26efe94bb50d46ecd1340a315cc01a9c769ee1c181115f62d4b45d077c9"
       }
     },
     {
