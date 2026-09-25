@@ -1,0 +1,416 @@
+{
+  "schema": "CEREBRON_RDX_SEMANTIC_RETRIEVAL_REPAIR_DEV_V2",
+  "run_id": 36161040992,
+  "classification": "DEV_POLICY_TUNING_NOT_COLD",
+  "source_v1_run_id": 36156985796,
+  "source_v1_receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30",
+  "embedding_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "corpus_size": 12,
+  "query_count": 10,
+  "candidate_policies": {
+    "SEMANTIC_ONLY": {
+      "policy": "SEMANTIC_ONLY",
+      "top1_correct": 8,
+      "top1_accuracy": 0.8,
+      "mrr": 0.9,
+      "results": [
+        {
+          "query_id": "Q1",
+          "expected": "orbital_assembly",
+          "top1": "orbital_assembly",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q2",
+          "expected": "m6_isolation",
+          "top1": "rollback",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q3",
+          "expected": "provenance",
+          "top1": "evidence_gate",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q4",
+          "expected": "dedup",
+          "top1": "dedup",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q5",
+          "expected": "memory_governor",
+          "top1": "memory_governor",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q6",
+          "expected": "semantic_retrieval",
+          "top1": "semantic_retrieval",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q7",
+          "expected": "simulation_replay",
+          "top1": "simulation_replay",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q8",
+          "expected": "gold",
+          "top1": "gold",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q9",
+          "expected": "rollback",
+          "top1": "rollback",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q10",
+          "expected": "tenant_privacy",
+          "top1": "tenant_privacy",
+          "rank": 1,
+          "ok": true
+        }
+      ]
+    },
+    "HYBRID_LEX_25": {
+      "policy": "HYBRID_LEX_25",
+      "top1_correct": 8,
+      "top1_accuracy": 0.8,
+      "mrr": 0.9,
+      "results": [
+        {
+          "query_id": "Q1",
+          "expected": "orbital_assembly",
+          "top1": "orbital_assembly",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q2",
+          "expected": "m6_isolation",
+          "top1": "rollback",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q3",
+          "expected": "provenance",
+          "top1": "evidence_gate",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q4",
+          "expected": "dedup",
+          "top1": "dedup",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q5",
+          "expected": "memory_governor",
+          "top1": "memory_governor",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q6",
+          "expected": "semantic_retrieval",
+          "top1": "semantic_retrieval",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q7",
+          "expected": "simulation_replay",
+          "top1": "simulation_replay",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q8",
+          "expected": "gold",
+          "top1": "gold",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q9",
+          "expected": "rollback",
+          "top1": "rollback",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q10",
+          "expected": "tenant_privacy",
+          "top1": "tenant_privacy",
+          "rank": 1,
+          "ok": true
+        }
+      ]
+    },
+    "HYBRID_LEX_50": {
+      "policy": "HYBRID_LEX_50",
+      "top1_correct": 9,
+      "top1_accuracy": 0.9,
+      "mrr": 0.95,
+      "results": [
+        {
+          "query_id": "Q1",
+          "expected": "orbital_assembly",
+          "top1": "orbital_assembly",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q2",
+          "expected": "m6_isolation",
+          "top1": "rollback",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q3",
+          "expected": "provenance",
+          "top1": "provenance",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q4",
+          "expected": "dedup",
+          "top1": "dedup",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q5",
+          "expected": "memory_governor",
+          "top1": "memory_governor",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q6",
+          "expected": "semantic_retrieval",
+          "top1": "semantic_retrieval",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q7",
+          "expected": "simulation_replay",
+          "top1": "simulation_replay",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q8",
+          "expected": "gold",
+          "top1": "gold",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q9",
+          "expected": "rollback",
+          "top1": "rollback",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q10",
+          "expected": "tenant_privacy",
+          "top1": "tenant_privacy",
+          "rank": 1,
+          "ok": true
+        }
+      ]
+    },
+    "HYBRID_LEX_75": {
+      "policy": "HYBRID_LEX_75",
+      "top1_correct": 8,
+      "top1_accuracy": 0.8,
+      "mrr": 0.9,
+      "results": [
+        {
+          "query_id": "Q1",
+          "expected": "orbital_assembly",
+          "top1": "orbital_assembly",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q2",
+          "expected": "m6_isolation",
+          "top1": "rollback",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q3",
+          "expected": "provenance",
+          "top1": "provenance",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q4",
+          "expected": "dedup",
+          "top1": "provenance",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q5",
+          "expected": "memory_governor",
+          "top1": "memory_governor",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q6",
+          "expected": "semantic_retrieval",
+          "top1": "semantic_retrieval",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q7",
+          "expected": "simulation_replay",
+          "top1": "simulation_replay",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q8",
+          "expected": "gold",
+          "top1": "gold",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q9",
+          "expected": "rollback",
+          "top1": "rollback",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q10",
+          "expected": "tenant_privacy",
+          "top1": "tenant_privacy",
+          "rank": 1,
+          "ok": true
+        }
+      ]
+    },
+    "RRF_SEM_LEX": {
+      "policy": "RRF_SEM_LEX",
+      "top1_correct": 9,
+      "top1_accuracy": 0.9,
+      "mrr": 0.95,
+      "results": [
+        {
+          "query_id": "Q1",
+          "expected": "orbital_assembly",
+          "top1": "orbital_assembly",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q2",
+          "expected": "m6_isolation",
+          "top1": "rollback",
+          "rank": 2,
+          "ok": false
+        },
+        {
+          "query_id": "Q3",
+          "expected": "provenance",
+          "top1": "provenance",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q4",
+          "expected": "dedup",
+          "top1": "dedup",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q5",
+          "expected": "memory_governor",
+          "top1": "memory_governor",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q6",
+          "expected": "semantic_retrieval",
+          "top1": "semantic_retrieval",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q7",
+          "expected": "simulation_replay",
+          "top1": "simulation_replay",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q8",
+          "expected": "gold",
+          "top1": "gold",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q9",
+          "expected": "rollback",
+          "top1": "rollback",
+          "rank": 1,
+          "ok": true
+        },
+        {
+          "query_id": "Q10",
+          "expected": "tenant_privacy",
+          "top1": "tenant_privacy",
+          "rank": 1,
+          "ok": true
+        }
+      ]
+    }
+  },
+  "baseline_policy": "SEMANTIC_ONLY",
+  "baseline_top1_accuracy": 0.8,
+  "baseline_mrr": 0.9,
+  "selected_policy": "RRF_SEM_LEX",
+  "selected_top1_accuracy": 0.9,
+  "selected_mrr": 0.95,
+  "gain_over_semantic_only": 0.09999999999999998,
+  "decision": "DEV_POLICY_PASS_FREEZE_FOR_FRESH_HOLDOUT_V2",
+  "fresh_holdout_consumed": false,
+  "training": "NOT_EXECUTED",
+  "weights_changed": false,
+  "claim_ceiling": "DEV_RETRIEVAL_POLICY_TUNING_ONLY; NO_PRODUCTION_RAG_CLAIM",
+  "source_record_sha256": "91d3bac5ba9eb5a17f5925dcfbfbdb4276a864c78271eb45e62cfdb1c65136e2"
+}
