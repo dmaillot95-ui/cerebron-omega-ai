@@ -241,6 +241,30 @@
       "TRANSFER_RISK": "LOW_AFTER_COMPILE_AND_CANARY_PASS",
       "PARENT_SHA": "77e3d0bd3acb308d44ae5fdddf94f761cd2c1335",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-PATCH-NEWLINE-002",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "CANARY_5",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "QWEN3_V5_SYNTAX_ERROR_LITERAL_NEWLINE_IN_KWARGS_BLOCK",
+      "ROOT_CAUSE": "A second escaped newline remained in the generated Python chat-template kwargs block.",
+      "EVIDENCE_REFS": [
+        "run:36081903987",
+        "jobs:107905485061,107905485237,107905485284,107905485287,107905485295"
+      ],
+      "IMPACT": "5/5 jobs failed at Python parse before model loading; zero AI outputs were produced.",
+      "SCOPE": "Council worker source generation only.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "rebuild entire chat-template block with literal source lines",
+        "add py_compile preflight before pip install",
+        "serialize five-job canary to max-parallel=1"
+      ],
+      "REPAIR_STATUS": "CORRECTED_PREFLIGHT_REQUIRED",
+      "TRANSFER_RISK": "LOW_AFTER_PY_COMPILE_PASS",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
