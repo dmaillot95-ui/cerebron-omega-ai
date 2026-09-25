@@ -1,0 +1,356 @@
+{
+  "schema": "CEREBRON_CORRECTIVE_CURRICULUM_G1_V1",
+  "date": "2026-09-25",
+  "status": "CURRICULUM_DEFINED_NOT_TRAINING_RELEASED",
+  "source_head": "b2f9acd3672e36d6e04ec1aeb9985067de5dc815",
+  "objective": "Convert measured failures and held-out regressions into a recursive, role-specific corrective curriculum for all 38 available AI identities.",
+  "evidence_sources": [
+    "memory/failure-bank-v1.json",
+    "memory/contradiction-bank-v1.json",
+    "memory/lesson-bank-v1.json",
+    "memory/gvl-lesson-index.json",
+    "config/all-ai-neural-training-coverage-v1.json",
+    "config/gvl-specialization-registry-v2.json",
+    "config/neural-training-fabric-v1.json",
+    "training/CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1.json",
+    "feat/cerebron-ai-platform-mvp/config/native-ai-dual-core-v1.json"
+  ],
+  "operational_boundary": {
+    "f172_f173_f174_site_runtime_mutation": false,
+    "learning_for_psi_aelys_elyra": true,
+    "nu_available": false
+  },
+  "collective_lessons": [
+    {
+      "id": "CL-G1-ROLE-FIDELITY",
+      "source_failure": "FAIL-C80-M42-SPECIALIZATION-COLLAPSE-001",
+      "target": "ALL_38",
+      "defect": "Shared model/prompt caused 35/38 GVL-heavy answers, 38/38 dual-core YES, mean role-alignment proxy 0.2456 and one lineage fingerprint.",
+      "correction": [
+        "ROLE_SPECIFIC_PROBLEM_STATEMENTS",
+        "ROLE_SPECIFIC_NEGATIVE_EXAMPLES",
+        "DUAL_CORE_NA_OUTSIDE_NAMED_DUAL_CORE_TASKS",
+        "DEPENDENCY_FINGERPRINT_VISIBLE_TO_AUDIT_NOT_TO_COLD_ANSWER"
+      ],
+      "metric": "ROLE_ALIGNMENT + DIVERSITY_WITHOUT_FALSE_INDEPENDENCE",
+      "release": "HOLD_UNTIL_COLD_ROLE_FIDELITY_SUITE_FROZEN"
+    },
+    {
+      "id": "CL-G1-TRANSFER-FIRST",
+      "source_failure": "WAVE1_WAVE2_ROLLBACKS",
+      "target": [
+        "SAPHEA",
+        "SPIRALION",
+        "ETHERION",
+        "HYPERION",
+        "ASTRION",
+        "METRION",
+        "AELYS",
+        "SAPHEA_MICRO"
+      ],
+      "defect": "Validation gains frequently failed to survive COLD/TRANSFER/RED.",
+      "correction": [
+        "TRAIN_ON_NEW_GOLD_RED_ONLY",
+        "STRATIFY_BY_FAILURE_BOUNDARY",
+        "SEPARATE_SURFACE_FORM_FROM_UNDERLYING_SKILL",
+        "FROZEN_TRANSFER_NEVER_IN_TRAIN"
+      ],
+      "metric": "MIN(COLD_GAIN,TRANSFER_GAIN,REDTEAM_GAIN)",
+      "release": "NO_SAME_DATA_RERUN"
+    },
+    {
+      "id": "CL-G1-FUSION-ROUTER",
+      "source_branch": "feat/cerebron-ai-platform-mvp",
+      "source_contract": "config/native-ai-dual-core-v1.json",
+      "target": [
+        "ELYSION",
+        "ELYSIUM",
+        "ALPHA",
+        "OMEGA",
+        "NEXUS"
+      ],
+      "defect": "Two valid cores can be complementary while naive/dev fusion fails to beat the best single core.",
+      "measured": {
+        "ELYSION": {
+          "best_single": 17,
+          "fusion": 9,
+          "gain": -8,
+          "repair_gain": -1
+        },
+        "ELYSIUM": {
+          "oracle_gain": 5,
+          "fresh_fusion_gain": -2,
+          "repair_gain": 0
+        },
+        "ALPHA": {
+          "dev_fusion_gain": 0
+        },
+        "OMEGA": {
+          "dev_fusion_gain": 0
+        },
+        "NEXUS": {
+          "dev_fusion_gain": 0
+        }
+      },
+      "correction": [
+        "TRAIN_OR_TUNE_ROUTER_NOT_CORE_BY_DEFAULT",
+        "SELECTIVE_ABSTENTION",
+        "DISAGREEMENT_FEATURES",
+        "DOMAIN_CONDITIONAL_ROUTING",
+        "CONFIDENCE_CALIBRATION",
+        "BEST_SINGLE_FALLBACK"
+      ],
+      "metric": "FUSION_GAIN_OVER_BEST_SINGLE",
+      "release": "FRESH_PRIVATE_HOLDOUT_REQUIRED"
+    },
+    {
+      "id": "CL-G1-SINGLE-CORE-RETENTION",
+      "source_branch": "feat/cerebron-ai-platform-mvp",
+      "target": [
+        "SAELION",
+        "DELTA"
+      ],
+      "defect": "No measured dual-core complementarity.",
+      "correction": [
+        "RETAIN_BEST_SINGLE",
+        "DO_NOT_TRAIN_FUSION_WITHOUT_COMPLEMENTARITY_SIGNAL",
+        "SEARCH_NEW_DATA_OR_DISTINCT_METHOD_BEFORE_REOPENING_D4"
+      ],
+      "metric": "ORACLE_GAIN_OVER_BEST_SINGLE",
+      "release": "STOP_DUAL_CORE_UNTIL_NEW_EVIDENCE"
+    }
+  ],
+  "ai_corrective_axes": {
+    "SAPHEA": [
+      "BALANCED_EPISTEMIC_BOUNDARIES",
+      "NEURAL_LEARNING_VERIFIED",
+      "FARM_EXECUTED",
+      "NO_NEURAL_LEARNING",
+      "REDTEAM_CALIBRATION"
+    ],
+    "SPIRALION": [
+      "TRANSFERABLE_CHECKPOINT_REASONING",
+      "MEMORY_CONTINUITY_WITHOUT_PROMPT_OVERFIT",
+      "NOVEL_SURFACE_TRANSFER"
+    ],
+    "ETHERION": [
+      "SCIENCE_REASONING_TRANSFER",
+      "FORMAL_CONSISTENCY",
+      "REDTEAM_SURVIVAL",
+      "AVOID_IN_FAMILY_OVERFIT"
+    ],
+    "HYPERION": [
+      "USEFUL_DIVERGENCE",
+      "NON_REDUNDANT_ALTERNATIVES",
+      "TRANSFER_GAIN",
+      "HYPOTHESIS_CALIBRATION"
+    ],
+    "ASTRION": [
+      "COLD_ROBUSTNESS",
+      "AEROSPACE_TRANSFER",
+      "CRITICAL_REGRESSION_AVOIDANCE"
+    ],
+    "METRION": [
+      "ADVERSARIAL_ENGINEERING",
+      "TRANSFER",
+      "UNIT_AND_CONSTRAINT_EDGE_CASES",
+      "REDTEAM_SURVIVAL"
+    ],
+    "AFAH": [
+      "AUDIT_TRANSFER",
+      "CALIBRATED_HOLD_REJECT",
+      "DEPENDENCY_AWARE_FUSION"
+    ],
+    "AELYS": [
+      "DIALOGUE_TRANSFER",
+      "FORMAT_VARIATION",
+      "INTENT_PRESERVATION",
+      "OUT_OF_DISTRIBUTION_DIALOGUE"
+    ],
+    "ELYRA": [
+      "POLICY_TRANSFER_IN_SYNTHETIC_SIMULATION",
+      "ROBUSTNESS",
+      "NO_PHYSICAL_CLAIM_LEAKAGE"
+    ],
+    "SAPHEA_MICRO": [
+      "SMALL_MODEL_TRANSFER",
+      "DOMAIN_BOUNDARY",
+      "LOW_CAPACITY_GENERALIZATION"
+    ],
+    "ELYSION": [
+      "ROUTER_FUSION",
+      "ABSTENTION",
+      "BEST_SINGLE_FALLBACK"
+    ],
+    "ELYSIUM": [
+      "ROUTER_FUSION",
+      "ADVERSARIAL_DISAGREEMENT_SELECTION"
+    ],
+    "SAELION": [
+      "SINGLE_CORE_CURRICULUM_SELECTION",
+      "COMPRESSION_WITHOUT_LOSS"
+    ],
+    "NEXUS": [
+      "ROUTER_FUSION",
+      "TOOL_KNOWLEDGE_ROUTE_SELECTION"
+    ],
+    "ALPHA": [
+      "ROUTER_FUSION",
+      "NOVELTY_VS_FEASIBILITY_SELECTION"
+    ],
+    "BETA": [
+      "PROBLEM_CONTRACT",
+      "CONSTRAINT_EXTRACTION",
+      "ASSUMPTION_CONTROL"
+    ],
+    "GAMMA": [
+      "CAUSAL_TOPOLOGY",
+      "MEDIATOR_FEEDBACK_DISTINCTION"
+    ],
+    "DELTA": [
+      "SINGLE_CORE_SCIENCE_MODELING",
+      "MODEL_TEST_DISCRIMINATION"
+    ],
+    "EPSILON": [
+      "SENSITIVITY",
+      "LOCAL_ROBUSTNESS",
+      "BIFURCATION_DETECTION"
+    ],
+    "ZETA": [
+      "EFFICIENCY_WITHOUT_CAPABILITY_LOSS",
+      "MINIMAL_COALITION"
+    ],
+    "ETA": [
+      "TEMPORAL_DYNAMICS",
+      "RECURRENCE",
+      "DELAY_FAILURES"
+    ],
+    "THETA": [
+      "REPRESENTATION_TRANSFER",
+      "SYMBOLIC_GRAPHICAL_ALGORITHMIC_EQUIVALENCE"
+    ],
+    "IOTA": [
+      "ATOMIC_FAILURE_LOCALIZATION",
+      "ASSUMPTION_DECOMPOSITION"
+    ],
+    "KAPPA": [
+      "CONSTRAINT_FEASIBILITY",
+      "BUILDABILITY"
+    ],
+    "LAMBDA": [
+      "REPRESENTATION_COMPRESSION",
+      "INTERFACE_TRANSFORM"
+    ],
+    "MU": [
+      "UNCERTAINTY",
+      "STATISTICAL_CALIBRATION",
+      "METROLOGY"
+    ],
+    "XI": [
+      "TRANSFER_GENERALIZATION",
+      "DOMAIN_SHIFT"
+    ],
+    "OMICRON": [
+      "RARE_EVENTS",
+      "TAIL_FAILURES",
+      "COUNTEREXAMPLES"
+    ],
+    "PI": [
+      "SEARCH_INFORMATION_GAIN",
+      "NON_REDUNDANT_EXPLORATION"
+    ],
+    "RHO": [
+      "DEPENDENCY_CORRELATION",
+      "FALSE_CONSENSUS_DETECTION"
+    ],
+    "SIGMA": [
+      "FORMAL_STATISTICS",
+      "AGGREGATION_WITH_UNCERTAINTY"
+    ],
+    "TAU": [
+      "INFORMATION_GAIN_PER_COST",
+      "COALITION_ROUTING"
+    ],
+    "UPSILON": [
+      "PARETO_TRADEOFFS",
+      "MULTI_OBJECTIVE_NON_COLLAPSE"
+    ],
+    "PHI": [
+      "INVARIANTS",
+      "SCALING",
+      "SYMMETRY_TRANSFER"
+    ],
+    "CHI": [
+      "INTERFACE_FAILURES",
+      "HANDSHAKE_CONTRACTS"
+    ],
+    "PSI": [
+      "HIDDEN_VARIABLES",
+      "LATENT_CONFOUNDERS",
+      "UNCERTAINTY_COUNTEREXAMPLES"
+    ],
+    "OMEGA": [
+      "ROUTER_FUSION",
+      "FALSIFICATION",
+      "PROOF_STATUS",
+      "ABSTENTION"
+    ],
+    "CEREBRON": [
+      "ROUTING_POLICY",
+      "COALITION_MINIMALITY",
+      "EXECUTION_ACCOUNTING_BOUNDARY"
+    ]
+  },
+  "dataset_rules": {
+    "source_classes": [
+      "L5_VALIDATED",
+      "L6_PROMOTED",
+      "RED_VALIDATED",
+      "AUDITED_FAILURE_WITH_REPRODUCIBLE_SIGNATURE"
+    ],
+    "deny_sources": [
+      "M6",
+      "COLD",
+      "TRANSFER",
+      "ADVERSARIAL_ANSWERS",
+      "UNVERIFIED_AGORA_RAW",
+      "SITE_RUNTIME_TELEMETRY_WITHOUT_CURATOR_APPROVAL"
+    ],
+    "min_new_records_per_trainable_target": 32,
+    "max_records_per_generation": 256,
+    "dedup_by": [
+      "CONTENT_HASH",
+      "SOURCE_LINEAGE",
+      "FAILURE_SIGNATURE",
+      "SEMANTIC_DUPLICATE"
+    ],
+    "balance": [
+      "POSITIVE",
+      "NEGATIVE",
+      "ABSTAIN_OR_UNKNOWN",
+      "COUNTEREXAMPLE"
+    ],
+    "target_surface_variation": true,
+    "benchmark_surface_separation": true
+  },
+  "generation_protocol": [
+    "G1_CURRICULUM",
+    "G1_CANDIDATE_LESSONS",
+    "AUDIT",
+    "COUNTER_AUDIT",
+    "REPRODUCTION",
+    "GOLD_RED_ADMISSION",
+    "ROLE_VECTOR_ROUTING",
+    "DATASET_SEAL",
+    "BASELINE",
+    "TRAIN_MAX_4_IN_PARALLEL",
+    "COLD",
+    "TRANSFER",
+    "REDTEAM",
+    "ABLATION",
+    "PROMOTE_OR_ROLLBACK",
+    "FAILURE_TO_G2_CURRICULUM"
+  ],
+  "promotion_rule": "NO_PROMOTION_UNLESS_COLD_GAIN>0 AND TRANSFER_GAIN>0 AND REDTEAM_NOT_WORSE AND ABLATION_SUPPORTS_CAUSAL_VALUE AND NO_CRITICAL_REGRESSION",
+  "geometric_claim": "NOT_ESTABLISHED"
+}
