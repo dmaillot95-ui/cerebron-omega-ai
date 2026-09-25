@@ -1,0 +1,60 @@
+{
+  "schema": "CEREBRON_M43_SAPHEA_CLOSED_V1",
+  "date": "2026-09-25",
+  "status": "CLOSED_NO_G7_PROMOTION",
+  "baseline": {
+    "score": 18,
+    "max": 60,
+    "m6_sha256": "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63"
+  },
+  "v1": {
+    "run": 36100266729,
+    "weights_changed": true,
+    "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "m6_score": 30,
+    "gain": 12,
+    "hf_private_readback": true,
+    "state": "G6_REAL_LORA_RESEARCH_ONLY"
+  },
+  "transfer": {
+    "run": 36101503838,
+    "benchmark_sha256": "b88fda14d86d09d0e634ba014c0f6ead89258b88aca770bb3f390a6e7e6858f3",
+    "base_score": 10,
+    "adapter_score": 30,
+    "gain": 20,
+    "redteam_base": 4,
+    "redteam_adapter": 4,
+    "critical_regression": true,
+    "failing_class": "NEURAL_LEARNING_VERIFIED",
+    "state": "G7_BLOCKED"
+  },
+  "v3": {
+    "run": 36102432058,
+    "weights_changed": true,
+    "m6_score": 25,
+    "gain": 7,
+    "validation_before": 5,
+    "validation_after": 12,
+    "validation_critical_regression": true,
+    "state": "ROLLBACK_RETAIN_EVIDENCE"
+  },
+  "v4": {
+    "run": 36103623948,
+    "weights_changed": true,
+    "adapter_sha256": "2b92db33f70f4d58874e1d0243e1d3cb7e38fb1225932ad5963486cbf9b2d48a",
+    "validation_gate_pass": true,
+    "m6_score": 18,
+    "gain": 0,
+    "hf_private_readback": true,
+    "state": "ROLLBACK_RETAIN_EVIDENCE"
+  },
+  "decision": "STOP_SAME_GOLD_LORA_HPARAMETER_FAMILY",
+  "next_training_requirement": "MATERIALLY_NEW_AUDITED_TRAINING_DATA_PLUS_FRESH_COLD_BENCHMARK",
+  "claims": [
+    "REAL_NEURAL_LORA_TRAINING_DEMONSTRATED",
+    "NO_G7_PROMOTION",
+    "NO_DEFAULT_RUNTIME_REPLACEMENT",
+    "FAILED_CANDIDATES_RETAINED_AS_EVIDENCE"
+  ],
+  "next_mission": "M44_ELYSION_DUAL_MODEL_ABLATION"
+}
