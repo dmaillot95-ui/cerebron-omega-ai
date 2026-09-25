@@ -1,0 +1,11 @@
+ELYSIUM WAVE3A M6 D3
+farm_id=146
+ai_id=ELYSIUM
+source_d2_repo=dmaillot95-ui/cerebron-farm-146-elysium
+source_d2_run=36129514044
+source_d2_audit_sha256=58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e
+source_f146_failure_run=36129831934
+source_f146_failure_class=F_SECURITY_HF_TOKEN_MISSING
+m6_training=DENY
+runtime_activation=NONE
+workflow_head_before_trigger=c196268b9f557c6c1ccbdcc6e2f2e670f1aad0b1
