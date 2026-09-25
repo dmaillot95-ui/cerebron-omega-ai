@@ -1,0 +1,87 @@
+{
+  "schema": "CEREBRON_112_RDX_REPRODUCIBLE_CLEAN_SOURCE_RELEASE_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_CLEAN_SOURCE_REPRODUCIBLE_RELEASE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "72c0d137d75ffedc2fcdd50c8bf1f7c0cb0a205f",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "1227e9cf557a2d28c587149f695f2101810698c8",
+    "full_validation": {
+      "run_id": 36178075583,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36178075592,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "source_integrity": {
+    "gate": "scripts/validate-source-checkout.mjs",
+    "status": "PASS",
+    "mode": "GIT_CLEAN",
+    "source_commit": "1227e9cf557a2d28c587149f695f2101810698c8",
+    "rejects_tracked_uncommitted_changes": true,
+    "platform_commit_must_match_git_head_when_both_exist": true
+  },
+  "reproducibility": {
+    "gate": "scripts/validate-reproducible-build.mjs",
+    "status": "PASS",
+    "method": "TWO_CONSECUTIVE_SHARED_STATIC_RELEASE_BUILDS_SAME_SOURCE",
+    "source_commit": "1227e9cf557a2d28c587149f695f2101810698c8",
+    "file_count": 16,
+    "aggregate_sha256": "16b631a81e3589090dddfcd070087ea03e395cd9f690bb174998c141a8d5a1d7",
+    "same_file_count": true,
+    "same_source_commit": true,
+    "same_aggregate_sha256": true
+  },
+  "static_release_quality": {
+    "provenance_schema": "RDX_BUILD_PROVENANCE_V1",
+    "manifest_schema": "RDX_RELEASE_MANIFEST_V1",
+    "browser_js_gate": "PASS",
+    "static_security_gate": "PASS",
+    "static_link_gate": "PASS",
+    "internal_links_checked": 28,
+    "fragment_anchors_checked": 16,
+    "html_files": 7,
+    "shared_builder": "scripts/build-static-release.mjs"
+  },
+  "deployment_proof": {
+    "schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "verifies_endpoint_semantics": true,
+    "verifies_all_served_file_sha256": true,
+    "verifies_all_served_file_lengths": true,
+    "reconstructs_aggregate_sha256": true,
+    "verifies_source_commit_provenance": true,
+    "production_deployment_verified": false
+  },
+  "product_claim_ceiling": {
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_publication": false,
+    "automatic_ai_execution": false,
+    "production_deployment_verified": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "next_exact": [
+    "Keep build source checkout clean and reproducibility gate mandatory.",
+    "Owner enables GitHub Pages Source=GitHub Actions once.",
+    "Manual dispatch Pages deploy=true.",
+    "Require deploy PASS and RDX_PRODUCTION_DEPLOYMENT_PROOF_V2 PASS.",
+    "Only then set production_deployment_verified=true.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
