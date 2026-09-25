@@ -321,20 +321,28 @@
           "retention_without_contamination"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
+      "dual_core_state": "D3_PRIVATE_BASELINES_READY",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "PENDING",
-        "D3": "PENDING",
-        "D4": "PENDING",
+        "D2": "PASS",
+        "D3": "READY_PRIVATE_M6_V2",
+        "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
         "D7": "PENDING",
         "D8": "PENDING"
       },
-      "memory_canary_run_id": 35960696909
+      "memory_canary_run_id": 35960696909,
+      "evidence": {
+        "d2_run_id": 36138362585,
+        "d2_audit_sha256": "52463129e1a4a0e4149175d37841be7d07c833e598647c0ce96bcae077cdf521",
+        "m6_v2_run_id": 36138516577,
+        "m6_v2_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+        "m6_v2_receipt_sha256": "31bd7ae5b8a63604aec7c94efb704e549bb08dc00e21ddc0541f3f40262529ed",
+        "m6_v2_exact_prompts_public": false
+      }
     },
     {
       "farm_id": 148,
@@ -503,20 +511,28 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_ACTIVE",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_PASS_M6_V2_SEALED_D3_READY",
+      "dual_core_state": "D3_PRIVATE_BASELINES_READY",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
-        "D2": "PENDING",
-        "D3": "PENDING",
-        "D4": "PENDING",
+        "D2": "PASS",
+        "D3": "READY_PRIVATE_M6_V2",
+        "D4": "BLOCKED_PENDING_D3",
         "D5": "PENDING",
         "D6": "PENDING",
         "D7": "PENDING",
         "D8": "PENDING"
       },
-      "memory_canary_run_id": 35960696909
+      "memory_canary_run_id": 35960696909,
+      "evidence": {
+        "d2_run_id": 36138369400,
+        "d2_audit_sha256": "d76c65abf109ec4d629dd63790ae66e15eb83866be1be4699b3e3af3c0d2a4fc",
+        "m6_v2_run_id": 36138516577,
+        "m6_v2_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
+        "m6_v2_receipt_sha256": "53e7041ed96f4e44d4bc5b4df6e168ef38a79d29923eb6a30f36777622ee9023",
+        "m6_v2_exact_prompts_public": false
+      }
     }
   ],
   "claim_ceiling": "ARCHITECTURE_CONTRACT_ONLY_EXCEPT_EXPLICIT_SCOPED_RUNTIME_AND_SINGLE_CORE_BASELINE_EVIDENCE_FOR_F145"
