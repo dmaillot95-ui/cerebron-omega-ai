@@ -1,0 +1,17 @@
+{
+  "schema": "CEREBRON_FIELDWISE_FORMAT_V3_LAUNCH",
+  "date": "2026-09-25",
+  "authorized": true,
+  "reason": "V1 and V2 monolithic format contracts produced no validated gain; diagnostic shows semantic content present but label drift and truncation prevent complete structured records.",
+  "source_v1_run_id": 36173645350,
+  "source_v2_run_id": 36177878435,
+  "source_v2_audit_artifact_id": 10883178873,
+  "source_v2_audit_digest": "sha256:89fb8574f506150146ff0e208fa367521d0f12208c55a3b956f0467afe9a5669",
+  "qwen_holdout_baseline_complete": 1,
+  "smollm_holdout_baseline_complete": 0,
+  "protocol": "SIX_FIELD_SPECIFIC_GENERATIONS_DETERMINISTIC_ASSEMBLY",
+  "weight_change": false,
+  "training_released": false,
+  "operational_mutation_f172_f173_f174": false,
+  "launch_head": "658c642ec6845a7e6fb6a39076f8b323a89891d6"
+}
