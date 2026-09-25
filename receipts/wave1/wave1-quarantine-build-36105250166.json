@@ -1,0 +1,20 @@
+{
+  "schema": "CEREBRON_WAVE1_QUARANTINE_BUILD_RECEIPT_V1",
+  "run_id": 36105250166,
+  "generator": "tools/wave1_quarantine_candidate_builder.py",
+  "seed": 26092501,
+  "record_count": 432,
+  "role_counts": {
+    "AELYS": 96,
+    "ETHERION": 144,
+    "AFAH": 96,
+    "METRION": 96
+  },
+  "manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+  "exact_benchmark_prompt_overlap_count": 0,
+  "training_released": false,
+  "state": "QUARANTINE",
+  "next_gate": "AUDIT_COUNTER_AUDIT_F72_AFAH",
+  "claim_ceiling": "STRUCTURALLY_VALID_QUARANTINE_CANDIDATES_NOT_GOLD_NOT_TRAINING_DATA",
+  "receipt_sha256": "966d149eeda2c5f15ca93f6b9601eada0b874ca9567773fc3549b2f7036c11f8"
+}
