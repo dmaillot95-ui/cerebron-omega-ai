@@ -1,5 +1,5 @@
 {
-  "version": "2.21",
+  "version": "2.22",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1131,9 +1131,28 @@
       "name": "NEXUS",
       "type": "AI_FARM",
       "role": "knowledge-connection-ai-tool-orchestration"
+    },
+    {
+      "id": 152,
+      "code": "F152",
+      "name": "CEREBRON RDX EXCHANGE",
+      "repo": "cerebron-rdx-exchange",
+      "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
+      "status": "REGISTERED_PENDING_REPOSITORY_VERIFICATION",
+      "type": "RDX_PRODUCT_FARM",
+      "role": "continuous-rd-production-storage-verification-marketplace-evidence-api",
+      "rules": [
+        "REALITY>COHERENCE",
+        "EVIDENCE>CONFIDENCE",
+        "CLAIM_LE_EVIDENCE",
+        "ATOMIC_RD_OBJECTS_PRIMARY",
+        "REPORTS_ARE_GENERATED_VIEWS_NOT_PRIMARY_MEMORY",
+        "NO_FAKE_CLIENTS_OR_SALES",
+        "NO_RUNTIME_ACTIVATION_BEFORE_REPOSITORY_VERIFICATION"
+      ]
     }
   ],
-  "max_farms": 146,
+  "max_farms": 152,
   "policy": {
     "farm_cap": 146,
     "no_farm_above_144": false,
@@ -1268,5 +1287,5 @@
       ]
     }
   },
-  "farm_ceiling": 146
+  "farm_ceiling": 152
 }
