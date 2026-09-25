@@ -1,0 +1,141 @@
+{
+  "schema": "CEREBRON_109_SELF_EVOLUTION_G1_L5_ACTIVE_V1",
+  "date": "2026-09-25",
+  "state": "SELF_EVOLUTION_G1_ACTIVE_FIRST_L5_VALIDATED_NO_WEIGHT_RELEASE",
+  "head_before_checkpoint": "3841b9dbe1f877a1fbe5b1a2601108a69df19806",
+  "scope": {
+    "available_ai_learning_population": 38,
+    "unavailable": [
+      "NU"
+    ],
+    "f172_f173_f174_learning_allowed": true,
+    "f172_f173_f174_operational_mutation": false
+  },
+  "self_evolution_core": {
+    "config": "config/cerebron-self-evolution-v1.json",
+    "engine": "evolution/cerebron_self_evolution.py",
+    "guard_run_id": 36173457101,
+    "guard_status": "SUCCESS",
+    "artifact_id": 10880498295,
+    "artifact_digest": "sha256:729006285d9349326d13ecff725c78c63979b67ac3415f73e8bba491259df11f"
+  },
+  "failure_curriculum": {
+    "failure_count": 21,
+    "failure_classes": [
+      "F_EVIDENCE_SCOPE",
+      "F_FORMAT",
+      "F_RED",
+      "F_ROLE",
+      "F_TOOL",
+      "F_TRANSFER"
+    ],
+    "routed_failure_classes": 6,
+    "routing_guard_run_id": 36175199245,
+    "routing_guard_status": "SUCCESS",
+    "task_count": 162,
+    "artifact_id": 10881796753,
+    "artifact_digest": "sha256:f9e6c23366347ccc64f7df205538fdcda57ebeadaee5461d53fbfbce9b6f9136"
+  },
+  "agora_scope_repair": {
+    "source_failure_id": "FAIL-AGORA-CONTENT-SCOPE-PROMOTION-001",
+    "before_run_id": 36174153740,
+    "before_problem": "GATE_INVARIANT_PROOF_COULD_UNLOCK_IMPORTED_CONTENT_WHILE_REPRODUCTION_REALITY_ABLATION_FAILED",
+    "corrective_commit": "d25b39ad47a7563a6ee6cbe8ce04f7b62d9327f2",
+    "corrected_run_id": 36174630729,
+    "corrected_status": "SUCCESS",
+    "corrected_state": {
+      "schema": "CEREBRON_AGORA_COLLECTIVE_V3",
+      "gate_invariant_ok": true,
+      "content_validation_bound": false,
+      "imported_gate_summary_pass": false,
+      "scientific_ok": false,
+      "promotion": "BLOCKED_CONTENT_VALIDATION_UNBOUND",
+      "memory_write": "BLOCKED_CONTENT_VALIDATION_UNBOUND"
+    },
+    "corrected_artifact_id": 10881995706,
+    "corrected_artifact_digest": "sha256:15bc76c141b6b905a913cf2c486736c456e0daebd258b5b9e82d49064559b4ac"
+  },
+  "first_validated_recursive_lesson": {
+    "lesson_id": "LESSON-AGORA-EVIDENCE-SCOPE-001",
+    "class": "L5_VALIDATED",
+    "validation_run_id": 36175649888,
+    "validation_status": "SUCCESS",
+    "validation_methods": 3,
+    "truth_table_cases": 8,
+    "truth_table_accepting_cases": 1,
+    "adversarial_attacks": 5,
+    "adversarial_false_accepts": 0,
+    "independent_model_lineages": 0,
+    "validation_sha256": "e5fc59051d8762559187d84608b657b382913e41f918deeec0bcaebb4b9fe3b4",
+    "artifact_id": 10882591087,
+    "artifact_digest": "sha256:e6b8f8d71975c0600a9cad6b8490dda423fe15831c683450156ee3ed04bbf95d",
+    "scope": "CONTROL_PLANE_EPISTEMIC_BOUNDARY_ONLY"
+  },
+  "corpus": {
+    "guard_run_id": 36176002698,
+    "status": "SUCCESS",
+    "canonical_record_count": 30,
+    "failure_bank": 21,
+    "lesson_bank": 4,
+    "contradiction_bank": 3,
+    "gvl_lesson_index": 2,
+    "split_counts": {
+      "train": 16,
+      "validation": 6,
+      "holdout": 8
+    },
+    "admission_training_eligible_count": 1,
+    "effective_training_eligible_count": 0,
+    "holdout_reserved_eligible_count": 1,
+    "decontamination_match_count": 0,
+    "blocked_train_record_count": 0,
+    "weight_training_released": false,
+    "artifact_id": 10882042975,
+    "artifact_digest": "sha256:bc0f0265b12143f7b3e553d7c3b60e68e14702f0a10358f63a49fe00b641fe1b"
+  },
+  "active_model_experiments": {
+    "format_contract_evolution": {
+      "run_id": 36173645350,
+      "head_sha": "6e45cbb27e992580aec600150f8a4ece7f10d630",
+      "status": "IN_PROGRESS",
+      "candidates": [
+        "PLAIN6",
+        "JSON6",
+        "TAG6"
+      ],
+      "models": [
+        "Qwen/Qwen3-4B",
+        "HuggingFaceTB/SmolLM3-3B"
+      ],
+      "protocol": "VALIDATION_SELECTION_THEN_FROZEN_HOLDOUT",
+      "weight_change": false
+    },
+    "failure_focused_dual_lineage_generation": {
+      "run_id": 36175344153,
+      "head_sha": "131dc88975f8bfa3fdf4d13b4ecb75399e3aca7e",
+      "status": "IN_PROGRESS",
+      "interpretation": "G1B candidate generation using failure-bound task pack; not independent proof and not training data.",
+      "model_lineages": 2,
+      "weight_change": false
+    }
+  },
+  "anti_redundancy": {
+    "pilot_auto_trigger_repaired": true,
+    "corrective_pilot_trigger_now": "WORKER_CHANGE_OR_MANUAL_DISPATCH_ONLY",
+    "queued_pre_repair_run_reclassified": "G1B_FAILURE_FOCUSED_CANDIDATE_GENERATION_NOT_INDEPENDENT_EVIDENCE"
+  },
+  "claims": {
+    "neural_improvement_this_wave": false,
+    "geometric_growth": "NOT_ESTABLISHED",
+    "weight_training_released": false,
+    "first_recursive_learning_memory_object": true
+  },
+  "resume": [
+    "FETCH_CURRENT_HEAD",
+    "VERIFY_RUN_36173645350",
+    "IF_COMPLETED_INSPECT_FORMAT_EVOLUTION_ARTIFACT_AND_HOLDOUT_GAIN",
+    "VERIFY_RUN_36175344153",
+    "TREAT_G1B_AS_CANDIDATE_GENERATION_NOT_INDEPENDENT_EVIDENCE",
+    "DO_NOT_RELEASE_WEIGHT_TRAINING_UNTIL_EFFECTIVE_TRAINING_ELIGIBLE_DATA_AND_COLD_TRANSFER_RED_ABLATION_GATES_ARE_READY"
+  ]
+}
