@@ -26,12 +26,20 @@ assert bus["providers"]["AELYS"]["runtime_status"]=="BASE_INSTALLED_ADAPTERS_UNQ
 
 assert by_id[174]["identity"]=="ELYRA"
 assert by_id[174]["repository_initialized"] is True
-assert by_id[174]["simulation_status"]=="NOT_EXECUTED"
+assert by_id[174]["simulation_status"]=="VISUAL_STATE_SEQUENCE_CANARY_EXECUTED"
+assert by_id[174]["visual_simulation_executed"] is True
+assert by_id[174]["video_render_executed"] is False
+assert by_id[174]["physical_validation_claimed"] is False
 assert by_id[174]["physical_test_status"]=="NOT_TESTED"
+assert by_id[174]["visual_canary"]["run_id"]==36160498658
 assert 174 in bus["providers"]["ELYRA"]["farm_refs"]
 assert bus["routes"]["visual.simulate"]=="ELYRA"
 assert "visual.simulate" in bus["providers"]["ELYRA"]["capabilities"]
 assert bus["providers"]["ELYRA"]["runtime_status"]=="UNQUALIFIED"
+assert bus["providers"]["ELYRA"]["visual_canary"]["status"]=="PASS"
+assert bus["providers"]["ELYRA"]["visual_canary"]["run_id"]==36160498658
+assert bus["providers"]["ELYRA"]["visual_canary"]["video_render_executed"] is False
+assert bus["providers"]["ELYRA"]["visual_canary"]["physical_validation_claimed"] is False
 
 for capability, provider in bus["routes"].items():
     assert provider in bus["providers"], (capability,provider)
@@ -48,7 +56,7 @@ print(json.dumps({
   "rdx_runtime":"UNBOUND",
   "f152_identity":"BETA",
   "f173_runtime":"BASE_INSTALLED_ADAPTERS_UNQUALIFIED",
-  "f174_runtime":"UNQUALIFIED_NOT_EXECUTED",
+  "f174_runtime":"UNQUALIFIED_VISUAL_CANARY_EXECUTED_NO_VIDEO_RENDER_NO_PHYSICAL_VALIDATION",
   "automatic_external_calls":False,
   "automatic_training":False
 },sort_keys=True))
