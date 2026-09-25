@@ -1,0 +1,71 @@
+{
+  "schema": "CEREBRON_113_RDX_RELEASE_ATTESTATION_VERIFIED_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_RELEASE_ATTESTATION_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "f744f274c68704de6e846f0c7f9efda7677efcbd",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "2f4e5a07fac4a742e9e94ceadb8c889cef6f73d0",
+    "full_validation": {
+      "run_id": 36179133933,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36179133657,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "source_integrity": {
+    "source_checkout_gate": "PASS",
+    "source_commit": "2f4e5a07fac4a742e9e94ceadb8c889cef6f73d0",
+    "provenance_schema": "RDX_BUILD_PROVENANCE_V1"
+  },
+  "release_manifest": {
+    "schema": "RDX_RELEASE_MANIFEST_V1",
+    "file_count": 16,
+    "aggregate_sha256": "f77807e09b06ae014f448ec2af9445d053bc451ecf9084aee05476b3ec32767c",
+    "gate": "PASS"
+  },
+  "release_attestation": {
+    "schema": "RDX_RELEASE_ATTESTATION_V1",
+    "attestation_type": "SELF_ATTESTED_BUILD_FACTS_NOT_EXTERNAL_SIGNATURE",
+    "attestation_sha256": "19af30a2e30e719e4d1bfcbf38c57a90ce60d2b4467116b2b6904ec7b91c1f0a",
+    "artifact_name": "rdx-release-attestation",
+    "validator": "scripts/validate-release-attestation.mjs",
+    "gate": "PASS",
+    "observed_same_on_full_validation_and_pages_build": true
+  },
+  "reproducibility": {
+    "gate": "PASS",
+    "same_source_commit": true,
+    "same_file_count": true,
+    "same_aggregate_sha256": true
+  },
+  "product_claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_publication": false,
+    "automatic_ai_execution": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Add fail-closed production verification promotion gate.",
+    "Require committed/ingested live proof before production_deployment_verified can become true.",
+    "Owner still must enable GitHub Pages Source=GitHub Actions once.",
+    "Do not modify F172-F174."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
