@@ -6,7 +6,7 @@
   "branch": "feat/saphea-first-lora-v1",
   "branch_head_at_trigger": "bfd670b3d21ea337fdcb2bf091348cb38b09e9d9",
   "run_id": 36100266729,
-  "state": "G6_PLUS_TRANSFER_ABLATION_PASS_HOLD_AUDIT",
+  "state": "G6_TRANSFER_COUNTERAUDIT_F72_PASS_AFAH_PENDING",
   "base_model": {
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
     "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
@@ -54,17 +54,13 @@
     "NO_AUTO_PROMOTION"
   ],
   "promotion_requires_later": [
-    "INDEPENDENT_AUDIT",
-    "RED_TEAM",
-    "F72_REVIEW",
     "AFAH_FINAL_AUTHORITY"
   ],
   "exact_resume": [
-    "Do not retrain SAPHEA G1.",
-    "Run independent-codepath reproduction on frozen transfer/adversarial data.",
-    "Run red-team near-miss evidence cases with deny-training.",
-    "Only after audit and red-team PASS route to F72 and AFAH.",
-    "No general capability claim; scope remains epistemic-status classification."
+    "Run AFAH final scoped promotion review using the frozen evidence chain.",
+    "AFAH may promote only scoped SAPHEA epistemic adapter; no general SAPHEA claim.",
+    "F72 status is SUPPORTED E2, not VERIFIED or external reproduction.",
+    "If AFAH promotes, register HF private adapter pointer and rollback target; do not overwrite base weights."
   ],
   "previous_attempt": {
     "run_id": 36099976977,
@@ -109,5 +105,20 @@
     "ablation_supports_value": true,
     "prompt_overlap_with_gold_m6": 0,
     "id_overlap_with_gold_m6": 0
+  },
+  "counter_audit": {
+    "run_id": 36101824432,
+    "reproduction": "PASS_9_TO_12_OF_36",
+    "redteam": "PASS_22_TO_29_OF_72",
+    "independence": "INTERNAL_CODEPATH_NOT_EXTERNAL"
+  },
+  "f72": {
+    "run_id": 36102560865,
+    "job_id": 107968007044,
+    "artifact_id": 10849871768,
+    "status": "SUPPORTED",
+    "evidence_level": "E2",
+    "review_pass": true,
+    "result_sha256": "14ade8931dd4b8ee8c4b232baf5edd8066cf38d4ac41dc4ddb14184b42f8cee3"
   }
 }
