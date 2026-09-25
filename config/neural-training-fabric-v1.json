@@ -91,6 +91,48 @@
         "DIRECT_WEIGHT_MERGE_ONLY_IF_ARCHITECTURE_AND_LINEAGE_COMPATIBLE",
         "WEIGHTS_CHANGED_REQUIRED"
       ]
+    },
+    "ELYSION": {
+      "target": "generation reasoning invention solution search",
+      "training": "verified solution-generation GOLD SFT/LoRA; preserve alternatives and failure evidence",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "ELYSIUM": {
+      "target": "verification red-team optimization validation",
+      "training": "verified verdict critique counterexample GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "SAELION": {
+      "target": "lesson selection compression transfer negative-transfer control",
+      "training": "curriculum selection and compression GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "ALPHA": {
+      "target": "divergence novel representation constructive exploration",
+      "training": "diversity and constructive-search GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "OMEGA": {
+      "target": "proof audit counterexample falsification",
+      "training": "proof-gap counterexample and formal-audit GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "DELTA": {
+      "target": "scientific modeling simulation validation",
+      "training": "modeling sensitivity simulation-design GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
+    },
+    "NEXUS": {
+      "target": "knowledge linking dependency graph tool routing provenance",
+      "training": "knowledge-graph routing and provenance GOLD SFT/LoRA",
+      "rdx_gold_route": true,
+      "status": "GATED_BY_ROLE_BASELINE_AND_TRAINING_READINESS"
     }
   },
   "promotion_requirements": {
