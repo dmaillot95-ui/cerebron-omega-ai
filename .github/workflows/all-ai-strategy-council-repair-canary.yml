@@ -11,7 +11,7 @@ jobs:
   canary:
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 1
       matrix:
         ai: [CEREBRON, AELYS, ETHERION, METRION, F166-RHO]
     runs-on: ubuntu-latest
@@ -20,6 +20,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      - name: Preflight Python syntax
+        run: python -m py_compile tools/all_ai_strategy_council_worker.py
       - name: Cache Qwen3-4B council model
         uses: actions/cache@v4
         with:
