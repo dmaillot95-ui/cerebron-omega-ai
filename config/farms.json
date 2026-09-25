@@ -1292,7 +1292,7 @@
       "domain": "nu-native-ai",
       "identity": "NU",
       "greek_letter": "Ν",
-      "status": "REGISTERED_REPOSITORY_MISSING",
+      "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING",
       "type": "AI_FARM",
       "role": "Construct the simplest null, baseline or no-effect explanation and test whether additional complexity is actually justified.",
       "training_status": "NOT_TRAINED",
@@ -1300,7 +1300,9 @@
       "role_id": "NULL_MODEL_CHALLENGER",
       "role_boundary": "Not formal proof/falsification closure; OMEGA does.",
       "campaign_passes": 10,
-      "infrastructure_status": "BLOCKED_MISSING_REPOSITORY"
+      "infrastructure_status": "LOCAL_SCAFFOLD_PRESENT_REPOSITORY_MISSING",
+      "local_scaffold": "scaffolds/f162-nu",
+      "repository_exists": false
     },
     {
       "id": 163,
@@ -1462,16 +1464,47 @@
       "role_boundary": "Does not certify discovered hypotheses; they return to verification.",
       "campaign_passes": 10,
       "infrastructure_status": "VALIDATED"
+    },
+    {
+      "id": 173,
+      "repo": "cerebron-farm-173-aelys-live",
+      "domain": "aelys-live-runtime",
+      "identity": "AELYS",
+      "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+      "type": "INTERFACE_RUNTIME_FARM",
+      "role": "Prepare a verifiable low-latency live interaction runtime contract for AELYS without claiming deployment.",
+      "training_status": "NOT_TRAINED",
+      "production_status": "NOT_DEPLOYED",
+      "repository_exists": true,
+      "repository_initialized": false,
+      "local_scaffold": "scaffolds/f173-aelys-live",
+      "infrastructure_status": "LOCAL_SCAFFOLD_PREPARED_TARGET_REPOSITORY_EMPTY"
+    },
+    {
+      "id": 174,
+      "repo": "cerebron-farm-174-elyra-visual-simulation",
+      "domain": "elyra-visual-simulation",
+      "identity": "ELYRA",
+      "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+      "type": "VISUAL_SIMULATION_FARM",
+      "role": "Prepare replayable visual and video simulation contracts for ELYRA without claiming executed simulation or physical validation.",
+      "training_status": "NOT_TRAINED",
+      "simulation_status": "NOT_EXECUTED",
+      "physical_test_status": "NOT_TESTED",
+      "repository_exists": true,
+      "repository_initialized": false,
+      "local_scaffold": "scaffolds/f174-elyra-visual-simulation",
+      "infrastructure_status": "LOCAL_SCAFFOLD_PREPARED_TARGET_REPOSITORY_EMPTY"
     }
   ],
-  "max_farms": 172,
+  "max_farms": 174,
   "policy": {
-    "farm_cap": 172,
+    "farm_cap": 174,
     "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
     "tools_are_not_farms": true,
-    "no_farm_above_172": true,
+    "no_farm_above_172": false,
     "greek_ai_constellation_registered": true,
     "greek_ai_roles_defined": true,
     "greek_ai_count": 24,
@@ -1486,7 +1519,16 @@
       162
     ],
     "greek_total_infrastructure_present": 23,
-    "greek_total_target": 24
+    "greek_total_target": 24,
+    "no_farm_above_174": true,
+    "extension_farm_ids": [
+      173,
+      174
+    ],
+    "extension_repository_empty_ids": [
+      173,
+      174
+    ]
   },
   "shared_engines": {
     "NVIDIA": {
