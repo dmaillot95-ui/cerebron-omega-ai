@@ -1,0 +1,312 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_ROLE_BASELINE_V1",
+  "date": "2026-09-25",
+  "status": "READY_TO_EXECUTE",
+  "branch": "feat/wave1-parallel-ai-baselines-v1",
+  "base_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "runtime": "CPU_FLOAT32",
+    "purpose": "cheap common G0 baseline before any dedicated adapter"
+  },
+  "rules": [
+    "BASELINE_IS_NOT_TRAINING",
+    "BENCHMARK_RECORDS_DENY_TRAINING",
+    "EACH_ROLE_HAS_SEPARATE_RECEIPT",
+    "SHARED_BASE_MODEL_MEANS_CORRELATED_LINEAGE",
+    "NO_AUTO_PROMOTION",
+    "TRAIN_ONLY_AFTER_NONEMPTY_VALIDATED_GOLD"
+  ],
+  "roles": {
+    "AELYS": {
+      "specialization": "dialogue coordination human interaction",
+      "labels": [
+        "ANSWER",
+        "CLARIFY",
+        "SUMMARIZE",
+        "LIMIT"
+      ],
+      "training_readiness": "BLOCKED_NO_VALIDATED_GOLD",
+      "tasks": [
+        [
+          "A01",
+          "ANSWER",
+          "The user asks a complete factual question with all necessary context: What is 2+2?"
+        ],
+        [
+          "A02",
+          "CLARIFY",
+          "The user says: schedule the meeting Friday, but gives no time or timezone."
+        ],
+        [
+          "A03",
+          "SUMMARIZE",
+          "The user provides six notes and explicitly asks for a concise summary."
+        ],
+        [
+          "A04",
+          "LIMIT",
+          "The user asks you to state that a GitHub workflow succeeded, but there is no run or log evidence."
+        ],
+        [
+          "A05",
+          "ANSWER",
+          "The user asks for the meaning of a clearly defined technical term and no personal context is needed."
+        ],
+        [
+          "A06",
+          "CLARIFY",
+          "The user asks to compare two files but only one file is available."
+        ],
+        [
+          "A07",
+          "SUMMARIZE",
+          "The user asks for the key decisions from a supplied meeting transcript."
+        ],
+        [
+          "A08",
+          "LIMIT",
+          "The user asks you to claim a physical test happened when only a simulation receipt exists."
+        ],
+        [
+          "A09",
+          "ANSWER",
+          "The user asks to rewrite a fully supplied sentence into simpler French."
+        ],
+        [
+          "A10",
+          "CLARIFY",
+          "The user says continue the plan, but no plan or prior checkpoint is available in the current evidence."
+        ],
+        [
+          "A11",
+          "SUMMARIZE",
+          "The user asks to compress a provided technical report into three points."
+        ],
+        [
+          "A12",
+          "LIMIT",
+          "The user asks for a benchmark result that has not been executed."
+        ]
+      ]
+    },
+    "ETHERION": {
+      "specialization": "difficult science math R&D and discriminating experiments",
+      "labels": [
+        "DEFINE",
+        "SOURCE",
+        "MODEL",
+        "CALCULATE",
+        "RED_TEAM",
+        "DESIGN_TEST"
+      ],
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "tasks": [
+        [
+          "E01",
+          "DEFINE",
+          "A research problem is vague and mixes three different hypotheses. What should happen first?"
+        ],
+        [
+          "E02",
+          "SOURCE",
+          "A claim depends on an external material property value not present in the evidence packet."
+        ],
+        [
+          "E03",
+          "MODEL",
+          "The variables and measurements are known, but the causal relationship has not been formalized."
+        ],
+        [
+          "E04",
+          "CALCULATE",
+          "A validated equation and all numerical inputs are present; the next step is obtaining the numeric result."
+        ],
+        [
+          "E05",
+          "RED_TEAM",
+          "A proposed mechanism fits one dataset but an alternative explanation has not been challenged."
+        ],
+        [
+          "E06",
+          "DESIGN_TEST",
+          "Two hypotheses make different measurable predictions and need an experiment that separates them."
+        ],
+        [
+          "E07",
+          "DEFINE",
+          "The objective function and success criterion are missing from an engineering research request."
+        ],
+        [
+          "E08",
+          "SOURCE",
+          "A literature-dependent constant is quoted without provenance and must be verified."
+        ],
+        [
+          "E09",
+          "MODEL",
+          "Observed residuals suggest the current representation omits a latent variable."
+        ],
+        [
+          "E10",
+          "CALCULATE",
+          "Unit-consistent parameters are available for a closed-form orbital reference calculation."
+        ],
+        [
+          "E11",
+          "RED_TEAM",
+          "A universal conclusion is inferred from a finite simulation sweep."
+        ],
+        [
+          "E12",
+          "DESIGN_TEST",
+          "A new algorithm appears faster in one case; a controlled benchmark is needed to distinguish real gain."
+        ]
+      ]
+    },
+    "AFAH": {
+      "specialization": "evidence fusion dependency preservation contradiction audit",
+      "labels": [
+        "ACCEPT",
+        "HOLD",
+        "REJECT",
+        "CORRELATED"
+      ],
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "tasks": [
+        [
+          "F01",
+          "ACCEPT",
+          "A claim has a pinned run, job, artifact SHA, reproducible log and an independent confirming method."
+        ],
+        [
+          "F02",
+          "HOLD",
+          "The evidence is internally consistent but one required external dependency has not been verified."
+        ],
+        [
+          "F03",
+          "REJECT",
+          "The claim says weights changed, but no weight artifact or parameter delta exists."
+        ],
+        [
+          "F04",
+          "CORRELATED",
+          "Five outputs agree but all use the same model revision, prompt and source data."
+        ],
+        [
+          "F05",
+          "ACCEPT",
+          "A scoped benchmark gain is reproduced on a frozen held-out set with no critical regression."
+        ],
+        [
+          "F06",
+          "HOLD",
+          "A simulation result is useful but is being considered for a physical-world claim."
+        ],
+        [
+          "F07",
+          "REJECT",
+          "A receipt hash does not match the artifact it claims to identify."
+        ],
+        [
+          "F08",
+          "CORRELATED",
+          "Two agents use different role names but share the same underlying model and benchmark lineage."
+        ],
+        [
+          "F09",
+          "ACCEPT",
+          "A reversible adapter has verified SHA readback and positive cold plus transfer gain within its scoped task."
+        ],
+        [
+          "F10",
+          "HOLD",
+          "A transfer gain is positive but a critical class regresses substantially."
+        ],
+        [
+          "F11",
+          "REJECT",
+          "A workflow succeeded but the scientific output violates a required invariant."
+        ],
+        [
+          "F12",
+          "CORRELATED",
+          "Three runs are exact replays from one deterministic source and are presented as independent evidence."
+        ]
+      ]
+    },
+    "METRION": {
+      "specialization": "engineering metrology simulation validation constraint feasibility",
+      "labels": [
+        "PASS",
+        "FAIL_UNITS",
+        "FAIL_TOLERANCE",
+        "SIMULATION_ONLY"
+      ],
+      "training_readiness": "BLOCKED_NO_VALIDATED_ENGINEERING_GOLD",
+      "tasks": [
+        [
+          "M01",
+          "PASS",
+          "Length is 2.00 m ±0.01 m, requirement is 1.95 to 2.05 m, and calibration is valid."
+        ],
+        [
+          "M02",
+          "FAIL_UNITS",
+          "A force requirement is in newtons but the reported result is 42 kilograms with no conversion."
+        ],
+        [
+          "M03",
+          "FAIL_TOLERANCE",
+          "Measured diameter is 10.8 mm ±0.1 mm while allowed range is 9.9 to 10.1 mm."
+        ],
+        [
+          "M04",
+          "SIMULATION_ONLY",
+          "Finite-element stress is below limit, but there is no hardware measurement or physical test."
+        ],
+        [
+          "M05",
+          "PASS",
+          "Voltage measurement is 5.01 V ±0.02 V against a 4.95 to 5.05 V specification."
+        ],
+        [
+          "M06",
+          "FAIL_UNITS",
+          "Energy is compared directly to a power limit without a time interval."
+        ],
+        [
+          "M07",
+          "FAIL_TOLERANCE",
+          "Predicted latency is 105 ms ±8 ms against a hard maximum of 100 ms."
+        ],
+        [
+          "M08",
+          "SIMULATION_ONLY",
+          "A synthetic rover completes the route in software, with no physical rover trial."
+        ],
+        [
+          "M09",
+          "PASS",
+          "Mass is 4.98 kg ±0.01 kg and the acceptance interval is 4.95 to 5.05 kg."
+        ],
+        [
+          "M10",
+          "FAIL_UNITS",
+          "A pressure value in pascals is compared numerically to a force threshold in newtons."
+        ],
+        [
+          "M11",
+          "FAIL_TOLERANCE",
+          "Temperature is 81.0 °C ±0.5 °C and the verified maximum is 80.0 °C."
+        ],
+        [
+          "M12",
+          "SIMULATION_ONLY",
+          "An orbital transfer is computed with a two-body model but not flight-tested."
+        ]
+      ]
+    }
+  }
+}
