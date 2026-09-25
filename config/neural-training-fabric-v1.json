@@ -88,7 +88,7 @@
     "AFAH": {
       "target": "epistemic final audit",
       "training": "audit/critique preference or SFT; never substitute for evidence",
-      "status": "REAL_LORA_G6_CANDIDATE_F72_SUPPORTED_FINAL_POLICY_PENDING",
+      "status": "REAL_LORA_G6_VERIFIED_RESEARCH_ONLY",
       "run_id": 36109026167,
       "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
       "gains": {
@@ -101,7 +101,13 @@
       "hf_private_readback_sha_pass": true,
       "f72_run_id": 36110722530,
       "f72_status": "SUPPORTED_E2",
-      "runtime_activation": "DENY_PENDING_FINAL_POLICY"
+      "runtime_activation": "DENY",
+      "final_policy_run_id": 36111258146,
+      "final_policy_decision": "G6_VERIFIED_RESEARCH_ONLY",
+      "final_policy_review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290",
+      "default_runtime": false,
+      "g7_promoted": false,
+      "research_use_only": true
     },
     "AELYS": {
       "target": "dialogue coordination human interaction",
@@ -266,6 +272,47 @@
         "review_sha256": "4c4bb04b946962bcb977a276e909db3b48f525e4001ff1a99323a3b71f38fa74"
       },
       "superseded_by": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json"
+    },
+    {
+      "role": "AFAH",
+      "type": "PEFT_LORA",
+      "scope": "EVIDENCE_ACCEPT_HOLD_REJECT_CORRELATION_CLASSIFICATION_ONLY",
+      "state": "G6_VERIFIED_RESEARCH_ONLY",
+      "run_id": 36109026167,
+      "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "dataset_release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+      "split_sha256": "7990920f812dbb0b92980af5bb9e56215718b7d620715b8b1fc512f9618740f0",
+      "weights_changed": true,
+      "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+      "adapter_config_sha256": "d9af1dc17455e0539822fa1267c5c8930194ae7e24addb5eeed14f6678fa4966",
+      "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+      "hf_private_object_prefix": "wave1/AFAH/LORA-V1/run-36109026167",
+      "hf_private_readback_sha_pass": true,
+      "gains": {
+        "VALIDATION": 12,
+        "M6": 2,
+        "TRANSFER": 6,
+        "RED": 4
+      },
+      "critical_regression": false,
+      "f72_review": {
+        "run_id": 36110722530,
+        "status": "SUPPORTED",
+        "evidence_level": "E2",
+        "result_sha256": "71dfa080d9d27687a9b40c1f8c55f875ecf2ddfd36ba188f3be62864b79c014f"
+      },
+      "afah_final_policy": {
+        "run_id": 36111258146,
+        "decision": "G6_VERIFIED_RESEARCH_ONLY",
+        "review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290",
+        "candidate_adapter_used_for_review": false
+      },
+      "runtime_activation": false,
+      "default_runtime": false,
+      "g7_promoted": false,
+      "research_use_only": true,
+      "claim_ceiling": "SCOPED_SYNTHETIC_EVIDENCE_CLASSIFICATION_G6_RESEARCH_ONLY"
     }
   ],
   "saphea_first_lora_evidence": {
@@ -337,7 +384,19 @@
     ],
     "independent_evidence_count": 0,
     "shared_base_lineage": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb",
-    "final_policy_run_id": 36111064497,
-    "final_policy_status": "QUEUED"
+    "final_policy_run_id": 36111258146,
+    "final_policy_status": "PASS_G6_RESEARCH_ONLY",
+    "g6_verified_research_roles": [
+      "AFAH"
+    ],
+    "f72_run_id": 36110722530,
+    "f72_result_sha256": "71dfa080d9d27687a9b40c1f8c55f875ecf2ddfd36ba188f3be62864b79c014f",
+    "final_policy_review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290",
+    "redundant_runs": [
+      36109522298,
+      36111064497
+    ],
+    "runtime_activation": false,
+    "g7_promoted": false
   }
 }
