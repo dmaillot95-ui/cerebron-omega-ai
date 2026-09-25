@@ -16,8 +16,8 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 
 ## État des fermes au dernier cycle
 
-- Fermes configurées : 172
-- Derniers workflows en succès : 164
+- Fermes configurées : 174
+- Derniers workflows en succès : 165
 - Derniers workflows en échec : 0
 - Fermes avec au moins un artefact sur leur dernier run : 128
 
@@ -94,7 +94,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=36155015254 status=completed conclusion=success artifacts=1
 - Farm 71 scientific-reproduction: run=36154838667 status=completed conclusion=success artifacts=1
-- Farm 72 reality-evidence-gate: run=36153904654 status=completed conclusion=success artifacts=1
+- Farm 72 reality-evidence-gate: run=36155242338 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
 - Farm 74 session-memory-encyclopedia: run=36154985897 status=completed conclusion=success artifacts=1
 - Farm 75 exploration-discovery: run=35750096709 status=completed conclusion=success artifacts=1
@@ -170,9 +170,9 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 145 elysion-native-intelligence: run=35952402753 status=completed conclusion=success artifacts=0
 - Farm 146 elysium-native-verification: run=36134238713 status=completed conclusion=success artifacts=0
 - Farm 147 saelion-native-learning-exploration: run=36155010944 status=completed conclusion=success artifacts=0
-- Farm 148 alpha-native-divergence-construction: run=36154991008 status=completed conclusion=success artifacts=0
-- Farm 149 omega-native-proof-falsification: run=36154998849 status=completed conclusion=success artifacts=0
-- Farm 150 delta-native-science-modeling: run=36155004253 status=completed conclusion=success artifacts=0
+- Farm 148 alpha-native-divergence-construction: run=36155379996 status=completed conclusion=success artifacts=0
+- Farm 149 omega-native-proof-falsification: run=36155385740 status=completed conclusion=success artifacts=0
+- Farm 150 delta-native-science-modeling: run=36155393435 status=completed conclusion=success artifacts=0
 - Farm 151 nexus-native-knowledge-orchestration: run=36155020619 status=completed conclusion=success artifacts=0
 - Farm 152 beta-native-ai: run=35973086817 status=completed conclusion=success artifacts=0
 - Farm 153 gamma-native-ai: run=35973209131 status=completed conclusion=success artifacts=0
@@ -195,3 +195,5 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 170 phi-native-ai: run=35973791127 status=completed conclusion=success artifacts=0
 - Farm 171 chi-native-ai: run=35973803439 status=completed conclusion=success artifacts=0
 - Farm 172 psi-native-ai: run=35973812171 status=completed conclusion=success artifacts=0
+- Farm 173 aelys-live-runtime: run=36153266774 status=completed conclusion=success artifacts=0
+- Farm 174 elyra-visual-simulation: run=None status=None conclusion=None artifacts=0
