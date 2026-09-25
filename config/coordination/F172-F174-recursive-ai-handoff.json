@@ -1,0 +1,46 @@
+{
+  "schema": "CEREBRON_PARALLEL_AI_OWNERSHIP_V1",
+  "date": "2026-09-25",
+  "mode": "ZERO_INTERFERENCE_PARALLEL_WORK",
+  "delegated_scope": {
+    "owner_label": "EXTERNAL_RECURSIVE_IMPROVEMENT_AI",
+    "farms": [
+      {
+        "farm_id": 172,
+        "repo": "dmaillot95-ui/cerebron-farm-172-psi",
+        "prepared_head": "b64708520004d15cc94dda82be7b66f4b740900b",
+        "handoff": "docs/RECURSIVE_AI_HANDOFF_2026-09-25.md"
+      },
+      {
+        "farm_id": 173,
+        "repo": "dmaillot95-ui/cerebron-farm-173-aelys-live",
+        "prepared_head": "3046335b1e7a67e7db8dc4b87f7d21b956c12083",
+        "handoff": "docs/RECURSIVE_AI_HANDOFF_2026-09-25.md"
+      },
+      {
+        "farm_id": 174,
+        "repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+        "prepared_head": "4b3ed9c3f156445d4203c2265dcdc319a79fe43c",
+        "handoff": "docs/RECURSIVE_AI_HANDOFF_2026-09-25.md"
+      }
+    ]
+  },
+  "local_session_scope": [
+    "RDX_EXCHANGE",
+    "F152_REGISTRY_AND_RDX_BINDINGS",
+    "MEMORY_AND_EVIDENCE_INTEGRATION",
+    "MASTER_REGISTRY_COORDINATION"
+  ],
+  "coordination_rules": [
+    "FETCH_REAL_HEAD_BEFORE_ANY_WRITE",
+    "NO_FORCE_PUSH",
+    "NO_CROSS_SESSION_FILE_OVERWRITE",
+    "PRESERVE_PRIOR_RECEIPTS_AND_HASHES",
+    "RECURSIVE_IMPROVEMENT_MUST_BE_MEASURED",
+    "KEEP_ONLY_IF_BENCHMARK_OR_CANARY_GAIN",
+    "ROLLBACK_ON_REGRESSION",
+    "SHARED_BASE_AGREEMENT_IS_NOT_INDEPENDENT_EVIDENCE",
+    "NO_PAID_PROVIDER_AUTO_ACTIVATION"
+  ],
+  "conflict_policy": "IF_F172_F173_OR_F174_HEAD_MOVES_EXTERNALLY_THIS_SESSION_MUST_TREAT_NEW_HEAD_AS_AUTHORITATIVE_AND_REFRAIN_FROM_PARALLEL_EDITS_UNLESS_EXPLICITLY_REQUESTED"
+}
