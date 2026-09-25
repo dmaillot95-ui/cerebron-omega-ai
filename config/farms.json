@@ -1,5 +1,5 @@
 {
-  "version": "2.24",
+  "version": "2.25",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1091,46 +1091,110 @@
       "id": 147,
       "repo": "cerebron-farm-147-saelion",
       "domain": "saelion-native-learning-exploration",
-      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "status": "D3_PASS_D4_STOP_NO_COMPLEMENTARITY_SINGLE_QWEN_RETAINED",
       "name": "SAELION",
       "type": "AI_FARM",
-      "role": "exploration-learning-selection-compression"
+      "role": "exploration-learning-selection-compression",
+      "evidence": {
+        "d4_precheck_run_id": 36146455180,
+        "d4_receipt_sha256": "d96d32c6def8822df44f450f8c76f89ab7a97b3e8b84278421b7218b3213463b",
+        "d4_oracle_union_correct": 45,
+        "d4_oracle_gain_over_best_single": 0,
+        "d4_decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY"
+      },
+      "claim_ceiling": "SINGLE_CORE_BASELINE_EVIDENCE_ONLY_NO_DUAL_CORE_PROMOTION_NO_NEURAL_TRAINING_CLAIM"
     },
     {
       "id": 148,
       "repo": "cerebron-farm-148-alpha",
       "domain": "alpha-native-divergence-construction",
-      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "status": "D3_PASS_D4_DEV_HOLD_NO_ROBUST_GAIN_SINGLE_QWEN_RETAINED",
       "name": "ALPHA",
       "type": "AI_FARM",
-      "role": "divergence-opening-construction"
+      "role": "divergence-opening-construction",
+      "evidence": {
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "cbe2b7b531d3fe5e8727b7e5c197b5548f63feaef5c37409978ad8ee94bedf92",
+        "d4_oracle_union_correct": 47,
+        "d4_oracle_gain_over_best_single": 3,
+        "d4_fusion_dev_run_id": 36155520110,
+        "d4_fusion_dev_receipt_sha256": "ad92509cc54dc80a3de9cf0b7323ea10d5ff92c635241a16b68984bf1d29978c",
+        "d4_fusion_dev_qwen_correct": 21,
+        "d4_fusion_dev_smol_correct": 10,
+        "d4_fusion_dev_best_single_correct": 21,
+        "d4_fusion_dev_best_policy_correct": 21,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
+      },
+      "claim_ceiling": "SINGLE_CORE_BASELINE_EVIDENCE_ONLY_NO_DUAL_CORE_PROMOTION_NO_NEURAL_TRAINING_CLAIM"
     },
     {
       "id": 149,
       "repo": "cerebron-farm-149-omega",
       "domain": "omega-native-proof-falsification",
-      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "status": "D3_PASS_D4_DEV_HOLD_NO_ROBUST_GAIN_SINGLE_QWEN_RETAINED",
       "name": "OMEGA",
       "type": "AI_FARM",
-      "role": "proof-audit-counteraudit-falsification"
+      "role": "proof-audit-counteraudit-falsification",
+      "evidence": {
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "164c1aabd265701b6beeab97a540beab5ec77b1629bf2833fd4cc92680a1863e",
+        "d4_oracle_union_correct": 66,
+        "d4_oracle_gain_over_best_single": 12,
+        "d4_fusion_dev_run_id": 36155520110,
+        "d4_fusion_dev_receipt_sha256": "0a06849deeb377a4ba3bbb07dd883b3f2abf93a5699d8346bf92b32c632c95e2",
+        "d4_fusion_dev_qwen_correct": 21,
+        "d4_fusion_dev_smol_correct": 13,
+        "d4_fusion_dev_best_single_correct": 21,
+        "d4_fusion_dev_best_policy_correct": 21,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
+      },
+      "claim_ceiling": "SINGLE_CORE_BASELINE_EVIDENCE_ONLY_NO_DUAL_CORE_PROMOTION_NO_NEURAL_TRAINING_CLAIM"
     },
     {
       "id": 150,
       "repo": "cerebron-farm-150-delta",
       "domain": "delta-native-science-modeling",
-      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "status": "D3_PASS_D4_STOP_NO_COMPLEMENTARITY_SINGLE_QWEN_RETAINED",
       "name": "DELTA",
       "type": "AI_FARM",
-      "role": "scientific-modeling-simulation-validation"
+      "role": "scientific-modeling-simulation-validation",
+      "evidence": {
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "83e1ff3fb7f0fc2ad8a16257d5528f5775cf37d8c4ded0c461ff69163a7f3dc3",
+        "d4_oracle_union_correct": 48,
+        "d4_oracle_gain_over_best_single": 0,
+        "d4_decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY"
+      },
+      "claim_ceiling": "SINGLE_CORE_BASELINE_EVIDENCE_ONLY_NO_DUAL_CORE_PROMOTION_NO_NEURAL_TRAINING_CLAIM"
     },
     {
       "id": 151,
       "repo": "cerebron-farm-151-nexus",
       "domain": "nexus-native-knowledge-orchestration",
-      "status": "REPOSITORY_PRESENT_MEMORY_CANARY_PENDING",
+      "status": "D3_PASS_D4_DEV_HOLD_NO_ROBUST_GAIN_SINGLE_QWEN_RETAINED",
       "name": "NEXUS",
       "type": "AI_FARM",
-      "role": "knowledge-connection-ai-tool-orchestration"
+      "role": "knowledge-connection-ai-tool-orchestration",
+      "evidence": {
+        "d4_precheck_run_id": 36146455180,
+        "d4_receipt_sha256": "4bb615dc7ae684b423cf955be5693dd92d7774132d8b09f9f22fb9889b77df99",
+        "d4_oracle_union_correct": 56,
+        "d4_oracle_gain_over_best_single": 4,
+        "d4_fusion_dev_run_id": 36155230931,
+        "d4_fusion_dev_receipt_sha256": "0c87630d9ac9f88c7e87e4bac930e96f122c4af7ca7c38baa220be0077be99e1",
+        "d4_fusion_dev_qwen_correct": 22,
+        "d4_fusion_dev_smol_correct": 16,
+        "d4_fusion_dev_best_single_correct": 22,
+        "d4_fusion_dev_best_policy_correct": 22,
+        "d4_fusion_dev_gain_over_best_single": 0,
+        "d4_fusion_dev_selected_policy": "RECIPROCAL_ELSE_QWEN",
+        "d4_fusion_dev_decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
+      },
+      "claim_ceiling": "SINGLE_CORE_BASELINE_EVIDENCE_ONLY_NO_DUAL_CORE_PROMOTION_NO_NEURAL_TRAINING_CLAIM"
     },
     {
       "id": 152,
