@@ -25,8 +25,29 @@
     "max_new_validated_lessons": 256,
     "max_wait_hours": 24,
     "trigger": "FIRST_OF_THRESHOLD_OR_MAX_WAIT",
-    "single_training_canary_at_a_time": true,
-    "note": "Initial conservative policy; tune only from measured throughput, quota and benchmark evidence."
+    "single_training_canary_at_a_time": false,
+    "note": "Initial conservative policy; tune only from measured throughput, quota and benchmark evidence.",
+    "max_parallel_real_trainings": 4,
+    "parallelism_evidence": {
+      "wave1_run_id": 36109026167,
+      "wave1_real_trainings": 4,
+      "wave1_run_status": "SUCCESS",
+      "wave2_run_id": 36117279297,
+      "wave2_real_trainings": 4,
+      "wave2_run_status": "SUCCESS",
+      "interpretation": "Four-way parallel LoRA execution is technically demonstrated; scientific promotion remains per-role and fail-closed."
+    },
+    "slot_policy": "KEEP_UP_TO_4_TRAINING_SLOTS; REFILL_ONLY_FROM_EXPLICITLY_RELEASED_NONREDUNDANT_BATCHES",
+    "completed_or_rollback_release_reuse": "DENY",
+    "new_training_requires": [
+      "TRAINING_RELEASE_TRUE",
+      "CONTINUOUS_TRAINING_ELIGIBLE_TRUE",
+      "TRAIN_SPLIT_PRESENT",
+      "COLD_TRANSFER_RED_EXCLUDED_FROM_TRAIN",
+      "BASE_MODEL_PINNED",
+      "DATASET_SHA256",
+      "NO_EQUIVALENT_INFLIGHT_OR_COMPLETED_RUN"
+    ]
   },
   "storage": {
     "github": {
@@ -120,6 +141,8 @@
     "NO_OVERWRITE_VERIFIED_HISTORY",
     "NO_COLD_TEST_LEAKAGE",
     "REALITY_GT_COHERENCE",
-    "EVIDENCE_GT_CONFIDENCE"
+    "EVIDENCE_GT_CONFIDENCE",
+    "FOUR_PARALLEL_TRAININGS_IS_RESOURCE_POLICY_NOT_FOUR_INDEPENDENT_PROOFS",
+    "NO_RETRAIN_ON_CLOSED_WAVE_RELEASE_WITHOUT_MATERIALLY_NEW_DATA_OR_METHOD"
   ]
 }
