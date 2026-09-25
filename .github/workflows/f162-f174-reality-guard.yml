@@ -1,0 +1,36 @@
+name: F162 F173 F174 Reality Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/farms.json'
+      - 'scaffolds/f162-nu/**'
+      - 'scaffolds/f173-aelys-live/**'
+      - 'scaffolds/f174-elyra-visual-simulation/**'
+      - 'tools/validate_f162_f173_f174_reality.py'
+      - '.github/workflows/f162-f174-reality-guard.yml'
+  pull_request:
+    paths:
+      - 'config/farms.json'
+      - 'scaffolds/f162-nu/**'
+      - 'scaffolds/f173-aelys-live/**'
+      - 'scaffolds/f174-elyra-visual-simulation/**'
+      - 'tools/validate_f162_f173_f174_reality.py'
+      - '.github/workflows/f162-f174-reality-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate F162/F173/F174 reality state
+        run: python tools/validate_f162_f173_f174_reality.py
