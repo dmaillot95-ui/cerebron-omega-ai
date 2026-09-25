@@ -37,9 +37,12 @@ assert (R/by_id[162]["local_scaffold"]).exists()
 if expected >= 174:
     assert by_id[173]["repository_exists"] is True
     assert by_id[173]["repository_initialized"] is True
-    assert by_id[173]["status"]=="BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED"
-    assert by_id[173]["dedicated_repo_selftest_run_id"]==36156589051
+    assert by_id[173]["status"]=="LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
+    assert by_id[173]["dedicated_repo_selftest_run_id"]==36162643249
     assert by_id[173]["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
+    assert by_id[173]["local_live_loop_canary"]["run_id"]==36162553038
+    assert by_id[173]["local_live_loop_canary"]["external_calls_executed"] is False
+    assert by_id[173]["production_status"]=="NOT_DEPLOYED"
     assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
     assert (R/by_id[173]["local_scaffold"]).exists()
 
