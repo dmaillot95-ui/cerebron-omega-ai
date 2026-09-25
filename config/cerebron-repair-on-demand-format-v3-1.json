@@ -1,0 +1,68 @@
+{
+  "schema": "CEREBRON_REPAIR_ON_DEMAND_FORMAT_V3_1",
+  "date": "2026-09-25",
+  "status": "PREPARED_NOT_EXECUTED",
+  "purpose": "Recover structured corrective records by robustly parsing existing PLAIN6 outputs and generating only missing fields.",
+  "source": {
+    "baseline_run_id": 36177878435,
+    "validation_artifact": {
+      "id": 10882824691,
+      "digest": "sha256:c75ae58dc48caecd349ac8d796904d9ae9651d52b3710f45c4ab2373324f3243"
+    },
+    "qwen_holdout_artifact": {
+      "id": 10883795907,
+      "digest": "sha256:6116354cc17a2f446433202a95db0a1baaaeecbc285929c4734fd7fb64a7d79a"
+    },
+    "smollm_holdout_artifact": {
+      "id": 10883830939,
+      "digest": "sha256:276593dba1ca1a896c269890f3e88d1a2c0efadcb63ba06c7fa1babb0a13dec8"
+    },
+    "v3_timeout_run_id": 36179580251
+  },
+  "fields": [
+    "ATTEMPT",
+    "ASSUMPTIONS",
+    "EVIDENCE_NEEDED",
+    "COUNTEREXAMPLE_OR_LIMIT",
+    "CONFIDENCE",
+    "UNKNOWN"
+  ],
+  "repair": {
+    "baseline_contract": "PLAIN6",
+    "robust_reparse_first": true,
+    "generate_only_missing_fields": true,
+    "max_new_tokens": 24,
+    "deterministic": true,
+    "labels_generated_by_runtime": true,
+    "confidence_values": [
+      "LOW",
+      "MEDIUM",
+      "HIGH"
+    ]
+  },
+  "validation": {
+    "model": "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+    "targets": [
+      "SAPHEA",
+      "AELYS"
+    ],
+    "require_complete_count": 2,
+    "require_strict_gain_over_robust_baseline": true
+  },
+  "holdout": {
+    "targets": [
+      "ETHERION",
+      "PSI"
+    ],
+    "model_lineages": [
+      "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+      "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1"
+    ],
+    "require_complete_count_each_lineage": 2,
+    "require_strict_gain_each_lineage": true
+  },
+  "promotion_ceiling": "INTERFACE_PROTOCOL_ONLY_NO_WEIGHT_IMPROVEMENT",
+  "operational_mutation_f172_f173_f174": false,
+  "weight_change": false,
+  "training_released": false
+}
