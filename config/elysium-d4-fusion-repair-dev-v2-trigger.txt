@@ -1,0 +1,8 @@
+ELYSIUM D4 FUSION REPAIR DEV V2
+source_d4_hold_run=36134498167
+source_d4_receipt_sha256=5d6b98614925dfe10b8dbae373b50ab1eb2c341f36280a525ffa29df0a143ac4
+purpose=DEV_POLICY_TUNING_ONLY
+cold_evidence=false
+neural_training=false
+next_if_pass=FRESH_PRIVATE_HOLDOUT_V2
+next_if_hold=REDESIGN_NO_FRESH_HOLDOUT
