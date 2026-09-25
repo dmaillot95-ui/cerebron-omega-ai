@@ -1,0 +1,133 @@
+name: CEREBRON Corrective AGORA Dual-Lineage Pilot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/corrective_agora_pilot_v1.py'
+      - 'tools/build_corrective_curriculum_g1_tasks.py'
+      - 'training/CEREBRON_CORRECTIVE_CURRICULUM_G1_V1.json'
+      - '.github/workflows/corrective-agora-dual-lineage-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preflight
+        run: |
+          python -m py_compile tools/corrective_agora_pilot_v1.py
+          python -m py_compile tools/build_corrective_curriculum_g1_tasks.py
+          python tools/build_corrective_curriculum_g1_tasks.py
+      - name: Cache model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: corrective-g1-${{ matrix.key }}-${{ matrix.revision }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute eight corrective roles
+        run: |
+          python tools/corrective_agora_pilot_v1.py \
+            --targets "SAPHEA,ETHERION,AELYS,ELYRA,ELYSION,OMEGA,PSI,CEREBRON" \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --output-root "artifacts/corrective-pilot/${{ matrix.key }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: corrective-agora-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/corrective-pilot/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: generate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: corrective-agora-*
+          path: downloaded
+      - name: Audit dual-lineage pilot
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          files=glob.glob("downloaded/**/receipt.json",recursive=True)
+          rows=[json.load(open(p)) for p in files]
+          expected={"SAPHEA","ETHERION","AELYS","ELYRA","ELYSION","OMEGA","PSI","CEREBRON"}
+          by={}
+          for r in rows:
+              by.setdefault(r["target_ai"],[]).append(r)
+          lineages={(r["model_id"],r["model_revision"],r["lineage_fingerprint"]) for r in rows}
+          pairs={}
+          for target in sorted(expected):
+              xs=by.get(target,[])
+              pairs[target]={
+                "receipt_count":len(xs),
+                "models":sorted({x["model_id"] for x in xs}),
+                "parse_pass_count":sum(bool(x.get("parse_ok")) for x in xs),
+                "output_hashes":sorted({x.get("output_sha256") for x in xs if x.get("output_sha256")})
+              }
+          out={
+            "schema":"CEREBRON_CORRECTIVE_AGORA_DUAL_LINEAGE_PILOT_AUDIT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "receipt_count":len(rows),
+            "target_count":len(by),
+            "distinct_model_lineages":len(lineages),
+            "inference_pass_count":sum(r.get("inference")=="PASS" for r in rows),
+            "parse_pass_count":sum(bool(r.get("parse_ok")) for r in rows),
+            "all_training_eligible_false":all(r.get("training_eligible") is False for r in rows),
+            "all_independent_evidence_false":all(r.get("independent_evidence") is False for r in rows),
+            "all_operational_mutation_false":all(r.get("operational_mutation_f172_f173_f174") is False for r in rows),
+            "pairs":pairs,
+            "training_released":False,
+            "claim_ceiling":"TWO_REAL_MODEL_LINEAGES_GENERATED_CANDIDATE_AGORA_LESSONS_NOT_INDEPENDENT_PROOF_NOT_TRAINING"
+          }
+          fail=[]
+          if len(rows)!=16: fail.append("receipt_count")
+          if set(by)!=expected: fail.append("target_set")
+          if any(len(by[t])!=2 for t in expected): fail.append("two_receipts_per_target")
+          if len(lineages)!=2: fail.append("lineage_count")
+          if out["inference_pass_count"]!=16: fail.append("inference_pass")
+          if not out["all_training_eligible_false"]: fail.append("training_boundary")
+          if not out["all_independent_evidence_false"]: fail.append("independence_boundary")
+          if not out["all_operational_mutation_false"]: fail.append("operational_boundary")
+          out["status"]="PASS" if not fail else "FAIL"
+          out["failures"]=fail
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/corrective-agora-dual-lineage-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: corrective-agora-dual-lineage-audit-${{ github.run_id }}
+          path: artifacts/corrective-agora-dual-lineage-audit.json
+          if-no-files-found: error
+          retention-days: 30
