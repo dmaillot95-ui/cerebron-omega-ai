@@ -1,0 +1,125 @@
+{
+  "schema": "CEREBRON_G1_LESSON_ADMISSION_POLICY_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "source_curriculum": "training/CEREBRON_CORRECTIVE_CURRICULUM_G1_V1.json",
+  "source_task_builder": "tools/build_corrective_curriculum_g1_tasks.py",
+  "candidate_generation": {
+    "minimum_model_lineages_for_high_value_pairing": 2,
+    "same_prompt_across_lineages_allowed_for_comparison": true,
+    "model_diversity_is_not_independent_scientific_evidence": true,
+    "raw_output_training_eligible": false
+  },
+  "admission_stages": [
+    {
+      "id": "A0_STRUCTURAL",
+      "requires": [
+        "REAL_EXECUTION",
+        "MODEL_ID",
+        "MODEL_REVISION",
+        "TASK_SHA256",
+        "OUTPUT_SHA256",
+        "PARSE_OK"
+      ],
+      "decision_if_fail": "REJECT_FORMAT_OR_EXECUTION"
+    },
+    {
+      "id": "A1_ROLE_FIDELITY",
+      "requires": [
+        "TARGET_AI_MATCH",
+        "CORRECTIVE_AXIS_MATCH",
+        "SPECIALIZATION_RELEVANT",
+        "NO_PROMPT_ECHO"
+      ],
+      "decision_if_fail": "REJECT_ROLE_DRIFT"
+    },
+    {
+      "id": "A2_EPISTEMIC",
+      "requires": [
+        "ASSUMPTIONS_PRESENT",
+        "EVIDENCE_NEEDED_PRESENT",
+        "LIMIT_OR_COUNTEREXAMPLE_PRESENT",
+        "UNKNOWN_PRESERVED"
+      ],
+      "decision_if_fail": "REJECT_OVERCONFIDENT"
+    },
+    {
+      "id": "A3_CROSS_LINEAGE_COMPARE",
+      "requires": [
+        "PAIR_PRESENT_WHEN_REQUIRED",
+        "DEPENDENCY_FINGERPRINT",
+        "CONFLICT_PRESERVED"
+      ],
+      "decision_if_fail": "HOLD_FOR_SECOND_LINEAGE"
+    },
+    {
+      "id": "A4_AUDIT",
+      "requires": [
+        "AUDITOR_PASS",
+        "COUNTER_AUDITOR_PASS"
+      ],
+      "decision_if_fail": "RED_OR_REJECT"
+    },
+    {
+      "id": "A5_REPRODUCTION",
+      "requires": [
+        "REPRODUCER_PASS_FOR_FACTUAL_OR_CALCULATIONAL_CLAIMS"
+      ],
+      "decision_if_fail": "HOLD_NON_STABILIZED"
+    },
+    {
+      "id": "A6_DEDUP_NOVELTY",
+      "requires": [
+        "CANONICAL_LOOKUP",
+        "FAILURE_BANK_LOOKUP",
+        "LESSON_BANK_LOOKUP",
+        "SEMANTIC_DEDUP"
+      ],
+      "decision_if_fail": "MERGE_REFERENCE_NOT_NEW"
+    },
+    {
+      "id": "A7_DATASET_RELEASE",
+      "requires": [
+        "GOLD_OR_RED_CLASS",
+        "LICENSE_PRIVACY_PASS",
+        "NO_COLD_LEAKAGE",
+        "DATASET_RECORD_HASH",
+        "SOURCE_LINEAGE"
+      ],
+      "decision_if_fail": "NOT_TRAINING_ELIGIBLE"
+    }
+  ],
+  "lesson_classes": {
+    "GOLD": "Correct, audited, counter-audited and reproduced when applicable.",
+    "RED": "Validated failure, counterexample, misleading pattern or rejected method useful for anti-error training.",
+    "SILVER": "Strong candidate awaiting one required gate.",
+    "WORKING": "Unverified AGORA candidate; never train.",
+    "REJECTED": "Failed admission; retain metadata when informative."
+  },
+  "cross_lineage_rule": {
+    "agreement": "Agreement may increase confidence only after common-dependency analysis.",
+    "disagreement": "Preserve both outputs plus comparison object; never silently choose majority.",
+    "identical_output": "Treat as potentially correlated; investigate prompt/base/data commonality.",
+    "distinct_output": "Distinctness is not correctness."
+  },
+  "protected_operational_scope": {
+    "farms": [
+      172,
+      173,
+      174
+    ],
+    "operational_mutation": false,
+    "learning_artifacts_allowed": true
+  },
+  "release_gate": [
+    "TRAINING_ELIGIBLE_COUNT>=32_PER_TARGET_OR_APPROVED_SHARED_SKILL_BATCH",
+    "DEDUP_COMPLETE",
+    "NO_M6_TRANSFER_RED_ANSWER_LEAKAGE",
+    "TARGET_BALANCE_CHECK",
+    "FAILURE_SIGNATURE_COVERAGE",
+    "BASELINE_FROZEN",
+    "ROLLBACK_POINTER_DEFINED"
+  ],
+  "training_claim_rule": "Only a later run that changes weights/adapters and passes COLD+TRANSFER+REDTEAM+ABLATION may be called neural improvement.",
+  "geometric_claim_rule": "No geometric-capability claim from candidate lessons, inference count, memory growth, or training count alone."
+}
