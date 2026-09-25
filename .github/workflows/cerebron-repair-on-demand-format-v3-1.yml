@@ -1,0 +1,180 @@
+name: CEREBRON Repair-On-Demand Format V3.1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/repair-on-demand-format-v3-1-launch.json'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-36177878435
+          path: baseline
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - name: Verify launch and source
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("control/repair-on-demand-format-v3-1-launch.json"))
+          assert x["schema"]=="CEREBRON_REPAIR_ON_DEMAND_FORMAT_V3_1_LAUNCH"
+          assert x["authorized"] is True
+          print("REPAIR_ON_DEMAND_V3_1_PREFLIGHT=PASS")
+          PY
+          python -m py_compile evolution/repair_on_demand_format_v3_1.py
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: format-fast-v2-qwen3-1cfa9a7208912126459214e8b04321603b3df60c
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Repair validation outputs
+        run: |
+          python evolution/repair_on_demand_format_v3_1.py \
+            --baseline-dir baseline \
+            --targets "SAPHEA,AELYS" \
+            --model-id "Qwen/Qwen3-4B" \
+            --revision "1cfa9a7208912126459214e8b04321603b3df60c" \
+            --run-id "${{ github.run_id }}" \
+            --output-root artifacts/repair-v3-1/validation
+      - name: Require complete validation gain
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/repair-v3-1/validation/summary.json"))
+          assert x["candidate_complete_count"]==2
+          assert x["strict_gain"] is True
+          assert x["all_complete"] is True
+          print("REPAIR_V3_1_VALIDATION=PASS",x["baseline_robust_complete_count"],x["candidate_complete_count"],x["repair_prompt_count"],x["latency_s"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repair-v3-1-validation-${{ github.run_id }}
+          path: artifacts/repair-v3-1/validation
+          if-no-files-found: error
+          retention-days: 30
+
+  holdout:
+    needs: validate
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            artifact: format-fast-v2-holdout-qwen3-36177878435
+            cache_key: format-fast-v2-qwen3-1cfa9a7208912126459214e8b04321603b3df60c
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            artifact: format-fast-v2-holdout-smollm3-36177878435
+            cache_key: format-fast-v2-smollm3-a07cc9a04f16550a088caea529712d1d335b0ac1
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: baseline
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: ${{ matrix.cache_key }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Repair frozen holdout outputs
+        run: |
+          python evolution/repair_on_demand_format_v3_1.py \
+            --baseline-dir baseline \
+            --targets "ETHERION,PSI" \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --output-root "artifacts/repair-v3-1/holdout/${{ matrix.key }}"
+      - name: Require strict complete gain
+        run: |
+          python - <<'PY'
+          import glob,json
+          p=glob.glob("artifacts/repair-v3-1/holdout/*/summary.json")
+          assert len(p)==1
+          x=json.load(open(p[0]))
+          assert x["candidate_complete_count"]==2
+          assert x["strict_gain"] is True
+          assert x["all_complete"] is True
+          print("REPAIR_V3_1_HOLDOUT=PASS",x["model_id"],x["baseline_robust_complete_count"],x["candidate_complete_count"],x["repair_prompt_count"],x["latency_s"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repair-v3-1-holdout-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/repair-v3-1/holdout/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: holdout
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: repair-v3-1-validation-${{ github.run_id }}
+          path: validation
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: repair-v3-1-holdout-*
+          path: holdout
+      - name: Cross-lineage adjudication
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          val=json.load(open("validation/summary.json"))
+          hs=[json.load(open(p)) for p in glob.glob("holdout/**/summary.json",recursive=True)]
+          fail=[]
+          if val.get("candidate_complete_count")!=2 or not val.get("strict_gain"): fail.append("validation_gain")
+          if len(hs)!=2: fail.append("holdout_lineage_count")
+          if len({(x["model_id"],x["model_revision"]) for x in hs})!=2: fail.append("lineage_identity")
+          if any(x.get("candidate_complete_count")!=2 or not x.get("strict_gain") for x in hs): fail.append("holdout_gain")
+          out={
+            "schema":"CEREBRON_REPAIR_ON_DEMAND_FORMAT_V3_1_AUDIT",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS" if not fail else "FAIL",
+            "validation":val,
+            "holdouts":hs,
+            "strict_gain_both_lineages":len(hs)==2 and all(x.get("strict_gain") for x in hs),
+            "promotion_decision":"PROMOTE_INTERFACE_PROTOCOL" if not fail else "HOLD",
+            "promotion_ceiling":"INTERFACE_PROTOCOL_ONLY_NO_WEIGHT_IMPROVEMENT",
+            "weight_change":False,
+            "training_released":False,
+            "failures":fail
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/repair-on-demand-v3-1-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repair-on-demand-v3-1-audit-${{ github.run_id }}
+          path: artifacts/repair-on-demand-v3-1-audit.json
+          if-no-files-found: error
+          retention-days: 30
