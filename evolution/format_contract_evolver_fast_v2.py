@@ -149,11 +149,20 @@ def main():
               "latency_s":round(sum(x["latency_s"] for x in xs),3)
             }
         winner=sorted(CONTRACTS,key=lambda c:(-metrics[c]["parse_pass"],metrics[c]["prompt_chars"],metrics[c]["latency_s"],c))[0]
+        baseline_parse=metrics["PLAIN6"]["parse_pass"]
+        winner_parse=metrics[winner]["parse_pass"]
+        selection_gain=winner_parse-baseline_parse
+        selection_eligible=(winner!="PLAIN6" and selection_gain>0)
         summary={
-          "schema":"CEREBRON_FORMAT_EVOLUTION_FAST_SELECT_V1",
+          "schema":"CEREBRON_FORMAT_EVOLUTION_FAST_SELECT_V2",
           "run_id":int(a.run_id),"model_id":a.model_id,"model_revision":a.revision,
           "lineage_fingerprint":lineage,"selection_targets":SELECT_TARGETS,
           "candidate_metrics":metrics,"winner":winner,
+          "baseline_parse_pass":baseline_parse,
+          "winner_parse_pass":winner_parse,
+          "selection_gain":selection_gain,
+          "selection_eligible":selection_eligible,
+          "selection_decision":"ADVANCE_TO_HOLDOUT" if selection_eligible else "HOLD_NO_VALIDATION_GAIN",
           "weight_change":False,"training_released":False
         }
         (root/"winner.json").write_text(json.dumps(summary,indent=2)+"\n")
