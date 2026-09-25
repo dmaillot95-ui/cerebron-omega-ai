@@ -8,7 +8,7 @@
   },
   "f72": {
     "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
-    "commit": "61ef7f29b023f7647c0dd6588d230d4c7c070a17",
+    "commit": "1706e33d4219bfd5c19fffce4a0d1561604c2587",
     "receipt": "receipts/wave1-afah-lora-evidence-review-36110722530.json",
     "run_id": 36110722530,
     "result_sha256": "71dfa080d9d27687a9b40c1f8c55f875ecf2ddfd36ba188f3be62864b79c014f"
@@ -16,7 +16,7 @@
   "expected_role": "AFAH",
   "expected_adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
   "requested_decision": "G6_VERIFIED_RESEARCH_ONLY",
-  "candidate_adapter_used_for_final_review": false,
-  "auto_runtime_activation": false,
-  "auto_g7_promotion": false
+  "candidate_adapter_must_not_review_itself": true,
+  "runtime_activation": false,
+  "g7_promotion": false
 }
