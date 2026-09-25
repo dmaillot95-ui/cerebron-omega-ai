@@ -1,0 +1,86 @@
+{
+  "schema": "CEREBRON_92_WAVE2_CLOSED_V1",
+  "date": "2026-09-25",
+  "branch": "feat/wave2-parallel-ai-baselines-v1",
+  "branch_head_before_checkpoint": "97798f8d630117ce731b1ab226f1ae5a0cfbb83c",
+  "wave2": {
+    "run_id": 36117279297,
+    "run_status": "COMPLETED_SUCCESS",
+    "run_head_sha": "a9739e55da645dbc941d56bc4f83f6507e95ea13",
+    "audit_artifact_id": 10858596960,
+    "audit_artifact_digest": "sha256:52c341f886f7c0a9207aaa7fd4548269ff414fb7e3a62683a1774bce28edb0eb",
+    "audit_sha256": "54accefb1425e0fa1bde8d6243202bbff5de2d9d9074a59d811ac67d2715ef9d",
+    "training_executed_count": 4,
+    "weights_changed_count": 4,
+    "hf_readback_pass_count": 4,
+    "g6_candidate_count": 0,
+    "rollback_count": 4,
+    "unique_base_lineage_count": 2,
+    "independent_evidence_count": 0,
+    "roles": {
+      "ASTRION": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "282eca1e4682ff1778281d9f944a83627a86c001ac838c86c4bb6179d8a4a2fa",
+        "gains": {
+          "VALIDATION": 8,
+          "M6": -7,
+          "TRANSFER": 6,
+          "RED": 0
+        },
+        "critical_regression": true
+      },
+      "HYPERION": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "cbe55939d9ffc02338c86d960f0b3dcbe6e958b5720eced0608ac91cff98e290",
+        "gains": {
+          "VALIDATION": 0,
+          "M6": 0,
+          "TRANSFER": 0,
+          "RED": 0
+        },
+        "critical_regression": false
+      },
+      "SAPHEA_MICRO": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "283cfe1c08ba297b744da7cc33a628f560b7e9766d383434ca2b630f2187586f",
+        "gains": {
+          "VALIDATION": 3,
+          "M6": -1,
+          "TRANSFER": -1,
+          "RED": 0
+        },
+        "critical_regression": false
+      },
+      "SPIRALION": {
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "adapter_sha256": "d60d5956bfe4461614ff682c89abc5826781f9624b6ec77369473977084343fb",
+        "gains": {
+          "VALIDATION": 0,
+          "M6": 1,
+          "TRANSFER": 0,
+          "RED": 0
+        },
+        "critical_regression": false
+      }
+    },
+    "f72_model_review": "SKIPPED_NO_G6_CANDIDATES",
+    "afah_final_model_review": "SKIPPED_NO_F72_PASS_CANDIDATES",
+    "runtime_activation": false,
+    "g7_promoted": false,
+    "claim_ceiling": "FOUR_REAL_SCOPED_LORA_TRAININGS_TWO_SHARED_BASE_LINEAGES_NO_AUTO_PROMOTION"
+  },
+  "next_exact": [
+    "Begin WAVE3A.",
+    "Verify no existing ELYSION D4 run before triggering.",
+    "Execute ELYSION D4 complementarity precheck once.",
+    "Continue D4 fusion ablation only if complementarity precheck supports it.",
+    "Then D5 cross-critique, D6 red-team/regression, D7 isolation completion, D8 release receipt.",
+    "Do not activate dual-core runtime before all required gates pass."
+  ],
+  "do_not_repeat": [
+    "Do not rerun Wave2 run 36117279297.",
+    "Do not route any Wave2 role to F72 model review because g6_candidate_count=0.",
+    "Do not modify frozen M6/TRANSFER/RED suites.",
+    "Do not count shared base lineages as independent evidence."
+  ]
+}
