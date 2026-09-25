@@ -203,17 +203,17 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D2_PASS_M6_V2_SEALED_D3_IN_PROGRESS",
+      "project_state": "D2_PASS_M6_SEALED_D3_IN_PROGRESS",
       "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
-        "D3": "IN_PROGRESS_PRIVATE_M6_V2",
+        "D3": "IN_PROGRESS",
         "D4": "BLOCKED_PENDING_D3",
         "D5": "BLOCKED_PENDING_D4",
         "D6": "BLOCKED_PENDING_D4",
-        "D7": "PENDING",
+        "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
         "D8": "PENDING"
       },
       "evidence": {
@@ -228,7 +228,10 @@
         "m6_v2_exact_prompts_public": false,
         "m6_v1_public_prompt_suite": "DISQUALIFIED_FROM_COLD_EVIDENCE",
         "m6_v1_failed_f146_run_id": 36129831934,
-        "d3_run_id": 36130283226
+        "d3_run_id": 36130283226,
+        "m6_release_run_id": 36130067318,
+        "m6_sha256": "4ade0334a5a4a08d9f6e623b7bfe8059f3e1fe7f382c2db38c3ab4b7707384d0",
+        "m6_receipt_sha256": "f6a6cc7b634990a48e1397e25bb2f250aa6b30b45f794669fce305f4a537f858"
       }
     },
     {
