@@ -1,0 +1,98 @@
+name: CEREBRON Wave1 Versioned Role Splits
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave1-role-splits-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile split chain
+        run: |
+          python -m py_compile tools/wave1_quarantine_candidate_builder.py
+          python -m py_compile tools/wave1_versioned_split_builder_v1.py
+      - name: Require AFAH admission pointer
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("training/WAVE1_DATA_ADMISSION_V1.json")
+          assert p.exists(),"AFAH_ADMISSION_POINTER_MISSING"
+          d=json.loads(p.read_text())
+          assert d["state"]=="ADMITTED_SYNTHETIC_CANDIDATE_POOL"
+          assert d["manifest_sha256"]=="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert d["training_released"] is False
+          print("AFAH_ADMISSION_POINTER=PASS")
+          PY
+      - name: Regenerate exact admitted candidate pool
+        run: |
+          python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Build deterministic role splits
+        run: |
+          python tools/wave1_versioned_split_builder_v1.py             --candidates artifacts/wave1-quarantine-candidates-v1.json             --admission training/WAVE1_DATA_ADMISSION_V1.json             --output-dir artifacts/wave1-splits
+      - name: Verify split counts and training lock
+        run: |
+          mkdir -p receipts/wave1
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path("artifacts/wave1-splits")
+          s=json.loads((root/"wave1-split-summary-v1.json").read_text())
+          assert s["source_manifest_sha256"]=="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert s["training_released"] is False
+          expected={
+            "AELYS":(72,24),
+            "ETHERION":(108,36),
+            "AFAH":(72,24),
+            "METRION":(72,24)
+          }
+          for role,(tr,va) in expected.items():
+              x=s["roles"][role]
+              assert x["train_count"]==tr and x["validation_count"]==va,(role,x)
+              p=json.loads((root/f"{role.lower()}-split-v1.json").read_text())
+              assert p["training_released"] is False
+              assert all(r["training_eligible"] is False for r in p["train_records"])
+              assert not ({r["record_id"] for r in p["train_records"]}&{r["record_id"] for r in p["validation_records"]})
+          receipt={
+            "schema":"CEREBRON_WAVE1_ROLE_SPLIT_POINTER_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_manifest_sha256":s["source_manifest_sha256"],
+            "summary_sha256":s["summary_sha256"],
+            "roles":s["roles"],
+            "training_released":False,
+            "next_gate":"FRESH_M6_TRANSFER_ADVERSARIAL_BUILD_AND_LEAKAGE_AUDIT",
+            "claim_ceiling":"VERSIONED_SYNTHETIC_ROLE_SPLITS_NOT_TRAINING_RELEASED"
+          }
+          raw=json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          p=pathlib.Path("receipts/wave1")/f"wave1-role-splits-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave1-role-splits-${{ github.run_id }}
+          path: |
+            artifacts/wave1-splits/
+            receipts/wave1/wave1-role-splits-${{ github.run_id }}.json
+          if-no-files-found: error
+      - name: Persist split pointer only
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/wave1-role-splits-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: Wave1 versioned role splits ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/wave1-parallel-ai-baselines-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
