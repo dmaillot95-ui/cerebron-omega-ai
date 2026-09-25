@@ -1,0 +1,116 @@
+{
+  "schema": "CEREBRON_WAVE2_DATASET_PACKAGE_RELEASE_POINTER_V1",
+  "run_id": 36114213946,
+  "release_sha256": "eaf6e53d1097758d7ce70d73ccdc5c3a39de0f9d25c4c59d76889b1b699bc439",
+  "source_manifest_sha256": "c4c1b1db4a6e074c3d88b8cbe20c38a969f8f45d236bb25bc549c82b2722d744",
+  "training_released": true,
+  "roles": {
+    "SPIRALION": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "ceeb718ef75daa43f4d0d600cc1046cfe60544a3cf2c2c093ab02636805949e1",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "45e13750a41e24b671ea252daff6b7a62b5039dd88051a0850140d1a600a1249",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "2bf8be3c386cbbfa6a2bb7df8d67ab3f55c5325cc16c2bd5b4bc5d44fb2918e3",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "bfdf3ac755acb9e7dcd5e4ce122899185f48c3bc5a6e1023ee8d519ffbbd394f",
+          "deny_training": true
+        }
+      },
+      "model": {
+        "id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      }
+    },
+    "HYPERION": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "96e7b9f213b06292ea03ae33e2e1e2771a169e52c0c37f98f7f52a9c71908b4e",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "5c28b6e317ce26ce58c20d95bc86eaeb3270d4a812540496dd6f05c933332a34",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "dd6f94b9cc0669380a131036f8b2a8b8c7031c65fe6b21cfba4c9bc34d4b6b85",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "f5d8fbbced2497bc797133a6d4c6711cafa9bc8d444faaebebed4e746ffaa2d6",
+          "deny_training": true
+        }
+      },
+      "model": {
+        "id": "HuggingFaceTB/SmolLM3-3B",
+        "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+      }
+    },
+    "ASTRION": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "9440427b5746344a2b0280fa0e66d5f96546ca73f7f466684c557f9c086ba33c",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "714d0f64364d041ff0455784e64f01cb92af3545d34e7f610ba774231188a555",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "78a4475d6b7bf0a55058450ad932a83d068ffc815ebd052ca3c50ef95e149fc7",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "d1f2b2591fc44fa7027ca84f30c03134153c282f53c56a8d853ae52484d35648",
+          "deny_training": true
+        }
+      },
+      "model": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      }
+    },
+    "SAPHEA_MICRO": {
+      "train_count": 126,
+      "validation_count": 42,
+      "split_sha256": "a9d1322ba07948e39d8305b38d1a2e6e1476489220ccff052115f00db5c36a17",
+      "cold": {
+        "M6": {
+          "count": 56,
+          "dataset_sha256": "847888f9e4ff9896d7e46e020ca7bfb00de409001af0db0ddb4420215e671255",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 56,
+          "dataset_sha256": "58df5e1e5876bc4c762bede5e6fbca6daa01796e1b2ae214bfda788bc8b86e22",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 28,
+          "dataset_sha256": "817a4c675a51e6300ffc19cb45ee8ed98d70f04dd79073ba125ebd0ebe450e17",
+          "deny_training": true
+        }
+      },
+      "model": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb"
+      }
+    }
+  },
+  "claim_ceiling": "SCOPED_SYNTHETIC_ROLE_TRAINING_RELEASE_NOT_GENERAL_CAPABILITY",
+  "next_gate": "FOUR_PARALLEL_REAL_LORA_CANARIES",
+  "receipt_sha256": "d98b89f7a61f53a40c9c0adda799bcc22403ceac49304437f580a24e2036c7b6"
+}
