@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_PASS_SEMANTIC_HYBRID_REJECTED_GOLD_BLOCKED_BY_F72",
+  "status": "RDX_MEMORY_PASS_SEMANTIC_INDEPENDENT_HOLD_GOLD_BLOCKED_BY_F72",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -307,6 +307,20 @@
     "rejected_policy": "RRF_SEM_LEX",
     "production_qualified": false,
     "training": "NOT_EXECUTED",
-    "rule": "FRESH_HOLDOUT_OVERRIDES_DEV_TUNING_WHEN_GENERALIZATION_FAILS"
+    "rule": "FRESH_HOLDOUT_OVERRIDES_DEV_TUNING_WHEN_GENERALIZATION_FAILS",
+    "independent_holdout_v3": {
+      "run_id": 36161829258,
+      "receipt_sha256": "4383fe6f1eb2894d68433004101a0fdb6d0449b67f1e540baa3f83bd90487516",
+      "policy": "SEMANTIC_ONLY",
+      "corpus_size": 18,
+      "query_count": 36,
+      "top1_correct": 33,
+      "top1_accuracy": 0.9166666666666666,
+      "mrr": 0.9467592592592593,
+      "critical_domains_pass": true,
+      "decision": "INDEPENDENT_HOLDOUT_HOLD_SEMANTIC_BASELINE",
+      "production_qualified": false,
+      "training": "NOT_EXECUTED"
+    }
   }
 }
