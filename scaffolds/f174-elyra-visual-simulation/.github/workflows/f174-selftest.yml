@@ -1,0 +1,53 @@
+name: F174 ELYRA Visual Simulation Selftest
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "architecture/**"
+      - "config/**"
+      - "tests/**"
+      - "validate_architecture.py"
+      - ".github/workflows/f174-selftest.yml"
+  pull_request:
+    paths:
+      - "architecture/**"
+      - "config/**"
+      - "tests/**"
+      - "validate_architecture.py"
+      - ".github/workflows/f174-selftest.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate architecture
+        run: python validate_architecture.py
+      - name: Run scaffold tests
+        run: python -m unittest tests/test_scaffold.py -v
+      - name: Verify evidence-safe boundaries
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open("config/project.json"))
+          assert p["target_repo_initialized"] is True
+          assert p["training_status"]=="NOT_TRAINED"
+          assert p["visual_simulation_executed"] is True
+          assert p["video_render_executed"] is True
+          assert p["physical_model_claimed"] is False
+          assert p["production_video_claimed"] is False
+          assert p["physical_validation_claimed"] is False
+          assert p["physical_test_status"]=="NOT_TESTED"
+          assert p["visual_canary"]["run_id"]==36160498658
+          assert p["video_canary"]["run_id"]==36161254578
+          assert p["paid_provider_auto_activation"] is False
+          print("F174_EVIDENCE_BOUNDARIES=PASS")
+          PY
