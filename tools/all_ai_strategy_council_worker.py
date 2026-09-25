@@ -13,7 +13,7 @@ def parse_labels(raw):
         s=line.strip()
         if not s: continue
         # Accept plain labels and common Markdown wrappers such as **PRIORITY:**.
-        cleaned=re.sub(r"^[\\s>\\-#*]+","",s)
+        cleaned=re.sub(r"^[\\s>#*\\-]+","",s)
         hit=False
         for lab in LABELS:
             m=re.match(r"^\\*{0,2}"+re.escape(lab)+r"\\*{0,2}\\s*:\\s*\\*{0,2}(.*)$",cleaned,re.I)
@@ -23,7 +23,7 @@ def parse_labels(raw):
                 hit=True
                 break
         if not hit and cur:
-            continuation=re.sub(r"^[\\s>\\-#*]+","",s).strip()
+            continuation=re.sub(r"^[\\s>#*\\-]+","",s).strip()
             out[cur]=(out[cur]+" "+continuation).strip()
     return out
 
