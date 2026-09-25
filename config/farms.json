@@ -1,5 +1,5 @@
 {
-  "version": "2.26",
+  "version": "2.27",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1202,7 +1202,7 @@
       "name": "CEREBRON RDX EXCHANGE",
       "repo": "cerebron-rdx-exchange",
       "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
-      "status": "RDX_MEMORY_WRITE_READ_RECALL_PASS_SEMANTIC_HYBRID_REJECTED_FRESH_HOLD",
+      "status": "RDX_MEMORY_PASS_SEMANTIC_INDEPENDENT_HOLD_NOT_PRODUCTION_GOLD_BLOCKED",
       "type": "RDX_PRODUCT_FARM",
       "role": "continuous-rd-production-storage-verification-marketplace-evidence-api-memory-training-ingress",
       "rules": [
@@ -1250,7 +1250,15 @@
         "semantic_fresh_holdout_decision": "FRESH_HOLDOUT_HOLD_NO_MEASURED_ROBUST_GAIN",
         "semantic_current_candidate": "SEMANTIC_ONLY",
         "semantic_hybrid_rrf": "REJECTED_ON_FRESH_HOLDOUT",
-        "semantic_production_qualified": false
+        "semantic_production_qualified": false,
+        "semantic_independent_v3_run_id": 36161829258,
+        "semantic_independent_v3_receipt_sha256": "4383fe6f1eb2894d68433004101a0fdb6d0449b67f1e540baa3f83bd90487516",
+        "semantic_independent_v3_top1_correct": 33,
+        "semantic_independent_v3_query_count": 36,
+        "semantic_independent_v3_top1_accuracy": 0.9166666666666666,
+        "semantic_independent_v3_mrr": 0.9467592592592593,
+        "semantic_independent_v3_critical_domains_pass": true,
+        "semantic_independent_v3_decision": "INDEPENDENT_HOLDOUT_HOLD_SEMANTIC_BASELINE"
       },
       "memory_binding_manifest": "config/rdx-memory-bindings-v1.json",
       "memory_routes": {
@@ -1268,7 +1276,7 @@
           118
         ]
       },
-      "claim_ceiling": "PRIVATE_RDX_WRITE_READ_SHA_RECALL_PASS; SYNTHETIC_SEMANTIC_RETRIEVAL_EVIDENCE_ONLY; HYBRID_RRF_REJECTED; NOT_PRODUCTION_SCALE; NO_NEURAL_TRAINING"
+      "claim_ceiling": "PRIVATE_WRITE_READ_SHA_RECALL_PASS; SYNTHETIC_SEMANTIC_RETRIEVAL_TOP1_91.7_PERCENT_ON_INDEPENDENT_V3_BUT_MRR_BELOW_GATE; NOT_PRODUCTION_SCALE; NO_NEURAL_TRAINING"
     },
     {
       "id": 173,
