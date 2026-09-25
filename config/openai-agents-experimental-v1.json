@@ -53,7 +53,8 @@
     "auto_paid_activation": false,
     "fail_closed": true,
     "unlock_requires": [
-      "EXPLICIT_USER_AUTHORIZATION_FOR_PAID_API",
+      "USER_ALREADY_AUTHORIZED_FUTURE_PAID_ASTRA_R_AND_D",
+      "EXPLICIT_NONZERO_BUDGET_CAP",
       "OPENAI_API_KEY_PRESENT_AT_RUNTIME_ONLY",
       "PROJECT_SPEND_LIMIT_CONFIGURED_EXTERNALLY",
       "CEREBRON_ENABLE_OPENAI_AGENTS=1",
@@ -89,5 +90,17 @@
     "AUTO_SCALE_ABOVE_5",
     "COUNT_SUBAGENTS_AS_INDEPENDENT_EVIDENCE",
     "AUTO_PROMOTION_FROM_AGENT_CONSENSUS"
-  ]
+  ],
+  "authorization": {
+    "user_intent": "AUTHORIZED_FOR_FUTURE_PAID_ASTRA_R_AND_D",
+    "recorded_date": "2026-09-25",
+    "execution_now": false,
+    "paid_execution_requires": [
+      "EXPLICIT_NONZERO_BUDGET_CAP",
+      "OPENAI_API_KEY_PRESENT_AT_RUNTIME_ONLY",
+      "PROJECT_SPEND_LIMIT_CONFIGURED_EXTERNALLY",
+      "CEREBRON_ENABLE_OPENAI_AGENTS=1",
+      "MODEL_ALLOWLIST_INCLUDES_GPT_6_ASTRA"
+    ]
+  }
 }
