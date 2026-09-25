@@ -1,0 +1,7 @@
+WAVE3B ALPHA OMEGA DELTA D3 PRIVATE COLD BASELINES
+ai_ids=ALPHA,OMEGA,DELTA
+models=Qwen3-4B,SmolLM3-3B
+m6_private=true
+deny_training=true
+weights_changed=false
+purpose=SINGLE_CORE_ROLE_BASELINES
