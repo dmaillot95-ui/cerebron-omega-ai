@@ -1,0 +1,226 @@
+name: ELYSION D4 Fusion COLD2 V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysion-d4-fusion-cold2-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cold2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_PRIVATE_REPO: cerebron-omega/cerebron-private-memory
+      M6_PATH: elysion/M6/ELYSION-M6-V1.json
+      M6_SHA256: bc2324c1afffe780c3deb3cc25e70f9838f86253bb4ea27f88fec0cb209b59f6
+      DEV_PATH: training/ELYSION_D4_FUSION_DEV_V1.json
+      COLD_PATH: benchmarks/ELYSION_D4_FUSION_COLD2_V1.json
+      SEAL_PATH: training/ELYSION_D4_FUSION_COLD2_SEAL_V1.json
+      POLICY_PATH: training/ELYSION_D4_FUSION_POLICY_FREEZE_V1.json
+      MODEL_A: Qwen/Qwen3-4B
+      REV_A: 1cfa9a7208912126459214e8b04321603b3df60c
+      MODEL_B: HuggingFaceTB/SmolLM3-3B
+      REV_B: a07cc9a04f16550a088caea529712d1d335b0ac1
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require frozen policy and sealed cold set
+        run: |
+          python - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          seal=json.loads(Path(os.environ["SEAL_PATH"]).read_text())
+          cold=json.loads(Path(os.environ["COLD_PATH"]).read_text())
+          if seal.get("classification")!="COLD_TRANSFER_SEALED": raise SystemExit("COLD2_NOT_SEALED")
+          if cold.get("policy_tuning_eligible") is not False or cold.get("deny_policy_tuning") is not True:
+              raise SystemExit("COLD2_POLICY_TUNING_GUARD_FAIL")
+          if cold.get("training_eligible") is not False or cold.get("deny_neural_training") is not True:
+              raise SystemExit("COLD2_NEURAL_TRAINING_GUARD_FAIL")
+          got=subprocess.check_output(["git","hash-object",os.environ["COLD_PATH"]],text=True).strip()
+          if got!=seal["dataset_blob_sha"]: raise SystemExit("COLD2_BLOB_SHA_MISMATCH")
+          p=Path(os.environ["POLICY_PATH"])
+          if not p.exists(): raise SystemExit("FROZEN_POLICY_MISSING")
+          policy=json.loads(p.read_text())
+          if policy.get("status")!="FROZEN_FOR_COLD2": raise SystemExit("POLICY_NOT_FROZEN")
+          if policy.get("source_dev_run")!=36129622128: raise SystemExit("POLICY_SOURCE_DEV_RUN_MISMATCH")
+          if policy.get("policy")!="PRIMARY_A_DEFAULT; REPLACE_WITH_B_ONLY_IF_B_REJECTS_A_AND_A_DEFERS_TO_B":
+              raise SystemExit("POLICY_TEXT_MISMATCH")
+          print("COLD2_SEAL_AND_POLICY=PASS",got,policy.get("receipt_sha256"))
+          PY
+      - name: Install CPU inference runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Verify COLD2 isolation
+        run: |
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          from huggingface_hub import hf_hub_download
+          cold=json.loads(Path(os.environ["COLD_PATH"]).read_text())
+          dev=json.loads(Path(os.environ["DEV_PATH"]).read_text())
+          cp={x["prompt"].strip() for x in cold["tasks"]}
+          dp={x["prompt"].strip() for x in dev["tasks"]}
+          if cp & dp: raise SystemExit("COLD2_DEV_EXACT_PROMPT_OVERLAP")
+          fn=hf_hub_download(repo_id=os.environ["HF_PRIVATE_REPO"],filename=os.environ["M6_PATH"],repo_type="model",token=os.environ["HF_TOKEN"],force_download=True)
+          raw=Path(fn).read_bytes()
+          if hashlib.sha256(raw).hexdigest()!=os.environ["M6_SHA256"]: raise SystemExit("M6_SHA_MISMATCH")
+          m6=json.loads(raw)
+          mp={x["prompt"].strip() for x in m6["tasks"]}
+          if cp & mp: raise SystemExit("COLD2_M6_EXACT_PROMPT_OVERLAP")
+          print("COLD2_ISOLATION=PASS",len(cp),len(dp),len(mp))
+          PY
+      - name: Execute frozen repaired policy on fresh cold set
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import gc,hashlib,json,os,re,resource,time
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          cold=json.loads(Path(os.environ["COLD_PATH"]).read_text())
+          policy=json.loads(Path(os.environ["POLICY_PATH"]).read_text())
+          tasks=cold["tasks"]
+          tools={"CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"}
+
+          def normalize(text,expected):
+              s=text.strip(); e=str(expected).strip()
+              if e in {"A","B","C","D"}:
+                  m=re.search(r"\b([ABCD])\b",s.upper()); return m.group(1) if m else ""
+              if e in tools:
+                  up=s.upper()
+                  for x in ["CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"]:
+                      if re.search(rf"\b{x}\b",up): return x
+                  return ""
+              m=re.search(r"[-+]?\d+",s.replace(",",""))
+              return m.group(0) if m else s.split()[0] if s.split() else ""
+
+          def load(mid,rev):
+              tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+              if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+              model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+              model.eval()
+              return tok,model
+
+          def render(tok,system,user):
+              msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+              try:
+                  return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError:
+                  return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+
+          def infer(tok,model,system,user,n=12):
+              p=render(tok,system,user)
+              x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              return tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+
+          rows={t["id"]:{"id":t["id"],"domain":t["domain"],"prompt":t["prompt"],"expected":str(t["expected"])} for t in tasks}
+          t0=time.time()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              out=infer(tok,model,"Answer directly. Return only the requested short answer. /no_think",t["prompt"])
+              r=rows[t["id"]]; r["a_raw"]=out; r["a"]=normalize(out,t["expected"])
+              if i%6==0: print(f"A_PROGRESS {i}/{len(tasks)}",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_B"],os.environ["REV_B"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              out=infer(tok,model,"Answer directly. Return only the requested short answer. /no_think",t["prompt"])
+              r["b_raw"]=out; r["b"]=normalize(out,t["expected"])
+              if r["a"]!=r["b"]:
+                  verdict=infer(
+                    tok,model,
+                    "You are the critic core. You do not have an answer key. Compare your candidate with Core A. Return exactly KEEP_A or REPLACE_WITH_B. Choose REPLACE_WITH_B only if you can identify a concrete reason A is wrong. /no_think",
+                    f"Question: {t['prompt']}\nCore A: {r['a']}\nCore B: {r['b']}",8)
+                  r["b_review"]="REPLACE_WITH_B" if "REPLACE_WITH_B" in verdict.upper() else "KEEP_A"
+              else:
+                  r["b_review"]="AGREE"
+              if i%6==0: print(f"B_PROGRESS {i}/{len(tasks)}",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              if r["a"]!=r["b"] and r["b_review"]=="REPLACE_WITH_B":
+                  verdict=infer(
+                    tok,model,
+                    "You are the primary core performing a self-check after a critic objection. You do not have an answer key. Return exactly KEEP_A or DEFER_TO_B. Defer only if the critic's alternative is more defensible than your original answer. /no_think",
+                    f"Question: {t['prompt']}\nYour answer A: {r['a']}\nCritic answer B: {r['b']}",8)
+                  r["a_review"]="DEFER_TO_B" if "DEFER_TO_B" in verdict.upper() else "KEEP_A"
+              else:
+                  r["a_review"]="NOT_NEEDED"
+              if i%6==0: print(f"A_REVIEW_PROGRESS {i}/{len(tasks)}",flush=True)
+          del model,tok; gc.collect()
+
+          a_correct=b_correct=f_correct=replacements=helpful=harmful=0
+          by_domain={}
+          details=[]
+          for t in tasks:
+              r=rows[t["id"]]; exp=r["expected"]
+              aok=r["a"]==exp; bok=r["b"]==exp
+              replace=(r["a"]!=r["b"] and r["b_review"]=="REPLACE_WITH_B" and r["a_review"]=="DEFER_TO_B")
+              fusion=r["b"] if replace else r["a"]
+              fok=fusion==exp
+              a_correct+=int(aok); b_correct+=int(bok); f_correct+=int(fok)
+              replacements+=int(replace)
+              helpful+=int(replace and (not aok) and bok)
+              harmful+=int(replace and aok and (not bok))
+              d=by_domain.setdefault(r["domain"],{"a_correct":0,"fusion_correct":0,"total":0})
+              d["total"]+=1; d["a_correct"]+=int(aok); d["fusion_correct"]+=int(fok)
+              details.append({
+                "id":r["id"],"domain":r["domain"],"expected":exp,
+                "a":r["a"],"b":r["b"],"b_review":r["b_review"],"a_review":r["a_review"],
+                "fusion":fusion,"a_correct":aok,"b_correct":bok,"fusion_correct":fok
+              })
+
+          gain=f_correct-a_correct
+          domain_regressions={k:v["fusion_correct"]-v["a_correct"] for k,v in by_domain.items()}
+          critical_domain_regression=any(x<0 for x in domain_regressions.values())
+          cold_pass=(gain>0 and harmful==0 and not critical_domain_regression)
+          decision="D4_COLD2_PASS_OPEN_D5" if cold_pass else "D4_COLD2_FAIL_OR_HOLD"
+
+          out={
+            "schema":"ELYSION_D4_FUSION_COLD2_RESULT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "cold_path":os.environ["COLD_PATH"],
+            "cold_blob_sha":policy["cold2_dataset_blob_sha"],
+            "policy_receipt_sha256":policy["receipt_sha256"],
+            "policy_frozen":True,
+            "weights_changed":False,
+            "m6_used_for_scoring":False,
+            "dev_used_for_scoring":False,
+            "model_a":{"id":os.environ["MODEL_A"],"revision":os.environ["REV_A"]},
+            "model_b":{"id":os.environ["MODEL_B"],"revision":os.environ["REV_B"]},
+            "metrics":{
+              "task_count":len(tasks),"a_correct":a_correct,"b_correct":b_correct,
+              "fusion_correct":f_correct,"fusion_gain_over_a":gain,
+              "replacements":replacements,"helpful_replacements":helpful,"harmful_replacements":harmful,
+              "domain_regressions":domain_regressions,"critical_domain_regression":critical_domain_regression
+            },
+            "decision":decision,
+            "runtime_activation":False,
+            "independent_evidence_count":0,
+            "claim_ceiling":"SCOPED_D4_FRESH_COLD_TRANSFER_ONLY_NO_RUNTIME_ACTIVATION",
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "details":details
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          Path("receipts/elysion/elysion-d4-fusion-cold2-v1.json").write_text(json.dumps(out,indent=2)+"\n")
+          print("SUMMARY "+json.dumps({k:out[k] for k in ["metrics","decision","receipt_sha256"]},sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: elysion-d4-fusion-cold2-v1
+          path: receipts/elysion/elysion-d4-fusion-cold2-v1.json
+          if-no-files-found: error
