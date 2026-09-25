@@ -218,16 +218,16 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D3_PASS_D4_PRECHECK_READY",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_PASS",
+      "project_state": "D4_COMPLEMENTARITY_PASS_FRESH_FUSION_CANARY_READY",
+      "dual_core_state": "D4_COMPLEMENTARITY_CONFIRMED_NOT_YET_FUSION_GAIN",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS_PRIVATE_M6_V2",
-        "D4": "READY_COMPLEMENTARITY_PRECHECK",
-        "D5": "BLOCKED_PENDING_D4",
-        "D6": "BLOCKED_PENDING_D4",
+        "D4": "COMPLEMENTARITY_PASS_FRESH_FUSION_CANARY_REQUIRED",
+        "D5": "BLOCKED_PENDING_D4_FUSION_GAIN",
+        "D6": "BLOCKED_PENDING_D4_FUSION_GAIN",
         "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
         "D8": "PENDING"
       },
@@ -251,7 +251,24 @@
         "d3_m6_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
         "d3_qwen_accuracy": 0.7083333333333334,
         "d3_smol_accuracy": 0.8333333333333334,
-        "d3_best_single": "HuggingFaceTB/SmolLM3-3B"
+        "d3_best_single": "HuggingFaceTB/SmolLM3-3B",
+        "d4_precheck_run_id": 36134272684,
+        "d4_precheck_artifact_id": 10862729677,
+        "d4_precheck_artifact_digest": "sha256:e721a6570b194f052b1c428477c4fb09581f1146970501032108f468cb864e24",
+        "d4_precheck_receipt_sha256": "93e94aaf5e2329edd46ed5ae5868881b96035071afae5e00fed4d47f02d62a63",
+        "d4_precheck_metrics": {
+          "qwen_correct": 51,
+          "smol_correct": 60,
+          "both_correct": 46,
+          "qwen_only_correct": 5,
+          "smol_only_correct": 14,
+          "both_wrong": 7,
+          "prediction_disagreement_count": 23,
+          "oracle_union_correct": 65,
+          "oracle_gain_over_best_single": 5
+        },
+        "d4_parallel_legacy_run_id": 36134272612,
+        "d4_parallel_legacy_evidence_status": "DO_NOT_COUNT_WRONG_D3_LINEAGE"
       }
     },
     {
