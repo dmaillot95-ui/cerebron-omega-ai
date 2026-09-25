@@ -211,5 +211,16 @@
     "global_f72_gate": "FAIL",
     "gold_released": false,
     "training_released": false
+  },
+  "github_farm_bindings": {
+    "aelys_live": {
+      "farm_id": 173,
+      "code": "F173",
+      "repo_full_name": "dmaillot95-ui/cerebron-farm-173-aelys-live",
+      "planned_url": "https://github.com/dmaillot95-ui/cerebron-farm-173-aelys-live",
+      "status": "RESERVED_REPOSITORY_NOT_YET_CREATED",
+      "reservation_manifest": "config/farm-reservations/F173-aelys-live.json",
+      "activation_rule": "VERIFY_REPOSITORY_THEN_REGISTER_ACTIVE_FARM"
+    }
   }
 }
