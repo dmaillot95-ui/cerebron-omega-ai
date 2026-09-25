@@ -1,0 +1,130 @@
+{
+  "schema": "CEREBRON_105_F72_REGISTRY_REALITY_PASS_RDX_GOLD_HOLD_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_PLANE_ONLY",
+  "coordination": {
+    "other_session": "ARCHITECTON_R&D_EXECUTION_PLANE",
+    "this_session": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_PLANE",
+    "rule": "DO_NOT_MODIFY_OTHER_SESSION_ACTIVE_RD_OBJECTS_OR_F173_F174"
+  },
+  "registry": {
+    "version": "2.27",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "sparse": true,
+    "missing_ids": [
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172
+    ],
+    "f152": "CEREBRON_RDX_EXCHANGE_REGISTERED",
+    "f173_f174": "PRESENT_OWNED_BY_OTHER_SESSION"
+  },
+  "config_audits": {
+    "civilization": {
+      "run_id": 36162342280,
+      "status": "PASS",
+      "head_sha": "9caab262e7190a060818bfe0a17330c1564b7f1a"
+    },
+    "native_ai_dual_core": {
+      "run_id": 36162342188,
+      "status": "PASS",
+      "head_sha": "9caab262e7190a060818bfe0a17330c1564b7f1a"
+    }
+  },
+  "f71_registry_reproduction": {
+    "run_id": 36162578051,
+    "status": "PASS",
+    "source_commit": "9caab262e7190a060818bfe0a17330c1564b7f1a",
+    "receipt_sha256": "bb18d86bc0704d7e14803f1dde17dd1b66b0e593aaac2205db9a7e1b636ac16a",
+    "claim_ceiling": "PINNED_SPARSE_REGISTRY_STRUCTURE_REPRODUCTION_ONLY_NO_GLOBAL_F72_RELEASE"
+  },
+  "f72_registry_reality": {
+    "run_id": 36162737723,
+    "status": "PASS_SCOPED_ONLY",
+    "receipt_sha256": "4ecc74b6e381ad8b6f6f465b003095615f4b7fa90bef53b48d2cddde2a47c16c",
+    "scoped_gate": "PASS",
+    "global_gate": "HOLD",
+    "global_release": false,
+    "gold_released": false,
+    "training_released": false
+  },
+  "f72_rdx_gold_policy_review": {
+    "run_id": 36163491199,
+    "status": "PASS_HOLD",
+    "receipt_sha256": "712d0d94b793f904dda5ed7d90d9e664cf7f384a2b18c84f6715b19f1a8ed7f4",
+    "source_rdx_commit": "0f80484dbb84803316397af9601284364a6d84be",
+    "decision": "HOLD_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS",
+    "observed": {
+      "canonical_object_count": 0,
+      "integration_entry_count": 0,
+      "execution_count": 0,
+      "human_review_complete": false,
+      "source_count": 4,
+      "source_rights_clear_for_training": false,
+      "open_work_count": 5
+    },
+    "blockers": [
+      "CANONICAL_OBJECTS_PRESENT",
+      "INTEGRATED_HANDOFFS_PRESENT",
+      "VERIFIED_EXECUTIONS_PRESENT",
+      "HUMAN_REVIEW_COMPLETE",
+      "SOURCE_RIGHTS_CLEAR_FOR_TRAINING",
+      "PACK_OPEN_WORK_EMPTY",
+      "FRESH_TRANSFER_ON_TRAIN_CANDIDATE",
+      "AFAH_REVIEW_ON_TRAIN_CANDIDATE"
+    ]
+  },
+  "memory_promotion_audit": {
+    "run_id": 36163660205,
+    "status": "PASS",
+    "receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
+    "artifact_id": 10875954962,
+    "artifact_digest": "sha256:2a58d72a57c67636c92f272a2b2eab7dd84e28e8d575eb0e16a4280039711be"
+  },
+  "current_gate_state": {
+    "f72": "FAIL_CLOSED",
+    "registry_reproduction": "PASS",
+    "registry_reality_scoped": "PASS",
+    "promotion_policy_review": "PASS_HOLD",
+    "m4_gold": "BLOCKED",
+    "neural_training": "BLOCKED",
+    "reason": "NO_TRAIN_ELIGIBLE_RDX_GOLD_OBJECTS"
+  },
+  "next_requirements": [
+    "WAIT_FOR_VERIFIED_RDX_HANDOFFS_FROM_RD_EXECUTION_PLANE",
+    "INTEGRATE_VERIFIED_RDX_OBJECTS",
+    "ESTABLISH_TRAINING_RIGHTS",
+    "COMPLETE_REQUIRED_HUMAN_REVIEW",
+    "FRESH_ABLATION_ON_ACTUAL_GOLD_CANDIDATE",
+    "FRESH_TRANSFER_ON_ACTUAL_GOLD_CANDIDATE",
+    "AFAH_REVIEW_ON_ACTUAL_GOLD_CANDIDATE",
+    "ONLY_THEN_REVIEW_F72_GLOBAL_PASS"
+  ],
+  "hard_rules": [
+    "NO_RAW_RDX_AUTO_TRAIN",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_GOLD_WITHOUT_F72_AND_AFAH",
+    "NO_NEURAL_LEARNING_CLAIM_WITHOUT_WEIGHT_OR_ADAPTER_CHANGE",
+    "NO_DUPLICATE_RUNS",
+    "DO_NOT_TOUCH_ARCHITECTON_ACTIVE_RD"
+  ]
+}
