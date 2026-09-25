@@ -1,0 +1,90 @@
+{
+  "schema": "CEREBRON_113_RDX_PORTABLE_STATIC_SECURITY_AND_FAST_CI_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_STATIC_SECURITY_CI_PROVENANCE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "0b3f537b760376f075251e52a30336da2c61b2b9",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "current_head": "18ab1efc6f6b3f4c57c5f9a3ec30fa8d05a3fc84",
+    "full_validation": {
+      "run_id": 36175730553,
+      "status": "PASS"
+    },
+    "public_pack_projection": {
+      "run_id": 36175730487,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36175724884,
+      "status": "PASS",
+      "head": "7bf84be4a2ca208e446ab47a764e940e75cf4c11"
+    },
+    "latest_pages_build_with_csp": {
+      "run_id": 36175695449,
+      "status": "PASS",
+      "head": "dd154ecb7eadc009947014b9e654039fb4d9f42c"
+    },
+    "pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "portable_security": {
+    "static_security_gate": "PASS",
+    "html_pages_checked": 7,
+    "policy": [
+      "default-src 'self'",
+      "style-src 'self' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-inline'",
+      "img-src 'self' data:",
+      "connect-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'"
+    ],
+    "referrer_policy": "strict-origin-when-cross-origin",
+    "generator_embeds_policy": true,
+    "vercel_policy_consistency_checked": true,
+    "github_pages_meta_policy_present": true
+  },
+  "release_integrity": {
+    "source_commit": "18ab1efc6f6b3f4c57c5f9a3ec30fa8d05a3fc84",
+    "public_file_count": 16,
+    "aggregate_sha256": "8816b1b47eb4d73ec8bd167ecbe2b071f1e00635e102b8acca73c28f0a301792",
+    "browser_js_gate": "PASS",
+    "internal_links_checked": 28,
+    "static_link_gate": "PASS",
+    "release_manifest_gate": "PASS",
+    "static_release_build_contract": "PASS"
+  },
+  "ci_hygiene": {
+    "full_validation_cancel_stale": true,
+    "deployment_readiness_cancel_stale": true,
+    "public_projection_cancel_stale": true,
+    "purpose": "LATEST_HEAD_VERDICT_PRIORITY_AND_REDUCED_STALE_QUEUE"
+  },
+  "deployment_claim_ceiling": {
+    "production_deployment_verified": false,
+    "github_pages_owner_enablement_required": true,
+    "vercel_connected_teams_count": 0,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Do not edit F172-F174 from this session.",
+    "Keep portable CSP and referrer policy on every generated/static HTML page.",
+    "Owner enables GitHub Pages Source=GitHub Actions once.",
+    "Manual dispatch Pages deploy=true and require deploy PASS plus live proof V2 PASS.",
+    "Only then mark production deployment verified."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
