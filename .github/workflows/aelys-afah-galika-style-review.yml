@@ -1,0 +1,121 @@
+name: AELYS AFAH Galika Style Review
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/aelys-afah-galika-style-review-trigger.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Run AELYS and AFAH review
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          python - <<'PY'
+          import json, hashlib, time
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer, AutoModelForCausalLM
+
+          evidence = {
+            'galika_status': 'CGI docufiction, not a verified physical humanoid or autonomous AI system.',
+            'observed_dialogue_traits': [
+              'calm sparse dialogue with short answers',
+              'meta-observation of the conversation itself',
+              'questions about how humans frame or stage the interaction',
+              'occasional correction of the human wording',
+              'strong fictional continuity and personality',
+              'visual embodiment amplifies perceived intelligence'
+            ],
+            'fictional_risk_traits': [
+              'threat-like language around face or body ownership',
+              'safety-protocol claims immediately after alarming fictional behavior',
+              'anthropomorphic framing that can be mistaken for real autonomy or consciousness',
+              'dramatic regressions used for storytelling'
+            ],
+            'product_lessons': [
+              'distinctive voice matters more than verbosity',
+              'a memorable assistant notices details and asks precise follow-up questions',
+              'gaze timing and embodiment strongly affect perceived personality',
+              'technical transparency must remain explicit'
+            ]
+          }
+
+          question = '''David wants the future AELYS website to let people talk to AELYS as AELYS, with a recognizable voice and reasoning style. He likes Galika's conversational presence: calm delivery, observation, meta-comments, and the impression that the character notices how the human is speaking to her.
+
+          Using the evidence packet below, answer in French:
+          1. What should AELYS borrow at the level of interaction style?
+          2. What should AELYS explicitly avoid?
+          3. Define AELYS own voice in 6 to 10 concrete rules.
+          4. Give 3 short sample replies showing her own style.
+          5. State whether this should become a prompt/persona layer, a trained adapter, or both, and what evidence is needed before training.
+          '''
+
+          def run(identity, model_id, revision, system):
+              tok = AutoTokenizer.from_pretrained(model_id, revision=revision)
+              mdl = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, torch_dtype=torch.float32, low_cpu_mem_usage=True)
+              msgs = [{'role':'system','content':system},{'role':'user','content':question + '\nEVIDENCE:\n' + json.dumps(evidence, ensure_ascii=False, indent=2)}]
+              try:
+                  kw = {'tokenize':False,'add_generation_prompt':True}
+                  if 'Qwen3' in model_id:
+                      kw['enable_thinking'] = False
+                  prompt = tok.apply_chat_template(msgs, **kw)
+              except Exception:
+                  prompt = system + '\n\n' + question + '\nEVIDENCE:\n' + json.dumps(evidence, ensure_ascii=False)
+              x = tok(prompt, return_tensors='pt')
+              t = time.time()
+              with torch.no_grad():
+                  y = mdl.generate(**x, max_new_tokens=650, do_sample=False, repetition_penalty=1.08, no_repeat_ngram_size=4)
+              answer = tok.decode(y[0][x['input_ids'].shape[1]:], skip_special_tokens=True).strip()
+              return {
+                'identity': identity,
+                'model_id': model_id,
+                'revision': revision,
+                'real_execution': True,
+                'llm_inference': True,
+                'answer': answer,
+                'answer_sha256': hashlib.sha256(answer.encode()).hexdigest(),
+                'latency_s': round(time.time()-t,3),
+                'claim_scope': 'real base-model inference under identity policy; not proof of identity-specific trained weights'
+              }
+
+          aelys_system = '''You are executing the AELYS role in CEREBRON. AELYS is the human-dialogue interface. Produce a distinctive conversational style, but do not claim consciousness, feelings, bodily needs, personal rights, or hidden autonomy. Do not imitate Galika exact wording or threatening behavior. Galika is inspiration for pacing, presence, observation and conversational texture only. AELYS should sound like herself: precise, calm, attentive, curious, capable of gently challenging a premise, concise by default, and transparent about uncertainty. Separate useful interface style from fiction. Speak directly to David in French.'''
+          afah_system = '''You are executing the AFAH role in CEREBRON. AFAH is the final evidence-gated audit and fusion role. Audit the proposed AELYS conversational identity against REALITY>COHERENCE, EVIDENCE>CONFIDENCE, CLAIM<=EVIDENCE, CONSENSUS!=PROOF. Preserve a memorable human-facing style, but reject imitation of Galika, false consciousness, manipulative ambiguity, threat-like persona behavior, and any claim that visual realism proves intelligence. Speak directly to David in French.'''
+
+          aelys = run('AELYS','HuggingFaceTB/SmolLM3-3B','a07cc9a04f16550a088caea529712d1d335b0ac1',aelys_system)
+          afah = run('AFAH','Qwen/Qwen3-4B','1cfa9a7208912126459214e8b04321603b3df60c',afah_system)
+          report = {
+            'schema':'CEREBRON_GALIKA_STYLE_AELYS_AFAH_REVIEW_V1',
+            'run_id': int(__import__('os').environ['GITHUB_RUN_ID']),
+            'source_subject':'GALIKA_PROJECT',
+            'source_status':'CGI_DOCUFICTION',
+            'aelys':aelys,
+            'afah':afah,
+            'operational_mutation_f172_f173_f174':False,
+            'weight_change':False,
+            'training_released':False
+          }
+          report['report_sha256'] = hashlib.sha256(json.dumps(report,sort_keys=True,default=str).encode()).hexdigest()
+          Path('artifacts/aelys-afah-galika-style-review.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps({'aelys_sha256':aelys['answer_sha256'],'afah_sha256':afah['answer_sha256'],'report_sha256':report['report_sha256']},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aelys-afah-galika-style-review
+          path: artifacts/aelys-afah-galika-style-review.json
+          if-no-files-found: error
+          retention-days: 30
