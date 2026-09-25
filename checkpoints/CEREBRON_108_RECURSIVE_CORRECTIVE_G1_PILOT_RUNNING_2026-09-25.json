@@ -1,0 +1,85 @@
+{
+  "schema": "CEREBRON_108_RECURSIVE_CORRECTIVE_G1_PILOT_RUNNING_V1",
+  "date": "2026-09-25",
+  "state": "RECURSIVE_CORRECTIVE_G1_ACTIVE_DUAL_LINEAGE_PILOT_RUNNING",
+  "main_head_before_checkpoint": "266afbf493c1e12531fc5f0e316c0559ed88718e",
+  "scope": {
+    "available_ai_learning_population": 38,
+    "unavailable": [
+      "NU"
+    ],
+    "learning_allowed_special_cases": [
+      "PSI_F172",
+      "AELYS_F173",
+      "ELYRA_F174"
+    ],
+    "operational_mutation_f172_f173_f174": false
+  },
+  "implemented": [
+    "training/CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1.json",
+    "tools/validate_recursive_coaxial_learning.py",
+    ".github/workflows/recursive-coaxial-learning-guard.yml",
+    "training/CEREBRON_CORRECTIVE_CURRICULUM_G1_V1.json",
+    "tools/build_corrective_curriculum_g1_tasks.py",
+    ".github/workflows/corrective-curriculum-g1.yml",
+    "tools/corrective_agora_pilot_v1.py",
+    ".github/workflows/corrective-agora-dual-lineage-pilot.yml",
+    "training/CEREBRON_G1_LESSON_ADMISSION_POLICY_V1.json"
+  ],
+  "verified_runs": {
+    "recursive_learning_guard": {
+      "run_id": 36169529232,
+      "status": "SUCCESS",
+      "artifact_id": 10879392487,
+      "artifact_digest": "sha256:c48f94346649e6bc14d48c94f1268071141409160dbf80562abe23727e70a6b0"
+    },
+    "corrective_curriculum_g1": {
+      "run_id": 36171119614,
+      "status": "SUCCESS",
+      "task_count": 162,
+      "artifact_id": 10879844841,
+      "artifact_digest": "sha256:a7ff8be388909bfea08fa39deb15c00d816d0377d548ff48aa6fc599e5228539"
+    }
+  },
+  "active_pilot": {
+    "run_id": 36171338416,
+    "head_sha": "6d70ea62231b9bb43fe4404f086fe2713d62f99e",
+    "status": "in_progress",
+    "conclusion": null,
+    "targets": [
+      "SAPHEA",
+      "ETHERION",
+      "AELYS",
+      "ELYRA",
+      "ELYSION",
+      "OMEGA",
+      "PSI",
+      "CEREBRON"
+    ],
+    "model_lineages": [
+      "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+      "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1"
+    ],
+    "expected_real_inferences": 16,
+    "training_released": false,
+    "independent_evidence_claim": false
+  },
+  "learning_truth": {
+    "new_weight_change_this_wave": false,
+    "neural_improvement_claim": false,
+    "geometric_growth_claim": "NOT_ESTABLISHED",
+    "next_promotion_requires": [
+      "AUDIT",
+      "COUNTER_AUDIT",
+      "REPRODUCTION",
+      "GOLD_RED_ADMISSION",
+      "DATASET_SEAL",
+      "REAL_WEIGHT_OR_ADAPTER_CHANGE",
+      "COLD_GAIN",
+      "TRANSFER_GAIN",
+      "REDTEAM",
+      "ABLATION"
+    ]
+  },
+  "resume": "FETCH -> VERIFY run 36171338416 -> inspect artifacts/audit -> admit or reject candidate lessons -> only then consider training release"
+}
