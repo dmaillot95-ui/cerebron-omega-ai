@@ -17,16 +17,16 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 174
-- Derniers workflows en succès : 165
+- Derniers workflows en succès : 166
 - Derniers workflows en échec : 0
-- Fermes avec au moins un artefact sur leur dernier run : 127
+- Fermes avec au moins un artefact sur leur dernier run : 128
 
 ## Détail technique
 
 - Farm 01 collatz-theory: run=36164208688 status=queued conclusion=None artifacts=0
-- Farm 02 collatz-dynamics: run=36163389001 status=pending conclusion=None artifacts=0
+- Farm 02 collatz-dynamics: run=36164717448 status=pending conclusion=None artifacts=0
 - Farm 03 collatz-adic: run=36163937339 status=queued conclusion=None artifacts=0
-- Farm 04 collatz-counterexample: run=36164470442 status=queued conclusion=None artifacts=0
+- Farm 04 collatz-counterexample: run=36164516053 status=queued conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=36163736046 status=queued conclusion=None artifacts=0
 - Farm 06 collatz-formal-audit: run=36164242425 status=queued conclusion=None artifacts=0
 - Farm 07 collatz-synthesis: run=36163764332 status=queued conclusion=None artifacts=0
@@ -81,7 +81,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 56 architecton-control: run=35420176710 status=completed conclusion=success artifacts=1
 - Farm 57 architecton-cam: run=35966429835 status=completed conclusion=success artifacts=1
 - Farm 58 architecton-metrology: run=35420179457 status=completed conclusion=success artifacts=1
-- Farm 59 verified-learning: run=36163847923 status=completed conclusion=success artifacts=1
+- Farm 59 verified-learning: run=36164635989 status=completed conclusion=success artifacts=1
 - Farm 60 hardware-architecture: run=35314116823 status=completed conclusion=success artifacts=0
 - Farm 61 electronics-pcb: run=35314178296 status=completed conclusion=success artifacts=0
 - Farm 62 embedded-firmware: run=35314346060 status=completed conclusion=success artifacts=0
@@ -89,8 +89,8 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 64 hardware-reliability-safety: run=35314709831 status=completed conclusion=success artifacts=0
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
 - Farm 66 knowledge-graph-vector-index: run=36164206587 status=completed conclusion=success artifacts=1
-- Farm 67 cross-farm-communication: run=36164009672 status=completed conclusion=success artifacts=1
-- Farm 68 autonomous-experiment-orchestrator: run=36164476639 status=queued conclusion=None artifacts=0
+- Farm 67 cross-farm-communication: run=36165127359 status=completed conclusion=success artifacts=1
+- Farm 68 autonomous-experiment-orchestrator: run=36164476639 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
 - Farm 70 theorem-proof-engineering: run=36164282601 status=completed conclusion=success artifacts=1
 - Farm 71 scientific-reproduction: run=36164024408 status=completed conclusion=success artifacts=1
