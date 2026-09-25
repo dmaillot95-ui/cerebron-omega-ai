@@ -1,0 +1,1 @@
+RDX MEMORY WRITE READ RECALL CANARY V1\nsource_farm=F152\nnamespace=RDX_SHARED\nclasses=M1,M7\ngold=false\ntraining=false\nsemantic_rag_quality_tested=false\n
