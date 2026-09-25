@@ -7,8 +7,8 @@
     "AFAH",
     "METRION"
   ],
-  "receipt_count": 8,
-  "real_inference_count": 8,
+  "receipt_count": 4,
+  "real_inference_count": 4,
   "training_executed_count": 0,
   "unique_lineage_fingerprints": 1,
   "independent_evidence_count": 0,
@@ -49,5 +49,21 @@
     "METRION": "BUILD_AND_VALIDATE_ENGINEERING_GOLD"
   },
   "claim_ceiling": "FOUR_REAL_PARALLEL_BASELINES_ONLY_NO_TRAINING_CLAIM",
-  "audit_sha256": "bbff2258423fce11cd9e48ef3ea42dba6bfcab75c3b804b144b5bbe3076dd60f"
+  "correction": {
+    "reason": "Original audit glob matched each receipt twice.",
+    "source_run": 36103514385,
+    "verified_artifact_ids": [
+      10849659656,
+      10849912253,
+      10849858714,
+      10850661419
+    ],
+    "verified_artifact_digests": [
+      "sha256:e1d92c71c61e1cf430fabad99860ba0b163a4c4e91e8210778fb4ff3f2cb5c70",
+      "sha256:5ed2ee9600d5ce25773de4d6dbe8c457895ac58d9b084f4152c7825e1f57c449",
+      "sha256:c509a7bbec25853d973f0f3770368b7f50c289d1bd51ddcea3fd701ada68ef95",
+      "sha256:eafe35e7ab2d0a43998c4c2248a9ff05def0a331c5dadc1c8529dfff8cf3461f"
+    ]
+  },
+  "audit_sha256": "c0178c7f504a40718fdbfebab22bb8f31f217ce199ee9a032321dd943117abd8"
 }
