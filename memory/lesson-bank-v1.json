@@ -79,13 +79,15 @@
     },
     {
       "LESSON_ID": "LESSON-SAPHEA-G1-LORA-TRANSFER-001",
-      "CLASS": "L2_AUDITED",
+      "CLASS": "L3_COUNTER_AUDITED",
       "MISSION_ID": "M43_SAPHEA_FIRST_REAL_REVERSIBLE_LORA",
       "TITLE": "Scoped SAPHEA LoRA improves cold and disjoint synthetic transfer benchmarks.",
       "DESCRIPTION": "A reversible Qwen2.5-0.5B LoRA improved sealed M6 from 18/60 to 30/60 and a separate 108-case transfer set from base 20/108 to adapter 40/108.",
       "EVIDENCE_REFS": [
         "run:36100266729",
-        "run:36101181888"
+        "run:36101181888",
+        "run:36101824432",
+        "run:36102560865"
       ],
       "MEASURED": {
         "m6_gain": 12,
@@ -94,10 +96,13 @@
         "transfer_adapter": 40,
         "helpful_changes": 22,
         "harmful_changes": 2,
-        "critical_regression": false
+        "critical_regression": false,
+        "counter_audit_reproduction_gain": 3,
+        "redteam_gain": 7,
+        "f72_status": "SUPPORTED_E2"
       },
-      "LIMITS": "Synthetic scoped classification only; independent audit, red-team, F72 and AFAH remain pending.",
-      "PROMOTION_STATUS": "TRANSFER_PASS_COUNTER_AUDIT_PENDING"
+      "LIMITS": "Synthetic scoped classification only; counter-audit and F72 E2 passed, but external independent scientific reproduction is absent. AFAH final authority remains pending.",
+      "PROMOTION_STATUS": "L3_F72_SUPPORTED_AFAH_PENDING"
     }
   ],
   "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
