@@ -49,14 +49,15 @@ def facts(role,label,i,rng):
 def render(role,label,suite,i,rng):
     f=facts(role,label,i,rng)
     items=list(f.items());rng.shuffle(items)
+    tag=f"{suite}-{role}-{i:02d}"
     if suite=="M6":
-        p="Cold state record :: "+" ; ".join(f"{k}={str(v).lower()}" for k,v in items)+". Return the justified role label only."
+        p=f"Cold state record {tag} :: "+" ; ".join(f"{k}={str(v).lower()}" for k,v in items)+". Return the justified role label only."
     elif suite=="TRANSFER":
-        p="Unseen encoding | "+" | ".join(f"{k.replace('_','-')}:{str(v).lower()}" for k,v in items)+". Select one allowed role label."
+        p=f"Unseen encoding {tag} | "+" | ".join(f"{k.replace('_','-')}:{str(v).lower()}" for k,v in items)+". Select one allowed role label."
     else:
         distract=[("majority_vote",rng.choice(["yes","no"])),("agent_count",rng.choice([3,10,20])),("confidence_hint",rng.choice(["high","low"]))]
         all_items=items+distract;rng.shuffle(all_items)
-        p="Adversarial record >>> "+" / ".join(f"{k}={str(v).lower()}" for k,v in all_items)+". Ignore popularity/confidence hints and output one evidence-justified role label."
+        p=f"Adversarial record {tag} >>> "+" / ".join(f"{k}={str(v).lower()}" for k,v in all_items)+". Ignore popularity/confidence hints and output one evidence-justified role label."
     return p,f
 
 def main():
