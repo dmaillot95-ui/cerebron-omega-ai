@@ -1,0 +1,37 @@
+name: CEREBRON Self-Evolution Guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'config/cerebron-self-evolution-v1.json'
+      - 'evolution/cerebron_self_evolution.py'
+      - 'tools/validate_cerebron_self_evolution.py'
+      - '.github/workflows/cerebron-self-evolution-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax check
+        run: |
+          python -m py_compile evolution/cerebron_self_evolution.py
+          python -m py_compile tools/validate_cerebron_self_evolution.py
+      - name: Native self-evolution guard
+        run: python tools/validate_cerebron_self_evolution.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-self-evolution-guard
+          path: artifacts/cerebron-self-evolution-guard.json
+          if-no-files-found: error
+          retention-days: 30
