@@ -49,14 +49,20 @@ assert f173["evidence"]["unified_plugin_bus_guard_run_id"]==36156083228
 f174=by_id[174]
 assert f174["repo"]=="cerebron-farm-174-elyra-visual-simulation"
 assert f174["identity"]=="ELYRA"
-assert f174["status"]=="DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED"
+assert f174["status"]=="VISUAL_STATE_SEQUENCE_CANARY_EXECUTED"
 assert f174["repository_exists"] is True
 assert f174["repository_initialized"] is True
 assert f174["training_status"]=="NOT_TRAINED"
-assert f174["simulation_status"]=="NOT_EXECUTED"
+assert f174["simulation_status"]=="VISUAL_STATE_SEQUENCE_CANARY_EXECUTED"
+assert f174["visual_simulation_executed"] is True
+assert f174["video_render_executed"] is False
+assert f174["physical_model_claimed"] is False
+assert f174["physical_validation_claimed"] is False
 assert f174["physical_test_status"]=="NOT_TESTED"
-assert f174["dedicated_repo_selftest_run_id"]==36156887593
-assert f174["dedicated_repo_head"]=="fd2327d3016475cdf84561e5d4bdcee89a28f2e5"
+assert f174["visual_canary"]["run_id"]==36160498658
+assert f174["visual_canary"]["result_sha256"]=="edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9"
+assert f174["dedicated_repo_selftest_run_id"]==36160671044
+assert f174["dedicated_repo_head"]=="7e11aa760be6badfca60f1ff1e60997a12aabb84"
 assert f174["bootstrap_manifest"]=="config/farm-bootstrap-manifest-f162-f174.json"
 
 for sub in ["scaffolds/f173-aelys-live","scaffolds/f174-elyra-visual-simulation"]:
@@ -69,7 +75,7 @@ print(json.dumps({
   "registry_max_farm":174,
   "f162":"PREPARED_REPOSITORY_MISSING",
   "f173":"LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED",
-  "f174":"DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
+  "f174":"VISUAL_STATE_SEQUENCE_CANARY_EXECUTED_VIDEO_RENDER_NOT_EXECUTED_PHYSICAL_NOT_TESTED",
   "training_claims":0,
   "execution_claims":0
 },sort_keys=True))
