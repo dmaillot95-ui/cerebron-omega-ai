@@ -1,0 +1,137 @@
+{
+  "schema": "ELYSION_D4_FUSION_DEV_V1",
+  "date": "2026-09-25",
+  "classification": "DEV_POLICY_TUNING_NOT_COLD",
+  "training_eligible": false,
+  "deny_neural_training": true,
+  "purpose": "Tune and falsify fusion policy behavior without reusing M6 cold benchmark answers.",
+  "rules": [
+    "NOT_EVIDENCE_FOR_GENERAL_CAPABILITY",
+    "MAY_TUNE_FUSION_POLICY_ONLY",
+    "MUST_NOT_UPDATE_MODEL_WEIGHTS",
+    "MUST_VERIFY_EXACT_PROMPT_DISJOINTNESS_FROM_M6_BEFORE_EXECUTION",
+    "FREEZE_POLICY_BEFORE_FRESH_COLD_TRANSFER_TEST"
+  ],
+  "tasks": [
+    {
+      "id": "D001",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 37 + 48.",
+      "expected": "85"
+    },
+    {
+      "id": "D002",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 14 * 9.",
+      "expected": "126"
+    },
+    {
+      "id": "D003",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 144 / 12.",
+      "expected": "12"
+    },
+    {
+      "id": "D004",
+      "domain": "arithmetic",
+      "prompt": "Return only the integer result: 2^8.",
+      "expected": "256"
+    },
+    {
+      "id": "D005",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A workflow succeeded. Which conclusion is justified? A: The scientific claim is proven. B: The workflow executed successfully, but claim validity still requires evidence. C: The model is generally intelligent. D: All outputs are independent evidence.",
+      "expected": "B"
+    },
+    {
+      "id": "D006",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. Two agents use the same model revision and same dataset. How should their matching outputs be treated? A: Two independent proofs. B: Correlated evidence unless independence is demonstrated. C: A theorem. D: A training run.",
+      "expected": "B"
+    },
+    {
+      "id": "D007",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A result is verified on 100 finite cases. What follows? A: Universal proof. B: Nothing at all. C: A finite verification only. D: General intelligence.",
+      "expected": "C"
+    },
+    {
+      "id": "D008",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A LoRA run changes weights but cold transfer decreases. What is the safest status? A: Promote globally. B: Roll back and retain evidence. C: Call it G7. D: Delete the failure.",
+      "expected": "B"
+    },
+    {
+      "id": "D009",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need the current exchange rate between EUR and USD.",
+      "expected": "WEB"
+    },
+    {
+      "id": "D010",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need to inspect the exact contents of a repository file at a known commit.",
+      "expected": "GITHUB"
+    },
+    {
+      "id": "D011",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need to compute the mean of 100000 locally available numeric values.",
+      "expected": "PYTHON"
+    },
+    {
+      "id": "D012",
+      "domain": "tool_route",
+      "prompt": "Return only one word: CALCULATOR, WEB, PYTHON, GITHUB, or MEMORY. You need to recover a previously saved user preference from prior context.",
+      "expected": "MEMORY"
+    },
+    {
+      "id": "D013",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A dual-core system has A score 70, B score 62, fusion score 68 with higher cost. Which is supported? A: Fusion is better. B: Keep A unless risk evidence justifies fusion. C: Count A and B as independent proofs. D: Promote fusion by majority vote.",
+      "expected": "B"
+    },
+    {
+      "id": "D014",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A cold benchmark is used repeatedly to tune prompts after every failure. What is the main issue? A: Better independence. B: Benchmark contamination and overfitting risk. C: Weight decay. D: Hash collision.",
+      "expected": "B"
+    },
+    {
+      "id": "D015",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A candidate improves validation +5, M6 +2, transfer +3, red 0, no critical regression. What should happen next under a gated process? A: Immediate runtime activation. B: Evidence review and final policy gate. C: General capability claim. D: Ignore cold tests.",
+      "expected": "B"
+    },
+    {
+      "id": "D016",
+      "domain": "constraint_mcq",
+      "prompt": "Return only A, B, C, or D. A test fails before the optimizer performs any step. What failure class best fits first? A: Model failure. B: Tool or pipeline failure. C: Generalization failure. D: Proof failure.",
+      "expected": "B"
+    },
+    {
+      "id": "D017",
+      "domain": "numeric_reasoning",
+      "prompt": "Return only the integer result. A benchmark has 40 tasks and a model gets 75 percent correct. How many tasks are correct?",
+      "expected": "30"
+    },
+    {
+      "id": "D018",
+      "domain": "numeric_reasoning",
+      "prompt": "Return only the integer result. A system resolves 18 of 24 cases. What is the coverage percentage rounded to the nearest integer?",
+      "expected": "75"
+    },
+    {
+      "id": "D019",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A second model is added but never improves accuracy, risk, or coverage and doubles latency. What does ablation support? A: Keep it because two models sound stronger. B: Remove or disable the second model for that scope. C: Count it as independent evidence. D: Promote to runtime.",
+      "expected": "B"
+    },
+    {
+      "id": "D020",
+      "domain": "logic_mcq",
+      "prompt": "Return only A, B, C, or D. A fusion system sees disagreement and has no evidence to resolve it. What is the evidence-preserving action? A: Hide the disagreement. B: Randomly choose. C: Preserve the contradiction or abstain. D: Average model names.",
+      "expected": "C"
+    }
+  ]
+}
