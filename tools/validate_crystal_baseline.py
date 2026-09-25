@@ -12,10 +12,15 @@ mem=json.loads((R/"config/memory-fabric-v1.json").read_text())
 
 assert cp["message"]==1
 assert cp["runtime_changed"] is False
-assert farms["max_farms"]==172
-assert farms["policy"]["farm_cap"]==172
-assert len(farms["farms"])==172
-assert {f["id"] for f in farms["farms"]}==set(range(1,173))
+
+# The crystal baseline preserves farms 1..172. Later farms may only extend it append-only.
+expected=farms["max_farms"]
+assert expected >= 172
+assert farms["policy"]["farm_cap"]==expected
+assert len(farms["farms"])==expected
+assert {f["id"] for f in farms["farms"]}==set(range(1, expected+1))
+assert all(any(f["id"]==i for f in farms["farms"]) for i in range(1,173))
+
 assert top["per_ai_agent_slots"]==8
 assert top["burst_pool"]["max_agents"]==20
 assert top["runtime_changed"] is False
@@ -23,13 +28,27 @@ assert crystal["no_overwrite"] is True
 assert "APPEND_OR_VERSION_NEVER_DESTRUCTIVE_OVERWRITE" in crystal["invariants"]
 assert route["routes"]["private_data_plane"]["availability"]=="VERIFIED_SCOPED"
 assert mem["status"].startswith("CONTROL_PLANE_ACTIVE_HF_PRIVATE_SCOPED_VERIFIED")
-missing=[f["id"] for f in farms["farms"] if f.get("infrastructure_status")=="BLOCKED_MISSING_REPOSITORY"]
+
+by_id={f["id"]:f for f in farms["farms"]}
+assert by_id[162]["repository_exists"] is False
+assert by_id[162]["status"]=="PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING"
+assert (R/by_id[162]["local_scaffold"]).exists()
+
+if expected >= 174:
+    for i in (173,174):
+        assert by_id[i]["repository_exists"] is True
+        assert by_id[i]["repository_initialized"] is False
+        assert (R/by_id[i]["local_scaffold"]).exists()
+
+missing=[f["id"] for f in farms["farms"] if f.get("repository_exists") is False]
 assert missing==[162], missing
 
 print(json.dumps({
  "status":"PASS",
  "campaign_message":1,
+ "crystal_baseline_min_farms":172,
  "registry_count":len(farms["farms"]),
+ "extension_count":max(0, expected-172),
  "agent_slots_per_ai":top["per_ai_agent_slots"],
  "burst_pool_max":top["burst_pool"]["max_agents"],
  "hf_scope":"SCOPED_VERIFIED",
