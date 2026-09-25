@@ -321,8 +321,8 @@
           "retention_without_contamination"
         ]
       },
-      "project_state": "D3_PRIVATE_COLD_BASELINES_IN_PROGRESS",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
+      "project_state": "D2_PASS_M6_V2_SEALED_D3_IN_PROGRESS",
+      "dual_core_state": "D3_PRIVATE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
@@ -512,8 +512,8 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "D3_PRIVATE_COLD_BASELINES_IN_PROGRESS",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
+      "project_state": "D2_PASS_M6_V2_SEALED_D3_IN_PROGRESS",
+      "dual_core_state": "D3_PRIVATE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
