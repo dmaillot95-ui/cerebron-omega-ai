@@ -1,8 +1,13 @@
 CEREBRON ALL-AI STRATEGY COUNCIL
 mission=C80-ALL-AI-STRATEGY-COUNCIL-001
 available_logical_ai=38
-representative_slot=A2_ANALYST
-max_parallel=20
-shared_model=Qwen/Qwen2.5-0.5B-Instruct
+execution=5_SHARED_MODEL_LOAD_SHARDS
+shards=8,8,8,7,7
+max_parallel=5
+shared_model=Qwen/Qwen3-4B
+revision=1cfa9a7208912126459214e8b04321603b3df60c
+format_contract=V7_QWEN3_UNICODE_ALIAS_STRICT
+audit=CEREBRON_ALL_AI_STRATEGY_COUNCIL_AUDIT_V2
+required_gate=38_RECEIPTS_38_INFERENCE_38_PARSE_38_SCORABLE
 independent_evidence_claim=false
 goal=next-roadmap-advice-plus-assistant-contribution-audit
