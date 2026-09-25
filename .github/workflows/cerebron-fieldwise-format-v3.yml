@@ -1,0 +1,192 @@
+name: CEREBRON Fieldwise Format Protocol V3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/fieldwise-format-v3-launch.json'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-36177878435
+          path: baseline-selection
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - name: Verify source baseline and launch
+        run: |
+          python - <<'PY'
+          import json
+          launch=json.load(open("control/fieldwise-format-v3-launch.json"))
+          assert launch["schema"]=="CEREBRON_FIELDWISE_FORMAT_V3_LAUNCH"
+          assert launch["authorized"] is True
+          winner=json.load(open("baseline-selection/winner.json"))
+          assert winner["candidate_metrics"]["PLAIN6"]["parse_pass"]==0
+          assert winner["candidate_metrics"]["PLAIN6"]["count"]==2
+          print("FIELDWISE_V3_VALIDATION_BASELINE=PASS 0/2")
+          PY
+          python -m py_compile evolution/fieldwise_format_protocol_v3.py
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: fieldwise-v3-qwen3-1cfa9a7208912126459214e8b04321603b3df60c
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute validation intervention
+        run: |
+          python evolution/fieldwise_format_protocol_v3.py \
+            --targets "SAPHEA,AELYS" \
+            --model-id "Qwen/Qwen3-4B" \
+            --revision "1cfa9a7208912126459214e8b04321603b3df60c" \
+            --run-id "${{ github.run_id }}" \
+            --output-root artifacts/fieldwise-v3/validation
+      - name: Require validation gain
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/fieldwise-v3/validation/summary.json"))
+          assert x["receipt_count"]==2
+          assert x["semantic_complete_count"]>0
+          out={
+            "baseline_complete":0,
+            "candidate_complete":x["semantic_complete_count"],
+            "gain":x["semantic_complete_count"],
+            "advance_to_holdout":x["semantic_complete_count"]>0
+          }
+          open("artifacts/fieldwise-v3/validation-decision.json","w").write(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fieldwise-v3-validation-${{ github.run_id }}
+          path: artifacts/fieldwise-v3
+          if-no-files-found: error
+          retention-days: 30
+
+  holdout:
+    needs: validate
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-holdout-${{ matrix.key }}-36177878435
+          path: baseline
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: fieldwise-v3-${{ matrix.key }}-${{ matrix.revision }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute frozen holdout intervention
+        run: |
+          python evolution/fieldwise_format_protocol_v3.py \
+            --targets "ETHERION,PSI" \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --output-root "artifacts/fieldwise-v3/holdout/${{ matrix.key }}"
+      - name: Compare against source baseline
+        run: |
+          python - <<'PY'
+          import json,glob,pathlib
+          base=json.load(open("baseline/summary.json"))
+          cand=glob.glob("artifacts/fieldwise-v3/holdout/*/summary.json")
+          assert len(cand)==1
+          c=json.load(open(cand[0]))
+          out={
+            "model_id":c["model_id"],
+            "model_revision":c["model_revision"],
+            "baseline_complete":base["baseline_parse_pass"],
+            "candidate_complete":c["semantic_complete_count"],
+            "gain":c["semantic_complete_count"]-base["baseline_parse_pass"],
+            "strict_gain":c["semantic_complete_count"]>base["baseline_parse_pass"],
+            "weight_change":False
+          }
+          p=pathlib.Path(cand[0]).parent/"comparison.json"
+          p.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fieldwise-v3-holdout-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/fieldwise-v3/holdout/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: holdout
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fieldwise-v3-holdout-*
+          path: downloaded
+      - uses: actions/download-artifact@v4
+        with:
+          name: fieldwise-v3-validation-${{ github.run_id }}
+          path: validation
+      - name: Final cross-lineage adjudication
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          comps=[json.load(open(p)) for p in glob.glob("downloaded/**/comparison.json",recursive=True)]
+          val=json.load(open("validation/validation-decision.json"))
+          fail=[]
+          if len(comps)!=2: fail.append("comparison_count")
+          if val.get("advance_to_holdout") is not True: fail.append("validation_no_gain")
+          if len({(x["model_id"],x["model_revision"]) for x in comps})!=2: fail.append("lineage_count")
+          both= len(comps)==2 and all(x.get("strict_gain") for x in comps)
+          out={
+            "schema":"CEREBRON_FIELDWISE_FORMAT_V3_AUDIT",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS" if not fail else "FAIL",
+            "validation":val,
+            "holdout_comparisons":comps,
+            "strict_gain_both_lineages":both,
+            "promotion_decision":"PROMOTE_INTERFACE_PROTOCOL" if (not fail and both) else "HOLD_NO_CROSS_LINEAGE_GAIN",
+            "promotion_ceiling":"INTERFACE_PROTOCOL_ONLY_NO_WEIGHT_IMPROVEMENT",
+            "weight_change":False,
+            "training_released":False,
+            "failures":fail
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/fieldwise-format-v3-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fieldwise-format-v3-audit-${{ github.run_id }}
+          path: artifacts/fieldwise-format-v3-audit.json
+          if-no-files-found: error
+          retention-days: 30
