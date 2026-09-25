@@ -1,0 +1,84 @@
+name: CEREBRON Format Selection Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/format-selection-diagnostic-launch.json'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify launch
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("control/format-selection-diagnostic-launch.json"))
+          assert x["schema"]=="CEREBRON_FORMAT_SELECTION_DIAGNOSTIC_LAUNCH_V1"
+          assert x["source_run_id"]==36177878435
+          print("DIAGNOSTIC_LAUNCH=PASS")
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: format-fast-v2-selection-36177878435
+          path: selection
+          run-id: 36177878435
+          github-token: ${{ github.token }}
+      - name: Diagnose parse failures
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,re,os
+          rows=[]
+          for p in sorted(glob.glob("selection/receipts/*.json")):
+              r=json.load(open(p))
+              raw=r.get("raw_output","")
+              parsed=r.get("parsed",{})
+              rows.append({
+                "target_ai":r.get("target_ai"),
+                "contract":r.get("contract"),
+                "parse_ok":r.get("parse_ok"),
+                "prompt_echo":r.get("prompt_echo"),
+                "raw_length":len(raw),
+                "raw_sha256":r.get("output_sha256"),
+                "raw_prefix":raw[:500],
+                "parsed_keys_nonempty":sorted([k for k,v in parsed.items() if str(v).strip()]),
+                "line_count":len([x for x in raw.splitlines() if x.strip()])
+              })
+          causes={
+            "prompt_echo":sum(bool(r["prompt_echo"]) for r in rows),
+            "empty_or_short":sum(r["raw_length"]<10 for r in rows),
+            "partial_parse":sum(0<len(r["parsed_keys_nonempty"])<6 for r in rows),
+            "zero_parse":sum(len(r["parsed_keys_nonempty"])==0 for r in rows),
+            "complete_but_rejected":sum(len(r["parsed_keys_nonempty"])==6 and not r["parse_ok"] for r in rows)
+          }
+          report={
+            "schema":"CEREBRON_FORMAT_SELECTION_DIAGNOSTIC_V1",
+            "source_run_id":36177878435,
+            "receipt_count":len(rows),
+            "causes":causes,
+            "rows":rows,
+            "weight_change":False,
+            "training_released":False,
+            "interpretation_ceiling":"FORMAT_FAILURE_DIAGNOSTIC_ONLY"
+          }
+          raw=json.dumps(report,sort_keys=True,separators=(",",":")).encode()
+          report["report_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/format-selection-diagnostic.json").write_text(json.dumps(report,indent=2)+"\n")
+          print(json.dumps(report,sort_keys=True))
+          if len(rows)!=6: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: format-selection-diagnostic
+          path: artifacts/format-selection-diagnostic.json
+          if-no-files-found: error
+          retention-days: 30
