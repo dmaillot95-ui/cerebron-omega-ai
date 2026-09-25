@@ -1,0 +1,9 @@
+SAPHEA LORA COUNTER AUDIT + RED TEAM
+version=v1
+training_run=36100266729
+transfer_run=36101181888
+adapter_sha=0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080
+audit_subset=36_sha_selected
+redteam=72_near_miss
+training_on_audit=DENY
+promotion=NOT_PROMOTED
