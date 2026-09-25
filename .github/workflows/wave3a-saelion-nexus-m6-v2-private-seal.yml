@@ -1,0 +1,232 @@
+name: Wave3A SAELION NEXUS M6 V2 Private Seal
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/wave3a-saelion-nexus-m6-v2-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seal:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ai: SAELION
+            slug: saelion
+            private_path: saelion/M6/SAELION-M6-V2.json
+          - ai: NEXUS
+            slug: nexus
+            private_path: nexus/M6/NEXUS-M6-V2.json
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install HF client
+        run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Seal private M6
+        env:
+          AI: ${{ matrix.ai }}
+          SLUG: ${{ matrix.slug }}
+          PRIVATE_PATH: ${{ matrix.private_path }}
+        run: |
+          mkdir -p receipts/wave3a-m6-v2
+          python - <<'PY'
+          import hashlib,json,os,pathlib,secrets,tempfile
+          from collections import Counter
+          from huggingface_hub import HfApi,hf_hub_download
+
+          ai=os.environ["AI"]; slug=os.environ["SLUG"]; private_path=os.environ["PRIVATE_PATH"]
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+
+          files=set(api.list_repo_files(repo_id=repo,repo_type="model"))
+          created_now=False
+          if private_path in files:
+              fn=pathlib.Path(hf_hub_download(repo_id=repo,filename=private_path,repo_type="model",token=token,force_download=True))
+              raw=fn.read_bytes(); suite=json.loads(raw)
+          else:
+              rng=secrets.SystemRandom()
+              if ai=="SAELION":
+                  domains=["lesson_selection","compression_fidelity","transfer","negative_transfer_detection","memory_hygiene","calibration"]
+              elif ai=="NEXUS":
+                  domains=["entity_linking","dependency_tracking","tool_routing","evidence_provenance","contradiction_routing","graph_retrieval"]
+              else:
+                  raise SystemExit("UNKNOWN_AI")
+
+              tasks=[]
+              for domain in domains:
+                  labels=["PASS"]*4+["FAIL"]*4+["INSUFFICIENT"]*4
+                  rng.shuffle(labels)
+                  for j,label in enumerate(labels,1):
+                      a=rng.randint(11,97); b=rng.randint(101,997); c=rng.randint(3,29)
+                      nonce=secrets.token_hex(4)
+                      if ai=="SAELION":
+                          if domain=="lesson_selection":
+                              evidence={"PASS":f"lesson L{a} reproduced in {c} independent scoped tests with provenance",
+                                        "FAIL":f"lesson L{a} contradicts a frozen transfer result",
+                                        "INSUFFICIENT":f"lesson L{a} has only one unreplicated observation"}[label]
+                              prompt=f"SAELION lesson selection. Candidate {nonce}: {evidence}. Should it be promoted as a validated reusable lesson? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="compression_fidelity":
+                              evidence={"PASS":f"compressed record preserves claim, source IDs, limits and failure cases; size ratio {a}%",
+                                        "FAIL":f"compressed record drops the only counterexample and provenance link P{b}",
+                                        "INSUFFICIENT":f"compressed record claims fidelity but original record hash is unavailable"}[label]
+                              prompt=f"SAELION compression audit {nonce}: {evidence}. Is fidelity sufficiently demonstrated? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="transfer":
+                              evidence={"PASS":f"lesson succeeds on held-out domain T{c} and original domain with no critical regression",
+                                        "FAIL":f"lesson improves source domain but fails held-out transfer T{c}",
+                                        "INSUFFICIENT":f"lesson has source-domain score {a}% but no held-out transfer test"}[label]
+                              prompt=f"SAELION transfer check {nonce}: {evidence}. Is positive transfer established? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="negative_transfer_detection":
+                              evidence={"PASS":f"post-transfer regression scan shows zero critical regressions across {c} protected tests",
+                                        "FAIL":f"post-transfer run breaks protected invariant I{a}",
+                                        "INSUFFICIENT":f"transfer was applied but protected regression suite was not executed"}[label]
+                              prompt=f"SAELION negative-transfer check {nonce}: {evidence}. Is absence of harmful transfer established? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="memory_hygiene":
+                              evidence={"PASS":f"memory item has SHA, provenance, class M4 and audit PASS; M6 excluded",
+                                        "FAIL":f"memory item copies sealed M6 content into training candidate set",
+                                        "INSUFFICIENT":f"memory item has content but no provenance or class tag"}[label]
+                              prompt=f"SAELION memory hygiene {nonce}: {evidence}. Is the item safe for the claimed reuse? Return only PASS, FAIL, or INSUFFICIENT."
+                          else:
+                              evidence={"PASS":f"report states scoped accuracy {a}% with explicit uncertainty and limits",
+                                        "FAIL":f"report observes {a}% on one benchmark and declares universal correctness",
+                                        "INSUFFICIENT":f"report gives confidence {a}% without calibration data"}[label]
+                              prompt=f"SAELION calibration check {nonce}: {evidence}. Is the confidence claim properly calibrated? Return only PASS, FAIL, or INSUFFICIENT."
+                      else:
+                          if domain=="entity_linking":
+                              evidence={"PASS":f"entity E{a} is linked by exact stable ID and two matching attributes",
+                                        "FAIL":f"entity E{a} is linked to a different stable ID despite name similarity",
+                                        "INSUFFICIENT":f"only a common display name is available; no stable ID"}[label]
+                              prompt=f"NEXUS entity-link audit {nonce}: {evidence}. Is the entity link established? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="dependency_tracking":
+                              evidence={"PASS":f"node N{a} lists dependency D{b}, and execution receipt confirms D{b} completed first",
+                                        "FAIL":f"node N{a} executed before required dependency D{b}",
+                                        "INSUFFICIENT":f"node N{a} names dependency D{b} but no execution order receipt exists"}[label]
+                              prompt=f"NEXUS dependency check {nonce}: {evidence}. Is dependency satisfaction established? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="tool_routing":
+                              evidence={"PASS":f"mission requires repository mutation and router selects GitHub write tool with explicit target",
+                                        "FAIL":f"mission requires exact arithmetic but router selects web search only",
+                                        "INSUFFICIENT":f"mission intent is ambiguous between retrieval and mutation"}[label]
+                              prompt=f"NEXUS tool-routing audit {nonce}: {evidence}. Is the routing decision justified? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="evidence_provenance":
+                              evidence={"PASS":f"claim C{a} points to source S{b}, immutable hash, timestamp and extraction location",
+                                        "FAIL":f"claim C{a} cites source S{b} but hash resolves to different content",
+                                        "INSUFFICIENT":f"claim C{a} has a URL label only, with no immutable receipt"}[label]
+                              prompt=f"NEXUS provenance audit {nonce}: {evidence}. Is provenance sufficient? Return only PASS, FAIL, or INSUFFICIENT."
+                          elif domain=="contradiction_routing":
+                              evidence={"PASS":f"two sources disagree materially and router sends case to RED_TEAM plus evidence reconciliation",
+                                        "FAIL":f"two sources disagree but router silently keeps the first result",
+                                        "INSUFFICIENT":f"apparent disagreement may be unit mismatch; normalization has not been checked"}[label]
+                              prompt=f"NEXUS contradiction routing {nonce}: {evidence}. Is the routing response adequate? Return only PASS, FAIL, or INSUFFICIENT."
+                          else:
+                              evidence={"PASS":f"graph query returns all nodes on verified path A{a}->B{c}->C{b} with provenance",
+                                        "FAIL":f"graph query omits required dependency B{c} from the only verified path",
+                                        "INSUFFICIENT":f"graph is partially indexed and completeness is unknown"}[label]
+                              prompt=f"NEXUS graph retrieval audit {nonce}: {evidence}. Is the retrieval result sufficiently supported? Return only PASS, FAIL, or INSUFFICIENT."
+
+                      tasks.append({"id":f"{ai}-M6V2-{len(tasks)+1:03d}","domain":domain,"prompt":prompt,"expected":label})
+
+              assert len(tasks)==72
+              counts=Counter(t["domain"] for t in tasks)
+              labels=Counter(t["expected"] for t in tasks)
+              assert len(counts)==6 and all(v==12 for v in counts.values())
+              assert labels=={"PASS":24,"FAIL":24,"INSUFFICIENT":24}
+              suite={
+                "schema":f"{ai}_M6_PRIVATE_SYNTHETIC_V2",
+                "ai_id":ai,
+                "classification":"M6_COLD_BENCHMARK_SEALED_PRIVATE",
+                "deny_training":True,
+                "training_eligible":False,
+                "exact_prompts_public":False,
+                "generation_policy":"SYSTEM_RANDOM_RUNTIME_ONE_TIME_SEAL",
+                "task_count":72,
+                "domain_counts":dict(sorted(counts.items())),
+                "label_counts":dict(sorted(labels.items())),
+                "tasks":tasks
+              }
+              raw=(json.dumps(suite,indent=2,ensure_ascii=False)+"\n").encode()
+              with tempfile.NamedTemporaryFile("wb",delete=False) as tf:
+                  tf.write(raw); src=tf.name
+              api.upload_file(path_or_fileobj=src,path_in_repo=private_path,repo_id=repo,repo_type="model",commit_message=f"Seal {ai} M6 V2 private")
+              created_now=True
+
+          if suite.get("deny_training") is not True or suite.get("training_eligible") is not False or suite.get("exact_prompts_public") is not False:
+              raise SystemExit("M6_GUARD_FAIL")
+          if len(suite.get("tasks",[]))!=72: raise SystemExit("M6_COUNT_FAIL")
+          raw=(json.dumps(suite,indent=2,ensure_ascii=False)+"\n").encode()
+          sha=hashlib.sha256(raw).hexdigest()
+          dst=pathlib.Path(hf_hub_download(repo_id=repo,filename=private_path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(dst.read_bytes()).hexdigest()!=sha: raise SystemExit("M6_READBACK_SHA_FAIL")
+          receipt={
+            "schema":f"{ai}_M6_V2_PRIVATE_RELEASE_RECEIPT",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "ai_id":ai,
+            "created_now":created_now,
+            "private_path":private_path,
+            "dataset_sha256":sha,
+            "task_count":72,
+            "domain_counts":suite["domain_counts"],
+            "label_counts":suite["label_counts"],
+            "deny_training":True,
+            "training_eligible":False,
+            "exact_prompts_public":False,
+            "hf_private_readback_sha_pass":True,
+            "claim_ceiling":"PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING"
+          }
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path(f"receipts/wave3a-m6-v2/{slug}.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave3a-m6-v2-${{ matrix.slug }}
+          path: receipts/wave3a-m6-v2/${{ matrix.slug }}.json
+          if-no-files-found: error
+
+  audit:
+    needs: seal
+    if: always() && needs.seal.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wave3a-m6-v2-*
+          path: downloaded
+          merge-multiple: true
+      - name: Audit and persist public receipts
+        run: |
+          mkdir -p receipts/wave3a-m6-v2
+          python - <<'PY'
+          import glob,json,pathlib,shutil
+          rows=[json.load(open(p)) for p in glob.glob("downloaded/*.json")]
+          assert {r["ai_id"] for r in rows}=={"SAELION","NEXUS"}
+          assert len(rows)==2
+          for r in rows:
+              assert r["deny_training"] is True
+              assert r["training_eligible"] is False
+              assert r["exact_prompts_public"] is False
+              assert r["hf_private_readback_sha_pass"] is True
+          for p in glob.glob("downloaded/*.json"):
+              shutil.copy2(p,pathlib.Path("receipts/wave3a-m6-v2")/pathlib.Path(p).name)
+          print(json.dumps({"status":"PASS","ai_ids":sorted(r["ai_id"] for r in rows)}))
+          PY
+      - name: Persist receipts
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave3a-m6-v2/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAELION NEXUS M6 V2 private seals ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
