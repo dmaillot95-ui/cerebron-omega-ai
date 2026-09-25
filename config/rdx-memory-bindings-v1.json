@@ -146,10 +146,15 @@
   },
   "semantic_retrieval_canary": {
     "run_id": 36156985796,
-    "state": "IN_PROGRESS",
+    "state": "FAIL_REPAIR_REQUIRED",
     "linked_memory_farm_id": 115,
     "corpus": "CEREBRON_OWNED_SYNTHETIC_PRIVATE",
+    "embedding_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "top1_accuracy": 0.8,
+    "mean_reciprocal_rank": 0.9,
+    "failed_query_count": 2,
     "training": false,
-    "claim_ceiling": "NO_SEMANTIC_RETRIEVAL_QUALITY_CLAIM_UNTIL_RECEIPT_PASS"
+    "claim_ceiling": "NO_SEMANTIC_RETRIEVAL_QUALITY_PASS_CLAIM"
   }
 }
