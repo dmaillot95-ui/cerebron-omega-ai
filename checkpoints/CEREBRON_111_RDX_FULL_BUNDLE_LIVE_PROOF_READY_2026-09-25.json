@@ -1,0 +1,85 @@
+{
+  "schema": "CEREBRON_111_RDX_FULL_BUNDLE_LIVE_PROOF_READY_V2",
+  "date": "2026-09-25",
+  "scope": "RDX_RELEASE_BUILD_LINK_INTEGRITY_LIVE_PROOF_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "017e28a7ebd5dadad94eed6c3ecae02365cc6df8",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "b42674ebf4e8119a72fa328808c28eacfe30d2e9",
+    "full_validation": {
+      "run_id": 36174867746,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36174867965,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36174867708,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_BY_PUSH_POLICY",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "static_quality": {
+    "html_files": 7,
+    "inline_scripts": 4,
+    "browser_js_syntax_gate": "PASS",
+    "internal_links_checked": 27,
+    "static_link_integrity_gate": "PASS",
+    "hosting_portability_gate": "PASS",
+    "static_release_build_contract": "PASS"
+  },
+  "release_integrity": {
+    "file_count": 15,
+    "aggregate_sha256": "845c5de7fcbd30d85c23cdd0b265bc27cf6576ce1bcddaeb7cccdc77c60ea189",
+    "manifest_schema": "RDX_RELEASE_MANIFEST_V1",
+    "manifest_gate": "PASS"
+  },
+  "live_deployment_proof": {
+    "script": "scripts/verify-live-deployment.mjs",
+    "schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "endpoint_semantic_checks": true,
+    "full_bundle_sha256_checks": true,
+    "full_bundle_byte_length_checks": true,
+    "aggregate_sha256_reconstruction": true,
+    "proof_artifact": "rdx-production-deployment-proof",
+    "production_verified": false,
+    "reason": "NO_REAL_DEPLOYMENT_YET"
+  },
+  "hosting": {
+    "github_pages_owner_enablement_required": true,
+    "vercel_connected_teams_count": 0,
+    "shared_builder": "scripts/build-static-release.mjs",
+    "vercel_build_command": "node scripts/build-static-release.mjs",
+    "output_directory": "dist"
+  },
+  "product_claim_ceiling": {
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "production_deployment_verified": false,
+    "automatic_ai_execution": false,
+    "automatic_publication": false,
+    "client_request_server_submission": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Owner enables GitHub Pages Source=GitHub Actions once.",
+    "Manual dispatch Pages workflow with deploy=true.",
+    "Require deploy PASS.",
+    "Require verify-live V2 PASS including all bundle SHA-256 checks.",
+    "Archive proof artifact and only then mark production deployment verified.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
