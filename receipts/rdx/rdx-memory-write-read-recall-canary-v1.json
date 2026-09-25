@@ -1,0 +1,26 @@
+{
+  "schema": "CEREBRON_RDX_MEMORY_WRITE_READ_RECALL_CANARY_V1",
+  "run_id": 36143467119,
+  "status": "PASS",
+  "source_farm_id": 152,
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "repo_private": true,
+  "namespace": "RDX_SHARED",
+  "object_path": "RDX_SHARED/M1/21/21fe4dc012c9a0d668f2c4e5c2ce6bc77c0dbb2debe472071d2893b5c323c178.json",
+  "object_sha256": "21fe4dc012c9a0d668f2c4e5c2ce6bc77c0dbb2debe472071d2893b5c323c178",
+  "index_path": "RDX_SHARED/INDEX/by-rdx-id/RDX-MEMORY-CANARY-001/CLAIM-001.json",
+  "index_sha256": "cbbcc3c803313a7abb0c47d8085dde071c0097cf4b037b550fa1e3e8d57d424f",
+  "write": "PASS",
+  "authenticated_read": "PASS",
+  "readback_sha": "PASS",
+  "recall_index_lookup": "PASS",
+  "recall_pointer_follow": "PASS",
+  "memory_classes": [
+    "M1",
+    "M7"
+  ],
+  "gold_write": "NOT_ATTEMPTED",
+  "training": "NOT_EXECUTED",
+  "claim_ceiling": "PRIVATE_WRITE_READ_SHA_AND_ID_POINTER_RECALL_PASS; SEMANTIC_RETRIEVAL_QUALITY_NOT_TESTED",
+  "receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f"
+}
