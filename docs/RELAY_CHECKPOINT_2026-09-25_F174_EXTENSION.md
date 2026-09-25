@@ -3,35 +3,22 @@
 Date : 2026-09-25  
 Mode : REALITY / EVIDENCE / APPEND-ONLY
 
-## 1. Registre
-
-- version : 2.25
-- max_farms : 174
-- farm_cap : 174
-- F01→F172 : cristal historique préservé
-- F173/F174 : extensions append-only
-- constellation grecque : inchangée jusqu'à F172
-
-## 2. F162 — NU
+## F162 — NU
 
 Dépôt cible :
 `dmaillot95-ui/cerebron-farm-162-nu`
 
 État réel :
-- entrée registre présente ;
 - scaffold local présent et validé ;
-- dépôt dédié toujours manquant ;
-- entraînement : `NOT_TRAINED` ;
+- dépôt dédié : manquant ;
+- entraînement : NOT_TRAINED ;
 - aucune exécution ou déploiement revendiqué ;
-- bootstrap canonique préparé dans :
-  `config/farm-bootstrap-manifest-f162-f174.json`.
+- bootstrap canonique : `config/farm-bootstrap-manifest-f162-f174.json`.
 
 Statut :
 `PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING`
 
-F162 n'était donc pas vide : son infrastructure locale existe, mais son dépôt dédié manque encore.
-
-## 3. F173 — AÉLYS LIVE
+## F173 — AÉLYS LIVE
 
 Dépôt :
 `dmaillot95-ui/cerebron-farm-173-aelys-live`
@@ -39,102 +26,108 @@ Dépôt :
 État réel :
 - dépôt initialisé ;
 - contrats locaux qualifiés ;
-- selftest dédié : SUCCESS, run `36156589051` ;
-- HEAD de qualification : `6a99ba8807ffd77fca95249c3f206b6c636dd024` ;
-- routage RDX corrigé vers `RDX_EXCHANGE` ;
-- F152 reste BETA et ne route pas RDX ;
-- TikTok / TTS / avatar / runtimes distants : `UNQUALIFIED` ;
-- entraînement : `NOT_TRAINED` ;
-- production live : `NOT_DEPLOYED`.
+- selftest : SUCCESS, run `36156589051` ;
+- RDX route : `RDX_EXCHANGE` ;
+- F152 interdit comme route RDX ;
+- TikTok / TTS / avatar / runtimes distants : UNQUALIFIED ;
+- training : NOT_TRAINED ;
+- production live : NOT_DEPLOYED.
 
 Statut :
 `BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED`
 
-## 4. F174 — ELYRA VISUAL SIMULATION
+## F174 — ELYRA VISUAL / VIDEO SIMULATION
 
 Dépôt :
 `dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation`
 
-### Dépôt et selftest
+### Dépôt
 
-- premier commit : `e270fa591e6f16afee3d9ae7a3f1d458539ec085`
-- dépôt initialisé : true
-- selftest après promotion : SUCCESS, run `36160671044`
-- HEAD selftest : `7e11aa760be6badfca60f1ff1e60997a12aabb84`
-- entraînement : `NOT_TRAINED`
+- initialized : true
+- selftest post-MP4 : SUCCESS, run `36161396850`
+- qualified head : `c122845a964461968ed9e7f9545b2edef59f0dcc`
+- training : NOT_TRAINED
 
-### Canary visuel réellement exécuté
+### Visual-state canary
 
 Run :
 `36160498658`
 
-Scénario :
-`F174-CANARY-001`
-
-Type :
-`DETERMINISTIC_VISUAL_STATE_SEQUENCE_CANARY`
-
-Résultat :
-- 8 frames d'état ;
+- scenario : `F174-CANARY-001`
+- frames : 8
 - result SHA-256 :
   `edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9`
-- artifact ID :
-  `10875238594`
-- artifact :
-  `f174-visual-canary`
-- artifact digest :
-  `sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc`
+- artifact ID : `10875238594`
 
-Limites obligatoires :
-- rendu vidéo final exécuté : false
-- modèle physique revendiqué : false
-- validation physique revendiquée : false
-- test physique : `NOT_TESTED`
+### MP4 video-render canary
+
+Run :
+`36161254578`
+
+- scenario : `F174-VIDEO-CANARY-001`
+- render kind : `DETERMINISTIC_SYNTHETIC_AVATAR_MP4`
+- frames : 24
+- FPS : 12
+- resolution : 320x180
+- bytes : 8178
+- frame sequence SHA-256 :
+  `c66ee8a1c31f44083591e969a1cc2d76d6c6307ba748707cbe06fd0acd9972b1`
+- video SHA-256 :
+  `95d5e25537760e22825728d0b019801023bd0ac1c321ab9a66cc6c5b8ca587fa`
+- artifact ID :
+  `10876145807`
+- artifact digest :
+  `sha256:a587f435a5d37690979f3378a02e3d6b84263ca11322b371cd805aaafa2c61f7`
+
+Limites :
+- production_video_claimed : false
+- physical_model_claimed : false
+- physical_validation_claimed : false
+- physical_test_status : NOT_TESTED
+- training_executed : false
 
 Statut :
-`VISUAL_STATE_SEQUENCE_CANARY_EXECUTED`
+`VIDEO_RENDER_CANARY_EXECUTED`
 
-Le canary prouve l'exécution déterministe de la chaîne d'état visuelle.  
-Il ne prouve ni une vidéo de production ni une validation physique.
-
-## 5. Unified Plugin Bus
+## Unified Plugin Bus
 
 Routes :
-
 - `rdx.search → RDX_EXCHANGE`
 - `rdx.fetch → RDX_EXCHANGE`
 - `presenter.compose → AELYS`
 - `avatar.speak → ELYRA`
 - `visual.simulate → ELYRA`
 
-Provider ELYRA :
-- F113 + F174 référencés ;
-- visual canary : PASS ;
-- runtime général : `UNQUALIFIED`.
+ELYRA reste :
+`runtime_status = UNQUALIFIED`
 
-Preuves après alignement :
-- Unified Plugin Bus Guard : run `36160985915` — SUCCESS
-- Omega Core : run `36160985902` — SUCCESS
-- Main Integration Gate : run `36160986289` — SUCCESS
-- GUARDIAN Security Regression : run `36160995408` — SUCCESS
+Le MP4 canary est une preuve d'exécution du renderer, pas une qualification production.
 
-## 6. Reality / Crystal
+## Guards finaux
 
-Reality Guard après promotion F174 :
-- run `36160830901` — SUCCESS
+- F162/F173/F174 Reality Guard : run `36161840847` — SUCCESS
+- CÉRÉBRON Omega Core : run `36161840848` — SUCCESS
+- CÉRÉBRON Main Integration Gate : run `36161840863` — SUCCESS
+- Civilization Crystal Baseline Guard : run `36161698459` — SUCCESS
+- Unified Plugin Bus Guard : run `36161712968` — SUCCESS
+- Guardian Security Regression : dernier run concerné `36160995408` — SUCCESS
 
-Crystal Baseline après mise à jour des assertions d'extension :
-- run `36160932451` — SUCCESS
+## Réalité actuelle
 
-Le socle F01→F172 reste préservé ; F173/F174 restent des extensions append-only.
+F162 :
+`LOCAL_SCAFFOLD_PRESENT / DEDICATED_REPOSITORY_MISSING`
 
-## 7. Règles de vérité
+F173 :
+`LOCAL_CONTRACTS_QUALIFIED / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE`
 
-`REPOSITORY_EXISTS != REPOSITORY_INITIALIZED`
+F174 :
+`VISUAL_CANARY_PASS / MP4_RENDER_CANARY_PASS / NOT_PRODUCTION / NOT_PHYSICALLY_VALIDATED / NOT_TRAINED`
+
+## Règles
 
 `REPOSITORY_INITIALIZED != RUNTIME_EXECUTED`
 
-`VISUAL_STATE_CANARY != VIDEO_PRODUCTION`
+`VIDEO_RENDER_CANARY != VIDEO_PRODUCTION`
 
 `VISUAL_SIMULATION != PHYSICAL_TEST`
 
@@ -142,26 +135,15 @@ Le socle F01→F172 reste préservé ; F173/F174 restent des extensions append-o
 
 `CLAIM <= EVIDENCE`
 
-## 8. Prochaine étape
+## Prochaines étapes utiles
 
-### F162
-Créer le dépôt dédié dès qu'un outil autorisé de création de repository est disponible, puis appliquer le bootstrap canonique et les guards.
+F162 :
+- créer le dépôt dédié quand un outil de création de repository est disponible.
 
-### F173
-Qualifier les runtimes externes un par un :
-- client live ;
-- TikTok ;
-- voix ;
-- TTS ;
-- avatar ;
-- RDX distant ;
-- mémoires distantes.
+F173 :
+- qualifier les runtimes live réels un par un avec canary + trace.
 
-Aucun passage à LIVE sans canary + trace/artifact.
-
-### F174
-Prochaine étape utile :
-1. ajouter un vrai pipeline de rendu frame/image ;
-2. produire un premier artefact visuel ou vidéo réel ;
-3. enregistrer son SHA/provenance ;
-4. conserver `physical_validation=false` tant qu'aucun test physique n'existe.
+F174 :
+- passer d'un avatar MP4 synthétique déterministe à un pipeline visuel plus riche ;
+- conserver provenance et hash pour chaque rendu ;
+- ne déclarer production/physique qu'après tests correspondants.
