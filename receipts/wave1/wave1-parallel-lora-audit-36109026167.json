@@ -1,0 +1,68 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_LORA_AUDIT_V1",
+  "run_id": 36109026167,
+  "role_count": 4,
+  "training_executed_count": 4,
+  "weights_changed_count": 4,
+  "hf_readback_pass_count": 4,
+  "g6_candidate_count": 1,
+  "rollback_count": 3,
+  "unique_base_lineage_count": 1,
+  "independent_evidence_count": 0,
+  "roles": {
+    "AELYS": {
+      "adapter_sha256": "fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb",
+      "gains": {
+        "VALIDATION": 6,
+        "M6": 0,
+        "TRANSFER": -4,
+        "RED": 0
+      },
+      "critical_regression": true,
+      "validation_gate_pass": true,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE"
+    },
+    "AFAH": {
+      "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+      "gains": {
+        "VALIDATION": 12,
+        "M6": 2,
+        "TRANSFER": 6,
+        "RED": 4
+      },
+      "critical_regression": false,
+      "validation_gate_pass": true,
+      "cold_gate_pass": true,
+      "decision": "G6_CANDIDATE_HOLD_F72_AFAH"
+    },
+    "ETHERION": {
+      "adapter_sha256": "2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": -2,
+        "TRANSFER": -1,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "validation_gate_pass": true,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE"
+    },
+    "METRION": {
+      "adapter_sha256": "6e51db22126ae3218429dc4afe62df4a43d8d824b6ee374b305315a70afb682f",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": 7,
+        "TRANSFER": 0,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "validation_gate_pass": false,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE"
+    }
+  },
+  "claim_ceiling": "FOUR_REAL_SCOPED_LORA_TRAININGS_WITH_SEPARATE_ADAPTERS_SHARED_BASE_LINEAGE_NO_AUTO_PROMOTION",
+  "audit_sha256": "940ac872f0e3682567eb0164781b0cb8bc342ccf1b6b1cfad0767467e8f796b9"
+}
