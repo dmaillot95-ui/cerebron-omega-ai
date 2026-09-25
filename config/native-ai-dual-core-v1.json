@@ -203,18 +203,32 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "REPOSITORY_PRESENT_NOT_YET_BENCHMARKED",
-      "dual_core_state": "PENDING_D1_TO_D8",
+      "project_state": "D2_PASS_M6_V2_SEALED_D3_IN_PROGRESS",
+      "dual_core_state": "D3_SINGLE_CORE_BASELINES_IN_PROGRESS",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
-        "D2": "PENDING_PER_AI_BINDING",
-        "D3": "PENDING",
-        "D4": "PENDING",
-        "D5": "PENDING",
-        "D6": "PENDING",
+        "D2": "PASS",
+        "D3": "IN_PROGRESS_PRIVATE_M6_V2",
+        "D4": "BLOCKED_PENDING_D3",
+        "D5": "BLOCKED_PENDING_D4",
+        "D6": "BLOCKED_PENDING_D4",
         "D7": "PENDING",
         "D8": "PENDING"
+      },
+      "evidence": {
+        "d2_repo": "dmaillot95-ui/cerebron-farm-146-elysium",
+        "d2_run_id": 36129514044,
+        "d2_audit_sha256": "58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+        "d2_qwen_receipt_sha256": "d85260ee8c9a7aa9cb4db5cadf859e9892eb1cf7a113d0ef611ac2de0be926bb",
+        "d2_smol_receipt_sha256": "902b7a78c96399353eb2a752eae4362cb5bfbac3090f02b9a854cc27973d5e37",
+        "m6_v2_run_id": 36130164581,
+        "m6_v2_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
+        "m6_v2_receipt_sha256": "0ad8d4ac99ba1c26e68b1f411112e6df62e20fde8a9b5e2aacf96502b7c78abb",
+        "m6_v2_exact_prompts_public": false,
+        "m6_v1_public_prompt_suite": "DISQUALIFIED_FROM_COLD_EVIDENCE",
+        "m6_v1_failed_f146_run_id": 36129831934,
+        "d3_run_id": 36130283226
       }
     },
     {
