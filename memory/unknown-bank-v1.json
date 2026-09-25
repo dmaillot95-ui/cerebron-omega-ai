@@ -109,8 +109,8 @@
     {
       "UNKNOWN_ID": "UNK-M43-SAPHEA-TRANSFER-ROBUSTNESS-001",
       "CLASS": "U1",
-      "STATE": "PARTIALLY_MEASURED",
-      "DESCRIPTION": "SAPHEA LoRA v1 has verified weight change and positive M6/aggregate transfer gain, but critical per-label transfer regression and no Red Team gain. It is unknown whether a lower-capacity, lower-LR, full-context repair can retain gain without forgetting.",
+      "STATE": "MEASURED_FAMILY_EXHAUSTED",
+      "DESCRIPTION": "Same-GOLD LoRA family exhausted: v1 achieved real scoped learning but critical transfer regression; v3 failed stratified validation; v4 passed validation but produced zero M6 gain. Further work requires materially new audited training data and fresh cold evaluation.",
       "MEASURABLE": true,
       "EVIDENCE_REFS": [
         "run:36100266729",
@@ -121,7 +121,7 @@
         "AFAH",
         "F72"
       ],
-      "STATUS": "OPEN_V3_REPAIR_CANARY"
+      "STATUS": "OPEN_NEW_DATA_REGIME_REQUIRED"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
