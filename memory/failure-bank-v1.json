@@ -576,6 +576,22 @@
       "REPRODUCIBLE": true,
       "REPAIR_STATUS": "ROLLBACK_RETAIN_EVIDENCE_NEW_DATA_OR_METHOD_REQUIRED",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-WAVE2-COLD-DUPLICATE-PROMPT-001",
+      "MISSION_ID": "WAVE2_PARALLEL_DATASET_PACKAGE",
+      "AI_ID": "SPIRALION|HYPERION|ASTRION|SAPHEA_MICRO",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "DUPLICATE_COLD_PROMPT_BEFORE_RELEASE",
+      "ROOT_CAUSE": "Deterministic cold-suite fact templates could produce identical serialized prompts when random field order repeated.",
+      "EVIDENCE_REFS": [
+        "run:36114043066",
+        "repair_commit:3585b5c0f551b968459076344fa44cca8b19b06b"
+      ],
+      "IMPACT": "Package release blocked before leakage gate and before any training; F72/AFAH admission remains valid.",
+      "REPRODUCIBLE": true,
+      "REPAIR_STATUS": "RESOLVED_WITH_NONSEMANTIC_DETERMINISTIC_CASE_TAGS",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
