@@ -1,0 +1,79 @@
+{
+  "schema": "CEREBRON_109_RDX_BROWSER_SAFE_VERIFIABLE_RELEASE_READY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SITE_RELEASE_VALIDATION_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "264fad90e24263d5f7eedd7aa88fd8c8608f04a3",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "6163819a948f6c398f67b01d63a1e98c97113692",
+    "full_validation": {
+      "run_id": 36173924193,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36173924271,
+      "status": "PASS"
+    },
+    "public_pack_projection": {
+      "run_id": 36173924313,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36173924188,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "browser_quality": {
+    "gate": "RDX_BROWSER_JS_SYNTAX_GATE",
+    "status": "PASS",
+    "regressions_fixed": [
+      "LITERAL_BACKSLASH_N_IN_INLINE_SCRIPT",
+      "INVALID_ROOT_PATH_REGEX",
+      "MALFORMED_URL_CONSTRUCTOR_PARENTHESIS",
+      "EXTRA_DOSSIER_LINK_PARENTHESIS"
+    ],
+    "verification_page": "dist/verify.html",
+    "verification_mode": "CLIENT_SIDE_SHA256_ALL_PUBLIC_FILES"
+  },
+  "release_integrity": {
+    "schema": "RDX_RELEASE_MANIFEST_V1",
+    "file_count": 15,
+    "aggregate_sha256": "55bd2e78b90339cea0f7f7c4c5f7b7f692b955148b3385e69ed86e8e44e4816f",
+    "hash_algorithm": "SHA-256",
+    "release_manifest_gate": "PASS"
+  },
+  "product_state": {
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_ai_execution": false,
+    "automatic_publication": false,
+    "payment_enabled": false,
+    "client_request_server_submission": false,
+    "client_request_local_export": true,
+    "production_deployment_verified": false
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "after_owner_enablement": [
+    "Manual dispatch RDX GitHub Pages Public Preview with deploy=true.",
+    "Require deploy job PASS.",
+    "Require verify-live job PASS.",
+    "Archive rdx-production-deployment-proof artifact.",
+    "Only then change production_deployment_verified to true."
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "coordination_manifest": "config/coordination/F172-F174-recursive-ai-handoff.json"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FALSE_TRAINING_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
