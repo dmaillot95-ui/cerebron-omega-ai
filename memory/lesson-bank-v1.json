@@ -103,6 +103,40 @@
       },
       "LIMITS": "Synthetic scoped classification only; counter-audit and F72 E2 passed, but external independent scientific reproduction is absent. AFAH final authority remains pending.",
       "PROMOTION_STATUS": "L3_F72_SUPPORTED_AFAH_PENDING"
+    },
+    {
+      "LESSON_ID": "LESSON-AGORA-EVIDENCE-SCOPE-001",
+      "CLASS": "L5_VALIDATED",
+      "MISSION_ID": "CEREBRON_SELF_EVOLUTION_G1",
+      "TITLE": "Control-plane gate evidence must be bound to content before content promotion.",
+      "DESCRIPTION": "AGORA previously allowed local proofs of the Boolean promotion-gate invariant to unlock imported content. The corrected V3 rule separates gate-invariant validation from content validation: content promotion requires gate_invariant_ok, imported_gate_summary_pass and content_validation_bound to all be true.",
+      "EVIDENCE_REFS": [
+        "failure:FAIL-AGORA-CONTENT-SCOPE-PROMOTION-001",
+        "before_run:36174153740",
+        "corrective_commit:d25b39ad47a7563a6ee6cbe8ce04f7b62d9327f2",
+        "corrective_run:36174630729",
+        "validation_run:36175649888",
+        "validation_artifact:10882591087",
+        "validation_artifact_digest:sha256:e6b8f8d71975c0600a9cad6b8490dda423fe15831c683450156ee3ed04bbf95d",
+        "validation_sha256:e5fc59051d8762559187d84608b657b382913e41f918deeec0bcaebb4b9fe3b4"
+      ],
+      "MEASURED": {
+        "historical_false_promotion_reproduced": true,
+        "corrected_false_promotion_blocked": true,
+        "exhaustive_truth_table_cases": 8,
+        "exhaustive_accepting_cases": 1,
+        "adversarial_attacks": 5,
+        "adversarial_false_accepts": 0,
+        "validation_methods": 3,
+        "independent_model_lineages": 0
+      },
+      "INVARIANT": "GATE_INVARIANT_EVIDENCE_DOES_NOT_VALIDATE_IMPORTED_CONTENT",
+      "POSITIVE_RULE": "Promote imported content only when the control-plane gate is valid, all required imported gates pass, and content-specific validation is bound to packet hashes.",
+      "NEGATIVE_RULE": "Do not use evidence about the gate mechanism itself as evidence for unrelated imported content.",
+      "TRAINING_USE": "CONTROL_PLANE_EPISTEMIC_BOUNDARY_ONLY",
+      "LIMITS": "Deterministic validation of an AGORA control-plane invariant only. It does not validate imported scientific packet content, does not establish independent model evidence, and is not a neural-improvement claim.",
+      "PROMOTION_STATUS": "L5_VALIDATED_CONTROL_PLANE",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
