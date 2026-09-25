@@ -1,0 +1,123 @@
+{
+  "schema": "CEREBRON_STOP_RESUME_PROTOCOL_V1",
+  "status": "DEFINED_FAIL_CLOSED",
+  "date": "2026-09-25",
+  "purpose": "Provide a non-destructive stop/resume protocol that preserves evidence and prevents a local freeze canary from being misreported as a system-wide stop.",
+  "implementation": {
+    "local_state_machine": "runtime/global_freeze.py",
+    "canary_workflow": ".github/workflows/global-freeze-canary.yml",
+    "enforcement_scope_now": "LOCAL_CONTROL_STATE_CANARY_AND_COOPERATIVE_WORKFLOWS_ONLY",
+    "systemwide_stop_claimed": false,
+    "note": "Existing workflows that do not consult a persisted runtime-control state can continue to run. Therefore a local canary PASS is not a global scheduler stop."
+  },
+  "states": [
+    "RUN",
+    "DRAIN",
+    "CHECKPOINT",
+    "VERIFY",
+    "FROZEN",
+    "RESUME_VERIFY",
+    "RUN"
+  ],
+  "stop_protocol": [
+    "FETCH_CURRENT_HEADS",
+    "INVENTORY_QUEUED_AND_IN_PROGRESS_RUNS",
+    "DENY_NEW_MUTATING_WORK_IN_CONTROLLED_SCOPE",
+    "DRAIN_OR_CLASSIFY_EXISTING_MUTATING_RUNS",
+    "CAPTURE_CHECKPOINT",
+    "HASH_CHECKPOINT_AND_CRITICAL_CONFIG",
+    "VERIFY_HEADS_DID_NOT_DRIFT_UNREVIEWED",
+    "ENTER_FROZEN_READ_ONLY",
+    "WRITE_STOP_RECEIPT"
+  ],
+  "stop_acceptance": {
+    "required_fields": [
+      "master_head",
+      "controlled_repo_heads",
+      "pending_runs",
+      "failed_runs",
+      "checkpoint_path",
+      "checkpoint_sha256",
+      "control_generation",
+      "frozen_at"
+    ],
+    "mutating_pending_policy": "ZERO_OR_EXPLICITLY_CLASSIFIED_AS_OUTSIDE_ENFORCED_SCOPE",
+    "checkpoint_hash_required": true,
+    "read_only_required": true,
+    "global_stop_claim_requires_all_controlled_workflows_to_honor_runtime_gate": true
+  },
+  "frozen_mode": {
+    "allowed": [
+      "READ",
+      "AUDIT",
+      "FETCH",
+      "VERIFY",
+      "LOG_FAILURES",
+      "PREPARE_PATCH_WITHOUT_COMMIT"
+    ],
+    "denied": [
+      "UNTRACKED_MUTATION",
+      "TRAINING_RELEASE",
+      "AUTOMATIC_PROMOTION",
+      "NEW_EXTERNAL_PAID_CALLS"
+    ],
+    "preserve": [
+      "FAILURE_BANK",
+      "RUN_LOGS",
+      "ARTIFACTS",
+      "SHA256",
+      "CONTRADICTIONS",
+      "CHECKPOINTS"
+    ]
+  },
+  "resume_protocol": [
+    "FETCH_CURRENT_HEADS",
+    "VERIFY_FROZEN_CHECKPOINT_HASH",
+    "COMPARE_HEAD_DRIFT_SINCE_FREEZE",
+    "REVIEW_FAILED_AND_PENDING_RUNS",
+    "REVALIDATE_CRITICAL_GATES",
+    "ENTER_RESUME_VERIFY",
+    "ENABLE_MUTATING_WORK_ONLY_IN_CONTROLLED_SCOPE",
+    "ENTER_RUN",
+    "WRITE_RESUME_RECEIPT"
+  ],
+  "resume_acceptance": {
+    "requires_verified_frozen_checkpoint": true,
+    "unresolved_head_collision": "HOLD",
+    "failed_critical_gate": "HOLD",
+    "unknown_checkpoint": "HOLD",
+    "resume_from_checkpoint_sha256_required": true
+  },
+  "stop_receipt_minimum": [
+    "EVENT",
+    "TIMESTAMP",
+    "HEADS",
+    "PENDING_RUNS",
+    "FAILED_RUNS",
+    "CHECKPOINT_SHA256",
+    "CONTROL_GENERATION",
+    "ENFORCEMENT_SCOPE",
+    "STATUS"
+  ],
+  "resume_receipt_minimum": [
+    "EVENT",
+    "TIMESTAMP",
+    "FROM_CHECKPOINT_SHA256",
+    "HEADS_REVIEWED",
+    "GATES_REVALIDATED",
+    "CONTROL_GENERATION",
+    "STATUS"
+  ],
+  "commands": {
+    "STOP": "FETCH -> INVENTORY -> DRAIN -> CHECKPOINT -> VERIFY -> FROZEN",
+    "RESUME": "FETCH -> VERIFY_CHECKPOINT -> REVIEW_DRIFT -> REVALIDATE_GATES -> RESUME_VERIFY -> RUN",
+    "SUITE": "FETCH -> VERIFY -> CONTINUE_FROM_CHECKPOINT"
+  },
+  "fail_closed_rules": [
+    "UNKNOWN_PENDING_RUNS=>HOLD",
+    "UNKNOWN_CHECKPOINT_HASH=>HOLD",
+    "HEAD_COLLISION=>HOLD",
+    "CRITICAL_GATE_FAILURE=>HOLD",
+    "LOCAL_FREEZE_CANARY_PASS!=GLOBAL_EXECUTION_STOPPED"
+  ]
+}
