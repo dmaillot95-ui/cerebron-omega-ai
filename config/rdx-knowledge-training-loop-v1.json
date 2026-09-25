@@ -1,0 +1,246 @@
+{
+  "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
+  "date": "2026-09-25",
+  "status": "CONFIGURED_GATED_NO_RDX_NEURAL_TRAINING_CLAIM_YET",
+  "source": {
+    "farm_id": 152,
+    "name": "CEREBRON RDX EXCHANGE",
+    "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange"
+  },
+  "objective": "Every validated RDX research asset becomes reusable knowledge immediately, while only audited GOLD subsets may later modify neural adapters or weights.",
+  "atomic_objects": [
+    "RDX_RESEARCH",
+    "QUESTION",
+    "HYPOTHESIS",
+    "CLAIM",
+    "SOURCE",
+    "CALCULATION",
+    "TEST",
+    "RESULT",
+    "COUNTEREXAMPLE",
+    "FAILURE",
+    "ALTERNATIVE",
+    "SIMULATION_RECEIPT",
+    "LIMITATION",
+    "EVIDENCE_LEVEL",
+    "CONCLUSION",
+    "VERSION"
+  ],
+  "immediate_knowledge_path": {
+    "pipeline": [
+      "RDX_ATOMIC_INGRESS",
+      "SCHEMA_CHECK",
+      "PROVENANCE_CHECK",
+      "SHA256",
+      "DEDUP",
+      "DOMAIN_TAG",
+      "M1_TRACE",
+      "M7_EVIDENCE",
+      "VECTOR_INDEX",
+      "KNOWLEDGE_GRAPH",
+      "RAG_AVAILABLE"
+    ],
+    "target_memory_farms": [
+      114,
+      115,
+      116,
+      118,
+      119,
+      120
+    ],
+    "rule": "RAG_AVAILABILITY_DOES_NOT_EQUAL_NEURAL_LEARNING"
+  },
+  "gold_candidate_path": {
+    "pipeline": [
+      "RDX_VALIDATED",
+      "LICENSE_ORIGIN_CHECK",
+      "CLIENT_RIGHTS_CHECK",
+      "PROVENANCE_PASS",
+      "DEDUP_PASS",
+      "CONTRADICTION_REVIEW",
+      "REPRODUCTION_OR_TEST_WHEN_APPLICABLE",
+      "F72_PASS",
+      "AFAH_PASS",
+      "NO_M6_CONTAMINATION",
+      "M4_GOLD"
+    ],
+    "fail_closed": true,
+    "no_auto_gold": true
+  },
+  "training_route": {
+    "enabled_as_policy": true,
+    "auto_training": false,
+    "batching": {
+      "min_new_gold_items": 32,
+      "max_new_gold_items": 256,
+      "trigger": "THRESHOLD_OR_EXPLICIT_CAMPAIGN",
+      "one_training_canary_per_target_at_a_time": true
+    },
+    "targets": {
+      "SAPHEA": [
+        "execution",
+        "procedures",
+        "tool-use",
+        "routing"
+      ],
+      "SPIRALION": [
+        "reasoning-trajectories",
+        "continuity",
+        "checkpoint-recovery"
+      ],
+      "ETHERION": [
+        "difficult-rd",
+        "science",
+        "math",
+        "technical-reasoning"
+      ],
+      "HYPERION": [
+        "alternative-hypotheses",
+        "divergence",
+        "contrastive-search"
+      ],
+      "ASTRION": [
+        "space-rd",
+        "mission-design",
+        "aerospace"
+      ],
+      "METRION": [
+        "engineering",
+        "calculation",
+        "simulation-validation"
+      ],
+      "AFAH": [
+        "audit",
+        "critique",
+        "claim-ceiling",
+        "evidence-discipline"
+      ],
+      "SAPHEA_MICRO": [
+        "small-specialists",
+        "domain-routing",
+        "compact-sft"
+      ],
+      "ELYSION": [
+        "generation",
+        "invention",
+        "candidate-solutions"
+      ],
+      "ELYSIUM": [
+        "verification",
+        "red-team",
+        "optimization",
+        "validation"
+      ],
+      "SAELION": [
+        "lesson-selection",
+        "compression",
+        "transfer",
+        "negative-transfer"
+      ],
+      "ALPHA": [
+        "divergence",
+        "novel-representation",
+        "constructive-search"
+      ],
+      "OMEGA": [
+        "proof",
+        "counterexample",
+        "falsification",
+        "formal-audit"
+      ],
+      "DELTA": [
+        "scientific-modeling",
+        "simulation-design",
+        "sensitivity"
+      ],
+      "NEXUS": [
+        "knowledge-linking",
+        "dependency-graph",
+        "tool-routing",
+        "provenance"
+      ]
+    },
+    "route_rule": "ONE_GOLD_ITEM_MAY_ROUTE_TO_ZERO_ONE_OR_MULTIPLE_TARGET_DATASETS_WITH_SHARED_PROVENANCE_BUT_MUST_NOT_COUNT_AS_INDEPENDENT_EVIDENCE"
+  },
+  "privacy_and_rights": {
+    "public_or_owned_rdx": "eligible_after_all_gates",
+    "client_private_rdx": "DENY_SHARED_TRAINING_BY_DEFAULT",
+    "client_private_training_requires": [
+      "EXPLICIT_CONTRACTUAL_RIGHT",
+      "TENANT_SCOPE",
+      "NO_CROSS_TENANT_LEAKAGE",
+      "DATASET_MANIFEST"
+    ],
+    "secrets": "NEVER_TRAIN"
+  },
+  "dataset_gate": {
+    "required": [
+      "dataset_sha256",
+      "record_count",
+      "source_manifest",
+      "license_origin_manifest",
+      "dedup_manifest",
+      "target_ai",
+      "train_validation_split",
+      "m6_exclusion_e2e",
+      "dependency_fingerprint"
+    ],
+    "forbidden": [
+      "M6_COLD_BENCHMARK",
+      "RAW_UNVERIFIED_RDX",
+      "SECRET_DATA",
+      "UNLICENSED_EXTERNAL_CONTENT",
+      "CLIENT_PRIVATE_WITHOUT_RIGHTS"
+    ]
+  },
+  "neural_training_proof": {
+    "required_before_claiming_learning": [
+      "weights_changed=true OR adapter_changed=true",
+      "weights_or_adapter_sha256",
+      "base_model_revision",
+      "training_config_sha256",
+      "dataset_sha256",
+      "training_run_id",
+      "baseline_m6",
+      "posttrain_m6",
+      "transfer_test",
+      "regression_test",
+      "ablation_vs_base_or_previous",
+      "rollback_checkpoint"
+    ],
+    "claim_rule": "NO_NEURAL_IMPROVEMENT_CLAIM_WITHOUT_REAL_WEIGHT_OR_ADAPTER_CHANGE_AND_MEASURED_COLD_GAIN"
+  },
+  "promotion": {
+    "required": [
+      "POSTTRAIN_M6_GAIN",
+      "TRANSFER_NONNEGATIVE_OR_EXPLAINED",
+      "NO_CRITICAL_REGRESSION",
+      "F72_PASS",
+      "AFAH_PASS"
+    ],
+    "else": "ROLLBACK_OR_HOLD"
+  },
+  "continuous_loop": [
+    "RDX_RESEARCH",
+    "ATOMIC_MEMORY",
+    "RAG_REUSE",
+    "NEW_RDX",
+    "GOLD_CURATION",
+    "BATCH_DATASET",
+    "REAL_TRAINING",
+    "COLD_EVALUATION",
+    "PROMOTE_OR_ROLLBACK",
+    "NEW_MODEL_GENERATION",
+    "NEW_RDX_RESEARCH"
+  ],
+  "hard_rules": [
+    "MEMORY_NOT_TRAINING",
+    "M6_NEVER_IN_TRAIN",
+    "SIMULATION_NOT_REAL_WORLD_TEST",
+    "FAILURES_AND_NEGATIVE_RESULTS_MAY_BE_GOLD_IF_VERIFIED",
+    "DO_NOT_TRAIN_AFTER_EVERY_RESPONSE",
+    "DEDUP_BEFORE_COUNTING",
+    "CLAIM_LE_EVIDENCE",
+    "REALITY_GT_COHERENCE"
+  ]
+}
