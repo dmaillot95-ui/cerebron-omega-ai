@@ -43,7 +43,19 @@
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
-      "training": "trajectory/checkpoint SFT"
+      "training": "trajectory/checkpoint SFT",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36117279297,
+      "adapter_sha256": "d60d5956bfe4461614ff682c89abc5826781f9624b6ec77369473977084343fb",
+      "gains": {
+        "VALIDATION": 0,
+        "M6": 1,
+        "TRANSFER": 0,
+        "RED": 0
+      },
+      "critical_regression": false,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "ETHERION": {
       "target": "difficult science math R&D",
@@ -63,11 +75,35 @@
     },
     "HYPERION": {
       "target": "divergent hypotheses and alternative methods",
-      "training": "diversity/contrastive candidate generation"
+      "training": "diversity/contrastive candidate generation",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36117279297,
+      "adapter_sha256": "cbe55939d9ffc02338c86d960f0b3dcbe6e958b5720eced0608ac91cff98e290",
+      "gains": {
+        "VALIDATION": 0,
+        "M6": 0,
+        "TRANSFER": 0,
+        "RED": 0
+      },
+      "critical_regression": false,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "ASTRION": {
       "target": "aerospace R&D",
-      "training": "aerospace GOLD SFT/LoRA"
+      "training": "aerospace GOLD SFT/LoRA",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36117279297,
+      "adapter_sha256": "282eca1e4682ff1778281d9f944a83627a86c001ac838c86c4bb6179d8a4a2fa",
+      "gains": {
+        "VALIDATION": 8,
+        "M6": -7,
+        "TRANSFER": 6,
+        "RED": 0
+      },
+      "critical_regression": true,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     },
     "METRION": {
       "target": "engineering calculation simulation validation",
@@ -132,7 +168,19 @@
     },
     "SAPHEA_MICRO": {
       "target": "population of compact specialists",
-      "training": "per-domain LoRA/QLoRA"
+      "training": "per-domain LoRA/QLoRA",
+      "status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "run_id": 36117279297,
+      "adapter_sha256": "283cfe1c08ba297b744da7cc33a628f560b7e9766d383434ca2b630f2187586f",
+      "gains": {
+        "VALIDATION": 3,
+        "M6": -1,
+        "TRANSFER": -1,
+        "RED": 0
+      },
+      "critical_regression": false,
+      "hf_private_readback_sha_pass": true,
+      "runtime_activation": "DENY"
     }
   },
   "promotion_requirements": {
@@ -402,11 +450,32 @@
   "all_ai_training_coverage": {
     "registry": "config/all-ai-neural-training-coverage-v1.json",
     "available_ai_count": 38,
-    "neural_training_executed_count": 6,
-    "wave2_pipeline_active_count": 4,
+    "neural_training_executed_count": 10,
+    "wave2_pipeline_active_count": 0,
     "dual_core_native_pending_count": 7,
     "specialist_pending_count": 20,
     "orchestrator_pending_count": 1,
     "invariant": "NO_AVAILABLE_AI_MAY_BE_OMITTED_FROM_THE_TRAINING_ROADMAP"
+  },
+  "wave2_parallel_lora": {
+    "canonical_run_id": 36117279297,
+    "branch": "feat/wave2-parallel-ai-baselines-v1",
+    "branch_head": "97798f8d630117ce731b1ab226f1ae5a0cfbb83c",
+    "release_sha256": "eaf6e53d1097758d7ce70d73ccdc5c3a39de0f9d25c4c59d76889b1b699bc439",
+    "audit_sha256": "54accefb1425e0fa1bde8d6243202bbff5de2d9d9074a59d811ac67d2715ef9d",
+    "audit_artifact_id": 10858596960,
+    "training_executed_count": 4,
+    "weights_changed_count": 4,
+    "hf_private_readback_pass_count": 4,
+    "g6_candidate_count": 0,
+    "rollback_count": 4,
+    "unique_base_lineage_count": 2,
+    "independent_evidence_count": 0,
+    "f72_model_review_skipped": true,
+    "afah_model_final_skipped": true,
+    "reason": "NO_G6_CANDIDATES",
+    "runtime_activation": false,
+    "g7_promoted": false,
+    "claim_ceiling": "FOUR_REAL_SCOPED_LORA_TRAININGS_TWO_SHARED_BASE_LINEAGES_NO_AUTO_PROMOTION"
   }
 }
