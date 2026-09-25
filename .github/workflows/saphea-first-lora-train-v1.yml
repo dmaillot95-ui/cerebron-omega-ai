@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 45
     env:
       PYTHONPATH: platform
-      HF_TOKEN: \${{ secrets.HF_TOKEN }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_REPO: cerebron-omega/cerebron-private-memory
     steps:
       - uses: actions/checkout@v4
@@ -191,11 +191,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: saphea-first-lora-training-\${{ github.run_id }}
+          name: saphea-first-lora-training-${{ github.run_id }}
           path: |
             platform/artifacts/saphea-first-lora-training-v1.json
             platform/artifacts/saphea-epistemic-baseline-v1.json
-            receipts/training/saphea-first-lora-\${{ github.run_id }}.json
+            receipts/training/saphea-first-lora-${{ github.run_id }}.json
           if-no-files-found: warn
 
       - name: Persist public metadata pointer only
@@ -203,9 +203,9 @@ jobs:
         run: |
           git config user.name cerebron-bot
           git config user.email actions@users.noreply.github.com
-          git add receipts/training/saphea-first-lora-\${{ github.run_id }}.json
+          git add receipts/training/saphea-first-lora-${{ github.run_id }}.json
           git diff --cached --quiet && exit 0
-          git commit -m "receipt: SAPHEA first real LoRA \${{ github.run_id }}"
+          git commit -m "receipt: SAPHEA first real LoRA ${{ github.run_id }}"
           for i in 1 2 3; do
             git pull --rebase origin feat/saphea-first-lora-v1 && git push && exit 0
             sleep 5
