@@ -1511,35 +1511,39 @@
       "repo": "cerebron-farm-174-elyra-visual-simulation",
       "domain": "elyra-visual-simulation",
       "identity": "ELYRA",
-      "status": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
+      "status": "VIDEO_RENDER_CANARY_EXECUTED",
       "type": "VISUAL_SIMULATION_FARM",
       "role": "Prepare replayable visual and video simulation contracts for ELYRA without claiming executed simulation or physical validation.",
       "training_status": "NOT_TRAINED",
-      "simulation_status": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
+      "simulation_status": "VIDEO_RENDER_CANARY_EXECUTED",
       "physical_test_status": "NOT_TESTED",
       "repository_exists": true,
       "repository_initialized": true,
       "local_scaffold": "scaffolds/f174-elyra-visual-simulation",
-      "infrastructure_status": "DEDICATED_REPOSITORY_SELFTEST_PASS_VISUAL_CANARY_PASS_EXTERNAL_RENDER_UNQUALIFIED",
+      "infrastructure_status": "DEDICATED_REPOSITORY_SELFTEST_PASS_VIDEO_RENDER_CANARY_PASS_PRODUCTION_UNQUALIFIED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
         "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
-        "dedicated_repo_head": "7e11aa760be6badfca60f1ff1e60997a12aabb84",
-        "dedicated_repo_selftest_run_id": 36160671044,
+        "dedicated_repo_head": "c122845a964461968ed9e7f9545b2edef59f0dcc",
+        "dedicated_repo_selftest_run_id": 36161396850,
         "visual_canary_run_id": 36160498658,
         "visual_canary_result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
         "visual_canary_artifact_id": 10875238594,
-        "visual_canary_artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc"
+        "visual_canary_artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc",
+        "video_canary_run_id": 36161254578,
+        "video_canary_video_sha256": "95d5e25537760e22825728d0b019801023bd0ac1c321ab9a66cc6c5b8ca587fa",
+        "video_canary_artifact_id": 10876145807,
+        "video_canary_artifact_digest": "sha256:a587f435a5d37690979f3378a02e3d6b84263ca11322b371cd805aaafa2c61f7"
       },
       "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json",
       "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
-      "dedicated_repo_head": "7e11aa760be6badfca60f1ff1e60997a12aabb84",
-      "dedicated_repo_selftest_run_id": 36160671044,
+      "dedicated_repo_head": "c122845a964461968ed9e7f9545b2edef59f0dcc",
+      "dedicated_repo_selftest_run_id": 36161396850,
       "visual_simulation_executed": true,
-      "video_render_executed": false,
+      "video_render_executed": true,
       "physical_model_claimed": false,
       "physical_validation_claimed": false,
       "visual_canary": {
@@ -1547,6 +1551,20 @@
         "result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
         "artifact_id": 10875238594,
         "artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc"
+      },
+      "production_video_claimed": false,
+      "video_canary": {
+        "run_id": 36161254578,
+        "scenario_id": "F174-VIDEO-CANARY-001",
+        "render_kind": "DETERMINISTIC_SYNTHETIC_AVATAR_MP4",
+        "frames": 24,
+        "fps": 12,
+        "resolution": "320x180",
+        "video_bytes": 8178,
+        "video_sha256": "95d5e25537760e22825728d0b019801023bd0ac1c321ab9a66cc6c5b8ca587fa",
+        "frame_sequence_sha256": "c66ee8a1c31f44083591e969a1cc2d76d6c6307ba748707cbe06fd0acd9972b1",
+        "artifact_id": 10876145807,
+        "artifact_digest": "sha256:a587f435a5d37690979f3378a02e3d6b84263ca11322b371cd805aaafa2c61f7"
       }
     }
   ],
@@ -1588,6 +1606,9 @@
       174
     ],
     "extension_visual_canary_pass_ids": [
+      174
+    ],
+    "extension_video_canary_pass_ids": [
       174
     ]
   },
