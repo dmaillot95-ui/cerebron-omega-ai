@@ -326,6 +326,39 @@
         "parse_pass_count:5",
         "all_pass:true"
       ]
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-M42-SPECIALIZATION-COLLAPSE-001",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "ALL_38_LOGICAL_AI",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_ROLE",
+      "FAILURE_SIGNATURE": "35_OF_38_GVL_HEAVY_38_OF_38_DUAL_CORE_YES_MEAN_ROLE_ALIGNMENT_0_2456",
+      "ROOT_CAUSE": "All 38 advisory perspectives used the same Qwen3-4B revision and a strongly shared line-of-route/prompt. The shared model anchored many roles on GVL/geometric-gate language and over-accepted dual-core framing.",
+      "EVIDENCE_REFS": [
+        "run:36084488477",
+        "receipts/council/all-ai-strategy-council-36084488477.json",
+        "audit_sha256:eb53171efb7ee1a2baa06514687170763db1db2c5ad04e4da6b7532db00bd64f"
+      ],
+      "IMPACT": "The council is valid as 38 correlated advisory perspectives but not as 38 independent specialist judgments or a consensus for assigning dual-model architectures.",
+      "SCOPE": "Strategy council role fidelity and prompt anchoring.",
+      "REPRODUCIBLE": true,
+      "MEASURED": {
+        "gvl_heavy_count": 35,
+        "dual_core_yes_count": 38,
+        "mean_role_alignment_proxy": 0.2456,
+        "mean_max_redundancy_proxy": 0.3745,
+        "unique_lineage_fingerprints": 1,
+        "independent_evidence_count": 0
+      },
+      "REPAIR_ATTEMPTS": [
+        "future council should use role-specific problem statements rather than one shared GVL-heavy route",
+        "for non-Greek logical roles, DUAL_CORE must be N/A unless explicitly evaluating a named Greek native AI",
+        "run role-fidelity cold canary before another 38-role council"
+      ],
+      "REPAIR_STATUS": "OPEN_ROLE_FIDELITY_REPAIR_REQUIRED",
+      "TRANSFER_RISK": "HIGH_IF_COUNCIL_MAJORITY_IS_TREATED_AS_CONSENSUS",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
