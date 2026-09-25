@@ -1,0 +1,47 @@
+{
+  "schema": "OMEGA_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36142921827,
+  "ai_id": "OMEGA",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "revision_verified": true,
+  "m6_sha256": "c4d5f9be45d3f12560df67ab091278ad13a10ee297a8a83f6e3578d9e2383248",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 30,
+  "accuracy": 0.4166666666666667,
+  "domain": {
+    "assumption_audit": {
+      "correct": 4,
+      "total": 12
+    },
+    "calibration": {
+      "correct": 7,
+      "total": 12
+    },
+    "counterexample_search": {
+      "correct": 4,
+      "total": 12
+    },
+    "formal_validity": {
+      "correct": 7,
+      "total": 12
+    },
+    "proof_gap_detection": {
+      "correct": 4,
+      "total": 12
+    },
+    "reproduction": {
+      "correct": 4,
+      "total": 12
+    }
+  },
+  "elapsed_s": 2573.515,
+  "max_rss_kb": 6656952,
+  "private_result_path": "omega/D3-results/run-36142921827/smollm3-3b.json",
+  "private_result_sha256": "7099991af5b84431c594dbe50b1ded0af87a4a93b65de78020482a377bb03f43",
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "receipt_sha256": "d5a4fc2820f408117207b8435edc18df435411a07534d7cdd0fd54e8b924b9de"
+}

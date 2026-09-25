@@ -1,0 +1,112 @@
+{
+  "schema": "DELTA_D3_PRIVATE_COLD_BASELINE_COMPARISON_V1",
+  "run_id": 36142921827,
+  "ai_id": "DELTA",
+  "status": "PASS",
+  "m6_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
+  "models": [
+    {
+      "schema": "DELTA_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+      "run_id": 36142921827,
+      "ai_id": "DELTA",
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "revision_verified": true,
+      "m6_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
+      "m6_deny_training": true,
+      "weights_changed": false,
+      "task_count": 72,
+      "correct": 44,
+      "accuracy": 0.6111111111111112,
+      "domain": {
+        "assumption_control": {
+          "correct": 8,
+          "total": 12
+        },
+        "dimensional_consistency": {
+          "correct": 8,
+          "total": 12
+        },
+        "model_fidelity": {
+          "correct": 8,
+          "total": 12
+        },
+        "sensitivity": {
+          "correct": 4,
+          "total": 12
+        },
+        "simulation_design": {
+          "correct": 8,
+          "total": 12
+        },
+        "transfer": {
+          "correct": 8,
+          "total": 12
+        }
+      },
+      "elapsed_s": 2510.644,
+      "max_rss_kb": 6696504,
+      "private_result_path": "delta/D3-results/run-36142921827/smollm3-3b.json",
+      "private_result_sha256": "fc8d5ce19eee8eb9e4b942ccf1313d31cf3e09e436481703ff7cd30d6605f5e2",
+      "hf_private_readback_sha_pass": true,
+      "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+      "receipt_sha256": "2a1c8d15e303c4d217c7438d4d7afd215e58042266b11a0f819d1e5095a2a319"
+    },
+    {
+      "schema": "DELTA_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+      "run_id": 36142921827,
+      "ai_id": "DELTA",
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "revision_verified": true,
+      "m6_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
+      "m6_deny_training": true,
+      "weights_changed": false,
+      "task_count": 72,
+      "correct": 48,
+      "accuracy": 0.6666666666666666,
+      "domain": {
+        "assumption_control": {
+          "correct": 8,
+          "total": 12
+        },
+        "dimensional_consistency": {
+          "correct": 8,
+          "total": 12
+        },
+        "model_fidelity": {
+          "correct": 8,
+          "total": 12
+        },
+        "sensitivity": {
+          "correct": 8,
+          "total": 12
+        },
+        "simulation_design": {
+          "correct": 8,
+          "total": 12
+        },
+        "transfer": {
+          "correct": 8,
+          "total": 12
+        }
+      },
+      "elapsed_s": 99.315,
+      "max_rss_kb": 9101128,
+      "private_result_path": "delta/D3-results/run-36142921827/qwen3-4b.json",
+      "private_result_sha256": "dacfc665047288add486e7f339f49688c75d2c6982f667bc32b73274bb35ca88",
+      "hf_private_readback_sha_pass": true,
+      "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+      "receipt_sha256": "9fd12e0cae145c18e35d4d0ffebc9a686dec4079129758f22403ddb97d9dc6b9"
+    }
+  ],
+  "best_single_accuracy": 0.6666666666666666,
+  "best_single_models": [
+    "Qwen/Qwen3-4B"
+  ],
+  "independent_evidence_count": 0,
+  "two_models_not_two_independent_proofs": true,
+  "selection_decision": "NO_DUAL_CORE_PROMOTION_FROM_D3_ALONE",
+  "claim_ceiling": "TWO_SINGLE_CORE_PRIVATE_M6_BASELINES_NO_DUAL_CORE_GAIN_CLAIM",
+  "audit_sha256": "49e879b04b01144f22229bacef8b4d7e96bbee9ded9261096a225c5cbfd8d27b"
+}

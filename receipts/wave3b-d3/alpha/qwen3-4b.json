@@ -1,0 +1,47 @@
+{
+  "schema": "ALPHA_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36142921827,
+  "ai_id": "ALPHA",
+  "model_id": "Qwen/Qwen3-4B",
+  "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "revision_verified": true,
+  "m6_sha256": "ccb4ef540bc8af61d86cee8974f773f5ee1f81614d1e71847bc7214f888f42a8",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 44,
+  "accuracy": 0.6111111111111112,
+  "domain": {
+    "coverage": {
+      "correct": 12,
+      "total": 12
+    },
+    "diversity": {
+      "correct": 8,
+      "total": 12
+    },
+    "novel_representation": {
+      "correct": 4,
+      "total": 12
+    },
+    "redundancy_control": {
+      "correct": 0,
+      "total": 12
+    },
+    "transfer": {
+      "correct": 8,
+      "total": 12
+    },
+    "useful_divergence": {
+      "correct": 12,
+      "total": 12
+    }
+  },
+  "elapsed_s": 2329.337,
+  "max_rss_kb": 8733916,
+  "private_result_path": "alpha/D3-results/run-36142921827/qwen3-4b.json",
+  "private_result_sha256": "21fb2d76ca7e704cdb9fd9589caaf9f63bc40af9c25e66c4befce2670d8caf83",
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "receipt_sha256": "33001649f755f0e238b086486c1978e5a97d14f74375a3febf6327ca01a989e0"
+}

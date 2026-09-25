@@ -1,0 +1,47 @@
+{
+  "schema": "ALPHA_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+  "run_id": 36142921827,
+  "ai_id": "ALPHA",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "revision_verified": true,
+  "m6_sha256": "ccb4ef540bc8af61d86cee8974f773f5ee1f81614d1e71847bc7214f888f42a8",
+  "m6_deny_training": true,
+  "weights_changed": false,
+  "task_count": 72,
+  "correct": 28,
+  "accuracy": 0.3888888888888889,
+  "domain": {
+    "coverage": {
+      "correct": 11,
+      "total": 12
+    },
+    "diversity": {
+      "correct": 5,
+      "total": 12
+    },
+    "novel_representation": {
+      "correct": 1,
+      "total": 12
+    },
+    "redundancy_control": {
+      "correct": 2,
+      "total": 12
+    },
+    "transfer": {
+      "correct": 4,
+      "total": 12
+    },
+    "useful_divergence": {
+      "correct": 5,
+      "total": 12
+    }
+  },
+  "elapsed_s": 1391.457,
+  "max_rss_kb": 6668608,
+  "private_result_path": "alpha/D3-results/run-36142921827/smollm3-3b.json",
+  "private_result_sha256": "57b86bd6b1303c1418053de1b899aaa4bd1bdcdaf2b50acba857ad69a4a49718",
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM",
+  "receipt_sha256": "44a11cc92d1af281f014eef6f988032d8a98c9deece97f84c7ed7563369f89e5"
+}
