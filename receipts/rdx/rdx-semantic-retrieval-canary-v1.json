@@ -33,5 +33,8 @@
   "weights_changed": false,
   "classification": "DEV_CANARY_FAIL_REPAIR_REQUIRED",
   "claim_ceiling": "SYNTHETIC_PRIVATE_RDX_SEMANTIC_RETRIEVAL_CANARY_FAILED_TOP1_THRESHOLD; NOT_PRODUCTION_SCALE_NOT_F115_FULL_RUNTIME",
-  "receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30"
+  "source_run_receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30",
+  "corpus_definition_visibility": "PUBLIC_SYNTHETIC_IN_RUNTIME_SCRIPT",
+  "hf_object_storage": "PRIVATE",
+  "audit_note": "The source run completed retrieval evaluation successfully but failed the declared top-1 threshold; this is a scientific/dev FAIL, not a mechanical runtime failure."
 }
