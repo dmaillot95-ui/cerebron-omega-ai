@@ -156,6 +156,36 @@
       "TRANSFER_RISK": "LOW_IF_RERUN_PASSES",
       "PARENT_SHA": "38902e1e8a6df3efce1188b2ba1a7ed27e07d058",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-REPAIR-REGEX-002",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "CANARY_5",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "V2_REGEX_MULTIPLE_REPEAT_POSITION_4",
+      "ROOT_CAUSE": "Markdown parser still used an over-escaped regular expression. re.match raised 'multiple repeat at position 4' after model generation and before receipt parsing.",
+      "EVIDENCE_REFS": [
+        "run:36075666669",
+        "artifact:10839353117",
+        "artifact:10840117683",
+        "artifact:10839468032",
+        "artifact:10839492994",
+        "artifact:10840027305",
+        "artifact:10840336946"
+      ],
+      "IMPACT": "Five canary executions were marked inference FAIL even though the exception was in post-generation parsing.",
+      "SCOPE": "Council output parser only.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "remove regex parsing entirely",
+        "deterministic Markdown normalization",
+        "same-scale five-AI rerun"
+      ],
+      "REPAIR_STATUS": "V3_IMPLEMENTED_CANARY_REQUIRED",
+      "TRANSFER_RISK": "LOW_AFTER_5_OF_5_PARSE_PASS",
+      "PARENT_SHA": "355e6ffaff51eba8db5f44cf8a8512dd4113d5bb",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
