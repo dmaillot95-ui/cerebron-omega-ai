@@ -50,6 +50,24 @@
         "A6_MEMORY_KEEPER"
       ],
       "STATUS": "OPEN_ACTIVATION_GATES_REMAIN"
+    },
+    {
+      "UNKNOWN_ID": "UNK-M42-ROLE-FIDELITY-TRANSFER-001",
+      "CLASS": "U1",
+      "STATE": "MEASURED_LOCALLY_TRANSFER_UNPROVEN",
+      "DESCRIPTION": "M42 achieved 38/38 execution and parsing, but mean role-alignment proxy was 0.2456 with strong GVL/dual-core anchoring. It remains unknown whether role-specific prompts or distinct models can preserve the 38-role specialization registry on held-out tasks.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "run:36084488477",
+        "receipts/council/all-ai-strategy-council-36084488477.json"
+      ],
+      "ROUTE_TO": [
+        "CEREBRON",
+        "AFAH",
+        "F166-RHO",
+        "METRION"
+      ],
+      "STATUS": "OPEN_ROLE_FIDELITY_COLD_TEST_REQUIRED"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
