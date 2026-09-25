@@ -1,0 +1,7 @@
+mission=M42-ROLE-FIDELITY-REPAIR-001
+sample=SAPHEA,F148-ALPHA,METRION,F166-RHO,F172-PSI
+model=Qwen/Qwen3-4B
+baseline_run=36084488477
+min_mean_role_alignment=0.40
+noncandidate_dual_core=NO
+gvl_recitation_max=1
