@@ -92,6 +92,32 @@
         "transfer_sha256:9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232"
       ],
       "CLAIM_CEILING": "SCOPED_SYNTHETIC_HELD_OUT_TRANSFER_ONLY"
+    },
+    {
+      "TRANSFER_ID": "TR-SAPHEA-LORA-XFER-V1",
+      "SOURCE_TASK": "SAPHEA_EPISTEMIC_M6",
+      "SOURCE_SCORE": 0.5,
+      "TRANSFER_TASK_1": "SAPHEA_EPISTEMIC_TRANSFER_V1_108_DISJOINT",
+      "TRANSFER_SCORE_1": 0.37037037037037035,
+      "BASE_TRANSFER_SCORE": 0.18518518518518517,
+      "TG": 0.18518518518518517,
+      "ABSOLUTE_CORRECT_GAIN": 20,
+      "HELD_OUT": true,
+      "PROMPT_OVERLAP_WITH_GOLD_M6": 0,
+      "ID_OVERLAP_WITH_GOLD_M6": 0,
+      "PREDICTION_CHANGED_COUNT": 67,
+      "HELPFUL_CHANGE_COUNT": 22,
+      "HARMFUL_CHANGE_COUNT": 2,
+      "CRITICAL_REGRESSION_COUNT": 0,
+      "ABLATION_SUPPORTS_VALUE": true,
+      "RESULT": "POSITIVE_SCOPED_TRANSFER_HOLD_FOR_INDEPENDENT_AUDIT",
+      "INDEPENDENCE_LIMIT": "Benchmark generator reuses classify_a/classify_b rule code from dataset module; separate 72-case evaluator required before F72.",
+      "EVIDENCE_REFS": [
+        "run:36101181888",
+        "artifact:10849184976",
+        "receipts/training/saphea-first-lora-transfer-36101181888.json",
+        "adapter_sha256:0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080"
+      ]
     }
   ],
   "rule": "LOCAL_IMPROVEMENT_NE_GENERAL_LEARNING"
