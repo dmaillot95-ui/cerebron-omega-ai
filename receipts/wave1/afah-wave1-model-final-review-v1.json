@@ -1,0 +1,61 @@
+{
+  "schema": "AFAH_WAVE1_MODEL_FINAL_POLICY_REVIEW_V1",
+  "authority": "AFAH_POLICY_GATE",
+  "authority_mode": "DETERMINISTIC_POLICY_GATE_NOT_CANDIDATE_MODEL_INFERENCE",
+  "candidate_adapter_used_for_final_review": false,
+  "checks": {
+    "role_afah": true,
+    "training_real": true,
+    "weights_changed": true,
+    "hf_private_readback": true,
+    "cold_deny_training": true,
+    "validation_gate": true,
+    "cold_gate": true,
+    "no_critical_regression": true,
+    "cold_gains": true,
+    "not_pre_promoted": true,
+    "canonical_single_candidate": true,
+    "canonical_three_rollbacks": true,
+    "correlation_declared": true,
+    "f72_farm": true,
+    "f72_role": true,
+    "f72_supported": true,
+    "f72_adapter_match": true,
+    "f72_candidate_not_reviewer": true,
+    "f72_route": true
+  },
+  "all_required_gates_pass": true,
+  "decision": "G6_VERIFIED_RESEARCH_ONLY",
+  "pointer": {
+    "schema": "AFAH_WAVE1_RESEARCH_ADAPTER_POINTER_V1",
+    "role": "AFAH",
+    "state": "G6_VERIFIED_RESEARCH_ONLY",
+    "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+    "adapter_config_sha256": "d9af1dc17455e0539822fa1267c5c8930194ae7e24addb5eeed14f6678fa4966",
+    "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+    "hf_private_object_prefix": "wave1/AFAH/LORA-V1/run-36109026167",
+    "runtime_activation": false,
+    "default_runtime": false,
+    "g7_promoted": false,
+    "research_use_only": true,
+    "claim_ceiling": "SCOPED_SYNTHETIC_EVIDENCE_CLASSIFICATION_G6_RESEARCH_ONLY"
+  },
+  "source_content_sha256": {
+    "role_receipt": "a3769ebbfd288b48bec4b86c3aede1570ae6c284e4e3f3d73352ef72bcb3ce46",
+    "canonical_audit": "3bb4743e7e27319a26ae3b281faf7f82e3e8cc0ee2644273f13bfebe3b019732",
+    "f72": "cb3c51d024cf1d2ff66bc1a62ac2ad5e78bc1df79596415f204a070da358d599"
+  },
+  "limitations": [
+    "The trained AFAH adapter was not used to judge itself.",
+    "Evidence is synthetic and task-scoped.",
+    "Wave1 roles share a base-model lineage and do not provide four independent confirmations.",
+    "G6 research status does not imply general AFAH capability or runtime superiority."
+  ],
+  "g7_requirements": [
+    "materially new held-out transfer family",
+    "repeat stability without critical per-label regression",
+    "independent or materially distinct reviewer/model lineage",
+    "explicit runtime ablation versus current default before any activation"
+  ],
+  "review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290"
+}

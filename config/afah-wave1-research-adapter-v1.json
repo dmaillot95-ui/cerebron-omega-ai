@@ -1,0 +1,14 @@
+{
+  "schema": "AFAH_WAVE1_RESEARCH_ADAPTER_POINTER_V1",
+  "role": "AFAH",
+  "state": "G6_VERIFIED_RESEARCH_ONLY",
+  "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+  "adapter_config_sha256": "d9af1dc17455e0539822fa1267c5c8930194ae7e24addb5eeed14f6678fa4966",
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "hf_private_object_prefix": "wave1/AFAH/LORA-V1/run-36109026167",
+  "runtime_activation": false,
+  "default_runtime": false,
+  "g7_promoted": false,
+  "research_use_only": true,
+  "claim_ceiling": "SCOPED_SYNTHETIC_EVIDENCE_CLASSIFICATION_G6_RESEARCH_ONLY"
+}
