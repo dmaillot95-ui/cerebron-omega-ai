@@ -105,6 +105,23 @@
         "F166-RHO"
       ],
       "STATUS": "OPEN_REPAIR_ABLATION_REQUIRED"
+    },
+    {
+      "UNKNOWN_ID": "UNK-M43-SAPHEA-TRANSFER-ROBUSTNESS-001",
+      "CLASS": "U1",
+      "STATE": "PARTIALLY_MEASURED",
+      "DESCRIPTION": "SAPHEA LoRA v1 has verified weight change and positive M6/aggregate transfer gain, but critical per-label transfer regression and no Red Team gain. It is unknown whether a lower-capacity, lower-LR, full-context repair can retain gain without forgetting.",
+      "MEASURABLE": true,
+      "EVIDENCE_REFS": [
+        "run:36100266729",
+        "run:36101503838"
+      ],
+      "ROUTE_TO": [
+        "SAPHEA",
+        "AFAH",
+        "F72"
+      ],
+      "STATUS": "OPEN_V3_REPAIR_CANARY"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
