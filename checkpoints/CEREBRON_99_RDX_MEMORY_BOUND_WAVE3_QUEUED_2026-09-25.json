@@ -1,0 +1,81 @@
+{
+  "schema": "CEREBRON_99_RDX_MEMORY_BOUND_WAVE3_QUEUED_V1",
+  "date": "2026-09-25",
+  "farm_count": 152,
+  "rdx": {
+    "farm_id": 152,
+    "ingress_canary_run_id": 36142030500,
+    "ingress_canary": "PASS",
+    "ingress_receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7",
+    "memory_rag": "PASS",
+    "gold": "BLOCKED_BY_F72",
+    "neural_training": "NOT_EXECUTED",
+    "memory_binding_manifest": "config/rdx-memory-bindings-v1.json",
+    "routes": {
+      "F114": "ENCYCLOPEDIC_INDEX",
+      "F115": "VECTOR_SEMANTIC_RAG",
+      "F116": "DEDUP_FUSION",
+      "F117": "CONDITIONAL_SIMULATION_REPLAY",
+      "F118": "GOLD_ONLY_AFTER_F72_AFAH",
+      "F119": "EVIDENCE_ARCHIVE",
+      "F120": "GOVERNOR_FREEZE"
+    },
+    "runtime_limit": "F114_F120_BINDING_CONFIGURED_WRITE_READ_RECALL_NOT_YET_PROVEN"
+  },
+  "elysium": {
+    "d4": "HOLD_NO_ROBUST_GAIN",
+    "d5": "BLOCKED",
+    "d6": "BLOCKED"
+  },
+  "wave3a": {
+    "ai_ids": [
+      "SAELION",
+      "NEXUS"
+    ],
+    "d3_run_id": 36138864930,
+    "state": "IN_PROGRESS",
+    "completed_partial": [
+      "NEXUS_SMOL_48_OF_72"
+    ],
+    "d4": "BLOCKED_PENDING_D3"
+  },
+  "wave3b": {
+    "ai_ids": [
+      "ALPHA",
+      "OMEGA",
+      "DELTA"
+    ],
+    "d2": "PASS_ALL",
+    "m6": "PASS_ALL_PRIVATE_DENY_TRAINING",
+    "d3_run_id": 36142921827,
+    "d3_state": "QUEUED",
+    "d4_workflow": "PREPARED_NOT_TRIGGERED"
+  },
+  "memory_audit": {
+    "run_id": 36143095219,
+    "state": "QUEUED",
+    "expected": {
+      "farm_count": 152,
+      "m6_training": "DENY",
+      "f72": "FAIL",
+      "m4": "BLOCKED_BY_F72"
+    }
+  },
+  "next_exact": [
+    "Close memory audit run 36143095219.",
+    "Close Wave3A D3 run 36138864930 and trigger Wave3A D4 complementarity once only if D3 PASS.",
+    "Allow queued Wave3B D3 run 36142921827 to start as capacity frees; do not duplicate.",
+    "After Wave3B D3 PASS, trigger prepared Wave3B D4 precheck once.",
+    "Do not claim F114-F120 runtime recall until write/read/recall canary passes."
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "QUEUE_IS_NOT_FAILURE",
+    "NO_DUPLICATE_RUNS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
