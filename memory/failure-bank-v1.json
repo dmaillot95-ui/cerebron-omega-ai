@@ -674,7 +674,9 @@
         "diagnostic_digest:sha256:809161a96ecd757aa25997069ad1877eef1f564cf098b3f9599b5e85f4382204",
         "reparse_run:36179033254",
         "reparse_artifact:10883925374",
-        "reparse_digest:sha256:02bdf6e139356d2fdbabdc4942a5f7ad8b9e7df5b8a930274e551803c7305940"
+        "reparse_digest:sha256:02bdf6e139356d2fdbabdc4942a5f7ad8b9e7df5b8a930274e551803c7305940",
+        "fieldwise_v3_run:36179580251",
+        "fieldwise_v3_validation_job:108218388574"
       ],
       "IMPACT": "Structured corrective lessons could not reliably enter audit/admission because valid semantic content was lost at the interface layer.",
       "SCOPE": "Corrective AGORA structured-output interface only; no evidence of a general reasoning regression.",
@@ -696,18 +698,34 @@
         "single JSON object contract",
         "six XML-like tag contract",
         "fuzzy/canonical parser",
-        "planned fieldwise batched generation with deterministic assembler"
+        "planned fieldwise batched generation with deterministic assembler",
+        "fieldwise six-output batched generation: SAPHEA 6/6 but 824.807s; timed out before AELYS"
       ],
-      "REPAIR_STATUS": "OPEN_FIELDWISE_ASSEMBLY_V3_REQUIRED",
+      "REPAIR_STATUS": "OPEN_REPAIR_ON_DEMAND_V3_1_REQUIRED",
       "CURRICULUM_TARGETS": [
         "STRUCTURED_OUTPUT_RELIABILITY",
         "INTERFACE_DECOMPOSITION",
         "DETERMINISTIC_ASSEMBLY",
         "PARSER_ROBUSTNESS",
-        "TOKEN_BUDGET_CONTROL"
+        "TOKEN_BUDGET_CONTROL",
+        "LATENCY_RESOURCE_EFFICIENCY",
+        "REUSE_EXISTING_PARTIAL_OUTPUT"
       ],
       "TRANSFER_RISK": "MEDIUM_INTERFACE_LAYER_ONLY",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "MEASURED_V3": {
+        "run_id": 36179580251,
+        "conclusion": "CANCELLED_TIMEOUT",
+        "validation_baseline_complete": 0,
+        "saphea_structure_complete": true,
+        "saphea_semantic_complete": true,
+        "saphea_nonempty_fields": 6,
+        "saphea_latency_s": 824.807,
+        "aelys_completed": false,
+        "holdout_executed": false,
+        "artifact_uploaded": false,
+        "interpretation": "FIELDWISE_DECOMPOSITION_CAN_COMPLETE_STRUCTURE_BUT_FULL_SIX_FIELD_REGENERATION_IS_TOO_SLOW_ON_CURRENT_CPU_RUNNER"
+      }
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
