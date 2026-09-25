@@ -1,0 +1,20 @@
+name: RDX R&D Handoff Contract Canary V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/rdx-rd-handoff-canary-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pytest
+      - name: Test RDX R&D handoff gates
+        run: python -m pytest -q tests/test_rdx_rd_handoff_v1.py
