@@ -1,0 +1,10 @@
+CEREBRON WAVE1 PARALLEL REAL LORA
+release_sha=1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb
+roles=AELYS,ETHERION,AFAH,METRION
+mode=SEPARATE_ADAPTER_PER_ROLE
+max_parallel=4
+base=Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb
+cold=M6,TRANSFER,RED
+cold_training=DENY
+hf_private=true
+auto_promotion=false
