@@ -4,7 +4,7 @@
   "project_id": "AELYS-LIVE-001",
   "identity": "AELYS",
   "role_id": "LIVE_INTERACTION_RUNTIME",
-  "status": "LOCAL_FALLBACK_SCAFFOLD_DEDICATED_REPOSITORY_INITIALIZED",
+  "status": "LOCAL_LIVE_LOOP_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "target_repo": "dmaillot95-ui/cerebron-farm-173-aelys-live",
   "target_repo_exists": true,
   "target_repo_initialized": true,
@@ -19,8 +19,18 @@
     "CLAIM_LE_EVIDENCE",
     "REAL_EXECUTION_RECEIPT_REQUIRED"
   ],
-  "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
-  "dedicated_repo_selftest_run_id": 36155830169,
+  "dedicated_repo_head": "3aaf23084b1414e4c2fe5da06fedfbc25aa868b6",
+  "dedicated_repo_selftest_run_id": 36162643249,
   "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED",
-  "unified_plugin_bus_guard_run_id": 36156083228
+  "unified_plugin_bus_guard_run_id": 36156083228,
+  "local_live_loop_canary": {
+    "run_id": 36162553038,
+    "head_sha": "bcbddc63c14785720c76795df64bb3e3a49d1e71",
+    "result_sha256": "a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4",
+    "artifact_id": 10876417068,
+    "artifact_digest": "sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303",
+    "external_calls_executed": false,
+    "production_live_claimed": false
+  },
+  "external_runtime_status": "UNQUALIFIED"
 }
