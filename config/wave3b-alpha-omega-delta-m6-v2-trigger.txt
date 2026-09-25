@@ -1,0 +1,7 @@
+WAVE3B ALPHA OMEGA DELTA M6 V2 PRIVATE SEAL
+ai_ids=ALPHA,OMEGA,DELTA
+task_count_each=72
+exact_prompts_public=false
+deny_training=true
+training_eligible=false
+purpose=COLD_BASELINE_PREPARATION
