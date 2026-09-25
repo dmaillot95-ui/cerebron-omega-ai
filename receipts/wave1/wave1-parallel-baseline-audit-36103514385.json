@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_BASELINE_AUDIT_V1",
+  "run_id": 36103514385,
+  "roles": [
+    "AELYS",
+    "ETHERION",
+    "AFAH",
+    "METRION"
+  ],
+  "receipt_count": 8,
+  "real_inference_count": 8,
+  "training_executed_count": 0,
+  "unique_lineage_fingerprints": 1,
+  "independent_evidence_count": 0,
+  "scores": {
+    "AELYS": {
+      "score": 3,
+      "max": 12,
+      "accuracy": 0.25,
+      "training_readiness": "BLOCKED_NO_VALIDATED_GOLD",
+      "benchmark_sha256": "8e7ae0624521ec80ff386892e4b34abb6bb2a91f141c707c69b89588d05f33b3"
+    },
+    "AFAH": {
+      "score": 4,
+      "max": 12,
+      "accuracy": 0.3333333333333333,
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "benchmark_sha256": "bbdd6ab75d8f2b445d621362549f6a1d429c1de981e522b4d9796513fbdebb41"
+    },
+    "ETHERION": {
+      "score": 3,
+      "max": 12,
+      "accuracy": 0.25,
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "benchmark_sha256": "f40c882dbd54a88f7e529d3672e4f22d49db94af9ee59d61ca419af6ef005ae5"
+    },
+    "METRION": {
+      "score": 1,
+      "max": 12,
+      "accuracy": 0.08333333333333333,
+      "training_readiness": "BLOCKED_NO_VALIDATED_ENGINEERING_GOLD",
+      "benchmark_sha256": "09335c394cb7be92800733ace242aa867967f8480f24a891b982fb60eb205790"
+    }
+  },
+  "next_gate": {
+    "AELYS": "BUILD_AND_VALIDATE_ROLE_GOLD",
+    "ETHERION": "ADMIT_VALIDATED_RECORDS_TO_EMPTY_SIX_AI_MANIFEST",
+    "AFAH": "ADMIT_VALIDATED_RECORDS_TO_EMPTY_SIX_AI_MANIFEST",
+    "METRION": "BUILD_AND_VALIDATE_ENGINEERING_GOLD"
+  },
+  "claim_ceiling": "FOUR_REAL_PARALLEL_BASELINES_ONLY_NO_TRAINING_CLAIM",
+  "audit_sha256": "bbff2258423fce11cd9e48ef3ea42dba6bfcab75c3b804b144b5bbe3076dd60f"
+}
