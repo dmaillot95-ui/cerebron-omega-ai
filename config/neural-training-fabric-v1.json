@@ -398,5 +398,15 @@
     ],
     "runtime_activation": false,
     "g7_promoted": false
+  },
+  "all_ai_training_coverage": {
+    "registry": "config/all-ai-neural-training-coverage-v1.json",
+    "available_ai_count": 38,
+    "neural_training_executed_count": 6,
+    "wave2_pipeline_active_count": 4,
+    "dual_core_native_pending_count": 7,
+    "specialist_pending_count": 20,
+    "orchestrator_pending_count": 1,
+    "invariant": "NO_AVAILABLE_AI_MAY_BE_OMITTED_FROM_THE_TRAINING_ROADMAP"
   }
 }
