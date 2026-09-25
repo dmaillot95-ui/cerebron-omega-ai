@@ -17,19 +17,19 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 172
-- Derniers workflows en succès : 166
+- Derniers workflows en succès : 165
 - Derniers workflows en échec : 0
-- Fermes avec au moins un artefact sur leur dernier run : 136
+- Fermes avec au moins un artefact sur leur dernier run : 134
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=36131114947 status=queued conclusion=None artifacts=10
-- Farm 02 collatz-dynamics: run=36130737554 status=completed conclusion=success artifacts=21
-- Farm 03 collatz-adic: run=36130018392 status=completed conclusion=success artifacts=21
-- Farm 04 collatz-counterexample: run=36130606265 status=completed conclusion=success artifacts=21
-- Farm 05 collatz-literature: run=36131138791 status=queued conclusion=None artifacts=5
-- Farm 06 collatz-formal-audit: run=36131311949 status=queued conclusion=None artifacts=0
-- Farm 07 collatz-synthesis: run=36131207176 status=queued conclusion=None artifacts=1
+- Farm 01 collatz-theory: run=36131864001 status=queued conclusion=None artifacts=3
+- Farm 02 collatz-dynamics: run=36132035612 status=queued conclusion=None artifacts=0
+- Farm 03 collatz-adic: run=36131432721 status=queued conclusion=None artifacts=16
+- Farm 04 collatz-counterexample: run=36131620884 status=queued conclusion=None artifacts=12
+- Farm 05 collatz-literature: run=36131138791 status=completed conclusion=success artifacts=22
+- Farm 06 collatz-formal-audit: run=36132046094 status=queued conclusion=None artifacts=0
+- Farm 07 collatz-synthesis: run=36131207176 status=completed conclusion=success artifacts=22
 - Farm 08 research-web: run=35819624232 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35533881788 status=completed conclusion=success artifacts=1
 - Farm 10 science-physics: run=35419826266 status=completed conclusion=success artifacts=21
@@ -68,7 +68,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 43 civilization-synthesis: run=35420388222 status=completed conclusion=success artifacts=21
 - Farm 44 ai-platform-routing: run=35420094884 status=completed conclusion=success artifacts=21
 - Farm 45 agent-runtime: run=35420391067 status=completed conclusion=success artifacts=21
-- Farm 46 global-video-research: run=36125957783 status=completed conclusion=success artifacts=1
+- Farm 46 global-video-research: run=36131416422 status=completed conclusion=success artifacts=1
 - Farm 47 global-country-web-intelligence: run=36129666575 status=completed conclusion=success artifacts=21
 - Farm 48 global-scientific-literature-intelligence: run=35309608719 status=completed conclusion=success artifacts=0
 - Farm 49 engineering-cad-digital-twin: run=35309609848 status=completed conclusion=success artifacts=0
@@ -81,22 +81,22 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 56 architecton-control: run=35420176710 status=completed conclusion=success artifacts=1
 - Farm 57 architecton-cam: run=35966429835 status=completed conclusion=success artifacts=1
 - Farm 58 architecton-metrology: run=35420179457 status=completed conclusion=success artifacts=1
-- Farm 59 verified-learning: run=36130554617 status=completed conclusion=success artifacts=1
+- Farm 59 verified-learning: run=36132169954 status=queued conclusion=None artifacts=0
 - Farm 60 hardware-architecture: run=35314116823 status=completed conclusion=success artifacts=0
 - Farm 61 electronics-pcb: run=35314178296 status=completed conclusion=success artifacts=0
 - Farm 62 embedded-firmware: run=35314346060 status=completed conclusion=success artifacts=0
 - Farm 63 hardware-test-hil: run=35314651610 status=completed conclusion=success artifacts=0
 - Farm 64 hardware-reliability-safety: run=35314709831 status=completed conclusion=success artifacts=0
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
-- Farm 66 knowledge-graph-vector-index: run=36130884448 status=completed conclusion=success artifacts=1
-- Farm 67 cross-farm-communication: run=36131085347 status=completed conclusion=success artifacts=1
-- Farm 68 autonomous-experiment-orchestrator: run=36131171752 status=completed conclusion=success artifacts=1
+- Farm 66 knowledge-graph-vector-index: run=36131775326 status=completed conclusion=success artifacts=1
+- Farm 67 cross-farm-communication: run=36131967357 status=completed conclusion=success artifacts=1
+- Farm 68 autonomous-experiment-orchestrator: run=36131899318 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
-- Farm 70 theorem-proof-engineering: run=36131275613 status=in_progress conclusion=None artifacts=1
-- Farm 71 scientific-reproduction: run=36130876406 status=completed conclusion=success artifacts=1
-- Farm 72 reality-evidence-gate: run=36131280736 status=completed conclusion=success artifacts=1
+- Farm 70 theorem-proof-engineering: run=36132028233 status=completed conclusion=success artifacts=1
+- Farm 71 scientific-reproduction: run=36131859121 status=completed conclusion=success artifacts=1
+- Farm 72 reality-evidence-gate: run=36132095369 status=completed conclusion=success artifacts=1
 - Farm 73 system-integration-qualification: run=35420456863 status=completed conclusion=success artifacts=1
-- Farm 74 session-memory-encyclopedia: run=36130586225 status=completed conclusion=success artifacts=1
+- Farm 74 session-memory-encyclopedia: run=36131772906 status=completed conclusion=success artifacts=1
 - Farm 75 exploration-discovery: run=35750096709 status=completed conclusion=success artifacts=1
 - Farm 76 central-orchestration-chatgpt-interface: run=35759230595 status=completed conclusion=success artifacts=1
 - Farm 77 humanoid-robotics-digital-twin-simulation-rl-sim2real: run=35769750335 status=completed conclusion=success artifacts=1
