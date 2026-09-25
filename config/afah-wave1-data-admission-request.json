@@ -1,0 +1,20 @@
+{
+  "schema": "AFAH_WAVE1_DATA_ADMISSION_REQUEST_V1",
+  "source": {
+    "repo": "dmaillot95-ui/cerebron-omega-ai",
+    "commit": "a732ad3cf1f00ff94e17cab2be8a97ca3dc30368",
+    "build_receipt": "receipts/wave1/wave1-quarantine-build-36105250166.json",
+    "audit_receipt": "receipts/wave1/wave1-quarantine-audit-36107794532.json",
+    "baseline_receipt": "receipts/wave1/wave1-parallel-baseline-audit-36103514385.json"
+  },
+  "f72": {
+    "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+    "commit": "daec92950c8f3d06f7c42589c2d6d530ab49fa08",
+    "receipt": "receipts/wave1-data-evidence-review-36108208786.json",
+    "run_id": 36108208786,
+    "result_sha256": "d0f290c94b8cc7e73a494cd429a656763792da877fc3a11c0cbe51d7d5c15470"
+  },
+  "expected_manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+  "requested_decision": "ADMIT_SYNTHETIC_CANDIDATE_POOL",
+  "auto_training_release": false
+}
