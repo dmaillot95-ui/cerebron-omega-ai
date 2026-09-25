@@ -37,8 +37,8 @@ assert (R/by_id[162]["local_scaffold"]).exists()
 if expected >= 174:
     assert by_id[173]["repository_exists"] is True
     assert by_id[173]["repository_initialized"] is True
-    assert by_id[173]["status"]=="LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
-    assert by_id[173]["dedicated_repo_selftest_run_id"]==36163651569
+    assert by_id[173]["status"]=="LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
+    assert by_id[173]["dedicated_repo_selftest_run_id"]==36164296182
     assert by_id[173]["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
     assert by_id[173]["local_live_loop_canary"]["run_id"]==36162553038
     assert by_id[173]["local_live_loop_canary"]["external_calls_executed"] is False
@@ -48,6 +48,9 @@ if expected >= 174:
     assert by_id[173]["local_session_replay_canary"]["run_id"]==36163483531
     assert by_id[173]["local_session_replay_canary"]["external_calls_executed"] is False
     assert by_id[173]["local_session_replay_canary"]["production_live_claimed"] is False
+    assert by_id[173]["local_http_loopback_canary"]["run_id"]==36164204308
+    assert by_id[173]["local_http_loopback_canary"]["external_endpoint_used"] is False
+    assert by_id[173]["local_http_loopback_canary"]["production_live_claimed"] is False
     assert by_id[173]["production_status"]=="NOT_DEPLOYED"
     assert by_id[173]["evidence"]["unified_plugin_bus_guard_run_id"]==36163898021
     assert (R/by_id[173]["local_scaffold"]).exists()
