@@ -1,0 +1,35 @@
+name: CEREBRON AGORA Evidence Scope Lesson
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/validate_agora_evidence_scope_lesson.py'
+      - 'memory/failure-bank-v1.json'
+      - '.github/workflows/agora-collective-5m.yml'
+      - '.github/workflows/agora-evidence-scope-lesson.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate evidence-scope lesson
+        run: |
+          python -m py_compile tools/validate_agora_evidence_scope_lesson.py
+          python tools/validate_agora_evidence_scope_lesson.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agora-evidence-scope-lesson-validation
+          path: artifacts/agora-evidence-scope-lesson-validation.json
+          if-no-files-found: error
+          retention-days: 30
