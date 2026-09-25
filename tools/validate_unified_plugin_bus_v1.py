@@ -24,6 +24,15 @@ assert by_id[173]["repository_initialized"] is True
 assert bus["providers"]["AELYS"]["farm_id"]==173
 assert bus["providers"]["AELYS"]["runtime_status"]=="BASE_INSTALLED_ADAPTERS_UNQUALIFIED"
 
+assert by_id[174]["identity"]=="ELYRA"
+assert by_id[174]["repository_initialized"] is True
+assert by_id[174]["simulation_status"]=="NOT_EXECUTED"
+assert by_id[174]["physical_test_status"]=="NOT_TESTED"
+assert 174 in bus["providers"]["ELYRA"]["farm_refs"]
+assert bus["routes"]["visual.simulate"]=="ELYRA"
+assert "visual.simulate" in bus["providers"]["ELYRA"]["capabilities"]
+assert bus["providers"]["ELYRA"]["runtime_status"]=="UNQUALIFIED"
+
 for capability, provider in bus["routes"].items():
     assert provider in bus["providers"], (capability,provider)
     assert capability in bus["providers"][provider]["capabilities"], (capability,provider)
@@ -31,6 +40,7 @@ for capability, provider in bus["routes"].items():
 assert bus["invariants"]["f152_identity"]=="BETA"
 assert bus["invariants"]["f152_must_not_route_rdx"] is True
 assert bus["invariants"]["unknown_capability"]=="DENY"
+assert bus["invariants"]["f174_repository_initialized_not_simulation_execution"] is True
 
 print(json.dumps({
   "status":"PASS",
@@ -38,6 +48,7 @@ print(json.dumps({
   "rdx_runtime":"UNBOUND",
   "f152_identity":"BETA",
   "f173_runtime":"BASE_INSTALLED_ADAPTERS_UNQUALIFIED",
+  "f174_runtime":"UNQUALIFIED_NOT_EXECUTED",
   "automatic_external_calls":False,
   "automatic_training":False
 },sort_keys=True))
