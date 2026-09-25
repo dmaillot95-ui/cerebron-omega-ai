@@ -115,6 +115,7 @@
     "SELF_EVOLUTION_GUARD_PASS",
     "STABLE_TRAIN_VAL_HOLDOUT_SPLIT",
     "DECONTAMINATION_PASS",
+    "NO_VALIDATION_HOLDOUT_DERIVATIVE_LEAKAGE",
     "TRAINING_ELIGIBLE_COUNT>=32_PER_TARGET_OR_APPROVED_SHARED_SKILL_BATCH",
     "DEDUP_COMPLETE",
     "NO_M6_TRANSFER_RED_ANSWER_LEAKAGE",
@@ -135,5 +136,29 @@
     ],
     "benchmark_contamination_action": "REJECT_OR_MOVE_OUT_OF_TRAIN",
     "cold_transfer_red_answers_training_eligible": false
+  },
+  "derivative_leakage_guard": {
+    "rule": "VALIDATION_OR_HOLDOUT_OBJECTS_AND_THEIR_DERIVATIVES_MUST_NOT_ENTER_TRAINING_IN_THE_SAME_GENERATION",
+    "protected_splits": [
+      "validation",
+      "holdout"
+    ],
+    "derivative_forms": [
+      "PARAPHRASE",
+      "SYNTHETIC_CASE",
+      "COUNTEREXAMPLE_DERIVED_FROM_RESERVED_OBJECT",
+      "PROMPT_TEMPLATE_DERIVED_FROM_RESERVED_OBJECT",
+      "DISTILLED_RULE",
+      "CHAIN_OF_THOUGHT_OR_EXPLANATION_DERIVED_FROM_RESERVED_OBJECT"
+    ],
+    "allowed_uses_for_reserved_objects": [
+      "EVALUATION",
+      "AUDIT",
+      "REDTEAM",
+      "TRANSFER_TEST",
+      "ABLATION_EVALUATION"
+    ],
+    "training_use": false,
+    "next_generation_reuse": "ONLY_AFTER_EXPLICIT_REPARTITION_WITH_NEW_FROZEN_EVAL_SET_AND_PROVENANCE_UPDATE"
   }
 }
