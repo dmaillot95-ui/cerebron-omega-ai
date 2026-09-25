@@ -26,7 +26,7 @@ jobs:
           python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
       - name: Verify expected manifest SHA
         env:
-          EXPECTED_MANIFEST_SHA: ${{ vars.WAVE1_QUARANTINE_MANIFEST_SHA }}
+          EXPECTED_MANIFEST_SHA: 4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe
         run: |
           python - <<'PY'
           import json,os,pathlib
