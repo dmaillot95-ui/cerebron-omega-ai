@@ -1,0 +1,7 @@
+WAVE3A SAELION NEXUS M6 V2 PRIVATE SEAL
+ai_ids=SAELION,NEXUS
+task_count_each=72
+exact_prompts_public=false
+deny_training=true
+training_eligible=false
+purpose=COLD_BASELINE_PREPARATION
