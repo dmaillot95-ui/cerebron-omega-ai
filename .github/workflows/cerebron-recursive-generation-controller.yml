@@ -1,0 +1,49 @@
+name: CEREBRON Recursive Generation Controller
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evolution/plan_recursive_generation_v1.py'
+      - 'memory/lesson-bank-v1.json'
+      - 'memory/failure-bank-v1.json'
+      - 'config/cerebron-self-evolution-v1.json'
+      - 'training/CEREBRON_G1_LESSON_ADMISSION_POLICY_V1.json'
+      - 'config/lesson-cross-audit-v1.json'
+      - 'config/lesson-ablation-pilot-v1.json'
+      - '.github/workflows/cerebron-recursive-generation-controller.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Plan next recursive generation
+        run: |
+          python -m py_compile evolution/plan_recursive_generation_v1.py
+          python evolution/plan_recursive_generation_v1.py
+      - name: Verify fail-closed training state
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/recursive-generation-controller.json"))
+          assert x["status"]=="PASS"
+          assert x["available_ai_count"]==38
+          assert x["weight_training_released"] is False
+          assert x["protected_operational_farms"]==[172,173,174]
+          print("RECURSIVE_GENERATION_CONTROLLER=PASS",x["next_safe_action"],x["effective_train_validated_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: recursive-generation-controller
+          path: artifacts/recursive-generation-controller.json
+          if-no-files-found: error
+          retention-days: 30
