@@ -1,0 +1,160 @@
+name: SAPHEA LoRA RedTeam Audit V1
+on:
+  push:
+    branches: ['feat/saphea-first-lora-v1']
+    paths:
+      - 'config/saphea-lora-redteam-audit-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  counter_audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      PYTHONPATH: platform
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      ADAPTER_PREFIX: colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned CPU audit stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece huggingface_hub
+
+      - name: Compile independent audit code
+        run: |
+          python -m py_compile platform/saphea_epistemic_dataset_v1.py
+          python -m py_compile platform/saphea_epistemic_transfer_v1.py
+          python -m py_compile platform/saphea_lora_redteam_audit_v1.py
+
+      - name: Rebuild frozen reference and transfer data
+        run: |
+          python platform/saphea_epistemic_dataset_v1.py
+          python platform/saphea_epistemic_transfer_v1.py
+
+      - name: Verify frozen data identities
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          g=json.loads((root/"saphea-epistemic-gold-v1.json").read_text())
+          m=json.loads((root/"saphea-epistemic-m6-v1.json").read_text())
+          t=json.loads((root/"saphea-epistemic-transfer-v1.json").read_text())
+          assert g["dataset_sha256"]=="efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa"
+          assert m["dataset_sha256"]=="cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63"
+          assert t["dataset_sha256"]=="9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232"
+          assert m["deny_training"] is True and t["deny_training"] is True
+          print("SAPHEA_COUNTER_AUDIT_DATA_FREEZE=PASS")
+          PY
+
+      - name: Download exact private adapter
+        run: |
+          mkdir -p /tmp/saphea-adapter
+          python - <<'PY'
+          import hashlib,os,pathlib
+          from huggingface_hub import hf_hub_download
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]; prefix=os.environ["ADAPTER_PREFIX"]
+          expected={
+            "adapter_model.safetensors":"0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+            "adapter_config.json":"3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+          }
+          dst=pathlib.Path("/tmp/saphea-adapter")
+          for name,want in expected.items():
+              src=hf_hub_download(repo_id=repo,filename=prefix+"/"+name,repo_type="model",token=token,force_download=True)
+              raw=pathlib.Path(src).read_bytes(); got=hashlib.sha256(raw).hexdigest()
+              if got!=want: raise SystemExit("SHA_MISMATCH_"+name)
+              (dst/name).write_bytes(raw)
+          print("SAPHEA_COUNTER_AUDIT_ADAPTER_SHA=PASS")
+          PY
+
+      - name: Run independent-codepath reproduction and Red Team
+        run: python platform/saphea_lora_redteam_audit_v1.py --adapter-dir /tmp/saphea-adapter
+
+      - name: Verify audit receipt integrity without forcing scientific PASS
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("platform/artifacts/saphea-first-lora-redteam-audit-v1.json")
+          d=json.loads(p.read_text())
+          assert d["audit_subset_count"]==36
+          assert d["redteam_count"]==72
+          assert d["redteam_training"]=="DENY"
+          assert d["redteam_prompt_overlap_with_transfer"]==0
+          assert d["base_audit_score"]+d["audit_compare"]["gain"]==d["adapter_audit_score"]
+          assert d["base_redteam_score"]+d["redteam_compare"]["gain"]==d["adapter_redteam_score"]
+          print("SAPHEA_COUNTER_AUDIT_RECEIPT_INTEGRITY=PASS")
+          print("SAPHEA_REPRODUCTION_PASS",d["independent_codepath_reproduction_pass"])
+          print("SAPHEA_REDTEAM_PASS",d["redteam_pass"])
+          print("SAPHEA_COUNTER_AUDIT_PASS",d["counter_audit_pass"])
+          PY
+
+      - name: Build public counter-audit receipt
+        run: |
+          mkdir -p receipts/training
+          python - <<'PY'
+          import json,os,pathlib
+          d=json.loads(pathlib.Path("platform/artifacts/saphea-first-lora-redteam-audit-v1.json").read_text())
+          out={
+            "schema":"SAPHEA_LORA_COUNTER_AUDIT_PUBLIC_RECEIPT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_training_run":36100266729,
+            "source_transfer_run":36101181888,
+            "adapter_sha256":"0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+            "audit_subset_count":d["audit_subset_count"],
+            "base_audit_score":d["base_audit_score"],
+            "adapter_audit_score":d["adapter_audit_score"],
+            "audit_max":d["audit_max"],
+            "audit_gain":d["audit_compare"]["gain"],
+            "independent_codepath_reproduction_pass":d["independent_codepath_reproduction_pass"],
+            "redteam_count":d["redteam_count"],
+            "base_redteam_score":d["base_redteam_score"],
+            "adapter_redteam_score":d["adapter_redteam_score"],
+            "redteam_max":d["redteam_max"],
+            "redteam_gain":d["redteam_compare"]["gain"],
+            "redteam_pass":d["redteam_pass"],
+            "counter_audit_pass":d["counter_audit_pass"],
+            "independence_note":d["independence_note"],
+            "promotion":"NOT_PROMOTED",
+            "next_gates":["F72_REVIEW","AFAH_FINAL_AUTHORITY"] if d["counter_audit_pass"] else ["ROLLBACK_REVIEW"],
+            "claim_ceiling":d["claim_ceiling"],
+          }
+          p=pathlib.Path("receipts/training")/f"saphea-lora-counter-audit-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+
+      - name: Remove private adapter
+        if: always()
+        run: rm -rf /tmp/saphea-adapter
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saphea-lora-counter-audit-${{ github.run_id }}
+          path: |
+            platform/artifacts/saphea-first-lora-redteam-audit-v1.json
+            receipts/training/saphea-lora-counter-audit-${{ github.run_id }}.json
+          if-no-files-found: warn
+
+      - name: Persist public audit metadata
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/saphea-lora-counter-audit-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAPHEA LoRA counter-audit ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/saphea-first-lora-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
