@@ -1,0 +1,113 @@
+{
+  "schema": "CEREBRON_103_REGISTRY_VERIFIED_RDX_SEMANTIC_REPAIR_WAVE3B_FUSION_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.24",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "f152": "REGISTERED_VERIFIED",
+    "f173": "OBSERVED_OTHER_SESSION_NO_MODIFICATION",
+    "f174": "OBSERVED_OTHER_SESSION_NO_MODIFICATION",
+    "absent_ids_153_172": "SPARSE_NOT_SYNTHESIZED"
+  },
+  "memory_audit": {
+    "run_id": 36156845720,
+    "status": "PASS",
+    "source_receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
+    "artifact_id": 10873189740,
+    "artifact_digest": "sha256:e37308434cb4bdf047fb31a11196f8e561c2b46c525a2881909783c72369992a",
+    "registry_entry_count": 154,
+    "registry_max_id": 174,
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "m6_training": "DENY"
+  },
+  "rdx": {
+    "f152_ingress": "PASS",
+    "write_read_sha_recall": "PASS",
+    "write_read_recall_run_id": 36143467119,
+    "semantic_v1": {
+      "run_id": 36156985796,
+      "status": "FAIL",
+      "top1_correct": 8,
+      "query_count": 10,
+      "top1_accuracy": 0.8,
+      "mean_reciprocal_rank": 0.9,
+      "source_run_receipt_sha256": "2cc40644334fbb7e2425194d26d400e5ab904c692860fa9973be56e94797ab30",
+      "classification": "DEV_CANARY_FAIL_REPAIR_REQUIRED",
+      "failed_queries": [
+        "Q2_M6_ISOLATION_RANK2",
+        "Q3_PROVENANCE_RANK2"
+      ]
+    },
+    "semantic_repair_dev_v2": {
+      "run_id": 36157461751,
+      "status": "QUEUED",
+      "policy_candidates": [
+        "SEMANTIC_ONLY",
+        "HYBRID_LEX_25",
+        "HYBRID_LEX_50",
+        "HYBRID_LEX_75",
+        "RRF_SEM_LEX"
+      ],
+      "fresh_holdout_consumed": false,
+      "training": false
+    }
+  },
+  "native_ai": {
+    "SAELION": {
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "NEXUS": {
+      "d4_precheck_oracle_gain": 4,
+      "d4_fusion_dev_run_id": 36155230931,
+      "d4_fusion_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_best_single": 22,
+      "dev_best_policy": 22,
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "DELTA": {
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "oracle_gain": 0,
+      "retained": "Qwen/Qwen3-4B"
+    },
+    "ALPHA": {
+      "d3": "PASS",
+      "d4_precheck_run_id": 36155099887,
+      "d4_oracle_gain": 3,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "IN_PROGRESS"
+    },
+    "OMEGA": {
+      "d3": "PASS",
+      "d4_precheck_run_id": 36155099887,
+      "d4_oracle_gain": 12,
+      "d4_fusion_dev_run_id": 36155520110,
+      "d4_fusion_dev": "IN_PROGRESS"
+    }
+  },
+  "next_exact": [
+    "Close RDX semantic repair DEV V2 run 36157461751. Only if it improves DEV and meets thresholds, freeze policy then create a NEW fresh holdout V2; never reuse V1 as cold evidence.",
+    "Close ALPHA/OMEGA fusion DEV run 36155520110. Only an AI with positive measured DEV gain may receive a new fresh private holdout.",
+    "Do not reopen SAELION, DELTA or NEXUS dual-core without new independent evidence.",
+    "Keep F118 M4 GOLD and RDX neural training blocked while F72 remains FAIL.",
+    "Do not modify F173/F174 or ARCHITECTON R&D execution work from the other session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
