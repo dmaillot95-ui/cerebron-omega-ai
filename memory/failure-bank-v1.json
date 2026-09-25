@@ -382,9 +382,17 @@
         "remove literal backslashes from GitHub Actions expressions",
         "rerun same GOLD/M6/base model without changing benchmark"
       ],
-      "REPAIR_STATUS": "CORRECTED_RERUN_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_BY_SAME_SCALE_RERUN",
       "TRANSFER_RISK": "LOW_AFTER_SAME_SCALE_RERUN",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36100266729",
+        "job:107961061331",
+        "weights_changed:true",
+        "baseline_m6:18/60",
+        "posttrain_m6:30/60",
+        "hf_private_readback_sha_pass:true"
+      ]
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
