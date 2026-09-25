@@ -1,0 +1,56 @@
+name: CEREBRON Relay Control Gates
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'config/cerebron-role-runtime-status-v1.json'
+      - 'config/cerebron-stop-resume-protocol-v1.json'
+      - 'config/cerebron-measurable-gates-v1.json'
+      - 'config/greek-ai-constellation-v1.json'
+      - 'config/greek-24-colony-master.json'
+      - 'config/cerebron-dual-core-contract-v1.json'
+      - 'config/cerebron-unified-plugin-bus-v1.json'
+      - 'config/farms.json'
+      - 'runtime/global_freeze.py'
+      - '.github/workflows/global-freeze-canary.yml'
+      - 'tools/validate_cerebron_relay_control.py'
+      - '.github/workflows/cerebron-relay-control-gate.yml'
+  pull_request:
+    paths:
+      - 'config/cerebron-role-runtime-status-v1.json'
+      - 'config/cerebron-stop-resume-protocol-v1.json'
+      - 'config/cerebron-measurable-gates-v1.json'
+      - 'config/greek-ai-constellation-v1.json'
+      - 'config/greek-24-colony-master.json'
+      - 'config/cerebron-dual-core-contract-v1.json'
+      - 'config/cerebron-unified-plugin-bus-v1.json'
+      - 'config/farms.json'
+      - 'runtime/global_freeze.py'
+      - '.github/workflows/global-freeze-canary.yml'
+      - 'tools/validate_cerebron_relay_control.py'
+      - '.github/workflows/cerebron-relay-control-gate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  measurable-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Measure relay control gates
+        run: python tools/validate_cerebron_relay_control.py
+      - name: Upload measurable gate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cerebron-relay-control-gates
+          path: artifacts/cerebron-relay-control-gates.json
+          if-no-files-found: error
+          retention-days: 14
