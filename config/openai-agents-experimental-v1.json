@@ -1,0 +1,93 @@
+{
+  "schema": "CEREBRON_OPENAI_AGENTS_EXPERIMENTAL_V1",
+  "date": "2026-09-25",
+  "branch": "feat/openai-agents-cerebron-experimental-v1",
+  "status": "DISABLED_BY_DEFAULT_ZERO_SPEND",
+  "enabled": false,
+  "api": {
+    "family": "OpenAI Agents API public beta",
+    "endpoint": "https://api.openai.com/v1/agents/sessions",
+    "beta_header": "OpenAI-Beta: agents=v1",
+    "session_mode": "DURABLE_MANAGED_CODEX_HARNESS",
+    "docs_verified_on": "2026-09-25"
+  },
+  "model_policy": {
+    "coordinator_default": "gpt-5.6-sol",
+    "high_difficulty_candidate": "gpt-6-astra",
+    "high_volume_candidate": "gpt-5.6-luna",
+    "note": "Current official docs verify gpt-6-astra; current pricing/API docs still list gpt-5.6-sol and gpt-5.6-luna. Do not invent gpt-6-sol or gpt-6-luna until officially documented."
+  },
+  "multi_agent": {
+    "enabled_when_runtime_gate_passes": true,
+    "max_concurrent_subagents": 5,
+    "reason": "CEREBRON operational coalition ceiling remains 5 until measured marginal information gain justifies expansion.",
+    "count_as_independent_evidence": false
+  },
+  "environment": {
+    "default": {
+      "type": "none"
+    },
+    "optional_self_hosted": {
+      "allowed": false,
+      "workspace_directory": "/workspace",
+      "unlock_requires": [
+        "EXPLICIT_SECURITY_REVIEW",
+        "SECRET_BACKEND",
+        "ISOLATION",
+        "USER_AUTHORIZATION"
+      ]
+    }
+  },
+  "tools": {
+    "mcp": {
+      "enabled": false,
+      "allowlist": [],
+      "inherit_to_subagents": true,
+      "note": "Agents API subagents can inherit configured MCP tools; CEREBRON requires explicit allowlist and provenance receipts before enabling."
+    },
+    "web_search": false,
+    "function_tools_for_subagents": false
+  },
+  "cost_gate": {
+    "max_spend_usd": 0,
+    "auto_paid_activation": false,
+    "fail_closed": true,
+    "unlock_requires": [
+      "EXPLICIT_USER_AUTHORIZATION_FOR_PAID_API",
+      "OPENAI_API_KEY_PRESENT_AT_RUNTIME_ONLY",
+      "PROJECT_SPEND_LIMIT_CONFIGURED_EXTERNALLY",
+      "CEREBRON_ENABLE_OPENAI_AGENTS=1",
+      "CEREBRON_OPENAI_MAX_SPEND_USD_GT_0",
+      "MODEL_ALLOWLIST_NONEMPTY"
+    ]
+  },
+  "evidence_gate": {
+    "session_id_required": true,
+    "model_id_required": true,
+    "input_hash_required": true,
+    "output_hash_required": true,
+    "tool_call_receipts_required": true,
+    "artifact_sha_required_when_artifact_exists": true,
+    "correlated_lineage_declared": true,
+    "simulation_not_test": true,
+    "agent_count_not_intelligence": true,
+    "workflow_success_not_scientific_success": true
+  },
+  "intended_mapping": {
+    "CEREBRON": "coordinator",
+    "SAPHEA": "execution selector / specialist router",
+    "SPIRALION": "continuity / checkpoint subagent",
+    "ETHERION": "hard R&D subagent",
+    "HYPERION": "alternative-hypothesis subagent",
+    "AFAH": "final evidence-policy gate outside candidate self-review"
+  },
+  "prohibited_by_default": [
+    "NETWORK_CALL_TO_OPENAI_AGENTS_API",
+    "OPENAI_HOSTED_SANDBOX",
+    "PAID_MODEL_INVOCATION",
+    "SECRET_COMMIT",
+    "AUTO_SCALE_ABOVE_5",
+    "COUNT_SUBAGENTS_AS_INDEPENDENT_EVIDENCE",
+    "AUTO_PROMOTION_FROM_AGENT_CONSENSUS"
+  ]
+}
