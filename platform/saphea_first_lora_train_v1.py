@@ -2,11 +2,15 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import pathlib
+import platform
 import random
 import time
 
+import peft
 import torch
+import transformers
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -301,6 +305,18 @@ def main():
         "base_weights_policy": "IMMUTABLE_G0",
         "adapter_type": "PEFT_LORA",
         "peft_target_modules": ["q_proj", "v_proj"],
+        "library_versions": {
+            "torch": torch.__version__,
+            "transformers": transformers.__version__,
+            "peft": peft.__version__,
+        },
+        "hardware": {
+            "device": "cpu",
+            "machine": platform.machine(),
+            "processor": platform.processor(),
+            "cpu_count": os.cpu_count(),
+            "torch_num_threads": torch.get_num_threads(),
+        },
         "hyperparameters": {
             "r": LORA_R,
             "lora_alpha": LORA_ALPHA,
@@ -308,6 +324,7 @@ def main():
             "learning_rate": LR,
             "epochs": EPOCHS,
             "gradient_accumulation_steps": GRAD_ACCUM,
+            "effective_batch_size": GRAD_ACCUM,
             "max_length": MAX_LENGTH,
             "seed": SEED,
         },
