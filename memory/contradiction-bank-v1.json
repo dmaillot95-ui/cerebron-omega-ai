@@ -42,6 +42,25 @@
       "RESOLUTION_TEST": "Apply DEPENDENCY_GRAPH and independence rule.",
       "WINNER": "NONE",
       "TIMESTAMP": "2026-09-24"
+    },
+    {
+      "CONTRADICTION_ID": "CONTRA-DUAL-CORE-SEMANTICS-001",
+      "CLAIM_A": "Dual core was previously described as two coordinated internal roles/cores.",
+      "CLAIM_B": "Project definition: Greek dual-core AIs contain two distinct models; Core A/Core B roles describe functions of those model slots.",
+      "SOURCE_A": "config/cerebron-dual-core-contract-v1.json prior revision",
+      "SOURCE_B": "project owner correction + feat/cerebron-ai-platform-mvp/config/native-ai-dual-core-v1.json default_candidate_pair",
+      "LINEAGE_A": "ASSISTANT_INTERPRETATION",
+      "LINEAGE_B": "AUTHORITATIVE_PROJECT_DESIGN_PLUS_REPOSITORY_MODEL_PAIR",
+      "EVIDENCE_A": "prior contract wording",
+      "EVIDENCE_B": "Qwen/Qwen3-4B + HuggingFaceTB/SmolLM3-3B pair; ELYSION D2 PASS",
+      "CONTEXT": "Meaning of double core in CEREBRON Greek-native AI architecture.",
+      "POSSIBLE_CAUSES": [
+        "confusion between model core and functional role"
+      ],
+      "RESOLUTION_STATUS": "RESOLVED_SEMANTICS_CORRECTED",
+      "RESOLUTION_TEST": "Contract must state DUAL_CORE_MEANS_TWO_MODELS_NOT_TWO_ROLES and model-pair verification gates.",
+      "WINNER": "NONE",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "No majority-vote resolution; unresolved contradictions remain visible."
