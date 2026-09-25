@@ -31,7 +31,7 @@
     "SAPHEA": {
       "target": "specialist execution and routing",
       "training": "domain SFT/LoRA",
-      "status": "SCOPED_LORA_G6_VERIFIED_HOLD_G7"
+      "status": "SCOPED_REAL_LORA_G6_VERIFIED_G7_PENDING"
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
@@ -169,5 +169,44 @@
       ],
       "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY"
     }
-  ]
+  ],
+  "saphea_first_lora_evidence": {
+    "status": "G6_REAL_LORA_HF_PRIVATE_VERIFIED_HOLD_G7",
+    "branch": "feat/saphea-first-lora-v1",
+    "run_id": 36100266729,
+    "job_id": 107961061331,
+    "artifact_id": 10848864759,
+    "artifact_digest": "sha256:f5eb6008c342d9921b160af28282b6bee684040539ee8fe2b47506acb5b46fca",
+    "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "adapter_config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+    "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+    "hf_private_object_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729",
+    "hf_private_readback_sha_pass": true,
+    "gold_dataset_sha256": "efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa",
+    "m6_dataset_sha256": "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63",
+    "m6_deny_training": true,
+    "train_records": 150,
+    "validation_records": 30,
+    "trainable_params": 1081344,
+    "trainable_fraction": 0.0021840298504761666,
+    "weights_changed": true,
+    "baseline_m6_score": 18,
+    "posttrain_m6_score": 30,
+    "cold_gain": 12,
+    "critical_regression": false,
+    "validation_loss_before": 0.48301953449845314,
+    "validation_loss_after": 0.11578285936266183,
+    "promotion": "NOT_PROMOTED",
+    "pending_gates": [
+      "NOVEL_TRANSFER_GAIN",
+      "ABLATION_SUPPORTS_VALUE",
+      "INDEPENDENT_AUDIT",
+      "RED_TEAM",
+      "F72_REVIEW",
+      "AFAH_FINAL_AUTHORITY"
+    ],
+    "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER"
+  }
 }
