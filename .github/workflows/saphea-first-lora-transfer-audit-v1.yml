@@ -1,0 +1,125 @@
+name: SAPHEA First LoRA V1 Transfer Audit
+on:
+  push:
+    branches: ['feat/saphea-first-lora-v1']
+    paths:
+      - 'config/saphea-first-lora-transfer-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      PYTHONPATH: platform
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned CPU audit stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece huggingface_hub
+
+      - name: Compile
+        run: |
+          python -m py_compile platform/saphea_epistemic_dataset_v1.py
+          python -m py_compile platform/saphea_first_lora_transfer_audit_v1.py
+
+      - name: Rebuild known GOLD and M6 IDs for no-leak check
+        run: python platform/saphea_epistemic_dataset_v1.py
+
+      - name: Run independent transfer ablation and red-team audit
+        run: python platform/saphea_first_lora_transfer_audit_v1.py
+
+      - name: Independently recompute audit gates from raw rows
+        run: |
+          mkdir -p receipts/training
+          python - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path("platform/artifacts/saphea-first-lora-transfer-audit-v1.json")
+          d=json.loads(p.read_text())
+          labels=["ROUTED_ONLY","FARM_EXECUTED","NO_NEURAL_LEARNING","NEURAL_LEARNING_VERIFIED","SIMULATION_ONLY","CLAIM_BLOCKED"]
+          base=sum(int(x["pass"]) for x in d["base_rows"])
+          adapted=sum(int(x["pass"]) for x in d["adapter_rows"])
+          assert base==d["base_score"]
+          assert adapted==d["adapter_score"]
+          assert adapted-base==d["transfer_gain"]
+          assert len(d["base_rows"])==72 and len(d["adapter_rows"])==72
+          assert d["transfer_deny_training"] is True
+          assert d["transfer_training_eligible"] is False
+          assert d["transfer_id_overlap_with_known_train_or_m6"] is False
+          assert d["hf_private_readback_sha_pass"] is True
+          assert d["adapter_sha256"]=="0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080"
+          assert d["novel_transfer_gain_positive"] is True
+          assert d["ablation_supports_value"] is True
+          assert d["red_team_pass"] is True
+          assert d["critical_regression"] is False
+
+          per={k:{"base":0,"adapter":0,"total":0} for k in labels}
+          amap={x["id"]:x for x in d["adapter_rows"]}
+          for b in d["base_rows"]:
+              a=amap[b["id"]]
+              assert b["target"]==a["target"]
+              k=b["target"]; per[k]["total"]+=1
+              per[k]["base"]+=int(b["pass"]); per[k]["adapter"]+=int(a["pass"])
+          redb=sum(int(x["pass"]) for x in d["base_rows"] if x["red_team"])
+          reda=sum(int(x["pass"]) for x in d["adapter_rows"] if x["red_team"])
+          redn=sum(1 for x in d["base_rows"] if x["red_team"])
+          assert redb==d["base_red_team"]["pass"] and reda==d["adapter_red_team"]["pass"] and redn==d["base_red_team"]["total"]
+
+          receipt={
+            "schema":"SAPHEA_FIRST_LORA_TRANSFER_PUBLIC_POINTER_V1",
+            "status":"TRANSFER_ABLATION_REDTEAM_PASS_F72_AFAH_PENDING",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_training_run":36100266729,
+            "source_adapter_sha256":d["adapter_sha256"],
+            "transfer_dataset_sha256":d["transfer_dataset_sha256"],
+            "transfer_record_count":d["transfer_record_count"],
+            "base_score":base,
+            "adapter_score":adapted,
+            "transfer_gain":adapted-base,
+            "per_label":per,
+            "base_red_team":{"pass":redb,"total":redn},
+            "adapter_red_team":{"pass":reda,"total":redn},
+            "critical_regression":False,
+            "novel_transfer_gain_positive":True,
+            "ablation_supports_value":True,
+            "red_team_pass":True,
+            "independent_audit_scope":d["independent_audit_scope"],
+            "independent_model_evidence":False,
+            "promotion":"NOT_PROMOTED_F72_AFAH_PENDING",
+            "report_sha256":d["report_sha256"],
+          }
+          out=pathlib.Path("receipts/training")/f"saphea-first-lora-transfer-{os.environ['GITHUB_RUN_ID']}.json"
+          out.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saphea-first-lora-transfer-${{ github.run_id }}
+          path: |
+            platform/artifacts/saphea-first-lora-transfer-v1.json
+            platform/artifacts/saphea-first-lora-transfer-audit-v1.json
+            receipts/training/saphea-first-lora-transfer-${{ github.run_id }}.json
+          if-no-files-found: error
+
+      - name: Persist public transfer pointer only
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/saphea-first-lora-transfer-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAPHEA first LoRA transfer audit ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/saphea-first-lora-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
