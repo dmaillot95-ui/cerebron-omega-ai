@@ -1,0 +1,115 @@
+{
+  "schema": "CEREBRON_UNIFIED_PLUGIN_BUS_V1",
+  "status": "DEFINED_FAIL_CLOSED_RUNTIME_UNQUALIFIED",
+  "automatic_external_calls": false,
+  "automatic_training": false,
+  "paid_provider_auto_activation": false,
+  "providers": {
+    "RDX_EXCHANGE": {
+      "kind": "EXTERNAL_REPOSITORY_SERVICE",
+      "repository": "dmaillot95-ui/cerebron-rdx-exchange",
+      "capabilities": [
+        "rdx.search",
+        "rdx.fetch"
+      ],
+      "runtime_status": "UNBOUND",
+      "endpoint_env": null,
+      "token_env": null,
+      "source_status_path": "dist/api/v1/status.json"
+    },
+    "F114": {
+      "kind": "FARM",
+      "farm_id": 114,
+      "capabilities": [
+        "memory.canonical_lookup"
+      ],
+      "runtime_status": "SCAFFOLDED_NOT_RUNTIME_QUALIFIED"
+    },
+    "F115": {
+      "kind": "FARM",
+      "farm_id": 115,
+      "capabilities": [
+        "memory.semantic_recall"
+      ],
+      "runtime_status": "SCAFFOLDED_NOT_RUNTIME_QUALIFIED"
+    },
+    "F116": {
+      "kind": "FARM",
+      "farm_id": 116,
+      "capabilities": [
+        "memory.lineage_check"
+      ],
+      "runtime_status": "SCAFFOLDED_NOT_RUNTIME_QUALIFIED"
+    },
+    "F119": {
+      "kind": "FARM",
+      "farm_id": 119,
+      "capabilities": [
+        "evidence.fetch"
+      ],
+      "runtime_status": "SCAFFOLDED_NOT_RUNTIME_QUALIFIED"
+    },
+    "F120": {
+      "kind": "FARM",
+      "farm_id": 120,
+      "capabilities": [
+        "governor.check"
+      ],
+      "runtime_status": "SCAFFOLDED_NOT_RUNTIME_QUALIFIED"
+    },
+    "AELYS": {
+      "kind": "FARM",
+      "farm_id": 173,
+      "capabilities": [
+        "presenter.compose"
+      ],
+      "runtime_status": "BASE_INSTALLED_ADAPTERS_UNQUALIFIED"
+    },
+    "ELYRA": {
+      "kind": "LOGICAL_PROVIDER",
+      "farm_refs": [
+        113,
+        174
+      ],
+      "capabilities": [
+        "avatar.speak"
+      ],
+      "runtime_status": "UNQUALIFIED"
+    },
+    "AFAH": {
+      "kind": "LOGICAL_IDENTITY",
+      "capabilities": [
+        "audit.review"
+      ],
+      "runtime_status": "UNBOUND"
+    }
+  },
+  "routes": {
+    "rdx.search": "RDX_EXCHANGE",
+    "rdx.fetch": "RDX_EXCHANGE",
+    "memory.canonical_lookup": "F114",
+    "memory.semantic_recall": "F115",
+    "memory.lineage_check": "F116",
+    "evidence.fetch": "F119",
+    "governor.check": "F120",
+    "presenter.compose": "AELYS",
+    "avatar.speak": "ELYRA",
+    "audit.review": "AFAH"
+  },
+  "invariants": {
+    "f152_identity": "BETA",
+    "f152_must_not_route_rdx": true,
+    "unknown_capability": "DENY",
+    "repository_binding_is_not_runtime_execution": true,
+    "memory_is_not_training": true,
+    "simulation_is_not_test": true
+  },
+  "activation_gate": [
+    "PROVIDER_RUNTIME_QUALIFIED",
+    "ENDPOINT_CONFIGURED_IF_REQUIRED",
+    "SECRET_REFERENCE_ENV_ONLY_IF_REQUIRED",
+    "CANARY_SUCCESS",
+    "TRACE_OR_ARTIFACT",
+    "EVIDENCE_LEVEL_NOT_INFLATED"
+  ]
+}
