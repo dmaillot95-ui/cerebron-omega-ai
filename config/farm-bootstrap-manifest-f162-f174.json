@@ -1,0 +1,113 @@
+{
+  "schema": "CEREBRON_MISSING_REPO_BOOTSTRAP_V1",
+  "generated_from_master_branch": "main",
+  "targets": [
+    {
+      "farm_id": 162,
+      "target_repo": "dmaillot95-ui/cerebron-farm-162-nu",
+      "target_state": "REPOSITORY_MISSING",
+      "source_root": "scaffolds/f162-nu",
+      "files": [
+        {
+          "path": "scaffolds/f162-nu/.github/workflows/architecture-guard.yml",
+          "blob_sha": "ca550bc72f27cb65cad9f11d3138eb2526845c7f",
+          "size": 297
+        },
+        {
+          "path": "scaffolds/f162-nu/.github/workflows/training-source-gate.yml",
+          "blob_sha": "d4895e8e54b66f75f02c8b62e03024e346bd8605",
+          "size": 454
+        },
+        {
+          "path": "scaffolds/f162-nu/README.md",
+          "blob_sha": "9770f0a28355213c54ab9c6c7ef2fff1d8cf552a",
+          "size": 474
+        },
+        {
+          "path": "scaffolds/f162-nu/architecture/NU_ARCHITECTURE_V1.json",
+          "blob_sha": "4538594ac2b7dcf7c482fbfc7ce4efa90b22b321",
+          "size": 1282
+        },
+        {
+          "path": "scaffolds/f162-nu/benchmarks/NU_BENCHMARK_V1.json",
+          "blob_sha": "af2bbbacaeb180ec977713f1458c283e75160514",
+          "size": 660
+        },
+        {
+          "path": "scaffolds/f162-nu/config/model-candidates.json",
+          "blob_sha": "3193553eaf4bd53d4cfa7faf206e94c542c9af6d",
+          "size": 555
+        },
+        {
+          "path": "scaffolds/f162-nu/config/project.json",
+          "blob_sha": "9cd2f379c9fe0b313aac7ba1af6ecd2c920ef352",
+          "size": 499
+        },
+        {
+          "path": "scaffolds/f162-nu/memory/NU_MEMORY_CONTRACT_V1.json",
+          "blob_sha": "3ff53417dbba10b3a623a5a15d7491f0d542d535",
+          "size": 616
+        },
+        {
+          "path": "scaffolds/f162-nu/tests/test_scaffold.py",
+          "blob_sha": "90ed531f799fe7353a36e160c107203a1a6b765b",
+          "size": 731
+        },
+        {
+          "path": "scaffolds/f162-nu/training/NU_TRAINING_READINESS_GATES_V1.json",
+          "blob_sha": "cec83397ddbd6ebd85bd056067932e13572f9bb0",
+          "size": 1272
+        },
+        {
+          "path": "scaffolds/f162-nu/training/source_gate.py",
+          "blob_sha": "8432aa1717d99d96a5f90b3d03950295c7b2e538",
+          "size": 851
+        },
+        {
+          "path": "scaffolds/f162-nu/validate_architecture.py",
+          "blob_sha": "ca7222b91163bfa6386345630b3a6f3b551a281f",
+          "size": 1033
+        }
+      ]
+    },
+    {
+      "farm_id": 174,
+      "target_repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+      "target_state": "REPOSITORY_EXISTS_EMPTY",
+      "source_root": "scaffolds/f174-elyra-visual-simulation",
+      "files": [
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/README.md",
+          "blob_sha": "8bbf40a7146c5adf19432cf2e7a14e6fe3678028",
+          "size": 697
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/architecture/ELYRA_VISUAL_SIMULATION_V1.json",
+          "blob_sha": "5852082b9dfdcce4c55bee0c841083468c963f7a",
+          "size": 719
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/config/project.json",
+          "blob_sha": "964ac30d94290d34a32b9b9f00f6604dc00367a8",
+          "size": 708
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/tests/test_scaffold.py",
+          "blob_sha": "d9b71182f191b716ab930020834520912ffc06c6",
+          "size": 488
+        },
+        {
+          "path": "scaffolds/f174-elyra-visual-simulation/validate_architecture.py",
+          "blob_sha": "d3b55a5f8c283872c79bea87191f2dbc83d7a555",
+          "size": 561
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "SOURCE_BLOB_SHA_MUST_MATCH_BEFORE_BOOTSTRAP",
+    "DO_NOT_MARK_INITIALIZED_BEFORE_FIRST_COMMIT_EXISTS",
+    "RUN_DEDICATED_GUARD_AFTER_BOOTSTRAP",
+    "DO_NOT_CLAIM_TRAINING_OR_EXECUTION_FROM_REPOSITORY_INITIALIZATION"
+  ]
+}
