@@ -478,7 +478,7 @@
         "stratified 25/5 per-label train/validation split",
         "validation no-regression gate before frozen M6/transfer retest"
       ],
-      "REPAIR_STATUS": "V3_FAILED_VALIDATION_V4_CONSERVATIVE_ABLATION_TRIGGERED",
+      "REPAIR_STATUS": "CLOSED_FAMILY_STOP_AFTER_V4_NO_COLD_GAIN",
       "TRANSFER_RISK": "HIGH_UNTIL_FROZEN_TRANSFER_RETEST_PASSES",
       "TIMESTAMP": "2026-09-25",
       "V3_EVIDENCE": {
@@ -494,7 +494,21 @@
         "validation_critical_regression": true,
         "decision": "ROLLBACK_RETAIN_EVIDENCE",
         "hf_private_upload": false
-      }
+      },
+      "V4_EVIDENCE": {
+        "run_id": 36103623948,
+        "weights_changed": true,
+        "adapter_sha256": "2b92db33f70f4d58874e1d0243e1d3cb7e38fb1225932ad5963486cbf9b2d48a",
+        "validation_gate_pass": true,
+        "validation_critical_regression": false,
+        "m6_base": "18/60",
+        "m6_adapter": "18/60",
+        "m6_gain": 0,
+        "critical_regression": false,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "hf_private_readback_sha_pass": true
+      },
+      "STOP_RULE": "Do not continue this same-GOLD LoRA hyperparameter family. New training requires materially new audited training data and a fresh cold benchmark."
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
