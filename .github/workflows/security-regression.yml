@@ -1,6 +1,12 @@
 name: GUARDIAN Security Regression
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'security/**'
+      - 'config/**'
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'security/**'
