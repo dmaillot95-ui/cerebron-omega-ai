@@ -1,0 +1,27 @@
+{
+  "schema": "ELYRA_VISUAL_SIMULATION_V1",
+  "farm_id": 174,
+  "identity": "ELYRA",
+  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+  "mission": "Prepare a replayable visual/video simulation contract for ELYRA without claiming executed simulation or physical validation.",
+  "loop": [
+    "WORLD_STATE",
+    "ELYRA_POSE_STATE",
+    "SCENE_COMPOSE",
+    "FRAME_SEQUENCE",
+    "ARTIFACT_PROVENANCE",
+    "REPLAY"
+  ],
+  "artifact_requirements": [
+    "scenario_id",
+    "input_state_hash",
+    "engine_or_generator",
+    "output_artifact_hash",
+    "timestamp"
+  ],
+  "boundaries": {
+    "physical_validation": "NOT_IMPLIED",
+    "training": "OUT_OF_SCOPE",
+    "paid_provider_activation": "DENY_BY_DEFAULT"
+  }
+}
