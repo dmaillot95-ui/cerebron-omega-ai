@@ -1,0 +1,16 @@
+{
+  "schema": "CEREBRON_REPAIR_ON_DEMAND_FORMAT_V3_1_LAUNCH",
+  "date": "2026-09-25",
+  "authorized": true,
+  "reason": "Full six-field V3 proved semantic completeness on SAPHEA but required 824.807s and timed out before AELYS; V3.1 reuses robustly parsed baseline fields and generates only missing values.",
+  "source_v2_run_id": 36177878435,
+  "source_v3_run_id": 36179580251,
+  "source_v3_result": "SAPHEA_6_OF_6_COMPLETE_AT_824_807S_THEN_TIMEOUT",
+  "validation_baseline_artifact_id": 10882824691,
+  "qwen_holdout_artifact_id": 10883795907,
+  "smollm_holdout_artifact_id": 10883830939,
+  "weight_change": false,
+  "training_released": false,
+  "operational_mutation_f172_f173_f174": false,
+  "launch_head": "f0c7a7d6e02cf1ac117433d30047d1a9dae6a75e"
+}
