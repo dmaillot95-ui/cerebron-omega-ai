@@ -1,0 +1,122 @@
+name: CEREBRON Role Fidelity Anti-Convergence Canary
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/all-ai-role-fidelity-canary-trigger.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        ai: [SAPHEA, F148-ALPHA, METRION, F166-RHO, F172-PSI]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Preflight
+        run: |
+          python -m py_compile tools/all_ai_strategy_council_worker.py
+          python -m py_compile tools/all_ai_role_fidelity_canary_worker.py
+      - name: Cache Qwen3-4B
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-qwen3-4b-1cfa9a7208912126459214e8b04321603b3df60c
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute anti-convergence perspective
+        run: python tools/all_ai_role_fidelity_canary_worker.py --ai "${{ matrix.ai }}" --run-id "${{ github.run_id }}" --output "artifacts/role-fidelity/${{ matrix.ai }}/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: role-fidelity-${{ matrix.ai }}
+          path: artifacts/role-fidelity/${{ matrix.ai }}/receipt.json
+
+  audit:
+    needs: canary
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: role-fidelity-*
+          path: downloaded/role-fidelity
+      - name: Audit role fidelity and anti-convergence
+        run: |
+          python - <<'PY'
+          import glob,json,re,pathlib,os,hashlib
+          baseline={
+            "SAPHEA":0.0,
+            "F148-ALPHA":0.0,
+            "METRION":5/7,
+            "F166-RHO":7/17,
+            "F172-PSI":5/17,
+          }
+          non_candidates={"SAPHEA","METRION","F166-RHO","F172-PSI"}
+          def tokens(s):
+              return set(re.findall(r"[a-z0-9]{3,}",(s or "").lower().replace("_"," ")))
+          rows=[]
+          for p in glob.glob("downloaded/role-fidelity/**/receipt.json",recursive=True):
+              r=json.load(open(p)); parsed=r.get("parsed") or {}
+              text=" ".join(str(v) for v in parsed.values())
+              R=tokens((r.get("parent_function") or "")+" "+" ".join(r.get("specialization_tags") or []))
+              O=tokens(text)
+              role=(len(R&O)/len(R)) if R else 0.0
+              dual=(parsed.get("DUAL_CORE") or "").strip()
+              gvl=any(x in text.lower() for x in ["gvl","geometric gate","transfer family"])
+              rows.append({
+                "ai_id":r["ai_id"],"inference":r.get("inference"),"parse_ok":bool(r.get("parse_ok")),
+                "role_alignment_proxy":round(role,6),"baseline_role_alignment_proxy":round(baseline[r["ai_id"]],6),
+                "dual_core":dual,"gvl_recitation":gvl,
+                "noncandidate_dual_no": (dual.upper().startswith("NO") if r["ai_id"] in non_candidates else True),
+                "output_sha256":r.get("output_sha256")
+              })
+          rows.sort(key=lambda x:x["ai_id"])
+          mean_role=sum(x["role_alignment_proxy"] for x in rows)/max(1,len(rows))
+          baseline_mean=sum(baseline.values())/len(baseline)
+          parse_pass=sum(x["parse_ok"] and x["inference"]=="PASS" for x in rows)
+          noncandidate_no=all(x["noncandidate_dual_no"] for x in rows)
+          gvl_count=sum(x["gvl_recitation"] for x in rows)
+          all_pass=(len(rows)==5 and parse_pass==5 and mean_role>=0.40 and noncandidate_no and gvl_count<=1)
+          out={
+            "schema":"CEREBRON_ROLE_FIDELITY_CANARY_AUDIT_V1",
+            "run_id":os.environ["GITHUB_RUN_ID"],
+            "source_baseline_run_id":36084488477,
+            "baseline_sample_mean_role_alignment_proxy":round(baseline_mean,6),
+            "new_mean_role_alignment_proxy":round(mean_role,6),
+            "minimum_required_mean_role_alignment_proxy":0.40,
+            "parse_pass_count":parse_pass,
+            "noncandidate_dual_no":noncandidate_no,
+            "gvl_recitation_count":gvl_count,
+            "all_pass":all_pass,
+            "rows":rows,
+            "claim_ceiling":"PROMPT_ROLE_FIDELITY_CANARY_ONLY_NOT_MODEL_SPECIALIZATION_PROOF"
+          }
+          out["sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          q=pathlib.Path("receipts/council/role-fidelity-canary.json");q.parent.mkdir(parents=True,exist_ok=True);q.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if not all_pass: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: role-fidelity-canary-audit-${{ github.run_id }}
+          path: receipts/council/role-fidelity-canary.json
+      - name: Persist role-fidelity canary
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/council/role-fidelity-canary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: role-fidelity anti-convergence canary"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
