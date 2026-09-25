@@ -1,0 +1,24 @@
+{
+  "schema": "AELYS_LIVE_ARCHITECTURE_V1",
+  "farm_id": 173,
+  "identity": "AELYS",
+  "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+  "mission": "Prepare a verifiable live interaction runtime contract for AÉLYS without claiming deployment.",
+  "loop": [
+    "INPUT_STREAM",
+    "SESSION_STATE",
+    "CEREBRON_ROUTE",
+    "RESPONSE_STREAM",
+    "OBSERVABILITY"
+  ],
+  "boundaries": {
+    "autonomous_external_actions": "DENY_BY_DEFAULT",
+    "paid_provider_activation": "DENY_BY_DEFAULT",
+    "training": "OUT_OF_SCOPE"
+  },
+  "evidence_rules": [
+    "LIVE_RUNTIME_REQUIRES_EXECUTION_RECEIPT",
+    "NO_DEPLOYMENT_CLAIM_WITHOUT_RUN",
+    "MEMORY_NE_TRAINING"
+  ]
+}
