@@ -1,0 +1,7 @@
+SAPHEA FIRST LORA TRANSFER GATE
+version=v1
+source_training_run=36100266729
+adapter_sha=0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080
+benchmark=TRANSFER_V1_108_DISJOINT
+training_on_transfer=DENY
+promotion=NOT_PROMOTED
