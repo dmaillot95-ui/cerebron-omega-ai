@@ -1,0 +1,117 @@
+{
+  "schema": "CEREBRON_LESSON_ABLATION_PILOT_V1",
+  "date": "2026-09-25",
+  "status": "PREPARED_NOT_EXECUTED",
+  "purpose": "Measure whether selected unvalidated strategy seeds improve transfer decisions when injected, compared with the same pinned model without the lesson.",
+  "claim_boundary": "This is prompt-level ablation. It does not train weights and does not prove general capability.",
+  "models": [
+    {
+      "key": "qwen3",
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+    },
+    {
+      "key": "smollm3",
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+    }
+  ],
+  "selected_lessons": [
+    {
+      "lesson_id": "D01-PROOF-001",
+      "domain": "math_proof",
+      "source": "config/lesson-validation-batch-01.json",
+      "strategy_summary": "Write quantifiers and target; derive lemmas; distinguish necessary/sufficient conditions; close every universal step.",
+      "anti_pattern": "finite verification as proof",
+      "failure_test": "Search for smallest counterexample and verify each implication.",
+      "cases": [
+        {
+          "case_id": "D01-XFER-REJECT-01",
+          "scenario": "A program checked a claimed integer property for every n from 1 through 1,000,000,000 and found no exception. The author concludes the property is therefore a theorem for every positive integer.",
+          "expected": "REJECT"
+        },
+        {
+          "case_id": "D01-XFER-ACCEPT-01",
+          "scenario": "A proof states the quantified assumptions, fixes an arbitrary positive integer n, derives a lemma from those assumptions, proves the target implication for that arbitrary n, and checks each implication before concluding the universal statement.",
+          "expected": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "lesson_id": "D03-SIMULATION-001",
+      "domain": "physics_engineering",
+      "source": "config/lesson-validation-batch-02.json",
+      "strategy_summary": "Define model equations, boundary/initial conditions, solver tolerances and validation target; distinguish numerical convergence from physical validation.",
+      "anti_pattern": "simulation presented as experiment",
+      "failure_test": "Perform mesh/time-step or tolerance convergence and compare with an independent reference.",
+      "cases": [
+        {
+          "case_id": "D03-XFER-REJECT-01",
+          "scenario": "A thermal simulation is stable across three mesh refinements and two time steps. No hardware or independent physical reference has been tested. The report states that the component is physically qualified for flight.",
+          "expected": "REJECT"
+        },
+        {
+          "case_id": "D03-XFER-ACCEPT-01",
+          "scenario": "A simulation report states the equations, boundary conditions and solver tolerances, reports numerical convergence, and limits its conclusion to the model prediction while explicitly marking physical validation as pending.",
+          "expected": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "lesson_id": "D10-DEPENDENCY-001",
+      "domain": "audit_redteam",
+      "source": "config/lesson-validation-batch-06.json",
+      "strategy_summary": "Fingerprint model, provider, prompt lineage, data and evidence sources before counting corroboration; collapse dependent outputs into one evidence family.",
+      "anti_pattern": "multiple executions counted as independent evidence",
+      "failure_test": "Remove all outputs sharing a dependency lineage and recompute evidential support.",
+      "cases": [
+        {
+          "case_id": "D10-XFER-REJECT-01",
+          "scenario": "Twelve reports were produced by the same model revision from the same prompt template and the same dataset, under twelve different agent names. An audit counts them as twelve independent confirmations.",
+          "expected": "REJECT"
+        },
+        {
+          "case_id": "D10-XFER-ACCEPT-01",
+          "scenario": "Three analyses use distinct methods and separately collected datasets. Provenance fingerprints show no shared model output, prompt lineage, or evidence source. For dependency accounting only, the audit counts three separate evidence families.",
+          "expected": "ACCEPT"
+        }
+      ]
+    },
+    {
+      "lesson_id": "D11-CONSENSUS_CONTROL-001",
+      "domain": "multi_agent_orchestration",
+      "source": "config/lesson-validation-batch-06.json",
+      "strategy_summary": "Treat consensus as a signal, not truth; weight independence, evidence quality and method diversity, and require external or alternative validation for high-impact claims.",
+      "anti_pattern": "agent count used as confidence score",
+      "failure_test": "Recompute decision after collapsing dependent agents and introducing a credible dissenting method.",
+      "cases": [
+        {
+          "case_id": "D11-XFER-REJECT-01",
+          "scenario": "Twenty agents with different role names but the same underlying model and shared source material all agree. No independent experiment or alternative method exists, yet the conclusion is marked proven because the vote is 20 to 0.",
+          "expected": "REJECT"
+        },
+        {
+          "case_id": "D11-XFER-ACCEPT-01",
+          "scenario": "A multi-agent council uses agreement only to prioritize a hypothesis. It collapses correlated agents into one lineage and keeps the claim provisional until a distinct method and independent falsification test are completed.",
+          "expected": "ACCEPT"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    "BASELINE",
+    "LESSON_INJECTED"
+  ],
+  "response_contract": [
+    "DECISION: ACCEPT|REJECT",
+    "REASON: one short sentence"
+  ],
+  "selection_rule": {
+    "per_model": "lesson_injected_correct > baseline_correct AND lesson_injected_accept_control_not_worse",
+    "cross_model": "positive ablation signal must hold on both pinned model lineages",
+    "result_ceiling": "L4_TRANSFER_ABLATION_CANDIDATE_NOT_GOLD"
+  },
+  "operational_mutation_f172_f173_f174": false,
+  "weight_change": false,
+  "training_released": false
+}
