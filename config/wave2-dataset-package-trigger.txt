@@ -1,0 +1,10 @@
+CEREBRON WAVE2 DATASET PACKAGE RELEASE
+source_manifest=c4c1b1db4a6e074c3d88b8cbe20c38a969f8f45d236bb25bc549c82b2722d744
+afah_run=36113724966
+afah_review_sha256=e48495a3c7fa1ad25470628dfc8db59dfff1888ada1d41752e2a09b2e99a3da7
+f72_run=36113384989
+f72_result_sha256=4ed12347e94ced51fadcb6b9aee0cc589499f79ee0cf1a45e0d7b187489118a7
+roles=SPIRALION,HYPERION,ASTRION,SAPHEA_MICRO
+cold=M6,TRANSFER,RED
+cold_training=DENY
+release_only_if_all_leakage_checks_pass=true
