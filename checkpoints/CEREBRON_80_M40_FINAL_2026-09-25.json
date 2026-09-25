@@ -1,0 +1,204 @@
+{
+  "schema": "CEREBRON_80_M40_FINAL_CHECKPOINT_V1",
+  "date": "2026-09-25",
+  "mode": "CONTINUATION_STRICTE_REALITY_EVIDENCE",
+  "repository": "dmaillot95-ui/cerebron-omega-ai",
+  "branch_main_head": "c77f1db652861c7e81bd6272cf75a2a41cb4c2f6",
+  "platform_branch": "feat/cerebron-ai-platform-mvp",
+  "platform_head": "34047d89336c1d54431052eec2c32063fa6651af",
+  "resume_rules": [
+    "NEVER_RESTART_FROM_ZERO",
+    "READ_THIS_CHECKPOINT_FIRST",
+    "READ_CHECKPOINTS_CEREBRON_80_LATEST_V2_NEXT",
+    "PRESERVE_NEGATIVE_EVIDENCE",
+    "NO_DESTRUCTIVE_OVERWRITE",
+    "CLAIM_LE_EVIDENCE",
+    "REPAIR_BEFORE_SCALE",
+    "TRANSFER_BEFORE_GENERALITY"
+  ],
+  "system_state": {
+    "operational_worker_scale": {
+      "decision": "STAY_AT_5",
+      "evidence_run": 36042832474,
+      "reason": "10 executed but 1 useful extension worker, 1 new finding, 1 shared lineage, 0 independent evidence"
+    },
+    "gvl": {
+      "dimension": 32,
+      "positive_consecutive_held_out_ratios": 1,
+      "gate": "1_OF_4",
+      "claim": "GEOMETRIC_GROWTH_NOT_DEMONSTRATED"
+    },
+    "knowledge_banks": {
+      "status": "ACTIVE_GUARD_PASS",
+      "guard_run": 36047140324,
+      "guard_sha256": "a3834b8921c9db1d29a20e7049b31d265106051bff77e2fe82168788f294e265",
+      "banks": [
+        "LESSON_BANK",
+        "FAILURE_BANK",
+        "CONTRADICTION_BANK",
+        "UNKNOWN_BANK",
+        "DEPENDENCY_GRAPH",
+        "TRANSFER_BANK"
+      ]
+    },
+    "platform": {
+      "control_plane": "LOCAL_OPERATIONAL_SCOPED",
+      "platform_ci": {
+        "run_id": 35913512153,
+        "tests": "50_OF_50_PASS"
+      },
+      "security": {
+        "run_id": 35913512257,
+        "status": "LOCAL_SECURITY_VERIFIED_REMOTE_DEPLOYMENT_BLOCKED"
+      },
+      "generative_backend": {
+        "run_id": 35913512285,
+        "model": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+        "status": "REAL_CPU_INFERENCE_PASS",
+        "claim_ceiling": "MODEL_OUTPUT_UNVERIFIED"
+      },
+      "farm_bridge_F123": {
+        "run_id": 35897592604,
+        "job_id": 107305284787,
+        "artifact_id": 10767830799,
+        "artifact_digest": "sha256:0cec95ef33e89dbc25858afeddf6fcd9d947d4774207038b3ef9866c21e1da75",
+        "status": "REAL_FARM_EXECUTION_VERIFIED",
+        "scope": "TWO_BODY_HOHMANN_REFERENCE_ONLY"
+      },
+      "agora": {
+        "transfer_audit_run": 35960821228,
+        "status": "PASS"
+      },
+      "memory_14_ai": {
+        "run_id": 35960821223,
+        "status": "PASS_PRIVATE_WRITE_READ_SHA",
+        "claim_ceiling": "MEMORY_NOT_NEURAL_TRAINING"
+      }
+    },
+    "ai_state": {
+      "ELYRA": {
+        "class": "SCOPED_TRAINED_POLICY",
+        "status": "NEURAL_TRAINING_VERIFIED_RUNTIME_INTEGRATED_INDEPENDENT_CODEPATH_AUDIT_PASS",
+        "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
+        "training_run": 35904950828,
+        "audit_run": 35905952407,
+        "audit_success_rate": 0.5083333333333333,
+        "teacher_success_rate": 0.525,
+        "claim_ceiling": "SYNTHETIC_IMITATION_GENERALIZES_WITHIN_SHIFTED_SIMULATOR_DISTRIBUTION"
+      },
+      "SAPHEA": {
+        "class": "LOGICAL_ORCHESTRATOR_WITH_TRAINING_PIPELINE",
+        "status": "BASELINE_AND_DATASET_READY_LORA_NOT_YET_VERIFIED",
+        "branch": "feat/saphea-first-lora-v1",
+        "baseline_run": 35907245194,
+        "m6_score": 18,
+        "m6_max": 60,
+        "m6_accuracy": 0.3
+      },
+      "ELYSION": {
+        "class": "DUAL_CORE_CANDIDATE",
+        "status": "D0_D3_PASS_D4_D6_D8_PENDING",
+        "single_core_baselines": {
+          "qwen": 0.51,
+          "smollm": 0.62
+        },
+        "rule": "DUAL_CORE_MUST_BE_ABLATED_AGAINST_BEST_SINGLE_CORE"
+      },
+      "ELYSIUM": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "SAELION": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "ALPHA": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "OMEGA": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "DELTA": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "NEXUS": {
+        "status": "DUAL_CORE_ARCHITECTURE_D0_D1_PASS_ACTIVATION_PENDING"
+      },
+      "AELYS": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "SPIRALION": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "ETHERION": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "HYPERION": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "ASTRION": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "METRION": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "AFAH": {
+        "status": "LOGICAL_ROLE_NO_DEDICATED_TRAINED_MODEL"
+      },
+      "SAPHEA_MICRO": {
+        "status": "PARTIALLY_IMPLEMENTED",
+        "implemented_units": 7,
+        "target_units": 20,
+        "rule": "NO_7_TO_20_WITHOUT_ABLATION_GAIN"
+      }
+    },
+    "secondary_models": {
+      "SmolLM2-1.7B": {
+        "benchmark_run": 35906985193,
+        "status": "FAIL_REPAIR_REQUIRED"
+      },
+      "Granite-3.3-2B": {
+        "benchmark_run": 35907328339,
+        "status": "FAIL_REPAIR_REQUIRED"
+      },
+      "OLMo-2-1B": {
+        "benchmark_run": 35906141609,
+        "status": "FAIL_REPAIR_REQUIRED"
+      }
+    },
+    "strategy_council": {
+      "mission": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "first_full_run": 36046943012,
+      "executed": 38,
+      "shared_lineages": 1,
+      "independent_evidence_count": 0,
+      "first_audit": "INVALID_FOR_RANKING_PARSE_PASS_0_OF_38",
+      "failure_1": "F_FORMAT_MARKDOWN_WRAPPED_LABELS",
+      "repair_canary_v1": 36075032169,
+      "repair_canary_v1_result": "FAIL_5_OF_5_F_TOOL_REGEX_BAD_CHARACTER_RANGE",
+      "repair_canary_v2": 36075666669,
+      "repair_canary_v2_status": "IN_PROGRESS_AT_CHECKPOINT",
+      "scale_policy": "DO_NOT_RERUN_38_UNTIL_5_OF_5_CANARY_PASS"
+    }
+  },
+  "next_missions_order": [
+    "M41_VERIFY_COUNCIL_REPAIR_CANARY_V2_5_OF_5; if fail, repair same layer and rerun same 5 only.",
+    "M42_IF_CANARY_PASS_RERUN_ALL_AI_COUNCIL_38_AND_AUDIT_ROLE_FIDELITY_NOVELTY_REDUNDANCY_TRANSFER_PROPOSALS.",
+    "M43_SAPHEA_FIRST_REAL_LORA_OR_QLORA: train on sealed GOLD, persist adapter SHA, evaluate unchanged M6 60, rollback on no measured gain.",
+    "M44_ELYSION_D4_D5_D6: dual-core vs best single-core 0.62, contradiction preservation, red-team, latency/resource cost.",
+    "M45_GVL_HELD_OUT_C3: distinct frozen benchmark family, zero critical regression; only then gate may move 1/4->2/4.",
+    "M46_BUILD_COLD_SPECIALTY_BENCHMARKS_FOR_AELYS_ETHERION_AFAH_METRION_BEFORE_ANY_DEDICATED_MODEL_TRAINING.",
+    "M47_DIAGNOSE_SECONDARY_MODEL_BENCHMARK_FAILURES_SMOLLM17_GRANITE_OLMO_ONE_BY_ONE_REPAIR_BEFORE_PROMOTION.",
+    "M48_PLATFORM_REMOTE_REMAINS_BLOCKED_UNTIL_TLS_PROXY_SECRET_BACKEND_DEPLOYMENT_ISOLATION_AND_REMOTE_RATE_LIMIT_VALIDATED.",
+    "M49_CONTINUE_MEMORY_M06_WITH_VERSIONED_PARENT_SHA_ROLLBACK_AND_NO_M6_TRAIN_CONTAMINATION.",
+    "M50_ONLY_SCALE_WORKERS_OR_MODELS_WHEN_MEASURED_MARGINAL_INFORMATION_GAIN_IS_POSITIVE."
+  ],
+  "forbidden_claims": [
+    "38_LOGICAL_AI_EQUALS_38_INDEPENDENT_MODELS",
+    "WORKFLOW_SUCCESS_EQUALS_COGNITIVE_SUCCESS",
+    "MEMORY_EQUALS_NEURAL_TRAINING",
+    "DUAL_CORE_ARCHITECTURE_EQUALS_DUAL_CORE_GAIN",
+    "SIMULATION_EQUALS_PHYSICAL_VALIDATION",
+    "GEOMETRIC_GROWTH_BEFORE_4_POSITIVE_HELD_OUT_CYCLES",
+    "FAILED_BENCHMARK_MODEL_EQUALS_OPERATIONAL_MODEL"
+  ]
+}
