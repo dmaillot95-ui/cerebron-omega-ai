@@ -51,6 +51,31 @@
       },
       "LIMITS": "Operational efficiency only. Does not prove role independence, specialization quality, model diversity, transfer, or scientific validity.",
       "PROMOTION_STATUS": "NOT_PROMOTED_TRANSFER_TEST_REQUIRED"
+    },
+    {
+      "LESSON_ID": "LESSON-M43-SAPHEA-LORA-G6-001",
+      "CLASS": "L2_AUDITED",
+      "MISSION_ID": "M43_SAPHEA_FIRST_REAL_REVERSIBLE_LORA",
+      "TITLE": "Scoped SAPHEA LoRA can improve sealed M6 without modifying base weights.",
+      "DESCRIPTION": "A reversible LoRA on pinned Qwen2.5-0.5B changed only adapter parameters and improved the sealed SAPHEA epistemic M6 from 18/60 to 30/60 with no critical per-label regression.",
+      "EVIDENCE_REFS": [
+        "run:36100266729",
+        "job:107961061331",
+        "artifact:10848864759",
+        "receipt:feat/saphea-first-lora-v1/receipts/training/saphea-first-lora-36100266729.json"
+      ],
+      "MEASURED": {
+        "baseline_m6_score": 18,
+        "posttrain_m6_score": 30,
+        "cold_gain": 12,
+        "validation_loss_before": 0.48301953449845314,
+        "validation_loss_after": 0.11578285936266183,
+        "trainable_params": 1081344,
+        "trainable_fraction": 0.0021840298504761666,
+        "critical_regression": false
+      },
+      "LIMITS": "Same scoped task family; novel transfer, independent audit, Red Team, F72 and AFAH gates remain open. Not a general SAPHEA capability claim.",
+      "PROMOTION_STATUS": "G6_ONLY_NOT_L5_L6"
     }
   ],
   "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
