@@ -1,0 +1,49 @@
+name: CEREBRON Self-Evolution Corpus Guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evolution/build_self_evolution_corpus_v1.py'
+      - 'memory/failure-bank-v1.json'
+      - 'memory/lesson-bank-v1.json'
+      - 'memory/contradiction-bank-v1.json'
+      - 'memory/gvl-lesson-index.json'
+      - '.github/workflows/cerebron-self-evolution-corpus-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build corpus
+        run: |
+          python -m py_compile evolution/build_self_evolution_corpus_v1.py
+          python evolution/build_self_evolution_corpus_v1.py
+      - name: Fail closed on false release
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/cerebron-self-evolution-corpus.json"))
+          assert x["weight_training_released"] is False
+          assert x["raw_record_count"] >= x["canonical_record_count"]
+          assert sum(x["split_counts"].values()) == x["canonical_record_count"]
+          assert all(not (r["training_eligible"] and r["source_bank"]=="FAILURE_BANK") for r in x["records"])
+          assert all(not (r["training_eligible"] and r["source_bank"]=="CONTRADICTION_BANK") for r in x["records"])
+          print("SELF_EVOLUTION_CORPUS_GUARD=PASS",x["canonical_record_count"],x["training_eligible_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cerebron-self-evolution-corpus
+          path: artifacts/cerebron-self-evolution-corpus.json
+          if-no-files-found: error
+          retention-days: 30
