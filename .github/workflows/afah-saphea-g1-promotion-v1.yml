@@ -1,0 +1,60 @@
+name: AFAH SAPHEA G1 Scoped Promotion V1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/afah-saphea-g1-promotion-request.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile AFAH policy gate
+        run: python -m py_compile tools/afah_saphea_g1_promotion_v1.py
+      - name: Run AFAH final scoped promotion review
+        run: python tools/afah_saphea_g1_promotion_v1.py
+      - name: Verify AFAH receipt integrity
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("receipts/training/afah-saphea-g1-promotion-v1.json")
+          d=json.loads(p.read_text())
+          assert d["authority"]=="AFAH"
+          assert d["authority_mode"]=="DETERMINISTIC_POLICY_GATE_NOT_DEDICATED_AFAH_MODEL_INFERENCE"
+          assert len(d["review_sha256"])==64
+          assert d["decision"] in ["PROMOTE_SCOPED_G7","HOLD_OR_ROLLBACK"]
+          print("AFAH_SAPHEA_G1_REVIEW=PASS",d["decision"],d["all_required_gates_pass"],d["review_sha256"])
+          if d["decision"]=="PROMOTE_SCOPED_G7":
+              c=json.loads(pathlib.Path("config/saphea-g1-epistemic-adapter-v1.json").read_text())
+              assert c["state"]=="SCOPED_G7_PROMOTED"
+              assert c["routing"]["general_default"] is False
+              assert c["base_model"]["immutable"] is True
+              print("AFAH_SCOPED_PROMOTION_POINTER=PASS",c["adapter"]["sha256"],c["claim_ceiling"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afah-saphea-g1-review-${{ github.run_id }}
+          path: |
+            receipts/training/afah-saphea-g1-promotion-v1.json
+            config/saphea-g1-epistemic-adapter-v1.json
+          if-no-files-found: warn
+      - name: Persist AFAH review and scoped pointer
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/afah-saphea-g1-promotion-v1.json
+          test -f config/saphea-g1-epistemic-adapter-v1.json && git add config/saphea-g1-epistemic-adapter-v1.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: AFAH SAPHEA G1 scoped promotion review"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1
