@@ -1476,21 +1476,26 @@
       "repo": "cerebron-farm-173-aelys-live",
       "domain": "aelys-live-runtime",
       "identity": "AELYS",
-      "status": "PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY",
+      "status": "BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED",
       "type": "INTERFACE_RUNTIME_FARM",
       "role": "Prepare a verifiable low-latency live interaction runtime contract for AELYS without claiming deployment.",
       "training_status": "NOT_TRAINED",
       "production_status": "NOT_DEPLOYED",
       "repository_exists": true,
-      "repository_initialized": false,
+      "repository_initialized": true,
       "local_scaffold": "scaffolds/f173-aelys-live",
-      "infrastructure_status": "LOCAL_SCAFFOLD_VALIDATED_TARGET_REPOSITORY_EMPTY",
+      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_MASTER_BUS_UNCONFIRMED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
-        "crystal_guard_run_id": 36155316425
-      }
+        "crystal_guard_run_id": 36155316425,
+        "dedicated_repo_selftest_run_id": 36153266774,
+        "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b"
+      },
+      "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b",
+      "dedicated_repo_selftest_run_id": 36153266774,
+      "master_plugin_bus_status": "UNCONFIRMED_REFERENCED_FILE_MISSING"
     },
     {
       "id": 174,
@@ -1544,8 +1549,10 @@
       174
     ],
     "extension_repository_empty_ids": [
-      173,
       174
+    ],
+    "extension_repository_initialized_ids": [
+      173
     ]
   },
   "shared_engines": {
