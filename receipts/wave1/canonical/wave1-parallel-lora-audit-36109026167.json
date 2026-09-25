@@ -1,0 +1,89 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_LORA_CANONICAL_AUDIT_V1",
+  "run_id": 36109026167,
+  "source_head": "aaea031281cc85b7a826f2c52e10c01bfd541e00",
+  "role_count": 4,
+  "training_executed_count": 4,
+  "weights_changed_count": 4,
+  "hf_readback_pass_count": 4,
+  "g6_candidate_count": 1,
+  "rollback_count": 3,
+  "unique_base_lineage_count": 1,
+  "independent_evidence_count": 0,
+  "candidate_roles": [
+    "AFAH"
+  ],
+  "rollback_roles": [
+    "AELYS",
+    "ETHERION",
+    "METRION"
+  ],
+  "roles": {
+    "AELYS": {
+      "adapter_sha256": "fd23337fb4884b6fb87542e4ff16a55d459e4ccc931eb39aa2c41f322ee94edb",
+      "gains": {
+        "VALIDATION": 6,
+        "M6": 0,
+        "TRANSFER": -4,
+        "RED": 0
+      },
+      "critical_regression": true,
+      "validation_gate_pass": true,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE",
+      "report_sha256": "5eada4ce379f45385834a6bc8faa29f04464886fdf94b44f45d3246643e7a1c8"
+    },
+    "ETHERION": {
+      "adapter_sha256": "2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": -2,
+        "TRANSFER": -1,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "validation_gate_pass": true,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE",
+      "report_sha256": "2d2b6383a3ef58c2afdaddc7c44e4a2b7dac82a0b1638a76f2223a11572a5bfa"
+    },
+    "AFAH": {
+      "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+      "gains": {
+        "VALIDATION": 12,
+        "M6": 2,
+        "TRANSFER": 6,
+        "RED": 4
+      },
+      "critical_regression": false,
+      "validation_gate_pass": true,
+      "cold_gate_pass": true,
+      "decision": "G6_CANDIDATE_HOLD_F72_AFAH",
+      "report_sha256": "3a2410945f7d7c0bb7303fbe9a4a62c8ccdb30ac69a1bbe47e8ba03747d22256"
+    },
+    "METRION": {
+      "adapter_sha256": "6e51db22126ae3218429dc4afe62df4a43d8d824b6ee374b305315a70afb682f",
+      "gains": {
+        "VALIDATION": 9,
+        "M6": 7,
+        "TRANSFER": 0,
+        "RED": -2
+      },
+      "critical_regression": true,
+      "validation_gate_pass": false,
+      "cold_gate_pass": false,
+      "decision": "ROLLBACK_RETAIN_EVIDENCE",
+      "report_sha256": "e43896db2c5e666ad14bce4741f3e1f85d7b573f439549bdc9e7e3fdfa96ae34"
+    }
+  },
+  "artifact_ids": {
+    "AELYS": 10852865508,
+    "AFAH": 10853100527,
+    "ETHERION": 10852643185,
+    "METRION": 10852642737
+  },
+  "evidence_origin": "EXACT_RECEIPTS_EXTRACTED_FROM_GITHUB_ACTION_ARTIFACTS",
+  "duplicate_run_36109522298": "CORRELATED_REDUNDANT_DO_NOT_COUNT_AS_INDEPENDENT_EVIDENCE",
+  "next_gate": "F72_REVIEW_AFAH_ONLY",
+  "claim_ceiling": "FOUR_REAL_SCOPED_LORA_TRAININGS_ONE_G6_CANDIDATE_THREE_ROLLBACKS_SHARED_BASE_LINEAGE_NO_PROMOTION"
+}
