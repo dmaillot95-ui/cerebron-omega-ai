@@ -1,0 +1,16 @@
+{
+  "schema": "CEREBRON_WAVE1_QUARANTINE_AUDIT_POINTER_V1",
+  "run_id": 36107794532,
+  "source_manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+  "semantic_pass_count": 432,
+  "semantic_fail_count": 0,
+  "unresolved_count": 0,
+  "tamper_case_count": 18,
+  "tamper_detected_count": 18,
+  "training_released": false,
+  "state": "AUDIT_COUNTER_AUDIT_PASS_F72_AFAH_PENDING",
+  "independent_model_evidence": false,
+  "report_sha256": "18dc79d211dc1df0ad615044918ff9e6a7eedeff84277a196662fdca16ca8fce",
+  "claim_ceiling": "SYNTHETIC_CONTRACT_DATA_AUDITED_NOT_YET_GOLD_NOT_TRAINING_RELEASED",
+  "receipt_sha256": "d102a0dd648fc3cc9c6eaf9b8af375fbc6f22b0bb83c4be77479b37f8462f5c2"
+}
