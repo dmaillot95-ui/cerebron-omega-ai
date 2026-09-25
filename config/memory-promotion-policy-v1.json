@@ -207,15 +207,34 @@
         "training_released": false
       },
       "remaining_requirements": [
-        "FRESH_ABLATION",
-        "FRESH_TRANSFER",
-        "AFAH_REVIEW",
-        "PROMOTION_POLICY_REVIEW"
+        "INTEGRATE_VERIFIED_RDX_OBJECTS",
+        "ESTABLISH_TRAINING_RIGHTS",
+        "COMPLETE_REQUIRED_HUMAN_REVIEW",
+        "FRESH_ABLATION_ON_ACTUAL_GOLD_CANDIDATE",
+        "FRESH_TRANSFER_ON_ACTUAL_GOLD_CANDIDATE",
+        "AFAH_REVIEW_ON_ACTUAL_GOLD_CANDIDATE"
       ],
-      "current_reason": "REGISTRY_REALITY_REPRODUCED_BUT_GLOBAL_PROMOTION_REQUIREMENTS_INCOMPLETE"
+      "current_reason": "RDX_PROMOTION_POLICY_REVIEW_PASS_HOLD_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS",
+      "promotion_policy_review": {
+        "status": "PASS_HOLD",
+        "run_id": 36163491199,
+        "receipt_sha256": "712d0d94b793f904dda5ed7d90d9e664cf7f384a2b18c84f6715b19f1a8ed7f4",
+        "source_rdx_commit": "0f80484dbb84803316397af9601284364a6d84be",
+        "observed": {
+          "canonical_object_count": 0,
+          "integration_entry_count": 0,
+          "execution_count": 0,
+          "human_review_complete": false,
+          "source_rights_clear_for_training": false,
+          "open_work_count": 5
+        },
+        "decision": "HOLD_NO_TRAIN_ELIGIBLE_GOLD_OBJECTS",
+        "gold_released": false,
+        "training_released": false
+      }
     }
   },
-  "global_promotion_state": "BLOCKED_PENDING_F72_ABLATION_TRANSFER_AFAH_POLICY_REVIEW",
+  "global_promotion_state": "BLOCKED_PENDING_F72_RDX_GOLD_CANDIDATE_ABLATION_TRANSFER_AFAH",
   "rules": [
     "MEMORY_NOT_LEARNING",
     "M6_NEVER_IN_TRAIN",
