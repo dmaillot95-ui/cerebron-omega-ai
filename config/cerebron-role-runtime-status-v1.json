@@ -1,0 +1,187 @@
+{
+  "schema": "CEREBRON_ROLE_RUNTIME_STATUS_V1",
+  "status": "AUTHORITATIVE_STATUS_SEMANTICS_REGISTERED",
+  "date": "2026-09-25",
+  "purpose": "Separate configured roles, AI identities, repositories, runtime execution, benchmarks, training and qualification so no slot or role is counted as a running independent model.",
+  "authoritative_inputs": [
+    "config/farms.json",
+    "config/greek-ai-constellation-v1.json",
+    "config/greek-24-colony-master.json",
+    "config/cerebron-dual-core-contract-v1.json",
+    "config/cerebron-unified-plugin-bus-v1.json"
+  ],
+  "status_lattice": [
+    {
+      "status": "ROLE_CONFIGURED",
+      "minimum_evidence": [
+        "role_id",
+        "function",
+        "boundary"
+      ],
+      "forbids": [
+        "MODEL_RUNNING",
+        "EXECUTED",
+        "TRAINED"
+      ]
+    },
+    {
+      "status": "IDENTITY_CONFIGURED",
+      "minimum_evidence": [
+        "farm_id",
+        "identity",
+        "registry_entry"
+      ],
+      "forbids": [
+        "EXECUTED",
+        "TRAINED"
+      ]
+    },
+    {
+      "status": "REPOSITORY_PRESENT",
+      "minimum_evidence": [
+        "repository_resolves"
+      ],
+      "forbids": [
+        "RUNTIME_QUALIFIED",
+        "EXECUTED"
+      ]
+    },
+    {
+      "status": "AVAILABLE",
+      "minimum_evidence": [
+        "runtime_or_worker_probe",
+        "required_resources_resolve"
+      ],
+      "forbids": [
+        "EXECUTED"
+      ]
+    },
+    {
+      "status": "EXECUTED",
+      "minimum_evidence": [
+        "run_or_exec_id",
+        "input_or_mission",
+        "output_or_trace",
+        "status"
+      ],
+      "forbids": [
+        "TRAINED_UNLESS_WEIGHT_EVIDENCE"
+      ]
+    },
+    {
+      "status": "BENCHMARKED",
+      "minimum_evidence": [
+        "benchmark_id",
+        "dataset_or_task_hash",
+        "result",
+        "model_revision"
+      ],
+      "forbids": [
+        "GENERAL_CAPABILITY_WITHOUT_TRANSFER"
+      ]
+    },
+    {
+      "status": "TRAINED",
+      "minimum_evidence": [
+        "weights_or_adapter_before",
+        "weights_or_adapter_after",
+        "training_run",
+        "artifact_hash"
+      ],
+      "forbids": [
+        "MEMORY_ONLY_AS_TRAINING"
+      ]
+    },
+    {
+      "status": "QUALIFIED",
+      "minimum_evidence": [
+        "required_gates_pass",
+        "cold",
+        "transfer",
+        "redteam",
+        "no_critical_regression"
+      ],
+      "forbids": [
+        "PRODUCTION_WITHOUT_RUNTIME_QUALIFICATION"
+      ]
+    }
+  ],
+  "accounting_rules": {
+    "role_slot_is_not_agent": true,
+    "identity_configured_is_not_model_running": true,
+    "repository_present_is_not_runtime_execution": true,
+    "execution_is_not_training": true,
+    "memory_is_not_training": true,
+    "same_model_lineage_is_not_independent_evidence": true,
+    "consensus_is_not_independent_evidence": true,
+    "unknown_must_remain_unknown": true
+  },
+  "greek_registry": {
+    "expected_configured_count": 24,
+    "includes_nu": true,
+    "nu_farm_id": 162,
+    "known_unavailable": [
+      "NU"
+    ],
+    "available_count": "UNKNOWN_UNTIL_RUNTIME_PROBE",
+    "executed_this_wave_requires": "AI_EXEC_RECEIPT_BOUND_TO_IDENTITY",
+    "independent_model_count_requires": "MODEL_PROVIDER_REVISION_AND_OVERLAP_AUDIT",
+    "authoritative_role_map": "config/greek-ai-constellation-v1.json"
+  },
+  "colony_status": {
+    "configured_definition": "Entry exists in config/greek-24-colony-master.json with a role/team template.",
+    "executed_definition": "At least one colony run has worker identities, run/exec IDs, outputs and provenance.",
+    "configured_is_not_executed": true,
+    "required_core_roles": [
+      "A0_CHIEF",
+      "A4_AUDITOR",
+      "A5_COUNTER_AUDITOR",
+      "A7_SYNTHESIZER"
+    ]
+  },
+  "dual_core_status": {
+    "contract": "config/cerebron-dual-core-contract-v1.json",
+    "configured_definition": "Candidate assignment exists.",
+    "bound_definition": "Both exact model revisions have receipts bound to the AI.",
+    "executed_definition": "Both core executions plus critique/fusion trace exist for the mission.",
+    "independent_evidence_definition": "Distinct model identity alone is insufficient; source, prompt, memory and dataset overlaps must be audited.",
+    "full_validation_requires": [
+      "D4",
+      "D5",
+      "D6",
+      "D8"
+    ]
+  },
+  "agora_status": {
+    "agora_run_is_not_ai_execution_without_participant_receipts": true,
+    "deterministic_methods_may_be_independent_methods_without_being_independent_ai_models": true,
+    "real_participants_require": [
+      "AI_ID",
+      "MODEL",
+      "MODEL_REVISION",
+      "ROLE",
+      "RUN_OR_EXEC_ID",
+      "OUTPUT_HASH"
+    ]
+  },
+  "native_cerebron_roles": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "AFAH",
+    "CEREBRON",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO"
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "CONSENSUS<=INDEPENDENT_EVIDENCE",
+    "MEMORY!=TRAINING",
+    "SIMULATION!=TEST",
+    "AGENT_COUNT!=INTELLIGENCE"
+  ]
+}
