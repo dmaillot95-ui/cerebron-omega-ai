@@ -1,0 +1,76 @@
+{
+  "schema": "CEREBRON_124_RDX_MANUAL_SIGNED_HUMAN_REVIEW_WORKFLOW_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_MANUAL_SIGNED_HUMAN_REVIEW_WORKFLOW_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "a76c0b580155965d956410f5a5493507ea4afe06",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "5801124d734cb6ab229b92a07612659974f01f32",
+    "full_validation": {
+      "run_id": 36190071780,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36190071674,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "5801124d734cb6ab229b92a07612659974f01f32",
+    "file_count": 16,
+    "aggregate_sha256": "afa9878c62383e8280416b8cbcd14b5b6153fe327ea591a3bb3b170b46d7dd64",
+    "release_attestation_sha256": "b4e48db9516c3ff9fa326d5ae51a03333c2267be65ad547c5b3ab7cf1e6f267e",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_chain": "PASS"
+  },
+  "manual_human_review_workflow": {
+    "workflow": ".github/workflows/rdx-production-human-review.yml",
+    "trigger": "workflow_dispatch_only",
+    "source_run_id_required": true,
+    "reviewer_id_required": true,
+    "allowed_decisions": [
+      "APPROVE",
+      "REJECT"
+    ],
+    "downloads_live_proof_artifact": true,
+    "downloads_registration_proposal_artifact": true,
+    "verifies_live_proof_sigstore": true,
+    "verifies_registration_proposal_sigstore": true,
+    "signs_human_review": true,
+    "verifies_human_review_sigstore": true,
+    "approve_builds_registry_update_proposal": true,
+    "signs_registry_update_proposal": true,
+    "auto_apply": false,
+    "workflow_contract": "PASS"
+  },
+  "fail_closed_controls": {
+    "human_review_contract": "PASS",
+    "negative_canaries": "PASS_8_OF_8_REJECTED",
+    "registry_mutation_mode": "PROPOSAL_ONLY",
+    "production_deployment_verified": false,
+    "proofs_registered": 0
+  },
+  "claim_ceiling": {
+    "actual_human_review_executed": false,
+    "actual_registry_update_proposal_from_live_run": false,
+    "production_deployment_verified": false,
+    "reason": "NO_REAL_DEPLOYMENT_OR_HUMAN_REVIEW_RUN_YET"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "HUMAN_REVIEW_IS_MANUAL",
+    "NO_SIMULATED_HUMAN_APPROVAL",
+    "NO_AUTO_APPLY_PRODUCTION_REGISTRY",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
