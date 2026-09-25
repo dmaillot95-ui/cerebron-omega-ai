@@ -1,0 +1,10 @@
+ELYSIUM D3 PRIVATE COLD BASELINE PAIR
+source_d2_run=36129514044
+source_d2_audit_sha256=58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e
+source_m6_run=36130164581
+m6_sha256=46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2
+m6_deny_training=true
+model_a=Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c
+model_b=HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1
+training=NONE
+runtime_activation=NONE
