@@ -1,0 +1,310 @@
+name: ELYSIUM Wave3A M6 Release and D3 Baselines
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysium-wave3a-m6-d3-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  release_m6:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      HF_PATH: elysium/M6/ELYSIUM-M6-V1.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Require private HF token
+        run: |
+          test -n "$HF_TOKEN" || { echo "HF_TOKEN_MISSING"; exit 17; }
+      - name: Build seal upload and verify private M6
+        run: |
+          mkdir -p receipts/elysium
+          python - <<'PY'
+          import hashlib,json,os,pathlib,tempfile
+          from collections import Counter
+          from huggingface_hub import HfApi,hf_hub_download
+
+          records=[]
+          def add(domain,prompt,expected):
+              records.append({"id":f"E6-{len(records)+1:03d}","domain":domain,"prompt":prompt,"expected":expected})
+
+          for a,b in [(7,5),(13,9),(21,8),(34,13)]:
+              add("claim_verification",f"Claim: {a}+{b}={a+b}. Evidence: direct integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("claim_verification",f"Claim: {a}+{b}={a+b+1}. Evidence: direct integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              add("claim_verification",f"Claim: every integer has property P. Evidence: property P was checked only for integers 1 through {a}. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for n in [4,6,8,10]:
+              c=n if n%4 else n+2
+              add("counterexample_search",f"Claim: all even integers are divisible by 4. Candidate counterexample: {c}. Return only PASS, FAIL, or INSUFFICIENT. PASS means the claim survives the supplied evidence.","FAIL")
+              add("counterexample_search",f"Claim: all listed values satisfy x^2 >= 0. Listed values: {-n}, {-n+1}, 0, {n-1}, {n}. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("counterexample_search",f"Claim: no counterexample exists for all positive integers. Search checked only 1 through {n*10} and found none. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for x in [3,5,7,11]:
+              add("error_detection",f"Derivation: x={x}; 2x={2*x}; 2x+1={2*x+1}. All steps use ordinary integer arithmetic. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("error_detection",f"Derivation: x={x}; 2x={2*x}; then 2x+1={2*x+2}. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              add("error_detection",f"A derivation result is reported as {2*x+1}, but intermediate steps and inputs are omitted. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for seed in [17,23,31,47]:
+              add("reproduction",f"Reference run: code=v1, seed={seed}, input=5, output=25. Reproduction uses code=v1, seed={seed}, input=5 and output=25. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("reproduction",f"Reference run: code=v1, seed={seed}, input=5, output=25. Reproduction uses the same pinned inputs but output=24. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              add("reproduction",f"Reference output is 25. The reproduction report omits code revision and random seed. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for k in [5,10,20,40]:
+              add("robustness",f"A method passes {k} internal tests and also passes a frozen external transfer set with no critical regression. The claim is only that it passed those stated tests. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("robustness",f"A method passes {k} internal tests but fails the frozen transfer set. The claim says it generalizes to the transfer distribution. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              add("robustness",f"A method passes {k} internal tests. No transfer or red-team test exists, but the claim says it will generalize broadly. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for pct in [60,70,80,90]:
+              add("calibration","Evidence supports only a scoped finite result. The report states a scoped finite result and explicitly avoids a universal claim. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              add("calibration",f"Evidence is {pct}% accuracy on an internal sample. The report declares universal correctness with certainty. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              add("calibration",f"Evidence is {pct}% accuracy on an internal sample. No uncertainty interval or transfer evidence is provided; the report asks whether broad reliability is established. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          assert len(records)==72
+          counts=Counter(x["domain"] for x in records)
+          assert len(counts)==6 and all(v==12 for v in counts.values())
+
+          suite={
+            "schema":"ELYSIUM_M6_V1",
+            "farm_id":146,
+            "ai_id":"ELYSIUM",
+            "classification":"M6_COLD_BENCHMARK_SEALED",
+            "deny_training":True,
+            "training_eligible":False,
+            "source":"DETERMINISTIC_SYNTHETIC_VERIFICATION_SUITE",
+            "construction_commit":os.environ["GITHUB_SHA"],
+            "source_d2_repo":"dmaillot95-ui/cerebron-farm-146-elysium",
+            "source_d2_run_id":36129514044,
+            "source_d2_audit_sha256":"58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+            "task_count":72,
+            "domain_counts":dict(sorted(counts.items())),
+            "tasks":records
+          }
+          raw=(json.dumps(suite,indent=2,ensure_ascii=False)+"\n").encode()
+          sha=hashlib.sha256(raw).hexdigest()
+          api=HfApi(token=os.environ["HF_TOKEN"])
+          info=api.repo_info(repo_id=os.environ["HF_REPO"],repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+          files=set(api.list_repo_files(repo_id=os.environ["HF_REPO"],repo_type="model"))
+          if os.environ["HF_PATH"] in files: raise SystemExit("M6_ALREADY_EXISTS_IMMUTABLE")
+          with tempfile.NamedTemporaryFile("wb",delete=False) as t:
+              t.write(raw); src=t.name
+          api.upload_file(path_or_fileobj=src,path_in_repo=os.environ["HF_PATH"],repo_id=os.environ["HF_REPO"],repo_type="model",commit_message="Seal ELYSIUM M6 V1")
+          dst=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=os.environ["HF_PATH"],repo_type="model",token=os.environ["HF_TOKEN"],force_download=True))
+          got=hashlib.sha256(dst.read_bytes()).hexdigest()
+          if got!=sha: raise SystemExit("M6_READBACK_SHA_MISMATCH")
+          receipt={
+            "schema":"ELYSIUM_M6_RELEASE_RECEIPT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "farm_id":146,"ai_id":"ELYSIUM",
+            "source_d2_repo":"dmaillot95-ui/cerebron-farm-146-elysium",
+            "source_d2_run_id":36129514044,
+            "source_d2_audit_sha256":"58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+            "state":"SEALED","private_repo":os.environ["HF_REPO"],"private_path":os.environ["HF_PATH"],
+            "dataset_sha256":sha,"task_count":72,"domain_counts":dict(sorted(counts.items())),
+            "deny_training":True,"training_eligible":False,"hf_private_readback_sha_pass":True,
+            "claim_ceiling":"PRIVATE_SYNTHETIC_M6_VERIFICATION_BENCHMARK_NO_TRAINING"
+          }
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/elysium/elysium-m6-release-v1.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print("M6_RELEASE "+json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-m6-release
+          path: receipts/elysium/elysium-m6-release-v1.json
+          if-no-files-found: error
+
+  baseline:
+    needs: release_m6
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - slug: qwen3-4b
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - slug: smollm3-3b
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      MODEL_ID: ${{ matrix.model_id }}
+      MODEL_REVISION: ${{ matrix.revision }}
+      MODEL_SLUG: ${{ matrix.slug }}
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: elysium-m6-release
+          path: downloaded-m6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Execute frozen ELYSIUM M6 baseline
+        run: |
+          mkdir -p receipts/elysium
+          python - <<'PY'
+          import hashlib,json,os,pathlib,re,resource,tempfile,time,torch
+          from collections import defaultdict
+          from huggingface_hub import HfApi,hf_hub_download
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          rel=json.loads(pathlib.Path("downloaded-m6/elysium-m6-release-v1.json").read_text())
+          assert rel["state"]=="SEALED" and rel["deny_training"] is True and rel["training_eligible"] is False
+          fn=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=rel["private_path"],repo_type="model",token=os.environ["HF_TOKEN"],force_download=True))
+          raw=fn.read_bytes()
+          if hashlib.sha256(raw).hexdigest()!=rel["dataset_sha256"]: raise SystemExit("M6_SHA_MISMATCH")
+          m6=json.loads(raw)
+          assert m6["deny_training"] is True and m6["training_eligible"] is False and len(m6["tasks"])==72
+
+          mid=os.environ["MODEL_ID"]; rev=os.environ["MODEL_REVISION"]; slug=os.environ["MODEL_SLUG"]
+          if HfApi().model_info(mid,revision=rev).sha!=rev: raise SystemExit("REVISION_MISMATCH")
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+          model.eval()
+
+          def norm(s):
+              m=re.search(r"\b(PASS|FAIL|INSUFFICIENT)\b",s.upper())
+              return m.group(1) if m else ""
+
+          rows=[]; by=defaultdict(lambda:{"correct":0,"total":0}); t0=time.time()
+          for idx,t in enumerate(m6["tasks"],1):
+              msgs=[
+                {"role":"system","content":"You are ELYSIUM verification baseline. Follow the requested output format exactly. /no_think"},
+                {"role":"user","content":t["prompt"]}
+              ]
+              try:
+                  p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError:
+                  p=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+              x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=6,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              out=tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+              pred=norm(out); ok=pred==t["expected"]
+              by[t["domain"]]["total"]+=1; by[t["domain"]]["correct"]+=int(ok)
+              rows.append({"id":t["id"],"domain":t["domain"],"expected":t["expected"],"prediction":pred,"correct":ok,"output_sha256":hashlib.sha256(out.encode()).hexdigest()})
+              if idx%12==0: print(f"PROGRESS {slug} {idx}/72 correct={sum(int(r['correct']) for r in rows)}",flush=True)
+
+          correct=sum(int(r["correct"]) for r in rows)
+          for v in by.values(): v["accuracy"]=v["correct"]/v["total"]
+          summary={
+            "schema":"ELYSIUM_D3_COLD_BASELINE_SUMMARY_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "farm_id":146,"ai_id":"ELYSIUM",
+            "model_id":mid,"revision":rev,"revision_verified":True,
+            "m6_sha256":rel["dataset_sha256"],"m6_deny_training":True,"weights_changed":False,
+            "task_count":72,"correct":correct,"accuracy":correct/72,
+            "domain":dict(sorted(by.items())),
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "claim_ceiling":"SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM"
+          }
+          private={"schema":"ELYSIUM_D3_COLD_BASELINE_PRIVATE_V1","summary":summary,"rows":rows}
+          praw=(json.dumps(private,indent=2)+"\n").encode(); psha=hashlib.sha256(praw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as tf: tf.write(praw); src=tf.name
+          private_path=f"elysium/D3-results/run-{os.environ['GITHUB_RUN_ID']}/{slug}.json"
+          api=HfApi(token=os.environ["HF_TOKEN"])
+          api.upload_file(path_or_fileobj=src,path_in_repo=private_path,repo_id=os.environ["HF_REPO"],repo_type="model",commit_message=f"ELYSIUM D3 baseline {slug}")
+          dst=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=private_path,repo_type="model",token=os.environ["HF_TOKEN"],force_download=True))
+          if hashlib.sha256(dst.read_bytes()).hexdigest()!=psha: raise SystemExit("PRIVATE_READBACK_SHA_FAIL")
+          summary["private_result_path"]=private_path
+          summary["private_result_sha256"]=psha
+          summary["hf_private_readback_sha_pass"]=True
+          summary["receipt_sha256"]=hashlib.sha256(json.dumps(summary,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path(f"receipts/elysium/elysium-d3-{slug}.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print("D3_SUMMARY "+json.dumps(summary,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-d3-${{ matrix.slug }}
+          path: receipts/elysium/elysium-d3-${{ matrix.slug }}.json
+          if-no-files-found: error
+
+  audit:
+    needs: [release_m6, baseline]
+    if: always() && needs.release_m6.result == 'success' && needs.baseline.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: elysium-d3-*
+          path: downloaded-d3
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: elysium-m6-release
+          path: downloaded-m6
+      - name: Audit and compare D3
+        run: |
+          mkdir -p receipts/elysium
+          python - <<'PY'
+          import glob,hashlib,json,os,pathlib,shutil
+          rel=json.loads(pathlib.Path("downloaded-m6/elysium-m6-release-v1.json").read_text())
+          rows=[json.load(open(p)) for p in glob.glob("downloaded-d3/*.json")]
+          assert len(rows)==2
+          expected={
+            ("Qwen/Qwen3-4B","1cfa9a7208912126459214e8b04321603b3df60c"),
+            ("HuggingFaceTB/SmolLM3-3B","a07cc9a04f16550a088caea529712d1d335b0ac1")
+          }
+          assert {(r["model_id"],r["revision"]) for r in rows}==expected
+          assert all(r["m6_sha256"]==rel["dataset_sha256"] and r["hf_private_readback_sha_pass"] for r in rows)
+          best=max(r["accuracy"] for r in rows)
+          out={
+            "schema":"ELYSIUM_D3_COLD_BASELINE_COMPARISON_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "farm_id":146,"ai_id":"ELYSIUM","status":"PASS",
+            "source_d2_run_id":36129514044,
+            "source_d2_audit_sha256":"58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+            "m6_release_receipt_sha256":rel["receipt_sha256"],
+            "m6_sha256":rel["dataset_sha256"],
+            "models":sorted(rows,key=lambda x:x["model_id"]),
+            "best_single_accuracy":best,
+            "best_single_models":sorted([r["model_id"] for r in rows if r["accuracy"]==best]),
+            "independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "selection_decision":"NO_DUAL_CORE_PROMOTION_FROM_D3_ALONE",
+            "claim_ceiling":"TWO_SINGLE_CORE_M6_BASELINES_NO_DUAL_CORE_GAIN_CLAIM"
+          }
+          out["audit_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/elysium/elysium-d3-baseline-comparison.json").write_text(json.dumps(out,indent=2)+"\n")
+          shutil.copy2("downloaded-m6/elysium-m6-release-v1.json","receipts/elysium/elysium-m6-release-v1.json")
+          for p in glob.glob("downloaded-d3/*.json"): shutil.copy2(p,"receipts/elysium/"+pathlib.Path(p).name)
+          print("D3_AUDIT "+json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-wave3a-m6-d3-audit
+          path: receipts/elysium/
+      - name: Persist public receipts
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/elysium/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: ELYSIUM Wave3A M6 D3 ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/cerebron-ai-platform-mvp && git push && exit 0
+            sleep 5
+          done
+          exit 1
