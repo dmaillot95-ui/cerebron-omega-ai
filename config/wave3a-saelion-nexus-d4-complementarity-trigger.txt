@@ -1,0 +1,7 @@
+WAVE3A SAELION NEXUS D4 COMPLEMENTARITY PRECHECK
+source_d3_run=36138864930
+saelion_d3_audit=b3ac7fba392adba79957dbeb0adfc65014cfb51787dbd252934f0b4c92b9e367
+nexus_d3_audit=0b403c263eafd2eaaf57398f6afd9bf445aace5f09f15276944c1e04fe32a356
+purpose=MEASURE_COMPLEMENTARITY_ONLY
+training=false
+runtime_activation=false
