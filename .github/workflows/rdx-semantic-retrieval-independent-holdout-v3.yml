@@ -1,0 +1,41 @@
+name: RDX Semantic Retrieval Independent Holdout V3
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/rdx-semantic-retrieval-independent-holdout-v3-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent retrieval runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir sentence-transformers numpy huggingface_hub
+      - name: Evaluate frozen semantic-only baseline on independent private holdout
+        run: python runtime/rdx_semantic_retrieval_independent_holdout_v3.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rdx-semantic-retrieval-independent-holdout-v3
+          path: receipts/rdx/rdx-semantic-retrieval-independent-holdout-v3.json
+          if-no-files-found: error
+      - name: Persist public receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/rdx/rdx-semantic-retrieval-independent-holdout-v3.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: RDX semantic independent holdout V3 ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
