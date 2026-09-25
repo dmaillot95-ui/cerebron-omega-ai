@@ -1,0 +1,88 @@
+name: CEREBRON Wave1 Quarantine Candidate Build
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave1-quarantine-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile deterministic builder
+        run: python -m py_compile tools/wave1_quarantine_candidate_builder.py
+      - name: Build quarantine candidates
+        run: |
+          python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Structural audit and benchmark-leakage check
+        run: |
+          mkdir -p receipts/wave1
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          c=json.loads(pathlib.Path("artifacts/wave1-quarantine-candidates-v1.json").read_text())
+          b=json.loads(pathlib.Path("config/wave1-parallel-role-baseline-v1.json").read_text())
+          assert c["record_count"]==432
+          assert c["training_released"] is False
+          assert c["state"]=="QUARANTINE"
+          assert c["benchmark_records_included"] is False
+          assert c["roles"]=={"AELYS":96,"ETHERION":144,"AFAH":96,"METRION":96}
+          rows=c["records"]
+          ids=[r["record_id"] for r in rows]
+          shas=[r["payload_sha256"] for r in rows]
+          assert len(ids)==len(set(ids))==432
+          assert len(shas)==len(set(shas))==432
+          assert all(r["state"]=="QUARANTINE" for r in rows)
+          assert all(r["training_eligible"] is False for r in rows)
+          assert all(r["benchmark_membership"] is False for r in rows)
+          assert all(r["audit_receipts"]==[] for r in rows)
+          assert all(r["f72_receipt"] is None for r in rows)
+          bench_prompts=set()
+          for role,spec in b["roles"].items():
+              for row in spec["tasks"]:
+                  bench_prompts.add(row[2].strip())
+          overlap=[r["record_id"] for r in rows if r["prompt"].strip() in bench_prompts]
+          assert not overlap, overlap
+          receipt={
+            "schema":"CEREBRON_WAVE1_QUARANTINE_BUILD_RECEIPT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "generator":"tools/wave1_quarantine_candidate_builder.py",
+            "seed":c["seed"],
+            "record_count":432,
+            "role_counts":c["roles"],
+            "manifest_sha256":c["manifest_sha256"],
+            "exact_benchmark_prompt_overlap_count":0,
+            "training_released":False,
+            "state":"QUARANTINE",
+            "next_gate":"AUDIT_COUNTER_AUDIT_F72_AFAH",
+            "claim_ceiling":"STRUCTURALLY_VALID_QUARANTINE_CANDIDATES_NOT_GOLD_NOT_TRAINING_DATA"
+          }
+          raw=json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          p=pathlib.Path("receipts/wave1")/f"wave1-quarantine-build-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave1-quarantine-candidates-${{ github.run_id }}
+          path: |
+            artifacts/wave1-quarantine-candidates-v1.json
+            receipts/wave1/wave1-quarantine-build-${{ github.run_id }}.json
+          if-no-files-found: error
+      - name: Persist quarantine manifest receipt only
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/wave1-quarantine-build-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: wave1 quarantine candidates ${{ github.run_id }}"
+          git pull --rebase origin feat/wave1-parallel-ai-baselines-v1
+          git push
