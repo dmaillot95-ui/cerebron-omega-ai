@@ -1,0 +1,76 @@
+{
+  "schema": "CEREBRON_110_RDX_SHARED_STATIC_RELEASE_BUILD_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SHARED_BUILD_RELEASE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "d34dd5f5dfec3d9e391c8d8bd87adc5bc49bc1d3",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "1f9c023a5f8ace8b54fca6ab7db076122d668c98",
+    "full_validation": {
+      "run_id": 36174477922,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36174477906,
+      "status": "PASS"
+    },
+    "public_pack_projection": {
+      "run_id": 36174477914,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36174477971,
+      "status": "PASS"
+    },
+    "pages_deploy": "SKIPPED_BY_PUSH_POLICY",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "shared_static_build": {
+    "script": "scripts/build-static-release.mjs",
+    "vercel_build_command": "node scripts/build-static-release.mjs",
+    "vercel_output_directory": "dist",
+    "vercel_install_command": "",
+    "pages_uses_same_builder": true,
+    "contract_validator": "scripts/validate-static-release-build.mjs",
+    "contract_status": "PASS"
+  },
+  "release_integrity": {
+    "public_file_count": 15,
+    "aggregate_sha256": "55bd2e78b90339cea0f7f7c4c5f7b7f692b955148b3385e69ed86e8e44e4816f",
+    "manifest_gate": "PASS",
+    "browser_js_gate": "PASS",
+    "hosting_portability_gate": "PASS",
+    "client_verify_page": "verify.html"
+  },
+  "deployment_access": {
+    "github_pages_owner_enablement_still_required": true,
+    "vercel_connected_teams_count": 0,
+    "vercel_real_deployment_claim": false
+  },
+  "product_claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "automatic_publication": false,
+    "automatic_ai_execution": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Keep Pages and Vercel on shared static release builder.",
+    "Do not claim Vercel deployment while connected account exposes zero teams/projects.",
+    "After GitHub Pages owner enablement, manual deploy then require live verifier PASS.",
+    "Preserve RDX evidence claim ceiling.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
