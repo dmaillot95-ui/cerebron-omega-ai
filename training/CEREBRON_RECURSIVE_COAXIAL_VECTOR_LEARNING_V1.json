@@ -551,6 +551,7 @@
     "DEDUP_AND_DEPENDENCY_FINGERPRINT",
     "GOLD_RED_LESSON_PROMOTION",
     "VECTOR_ROUTE_TO_TARGET_AIS",
+    "PROMPT_ROUTER_SELF_EVOLUTION",
     "ROLE_SPECIFIC_DATASET_SEAL",
     "SCRATCH_VS_INHERITED_ABLATION",
     "REAL_ADAPTER_OR_WEIGHT_TRAINING_IF_RELEASED",
@@ -723,5 +724,17 @@
       "must_preserve_physical_claim_boundary": true,
       "runtime_or_site_mutation": false
     }
+  },
+  "pre_weight_optimization": {
+    "required": true,
+    "engine": "CEREBRON_SELF_EVOLUTION_V1",
+    "config": "config/cerebron-self-evolution-v1.json",
+    "rule": "Repair prompt, role contract, router, fusion or formatting defects before weight training when the defect can be isolated above the weight layer.",
+    "escalation_to_weights_requires": [
+      "PROMPT_ROUTER_SKILL_OPTIMIZATION_INSUFFICIENT_OR_NOT_APPLICABLE",
+      "NEW_AUDITED_GOLD_RED_DATA",
+      "DECONTAMINATION_PASS",
+      "FROZEN_BASELINE_AND_HOLDOUT"
+    ]
   }
 }
