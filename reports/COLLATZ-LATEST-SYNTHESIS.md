@@ -17,19 +17,19 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 174
-- Derniers workflows en succès : 165
+- Derniers workflows en succès : 164
 - Derniers workflows en échec : 0
 - Fermes avec au moins un artefact sur leur dernier run : 128
 
 ## Détail technique
 
-- Farm 01 collatz-theory: run=36154389344 status=queued conclusion=None artifacts=0
+- Farm 01 collatz-theory: run=36155642368 status=queued conclusion=None artifacts=0
 - Farm 02 collatz-dynamics: run=36154579305 status=pending conclusion=None artifacts=0
 - Farm 03 collatz-adic: run=36154849438 status=queued conclusion=None artifacts=0
-- Farm 04 collatz-counterexample: run=36154571121 status=queued conclusion=None artifacts=0
+- Farm 04 collatz-counterexample: run=36155831297 status=queued conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=36154829710 status=queued conclusion=None artifacts=0
 - Farm 06 collatz-formal-audit: run=36155135858 status=queued conclusion=None artifacts=0
-- Farm 07 collatz-synthesis: run=36152988866 status=queued conclusion=None artifacts=0
+- Farm 07 collatz-synthesis: run=36155810675 status=queued conclusion=None artifacts=0
 - Farm 08 research-web: run=35819624232 status=completed conclusion=success artifacts=22
 - Farm 09 science-math: run=35533881788 status=completed conclusion=success artifacts=1
 - Farm 10 science-physics: run=35419826266 status=completed conclusion=success artifacts=21
@@ -195,5 +195,5 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 170 phi-native-ai: run=35973791127 status=completed conclusion=success artifacts=0
 - Farm 171 chi-native-ai: run=35973803439 status=completed conclusion=success artifacts=0
 - Farm 172 psi-native-ai: run=35973812171 status=completed conclusion=success artifacts=0
-- Farm 173 aelys-live-runtime: run=36153266774 status=completed conclusion=success artifacts=0
+- Farm 173 aelys-live-runtime: run=36155830169 status=queued conclusion=None artifacts=0
 - Farm 174 elyra-visual-simulation: run=None status=None conclusion=None artifacts=0
