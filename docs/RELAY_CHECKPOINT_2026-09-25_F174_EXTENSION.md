@@ -26,23 +26,58 @@ Dépôt :
 État réel :
 - dépôt initialisé ;
 - contrats locaux qualifiés ;
-- canary local de boucle live : SUCCESS, run `36162553038` ;
-- selftest post-canary : SUCCESS, run `36162643249` ;
-- résultat SHA-256 : `a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4` ;
-- artifact ID : `10876417068` ;
-- artifact digest : `sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303` ;
-- la boucle locale exécute ingress → préparation de requêtes → présentation fail-closed ;
-- aucun appel externe n'est exécuté par ce canary ;
-- présentation sans preuve : `HOLD` ;
-- avatar/TTS : `UNQUALIFIED` ;
-- RDX route : `RDX_EXCHANGE` ;
-- F152 interdit comme route RDX ;
-- TikTok / TTS / avatar / runtimes distants : UNQUALIFIED ;
-- training : NOT_TRAINED ;
-- production live : NOT_DEPLOYED.
+- selftest global après les trois canaries : SUCCESS, run `36163651569` ;
+- training : `NOT_TRAINED` ;
+- production live : `NOT_DEPLOYED` ;
+- runtimes externes : `UNQUALIFIED`.
+
+### Canary local de boucle live
+
+Run : `36162553038`
+
+- résultat SHA-256 : `a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4`
+- artifact ID : `10876417068`
+- artifact digest : `sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303`
+- external_calls_executed : false
+- production_live_claimed : false
+- présentation sans preuve : HOLD
+- avatar runtime : UNQUALIFIED
+
+### Canary TTS local offline
+
+Run : `36163338754`
+
+- moteur : `espeak-ng`
+- durée : 3.78254 s
+- WAV : 166854 octets
+- WAV SHA-256 : `71eea3f77b68a77b5ca773950c961f63d38b4f33ed06cffcab57c325e56a2e9e`
+- artifact ID : `10875663863`
+- artifact digest : `sha256:67cbd7aabeae0682b36da8d2df7407e01efc5e09d32b17e961acb5df94a37687`
+- external_service_used : false
+- paid_provider_used : false
+- production_live_claimed : false
+- voice_identity_claimed : false
+
+### Canary session replay
+
+Run : `36163483531`
+
+- événements : 3
+- final trace hash : `abcc5451ebbcb0965a9f220d8b445b2504ff97471e8dba1cbc1426ce9dc783b8`
+- résultat SHA-256 : `785eef06fa1357f513dbbee3f5dd87e9f36949a4e63588df67c4fffe6c404510`
+- artifact ID : `10876263729`
+- artifact digest : `sha256:442d3bd1801a627c41378d75f6d06eaa43731817e81a5a510f27ecb9367b8348`
+- external_calls_executed : false
+- production_live_claimed : false
+- avatar runtime : UNQUALIFIED
+
+RDX route :
+`RDX_EXCHANGE`
+
+F152 reste BETA et interdit comme route RDX.
 
 Statut :
-`LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED`
+`LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED`
 
 ## F174 — ELYRA VISUAL / VIDEO SIMULATION
 
@@ -113,18 +148,14 @@ Le MP4 canary est une preuve d'exécution du renderer, pas une qualification pro
 
 ## Guards finaux
 
-Après ajout du canary local F173 :
-- F162/F173/F174 Reality Guard : run `36162875939` — SUCCESS
-- Civilization Crystal Baseline Guard : run `36162882109` — SUCCESS
-- Unified Plugin Bus Guard : run `36162887468` — SUCCESS
-- CÉRÉBRON Omega Core : run `36162887709` — SUCCESS
-- CÉRÉBRON Main Integration Gate : run `36162887441` — SUCCESS
+Après ajout des canaries F173 live-loop + TTS + session replay :
+- F162/F173/F174 Reality Guard : run `36163893188` — SUCCESS
+- Unified Plugin Bus Guard : run `36163898021` — SUCCESS
+- Civilization Crystal Baseline Guard : run `36163902368` — SUCCESS
+- CÉRÉBRON Omega Core : run `36163902310` — SUCCESS
+- CÉRÉBRON Main Integration Gate : run `36163902337` — SUCCESS
 
-Preuves antérieures F174 MP4 :
-- F162/F173/F174 Reality Guard : run `36161840847` — SUCCESS
-- Civilization Crystal Baseline Guard : run `36161698459` — SUCCESS
-- Unified Plugin Bus Guard : run `36161712968` — SUCCESS
-- Guardian Security Regression : dernier run concerné `36160995408` — SUCCESS
+Preuves F174 MP4 antérieures conservées dans le registre.
 
 ## Réalité actuelle
 
@@ -132,7 +163,7 @@ F162 :
 `LOCAL_SCAFFOLD_PRESENT / DEDICATED_REPOSITORY_MISSING`
 
 F173 :
-`LOCAL_LIVE_LOOP_CANARY_PASS / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE / NOT_TRAINED`
+`LOCAL_LOOP_PASS / LOCAL_TTS_PASS / SESSION_REPLAY_PASS / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE / NOT_TRAINED`
 
 F174 :
 `VISUAL_CANARY_PASS / MP4_RENDER_CANARY_PASS / NOT_PRODUCTION / NOT_PHYSICALLY_VALIDATED / NOT_TRAINED`
@@ -155,9 +186,11 @@ F162 :
 - créer le dépôt dédié quand un outil de création de repository est disponible.
 
 F173 :
-- le canary local fail-closed est PASS ;
-- prochaine preuve utile : qualifier un runtime externe réel isolé (par exemple sortie TTS ou client privé), avec canary + trace ;
-- ne pas passer à LIVE tant qu'un endpoint/runtimes externe réel n'est pas exécuté et validé.
+- live-loop local : PASS ;
+- TTS local offline : PASS ;
+- session replay déterministe : PASS ;
+- prochaine preuve utile : qualifier un runtime externe réel isolé (client privé, TikTok ou avatar runtime), avec canary + trace ;
+- ne pas passer à LIVE tant qu'un endpoint/runtime externe réel n'est pas exécuté et validé.
 
 F174 :
 - passer d'un avatar MP4 synthétique déterministe à un pipeline visuel plus riche ;
