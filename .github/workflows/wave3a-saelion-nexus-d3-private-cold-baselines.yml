@@ -1,0 +1,226 @@
+name: Wave3A SAELION NEXUS D3 Private Cold Baselines
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/wave3a-saelion-nexus-d3-private-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ai: SAELION
+            slug: saelion
+            model_slug: qwen3-4b
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - ai: SAELION
+            slug: saelion
+            model_slug: smollm3-3b
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+          - ai: NEXUS
+            slug: nexus
+            model_slug: qwen3-4b
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - ai: NEXUS
+            slug: nexus
+            model_slug: smollm3-3b
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Execute private frozen M6 baseline
+        env:
+          AI: ${{ matrix.ai }}
+          SLUG: ${{ matrix.slug }}
+          MODEL_SLUG: ${{ matrix.model_slug }}
+          MODEL_ID: ${{ matrix.model_id }}
+          MODEL_REVISION: ${{ matrix.revision }}
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import gc,hashlib,json,os,pathlib,re,resource,tempfile,time,torch
+          from collections import defaultdict
+          from huggingface_hub import HfApi,hf_hub_download
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          ai=os.environ["AI"]; slug=os.environ["SLUG"]; mslug=os.environ["MODEL_SLUG"]
+          mid=os.environ["MODEL_ID"]; rev=os.environ["MODEL_REVISION"]
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+
+          contract=json.loads(pathlib.Path("config/native-ai-dual-core-v1.json").read_text())
+          rec=next((x for x in contract["native_ai"] if x["ai_id"]==ai),None)
+          if not rec: raise SystemExit("AI_CONTRACT_MISSING")
+          if rec.get("gate_status",{}).get("D2")!="PASS":
+              raise SystemExit("D2_NOT_PASS")
+
+          m6r=json.loads(pathlib.Path(f"receipts/wave3a-m6-v2/{slug}.json").read_text())
+          if m6r.get("ai_id")!=ai: raise SystemExit("M6_AI_MISMATCH")
+          if m6r.get("deny_training") is not True or m6r.get("training_eligible") is not False or m6r.get("exact_prompts_public") is not False:
+              raise SystemExit("M6_GUARD_FAIL")
+          fn=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=m6r["private_path"],repo_type="model",token=token,force_download=True))
+          raw=fn.read_bytes()
+          if hashlib.sha256(raw).hexdigest()!=m6r["dataset_sha256"]: raise SystemExit("M6_SHA_MISMATCH")
+          suite=json.loads(raw); tasks=suite["tasks"]
+          if len(tasks)!=72: raise SystemExit("M6_COUNT_FAIL")
+
+          info=HfApi().model_info(mid,revision=rev)
+          if info.sha!=rev: raise SystemExit("REVISION_MISMATCH")
+          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+          if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+          model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+          model.eval()
+
+          if ai=="SAELION":
+              system="You are SAELION baseline core. Judge lesson selection, transfer, compression, memory hygiene and calibration conservatively. Return only PASS, FAIL, or INSUFFICIENT. /no_think"
+          else:
+              system="You are NEXUS baseline core. Judge entity links, dependencies, routing, provenance, contradictions and graph retrieval conservatively. Return only PASS, FAIL, or INSUFFICIENT. /no_think"
+
+          def render(user):
+              msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+              try: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+
+          def norm(s):
+              m=re.search(r"\b(PASS|FAIL|INSUFFICIENT)\b",s.upper())
+              return m.group(1) if m else ""
+
+          rows=[]; correct=0; domain=defaultdict(lambda:{"correct":0,"total":0})
+          t0=time.time()
+          for i,t in enumerate(tasks,1):
+              p=render(t["prompt"]); x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=6,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              rawout=tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+              pred=norm(rawout); ok=pred==t["expected"]
+              correct+=int(ok); domain[t["domain"]]["total"]+=1; domain[t["domain"]]["correct"]+=int(ok)
+              rows.append({"id":t["id"],"domain":t["domain"],"expected":t["expected"],"prediction":pred,"correct":ok})
+              if i%12==0: print(f"{ai} {mslug} PROGRESS {i}/72",flush=True)
+
+          private={
+            "schema":f"{ai}_D3_PRIVATE_COLD_BASELINE_RESULT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "ai_id":ai,
+            "model_id":mid,
+            "revision":rev,
+            "m6_sha256":m6r["dataset_sha256"],
+            "weights_changed":False,
+            "rows":rows
+          }
+          praw=(json.dumps(private,indent=2)+"\n").encode()
+          psha=hashlib.sha256(praw).hexdigest()
+          with tempfile.NamedTemporaryFile("wb",delete=False) as tf:
+              tf.write(praw); src=tf.name
+          private_path=f"{slug}/D3-results/run-{os.environ['GITHUB_RUN_ID']}/{mslug}.json"
+          api=HfApi(token=token)
+          api.upload_file(path_or_fileobj=src,path_in_repo=private_path,repo_id=os.environ["HF_REPO"],repo_type="model",commit_message=f"{ai} D3 {mslug} {os.environ['GITHUB_RUN_ID']}")
+          dst=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=private_path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(dst.read_bytes()).hexdigest()!=psha: raise SystemExit("PRIVATE_READBACK_SHA_FAIL")
+
+          summary={
+            "schema":f"{ai}_D3_PRIVATE_COLD_BASELINE_SUMMARY_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "ai_id":ai,
+            "model_id":mid,"revision":rev,"revision_verified":True,
+            "m6_sha256":m6r["dataset_sha256"],"m6_deny_training":True,
+            "weights_changed":False,"task_count":72,"correct":correct,"accuracy":correct/72,
+            "domain":dict(sorted(domain.items())),
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "private_result_path":private_path,"private_result_sha256":psha,
+            "hf_private_readback_sha_pass":True,
+            "claim_ceiling":"SINGLE_CORE_PRIVATE_M6_BASELINE_NO_DUAL_CORE_GAIN_CLAIM"
+          }
+          summary["receipt_sha256"]=hashlib.sha256(json.dumps(summary,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path(f"out/{slug}-{mslug}.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(summary,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.slug }}-d3-${{ matrix.model_slug }}
+          path: out/${{ matrix.slug }}-${{ matrix.model_slug }}.json
+          if-no-files-found: error
+
+  audit:
+    needs: baseline
+    if: always() && needs.baseline.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: '*-d3-*'
+          path: downloaded
+          merge-multiple: true
+      - name: Compare and persist both AIs
+        run: |
+          mkdir -p receipts/wave3a-d3/saelion receipts/wave3a-d3/nexus
+          python - <<'PY'
+          import glob,hashlib,json,pathlib,shutil,os
+          rows=[json.load(open(p)) for p in glob.glob("downloaded/*.json")]
+          assert len(rows)==4,len(rows)
+          for ai,slug in [("SAELION","saelion"),("NEXUS","nexus")]:
+              subset=[r for r in rows if r["ai_id"]==ai]
+              assert len(subset)==2
+              assert {r["model_id"] for r in subset}=={"Qwen/Qwen3-4B","HuggingFaceTB/SmolLM3-3B"}
+              assert len({r["m6_sha256"] for r in subset})==1
+              assert all(r["revision_verified"] and r["hf_private_readback_sha_pass"] and not r["weights_changed"] for r in subset)
+              best=max(r["accuracy"] for r in subset)
+              best_models=sorted(r["model_id"] for r in subset if r["accuracy"]==best)
+              out={
+                "schema":f"{ai}_D3_PRIVATE_COLD_BASELINE_COMPARISON_V1",
+                "run_id":int(os.environ["GITHUB_RUN_ID"]),
+                "ai_id":ai,
+                "status":"PASS",
+                "m6_sha256":subset[0]["m6_sha256"],
+                "models":sorted(subset,key=lambda x:x["model_id"]),
+                "best_single_accuracy":best,
+                "best_single_models":best_models,
+                "independent_evidence_count":0,
+                "two_models_not_two_independent_proofs":True,
+                "selection_decision":"NO_DUAL_CORE_PROMOTION_FROM_D3_ALONE",
+                "claim_ceiling":"TWO_SINGLE_CORE_PRIVATE_M6_BASELINES_NO_DUAL_CORE_GAIN_CLAIM"
+              }
+              out["audit_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+              base=pathlib.Path(f"receipts/wave3a-d3/{slug}")
+              base.mkdir(parents=True,exist_ok=True)
+              for r in subset:
+                  mslug="qwen3-4b" if r["model_id"]=="Qwen/Qwen3-4B" else "smollm3-3b"
+                  (base/f"{mslug}.json").write_text(json.dumps(r,indent=2)+"\n")
+              (base/f"{slug}-d3-baseline-comparison.json").write_text(json.dumps(out,indent=2)+"\n")
+              print(json.dumps({"ai":ai,"best_single_accuracy":best,"best_single_models":best_models,"audit_sha256":out["audit_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave3a-saelion-nexus-d3-audit
+          path: receipts/wave3a-d3/
+      - name: Persist D3 public receipts
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave3a-d3/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAELION NEXUS D3 private baselines ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
