@@ -1,0 +1,6 @@
+RDX KNOWLEDGE INGRESS CANARY V1
+source_farm=F152
+expected_memory=PASS
+expected_gold=BLOCKED_BY_F72
+expected_training=false
+m6_never_in_train=true
