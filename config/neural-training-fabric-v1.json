@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G6",
+  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G7",
   "name": "CEREBRON Neural Training Fabric",
   "principles": [
     "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
@@ -31,7 +31,8 @@
     "SAPHEA": {
       "target": "specialist execution and routing",
       "training": "domain SFT/LoRA",
-      "status": "SCOPED_REAL_LORA_G6_VERIFIED_G7_BLOCKED_TRANSFER_REDTEAM"
+      "status": "SCOPED_LORA_G7_PROMOTED_E2",
+      "active_adapter_pointer": "config/saphea-g1-epistemic-adapter-v1.json"
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
@@ -158,11 +159,9 @@
       "validation_loss_after": 0.11578285936266183,
       "critical_regression": false,
       "hf_private_readback_sha_pass": true,
-      "promotion": "NOT_PROMOTED",
-      "pending": [
-        "AFAH_FINAL_AUTHORITY"
-      ],
-      "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY",
+      "promotion": "SCOPED_G7_PROMOTED",
+      "pending": [],
+      "claim_ceiling": "SCOPED_EPISTEMIC_CLASSIFICATION_G7_SUPPORTED_E2",
       "transfer_gate": {
         "run_id": 36101181888,
         "dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
@@ -196,6 +195,12 @@
         "review_pass": true,
         "result_sha256": "14ade8931dd4b8ee8c4b232baf5edd8066cf38d4ac41dc4ddb14184b42f8cee3",
         "route": "AFAH_SCOPED_PROMOTION_REVIEW"
+      },
+      "afah_final": {
+        "run_id": 36102706055,
+        "decision": "PROMOTE_SCOPED_G7",
+        "all_required_gates_pass": true,
+        "review_sha256": "4c4bb04b946962bcb977a276e909db3b48f525e4001ff1a99323a3b71f38fa74"
       }
     }
   ],
