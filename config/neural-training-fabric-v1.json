@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "TRAINING_EXECUTED_SCOPED_G6_G7_ELYRA",
+  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G6",
   "name": "CEREBRON Neural Training Fabric",
   "principles": [
     "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
@@ -30,7 +30,8 @@
   "roles": {
     "SAPHEA": {
       "target": "specialist execution and routing",
-      "training": "domain SFT/LoRA"
+      "training": "domain SFT/LoRA",
+      "status": "SCOPED_LORA_G6_VERIFIED_HOLD_G7"
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
@@ -128,5 +129,45 @@
       "no real-robot validation",
       "no RL claim"
     ]
-  }
+  },
+  "verified_training_history": [
+    {
+      "role": "SAPHEA",
+      "type": "PEFT_LORA",
+      "scope": "CEREBRON_EPISTEMIC_STATUS_CLASSIFICATION_ONLY",
+      "state": "G6_REAL_LORA_VERIFIED_HOLD_G7",
+      "run_id": 36100266729,
+      "job_id": 107961061331,
+      "artifact_id": 10848864759,
+      "artifact_digest": "sha256:f5eb6008c342d9921b160af28282b6bee684040539ee8fe2b47506acb5b46fca",
+      "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "gold_sha256": "efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa",
+      "m6_sha256": "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63",
+      "m6_deny_training": true,
+      "weights_changed": true,
+      "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+      "adapter_config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+      "baseline_m6_score": 18,
+      "posttrain_m6_score": 30,
+      "cold_gain": 12,
+      "accuracy_before": 0.3,
+      "accuracy_after": 0.5,
+      "relative_accuracy_gain": 0.6666666666666667,
+      "validation_loss_before": 0.48301953449845314,
+      "validation_loss_after": 0.11578285936266183,
+      "critical_regression": false,
+      "hf_private_readback_sha_pass": true,
+      "promotion": "NOT_PROMOTED",
+      "pending": [
+        "NOVEL_TRANSFER_GAIN",
+        "ABLATION_SUPPORTS_VALUE",
+        "INDEPENDENT_AUDIT",
+        "RED_TEAM",
+        "F72_REVIEW",
+        "AFAH_FINAL_AUTHORITY"
+      ],
+      "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY"
+    }
+  ]
 }
