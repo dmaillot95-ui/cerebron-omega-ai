@@ -1,0 +1,39 @@
+{
+  "schema": "CEREBRON_WAVE1_ROLE_LORA_PUBLIC_POINTER_V1",
+  "run_id": 36109522298,
+  "role": "ETHERION",
+  "real_training": true,
+  "training_executed": true,
+  "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+  "release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+  "split_sha256": "4d91ebba3e80bbf4b0e443b8479b8e529b61c29762b8f4dacf3ae0678a67fb0f",
+  "cold_dataset_sha256": {
+    "M6": "1285999e40d338ae81420c3451c5e3763347220c46e685194cecce51ae56e27f",
+    "TRANSFER": "724f4cf7350487313fbb665cfbb6f1e220225a6649ee65f0b922f1bce8c677aa",
+    "RED": "52172c7ea6a5534177a669ede6bad464cbfb075d4268d516a7e1761b6fb26e9f"
+  },
+  "cold_deny_training": true,
+  "weights_changed": true,
+  "adapter_sha256": "2b17238dce414b66e89c96b0d53264071fb0da09dd3d038ff91aefbbc6f67e97",
+  "adapter_config_sha256": "d9af1dc17455e0539822fa1267c5c8930194ae7e24addb5eeed14f6678fa4966",
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "hf_private_object_prefix": "wave1/ETHERION/LORA-V1/run-36109522298",
+  "hf_private_readback_sha_pass": true,
+  "gains": {
+    "VALIDATION": 9,
+    "M6": -2,
+    "TRANSFER": -1,
+    "RED": -2
+  },
+  "any_critical_regression": true,
+  "validation_gate_pass": true,
+  "cold_gate_pass": false,
+  "decision": "ROLLBACK_RETAIN_EVIDENCE",
+  "promotion": "NOT_PROMOTED",
+  "pending": [
+    "REPAIR_OR_NEW_DATA"
+  ],
+  "report_sha256": "1d340c95932773fa6f24d0d6c3ff5ecd373bbd94f61de57544f34c7af5e3f003",
+  "claim_ceiling": "REAL_SCOPED_LORA_WEIGHT_CHANGE_AND_COLD_EVALUATION_ONLY_NO_GENERAL_CAPABILITY"
+}
