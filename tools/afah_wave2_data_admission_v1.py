@@ -15,8 +15,8 @@ def fetch(repo,commit,path):
 def main():
     req=json.loads(REQ.read_text())
     src=req["source"]
-    baseline,bsha=fetch(src["repo"],src["commit"],src["baseline_receipt"])
-    data,dsha=fetch(src["repo"],src["commit"],src["quarantine_receipt"])
+    baseline,bsha=fetch(src["repo"],src["baseline_commit"],src["baseline_receipt"])
+    data,dsha=fetch(src["repo"],src["quarantine_commit"],src["quarantine_receipt"])
     fcfg=req["f72"]
     f72,fsha=fetch(fcfg["repo"],fcfg["commit"],fcfg["receipt"])
     manifest=req["expected_manifest_sha256"]
