@@ -653,6 +653,61 @@
         "CONSENSUS_VS_INDEPENDENT_EVIDENCE"
       ],
       "REUSE_POLICY": "RED_CANDIDATE_FOR_CURRICULUM_AND_EVALUATION_ONLY_UNTIL_EXPLICIT_RED_ADMISSION"
+    },
+    {
+      "FAILURE_ID": "FAIL-FORMAT-MONOLITHIC-SIXFIELD-001",
+      "MISSION_ID": "CEREBRON_SELF_EVOLUTION_G1",
+      "AI_ID": "CEREBRON",
+      "AGENT_ID": "FORMAT_CONTRACT_EVOLUTION",
+      "FAILURE_CLASS": "F_FORMAT",
+      "FAILURE_SIGNATURE": "MONOLITHIC_SIX_FIELD_OUTPUT_LABEL_DRIFT_AND_TRUNCATION",
+      "ROOT_CAUSE": "Pinned 3B/4B models often preserved semantic content but mutated field labels/casing/underscores/tags and frequently exhausted the generation budget before CONFIDENCE and UNKNOWN. Strict parsing amplified the failure, but robust reparsing still recovered only 21/36 fields and 0/6 complete records.",
+      "EVIDENCE_REFS": [
+        "run:36173645350",
+        "audit_artifact:10882824743",
+        "audit_digest:sha256:6f15369e206b4797800b28ff73325d093d381752f86f4fb23d76b87c79d00089",
+        "run:36177878435",
+        "selection_artifact:10882824691",
+        "selection_digest:sha256:c75ae58dc48caecd349ac8d796904d9ae9651d52b3710f45c4ab2373324f3243",
+        "diagnostic_run:36178912892",
+        "diagnostic_artifact:10882898330",
+        "diagnostic_digest:sha256:809161a96ecd757aa25997069ad1877eef1f564cf098b3f9599b5e85f4382204",
+        "reparse_run:36179033254",
+        "reparse_artifact:10883925374",
+        "reparse_digest:sha256:02bdf6e139356d2fdbabdc4942a5f7ad8b9e7df5b8a930274e551803c7305940"
+      ],
+      "IMPACT": "Structured corrective lessons could not reliably enter audit/admission because valid semantic content was lost at the interface layer.",
+      "SCOPE": "Corrective AGORA structured-output interface only; no evidence of a general reasoning regression.",
+      "REPRODUCIBLE": true,
+      "MEASURED_BEFORE": {
+        "baseline_pilot_parse_pass": 6,
+        "baseline_pilot_receipts": 16,
+        "v1_qwen_validation_complete": 0,
+        "v1_smollm_validation_complete": 0,
+        "v1_promoted_lineages": 0,
+        "v2_selection_complete": 0,
+        "v2_selection_receipts": 6,
+        "robust_reparse_total_fields_before": 11,
+        "robust_reparse_total_fields_after": 21,
+        "robust_reparse_complete_after": 0
+      },
+      "REPAIR_ATTEMPTS": [
+        "plain six-line contract",
+        "single JSON object contract",
+        "six XML-like tag contract",
+        "fuzzy/canonical parser",
+        "planned fieldwise batched generation with deterministic assembler"
+      ],
+      "REPAIR_STATUS": "OPEN_FIELDWISE_ASSEMBLY_V3_REQUIRED",
+      "CURRICULUM_TARGETS": [
+        "STRUCTURED_OUTPUT_RELIABILITY",
+        "INTERFACE_DECOMPOSITION",
+        "DETERMINISTIC_ASSEMBLY",
+        "PARSER_ROBUSTNESS",
+        "TOKEN_BUDGET_CONTROL"
+      ],
+      "TRANSFER_RISK": "MEDIUM_INTERFACE_LAYER_ONLY",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
