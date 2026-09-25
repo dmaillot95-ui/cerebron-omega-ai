@@ -1,0 +1,137 @@
+{
+  "schema": "CEREBRON_RDX_MEMORY_BINDINGS_V1",
+  "date": "2026-09-25",
+  "status": "CONFIGURED_FARMS_SCAFFOLDED_RUNTIME_WRITE_READ_NOT_YET_PROVEN",
+  "source": {
+    "farm_id": 152,
+    "repo": "cerebron-rdx-exchange",
+    "namespace_shared": "RDX_SHARED",
+    "namespace_tenant_pattern": "RDX_TENANT/{tenant_id}"
+  },
+  "routes": [
+    {
+      "farm_id": 114,
+      "repo": "cerebron-farm-114-encyclopedic-memory-index",
+      "role": "CANONICAL_RDX_ENTITY_CLAIM_TOPIC_INDEX",
+      "classes": [
+        "M1",
+        "M4",
+        "M7"
+      ],
+      "write_condition": "SCHEMA_PROVENANCE_DEDUP_PASS"
+    },
+    {
+      "farm_id": 115,
+      "repo": "cerebron-farm-115-vector-semantic-memory",
+      "role": "SEMANTIC_RETRIEVAL_INDEX_FOR_RAG",
+      "classes": [
+        "M1",
+        "M4",
+        "M7"
+      ],
+      "write_condition": "MEMORY_ADMISSIBLE"
+    },
+    {
+      "farm_id": 116,
+      "repo": "cerebron-farm-116-dedup-knowledge-fusion",
+      "role": "DUPLICATE_LINEAGE_AND_KNOWLEDGE_FUSION",
+      "classes": [
+        "M1",
+        "M4",
+        "M7"
+      ],
+      "write_condition": "BEFORE_CANONICAL_PROMOTION"
+    },
+    {
+      "farm_id": 117,
+      "repo": "cerebron-farm-117-simulation-replay-memory",
+      "role": "REPLAYABLE_RDX_SIMULATION_RECIPES_ONLY",
+      "classes": [
+        "M2"
+      ],
+      "write_condition": "SIMULATION_RECEIPT_WITH_SEED_CONFIG_VERSION"
+    },
+    {
+      "farm_id": 118,
+      "repo": "cerebron-farm-118-gold-knowledge-library",
+      "role": "CURATED_RDX_GOLD_FOR_REUSE_AND_TRAIN_DATASET_SOURCE",
+      "classes": [
+        "M4"
+      ],
+      "write_condition": "F72_PASS_AND_AFAH_PASS_AND_M6_CLEAN_AND_RIGHTS_PASS"
+    },
+    {
+      "farm_id": 119,
+      "repo": "cerebron-farm-119-evidence-scientific-archive",
+      "role": "RDX_SOURCES_TESTS_RESULTS_LIMITATIONS_AUDIT_EVIDENCE",
+      "classes": [
+        "M7"
+      ],
+      "write_condition": "PROVENANCE_AND_SHA256_PASS"
+    },
+    {
+      "farm_id": 120,
+      "repo": "cerebron-farm-120-memory-governor-freeze",
+      "role": "QUOTA_RETENTION_FREEZE_AND_TRAINING_CONTAMINATION_GOVERNOR",
+      "classes": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7"
+      ],
+      "write_condition": "CONTROL_PLANE_ALWAYS"
+    }
+  ],
+  "read_path": [
+    "QUESTION",
+    "NEXUS_OR_CEREBRON_ROUTER",
+    "F114_CANONICAL_INDEX",
+    "F115_SEMANTIC_RETRIEVAL",
+    "F119_EVIDENCE_FETCH",
+    "F116_LINEAGE_DEDUP_CHECK",
+    "MINIMUM_RELEVANT_CONTEXT",
+    "SPECIALIST_AI"
+  ],
+  "write_path": [
+    "F152_RDX_ATOMIC_OBJECT",
+    "SCHEMA",
+    "PROVENANCE",
+    "SHA256",
+    "RIGHTS",
+    "F116_DEDUP",
+    "F119_EVIDENCE",
+    "F114_INDEX",
+    "F115_VECTOR",
+    "OPTIONAL_F117_REPLAY",
+    "F120_GOVERNOR"
+  ],
+  "gold_path": [
+    "VALIDATED_RDX",
+    "F116_DEDUP",
+    "F119_EVIDENCE",
+    "F72_PASS",
+    "AFAH_PASS",
+    "RIGHTS_PASS",
+    "M6_CLEAN",
+    "F118_M4_GOLD",
+    "TARGET_AI_DATASET"
+  ],
+  "current_limits": [
+    "F114_TO_F120_ARE_SCAFFOLDED_IN_REGISTRY",
+    "THIS_BINDING_DOES_NOT_PROVE_EXTERNAL_WRITE_READ_RECALL",
+    "F72_CURRENT_FAIL_BLOCKS_F118_GOLD_PROMOTION",
+    "NO_RDX_NEURAL_TRAINING_CLAIM_FROM_BINDING_ALONE"
+  ],
+  "rules": [
+    "MEMORY_NOT_TRAINING",
+    "M6_NEVER_IN_TRAIN",
+    "TENANT_PRIVATE_NOT_SHARED",
+    "CONTENT_ADDRESS_BY_SHA256",
+    "DEDUP_BEFORE_COUNTING",
+    "CLAIM_LE_EVIDENCE"
+  ]
+}
