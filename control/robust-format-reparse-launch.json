@@ -1,0 +1,10 @@
+{
+  "schema": "CEREBRON_ROBUST_FORMAT_REPARSE_LAUNCH_V1",
+  "date": "2026-09-25",
+  "source_run_id": 36177878435,
+  "source_artifact_id": 10882824691,
+  "purpose": "Test whether parsing robustness recovers structured fields from existing outputs without new model inference.",
+  "new_inference": false,
+  "weight_change": false,
+  "training_released": false
+}
