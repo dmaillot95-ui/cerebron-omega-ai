@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_PRIVATE_WRITE_READ_RECALL_PASS_GOLD_BLOCKED_BY_F72",
+  "status": "RDX_MEMORY_PASS_SEMANTIC_HYBRID_REJECTED_GOLD_BLOCKED_BY_F72",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -273,5 +273,40 @@
     "mean_reciprocal_rank": 0.9,
     "training": "NOT_EXECUTED",
     "weights_changed": false
+  },
+  "semantic_retrieval": {
+    "linked_memory_farm_id": 115,
+    "embedding_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "dev_v1": {
+      "run_id": 36156985796,
+      "top1_accuracy": 0.8,
+      "mrr": 0.9,
+      "status": "FAIL"
+    },
+    "repair_dev_v2": {
+      "run_id": 36161040992,
+      "selected_policy": "RRF_SEM_LEX",
+      "top1_accuracy": 0.9,
+      "mrr": 0.95,
+      "decision": "PASS_FOR_FRESH_HOLDOUT_ONLY"
+    },
+    "fresh_holdout_v2": {
+      "run_id": 36161387023,
+      "receipt_sha256": "04a93068314f1740d27c150f20e79f3fd6ec46f9dd1ccd6f412d33d6380c3bcd",
+      "semantic_only_top1_accuracy": 0.9583333333333334,
+      "semantic_only_mrr": 0.9791666666666666,
+      "rrf_sem_lex_top1_accuracy": 0.8333333333333334,
+      "rrf_sem_lex_mrr": 0.876388888888889,
+      "gain_over_semantic_only": -0.125,
+      "critical_domains_pass": false,
+      "decision": "FRESH_HOLDOUT_HOLD_NO_MEASURED_ROBUST_GAIN",
+      "fresh_holdout_consumed": true
+    },
+    "current_candidate": "SEMANTIC_ONLY",
+    "rejected_policy": "RRF_SEM_LEX",
+    "production_qualified": false,
+    "training": "NOT_EXECUTED",
+    "rule": "FRESH_HOLDOUT_OVERRIDES_DEV_TUNING_WHEN_GENERALIZATION_FAILS"
   }
 }
