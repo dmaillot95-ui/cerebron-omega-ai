@@ -1,0 +1,82 @@
+{
+  "schema": "CEREBRON_121_RDX_POST_DEPLOY_CHAIN_INTEGRATION_CANARY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SYNTHETIC_POST_DEPLOY_CHAIN_CANARY_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "3dc9e2397ef89bec1c11fde3e30d0a081aaef5fc",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "33e634a98747787238c4764f51f927e21421b239",
+    "full_validation": {
+      "run_id": 36188330418,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36188330444,
+      "status": "PASS"
+    },
+    "github_pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "33e634a98747787238c4764f51f927e21421b239",
+    "file_count": 16,
+    "release_aggregate_sha256": "12fac7e4de91edfa0b476616ef49a2ea76010a6b1ff9bb7e6ddae5af01824654",
+    "release_attestation_sha256": "e5b9b9167d6f5a6d37919e4d28b3f2e2cdf341879a4de2dfa4472b63012dd961",
+    "release_manifest_gate": "PASS",
+    "release_attestation_gate": "PASS",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_attestation": "PASS",
+    "release_sigstore_verification": "PASS"
+  },
+  "integration_canary": {
+    "gate": "scripts/validate-post-deploy-chain-integration-canary.mjs",
+    "status": "PASS",
+    "evidence_class": "SYNTHETIC_PIPELINE_CANARY_NOT_LIVE_EVIDENCE",
+    "live_evidence_claim": false,
+    "synthetic_base_url": "https://rdx-post-deploy-canary.invalid/",
+    "production_proof_registration_proposal": "PASS",
+    "known_good_release_proposal": "PASS",
+    "auto_apply": false,
+    "production_proof_registry_unchanged": true,
+    "known_good_registry_unchanged": true,
+    "interpretation": "PIPELINE_CONTRACT_TEST_ONLY_NOT_PRODUCTION_DEPLOYMENT_EVIDENCE"
+  },
+  "fail_closed_controls": {
+    "production_negative_canaries": "PASS_5_OF_5_REJECTED",
+    "rollback_negative_canary": "PASS_1_OF_1_REJECTED",
+    "live_promotion_chain_contract": "PASS",
+    "production_promotion_registry_mode": "FAIL_CLOSED",
+    "rollback_registry_mode": "FAIL_CLOSED"
+  },
+  "production_control": {
+    "production_deployment_verified": false,
+    "public_claim": false,
+    "actual_live_chain_executed": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "active_known_good_release": null
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "next_exact": [
+    "Keep synthetic canary explicitly non-live and non-production.",
+    "After first real deployment, require signed live proof and signed review proposals.",
+    "Do not mutate production or rollback registries automatically.",
+    "Do not set production_deployment_verified=true until signed live evidence and reviewed registry state exist.",
+    "Do not modify F172-F174."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "SIMULATION!=TEST",
+    "SYNTHETIC_CANARY!=LIVE_EVIDENCE",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
