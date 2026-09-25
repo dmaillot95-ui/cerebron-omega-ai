@@ -11,11 +11,14 @@
     "INDEPENDENT_POST_TRAIN_BENCHMARK",
     "ROLLBACK_ON_REGRESSION",
     "NO_PROMOTION_WITHOUT_MEASURED_GAIN",
-    "ZERO_PAID_OVERAGE_DEFAULT"
+    "ZERO_PAID_OVERAGE_DEFAULT",
+    "RDX_VALIDATED_RESEARCH_IS_A_TRAINING_SOURCE_ONLY_AFTER_M4_GOLD",
+    "RDX_MEMORY_RETRIEVAL_IS_NOT_NEURAL_LEARNING"
   ],
   "pipeline": [
     "AGORA_VALIDATED",
     "M4_GOLD",
+    "RDX_VALIDATED_GOLD",
     "SIGMA_GOLD_AGGREGATION",
     "ROLE_DATASET_BUILD",
     "TRAIN_VALIDATION_SPLIT",
@@ -155,5 +158,45 @@
       "weights_sha256": "b4799a695795fece1db392150876b9fd037bb90d2cfdbdfe6dc70765f33a8601",
       "scope": "SYNTHETIC_ROVER_POLICY_ONLY"
     }
+  },
+  "rdx_learning_loop": {
+    "source_farm_id": 152,
+    "source": "CEREBRON_RDX_EXCHANGE",
+    "state": "CONFIGURED_GATED_NOT_AUTO_TRAINING",
+    "memory_path": "RDX_ATOMIC_OBJECTS -> M1/M7 -> RAG/KNOWLEDGE_GRAPH",
+    "neural_path": "RDX_VALIDATED -> M4_GOLD -> ROLE_DATASET -> TRAIN -> NEW_ADAPTER_OR_WEIGHTS -> POSTTRAIN_M6 -> TRANSFER -> REGRESSION -> F72 -> AFAH -> PROMOTE_OR_ROLLBACK",
+    "batching": {
+      "per_response_training": false,
+      "use_validated_batches": true,
+      "initial_min_gold_items": 32,
+      "initial_max_gold_items": 256
+    },
+    "target_roles": [
+      "SAPHEA",
+      "SPIRALION",
+      "ETHERION",
+      "HYPERION",
+      "ASTRION",
+      "METRION",
+      "AFAH",
+      "SAPHEA_MICRO",
+      "ELYSION",
+      "ELYSIUM",
+      "SAELION",
+      "ALPHA",
+      "OMEGA",
+      "DELTA",
+      "NEXUS"
+    ],
+    "proof_required": [
+      "weights_changed=true OR adapter_changed=true",
+      "weights_or_adapter_sha256",
+      "training_config_sha256",
+      "dataset_sha256",
+      "baseline_m6",
+      "posttrain_m6",
+      "transfer_test",
+      "regression_test"
+    ]
   }
 }
