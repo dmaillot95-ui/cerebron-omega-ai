@@ -1,0 +1,246 @@
+name: NEXUS D4 Fusion DEV V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/nexus-d4-fusion-dev-v1-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fusion_dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      MODEL_A: Qwen/Qwen3-4B
+      REV_A: 1cfa9a7208912126459214e8b04321603b3df60c
+      MODEL_B: HuggingFaceTB/SmolLM3-3B
+      REV_B: a07cc9a04f16550a088caea529712d1d335b0ac1
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Evaluate NEXUS candidate fusion policies on DEV only
+        run: |
+          mkdir -p receipts/nexus/d4
+          python - <<'PY'
+          import gc,hashlib,json,os,random,re,resource,time
+          from collections import defaultdict
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          rng=random.Random(15120260925)
+          tasks=[]
+          def add(domain,prompt,expected):
+              tasks.append({"id":f"NEXUS-DEV-{len(tasks)+1:03d}","domain":domain,"prompt":prompt,"expected":expected})
+
+          # DEV-only synthetic suite. It is intentionally distinct from sealed M6.
+          # Public/reproducible; never cold evidence and never used as M6.
+          for _ in range(4):
+              mode=rng.randrange(3)
+              if mode==0:
+                  add("contradiction_routing","Source A says component X is enabled. Source B, same version and timestamp, says X is disabled. No precedence rule exists. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+              elif mode==1:
+                  add("contradiction_routing","Two records disagree, but one is explicitly superseded by the newer canonical version. Routing to the newer canonical record is proposed. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              else:
+                  add("contradiction_routing","Two equally authoritative records conflict and the system silently chooses one as fact. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+
+          for _ in range(4):
+              n=rng.randint(2,6); mode=rng.randrange(3)
+              if mode==0:
+                  add("dependency_tracking",f"Artifact A depends on B; B depends on C; C is verified. The dependency chain A→B→C is explicitly recorded across {n} metadata fields. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              elif mode==1:
+                  add("dependency_tracking","A result is promoted although one mandatory upstream dependency is missing and no fallback exists. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              else:
+                  add("dependency_tracking","A result cites an upstream dependency ID, but the dependency status is unavailable. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for _ in range(4):
+              k=rng.randint(10,99); mode=rng.randrange(3)
+              if mode==0:
+                  add("entity_linking",f"Two mentions share canonical ID ENT-{k:02d} and matching versioned metadata; linking them as one entity is proposed. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              elif mode==1:
+                  add("entity_linking",f"Two entities have similar names but different canonical IDs ENT-{k:02d} and ENT-{k+1:02d}; they are merged solely by name similarity. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              else:
+                  add("entity_linking","Two records may describe the same component, but neither has a canonical ID or stable disambiguating metadata. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for _ in range(4):
+              mode=rng.randrange(3)
+              if mode==0:
+                  add("evidence_provenance","A claim includes source ID, immutable SHA-256, producer, timestamp, and test receipt. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              elif mode==1:
+                  add("evidence_provenance","A claim is marked verified but has no source ID, no artifact hash, and no test receipt. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              else:
+                  add("evidence_provenance","A claim cites a source ID, but the referenced artifact is temporarily unavailable for hash verification. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for _ in range(4):
+              mode=rng.randrange(3)
+              if mode==0:
+                  add("graph_retrieval","Query asks for all direct dependencies of node A. The graph returns exactly the verified outgoing dependency edges of A with provenance. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              elif mode==1:
+                  add("graph_retrieval","Query asks for direct dependencies of A, but the response mixes unrelated second-hop neighbors without marking them as indirect. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              else:
+                  add("graph_retrieval","The graph index reports that one partition required by the query is unavailable, so completeness cannot be checked. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          for _ in range(4):
+              tool=rng.choice(["calculator","repository_search","memory_lookup","simulation_runner"])
+              mode=rng.randrange(3)
+              if mode==0:
+                  add("tool_routing",f"The task explicitly requires {tool}, the tool is available, and the router selects {tool}. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+              elif mode==1:
+                  add("tool_routing",f"The task requires {tool}, but the router deliberately selects an unrelated image tool instead. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+              else:
+                  add("tool_routing",f"The task may require {tool}, but tool availability and required permissions are unknown. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+
+          assert len(tasks)==24
+          assert {t["domain"] for t in tasks}=={"contradiction_routing","dependency_tracking","entity_linking","evidence_provenance","graph_retrieval","tool_routing"}
+
+          def norm(s):
+              m=re.search(r"\b(PASS|FAIL|INSUFFICIENT)\b",s.upper())
+              return m.group(1) if m else ""
+
+          def load(mid,rev):
+              tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+              if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+              model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+              model.eval(); return tok,model
+
+          def render(tok,system,user):
+              msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+              try: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+
+          def infer(tok,model,system,user,n=8):
+              p=render(tok,system,user); x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              return tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+
+          system="You are NEXUS. Judge routing, graph, entity, dependency and provenance decisions conservatively. Return only PASS, FAIL, or INSUFFICIENT. /no_think"
+          rows={t["id"]:{**t} for t in tasks}
+          t0=time.time()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              r["qwen"]=norm(infer(tok,model,system,t["prompt"],6))
+              if i%6==0: print(f"QWEN_BASE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_B"],os.environ["REV_B"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              r["smol"]=norm(infer(tok,model,system,t["prompt"],6))
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    "You are a neutral NEXUS fusion judge. Compare candidate verdicts using only the question. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Question: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["smol_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else: r["smol_judge"]="AGREE"
+              if i%6==0: print(f"SMOL_BASE_JUDGE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    "You are a neutral NEXUS fusion judge. Compare candidate verdicts using only the question. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Question: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["qwen_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else: r["qwen_judge"]="AGREE"
+              if i%6==0: print(f"QWEN_JUDGE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          def choose(policy,r):
+              if r["qwen"]==r["smol"]: return r["qwen"]
+              qj=r["qwen_judge"]; sj=r["smol_judge"]
+              if policy=="QWEN_PRIMARY":
+                  return r["smol"] if qj==sj=="SMOL" else r["qwen"]
+              if policy=="SMOL_PRIMARY":
+                  return r["qwen"] if qj==sj=="QWEN" else r["smol"]
+              if policy=="RECIPROCAL_ELSE_QWEN":
+                  if qj==sj=="SMOL": return r["smol"]
+                  if qj==sj=="QWEN": return r["qwen"]
+                  return r["qwen"]
+              if policy=="RECIPROCAL_ELSE_SMOL":
+                  if qj==sj=="SMOL": return r["smol"]
+                  if qj==sj=="QWEN": return r["qwen"]
+                  return r["smol"]
+              raise ValueError(policy)
+
+          policies=["QWEN_PRIMARY","SMOL_PRIMARY","RECIPROCAL_ELSE_QWEN","RECIPROCAL_ELSE_SMOL"]
+          base_q=sum(r["qwen"]==r["expected"] for r in rows.values())
+          base_s=sum(r["smol"]==r["expected"] for r in rows.values())
+          best_single=max(base_q,base_s)
+          results={}
+          for p in policies:
+              correct=0; by=defaultdict(lambda:{"correct":0,"total":0})
+              for r in rows.values():
+                  pred=choose(p,r); ok=pred==r["expected"]; correct+=int(ok)
+                  by[r["domain"]]["correct"]+=int(ok); by[r["domain"]]["total"]+=1
+              regressions=[]
+              for dom,v in by.items():
+                  qb=sum(x["qwen"]==x["expected"] for x in rows.values() if x["domain"]==dom)
+                  sb=sum(x["smol"]==x["expected"] for x in rows.values() if x["domain"]==dom)
+                  regressions.append(max(qb,sb)-v["correct"])
+              results[p]={
+                "correct":correct,
+                "gain_over_best_single":correct-best_single,
+                "max_domain_regression_vs_best_single":max(regressions),
+                "domain":dict(sorted(by.items()))
+              }
+
+          ranked=sorted(policies,key=lambda p:(results[p]["correct"],-results[p]["max_domain_regression_vs_best_single"],p),reverse=True)
+          selected=ranked[0]; sel=results[selected]
+          decision="DEV_POLICY_PASS_FREEZE_FOR_FRESH_PRIVATE_HOLDOUT" if sel["gain_over_best_single"]>0 and sel["max_domain_regression_vs_best_single"]<=1 else "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
+          out={
+            "schema":"NEXUS_D4_FUSION_DEV_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "classification":"DEV_POLICY_TUNING_NOT_COLD",
+            "source_precheck_run_id":36146455180,
+            "source_precheck_receipt_sha256":"4bb615dc7ae684b423cf955be5693dd92d7774132d8b09f9f22fb9889b77df99",
+            "m6_used_for_tuning":False,
+            "weights_changed":False,
+            "task_count":24,
+            "dev_sha256":hashlib.sha256(json.dumps(tasks,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "qwen_correct":base_q,
+            "smol_correct":base_s,
+            "best_single_correct":best_single,
+            "candidate_policies":results,
+            "selected_policy":selected,
+            "selected_metrics":sel,
+            "decision":decision,
+            "next_if_pass":"NEW_FRESH_PRIVATE_HOLDOUT_NEVER_SEEN_DURING_POLICY_TUNING",
+            "next_if_hold":"STOP_OR_REDESIGN_WITHOUT_CONSUMING_PRIVATE_HOLDOUT",
+            "claim_ceiling":"DEV_POLICY_TUNING_ONLY_NOT_COLD_EVIDENCE_NO_DUAL_CORE_PROMOTION",
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          Path("receipts/nexus/d4/nexus-d4-fusion-dev-v1.json").write_text(json.dumps(out,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(out,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nexus-d4-fusion-dev-v1
+          path: receipts/nexus/d4/nexus-d4-fusion-dev-v1.json
+          if-no-files-found: error
+      - name: Persist DEV receipt
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/nexus/d4/nexus-d4-fusion-dev-v1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: NEXUS D4 fusion DEV V1 ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
