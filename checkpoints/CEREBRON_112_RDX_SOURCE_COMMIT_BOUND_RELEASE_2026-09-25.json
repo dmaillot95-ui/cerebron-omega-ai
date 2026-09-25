@@ -1,0 +1,81 @@
+{
+  "schema": "CEREBRON_112_RDX_SOURCE_COMMIT_BOUND_RELEASE_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SOURCE_PROVENANCE_RELEASE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "af5df6834ddb4500572a41db79aad59a1f2dc772",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "a5dc3390aedbbc2a083455dd248902ca4281fa47",
+    "full_validation": {
+      "run_id": 36175185628,
+      "status": "PASS"
+    },
+    "deployment_readiness": {
+      "run_id": 36175185573,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36175185585,
+      "status": "PASS"
+    },
+    "pages_deploy": "SKIPPED_BY_PUSH_POLICY",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "source_provenance": {
+    "schema": "RDX_BUILD_PROVENANCE_V1",
+    "endpoint": "api/v1/build-provenance.json",
+    "source_repository": "dmaillot95-ui/cerebron-rdx-exchange",
+    "source_commit": "a5dc3390aedbbc2a083455dd248902ca4281fa47",
+    "source_commit_format": "40_HEX",
+    "manifest_source_commit_bound": true,
+    "live_source_commit_verification": true
+  },
+  "release_integrity": {
+    "public_file_count": 16,
+    "aggregate_sha256": "bc030775f2fe2a8d59753c3ac12ad838b6290875b3f61b8c2976469da692b111",
+    "manifest_schema": "RDX_RELEASE_MANIFEST_V1",
+    "manifest_gate": "PASS",
+    "static_link_integrity": "PASS",
+    "links_checked": 28,
+    "browser_js_syntax": "PASS",
+    "html_files": 7,
+    "inline_scripts": 4,
+    "static_release_build_contract": "PASS"
+  },
+  "live_deployment_proof": {
+    "schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "endpoint_semantics": true,
+    "full_bundle_sha256": true,
+    "full_bundle_byte_length": true,
+    "aggregate_sha256_reconstruction": true,
+    "source_commit_match_required": true,
+    "github_sha_match_required_when_available": true,
+    "production_verified": false
+  },
+  "hosting": {
+    "github_pages_owner_enablement_required": true,
+    "vercel_connected_teams_count": 0,
+    "shared_builder": "scripts/build-static-release.mjs",
+    "output_directory": "dist"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Do not edit F172-F174 from this session.",
+    "Keep source provenance bound to every release manifest.",
+    "After GitHub Pages owner enablement, manual deploy with deploy=true.",
+    "Require deploy PASS and verify-live V2 PASS.",
+    "Only then set production_deployment_verified=true."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
