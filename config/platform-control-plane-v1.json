@@ -14,14 +14,16 @@
     "memory_view",
     "evidence_view",
     "artifact_access",
-    "health_and_audit"
+    "health_and_audit",
+    "plugin_bus_view"
   ],
   "authority": {
     "may_read": [
       "config/farms.json",
       "config/memory-fabric-v1.json",
       "config/neural-training-fabric-v1.json",
-      "config/open-tool-fabric-v1.json"
+      "config/open-tool-fabric-v1.json",
+      "config/cerebron-unified-plugin-bus-v1.json"
     ],
     "may_write_runtime": [
       "platform/data/**",
@@ -43,6 +45,7 @@
     "logical_role_is_not_model": true,
     "routed_farm_id_is_not_remote_farm_execution": true,
     "memory_is_not_training": true,
-    "simulation_is_not_physical_validation": true
+    "simulation_is_not_physical_validation": true,
+    "plugin_binding_is_not_runtime_execution": true
   }
 }
