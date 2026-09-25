@@ -359,6 +359,32 @@
       "REPAIR_STATUS": "OPEN_ROLE_FIDELITY_REPAIR_REQUIRED",
       "TRANSFER_RISK": "HIGH_IF_COUNCIL_MAJORITY_IS_TREATED_AS_CONSENSUS",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-M43-SAPHEA-FIRST-LORA-001",
+      "MISSION_ID": "M43_SAPHEA_FIRST_REAL_REVERSIBLE_LORA",
+      "AI_ID": "SAPHEA",
+      "AGENT_ID": "TRAINING_CANARY",
+      "FAILURE_CLASS": "F_TOOL",
+      "FAILURE_SIGNATURE": "TARGET_TRUNCATED_BEFORE_OPTIMIZER_PLUS_ESCAPED_ACTIONS_EXPRESSION",
+      "ROOT_CAUSE": "The first LoRA canary used naive full-sequence truncation at 256 tokens, removing the supervised target on long prompts. The generated workflow also retained backslashes before GitHub expression syntax in artifact names.",
+      "EVIDENCE_REFS": [
+        "run:36099976977",
+        "job:107960199350",
+        "branch:feat/saphea-first-lora-v1",
+        "baseline:35907245194"
+      ],
+      "IMPACT": "Run stopped before any optimizer step. No SAPHEA neural-learning claim is permitted from this run. Metadata artifact upload also failed due invalid backslash in artifact name.",
+      "SCOPE": "Training data encoding and workflow formatting only; baseline/data gates passed.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "reserve target tokens and left-truncate only prompt prefix",
+        "remove literal backslashes from GitHub Actions expressions",
+        "rerun same GOLD/M6/base model without changing benchmark"
+      ],
+      "REPAIR_STATUS": "CORRECTED_RERUN_REQUIRED",
+      "TRANSFER_RISK": "LOW_AFTER_SAME_SCALE_RERUN",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
