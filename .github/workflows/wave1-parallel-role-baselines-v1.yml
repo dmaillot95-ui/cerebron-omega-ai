@@ -60,7 +60,7 @@ jobs:
           mkdir -p receipts/wave1
           python - <<'PY'
           import glob,json,os,pathlib,hashlib
-          files=sorted(glob.glob("downloaded/wave1/**/**/*.json",recursive=True))
+          files=sorted(set(glob.glob("downloaded/wave1/**/*.json",recursive=True)))
           rows=[]
           for p in files:
               d=json.loads(pathlib.Path(p).read_text())
@@ -68,7 +68,7 @@ jobs:
                   rows.append(d)
           by={r["role"]:r for r in rows}
           expected=["AELYS","ETHERION","AFAH","METRION"]
-          assert sorted(by)==sorted(expected), sorted(by)
+          assert sorted(by)==sorted(expected), sorted(by)\n          assert len(rows)==4, len(rows)
           assert all(r["real_inference"] is True for r in rows)
           assert all(r["training_executed"] is False for r in rows)
           assert all(r["benchmark_deny_training"] is True for r in rows)
