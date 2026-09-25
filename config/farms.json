@@ -1,5 +1,5 @@
 {
-  "version": "2.23",
+  "version": "2.24",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1227,17 +1227,45 @@
         "UNKNOWN_CAPABILITY_DENY",
         "EXTERNAL_ADAPTER_REQUIRES_EXECUTABLE_CANARY"
       ]
+    },
+    {
+      "id": 174,
+      "code": "F174",
+      "name": "ELYRA VISUAL SIMULATION",
+      "repo": "cerebron-farm-174-elyra-visual-simulation",
+      "repo_full_name": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+      "url": "https://github.com/dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+      "domain": "elyra-visual-simulation-images-video-avatar-animation-showcase",
+      "status": "REPOSITORY_PRESENT_HOLD_UNTIL_RDX_SITE_COMPLETE",
+      "type": "VISUAL_VIDEO_INTEGRATION_FARM",
+      "role": "visualize-elyra-simulations-images-video-avatar-animation-and-future-ai-video-showcase",
+      "priority_gate": "DO_NOT_BUILD_SITE_OR_RUNTIME_BEFORE_RDX_SITE_COMPLETION",
+      "linked_farms": [
+        173,
+        152,
+        113
+      ],
+      "rules": [
+        "RDX_SITE_FIRST",
+        "REALITY>COHERENCE",
+        "EVIDENCE>CONFIDENCE",
+        "CLAIM_LE_EVIDENCE",
+        "SIMULATION_NE_TEST",
+        "MEMORY_NE_TRAINING",
+        "NO_VIDEO_RUNTIME_CLAIM_BEFORE_EXECUTABLE_CANARY",
+        "NO_PRIVATE_CLIENT_DATA_IN_PUBLIC_GITHUB"
+      ]
     }
   ],
-  "max_farms": 173,
+  "max_farms": 174,
   "policy": {
-    "farm_cap": 173,
+    "farm_cap": 174,
     "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
     "tools_are_not_farms": true,
-    "current_registered_farm_count": 153,
-    "current_highest_farm_id": 173,
+    "current_registered_farm_count": 154,
+    "current_highest_farm_id": 174,
     "new_farm_admission": "REPOSITORY_MUST_EXIST_AND_BE_VERIFIED_BEFORE_REGISTRY_INSERT",
     "future_ids_are_not_active_until_verified": true
   },
@@ -1364,5 +1392,5 @@
       ]
     }
   },
-  "farm_ceiling": 173
+  "farm_ceiling": 174
 }

@@ -1,0 +1,32 @@
+{
+  "schema": "CEREBRON_FARM_RESERVATION_V1",
+  "date": "2026-09-25",
+  "farm_id": 174,
+  "code": "F174",
+  "name": "ELYRA VISUAL SIMULATION",
+  "repo": "cerebron-farm-174-elyra-visual-simulation",
+  "repo_full_name": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+  "url": "https://github.com/dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
+  "repository_verified": true,
+  "visibility": "public",
+  "status": "REGISTERED_REPOSITORY_PRESENT_HOLD_UNTIL_RDX_SITE_COMPLETE",
+  "type": "VISUAL_VIDEO_INTEGRATION_FARM",
+  "domain": "elyra-visual-simulation-images-video-avatar-animation-showcase",
+  "role": "future ELYRA image/video simulation and AI-video showcase integration",
+  "linked_farms": [
+    173,
+    152,
+    113
+  ],
+  "execution_priority": [
+    "FINISH_RDX_SITE",
+    "STABILIZE_F173_AELYS_LIVE",
+    "THEN_BUILD_F174"
+  ],
+  "rules": [
+    "RDX_SITE_FIRST",
+    "NO_SITE_BUILD_NOW",
+    "NO_RUNTIME_ACTIVE_CLAIM_BEFORE_CANARY",
+    "NO_AUTOMATIC_TRAINING_FROM_VIDEO_OR_CLIENT_INPUT"
+  ]
+}
