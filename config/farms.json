@@ -1484,18 +1484,19 @@
       "repository_exists": true,
       "repository_initialized": true,
       "local_scaffold": "scaffolds/f173-aelys-live",
-      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_MASTER_BUS_GUARD_PENDING",
+      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_MASTER_BUS_GUARD_PASS_RUNTIME_UNQUALIFIED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
-        "dedicated_repo_selftest_run_id": 36153266774,
-        "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b"
+        "dedicated_repo_selftest_run_id": 36155830169,
+        "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
+        "unified_plugin_bus_guard_run_id": 36156083228
       },
-      "dedicated_repo_head": "eefc374f7639c86c87dafbb174d006c804343b9b",
-      "dedicated_repo_selftest_run_id": 36153266774,
-      "master_plugin_bus_status": "DECLARED_GUARD_PENDING_RUNTIME_UNQUALIFIED"
+      "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
+      "dedicated_repo_selftest_run_id": 36155830169,
+      "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
     },
     {
       "id": 174,
