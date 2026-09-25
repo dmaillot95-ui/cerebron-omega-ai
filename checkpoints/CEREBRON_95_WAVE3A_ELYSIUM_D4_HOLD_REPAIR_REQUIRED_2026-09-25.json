@@ -1,0 +1,46 @@
+{
+  "schema": "CEREBRON_95_WAVE3A_ELYSIUM_D4_HOLD_REPAIR_REQUIRED_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "elysium": {
+    "d2_run_id": 36129514044,
+    "d3_run_id": 36130283226,
+    "d3_best_single_model": "HuggingFaceTB/SmolLM3-3B",
+    "d3_best_single_correct": 60,
+    "d4_precheck_run_id": 36134272684,
+    "d4_oracle_union_correct": 65,
+    "d4_oracle_gain_over_best_single": 5,
+    "d4_fresh_fusion_run_id": 36134498167,
+    "d4_fresh_fusion_artifact_id": 10864572618,
+    "d4_fresh_fusion_artifact_digest": "sha256:a616267e0b17a9a4a8a5a04c7d7e8c8cdf06302d2e060639f2fddc100fa56768",
+    "d4_fresh_fusion_holdout_sha256": "6b842c86d133313b29ff334eb45b7421b517896be8b411b42b1e423793466f73",
+    "d4_fresh_fusion_receipt_sha256": "5d6b98614925dfe10b8dbae373b50ab1eb2c341f36280a525ffa29df0a143ac4",
+    "d4_metrics": {
+      "qwen_correct": 20,
+      "smol_correct": 18,
+      "best_single_correct": 20,
+      "fusion_correct": 18,
+      "fusion_gain_over_best_single": -2,
+      "switches_to_qwen": 0,
+      "helpful_switches": 0,
+      "harmful_switches": 0
+    },
+    "d4_state": "HOLD_NO_MEASURED_GAIN_REPAIR_REQUIRED",
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4",
+    "runtime_activation": false
+  },
+  "interpretation": [
+    "D3 and the D4 complementarity precheck showed exploitable disagreement, but the frozen fusion policy did not convert it into measured gain on a fresh private holdout.",
+    "The fresh holdout reversed the best-single ordering: Qwen 20/24 vs Smol 18/24, while D3 had Smol 60/72 vs Qwen 51/72.",
+    "The tested policy made zero switches to Qwen, so fusion collapsed to the Smol primary and underperformed the fresh best single.",
+    "The D4 fresh holdout must not be reused as cold evidence for a repaired policy."
+  ],
+  "next_exact": [
+    "Create a DEV-only ELYSIUM fusion-policy repair experiment independent of the fresh D4 holdout.",
+    "Compare symmetric and adaptive routing policies without neural training.",
+    "Freeze one policy only if it beats both DEV single-core baselines without critical regression.",
+    "Then generate a new private fresh holdout V2 and test once.",
+    "Keep D5 and D6 blocked until a fresh D4 measured gain exists."
+  ]
+}
