@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_PASS_SEMANTIC_INDEPENDENT_HOLD_GOLD_BLOCKED_BY_F72",
+  "status": "RDX_MEMORY_PASS_SEMANTIC_HYBRID_REJECTED_GOLD_BLOCKED_BY_F72_POST_REGISTRY_REALITY_PASS",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -322,5 +322,21 @@
       "production_qualified": false,
       "training": "NOT_EXECUTED"
     }
+  },
+  "f72_gate": {
+    "status": "GLOBAL_FAIL_CLOSED",
+    "registry_reproduction": "PASS",
+    "registry_reality_scoped": "PASS",
+    "f71_run_id": 36162578051,
+    "f72_run_id": 36162737723,
+    "remaining_requirements": [
+      "FRESH_ABLATION",
+      "FRESH_TRANSFER",
+      "AFAH_REVIEW",
+      "PROMOTION_POLICY_REVIEW"
+    ],
+    "m4_gold": "BLOCKED",
+    "neural_training": "BLOCKED",
+    "rule": "SCOPED_REGISTRY_REALITY_PASS_DOES_NOT_EQUAL_GLOBAL_F72_PASS"
   }
 }
