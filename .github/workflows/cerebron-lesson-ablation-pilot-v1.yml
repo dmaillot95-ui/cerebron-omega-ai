@@ -1,0 +1,139 @@
+name: CEREBRON Lesson Ablation Pilot V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'control/lesson-ablation-launch-v1.json'
+
+permissions:
+  contents: read
+
+jobs:
+  ablate:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify launch and source invariants
+        run: |
+          python - <<'PY'
+          import json
+          launch=json.load(open("control/lesson-ablation-launch-v1.json"))
+          cfg=json.load(open("config/lesson-ablation-pilot-v1.json"))
+          assert launch["schema"]=="CEREBRON_LESSON_ABLATION_LAUNCH_V1"
+          assert launch["authorized"] is True
+          assert cfg["status"]=="PREPARED_NOT_EXECUTED"
+          assert cfg["weight_change"] is False
+          assert cfg["training_released"] is False
+          assert cfg["operational_mutation_f172_f173_f174"] is False
+          assert len(cfg["selected_lessons"])==4
+          print("LESSON_ABLATION_PREFLIGHT=PASS")
+          PY
+          python -m py_compile evolution/lesson_ablation_pilot_v1.py
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: lesson-ablation-${{ matrix.key }}-${{ matrix.revision }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Execute baseline versus lesson ablation
+        run: |
+          python evolution/lesson_ablation_pilot_v1.py \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --output-root "artifacts/lesson-ablation/${{ matrix.key }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lesson-ablation-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/lesson-ablation/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: ablate
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: lesson-ablation-*
+          path: downloaded
+      - name: Cross-lineage ablation audit
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          files=glob.glob("downloaded/**/summary.json",recursive=True)
+          rows=[json.load(open(p)) for p in files]
+          expected_lessons={"D01-PROOF-001","D03-SIMULATION-001","D10-DEPENDENCY-001","D11-CONSENSUS_CONTROL-001"}
+          failures=[]
+          if len(rows)!=2: failures.append("summary_count")
+          if len({(r["model_id"],r["model_revision"]) for r in rows})!=2: failures.append("lineage_count")
+          if any(r.get("receipt_count")!=16 for r in rows): failures.append("receipt_count")
+          if any(r.get("inference_pass_count")!=16 for r in rows): failures.append("inference_pass")
+          if any(r.get("weight_change") is not False for r in rows): failures.append("weight_boundary")
+          if any(r.get("training_released") is not False for r in rows): failures.append("training_boundary")
+          cross={}
+          for lid in sorted(expected_lessons):
+              vals=[]
+              for r in rows:
+                  v=r.get("lessons",{}).get(lid)
+                  if v is None: failures.append("missing_lesson:"+lid); continue
+                  vals.append({
+                    "model_id":r["model_id"],
+                    "baseline_correct":v["baseline_correct"],
+                    "injected_correct":v["injected_correct"],
+                    "gain":v["gain"],
+                    "positive_ablation_signal":v["positive_ablation_signal"]
+                  })
+              cross[lid]={
+                "lineages":vals,
+                "both_lineages_positive":len(vals)==2 and all(v["positive_ablation_signal"] for v in vals),
+                "total_gain":sum(v["gain"] for v in vals)
+              }
+          candidates=[lid for lid,v in cross.items() if v["both_lineages_positive"]]
+          out={
+            "schema":"CEREBRON_LESSON_ABLATION_CROSS_LINEAGE_AUDIT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS" if not failures else "FAIL",
+            "model_lineages":len({(r["model_id"],r["model_revision"]) for r in rows}),
+            "cross_model_results":cross,
+            "l4_candidates":candidates,
+            "l4_candidate_count":len(candidates),
+            "weight_change":False,
+            "training_released":False,
+            "claim_ceiling":"L4_TRANSFER_ABLATION_CANDIDATE_NOT_GOLD",
+            "failures":failures
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/lesson-ablation-cross-lineage-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if failures: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lesson-ablation-cross-lineage-audit-${{ github.run_id }}
+          path: artifacts/lesson-ablation-cross-lineage-audit.json
+          if-no-files-found: error
+          retention-days: 30
