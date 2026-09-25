@@ -1,0 +1,67 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_DATASET_READINESS_V1",
+  "date": "2026-09-25",
+  "branch": "feat/wave1-parallel-ai-baselines-v1",
+  "status": "QUARANTINE_ONLY_NO_TRAINING_RELEASED",
+  "invariant": "BENCHMARK_RECORDS_NEVER_TRAIN",
+  "shared_rules": [
+    "TRAINING_RELEASE_DENY_BY_DEFAULT",
+    "ONLY_GOLD_VALIDATED_OR_RED_VALIDATED_RECORDS_MAY_ENTER_TRAIN",
+    "M6_BLIND_AND_TRANSFER_DENY_TRAINING",
+    "HASH_EVERY_RECORD",
+    "PROVENANCE_REQUIRED",
+    "DEPENDENCY_FINGERPRINT_REQUIRED",
+    "AUDIT_COUNTER_AUDIT_REQUIRED",
+    "F72_REQUIRED",
+    "AFAH_REQUIRED",
+    "NO_AUTO_PROMOTION"
+  ],
+  "roles": {
+    "AELYS": {
+      "target": "dialogue coordination human interaction",
+      "current_state": "NO_VALIDATED_GOLD",
+      "proposed_train_family": "DIALOGUE_ACTION_SELECTION_AND_EVIDENCE_LIMITS",
+      "benchmark": "config/wave1-parallel-role-baseline-v1.json#AELYS",
+      "source_policy": "ONLY_AUDITED_DIALOGUE_CASES_AND_EXPLICIT_CONTRACT_RULES",
+      "next": "BUILD_QUARANTINE_CANDIDATES"
+    },
+    "ETHERION": {
+      "target": "difficult science math R&D",
+      "current_state": "SIX_AI_MANIFEST_EMPTY",
+      "proposed_train_family": "R_AND_D_NEXT_ACTION_SELECTION_AND_FALSIFICATION",
+      "benchmark": "config/wave1-parallel-role-baseline-v1.json#ETHERION",
+      "source_policy": "ONLY_AUDITED_RD_CASES_WITH_REPRODUCIBLE_REASON_FOR_TARGET",
+      "next": "BUILD_QUARANTINE_CANDIDATES"
+    },
+    "AFAH": {
+      "target": "epistemic final audit",
+      "current_state": "SIX_AI_MANIFEST_EMPTY",
+      "proposed_train_family": "EVIDENCE_ACCEPT_HOLD_REJECT_CORRELATION",
+      "benchmark": "config/wave1-parallel-role-baseline-v1.json#AFAH",
+      "source_policy": "ONLY_AUDITED_EVIDENCE_CASES_WITH_PINNED_DEPENDENCIES",
+      "next": "BUILD_QUARANTINE_CANDIDATES"
+    },
+    "METRION": {
+      "target": "engineering metrology simulation validation",
+      "current_state": "NO_VALIDATED_ENGINEERING_GOLD",
+      "proposed_train_family": "UNITS_TOLERANCE_MEASUREMENT_SIMULATION_BOUNDARY",
+      "benchmark": "config/wave1-parallel-role-baseline-v1.json#METRION",
+      "source_policy": "ONLY_DIMENSIONALLY_CHECKABLE_ENGINEERING_CASES",
+      "next": "BUILD_QUARANTINE_CANDIDATES"
+    }
+  },
+  "release_gate": {
+    "training_released": false,
+    "unlock_requires": [
+      "NONEMPTY_QUARANTINE_CANDIDATES",
+      "STRUCTURAL_VALIDATION_PASS",
+      "DEDUP_PASS",
+      "AUDIT_PASS",
+      "COUNTER_AUDIT_PASS",
+      "F72_PASS",
+      "AFAH_PASS",
+      "VERSIONED_GOLD_MANIFEST",
+      "DISJOINT_VALIDATION_M6_TRANSFER_SPLITS"
+    ]
+  }
+}
