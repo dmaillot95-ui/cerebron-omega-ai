@@ -73,13 +73,13 @@
     {
       "farm_id": 174,
       "target_repo": "dmaillot95-ui/cerebron-farm-174-elyra-visual-simulation",
-      "target_state": "REPOSITORY_EXISTS_EMPTY",
+      "target_state": "REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
       "source_root": "scaffolds/f174-elyra-visual-simulation",
       "files": [
         {
           "path": "scaffolds/f174-elyra-visual-simulation/README.md",
-          "blob_sha": "8bbf40a7146c5adf19432cf2e7a14e6fe3678028",
-          "size": 697
+          "blob_sha": "0065342a64d67ad7ad89ff7762abc792ea4e765b",
+          "size": 873
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/architecture/ELYRA_VISUAL_SIMULATION_V1.json",
@@ -88,18 +88,18 @@
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/config/project.json",
-          "blob_sha": "964ac30d94290d34a32b9b9f00f6604dc00367a8",
-          "size": 708
+          "blob_sha": "667893198aa4b4bc24b77a04cec5994e7806127e",
+          "size": 1067
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/tests/test_scaffold.py",
-          "blob_sha": "d9b71182f191b716ab930020834520912ffc06c6",
-          "size": 488
+          "blob_sha": "eabf28ed353fac218cc3d7c9654b45aecdbc9447",
+          "size": 582
         },
         {
           "path": "scaffolds/f174-elyra-visual-simulation/validate_architecture.py",
-          "blob_sha": "d3b55a5f8c283872c79bea87191f2dbc83d7a555",
-          "size": 561
+          "blob_sha": "35a31dadfba80db9d13d88a844805ae46442fdc7",
+          "size": 653
         }
       ]
     }
@@ -108,6 +108,7 @@
     "SOURCE_BLOB_SHA_MUST_MATCH_BEFORE_BOOTSTRAP",
     "DO_NOT_MARK_INITIALIZED_BEFORE_FIRST_COMMIT_EXISTS",
     "RUN_DEDICATED_GUARD_AFTER_BOOTSTRAP",
-    "DO_NOT_CLAIM_TRAINING_OR_EXECUTION_FROM_REPOSITORY_INITIALIZATION"
+    "DO_NOT_CLAIM_TRAINING_OR_EXECUTION_FROM_REPOSITORY_INITIALIZATION",
+    "INITIALIZED_TARGETS_RETAIN_BOOTSTRAP_PROVENANCE"
   ]
 }
