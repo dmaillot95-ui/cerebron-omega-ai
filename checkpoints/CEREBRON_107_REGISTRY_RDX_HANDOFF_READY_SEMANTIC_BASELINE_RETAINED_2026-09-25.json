@@ -1,0 +1,120 @@
+{
+  "schema": "CEREBRON_107_REGISTRY_RDX_HANDOFF_READY_SEMANTIC_BASELINE_RETAINED_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.27",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "duplicate_ids": [],
+    "missing_ids": [
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172
+    ],
+    "f152": "REGISTERED_UPDATED",
+    "f173_f174": "REGISTERED_OTHER_SESSION_NO_MODIFICATION"
+  },
+  "f72": {
+    "registry_reproduction": "PASS",
+    "registry_reality_scoped": "PASS",
+    "global_gate": "FAIL_CLOSED",
+    "gold": "BLOCKED",
+    "training": "BLOCKED",
+    "reason": "NO_TRAIN_ELIGIBLE_RDX_GOLD_OBJECTS"
+  },
+  "rd_handoff": {
+    "contract": "config/rdx-rd-handoff-contract-v1.json",
+    "validator": "runtime/rdx_rd_handoff_v1.py",
+    "tests": "tests/test_rdx_rd_handoff_v1.py",
+    "template": "templates/rdx-rd-handoff-v1.example.json",
+    "canary_run_id": 36164294092,
+    "canary_status": "PASS",
+    "pytest": "4/4 PASS",
+    "current_real_handoff_count": 0
+  },
+  "native_ai": {
+    "SAELION": "D4_STOP_NO_COMPLEMENTARITY",
+    "DELTA": "D4_STOP_NO_COMPLEMENTARITY",
+    "NEXUS": "D4_HOLD_NO_ROBUST_DEV_GAIN",
+    "ALPHA": "D4_HOLD_NO_ROBUST_DEV_GAIN",
+    "OMEGA": "D4_HOLD_NO_ROBUST_DEV_GAIN",
+    "ELYSIUM": "D4_HOLD_NO_ROBUST_GAIN",
+    "ELYSION": "D4_HOLD_REDESIGN_REQUIRED"
+  },
+  "semantic_retrieval": {
+    "current_candidate": "SEMANTIC_ONLY_ALL_MINILM_L6_V2",
+    "production_qualified": false,
+    "independent_v3": {
+      "run_id": 36161829258,
+      "top1_accuracy": 0.9166666666666666,
+      "mrr": 0.9467592592592593,
+      "critical_domains_pass": true,
+      "decision": "HOLD"
+    },
+    "multilingual_v4": {
+      "run_id": 36164021509,
+      "decision": "HOLD",
+      "fr_gain": 0.2222222222222222,
+      "en_regression": 0.11111111111111116,
+      "fresh_holdout_consumed": false,
+      "receipt_sha256": "750eea725eb23e025f55fb8381da8c642db05852dd2d628315cfc91b0b6510fb"
+    },
+    "fusion_v5": {
+      "run_id": 36164464446,
+      "status": "PASS_MECHANICAL_HOLD_SCIENTIFIC",
+      "selected_policy": "BASELINE_ONLY",
+      "decision": "DEV_POLICY_HOLD_NO_ROBUST_FUSION_GAIN",
+      "best_balanced_nonpassing_policy": {
+        "name": "LANG_WEIGHTED_BLEND",
+        "overall_top1": 0.8333333333333334,
+        "overall_mrr": 0.9037037037037037,
+        "en_top1": 0.8333333333333334,
+        "fr_top1": 0.8333333333333334,
+        "critical_domains_pass": false
+      },
+      "fresh_holdout_consumed": false,
+      "training": "NOT_EXECUTED",
+      "receipt_sha256": "a01152ae867583f8d674dae0e62f12216fb7b9bc6a0155d905d37f7171cbe2ac"
+    },
+    "next_rule": "WAIT_FOR_REAL_RDX_CORPUS_OR_GENUINELY_NEW_DEV_EVIDENCE_BEFORE_MORE_TUNING"
+  },
+  "next_exact": [
+    "Wait for real verified R&D handoffs from ARCHITECTON execution plane.",
+    "Validate every handoff with runtime/rdx_rd_handoff_v1.py; do not edit source evidence to force PASS.",
+    "Ingest memory-ready objects into RDX memory routes while keeping GOLD blocked until full candidate gates pass.",
+    "Do not consume another semantic holdout from the current synthetic family.",
+    "Use real RDX object metadata/corpus for the next retrieval ablation.",
+    "Only review global F72 when an actual RDX GOLD candidate has rights, human review, ablation, transfer and AFAH PASS.",
+    "No neural training until M4 GOLD exists and F72 global passes."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "ABLATION_BEFORE_ADDITION",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_RAW_RDX_AUTO_TRAIN",
+    "NO_DUPLICATE_RUNS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
