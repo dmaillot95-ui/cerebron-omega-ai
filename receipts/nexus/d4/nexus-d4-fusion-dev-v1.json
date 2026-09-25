@@ -1,0 +1,179 @@
+{
+  "schema": "NEXUS_D4_FUSION_DEV_V1",
+  "run_id": 36155230931,
+  "classification": "DEV_POLICY_TUNING_NOT_COLD",
+  "source_precheck_run_id": 36146455180,
+  "source_precheck_receipt_sha256": "4bb615dc7ae684b423cf955be5693dd92d7774132d8b09f9f22fb9889b77df99",
+  "m6_used_for_tuning": false,
+  "weights_changed": false,
+  "task_count": 24,
+  "dev_sha256": "0871b909d12df614aae7d0f3ea32d43373da8c9cf2659ba5dcc8a22fcc273e41",
+  "qwen_correct": 22,
+  "smol_correct": 16,
+  "best_single_correct": 22,
+  "candidate_policies": {
+    "QWEN_PRIMARY": {
+      "correct": 22,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 0,
+      "domain": {
+        "contradiction_routing": {
+          "correct": 4,
+          "total": 4
+        },
+        "dependency_tracking": {
+          "correct": 3,
+          "total": 4
+        },
+        "entity_linking": {
+          "correct": 4,
+          "total": 4
+        },
+        "evidence_provenance": {
+          "correct": 4,
+          "total": 4
+        },
+        "graph_retrieval": {
+          "correct": 3,
+          "total": 4
+        },
+        "tool_routing": {
+          "correct": 4,
+          "total": 4
+        }
+      }
+    },
+    "SMOL_PRIMARY": {
+      "correct": 16,
+      "gain_over_best_single": -6,
+      "max_domain_regression_vs_best_single": 3,
+      "domain": {
+        "contradiction_routing": {
+          "correct": 1,
+          "total": 4
+        },
+        "dependency_tracking": {
+          "correct": 3,
+          "total": 4
+        },
+        "entity_linking": {
+          "correct": 2,
+          "total": 4
+        },
+        "evidence_provenance": {
+          "correct": 3,
+          "total": 4
+        },
+        "graph_retrieval": {
+          "correct": 3,
+          "total": 4
+        },
+        "tool_routing": {
+          "correct": 4,
+          "total": 4
+        }
+      }
+    },
+    "RECIPROCAL_ELSE_QWEN": {
+      "correct": 22,
+      "gain_over_best_single": 0,
+      "max_domain_regression_vs_best_single": 0,
+      "domain": {
+        "contradiction_routing": {
+          "correct": 4,
+          "total": 4
+        },
+        "dependency_tracking": {
+          "correct": 3,
+          "total": 4
+        },
+        "entity_linking": {
+          "correct": 4,
+          "total": 4
+        },
+        "evidence_provenance": {
+          "correct": 4,
+          "total": 4
+        },
+        "graph_retrieval": {
+          "correct": 3,
+          "total": 4
+        },
+        "tool_routing": {
+          "correct": 4,
+          "total": 4
+        }
+      }
+    },
+    "RECIPROCAL_ELSE_SMOL": {
+      "correct": 16,
+      "gain_over_best_single": -6,
+      "max_domain_regression_vs_best_single": 3,
+      "domain": {
+        "contradiction_routing": {
+          "correct": 1,
+          "total": 4
+        },
+        "dependency_tracking": {
+          "correct": 3,
+          "total": 4
+        },
+        "entity_linking": {
+          "correct": 2,
+          "total": 4
+        },
+        "evidence_provenance": {
+          "correct": 3,
+          "total": 4
+        },
+        "graph_retrieval": {
+          "correct": 3,
+          "total": 4
+        },
+        "tool_routing": {
+          "correct": 4,
+          "total": 4
+        }
+      }
+    }
+  },
+  "selected_policy": "RECIPROCAL_ELSE_QWEN",
+  "selected_metrics": {
+    "correct": 22,
+    "gain_over_best_single": 0,
+    "max_domain_regression_vs_best_single": 0,
+    "domain": {
+      "contradiction_routing": {
+        "correct": 4,
+        "total": 4
+      },
+      "dependency_tracking": {
+        "correct": 3,
+        "total": 4
+      },
+      "entity_linking": {
+        "correct": 4,
+        "total": 4
+      },
+      "evidence_provenance": {
+        "correct": 4,
+        "total": 4
+      },
+      "graph_retrieval": {
+        "correct": 3,
+        "total": 4
+      },
+      "tool_routing": {
+        "correct": 4,
+        "total": 4
+      }
+    }
+  },
+  "decision": "DEV_POLICY_HOLD_NO_ROBUST_GAIN",
+  "next_if_pass": "NEW_FRESH_PRIVATE_HOLDOUT_NEVER_SEEN_DURING_POLICY_TUNING",
+  "next_if_hold": "STOP_OR_REDESIGN_WITHOUT_CONSUMING_PRIVATE_HOLDOUT",
+  "claim_ceiling": "DEV_POLICY_TUNING_ONLY_NOT_COLD_EVIDENCE_NO_DUAL_CORE_PROMOTION",
+  "elapsed_s": 189.255,
+  "max_rss_kb": 9049908,
+  "receipt_sha256": "0c87630d9ac9f88c7e87e4bac930e96f122c4af7ca7c38baa220be0077be99e1"
+}
