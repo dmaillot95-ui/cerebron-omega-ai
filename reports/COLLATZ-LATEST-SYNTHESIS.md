@@ -17,7 +17,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 ## État des fermes au dernier cycle
 
 - Fermes configurées : 174
-- Derniers workflows en succès : 164
+- Derniers workflows en succès : 165
 - Derniers workflows en échec : 0
 - Fermes avec au moins un artefact sur leur dernier run : 128
 
@@ -26,7 +26,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 01 collatz-theory: run=36155642368 status=queued conclusion=None artifacts=0
 - Farm 02 collatz-dynamics: run=36154579305 status=pending conclusion=None artifacts=0
 - Farm 03 collatz-adic: run=36154849438 status=queued conclusion=None artifacts=0
-- Farm 04 collatz-counterexample: run=36155831297 status=queued conclusion=None artifacts=0
+- Farm 04 collatz-counterexample: run=36156031538 status=queued conclusion=None artifacts=0
 - Farm 05 collatz-literature: run=36154829710 status=queued conclusion=None artifacts=0
 - Farm 06 collatz-formal-audit: run=36155135858 status=queued conclusion=None artifacts=0
 - Farm 07 collatz-synthesis: run=36155810675 status=queued conclusion=None artifacts=0
@@ -41,7 +41,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 16 industry-manufacturing: run=35419849738 status=completed conclusion=success artifacts=21
 - Farm 17 computing-software: run=35419900013 status=completed conclusion=success artifacts=21
 - Farm 18 ai-agents: run=35419904006 status=completed conclusion=success artifacts=21
-- Farm 19 cybersecurity: run=36154239932 status=completed conclusion=success artifacts=1
+- Farm 19 cybersecurity: run=36156013704 status=completed conclusion=success artifacts=1
 - Farm 20 data-knowledge: run=35419910610 status=completed conclusion=success artifacts=1
 - Farm 21 economics-finance: run=35419913223 status=completed conclusion=success artifacts=21
 - Farm 22 business-market: run=35419915837 status=completed conclusion=success artifacts=21
@@ -88,7 +88,7 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 63 hardware-test-hil: run=35314651610 status=completed conclusion=success artifacts=0
 - Farm 64 hardware-reliability-safety: run=35314709831 status=completed conclusion=success artifacts=0
 - Farm 65 physical-prototype-qualification: run=35420420399 status=completed conclusion=success artifacts=1
-- Farm 66 knowledge-graph-vector-index: run=36154847332 status=completed conclusion=success artifacts=1
+- Farm 66 knowledge-graph-vector-index: run=36156166945 status=completed conclusion=success artifacts=1
 - Farm 67 cross-farm-communication: run=36154951295 status=completed conclusion=success artifacts=1
 - Farm 68 autonomous-experiment-orchestrator: run=36155033660 status=completed conclusion=success artifacts=1
 - Farm 69 causal-discovery: run=35420432322 status=completed conclusion=success artifacts=1
@@ -195,5 +195,5 @@ Un nouveau résultat ne doit entrer dans la section « Démontré » qu’après
 - Farm 170 phi-native-ai: run=35973791127 status=completed conclusion=success artifacts=0
 - Farm 171 chi-native-ai: run=35973803439 status=completed conclusion=success artifacts=0
 - Farm 172 psi-native-ai: run=35973812171 status=completed conclusion=success artifacts=0
-- Farm 173 aelys-live-runtime: run=36155830169 status=queued conclusion=None artifacts=0
+- Farm 173 aelys-live-runtime: run=36155830169 status=completed conclusion=success artifacts=0
 - Farm 174 elyra-visual-simulation: run=None status=None conclusion=None artifacts=0
