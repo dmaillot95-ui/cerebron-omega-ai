@@ -1,0 +1,57 @@
+{
+  "schema": "CEREBRON_97_WAVE3A_MULTI_AI_EXECUTION_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "active": {
+    "ELYSIUM": {
+      "d4_state": "HOLD_NO_MEASURED_GAIN",
+      "repair_dev_v2_run_id": 36137547428,
+      "repair_dev_v2_state": "IN_PROGRESS",
+      "d5": "BLOCKED",
+      "d6": "BLOCKED"
+    },
+    "SAELION": {
+      "d2_run_id": 36138362585,
+      "d2_state": "PASS",
+      "d2_audit_sha256": "52463129e1a4a0e4149175d37841be7d07c833e598647c0ce96bcae077cdf521",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "97ba81d7b2cb898dcc362a289919979fb1d4a9be4b12b3cbdb86c8c36fc234d4",
+      "m6_receipt_sha256": "31bd7ae5b8a63604aec7c94efb704e549bb08dc00e21ddc0541f3f40262529ed",
+      "d3_run_id": 36138864930,
+      "d3_state": "IN_PROGRESS"
+    },
+    "NEXUS": {
+      "d2_run_id": 36138369400,
+      "d2_state": "PASS",
+      "d2_audit_sha256": "d76c65abf109ec4d629dd63790ae66e15eb83866be1be4699b3e3af3c0d2a4fc",
+      "m6_run_id": 36138516577,
+      "m6_sha256": "358eb84c10b5e6555cf99342f0086c3185274219991ece6de10132844b57b717",
+      "m6_receipt_sha256": "53e7041ed96f4e44d4bc5b4df6e168ef38a79d29923eb6a30f36777622ee9023",
+      "d3_run_id": 36138864930,
+      "d3_state": "IN_PROGRESS"
+    },
+    "ELYSION": {
+      "d4_state": "HOLD_REDESIGN_REQUIRED",
+      "role_aligned_dev_v2_workflow": ".github/workflows/elysion-d4-fusion-repair-dev-v2.yml",
+      "role_aligned_dev_v2_triggered": false
+    }
+  },
+  "prepared_not_triggered": {
+    "saelion_nexus_d4_precheck": ".github/workflows/wave3a-saelion-nexus-d4-complementarity-precheck.yml",
+    "elysion_dev_v2": ".github/workflows/elysion-d4-fusion-repair-dev-v2.yml"
+  },
+  "rules": [
+    "NO_DUPLICATE_RERUN_WHILE_ACTIVE",
+    "M6_DENY_TRAINING",
+    "D3_BEFORE_D4",
+    "ABLATION_BEFORE_PROMOTION",
+    "FRESH_HOLDOUT_AFTER_POLICY_FREEZE",
+    "CLAIM_LEQ_EVIDENCE"
+  ],
+  "next_exact": [
+    "Close ELYSIUM repair DEV V2 on its real receipt.",
+    "Close SAELION and NEXUS D3 on their persisted comparison receipts.",
+    "If D3 passes, trigger SAELION/NEXUS D4 complementarity precheck exactly once.",
+    "Trigger ELYSION DEV V2 only when runner capacity is available; do not reuse old cold holdouts for tuning."
+  ]
+}
