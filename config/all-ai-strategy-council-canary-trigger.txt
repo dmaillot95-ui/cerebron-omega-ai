@@ -1,2 +1,2 @@
-repair=markdown-label-parser-v2
+repair=markdown-label-parser-v3-regex-fixed
 sample=5
