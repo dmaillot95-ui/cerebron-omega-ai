@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G7",
+  "status": "TRAINING_EXECUTED_SCOPED_ELYRA_AND_SAPHEA_G6_RESEARCH_ONLY",
   "name": "CEREBRON Neural Training Fabric",
   "principles": [
     "REAL_WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_LEARNING",
@@ -31,8 +31,15 @@
     "SAPHEA": {
       "target": "specialist execution and routing",
       "training": "domain SFT/LoRA",
-      "status": "SCOPED_LORA_G7_PROMOTED_E2",
-      "active_adapter_pointer": "config/saphea-g1-epistemic-adapter-v1.json"
+      "status": "SCOPED_LORA_G6_RESEARCH_ONLY_G7_REVOKED",
+      "active_adapter_pointer": null,
+      "runtime_activation": "DENY",
+      "superseded_promotion": {
+        "prior_pointer": "config/saphea-g1-epistemic-adapter-v1.json",
+        "prior_decision": "SCOPED_G7_PROMOTED",
+        "superseded_by": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json",
+        "reason": "Later frozen transfer benchmark exposed critical NEURAL_LEARNING_VERIFIED regression; V3 validation failed and V4 cold gain was zero."
+      }
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
@@ -136,7 +143,7 @@
       "role": "SAPHEA",
       "type": "PEFT_LORA",
       "scope": "CEREBRON_EPISTEMIC_STATUS_CLASSIFICATION_ONLY",
-      "state": "G6_REAL_LORA_VERIFIED_HOLD_G7",
+      "state": "G6_REAL_LORA_RESEARCH_ONLY_G7_REVOKED",
       "run_id": 36100266729,
       "job_id": 107961061331,
       "artifact_id": 10848864759,
@@ -159,9 +166,16 @@
       "validation_loss_after": 0.11578285936266183,
       "critical_regression": false,
       "hf_private_readback_sha_pass": true,
-      "promotion": "SCOPED_G7_PROMOTED",
-      "pending": [],
-      "claim_ceiling": "SCOPED_EPISTEMIC_CLASSIFICATION_G7_SUPPORTED_E2",
+      "promotion": "REVOKED_BY_LATER_FROZEN_TRANSFER_EVIDENCE",
+      "pending": [
+        "MATERIALLY_NEW_AUDITED_TRAINING_DATA",
+        "FRESH_COLD_BENCHMARK",
+        "TRANSFER_NO_CRITICAL_REGRESSION",
+        "RED_TEAM_PASS",
+        "F72_REVIEW",
+        "AFAH_FINAL_AUTHORITY"
+      ],
+      "claim_ceiling": "REAL_LORA_TRAINING_DEMONSTRATED_FOR_SCOPED_CLASSIFIER; NO_ACTIVE_G7_RUNTIME_PROMOTION",
       "transfer_gate": {
         "run_id": 36101181888,
         "dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
@@ -201,11 +215,12 @@
         "decision": "PROMOTE_SCOPED_G7",
         "all_required_gates_pass": true,
         "review_sha256": "4c4bb04b946962bcb977a276e909db3b48f525e4001ff1a99323a3b71f38fa74"
-      }
+      },
+      "superseded_by": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json"
     }
   ],
   "saphea_first_lora_evidence": {
-    "status": "G6_REAL_LORA_VERIFIED_G7_BLOCKED",
+    "status": "G6_REAL_LORA_RESEARCH_ONLY_G7_REVOKED",
     "branch": "feat/saphea-first-lora-v1",
     "run_id": 36100266729,
     "job_id": 107961061331,
@@ -232,7 +247,7 @@
     "critical_regression": false,
     "validation_loss_before": 0.48301953449845314,
     "validation_loss_after": 0.11578285936266183,
-    "promotion": "NOT_PROMOTED_CLASS_COLLAPSE",
+    "promotion": "REVOKED_NO_DEFAULT_RUNTIME_REPLACEMENT",
     "pending_gates": [
       "NOVEL_TRANSFER_GAIN",
       "ABLATION_SUPPORTS_VALUE",
@@ -254,6 +269,7 @@
       "critical_regression": true,
       "ablation_supports_value": false,
       "decision": "G7_BLOCKED_ROLLBACK_OR_REPAIR"
-    }
+    },
+    "final_checkpoint": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json"
   }
 }
