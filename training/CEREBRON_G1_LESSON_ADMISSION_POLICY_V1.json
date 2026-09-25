@@ -112,6 +112,9 @@
     "learning_artifacts_allowed": true
   },
   "release_gate": [
+    "SELF_EVOLUTION_GUARD_PASS",
+    "STABLE_TRAIN_VAL_HOLDOUT_SPLIT",
+    "DECONTAMINATION_PASS",
     "TRAINING_ELIGIBLE_COUNT>=32_PER_TARGET_OR_APPROVED_SHARED_SKILL_BATCH",
     "DEDUP_COMPLETE",
     "NO_M6_TRANSFER_RED_ANSWER_LEAKAGE",
@@ -121,5 +124,16 @@
     "ROLLBACK_POINTER_DEFINED"
   ],
   "training_claim_rule": "Only a later run that changes weights/adapters and passes COLD+TRANSFER+REDTEAM+ABLATION may be called neural improvement.",
-  "geometric_claim_rule": "No geometric-capability claim from candidate lessons, inference count, memory growth, or training count alone."
+  "geometric_claim_rule": "No geometric-capability claim from candidate lessons, inference count, memory growth, or training count alone.",
+  "self_evolution_integration": {
+    "engine": "evolution/cerebron_self_evolution.py",
+    "config": "config/cerebron-self-evolution-v1.json",
+    "required_before_dataset_release": [
+      "STABLE_SPLIT",
+      "DECONTAMINATION_PASS",
+      "HARD_CONSTRAINTS_PASS"
+    ],
+    "benchmark_contamination_action": "REJECT_OR_MOVE_OUT_OF_TRAIN",
+    "cold_transfer_red_answers_training_eligible": false
+  }
 }
