@@ -9,8 +9,8 @@
   "objective": "Every available CEREBRON AI has an explicit neural-training state or planned wave. No AI may disappear from the training roadmap.",
   "coverage_counts": {
     "PENDING_ORCHESTRATOR_POLICY_TRAINING": 1,
-    "NEURAL_TRAINING_EXECUTED": 6,
-    "PIPELINE_ACTIVE_WAVE2": 4,
+    "NEURAL_TRAINING_EXECUTED": 10,
+    "PIPELINE_ACTIVE_WAVE2": 0,
     "PENDING_DUAL_MODEL_NEURAL_PIPELINE": 7,
     "PENDING_SPECIALIST_NEURAL_PIPELINE": 20
   },
@@ -136,11 +136,11 @@
         "synthesis_compression",
         "integration_interfaces"
       ],
-      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
-      "planned_wave": "WAVE2",
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
       "training_mode": "ROLE_SPECIFIC_LORA",
-      "current_fabric_status": null,
-      "runtime_activation": false
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
     },
     {
       "ai_id": "ETHERION",
@@ -167,11 +167,11 @@
         "search_exploration",
         "causal_mechanism"
       ],
-      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
-      "planned_wave": "WAVE2",
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
       "training_mode": "ROLE_SPECIFIC_LORA",
-      "current_fabric_status": null,
-      "runtime_activation": false
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
     },
     {
       "ai_id": "ASTRION",
@@ -182,11 +182,11 @@
         "engineering_validation",
         "integration_interfaces"
       ],
-      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
-      "planned_wave": "WAVE2",
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
       "training_mode": "ROLE_SPECIFIC_LORA",
-      "current_fabric_status": null,
-      "runtime_activation": false
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
     },
     {
       "ai_id": "METRION",
@@ -259,11 +259,11 @@
         "optimization_efficiency",
         "metrology_benchmark"
       ],
-      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
-      "planned_wave": "WAVE2",
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
       "training_mode": "ROLE_SPECIFIC_LORA",
-      "current_fabric_status": null,
-      "runtime_activation": false
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
     },
     {
       "ai_id": "ELYSION",
