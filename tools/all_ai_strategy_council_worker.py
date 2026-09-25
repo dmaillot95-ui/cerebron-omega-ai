@@ -11,6 +11,8 @@ def parse_labels(raw):
     out={}; cur=None
     aliases={
         "PRIORITY":"PRIORITY",
+        "PRIORITIZE":"PRIORITY",
+        "PRIORITISE":"PRIORITY",
         "PROPOSAL":"PROPOSAL",
         "TEST":"TEST",
         "STOP":"STOP",
@@ -27,7 +29,7 @@ def parse_labels(raw):
         s=line.strip()
         if not s:
             continue
-        plain=s.lstrip(" \t>#*-").replace("**","").replace("__","").replace("`","").strip()
+        plain=s.lstrip(" \t>#*-").replace("**","").replace("__","").replace("`","").replace("：",":").strip()
         if ":" in plain:
             head,val=plain.split(":",1)
             key=aliases.get(head.strip().upper())
@@ -87,7 +89,7 @@ RISK: state the main unknown or failure mode that could invalidate the proposal.
          "ai_id":a.ai,"identity":spec["identity"],"parent_function":spec["parent_function"],
          "specialization_tags":spec["specialization_tags"],"specialization_vector":spec["specialization_vector"],
          "endpoint":endpoint,"model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False,
-         "format_contract_version":"V5_QWEN3_4B_ALIAS_STRICT",
+         "format_contract_version":"V7_QWEN3_UNICODE_ALIAS_STRICT",
          "spiralix_input_envelope":inp,"spiralix_input_sha256":sha256_obj(inp)}
     t=time.time()
     try:
