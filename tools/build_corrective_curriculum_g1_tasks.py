@@ -12,6 +12,7 @@ curr=load("training/CEREBRON_CORRECTIVE_CURRICULUM_G1_V1.json")
 coverage=load("config/all-ai-neural-training-coverage-v1.json")
 failures=load("memory/failure-bank-v1.json")
 gvl=load("config/gvl-specialization-registry-v2.json")
+routing=load("config/cerebron-failure-curriculum-routing-v1.json")
 
 available={e["identity"]:e for e in coverage["entries"] if e.get("available") is True}
 targets=set(curr["ai_corrective_axes"])
@@ -27,13 +28,25 @@ missing_vec=[x for x in sorted(targets) if x not in vec_by_identity or len(vec_b
 if missing_vec:
     raise SystemExit("MISSING_32D_VECTOR:"+",".join(missing_vec))
 
-# Map direct/relevant measured failures.
+# Map direct/relevant measured failures plus explicit cross-specialist routes.
 direct={}
+route_reasons={}
+class_routes=routing.get("class_routes",{})
+overrides=routing.get("explicit_failure_overrides",{})
 for f in failures["entries"]:
     ai=str(f.get("AI_ID",""))
+    routed=set(class_routes.get(f.get("FAILURE_CLASS"),{}).get("specialists",[]))
+    override=overrides.get(f.get("FAILURE_ID"),{})
+    routed.update(override.get("specialists",[]))
     for ident in targets:
-        if ident in ai or ai in ("ALL_38_LOGICAL_AI","ALL_AVAILABLE_LOGICAL_AI"):
+        direct_match=(ident in ai or ai in ("ALL_38_LOGICAL_AI","ALL_AVAILABLE_LOGICAL_AI"))
+        routed_match=ident in routed
+        if direct_match or routed_match:
             direct.setdefault(ident,[]).append(f)
+            reasons=[]
+            if direct_match: reasons.append("SOURCE_AI_OR_GLOBAL_SCOPE")
+            if routed_match: reasons.append("FAILURE_CLASS_SPECIALIST_ROUTE")
+            route_reasons.setdefault((ident,f.get("FAILURE_ID")),reasons)
 
 task_types=[
     ("BOUNDARY_CONTRAST","Generate a pair of superficially similar cases whose correct treatment differs on the target skill boundary."),
@@ -52,7 +65,10 @@ for ident in sorted(targets):
             "failure_id":f.get("FAILURE_ID"),
             "failure_class":f.get("FAILURE_CLASS"),
             "signature":f.get("FAILURE_SIGNATURE"),
-            "repair_status":f.get("REPAIR_STATUS")
+            "repair_status":f.get("REPAIR_STATUS"),
+            "root_cause":f.get("ROOT_CAUSE"),
+            "curriculum_targets":f.get("CURRICULUM_TARGETS",[]),
+            "route_reasons":route_reasons.get((ident,f.get("FAILURE_ID")),[])
         })
     for i,(kind,instruction) in enumerate(task_types):
         axis=axes[i % len(axes)]
@@ -115,6 +131,8 @@ report={
     "task_count":len(tasks),
     "tasks":tasks,
     "admission_chain":["AGORA_ATTEMPT","AUDIT","COUNTER_AUDIT","REPRODUCTION","GOLD_OR_RED","DATASET_SEAL"],
+    "failure_routing_schema":routing.get("schema"),
+    "failure_class_route_count":len(class_routes),
     "training_released":False,
     "geometric_growth_claim":"NOT_ESTABLISHED"
 }
