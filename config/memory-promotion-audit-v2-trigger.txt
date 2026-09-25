@@ -7,3 +7,4 @@ m6_training=DENY
 f72_expected=FAIL
 gold_expected=BLOCKED
 repair_run=ASSERT_154_ENTRIES_MAX_F174
+post_f173_f174_verification=2026-09-25
