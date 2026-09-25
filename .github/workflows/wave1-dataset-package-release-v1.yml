@@ -1,0 +1,103 @@
+name: CEREBRON Wave1 Dataset Package Release
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave1-dataset-package-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile package chain
+        run: |
+          python -m py_compile tools/wave1_quarantine_candidate_builder.py
+          python -m py_compile tools/wave1_versioned_split_builder_v1.py
+          python -m py_compile tools/wave1_cold_suite_builder_v1.py
+          python -m py_compile tools/wave1_dataset_release_gate_v1.py
+      - name: Require AFAH admitted source pool
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("training/WAVE1_DATA_ADMISSION_V1.json")
+          assert p.exists(),"AFAH_ADMISSION_POINTER_MISSING"
+          d=json.loads(p.read_text())
+          assert d["state"]=="ADMITTED_SYNTHETIC_CANDIDATE_POOL"
+          assert d["manifest_sha256"]=="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert d["training_released"] is False
+          print("AFAH_SOURCE_POOL_ADMITTED=PASS")
+          PY
+      - name: Regenerate exact admitted pool
+        run: |
+          python tools/wave1_quarantine_candidate_builder.py             --output artifacts/wave1-quarantine-candidates-v1.json
+      - name: Build deterministic TRAIN VALIDATION candidates
+        run: |
+          python tools/wave1_versioned_split_builder_v1.py             --candidates artifacts/wave1-quarantine-candidates-v1.json             --admission training/WAVE1_DATA_ADMISSION_V1.json             --output-dir artifacts/wave1-splits
+      - name: Build fresh M6 TRANSFER RED suites
+        run: |
+          python tools/wave1_cold_suite_builder_v1.py             --output-dir artifacts/wave1-cold
+      - name: Execute leakage and release gate
+        run: |
+          python tools/wave1_dataset_release_gate_v1.py             --candidates artifacts/wave1-quarantine-candidates-v1.json             --split-dir artifacts/wave1-splits             --cold-dir artifacts/wave1-cold             --admission training/WAVE1_DATA_ADMISSION_V1.json             --baseline-config config/wave1-parallel-role-baseline-v1.json             --output training/WAVE1_PARALLEL_TRAINING_RELEASE_V1.json
+      - name: Verify scoped training release
+        run: |
+          mkdir -p receipts/wave1
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          d=json.loads(pathlib.Path("training/WAVE1_PARALLEL_TRAINING_RELEASE_V1.json").read_text())
+          assert d["state"]=="RELEASED_FOR_SCOPED_LORA_TRAINING"
+          assert d["training_released"] is True
+          assert d["source_manifest_sha256"]=="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert all(d["checks"].values())
+          assert d["checks"]["cold_total_360"] is True
+          receipt={
+            "schema":"CEREBRON_WAVE1_DATASET_PACKAGE_RELEASE_POINTER_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "release_sha256":d["release_sha256"],
+            "source_manifest_sha256":d["source_manifest_sha256"],
+            "training_released":True,
+            "roles":{k:{
+              "train_count":v["train_count"],
+              "validation_count":v["validation_count"],
+              "split_sha256":v["split_sha256"],
+              "cold":v["cold"]
+            } for k,v in d["roles"].items()},
+            "claim_ceiling":d["claim_ceiling"],
+            "next_gate":"FOUR_PARALLEL_REAL_LORA_CANARIES"
+          }
+          raw=json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()
+          receipt["receipt_sha256"]=hashlib.sha256(raw).hexdigest()
+          p=pathlib.Path("receipts/wave1")/f"wave1-dataset-package-release-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave1-dataset-package-${{ github.run_id }}
+          path: |
+            artifacts/wave1-splits/
+            artifacts/wave1-cold/
+            training/WAVE1_PARALLEL_TRAINING_RELEASE_V1.json
+            receipts/wave1/wave1-dataset-package-release-${{ github.run_id }}.json
+          if-no-files-found: error
+      - name: Persist release pointer and receipt only
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add training/WAVE1_PARALLEL_TRAINING_RELEASE_V1.json
+          git add receipts/wave1/wave1-dataset-package-release-${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "release: Wave1 scoped parallel training package ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/wave1-parallel-ai-baselines-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
