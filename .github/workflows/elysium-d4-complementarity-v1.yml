@@ -1,0 +1,86 @@
+name: ELYSIUM D4 Complementarity Precheck
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysium-d4-complementarity-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  precheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Compare exact private D3 rows
+        run: |
+          mkdir -p receipts/elysium
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from collections import defaultdict
+          from huggingface_hub import hf_hub_download
+
+          comp=pathlib.Path("receipts/elysium/elysium-d3-baseline-comparison.json")
+          qf=pathlib.Path("receipts/elysium/elysium-d3-qwen3-4b.json")
+          sf=pathlib.Path("receipts/elysium/elysium-d3-smollm3-3b.json")
+          if not (comp.exists() and qf.exists() and sf.exists()): raise SystemExit("D3_RECEIPTS_MISSING")
+          c=json.loads(comp.read_text()); qsum=json.loads(qf.read_text()); ssum=json.loads(sf.read_text())
+          if c.get("status")!="PASS": raise SystemExit("D3_NOT_PASS")
+          if qsum["m6_sha256"]!=ssum["m6_sha256"] or qsum["m6_sha256"]!=c["m6_sha256"]: raise SystemExit("M6_SHA_MISMATCH")
+
+          def load(summary):
+              fn=pathlib.Path(hf_hub_download(repo_id=os.environ["HF_REPO"],filename=summary["private_result_path"],repo_type="model",token=os.environ["HF_TOKEN"],force_download=True))
+              raw=fn.read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=summary["private_result_sha256"]: raise SystemExit("PRIVATE_SHA_MISMATCH")
+              return json.loads(raw)
+          q=load(qsum); s=load(ssum)
+          qr={x["id"]:x for x in q["rows"]}; sr={x["id"]:x for x in s["rows"]}
+          if set(qr)!=set(sr) or len(qr)!=72: raise SystemExit("ROW_SET_MISMATCH")
+          both=qo=so=neither=disagree=0
+          domain=defaultdict(lambda:{"qwen":0,"smol":0,"oracle":0,"total":0})
+          rows=[]
+          for i in sorted(qr):
+              a=qr[i]; b=sr[i]
+              if a["domain"]!=b["domain"] or a["expected"]!=b["expected"]: raise SystemExit("ROW_MISMATCH")
+              qc=bool(a["correct"]); sc=bool(b["correct"])
+              both+=qc and sc; qo+=qc and not sc; so+=sc and not qc; neither+=not qc and not sc
+              disagree+=a["prediction"]!=b["prediction"]
+              d=domain[a["domain"]]; d["total"]+=1; d["qwen"]+=qc; d["smol"]+=sc; d["oracle"]+=qc or sc
+              rows.append({"id_sha256":hashlib.sha256(i.encode()).hexdigest(),"domain":a["domain"],"qwen_correct":qc,"smol_correct":sc,"predictions_disagree":a["prediction"]!=b["prediction"]})
+          qcorrect=both+qo; scorrect=both+so; oracle=both+qo+so; gain=oracle-max(qcorrect,scorrect)
+          out={
+            "schema":"ELYSIUM_D4_COMPLEMENTARITY_PRECHECK_V1",
+            "source_d3_run_id":c["run_id"],"source_d3_audit_sha256":c["audit_sha256"],
+            "m6_sha256":c["m6_sha256"],"task_count":72,
+            "qwen_correct":qcorrect,"smol_correct":scorrect,
+            "both_correct":both,"qwen_only_correct":qo,"smol_only_correct":so,"both_wrong":neither,
+            "prediction_disagreement_count":disagree,"oracle_union_correct":oracle,
+            "oracle_gain_over_best_single":gain,"domain":dict(sorted(domain.items())),
+            "decision":"CONTINUE_D4_FUSION_CANARY" if gain>0 else "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+            "independent_evidence_count":0,"two_models_not_two_independent_proofs":True,
+            "claim_ceiling":"D3_ROW_COMPLEMENTARITY_PRECHECK_NO_FUSION_GAIN_CLAIM",
+            "rows":rows
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/elysium/elysium-d4-complementarity.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps({k:out[k] for k in ["qwen_correct","smol_correct","both_correct","qwen_only_correct","smol_only_correct","both_wrong","prediction_disagreement_count","oracle_union_correct","oracle_gain_over_best_single","decision","receipt_sha256"]},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elysium-d4-complementarity
+          path: receipts/elysium/elysium-d4-complementarity.json
+          if-no-files-found: error
+      - name: Persist D4 precheck receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/elysium/elysium-d4-complementarity.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: ELYSIUM D4 complementarity ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push
