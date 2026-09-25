@@ -44,11 +44,11 @@
       114,
       115,
       116,
-      118,
       119,
       120
     ],
-    "rule": "RAG_AVAILABILITY_DOES_NOT_EQUAL_NEURAL_LEARNING"
+    "rule": "RAG_AVAILABILITY_DOES_NOT_EQUAL_NEURAL_LEARNING",
+    "conditional_replay_farm": 117
   },
   "gold_candidate_path": {
     "pipeline": [
@@ -65,7 +65,8 @@
       "M4_GOLD"
     ],
     "fail_closed": true,
-    "no_auto_gold": true
+    "no_auto_gold": true,
+    "gold_library_farm": 118
   },
   "training_route": {
     "enabled_as_policy": true,
@@ -251,5 +252,6 @@
     "memory_rag": "PASS",
     "gold": "BLOCKED_BY_F72",
     "neural_training": "NOT_EXECUTED"
-  }
+  },
+  "memory_binding_manifest": "config/rdx-memory-bindings-v1.json"
 }
