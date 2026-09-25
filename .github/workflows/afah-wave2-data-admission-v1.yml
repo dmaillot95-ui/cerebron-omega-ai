@@ -1,0 +1,54 @@
+name: AFAH Wave2 Data Admission V1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/afah-wave2-data-admission-request.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile AFAH Wave2 admission gate
+        run: python -m py_compile tools/afah_wave2_data_admission_v1.py
+      - name: Run AFAH Wave2 data admission
+        run: python tools/afah_wave2_data_admission_v1.py
+      - name: Verify AFAH Wave2 receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path("receipts/wave2/afah-wave2-data-admission-v1.json").read_text())
+          assert r["all_required_gates_pass"] is True
+          assert r["decision"]=="ADMIT_WAVE2_SYNTHETIC_CANDIDATE_POOL"
+          p=json.loads(pathlib.Path("training/WAVE2_DATA_ADMISSION_V1.json").read_text())
+          assert p["state"]=="ADMITTED_SYNTHETIC_CANDIDATE_POOL"
+          assert p["record_count"]==456
+          assert p["training_released"] is False
+          print("AFAH_WAVE2_DATA_ADMISSION=PASS",r["review_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afah-wave2-data-admission-${{ github.run_id }}
+          path: |
+            receipts/wave2/afah-wave2-data-admission-v1.json
+            training/WAVE2_DATA_ADMISSION_V1.json
+          if-no-files-found: error
+      - name: Persist Wave2 admission pointer
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave2/afah-wave2-data-admission-v1.json training/WAVE2_DATA_ADMISSION_V1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: AFAH Wave2 data admission"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1
