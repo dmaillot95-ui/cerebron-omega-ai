@@ -18,7 +18,7 @@
     "REAL_EXECUTION_RECEIPT_REQUIRED",
     "NATIVE_AI_DUAL_CORE_REQUIRES_ABLATION_GAIN",
     "NATIVE_AI_MEMORY_USES_PER_AI_NAMESPACE",
-    "EVERY_REGISTERED_FARM_F001_F146_MUST_HAVE_FUNCTIONAL_GROUP_OR_DOCUMENTED_FALLBACK",
+    "EVERY_REGISTERED_FARM_MUST_HAVE_FUNCTIONAL_GROUP_OR_DOCUMENTED_FALLBACK",
     "REGISTRY_STATUS_DOES_NOT_SUBSTITUTE_FOR_CURRENT_RUN_RECEIPT",
     "FARM_EXECUTION_CLAIM_REQUIRES_RUN_JOB_ARTIFACT_OR_EQUIVALENT_RECEIPT",
     "PENDING_NATIVE_AI_FARM_NOT_ROUTABLE_UNTIL_MEMORY_RUNTIME_BENCHMARK_GATES_PASS"
@@ -147,14 +147,21 @@
   "compatibility": {
     "greek24": "routing vocabulary only; not mandatory persistent colonies",
     "legacy62": "preserved reserve/archive",
-    "farms151": "current verified registry snapshot; F147-F151 repositories exist but remain activation-gated"
+    "farms151": "current verified registry snapshot; F147-F151 repositories exist but remain activation-gated",
+    "current_registry": "154 registered entries, highest ID F174, sparse extensions routed by verified registry metadata"
   },
   "current_blockers": [
     "Only explicitly integrated bridge pilots can be invoked through platform/farm_bridge.py today; registered farms remain callable capability identities but platform bridge execution is not universal.",
     "HF slots remain runtime-gated; provider failures are route-specific and do not invalidate farm identity."
   ],
   "registry_snapshot": {
-    "count": 151,
-    "max_id": 151
+    "count": 154,
+    "max_id": 174,
+    "sparse": true,
+    "registered_extension_ids": [
+      152,
+      173,
+      174
+    ]
   }
 }

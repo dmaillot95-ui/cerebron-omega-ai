@@ -299,9 +299,11 @@
     }
   ],
   "registry_snapshot": {
-    "count": 151,
-    "max_id": 151,
-    "date": "2026-09-24"
+    "count": 154,
+    "max_id": 174,
+    "date": "2026-09-25",
+    "sparse": true,
+    "source": "config/farms.json"
   },
   "dynamic_fallback": {
     "applies_to": "ANY_FUTURE_VERIFIED_REGISTERED_FARM_NOT_LISTED_IN_STATIC_GROUPS",
@@ -311,8 +313,15 @@
       "status",
       "evidence"
     ],
-    "current_range": "NONE_FOR_F001_F151_AFTER_EXPLICIT_CLASSIFICATION",
+    "current_range": "F152_F173_F174_VIA_REGISTRY_DOMAIN_FALLBACK",
     "execution_rule": "REGISTERED_IDENTITY_DOES_NOT_EQUAL_EXECUTED_CAPABILITY",
-    "future_rule": "NEW_FARM_MUST_ENTER_A_FUNCTIONAL_GROUP_OR_EXPLICIT_FALLBACK_WITH_REASON"
+    "future_rule": "NEW_FARM_MUST_ENTER_A_FUNCTIONAL_GROUP_OR_EXPLICIT_FALLBACK_WITH_REASON",
+    "current_extension_ids": [
+      152,
+      173,
+      174
+    ],
+    "current_registry_count": 154,
+    "current_registry_max_id": 174
   }
 }
