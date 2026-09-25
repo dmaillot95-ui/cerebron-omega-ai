@@ -1,0 +1,63 @@
+{
+  "schema": "AFAH_WAVE1_DATA_ADMISSION_REVIEW_V1",
+  "authority": "AFAH",
+  "authority_mode": "DETERMINISTIC_POLICY_GATE_NOT_DEDICATED_AFAH_MODEL_INFERENCE",
+  "checks": {
+    "manifest_consistent": true,
+    "build_training_locked": true,
+    "audit_training_locked": true,
+    "audit_semantic_432": true,
+    "audit_tamper_pass": true,
+    "baseline_real_four": true,
+    "baseline_no_training": true,
+    "baseline_correlation_declared": true,
+    "f72_farm_72": true,
+    "f72_review_pass": true,
+    "f72_supported_e2": true,
+    "f72_training_locked": true,
+    "f72_route": true,
+    "claim_ceiling_scoped": true
+  },
+  "all_required_gates_pass": true,
+  "decision": "ADMIT_SYNTHETIC_CANDIDATE_POOL",
+  "admission": {
+    "schema": "CEREBRON_WAVE1_DATA_ADMISSION_V1",
+    "state": "ADMITTED_SYNTHETIC_CANDIDATE_POOL",
+    "manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+    "record_count": 432,
+    "roles": {
+      "AELYS": 96,
+      "ETHERION": 144,
+      "AFAH": 96,
+      "METRION": 96
+    },
+    "training_released": false,
+    "allowed_next_steps": [
+      "VERSIONED_ROLE_SPLITS",
+      "FRESH_BLIND_M6",
+      "FRESH_TRANSFER",
+      "FRESH_ADVERSARIAL"
+    ],
+    "forbidden": [
+      "DIRECT_TRAINING_FROM_BASELINE_BENCHMARK",
+      "TRAIN_ON_M6",
+      "TRAIN_ON_TRANSFER",
+      "TRAIN_ON_ADVERSARIAL",
+      "AUTO_PROMOTION"
+    ],
+    "claim_ceiling": "AUDITED_SYNTHETIC_CANDIDATE_DATA_ONLY_NOT_EMPIRICAL_GROUND_TRUTH_NOT_TRAINING_RELEASE"
+  },
+  "source_content_sha256": {
+    "build": "23a39ef4917858ce9c51ce7f34abb63fb9ab718dd3a49b1f69c8756a8c6fe053",
+    "audit": "2d2b1bc8a262c8e7ad62049f6eb5259bed9da033bb02a631e9a71672ee70125a",
+    "baseline": "0f090558a60ceaf0514bd2bd061d2206816b6b68e5095af6f4497103e637459e",
+    "f72": "c6b549b8b9454ce67ffe2b9ae2a79c6b795faa5231bfe0d3fd24ed4ba41dd125"
+  },
+  "limitations": [
+    "Candidate records are deterministic synthetic contract data, not empirical ground truth.",
+    "Semantic counter-audit is separate code path but not external independent evidence.",
+    "AFAH admission does not release model training.",
+    "Fresh blind M6, transfer and adversarial splits remain required before LoRA training."
+  ],
+  "review_sha256": "27abc2937ded0085a9feb9b50c5a6e3bde5f2acce7521c99774a31a5c02eb730"
+}

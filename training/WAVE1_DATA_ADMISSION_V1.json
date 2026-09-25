@@ -1,0 +1,27 @@
+{
+  "schema": "CEREBRON_WAVE1_DATA_ADMISSION_V1",
+  "state": "ADMITTED_SYNTHETIC_CANDIDATE_POOL",
+  "manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+  "record_count": 432,
+  "roles": {
+    "AELYS": 96,
+    "ETHERION": 144,
+    "AFAH": 96,
+    "METRION": 96
+  },
+  "training_released": false,
+  "allowed_next_steps": [
+    "VERSIONED_ROLE_SPLITS",
+    "FRESH_BLIND_M6",
+    "FRESH_TRANSFER",
+    "FRESH_ADVERSARIAL"
+  ],
+  "forbidden": [
+    "DIRECT_TRAINING_FROM_BASELINE_BENCHMARK",
+    "TRAIN_ON_M6",
+    "TRAIN_ON_TRANSFER",
+    "TRAIN_ON_ADVERSARIAL",
+    "AUTO_PROMOTION"
+  ],
+  "claim_ceiling": "AUDITED_SYNTHETIC_CANDIDATE_DATA_ONLY_NOT_EMPIRICAL_GROUND_TRUTH_NOT_TRAINING_RELEASE"
+}
