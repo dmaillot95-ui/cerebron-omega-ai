@@ -1,0 +1,59 @@
+name: AFAH Wave1 Model Final Policy Review V1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/afah-wave1-model-final-review-request.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile AFAH final policy gate
+        run: python -m py_compile tools/afah_wave1_model_final_policy_v1.py
+      - name: Run AFAH final policy review
+        run: python tools/afah_wave1_model_final_policy_v1.py
+      - name: Verify final policy receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path("receipts/wave1/afah-wave1-model-final-review-v1.json").read_text())
+          assert r["authority"]=="AFAH_POLICY_GATE"
+          assert r["authority_mode"]=="DETERMINISTIC_POLICY_GATE_NOT_CANDIDATE_MODEL_INFERENCE"
+          assert r["candidate_adapter_used_for_final_review"] is False
+          assert r["all_required_gates_pass"] is True
+          assert r["decision"]=="G6_VERIFIED_RESEARCH_ONLY"
+          p=json.loads(pathlib.Path("config/afah-wave1-research-adapter-v1.json").read_text())
+          assert p["runtime_activation"] is False
+          assert p["default_runtime"] is False
+          assert p["g7_promoted"] is False
+          assert p["research_use_only"] is True
+          print("AFAH_WAVE1_FINAL_POLICY=PASS",r["review_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afah-wave1-model-final-policy-${{ github.run_id }}
+          path: |
+            receipts/wave1/afah-wave1-model-final-review-v1.json
+            config/afah-wave1-research-adapter-v1.json
+          if-no-files-found: error
+      - name: Persist G6 research-only pointer
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/afah-wave1-model-final-review-v1.json
+          git add config/afah-wave1-research-adapter-v1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: AFAH Wave1 G6 research-only review"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1
