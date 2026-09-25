@@ -1,0 +1,57 @@
+name: AFAH Wave1 Data Admission V1
+on:
+  push:
+    branches: ['feat/wave1-parallel-ai-baselines-v1']
+    paths:
+      - 'config/afah-wave1-data-admission-request.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile AFAH Wave1 policy gate
+        run: python -m py_compile tools/afah_wave1_data_admission_v1.py
+      - name: Run AFAH Wave1 data admission review
+        run: python tools/afah_wave1_data_admission_v1.py
+      - name: Verify AFAH Wave1 receipt integrity
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path("receipts/wave1/afah-wave1-data-admission-v1.json").read_text())
+          assert r["authority"]=="AFAH"
+          assert r["authority_mode"]=="DETERMINISTIC_POLICY_GATE_NOT_DEDICATED_AFAH_MODEL_INFERENCE"
+          assert r["all_required_gates_pass"] is True
+          assert r["decision"]=="ADMIT_SYNTHETIC_CANDIDATE_POOL"
+          assert r["admission"]["training_released"] is False
+          assert r["admission"]["state"]=="ADMITTED_SYNTHETIC_CANDIDATE_POOL"
+          p=json.loads(pathlib.Path("training/WAVE1_DATA_ADMISSION_V1.json").read_text())
+          assert p["manifest_sha256"]=="4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe"
+          assert p["training_released"] is False
+          print("AFAH_WAVE1_DATA_ADMISSION=PASS",r["review_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afah-wave1-data-admission-${{ github.run_id }}
+          path: |
+            receipts/wave1/afah-wave1-data-admission-v1.json
+            training/WAVE1_DATA_ADMISSION_V1.json
+          if-no-files-found: error
+      - name: Persist AFAH Wave1 admission pointer
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave1/afah-wave1-data-admission-v1.json training/WAVE1_DATA_ADMISSION_V1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: AFAH Wave1 data admission review"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/wave1-parallel-ai-baselines-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
