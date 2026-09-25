@@ -1,0 +1,100 @@
+{
+  "schema": "CEREBRON_WAVE1_DATASET_PACKAGE_RELEASE_POINTER_V1",
+  "run_id": 36108644676,
+  "release_sha256": "1699d9107b7e110398e9565ad67c7460df066845acbf057208ba2bf5e8edc8fb",
+  "source_manifest_sha256": "4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe",
+  "training_released": true,
+  "roles": {
+    "AELYS": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "cc6a0f40a80d1ea4523b22360b90316fbbb210ca49b86bf7bef15b75e7158187",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "5cca8b830595c64b7491f8b5f9428776051ab8f726d696872e682aad58232d8d",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "a38f28b7d0e6873b64b4b96c404c87604b506f1115f0074c0f02eaf0d4a3099d",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "384ffbb0f0a68870f5ba38b9ddab5067f8c2714330c3643ed2e2a63cbb36568d",
+          "deny_training": true
+        }
+      }
+    },
+    "ETHERION": {
+      "train_count": 108,
+      "validation_count": 36,
+      "split_sha256": "4d91ebba3e80bbf4b0e443b8479b8e529b61c29762b8f4dacf3ae0678a67fb0f",
+      "cold": {
+        "M6": {
+          "count": 48,
+          "dataset_sha256": "1285999e40d338ae81420c3451c5e3763347220c46e685194cecce51ae56e27f",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 48,
+          "dataset_sha256": "724f4cf7350487313fbb665cfbb6f1e220225a6649ee65f0b922f1bce8c677aa",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 24,
+          "dataset_sha256": "52172c7ea6a5534177a669ede6bad464cbfb075d4268d516a7e1761b6fb26e9f",
+          "deny_training": true
+        }
+      }
+    },
+    "AFAH": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "7990920f812dbb0b92980af5bb9e56215718b7d620715b8b1fc512f9618740f0",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "d279fb3111b50135760d975dc6d27dd98bdcffada31d43bf6f8a44643404e8f6",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "6c68dade3a9e6ac329cd4dc252715bd51ea039ce57029141d5dbbf636a6abf9b",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "bcf40e6f61d3734763a104b7cb519c790df108d998d1576ed640f58d75f29953",
+          "deny_training": true
+        }
+      }
+    },
+    "METRION": {
+      "train_count": 72,
+      "validation_count": 24,
+      "split_sha256": "627042f594866c1d2c18e732ce08889d458e37e702d0b6eaf14a0b1212a0586a",
+      "cold": {
+        "M6": {
+          "count": 32,
+          "dataset_sha256": "3bb248f4ad1788746a8e06b91fcb2607bc16f1f0c1b551429aa0bfdf710df770",
+          "deny_training": true
+        },
+        "TRANSFER": {
+          "count": 32,
+          "dataset_sha256": "80e6f11025c21f88ada3917c26aa7b40a38a4dc4cc67ca5d5918bb553bcefa0e",
+          "deny_training": true
+        },
+        "RED": {
+          "count": 16,
+          "dataset_sha256": "c44192c1216d96202ad6d071e4f22ba2e50c457dd526dafd7a1dc3c017498962",
+          "deny_training": true
+        }
+      }
+    }
+  },
+  "claim_ceiling": "SCOPED_SYNTHETIC_ROLE_TRAINING_RELEASE_NOT_GENERAL_CAPABILITY",
+  "next_gate": "FOUR_PARALLEL_REAL_LORA_CANARIES",
+  "receipt_sha256": "6bfa18186bd07a7762412d854218ec7d8a0ccb20358db2dbea70cc461b3bd770"
+}
