@@ -1,0 +1,4 @@
+RDX R&D HANDOFF CONTRACT CANARY V1
+purpose=VALIDATE_MEMORY_TO_F72_TO_GOLD_FAIL_CLOSED_ROUTE
+training=false
+m6_never_in_train=true
