@@ -1,0 +1,14 @@
+{
+  "schema": "CEREBRON_EPISTEMIC_SENTINEL_FORMAT_V3_2_LAUNCH",
+  "date": "2026-09-25",
+  "authorized": true,
+  "reason": "Validation PLAIN6 outputs already contain all four substantive fields; only CONFIDENCE and UNKNOWN are missing. V3/V3.1 model-based repairs were too slow or unreliable. Use explicit runtime uncertainty sentinels instead of generating substantive content.",
+  "source_v2_run_id": 36177878435,
+  "source_v3_run_id": 36179580251,
+  "source_v3_1_run_id": 36182424742,
+  "new_inference": false,
+  "weight_change": false,
+  "training_released": false,
+  "operational_mutation_f172_f173_f174": false,
+  "launch_head": "426887a0f423ef3354c991982eeb13aff2863a34"
+}
