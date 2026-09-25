@@ -31,7 +31,7 @@
     "SAPHEA": {
       "target": "specialist execution and routing",
       "training": "domain SFT/LoRA",
-      "status": "SCOPED_REAL_LORA_G6_VERIFIED_G7_PENDING"
+      "status": "SCOPED_REAL_LORA_G6_VERIFIED_G7_BLOCKED_TRANSFER_REDTEAM"
     },
     "SPIRALION": {
       "target": "cumulative reasoning and checkpoint continuity",
@@ -180,7 +180,7 @@
     }
   ],
   "saphea_first_lora_evidence": {
-    "status": "G6_REAL_LORA_HF_PRIVATE_VERIFIED_HOLD_G7",
+    "status": "G6_REAL_LORA_VERIFIED_G7_BLOCKED",
     "branch": "feat/saphea-first-lora-v1",
     "run_id": 36100266729,
     "job_id": 107961061331,
@@ -207,7 +207,7 @@
     "critical_regression": false,
     "validation_loss_before": 0.48301953449845314,
     "validation_loss_after": 0.11578285936266183,
-    "promotion": "NOT_PROMOTED",
+    "promotion": "NOT_PROMOTED_CLASS_COLLAPSE",
     "pending_gates": [
       "NOVEL_TRANSFER_GAIN",
       "ABLATION_SUPPORTS_VALUE",
@@ -216,6 +216,19 @@
       "F72_REVIEW",
       "AFAH_FINAL_AUTHORITY"
     ],
-    "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER"
+    "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER",
+    "g7_block": {
+      "run_id": 36101503838,
+      "benchmark_sha256": "b88fda14d86d09d0e634ba014c0f6ead89258b88aca770bb3f390a6e7e6858f3",
+      "normal_base_score": 10,
+      "normal_adapter_score": 30,
+      "normal_max": 60,
+      "redteam_base_score": 4,
+      "redteam_adapter_score": 4,
+      "redteam_max": 24,
+      "critical_regression": true,
+      "ablation_supports_value": false,
+      "decision": "G7_BLOCKED_ROLLBACK_OR_REPAIR"
+    }
   }
 }
