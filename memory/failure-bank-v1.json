@@ -478,9 +478,23 @@
         "stratified 25/5 per-label train/validation split",
         "validation no-regression gate before frozen M6/transfer retest"
       ],
-      "REPAIR_STATUS": "V3_ANTI_FORGETTING_CANARY_QUEUED",
+      "REPAIR_STATUS": "V3_FAILED_VALIDATION_V4_CONSERVATIVE_ABLATION_TRIGGERED",
       "TRANSFER_RISK": "HIGH_UNTIL_FROZEN_TRANSFER_RETEST_PASSES",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "V3_EVIDENCE": {
+        "run_id": 36102432058,
+        "weights_changed": true,
+        "adapter_sha256": "c15cdcb8c2aa01fde4118210c4fe8ab7c038f97ed487182a16d35020d90a470d",
+        "m6_base": "18/60",
+        "m6_adapter": "25/60",
+        "m6_gain": 7,
+        "validation_before": "5/30",
+        "validation_after": "12/30",
+        "neural_learning_verified_validation": "5/5 -> 3/5",
+        "validation_critical_regression": true,
+        "decision": "ROLLBACK_RETAIN_EVIDENCE",
+        "hf_private_upload": false
+      }
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
