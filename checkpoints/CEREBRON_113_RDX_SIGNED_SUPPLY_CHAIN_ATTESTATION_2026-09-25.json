@@ -1,0 +1,78 @@
+{
+  "schema": "CEREBRON_113_RDX_SIGNED_SUPPLY_CHAIN_ATTESTATION_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_SIGNED_RELEASE_PROVENANCE_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "c3e8ff3d7aebaa382fa2ef0a3ca8453b9a870758",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "5ab150882cbf495e02e282745fded3ac626799b7",
+    "full_validation": {
+      "run_id": 36179407295,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36179407257,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "verify_live": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_integrity": {
+    "manifest_schema": "RDX_RELEASE_MANIFEST_V1",
+    "public_file_count": 16,
+    "aggregate_sha256": "be7c370eaf5a357fd4875ff59e69295f6c3c80ff1b3995e2b6fb2d5708b5cfde",
+    "provenance_schema": "RDX_BUILD_PROVENANCE_V1",
+    "source_commit": "5ab150882cbf495e02e282745fded3ac626799b7",
+    "reproducible_build_required": true,
+    "clean_source_checkout_required": true
+  },
+  "internal_attestation": {
+    "schema": "RDX_RELEASE_ATTESTATION_V1",
+    "status": "PASS",
+    "attestation_sha256": "3941a4b936c80b91f4e7954ef6c52d8f9c26aa5b445bceab7e6f67e745c715c0",
+    "subject_file": "artifacts/rdx-release-attestation.json",
+    "subject_sha256": "e8b61cc25332cbdaef980b250847585e25b0f21ec4864a69929b8d7e5fde3443",
+    "type": "SELF_ATTESTED_BUILD_FACTS_NOT_EXTERNAL_SIGNATURE"
+  },
+  "github_signed_attestation": {
+    "action": "actions/attest@v4",
+    "predicate": "SLSA_BUILD_PROVENANCE",
+    "sigstore_instance": "PUBLIC_GOOD",
+    "rekor_transparency_log": true,
+    "github_attestation_id": 50278996,
+    "github_attestation_url": "https://github.com/dmaillot95-ui/cerebron-rdx-exchange/attestations/50278996",
+    "signed_attestation_creation": "PASS",
+    "repository_upload": "PASS",
+    "verification_command": "gh attestation verify artifacts/rdx-release-attestation.json --repo $GITHUB_REPOSITORY --source-digest $GITHUB_SHA",
+    "verification_step": "PASS",
+    "verification_scopes_repository": true,
+    "verification_scopes_source_commit": true
+  },
+  "product_claim_ceiling": {
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED",
+    "production_deployment_verified": false,
+    "automatic_publication": false,
+    "automatic_ai_execution": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Preserve signed GitHub/Sigstore attestation step on every Pages release build.",
+    "Owner enables GitHub Pages Source=GitHub Actions once.",
+    "Manual dispatch deploy=true.",
+    "Require deploy PASS plus RDX_PRODUCTION_DEPLOYMENT_PROOF_V2 PASS.",
+    "Only then mark production_deployment_verified=true.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
