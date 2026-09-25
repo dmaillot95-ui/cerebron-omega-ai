@@ -1,0 +1,58 @@
+{
+  "schema": "CEREBRON_90_WAVE2_PARALLEL_BASELINES_QUEUED_V1",
+  "date": "2026-09-25",
+  "parent": "checkpoints/CEREBRON_89_WAVE1_FOUR_PARALLEL_LORA_CLOSED_2026-09-25.json",
+  "main_head": "22418bb0e804683acdfc403e3b3e22203b40d1a2",
+  "branch": "feat/wave2-parallel-ai-baselines-v1",
+  "branch_head": "83d437b2b688aabddc6c00a63c835ce17f1f26e1",
+  "wave1_final": {
+    "AFAH": {
+      "state": "G6_VERIFIED_RESEARCH_ONLY",
+      "final_policy_run": 36111258146,
+      "final_policy_status": "PASS",
+      "final_policy_review_sha256": "8bb3f007f4308f03a28de704ebe899091c07641525abac526c3ed02a1b6d4290",
+      "adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+      "runtime_activation": false,
+      "g7_promoted": false
+    },
+    "rollbacks": [
+      "AELYS",
+      "ETHERION",
+      "METRION"
+    ]
+  },
+  "wave2": {
+    "run_id": 36111654337,
+    "status": "QUEUED_AT_CHECKPOINT",
+    "roles": [
+      "SPIRALION",
+      "HYPERION",
+      "ASTRION",
+      "SAPHEA_MICRO"
+    ],
+    "training_executed": false,
+    "benchmark_deny_training": true,
+    "models": {
+      "SPIRALION": "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "HYPERION": "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "ASTRION": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "SAPHEA_MICRO": "Qwen/Qwen2.5-0.5B-Instruct@ec7ddfa904d4d447eedd0b7f126df16957734abb"
+    },
+    "model_lineage_count": 2,
+    "independent_evidence_count": 0,
+    "readiness": {
+      "SPIRALION": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "HYPERION": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "ASTRION": "BLOCKED_NO_VALIDATED_AEROSPACE_GOLD",
+      "SAPHEA_MICRO": "BLOCKED_DESIGN_ACTIVE_NO_VERSIONED_MICRO_GOLD"
+    }
+  },
+  "exact_resume": [
+    "Check run 36111654337.",
+    "Do not create another Wave2 baseline run while this one exists.",
+    "Read four role receipts when complete and record exact scores/model revisions.",
+    "Do not train any Wave2 role from baseline cases.",
+    "Build role-specific quarantine datasets only after baseline audit, then audit/counter-audit/F72/AFAH before release.",
+    "Keep Greek native double-model AIs on their separate two-model lane."
+  ]
+}
