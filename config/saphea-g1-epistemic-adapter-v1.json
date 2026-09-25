@@ -3,7 +3,7 @@
   "ai_id": "SAPHEA",
   "generation": "G1",
   "scope": "CEREBRON_EPISTEMIC_STATUS_CLASSIFICATION_ONLY",
-  "state": "SCOPED_G7_PROMOTED",
+  "state": "REVOKED_RESEARCH_ONLY",
   "base_model": {
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
     "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
@@ -16,13 +16,14 @@
     "private_object_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-36100266729"
   },
   "routing": {
-    "mode": "SCOPED_OPT_IN",
+    "mode": "DISABLED",
     "allowed_task": "epistemic-status-classification",
     "general_default": false
   },
   "rollback": {
     "target": "G0_BASE_MODEL_NO_ADAPTER",
-    "automatic_on_critical_regression": true
+    "triggered": true,
+    "reason": "Later frozen transfer benchmark detected critical class regression; subsequent same-GOLD repairs did not restore promotable gain."
   },
   "evidence": {
     "training_run": 36100266729,
@@ -36,7 +37,9 @@
     "f72_status": "SUPPORTED",
     "f72_level": "E2"
   },
-  "claim_ceiling": "SCOPED_EPISTEMIC_CLASSIFICATION_G7_SUPPORTED_E2",
+  "claim_ceiling": "HISTORICAL_SCOPED_G7_ATTEMPT_SUPERSEDED; ADAPTER_RETAINED_AS_RESEARCH_EVIDENCE_ONLY",
   "external_independent_reproduction": "NOT_PRESENT",
-  "no_general_capability_claim": true
+  "no_general_capability_claim": true,
+  "superseded_by": "checkpoints/CEREBRON_86_M43_SAPHEA_CLOSED_2026-09-25.json",
+  "historical_promotion_receipt": "receipts/training/afah-saphea-g1-promotion-v1.json"
 }
