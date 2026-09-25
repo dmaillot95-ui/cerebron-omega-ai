@@ -67,54 +67,90 @@
   "providers": [
     {
       "id": "F152_RDX",
-      "capabilities": ["rdx.search", "rdx.fetch"],
+      "capabilities": [
+        "rdx.search",
+        "rdx.fetch"
+      ],
       "repo": "dmaillot95-ui/cerebron-rdx-exchange"
     },
     {
       "id": "F114_CANONICAL_INDEX",
-      "capabilities": ["memory.canonical_lookup"],
+      "capabilities": [
+        "memory.canonical_lookup"
+      ],
       "repo": "dmaillot95-ui/cerebron-farm-114-encyclopedic-memory-index"
     },
     {
       "id": "F115_VECTOR_MEMORY",
-      "capabilities": ["memory.semantic_recall"],
+      "capabilities": [
+        "memory.semantic_recall"
+      ],
       "repo": "dmaillot95-ui/cerebron-farm-115-vector-semantic-memory",
-      "scope_limit": "PRODUCTION_RAG_QUALITY_NOT_YET_PROVEN"
+      "scope_limit": "FRESH_SYNTHETIC_HOLDOUT_HYBRID_GAIN_PROVEN_PRODUCTION_RAG_QUALITY_NOT_PROVEN",
+      "evidence": {
+        "dense_stress_run_id": 36150611340,
+        "hybrid_holdout_run_id": 36150890905,
+        "hybrid_holdout_top1": "24/24",
+        "dense_holdout_top1": "22/24",
+        "receipt_sha256": "2b6f1b2c63d193ecc3e6290270165dc5bd064f9cee4449563f618fafce562c62"
+      }
     },
     {
       "id": "F116_DEDUP_FUSION",
-      "capabilities": ["memory.lineage_check"],
+      "capabilities": [
+        "memory.lineage_check"
+      ],
       "repo": "dmaillot95-ui/cerebron-farm-116-dedup-knowledge-fusion",
-      "scope_limit": "SEMANTIC_DEDUP_NOT_YET_PROVEN"
+      "scope_limit": "SYNTHETIC_SEMANTIC_DUPLICATE_CANDIDATE_DETECTION_ONLY_NO_AUTOMATIC_MERGE",
+      "evidence": {
+        "run_id": 36150666844,
+        "holdout": "12/12",
+        "auto_merge_authorized": false,
+        "receipt_sha256": "f7a2270ce31983c440648592c94df0dcb20e2da8b09c17534ede002e5f94e1a5"
+      }
     },
     {
       "id": "F119_EVIDENCE_ARCHIVE",
-      "capabilities": ["evidence.fetch"],
+      "capabilities": [
+        "evidence.fetch"
+      ],
       "repo": "dmaillot95-ui/cerebron-farm-119-evidence-scientific-archive"
     },
     {
       "id": "F120_MEMORY_GOVERNOR",
-      "capabilities": ["governor.check"],
+      "capabilities": [
+        "governor.check"
+      ],
       "repo": "dmaillot95-ui/cerebron-farm-120-memory-governor-freeze"
     },
     {
       "id": "NEXUS_ROUTER",
-      "capabilities": ["rdx.search", "memory.semantic_recall", "evidence.fetch"],
+      "capabilities": [
+        "rdx.search",
+        "memory.semantic_recall",
+        "evidence.fetch"
+      ],
       "role": "MINIMUM_RELEVANT_CONTEXT_ROUTER"
     },
     {
       "id": "AELYS_PRESENTER",
-      "capabilities": ["presenter.compose"],
+      "capabilities": [
+        "presenter.compose"
+      ],
       "role": "INTERACTIVE_RD_PRESENTER"
     },
     {
       "id": "ELYRA_AVATAR",
-      "capabilities": ["avatar.speak"],
+      "capabilities": [
+        "avatar.speak"
+      ],
       "role": "VOICE_FACE_BODY_OUTPUT"
     },
     {
       "id": "AFAH_AUDIT",
-      "capabilities": ["audit.review"],
+      "capabilities": [
+        "audit.review"
+      ],
       "role": "FINAL_AUDIT_AUTHORITY"
     }
   ],
@@ -166,5 +202,14 @@
     "namespace_manifest_uploaded": false,
     "reason": "THIS_COMMIT_REGISTERS_THE_CONTROL_PLANE_BINDING_ONLY; HUGGING_FACE_WRITE_REQUIRES_AUTHORIZED_HF_CONNECTION_OR_EXISTING_GITHUB_ACTION_HF_TOKEN_EXECUTION",
     "next_safe_action": "UPLOAD_A_CONTENT_ADDRESSED_NAMESPACE_MANIFEST_THROUGH_THE_EXISTING_PRIVATE_HF_WRITE_READ_VERIFY_PATH"
+  },
+  "f72_scoped_evidence": {
+    "run_id": 36151143501,
+    "evidence_level": "E2",
+    "decision": "F72_SUPPORTS_RDX_MEMORY_CANARY_STACK_V2_ONLY",
+    "result_sha256": "e8435eb95511ac6c205b3ed2a185f9dd8c005c0f68e8f1a32f219e4bb0dacd81",
+    "global_f72_gate": "FAIL",
+    "gold_released": false,
+    "training_released": false
   }
 }
