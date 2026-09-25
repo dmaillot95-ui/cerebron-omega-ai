@@ -49,8 +49,15 @@ def main():
         errors.append("policy must reflect current F72 FAIL until fresh evidence passes")
     if f72.get("current_registry_count")!=farm_count:
         errors.append("F72 current_registry_count mismatch")
-    if farm_count!=max_id:
-        errors.append("farm registry count/max id mismatch")
+    ids=[x.get("id") for x in farms.get("farms",[])]
+    if len(ids)!=len(set(ids)):
+        errors.append("duplicate farm ids")
+    if farms.get("max_farms")!=max_id:
+        errors.append("max_farms must equal highest registered farm id")
+    if farms.get("farm_ceiling")!=max_id:
+        errors.append("farm_ceiling must equal highest registered farm id")
+    if f72.get("current_registry_max_id")!=max_id:
+        errors.append("F72 current_registry_max_id mismatch")
     gps=p.get("global_promotion_state","")
     if f72.get("current")!="PASS" and not gps.startswith("BLOCKED_PENDING_F72"):
         errors.append("global promotion must fail closed while F72 is not PASS")
