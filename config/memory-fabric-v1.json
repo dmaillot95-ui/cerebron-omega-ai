@@ -27,7 +27,9 @@
     "HUMAN_INTERACTION",
     "EMBODIED_REPLAY",
     "ELYSION",
-    "ELYSIUM"
+    "ELYSIUM",
+    "RDX_SHARED",
+    "RDX_TENANT"
   ],
   "classes": {
     "M0": {
@@ -185,5 +187,31 @@
       "NEXUS": 151
     },
     "activation_rule": "REPOSITORY_PRESENT_IS_NOT_ACTIVE; MEMORY_CANARY_PLUS_MODEL_GATES_REQUIRED"
+  },
+  "rdx": {
+    "source_farm_id": 152,
+    "binding_manifest": "config/rdx-memory-bindings-v1.json",
+    "shared_namespace": "RDX_SHARED",
+    "tenant_namespace_pattern": "RDX_TENANT/{tenant_id}",
+    "memory_farms": [
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ],
+    "immediate_rag_farms": [
+      114,
+      115,
+      116,
+      119,
+      120
+    ],
+    "conditional_replay_farm": 117,
+    "gold_farm": 118,
+    "runtime_state": "BINDING_CONFIGURED_WRITE_READ_RECALL_NOT_YET_PROVEN",
+    "rule": "RDX_MEMORY_ROUTE_DOES_NOT_PROVE_NEURAL_TRAINING"
   }
 }
