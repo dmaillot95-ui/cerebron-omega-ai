@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_123_RDX_HUMAN_REVIEW_PRODUCTION_LOCK_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_HUMAN_REVIEW_PRODUCTION_LOCK_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "5558c76ab04eb4b45a2bad0049546ff0e369f0b5",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "90212cc2b94fb3f123f7c8b9371dbca359198268",
+    "full_validation": {
+      "run_id": 36189753816,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36189753800,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "90212cc2b94fb3f123f7c8b9371dbca359198268",
+    "file_count": 16,
+    "aggregate_sha256": "fc3c240bcc25a8b23badbee4cfe58c25f688ad1308b1aff7d6174b7167ccffd9",
+    "release_attestation_sha256": "2562f39c717c84f6e75c8a45672e839cd4f18a8aada9421e49e6fecd792ec943",
+    "reproducible_build_gate": "PASS",
+    "sigstore_release_attestation": "PASS",
+    "sigstore_release_verification": "PASS"
+  },
+  "human_review_lock": {
+    "policy_schema": "RDX_PRODUCTION_HUMAN_REVIEW_POLICY_V1",
+    "review_schema": "RDX_PRODUCTION_HUMAN_REVIEW_V1",
+    "contract_gate": "PASS",
+    "required_for_registry_entry": true,
+    "approved_decision_required": true,
+    "reviewer_id_required": true,
+    "reviewed_at_required": true,
+    "registration_proposal_sha256_required": true,
+    "live_proof_sha256_match_required": true,
+    "source_commit_match_required": true,
+    "release_aggregate_match_required": true,
+    "signed_live_proof_verified_required": true,
+    "signed_registration_proposal_verified_required": true,
+    "auto_apply": false
+  },
+  "fail_closed_negative_canaries": {
+    "status": "PASS",
+    "rejected_count": 8,
+    "rejected": [
+      "PUBLIC_TRUE_WITHOUT_LIVE_PROOF",
+      "WRONG_SOURCE_COMMIT",
+      "WRONG_RELEASE_AGGREGATE",
+      "SYNTHETIC_CANARY_IN_REGISTRY",
+      "MISSING_HUMAN_REVIEW",
+      "HUMAN_REVIEW_NOT_APPROVED",
+      "UNSIGNED_LIVE_PROOF",
+      "UNSIGNED_REGISTRATION_PROPOSAL"
+    ],
+    "additional_known_good_negative": "VERIFIED_PRODUCTION_WITHOUT_KNOWN_GOOD_REJECTED"
+  },
+  "production_control": {
+    "production_deployment_verified": false,
+    "public_claim": false,
+    "proofs_registered": 0,
+    "latest_verified": null,
+    "human_review_required": true,
+    "no_auto_apply": true
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "blocker": "OWNER_MUST_ENABLE_GITHUB_PAGES_SOURCE_GITHUB_ACTIONS_ONCE",
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "HUMAN_REVIEW_REQUIRED_BEFORE_PRODUCTION_REGISTRY",
+    "SYNTHETIC_CANARY!=LIVE_EVIDENCE",
+    "NO_AUTO_APPLY_PRODUCTION_PROOF",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
