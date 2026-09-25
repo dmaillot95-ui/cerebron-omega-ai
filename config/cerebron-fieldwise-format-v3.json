@@ -1,0 +1,84 @@
+{
+  "schema": "CEREBRON_FIELDWISE_FORMAT_PROTOCOL_V3",
+  "date": "2026-09-25",
+  "status": "PREPARED_NOT_EXECUTED",
+  "purpose": "Repair structured-output reliability by decomposing six semantic fields into field-specific short generations and assembling the record deterministically in software.",
+  "evidence_basis": {
+    "format_v1_run": 36173645350,
+    "format_v1_promoted_lineages": 0,
+    "format_v2_selection_run": 36177878435,
+    "format_v2_validation_result": "PLAIN6_0_OF_2_JSON6_0_OF_2_TAG6_0_OF_2",
+    "diagnostic_run": 36178912892,
+    "robust_reparse_run": 36179033254,
+    "robust_reparse_fields_before": 11,
+    "robust_reparse_fields_after": 21,
+    "robust_reparse_complete_after": 0,
+    "failure_id": "FAIL-FORMAT-MONOLITHIC-SIXFIELD-001"
+  },
+  "fields": [
+    {
+      "key": "ATTEMPT",
+      "max_words": 24,
+      "instruction": "Give one concrete candidate answer or teaching example."
+    },
+    {
+      "key": "ASSUMPTIONS",
+      "max_words": 18,
+      "instruction": "State only assumptions that must hold."
+    },
+    {
+      "key": "EVIDENCE_NEEDED",
+      "max_words": 18,
+      "instruction": "State what evidence or test would verify the candidate."
+    },
+    {
+      "key": "COUNTEREXAMPLE_OR_LIMIT",
+      "max_words": 18,
+      "instruction": "State one counterexample, failure case, or scope limit."
+    },
+    {
+      "key": "CONFIDENCE",
+      "max_words": 6,
+      "instruction": "Return LOW, MEDIUM, or HIGH plus at most five words of reason."
+    },
+    {
+      "key": "UNKNOWN",
+      "max_words": 18,
+      "instruction": "State what remains unresolved or missing."
+    }
+  ],
+  "generation": {
+    "batching": "SIX_FIELDS_IN_ONE_BATCH_PER_TASK",
+    "deterministic": true,
+    "do_sample": false,
+    "max_new_tokens_per_field": 48,
+    "deterministic_assembler": true,
+    "labels_generated_by_runtime_not_model": true
+  },
+  "validation": {
+    "source_baseline_run_id": 36177878435,
+    "selection_targets": [
+      "SAPHEA",
+      "AELYS"
+    ],
+    "validation_model": "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+    "require_candidate_complete_gt_baseline": true,
+    "require_candidate_complete_count": 2
+  },
+  "holdout": {
+    "source_baseline_run_id": 36177878435,
+    "targets": [
+      "ETHERION",
+      "PSI"
+    ],
+    "model_lineages": [
+      "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+      "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1"
+    ],
+    "require_strict_gain_each_lineage": true
+  },
+  "promotion_ceiling": "INTERFACE_PROTOCOL_ONLY_NO_WEIGHT_IMPROVEMENT",
+  "operational_mutation_f172_f173_f174": false,
+  "weight_change": false,
+  "training_released": false
+}
