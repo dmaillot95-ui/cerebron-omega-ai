@@ -24,8 +24,8 @@ jobs:
           p=pathlib.Path("artifacts/memory-promotion-audit-v2.json")
           d=json.loads(p.read_text())
           assert d["status"]=="PASS"
-          assert d["farm_count"]==152
-          assert d["max_farm_id"]==152
+          assert d["farm_count"]==154
+          assert d["max_farm_id"]==174
           assert d["m6_training"]=="DENY"
           assert d["f72_current"]=="FAIL"
           assert d["m4_promotion"]=="BLOCKED_BY_F72"
