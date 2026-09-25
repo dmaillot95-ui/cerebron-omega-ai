@@ -1492,7 +1492,7 @@
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
         "dedicated_repo_selftest_run_id": 36156589051,
-        "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
+        "dedicated_repo_head": "6a99ba8807ffd77fca95249c3f206b6c636dd024",
         "unified_plugin_bus_guard_run_id": 36156083228,
         "rdx_route_fix_run_id": 36156539575,
         "runtime_qualification_run_id": 36156589051
