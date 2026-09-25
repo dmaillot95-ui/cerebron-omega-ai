@@ -330,14 +330,14 @@
           "retention_without_contamination"
         ]
       },
-      "project_state": "D3_BASELINES_COMPLETE_AUDIT_QUEUED",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_COMPLETE_AUDIT_PENDING",
+      "project_state": "D3_PASS_D4_COMPLEMENTARITY_READY",
+      "dual_core_state": "D3_PASS_QWEN_BEST_SINGLE",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "BASELINES_COMPLETE_AUDIT_QUEUED",
-        "D4": "BLOCKED_PENDING_D3_AUDIT",
+        "D3": "PASS",
+        "D4": "READY_COMPLEMENTARITY_PRECHECK",
         "D5": "PENDING",
         "D6": "PENDING",
         "D7": "PENDING",
@@ -361,7 +361,10 @@
         "d3_preliminary_best_single_model": "Qwen/Qwen3-4B",
         "d3_preliminary_best_single_correct": 45,
         "d3_audit_job_id": 108099162015,
-        "d3_audit_state": "QUEUED"
+        "d3_audit_state": "QUEUED",
+        "d3_audit_sha256": "b3ac7fba392adba79957dbeb0adfc65014cfb51787dbd252934f0b4c92b9e367",
+        "d3_best_single_model": "Qwen/Qwen3-4B",
+        "d3_best_single_accuracy": 0.625
       }
     },
     {
@@ -558,14 +561,14 @@
           "execution_efficiency"
         ]
       },
-      "project_state": "D3_BASELINES_COMPLETE_AUDIT_QUEUED",
-      "dual_core_state": "D3_SINGLE_CORE_BASELINES_COMPLETE_AUDIT_PENDING",
+      "project_state": "D3_PASS_D4_COMPLEMENTARITY_READY",
+      "dual_core_state": "D3_PASS_QWEN_BEST_SINGLE",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
-        "D3": "BASELINES_COMPLETE_AUDIT_QUEUED",
-        "D4": "BLOCKED_PENDING_D3_AUDIT",
+        "D3": "PASS",
+        "D4": "READY_COMPLEMENTARITY_PRECHECK",
         "D5": "PENDING",
         "D6": "PENDING",
         "D7": "PENDING",
@@ -589,7 +592,10 @@
         "d3_preliminary_best_single_model": "Qwen/Qwen3-4B",
         "d3_preliminary_best_single_correct": 52,
         "d3_audit_job_id": 108099162015,
-        "d3_audit_state": "QUEUED"
+        "d3_audit_state": "QUEUED",
+        "d3_audit_sha256": "0b403c263eafd2eaaf57398f6afd9bf445aace5f09f15276944c1e04fe32a356",
+        "d3_best_single_model": "Qwen/Qwen3-4B",
+        "d3_best_single_accuracy": 0.7222222222222222
       }
     }
   ],
