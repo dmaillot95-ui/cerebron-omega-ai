@@ -1,0 +1,23 @@
+{
+  "schema": "SAPHEA_LORA_REPAIR_V2_PUBLIC_POINTER_V1",
+  "run_id": 36102478152,
+  "code_commit": "7c2d7afadc3d9f68651a7e7e358c6b6f0dcfec2c",
+  "experiment": "DATA_REPRESENTATION_ONLY_ABLATION",
+  "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+  "repair_gold_sha256": "ffcbe7dcbcb2b2fe21507c450b2000913fd996327c14d9491be50078fd4a700a",
+  "adapter_sha256": "f549c97ea8bf3a5fd987323ceb340851d834e4d00d8765d4da768b7105ed9243",
+  "adapter_config_sha256": "3adc5c7d19aa85d403bdc9515772b16d50d029628f5e9d41e84db43ca6548b0b",
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "hf_private_object_prefix": "colony/C03-SIGMA/agents/SAPHEA/adapters/G1R-DATA-V2/run-36102478152",
+  "hf_private_readback_sha_pass": true,
+  "m6_score": 19,
+  "m6_max": 60,
+  "m6_dev_guard_pass": false,
+  "m6_guard_regression": true,
+  "validation_loss_before": 0.9121051813579268,
+  "validation_loss_after": 0.3699871082272794,
+  "promotion": "NOT_PROMOTED",
+  "next_gate": "FROZEN_REPAIR_BENCHMARK_V3_THREE_WAY_COMPARISON",
+  "claim_ceiling": "REPAIR_CANDIDATE_TRAINED_NOT_VALIDATED_FOR_G7"
+}
