@@ -1,0 +1,104 @@
+name: CEREBRON Format Contract Evolution V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evolution/format_contract_evolver_v1.py'
+      - '.github/workflows/cerebron-format-contract-evolution-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  evolve:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - key: qwen3
+            model_id: Qwen/Qwen3-4B
+            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+          - key: smollm3
+            model_id: HuggingFaceTB/SmolLM3-3B
+            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preflight native evolution core
+        run: |
+          python -m py_compile evolution/cerebron_self_evolution.py
+          python -m py_compile evolution/format_contract_evolver_v1.py
+          python evolution/cerebron_self_evolution.py --selftest
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: format-evolution-${{ matrix.key }}-${{ matrix.revision }}
+      - name: Install inference stack
+        run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Evolve on validation then test frozen holdout
+        run: |
+          python evolution/format_contract_evolver_v1.py \
+            --model-id "${{ matrix.model_id }}" \
+            --revision "${{ matrix.revision }}" \
+            --run-id "${{ github.run_id }}" \
+            --output-root "artifacts/format-evolution/${{ matrix.key }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: format-evolution-${{ matrix.key }}-${{ github.run_id }}
+          path: artifacts/format-evolution/${{ matrix.key }}
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: evolve
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: format-evolution-*
+          path: downloaded
+      - name: Audit independent holdout decisions
+        run: |
+          python - <<'PY'
+          import glob,json,hashlib,pathlib,os
+          files=glob.glob("downloaded/**/summary.json",recursive=True)
+          rows=[json.load(open(p)) for p in files]
+          fail=[]
+          if len(rows)!=2: fail.append("summary_count")
+          if len({(r["model_id"],r["model_revision"]) for r in rows})!=2: fail.append("lineage_count")
+          if any(r.get("weight_change") is not False for r in rows): fail.append("weight_boundary")
+          if any(r.get("training_released") is not False for r in rows): fail.append("training_boundary")
+          if any(r.get("operational_mutation_f172_f173_f174") is not False for r in rows): fail.append("operational_boundary")
+          out={
+            "schema":"CEREBRON_FORMAT_CONTRACT_EVOLUTION_AUDIT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS" if not fail else "FAIL",
+            "model_results":rows,
+            "promoted_lineages":sum(r.get("promotion_decision")=="PROMOTE_CONTRACT_CANDIDATE" for r in rows),
+            "failures":fail,
+            "claim_ceiling":"PROMPT_FORMAT_CANDIDATE_ONLY_NO_WEIGHT_IMPROVEMENT"
+          }
+          raw=json.dumps(out,sort_keys=True,separators=(",",":")).encode()
+          out["audit_sha256"]=hashlib.sha256(raw).hexdigest()
+          pathlib.Path("artifacts").mkdir(exist_ok=True)
+          pathlib.Path("artifacts/format-contract-evolution-audit.json").write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          if fail: raise SystemExit(2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: format-contract-evolution-audit-${{ github.run_id }}
+          path: artifacts/format-contract-evolution-audit.json
+          if-no-files-found: error
+          retention-days: 30
