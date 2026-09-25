@@ -12,7 +12,7 @@ ROLE_SCOPE={
  "ASTRION":"aerospace R&D systems physics trajectory propulsion and validation",
  "SAPHEA_MICRO":"routing compact specialist selection and minimal useful coalition"
 }
-MAX_LENGTH=192
+MAX_LENGTH=128
 LR=5e-5
 EPOCHS=1
 GRAD_ACCUM=8
