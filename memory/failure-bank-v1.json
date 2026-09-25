@@ -393,6 +393,51 @@
         "posttrain_m6:30/60",
         "hf_private_readback_sha_pass:true"
       ]
+    },
+    {
+      "FAILURE_ID": "FAIL-M43-SAPHEA-G7-CLASS-COLLAPSE-001",
+      "MISSION_ID": "M43_SAPHEA_G6_TO_G7_VALIDATION",
+      "AI_ID": "SAPHEA",
+      "AGENT_ID": "F72_PRE_REVIEW_TRANSFER_AUDIT",
+      "FAILURE_CLASS": "F_TRANSFER",
+      "FAILURE_SIGNATURE": "NORMAL_TRANSFER_PLUS20_BUT_CLASS_COLLAPSE_AND_REDTEAM_ZERO_GAIN",
+      "ROOT_CAUSE": "The G6 LoRA shifted label priors strongly. It learned ROUTED_ONLY, SIMULATION_ONLY and CLAIM_BLOCKED on the frozen V2 transfer set but lost NEURAL_LEARNING_VERIFIED completely and failed to learn FARM_EXECUTED/NO_NEURAL_LEARNING. Red-team predictions remained poor and became heavily biased toward CLAIM_BLOCKED.",
+      "EVIDENCE_REFS": [
+        "run:36101503838",
+        "artifact:10849268717",
+        "receipts/training/saphea-first-lora-transfer-36101503838.json",
+        "benchmark_sha256:b88fda14d86d09d0e634ba014c0f6ead89258b88aca770bb3f390a6e7e6858f3"
+      ],
+      "IMPACT": "G7 promotion blocked. Adapter remains research-only and must not become default SAPHEA runtime.",
+      "SCOPE": "SAPHEA epistemic six-label classification only.",
+      "REPRODUCIBLE": true,
+      "MEASURED": {
+        "normal_base": "10/60",
+        "normal_adapter": "30/60",
+        "transfer_gain": 20,
+        "redteam_base": "4/24",
+        "redteam_adapter": "4/24",
+        "redteam_gain": 0,
+        "critical_regression": true,
+        "per_label_delta": {
+          "ROUTED_ONLY": 10,
+          "FARM_EXECUTED": 0,
+          "NO_NEURAL_LEARNING": 0,
+          "NEURAL_LEARNING_VERIFIED": -10,
+          "SIMULATION_ONLY": 10,
+          "CLAIM_BLOCKED": 10
+        }
+      },
+      "REPAIR_ATTEMPTS": [
+        "keep all cold transfer/red-team cases DENY_TRAINING",
+        "build fresh balanced contrastive GOLD with new facts/templates targeting confused label boundaries",
+        "stratify train/validation by label",
+        "lower LoRA capacity/learning rate before retraining",
+        "compare repaired adapter against base and G6 adapter on unchanged M6 and both frozen transfer gates"
+      ],
+      "REPAIR_STATUS": "G7_BLOCKED_REPAIR_CANARY_REQUIRED",
+      "TRANSFER_RISK": "HIGH_FOR_DEFAULT_RUNTIME",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
