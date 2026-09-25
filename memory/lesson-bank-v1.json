@@ -24,6 +24,34 @@
       "dedup_required": true
     }
   ],
-  "entries": [],
+  "entries": [
+    {
+      "LESSON_ID": "LESSON-C80-M42-SHARED-LOAD-001",
+      "CLASS": "L2_AUDITED",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "TITLE": "Five shared-model-load shards can execute 38 advisory roles with full receipt coverage.",
+      "DESCRIPTION": "M42 replaced 38 independent model loads with 5 shards sized 8,8,8,7,7. All 38 logical-AI perspectives executed and parsed while preserving one receipt per AI.",
+      "EVIDENCE_REFS": [
+        "run:36084488477",
+        "artifact:10844625572",
+        "artifact:10843349590",
+        "artifact:10843932526",
+        "artifact:10843629226",
+        "artifact:10844386367",
+        "audit:receipts/council/all-ai-strategy-council-36084488477.json"
+      ],
+      "MEASURED": {
+        "requested": 38,
+        "executed": 38,
+        "parse_pass": 38,
+        "scorable": 38,
+        "shard_count": 5,
+        "unique_lineage_fingerprints": 1,
+        "independent_evidence_count": 0
+      },
+      "LIMITS": "Operational efficiency only. Does not prove role independence, specialization quality, model diversity, transfer, or scientific validity.",
+      "PROMOTION_STATUS": "NOT_PROMOTED_TRANSFER_TEST_REQUIRED"
+    }
+  ],
   "note": "Existing GVL capsules remain authoritative and are referenced rather than copied."
 }
