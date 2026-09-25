@@ -1,0 +1,209 @@
+name: CEREBRON Wave2 Parallel Role LoRA
+on:
+  push:
+    branches: ['feat/wave2-parallel-ai-baselines-v1']
+    paths:
+      - 'config/wave2-parallel-lora-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  train:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        role: [SPIRALION, HYPERION, ASTRION, SAPHEA_MICRO]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache Wave2 model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: wave2-${{ matrix.role }}-models-v1
+      - name: Install CPU LoRA stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir "transformers>=4.53,<5" peft accelerate safetensors sentencepiece huggingface_hub
+      - name: Compile Wave2 training chain
+        run: |
+          python -m py_compile tools/wave2_quarantine_candidate_builder.py
+          python -m py_compile tools/wave2_versioned_split_builder_v1.py
+          python -m py_compile tools/wave2_cold_suite_builder_v1.py
+          python -m py_compile tools/wave2_dataset_release_gate_v1.py
+          python -m py_compile platform/wave2_role_lora_train_v1.py
+      - name: Require Wave2 training release and Smol resource gate
+        run: |
+          ROLE="${{ matrix.role }}"
+          export ROLE
+          python - <<'PY'
+          import json,os,pathlib
+          r=json.loads(pathlib.Path("training/WAVE2_PARALLEL_TRAINING_RELEASE_V1.json").read_text())
+          assert r["state"]=="RELEASED_FOR_SCOPED_LORA_TRAINING"
+          assert r["training_released"] is True
+          role=os.environ["ROLE"]
+          if role in {"SPIRALION","HYPERION"}:
+              p=pathlib.Path("receipts/wave2/smollm3-3b-lora-resource-canary.json")
+              assert p.exists(),"SMOLLM3_RESOURCE_CANARY_MISSING"
+              c=json.loads(p.read_text())
+              assert c["model_id"]=="HuggingFaceTB/SmolLM3-3B"
+              assert c["real_training_step"] is True
+              assert c["weights_changed"] is True
+              assert c["decision"]=="RESOURCE_CANARY_PASS"
+              print("SMOLLM3_RESOURCE_GATE=PASS",c["max_rss_kb"],c["elapsed_s"])
+          print("WAVE2_TRAINING_RELEASE=PASS",r["release_sha256"],role)
+          PY
+      - name: Reproduce exact released dataset package
+        run: |
+          python tools/wave2_quarantine_candidate_builder.py --output artifacts/wave2-quarantine-candidates-v1.json
+          python tools/wave2_versioned_split_builder_v1.py             --candidates artifacts/wave2-quarantine-candidates-v1.json             --admission training/WAVE2_DATA_ADMISSION_V1.json             --output-dir artifacts/wave2-splits
+          python tools/wave2_cold_suite_builder_v1.py --output-dir artifacts/wave2-cold
+          python tools/wave2_dataset_release_gate_v1.py             --candidates artifacts/wave2-quarantine-candidates-v1.json             --split-dir artifacts/wave2-splits             --cold-dir artifacts/wave2-cold             --admission training/WAVE2_DATA_ADMISSION_V1.json             --baseline-config config/wave2-parallel-role-baseline-v1.json             --output artifacts/reproduced-wave2-release.json
+          python - <<'PY'
+          import json
+          a=json.load(open("training/WAVE2_PARALLEL_TRAINING_RELEASE_V1.json"))
+          b=json.load(open("artifacts/reproduced-wave2-release.json"))
+          assert a["training_released"] is True and b["training_released"] is True
+          assert a["release_sha256"]==b["release_sha256"],(a["release_sha256"],b["release_sha256"])
+          print("WAVE2_RELEASE_REPRODUCED",a["release_sha256"])
+          PY
+      - name: Train real scoped Wave2 LoRA
+        run: |
+          ROLE="${{ matrix.role }}"
+          role_lc=$(echo "$ROLE" | tr '[:upper:]' '[:lower:]')
+          python platform/wave2_role_lora_train_v1.py             --role "$ROLE"             --split "artifacts/wave2-splits/${role_lc}-split-v1.json"             --m6 "artifacts/wave2-cold/${role_lc}-m6-v1.json"             --transfer "artifacts/wave2-cold/${role_lc}-transfer-v1.json"             --red "artifacts/wave2-cold/${role_lc}-red-v1.json"             --release training/WAVE2_PARALLEL_TRAINING_RELEASE_V1.json             --output-root "artifacts/wave2-training/${role_lc}"
+      - name: Store adapter in private Hugging Face and verify readback
+        run: |
+          ROLE="${{ matrix.role }}"
+          role_lc=$(echo "$ROLE" | tr '[:upper:]' '[:lower:]')
+          export ROLE role_lc
+          mkdir -p receipts/wave2
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from huggingface_hub import HfApi,hf_hub_download
+          role=os.environ["ROLE"]; role_lc=os.environ["role_lc"]
+          root=pathlib.Path("artifacts/wave2-training")/role_lc
+          report=json.loads((root/"training-report.json").read_text())
+          token=os.environ.get("HF_TOKEN","").strip()
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+          run_id=os.environ["GITHUB_RUN_ID"];prefix=f"wave2/{role}/LORA-V1/run-{run_id}"
+          api.upload_folder(folder_path=str(root/"adapter"),path_in_repo=prefix,repo_id=repo,repo_type="model",commit_message=f"Wave2 {role} LoRA run {run_id}")
+          got=pathlib.Path(hf_hub_download(repo_id=repo,filename=prefix+"/adapter_model.safetensors",repo_type="model",token=token,force_download=True))
+          gotcfg=pathlib.Path(hf_hub_download(repo_id=repo,filename=prefix+"/adapter_config.json",repo_type="model",token=token,force_download=True))
+          asha=hashlib.sha256(got.read_bytes()).hexdigest();csha=hashlib.sha256(gotcfg.read_bytes()).hexdigest()
+          assert asha==report["adapter_file_sha256"];assert csha==report["adapter_config_sha256"]
+          receipt={
+            "schema":"CEREBRON_WAVE2_ROLE_LORA_PUBLIC_POINTER_V1",
+            "run_id":int(run_id),"role":role,"real_training":True,"training_executed":True,
+            "base_model_id":report["base_model_id"],"base_revision":report["base_revision"],
+            "release_sha256":report["release_sha256"],"split_sha256":report["split_sha256"],
+            "evaluation_mode":report["evaluation_mode"],"cold_dataset_sha256":report["cold_dataset_sha256"],
+            "cold_deny_training":True,"weights_changed":report["weights_changed"],
+            "adapter_sha256":report["adapter_file_sha256"],"adapter_config_sha256":report["adapter_config_sha256"],
+            "hf_private_repo":repo,"hf_private_object_prefix":prefix,"hf_private_readback_sha_pass":True,
+            "gains":report["gains"],"any_critical_regression":report["any_critical_regression"],
+            "validation_gate_pass":report["validation_gate_pass"],"cold_gate_pass":report["cold_gate_pass"],
+            "decision":report["decision"],"promotion":"NOT_PROMOTED","pending":report["pending"],
+            "report_sha256":report["report_sha256"],"claim_ceiling":report["claim_ceiling"]
+          }
+          p=pathlib.Path("receipts/wave2")/f"{role_lc}-lora-{run_id}.json"
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - name: Remove private adapter from GitHub artifact set
+        run: |
+          ROLE="${{ matrix.role }}"
+          role_lc=$(echo "$ROLE" | tr '[:upper:]' '[:lower:]')
+          rm -rf "artifacts/wave2-training/${role_lc}/adapter"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wave2-role-lora-${{ matrix.role }}
+          path: |
+            artifacts/wave2-training/
+            receipts/wave2/*-lora-${{ github.run_id }}.json
+          if-no-files-found: warn
+
+  audit:
+    needs: train
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wave2-role-lora-*
+          path: downloaded/wave2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit Wave2 training receipts
+        run: |
+          mkdir -p receipts/wave2
+          python - <<'PY'
+          import glob,hashlib,json,os,pathlib,shutil
+          files=sorted(set(glob.glob("downloaded/wave2/**/receipts/wave2/*-lora-*.json",recursive=True)))
+          rows=[]
+          for p in files:
+              d=json.loads(pathlib.Path(p).read_text())
+              if d.get("schema")=="CEREBRON_WAVE2_ROLE_LORA_PUBLIC_POINTER_V1":
+                  rows.append(d);shutil.copy2(p,pathlib.Path("receipts/wave2")/pathlib.Path(p).name)
+          expected=["SPIRALION","HYPERION","ASTRION","SAPHEA_MICRO"]
+          by={r["role"]:r for r in rows}
+          assert sorted(by)==sorted(expected),(sorted(by),files)
+          assert len(rows)==4
+          assert all(r["real_training"] and r["training_executed"] for r in rows)
+          assert all(r["weights_changed"] for r in rows)
+          assert all(r["hf_private_readback_sha_pass"] for r in rows)
+          assert all(r["cold_deny_training"] for r in rows)
+          lineages={(r["base_model_id"],r["base_revision"]) for r in rows}
+          out={
+            "schema":"CEREBRON_WAVE2_PARALLEL_LORA_AUDIT_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "role_count":4,"training_executed_count":4,
+            "weights_changed_count":sum(r["weights_changed"] for r in rows),
+            "hf_readback_pass_count":sum(r["hf_private_readback_sha_pass"] for r in rows),
+            "g6_candidate_count":sum(str(r["decision"]).startswith("G6_CANDIDATE") for r in rows),
+            "rollback_count":sum(r["decision"]=="ROLLBACK_RETAIN_EVIDENCE" for r in rows),
+            "unique_base_lineage_count":len(lineages),"independent_evidence_count":0,
+            "roles":{r["role"]:{
+              "model_id":r["base_model_id"],"adapter_sha256":r["adapter_sha256"],
+              "gains":r["gains"],"critical_regression":r["any_critical_regression"],
+              "validation_gate_pass":r["validation_gate_pass"],"cold_gate_pass":r["cold_gate_pass"],
+              "decision":r["decision"]
+            } for r in rows},
+            "claim_ceiling":"FOUR_REAL_SCOPED_LORA_TRAININGS_TWO_SHARED_BASE_LINEAGES_NO_AUTO_PROMOTION"
+          }
+          out["audit_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          p=pathlib.Path("receipts/wave2")/f"wave2-parallel-lora-audit-{os.environ['GITHUB_RUN_ID']}.json"
+          p.write_text(json.dumps(out,indent=2)+"\n");print(json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave2-parallel-lora-audit-${{ github.run_id }}
+          path: receipts/wave2/
+      - name: Persist Wave2 public pointers and audit
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/wave2/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: Wave2 parallel LoRA audit ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/wave2-parallel-ai-baselines-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
