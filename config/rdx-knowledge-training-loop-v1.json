@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_RDX_KNOWLEDGE_TRAINING_LOOP_V1",
   "date": "2026-09-25",
-  "status": "RDX_MEMORY_INGRESS_CANARY_PASS_GOLD_BLOCKED_BY_F72",
+  "status": "RDX_MEMORY_PRIVATE_WRITE_READ_RECALL_PASS_GOLD_BLOCKED_BY_F72",
   "source": {
     "farm_id": 152,
     "name": "CEREBRON RDX EXCHANGE",
@@ -253,5 +253,16 @@
     "gold": "BLOCKED_BY_F72",
     "neural_training": "NOT_EXECUTED"
   },
-  "memory_binding_manifest": "config/rdx-memory-bindings-v1.json"
+  "memory_binding_manifest": "config/rdx-memory-bindings-v1.json",
+  "memory_runtime_proof": {
+    "run_id": 36143467119,
+    "receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f",
+    "private_write": "PASS",
+    "authenticated_read": "PASS",
+    "readback_sha": "PASS",
+    "id_pointer_recall": "PASS",
+    "semantic_retrieval_quality": "NOT_TESTED",
+    "gold_write": "NOT_ATTEMPTED",
+    "training": "NOT_EXECUTED"
+  }
 }
