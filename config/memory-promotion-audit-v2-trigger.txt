@@ -1,0 +1,6 @@
+MEMORY PROMOTION AUDIT V2
+farm_count_expected=152
+f152_rdx_ingress=CONFIGURED
+m6_training=DENY
+f72_expected=FAIL
+gold_expected=BLOCKED
