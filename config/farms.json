@@ -1138,7 +1138,7 @@
       "name": "CEREBRON RDX EXCHANGE",
       "repo": "cerebron-rdx-exchange",
       "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
-      "status": "REPOSITORY_PRESENT_EMPTY_OR_BRANCH_UNVERIFIED",
+      "status": "REPOSITORY_PRESENT_RDX_MEMORY_INGRESS_CANARY_PASS_PRODUCT_BUILD_SEPARATE",
       "type": "RDX_PRODUCT_FARM",
       "role": "continuous-rd-production-storage-verification-marketplace-evidence-api-memory-training-ingress",
       "rules": [
@@ -1156,7 +1156,13 @@
         "REPORTS_ARE_VIEWS_ATOMIC_KNOWLEDGE_IS_PRIMARY"
       ],
       "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange",
-      "url": "https://github.com/dmaillot95-ui/cerebron-rdx-exchange"
+      "url": "https://github.com/dmaillot95-ui/cerebron-rdx-exchange",
+      "evidence": {
+        "rdx_ingress_canary_run_id": 36142030500,
+        "rdx_ingress_canary_receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7",
+        "memory_rag": "PASS",
+        "gold": "BLOCKED_BY_F72"
+      }
     }
   ],
   "max_farms": 152,
