@@ -1,10 +1,10 @@
-SAPHEA FIRST LORA TRANSFER AUDIT
-version=v2-independent-evaluator
+SAPHEA FIRST LORA TRANSFER GATE
+version=v2-frozen-transfer-ablation-redteam
 source_training_run=36100266729
 adapter_sha=0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080
-scope=72_NEW_TRANSFER_REDTEAM_CASES
-training_use=DENY
-ablation=BASE_VS_BASE_PLUS_ADAPTER
-independent_audit=SEPARATE_EVALUATOR_CODEPATH
+benchmark=84_RECORDS_60_TRANSFER_24_REDTEAM
+scope=SAME_EPISTEMIC_LABELS_NEW_PROMPT_FIELD_REPRESENTATIONS
+training_on_transfer=DENY
+negative_result=RETAIN_AS_EVIDENCE
 independent_model_evidence=false
-promotion=F72_AFAH_GATED
+promotion=NOT_PROMOTED
