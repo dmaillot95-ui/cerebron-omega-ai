@@ -1477,7 +1477,7 @@
       "repo": "cerebron-farm-173-aelys-live",
       "domain": "aelys-live-runtime",
       "identity": "AELYS",
-      "status": "BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED",
+      "status": "LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED",
       "type": "INTERFACE_RUNTIME_FARM",
       "role": "Prepare a verifiable low-latency live interaction runtime contract for AELYS without claiming deployment.",
       "training_status": "NOT_TRAINED",
@@ -1485,26 +1485,39 @@
       "repository_exists": true,
       "repository_initialized": true,
       "local_scaffold": "scaffolds/f173-aelys-live",
-      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_LOCAL_CONTRACTS_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
+      "infrastructure_status": "DEDICATED_REPOSITORY_LOCAL_LIVE_LOOP_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
-        "dedicated_repo_selftest_run_id": 36156589051,
-        "dedicated_repo_head": "6a99ba8807ffd77fca95249c3f206b6c636dd024",
+        "dedicated_repo_selftest_run_id": 36162643249,
+        "dedicated_repo_head": "3aaf23084b1414e4c2fe5da06fedfbc25aa868b6",
         "unified_plugin_bus_guard_run_id": 36156083228,
         "rdx_route_fix_run_id": 36156539575,
-        "runtime_qualification_run_id": 36156589051
+        "runtime_qualification_run_id": 36156589051,
+        "local_live_loop_canary_run_id": 36162553038,
+        "local_live_loop_canary_result_sha256": "a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4",
+        "local_live_loop_canary_artifact_id": 10876417068,
+        "local_live_loop_canary_artifact_digest": "sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303"
       },
-      "dedicated_repo_head": "6a99ba8807ffd77fca95249c3f206b6c636dd024",
-      "dedicated_repo_selftest_run_id": 36156589051,
+      "dedicated_repo_head": "3aaf23084b1414e4c2fe5da06fedfbc25aa868b6",
+      "dedicated_repo_selftest_run_id": 36162643249,
       "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED",
       "local_contracts_status": "QUALIFIED",
       "external_runtime_status": "UNQUALIFIED",
       "rdx_route_provider": "RDX_EXCHANGE",
       "f152_rdx_route_forbidden": true,
-      "runtime_qualification_file": "config/runtime-qualification.json"
+      "runtime_qualification_file": "config/runtime-qualification.json",
+      "local_live_loop_canary_status": "PASS",
+      "local_live_loop_canary": {
+        "run_id": 36162553038,
+        "result_sha256": "a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4",
+        "artifact_id": 10876417068,
+        "artifact_digest": "sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303",
+        "external_calls_executed": false,
+        "production_live_claimed": false
+      }
     },
     {
       "id": 174,
@@ -1610,6 +1623,9 @@
     ],
     "extension_video_canary_pass_ids": [
       174
+    ],
+    "extension_local_live_canary_pass_ids": [
+      173
     ]
   },
   "shared_engines": {
