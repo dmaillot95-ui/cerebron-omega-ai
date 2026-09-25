@@ -36,12 +36,12 @@ Dépôt :
 État réel :
 - dépôt GitHub existe et possède une branche `main` ;
 - base d'intégration F173 installée ;
-- selftest dédié : SUCCESS, run `36153266774` ;
-- HEAD vérifié : `eefc374f7639c86c87dafbb174d006c804343b9b` ;
+- selftest dédié corrigé : SUCCESS, run `36155830169` ;
+- HEAD vérifié : `1c296ae0ba430fc3706de7ad2d81a2a088ed613c` ;
 - adaptateurs live/TikTok/TTS/avatar : UNQUALIFIED ;
 - entraînement : NOT_TRAINED ;
 - production live : NOT_DEPLOYED ;
-- le fichier de bus maître cité par F173 (`config/cerebron-unified-plugin-bus-v1.json`) n'existe pas dans `main` : binding maître NON CONFIRMÉ.
+- le bus maître `config/cerebron-unified-plugin-bus-v1.json` existe et son Guard est PASS ; le runtime des providers reste UNQUALIFIED.
 
 Statut :
 `BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED`
@@ -70,7 +70,8 @@ Scaffold :
 
 ## Preuves GitHub Actions
 
-- F173 dépôt dédié Selftest : run 36153266774 — SUCCESS
+- F173 dépôt dédié Selftest corrigé : run 36155830169 — SUCCESS
+- CÉRÉBRON Unified Plugin Bus Guard : run 36156083228 — SUCCESS
 - F162/F173/F174 Reality Guard : run 36155160206 — SUCCESS
 - CÉRÉBRON Omega Core : run 36155316250 — SUCCESS
 - CÉRÉBRON Main Integration Gate : run 36155316281 — SUCCESS
@@ -111,3 +112,19 @@ Pour F162 :
 - créer d'abord le dépôt dédié ;
 - recopier `scaffolds/f162-nu` ;
 - valider avant tout changement de statut.
+
+
+## Correction de routage F173 → RDX
+
+Le premier scaffold F173 associait à tort `rdx.search` / `rdx.fetch` à `F152_RDX`.
+
+Vérification du registre maître :
+- F152 = BETA ;
+- F152 ne doit pas être utilisé comme fournisseur RDX.
+
+Correction appliquée :
+- provider : `RDX_EXCHANGE` ;
+- dépôt : `dmaillot95-ui/cerebron-rdx-exchange` ;
+- runtime : `UNBOUND` / non qualifié ;
+- appels externes automatiques : false ;
+- F152 est BETA et explicitement exclu du routage RDX.
