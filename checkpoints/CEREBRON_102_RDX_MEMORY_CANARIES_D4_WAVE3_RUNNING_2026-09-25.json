@@ -1,0 +1,115 @@
+{
+  "schema": "CEREBRON_102_RDX_MEMORY_CANARIES_D4_WAVE3_RUNNING_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_REGISTRY_MEMORY_TRAINING_INTEGRATION_ONLY",
+  "coordination": {
+    "other_session": "R&D_EXECUTION_PLANE_ARCHITECTON",
+    "this_session": "RDX_REGISTRY_MEMORY_TRAINING_INTEGRATION_PLANE",
+    "collision_rule": "DO_NOT_MODIFY_OTHER_SESSION_ACTIVE_RD_OBJECTS"
+  },
+  "rdx": {
+    "farm_id": 152,
+    "ingress_canary": {
+      "run_id": 36142030500,
+      "status": "PASS",
+      "receipt_sha256": "960d8cf216f31ed7d191eb2852d7bb1446180f7ae37300048b9626f2c09b8db7"
+    },
+    "write_read_recall": {
+      "run_id": 36143467119,
+      "status": "PASS",
+      "receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f"
+    },
+    "memory_runtime_claim": "PRIVATE_WRITE_READ_SHA_AND_ID_POINTER_RECALL_PASS",
+    "semantic_quality": "NOT_YET_PROVEN",
+    "gold": "BLOCKED_BY_F72",
+    "neural_training": "NOT_EXECUTED"
+  },
+  "memory_farms": {
+    "F114": {
+      "run_id": 36146849036,
+      "state": "QUEUED",
+      "test": "CANONICAL_ID_INDEX_AND_CONFLICT_DETECTION"
+    },
+    "F115": {
+      "run_id": 36146647325,
+      "state": "IN_PROGRESS",
+      "test": "SEMANTIC_RECALL_TOP1_MRR"
+    },
+    "F116": {
+      "run_id": 36146855717,
+      "state": "QUEUED",
+      "test": "NORMALIZED_EXACT_DEDUP_AND_PROVENANCE_FUSION"
+    },
+    "F117": {
+      "state": "NO_NEW_RUNTIME_CANARY_THIS_CHECKPOINT"
+    },
+    "F118": {
+      "state": "BLOCKED_BY_F72_GOLD"
+    },
+    "F119": {
+      "state": "EVIDENCE_ROUTE_CONFIGURED"
+    },
+    "F120": {
+      "state": "GOVERNOR_ROUTE_CONFIGURED"
+    }
+  },
+  "wave3a": {
+    "d3_run_id": 36138864930,
+    "d3": "PASS",
+    "SAELION": {
+      "best_single": "Qwen/Qwen3-4B",
+      "qwen": "45/72",
+      "smol": "36/72",
+      "audit_sha256": "b3ac7fba392adba79957dbeb0adfc65014cfb51787dbd252934f0b4c92b9e367"
+    },
+    "NEXUS": {
+      "best_single": "Qwen/Qwen3-4B",
+      "qwen": "52/72",
+      "smol": "48/72",
+      "audit_sha256": "0b403c263eafd2eaaf57398f6afd9bf445aace5f09f15276944c1e04fe32a356"
+    },
+    "d4_precheck_run_id": 36146455180,
+    "d4_state": "QUEUED"
+  },
+  "wave3b": {
+    "d3_run_id": 36142921827,
+    "state": "IN_PROGRESS",
+    "completed": {
+      "DELTA_QWEN": {
+        "correct": 48,
+        "total": 72
+      },
+      "OMEGA_QWEN": {
+        "correct": 54,
+        "total": 72
+      },
+      "ALPHA_SMOL": {
+        "correct": 28,
+        "total": 72
+      }
+    },
+    "remaining": [
+      "OMEGA_SMOL",
+      "DELTA_SMOL",
+      "ALPHA_QWEN"
+    ],
+    "d4": "BLOCKED_PENDING_D3_COMPARISON"
+  },
+  "elysium": {
+    "d4": "HOLD_NO_ROBUST_GAIN",
+    "d5": "BLOCKED",
+    "d6": "BLOCKED"
+  },
+  "f72": {
+    "current": "FAIL",
+    "gold_m4": "BLOCKED",
+    "rdx_training": "BLOCKED"
+  },
+  "next_exact": [
+    "Close F114/F115/F116 RDX canaries without duplicate runs.",
+    "Close Wave3A D4 complementarity run 36146455180; continue to fusion canary only for AI with positive oracle complementarity.",
+    "Close Wave3B D3 run 36142921827; trigger prepared Wave3B D4 exactly once only after comparison PASS.",
+    "Do not open F118 GOLD or RDX neural training while F72 FAIL.",
+    "Do not modify ARCHITECTON R&D execution objects owned by the other session."
+  ]
+}
