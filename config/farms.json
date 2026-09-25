@@ -1202,7 +1202,7 @@
       "name": "CEREBRON RDX EXCHANGE",
       "repo": "cerebron-rdx-exchange",
       "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
-      "status": "RDX_MEMORY_PASS_SEMANTIC_INDEPENDENT_HOLD_NOT_PRODUCTION_GOLD_BLOCKED",
+      "status": "RDX_MEMORY_PASS_SEMANTIC_BASELINE_RETAINED_NOT_PRODUCTION_GOLD_BLOCKED",
       "type": "RDX_PRODUCT_FARM",
       "role": "continuous-rd-production-storage-verification-marketplace-evidence-api-memory-training-ingress",
       "rules": [
@@ -1248,7 +1248,7 @@
         "semantic_fresh_holdout_rrf_top1_accuracy": 0.8333333333333334,
         "semantic_fresh_holdout_gain": -0.125,
         "semantic_fresh_holdout_decision": "FRESH_HOLDOUT_HOLD_NO_MEASURED_ROBUST_GAIN",
-        "semantic_current_candidate": "SEMANTIC_ONLY",
+        "semantic_current_candidate": "SEMANTIC_ONLY_ALL_MINILM_L6_V2",
         "semantic_hybrid_rrf": "REJECTED_ON_FRESH_HOLDOUT",
         "semantic_production_qualified": false,
         "semantic_independent_v3_run_id": 36161829258,
@@ -1258,7 +1258,14 @@
         "semantic_independent_v3_top1_accuracy": 0.9166666666666666,
         "semantic_independent_v3_mrr": 0.9467592592592593,
         "semantic_independent_v3_critical_domains_pass": true,
-        "semantic_independent_v3_decision": "INDEPENDENT_HOLDOUT_HOLD_SEMANTIC_BASELINE"
+        "semantic_independent_v3_decision": "INDEPENDENT_HOLDOUT_HOLD_SEMANTIC_BASELINE",
+        "semantic_multilingual_v4_run_id": 36164021509,
+        "semantic_multilingual_v4_receipt_sha256": "750eea725eb23e025f55fb8381da8c642db05852dd2d628315cfc91b0b6510fb",
+        "semantic_multilingual_v4_decision": "DEV_HOLD_BASELINE_NO_ROBUST_MULTILINGUAL_GAIN",
+        "semantic_policy_fusion_v5_run_id": 36164464446,
+        "semantic_policy_fusion_v5_receipt_sha256": "a01152ae867583f8d674dae0e62f12216fb7b9bc6a0155d905d37f7171cbe2ac",
+        "semantic_policy_fusion_v5_decision": "DEV_POLICY_HOLD_NO_ROBUST_FUSION_GAIN",
+        "semantic_policy_fusion_v5_selected_policy": "BASELINE_ONLY"
       },
       "memory_binding_manifest": "config/rdx-memory-bindings-v1.json",
       "memory_routes": {
@@ -1276,7 +1283,7 @@
           118
         ]
       },
-      "claim_ceiling": "PRIVATE_WRITE_READ_SHA_RECALL_PASS; SYNTHETIC_SEMANTIC_RETRIEVAL_TOP1_91.7_PERCENT_ON_INDEPENDENT_V3_BUT_MRR_BELOW_GATE; NOT_PRODUCTION_SCALE; NO_NEURAL_TRAINING"
+      "claim_ceiling": "PRIVATE_WRITE_READ_SHA_RECALL_PASS; INDEPENDENT_SYNTHETIC_SEMANTIC_BASELINE_TOP1_91.7_PERCENT_MRR_0.9468; BILINGUAL_DEV_ALTERNATIVES_REJECTED; NOT_PRODUCTION_SCALE; NO_NEURAL_TRAINING"
     },
     {
       "id": 173,
