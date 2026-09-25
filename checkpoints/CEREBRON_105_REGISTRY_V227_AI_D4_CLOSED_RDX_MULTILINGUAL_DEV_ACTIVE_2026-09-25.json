@@ -1,0 +1,134 @@
+{
+  "schema": "CEREBRON_105_REGISTRY_V227_AI_D4_CLOSED_RDX_MULTILINGUAL_DEV_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.27",
+    "entry_count": 154,
+    "max_registered_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "sparse_ids_expected": true,
+    "f152": "REGISTERED_RDX_MEMORY_SEMANTIC_HOLD",
+    "f173_f174": "OBSERVED_OTHER_SESSION_NO_MODIFICATION"
+  },
+  "native_ai": {
+    "SAELION": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "retained": "Qwen/Qwen3-4B",
+      "oracle_gain": 0
+    },
+    "DELTA": {
+      "d3": "PASS",
+      "d4": "STOP_NO_COMPLEMENTARITY",
+      "retained": "Qwen/Qwen3-4B",
+      "oracle_gain": 0
+    },
+    "NEXUS": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 4,
+      "d4_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "ALPHA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 3,
+      "d4_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "OMEGA": {
+      "d3": "PASS",
+      "d4_precheck_oracle_gain": 12,
+      "d4_dev": "HOLD_NO_ROBUST_GAIN",
+      "dev_gain": 0,
+      "fresh_holdout_consumed": false
+    },
+    "ELYSIUM": {
+      "d4": "HOLD_NO_ROBUST_GAIN"
+    },
+    "ELYSION": {
+      "d4": "HOLD_REDESIGN_REQUIRED"
+    }
+  },
+  "rdx_memory": {
+    "ingress_run_id": 36142030500,
+    "ingress": "PASS",
+    "write_read_recall_run_id": 36143467119,
+    "write_read_recall": "PASS",
+    "semantic_v1": {
+      "run_id": 36156985796,
+      "status": "FAIL",
+      "top1_accuracy": 0.8,
+      "mrr": 0.9
+    },
+    "semantic_dev_v2": {
+      "run_id": 36161040992,
+      "status": "PASS_DEV_ONLY",
+      "selected_policy": "RRF_SEM_LEX",
+      "top1_accuracy": 0.9,
+      "mrr": 0.95
+    },
+    "semantic_fresh_v2": {
+      "run_id": 36161387023,
+      "status": "HOLD",
+      "semantic_only_top1": 0.9583333333333334,
+      "rrf_top1": 0.8333333333333334,
+      "gain": -0.125
+    },
+    "semantic_independent_v3": {
+      "run_id": 36161829258,
+      "status": "HOLD",
+      "policy": "SEMANTIC_ONLY",
+      "top1_correct": 33,
+      "query_count": 36,
+      "top1_accuracy": 0.9166666666666666,
+      "mrr": 0.9467592592592593,
+      "critical_domains_pass": true
+    },
+    "semantic_multilingual_dev_v4": {
+      "run_id": 36164021509,
+      "status": "QUEUED",
+      "baseline": "sentence-transformers/all-MiniLM-L6-v2",
+      "candidate": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "classification": "PUBLIC_DEV_ABLATION_NOT_COLD",
+      "training": false,
+      "fresh_holdout_consumed": false
+    }
+  },
+  "promotion": {
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "rdx_neural_training": "BLOCKED",
+    "neural_learning_claim": "DENY_UNTIL_WEIGHTS_OR_ADAPTER_CHANGED_AND_COLD_GAIN_MEASURED"
+  },
+  "next_exact": [
+    "Close RDX multilingual DEV V4 run 36164021509.",
+    "If multilingual candidate shows robust French gain with no global regression and critical domains pass, freeze exact resolved revision and create one NEW fresh private bilingual holdout V4 from a different generator family.",
+    "If DEV V4 does not pass, keep semantic-only baseline and do not consume another holdout.",
+    "Do not reopen SAELION/DELTA dual-core.",
+    "Do not give NEXUS/ALPHA/OMEGA a fresh holdout after D4 DEV gain 0.",
+    "Keep F118 GOLD and all RDX neural training blocked while F72 remains FAIL.",
+    "Do not modify F173/F174 or ARCHITECTON R&D work."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "QUEUE_IS_NOT_FAILURE",
+    "MECHANICAL_FAILURE_NOT_SCIENTIFIC_FAILURE",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+    "ABLATION_BEFORE_ADDITION"
+  ]
+}
