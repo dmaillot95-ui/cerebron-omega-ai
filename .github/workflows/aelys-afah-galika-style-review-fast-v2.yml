@@ -99,7 +99,7 @@ FAITS:
         if: always()
         with:
           name: galika-style-${{ matrix.identity }}-v2
-          path: artifacts/${{ matrix.identity == 'AELYS' && 'aelys' || 'afah' }}-galika-style-v2.json
+          path: artifacts/*-galika-style-v2.json
           if-no-files-found: error
           retention-days: 30
 
