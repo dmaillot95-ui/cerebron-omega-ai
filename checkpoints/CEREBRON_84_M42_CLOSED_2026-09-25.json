@@ -1,0 +1,52 @@
+{
+  "schema": "CEREBRON_84_M42_CLOSED_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_83_M42_COUNCIL_RUNNING_2026-09-25.json",
+  "m41": {
+    "status": "CLOSED_PASS",
+    "run_id": 36082948475
+  },
+  "m42": {
+    "status": "CLOSED_PASS_WITH_SPECIALIZATION_LIMITATION",
+    "run_id": 36084488477,
+    "head_sha": "1962c0a8f3b9d5adcc299f188f68d07c029c3fd8",
+    "gate": {
+      "receipt_count": 38,
+      "executed_count": 38,
+      "parse_pass_count": 38,
+      "scorable_count": 38,
+      "unique_lineage_fingerprints": 1,
+      "independent_evidence_count": 0
+    },
+    "audit_sha256": "eb53171efb7ee1a2baa06514687170763db1db2c5ad04e4da6b7532db00bd64f",
+    "artifacts": {
+      "S1": "sha256:a0adde5901f421dc12b39a9f8c12614a98e7f1fb907c7936661ff713a6c7635f",
+      "S2": "sha256:8ffd5b64db7a04388c6d9a0fa82b43cb87228c7301cb64fdd9f3902b5f0a1cd0",
+      "S3": "sha256:104890d2a5b70b3571f35acb86b9915b90f8b5a736ecc0bb587e9486282c05b8",
+      "S4": "sha256:ca668369998cc6754225b3d1d981447fb81fd1b550ded906339719aa3f76f812",
+      "S5": "sha256:89af3b92ccc5788161eb6ea25edca11f80a053537dc0c3d3b2379c82ad9628be",
+      "AUDIT": "sha256:1ddbfa8fa1c449f37b2afbb7c25e4606486f234d6cd32fbd5bf8ebe5a8ac3105"
+    },
+    "diagnostics": {
+      "mean_role_alignment_proxy": 0.2456,
+      "gvl_heavy_count": 35,
+      "dual_core_yes_count": 38,
+      "failure_id": "FAIL-C80-M42-SPECIALIZATION-COLLAPSE-001",
+      "unknown_id": "UNK-M42-ROLE-FIDELITY-TRANSFER-001"
+    },
+    "interpretation": "Operational council execution PASS. Specialist-independence/consensus claim DENIED because shared model+route created correlated and partially collapsed role behavior."
+  },
+  "frozen_global_state": {
+    "operational_worker_scale": "STAY_AT_5",
+    "gvl_gate": "1_OF_4_GEOMETRIC_GROWTH_NOT_DEMONSTRATED",
+    "dual_core": "GREEK_AI_TWO_DISTINCT_MODELS_ACTIVATION_GATED",
+    "remote_platform": "BLOCKED_PENDING_SECURITY_GATES"
+  },
+  "exact_resume": [
+    "Inspect SAPHEA first-LoRA branch and run only if dataset/GOLD/M6 isolation/rollback gates are intact.",
+    "Do not use M42 majority as evidence for dual-core activation.",
+    "Keep M42 fusion dependency-based; validate each proposal separately.",
+    "Run a future role-fidelity cold canary with de-anchored role-specific prompts before any new 38-role council.",
+    "Preserve M6 as DENY_TRAINING."
+  ]
+}
