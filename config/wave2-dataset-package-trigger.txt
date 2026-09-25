@@ -8,3 +8,6 @@ roles=SPIRALION,HYPERION,ASTRION,SAPHEA_MICRO
 cold=M6,TRANSFER,RED
 cold_training=DENY
 release_only_if_all_leakage_checks_pass=true
+retry=v2-fix-duplicate-cold-prompts
+previous_run=36114043066
+previous_failure=F_TOOL_DUPLICATE_COLD_PROMPT
