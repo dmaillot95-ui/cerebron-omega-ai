@@ -1,0 +1,9 @@
+CEREBRON WAVE1 DATASET PACKAGE RELEASE
+source_manifest=4fe279c2941b324d1a7fb2620bff945aa6558c7596aa5814ac4802d55ac36abe
+afah_run=36108328129
+afah_review_sha=27abc2937ded0085a9feb9b50c5a6e3bde5f2acce7521c99774a31a5c02eb730
+roles=AELYS,ETHERION,AFAH,METRION
+train_validation=DETERMINISTIC_SUBSETS
+cold=M6,TRANSFER,RED
+cold_training=DENY
+release_only_if_all_leakage_checks_pass=true
