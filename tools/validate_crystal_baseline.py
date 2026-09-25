@@ -35,10 +35,16 @@ assert by_id[162]["status"]=="PREPARED_NOT_DEPLOYED_REPOSITORY_MISSING"
 assert (R/by_id[162]["local_scaffold"]).exists()
 
 if expected >= 174:
-    for i in (173,174):
-        assert by_id[i]["repository_exists"] is True
-        assert by_id[i]["repository_initialized"] is False
-        assert (R/by_id[i]["local_scaffold"]).exists()
+    assert by_id[173]["repository_exists"] is True
+    assert by_id[173]["repository_initialized"] is True
+    assert by_id[173]["status"]=="BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED"
+    assert by_id[173]["dedicated_repo_selftest_run_id"]==36153266774
+    assert (R/by_id[173]["local_scaffold"]).exists()
+
+    assert by_id[174]["repository_exists"] is True
+    assert by_id[174]["repository_initialized"] is False
+    assert by_id[174]["status"]=="PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY"
+    assert (R/by_id[174]["local_scaffold"]).exists()
 
 missing=[f["id"] for f in farms["farms"] if f.get("repository_exists") is False]
 assert missing==[162], missing
