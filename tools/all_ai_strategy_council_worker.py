@@ -94,9 +94,12 @@ RISK: state the main unknown or failure mode that could invalidate the proposal.
         import torch
         from transformers import AutoTokenizer,AutoModelForCausalLM
         tok=AutoTokenizer.from_pretrained(model_id,revision=rev)
-        dtype=torch.bfloat16 if "Qwen3" in model_id else torch.float32\n        model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=dtype,low_cpu_mem_usage=True)
+        dtype=torch.bfloat16 if "Qwen3" in model_id else torch.float32
+        model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=dtype,low_cpu_mem_usage=True)
         msgs=[{"role":"system","content":system},{"role":"user","content":user}]
-        try:\n            kwargs={"tokenize":False,"add_generation_prompt":True}\n            if "Qwen3" in model_id: kwargs["enable_thinking"]=False\n            prompt=tok.apply_chat_template(msgs,**kwargs)
+        try:
+            kwargs={"tokenize":False,"add_generation_prompt":True}\n            if "Qwen3" in model_id: kwargs["enable_thinking"]=False
+            prompt=tok.apply_chat_template(msgs,**kwargs)
         except Exception: prompt=system+"\n\n"+user+"\nASSISTANT:\n"
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
