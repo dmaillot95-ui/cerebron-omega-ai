@@ -265,6 +265,30 @@
       "REPAIR_STATUS": "CORRECTED_PREFLIGHT_REQUIRED",
       "TRANSFER_RISK": "LOW_AFTER_PY_COMPILE_PASS",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-QWEN3-FORMAT-001",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "CEREBRON_CANARY",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_FORMAT",
+      "FAILURE_SIGNATURE": "QWEN3_GOOD_CONTENT_PARSE_FAIL_FULLWIDTH_COLON_PRIORITY_ALIAS",
+      "ROOT_CAUSE": "Qwen3 produced useful eight-field content but used Unicode fullwidth colon and PRIORITIZE instead of PRIORITY, which the strict parser did not normalize.",
+      "EVIDENCE_REFS": [
+        "run:36082174094",
+        "artifact:10842840701"
+      ],
+      "IMPACT": "High-quality advisory output was marked parse failure despite containing all eight semantic fields.",
+      "SCOPE": "Parser normalization only; content quality was materially better than the 0.5B council model.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "normalize fullwidth colon",
+        "map PRIORITIZE/PRIORITISE to PRIORITY",
+        "rerun same five with warm Qwen3 cache"
+      ],
+      "REPAIR_STATUS": "V7_CANARY_REQUIRED",
+      "TRANSFER_RISK": "LOW_AFTER_5_OF_5_PASS",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
