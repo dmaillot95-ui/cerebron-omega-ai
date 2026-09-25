@@ -1,0 +1,56 @@
+{
+  "schema": "CEREBRON_WAVE1_PARALLEL_TRAINING_RELEASE_CONTRACT_V1",
+  "date": "2026-09-25",
+  "status": "PREPARED_NOT_RELEASED",
+  "roles": [
+    "AELYS",
+    "ETHERION",
+    "AFAH",
+    "METRION"
+  ],
+  "base_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "immutable": true
+  },
+  "admission_source": {
+    "required_decision": "ADMIT_AS_SYNTHETIC_GOLD_CANDIDATE_POOL_NOT_TRAINING_RELEASED",
+    "required_f72": true,
+    "required_afah": true
+  },
+  "split_policy": {
+    "train_validation_source": "ADMITTED_QUARANTINE_POOL_ONLY",
+    "train_fraction_per_label": 0.75,
+    "validation_fraction_per_label": 0.25,
+    "blind_m6_source": "SEPARATE_GENERATOR_FAMILY",
+    "transfer_source": "SEPARATE_GENERATOR_FAMILY",
+    "adversarial_source": "SEPARATE_GENERATOR_FAMILY",
+    "forbid": [
+      "BASELINE_BENCHMARK_TO_TRAIN",
+      "M6_TO_TRAIN",
+      "TRANSFER_TO_TRAIN",
+      "ADVERSARIAL_TO_TRAIN",
+      "PROMPT_TEMPLATE_REUSE_ACROSS_TRAIN_AND_COLD_SETS"
+    ]
+  },
+  "parallel_training": {
+    "max_parallel": 4,
+    "each_role_separate_adapter": true,
+    "each_role_separate_dataset_sha": true,
+    "each_role_separate_receipt": true,
+    "shared_base_lineage": true,
+    "independent_evidence_count": 0
+  },
+  "promotion_gate": [
+    "REAL_ADAPTER_WEIGHT_CHANGE",
+    "HF_PRIVATE_WRITE_READ_SHA",
+    "COLD_GAIN_POSITIVE",
+    "TRANSFER_GAIN_POSITIVE",
+    "NO_CRITICAL_PER_LABEL_REGRESSION",
+    "ABLATION_SUPPORTS_VALUE",
+    "RED_TEAM_PASS",
+    "F72_REVIEW",
+    "AFAH_FINAL_AUTHORITY"
+  ],
+  "current_training_release": false
+}
