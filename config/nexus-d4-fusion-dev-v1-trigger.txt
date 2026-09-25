@@ -1,0 +1,7 @@
+NEXUS D4 FUSION DEV V1
+source_precheck_run=36146455180
+source_precheck_receipt_sha256=4bb615dc7ae684b423cf955be5693dd92d7774132d8b09f9f22fb9889b77df99
+m6_used_for_tuning=false
+classification=DEV_POLICY_TUNING_NOT_COLD
+next_if_pass=NEW_FRESH_PRIVATE_HOLDOUT
+next_if_hold=STOP_OR_REDESIGN_NO_PRIVATE_HOLDOUT
