@@ -38,7 +38,11 @@ jobs:
           assert sum(x["split_counts"].values()) == x["canonical_record_count"]
           assert all(not (r["training_eligible"] and r["source_bank"]=="FAILURE_BANK") for r in x["records"])
           assert all(not (r["training_eligible"] and r["source_bank"]=="CONTRADICTION_BANK") for r in x["records"])
-          print("SELF_EVOLUTION_CORPUS_GUARD=PASS",x["canonical_record_count"],x["training_eligible_count"])
+          assert all(not r.get("effective_training_eligible") or r["split"]=="train" for r in x["records"])
+          assert all(not (r.get("effective_training_eligible") and r.get("decontamination_blocked")) for r in x["records"])
+          assert x["effective_training_eligible_count"] <= x["training_eligible_count"]
+          assert x["blocked_train_record_count"] <= x["split_counts"]["train"]
+          print("SELF_EVOLUTION_CORPUS_GUARD=PASS",x["canonical_record_count"],x["training_eligible_count"],x["effective_training_eligible_count"],x["decontamination_match_count"])
           PY
       - uses: actions/upload-artifact@v4
         if: always()
