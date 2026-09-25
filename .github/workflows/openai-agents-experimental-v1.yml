@@ -1,0 +1,36 @@
+name: CEREBRON OpenAI Agents Experimental Contract CI
+on:
+  push:
+    branches: ['feat/openai-agents-cerebron-experimental-v1']
+    paths:
+      - 'config/openai-agents-experimental-v1.json'
+      - 'tools/validate_openai_agents_experimental_v1.py'
+      - '.github/workflows/openai-agents-experimental-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  static-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python -m py_compile tools/validate_openai_agents_experimental_v1.py
+      - name: Validate zero-spend fail-closed contract
+        run: python tools/validate_openai_agents_experimental_v1.py
+      - name: Assert no runtime API secret required
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          d=json.loads(pathlib.Path("config/openai-agents-experimental-v1.json").read_text())
+          assert d["enabled"] is False
+          assert d["cost_gate"]["max_spend_usd"]==0
+          assert d["tools"]["mcp"]["enabled"] is False
+          assert d["environment"]["default"]["type"]=="none"
+          print("OPENAI_AGENTS_EXPERIMENT=STATIC_ONLY_ZERO_NETWORK_ZERO_SPEND")
+          PY
