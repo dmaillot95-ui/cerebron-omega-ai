@@ -160,8 +160,9 @@
       "state_sha": "7bec961e6e2980bed75b676e7c51200aac348e5c",
       "iteration": 464,
       "observed_packet_count": 144,
-      "current_registry_count": 152,
-      "registry_sync_note": "REGISTRY_NOW_152_F72_REMAINS_FAIL_UNTIL_FRESH_GATE_EVIDENCE"
+      "current_registry_count": 154,
+      "registry_sync_note": "REGISTRY_154_ENTRIES_MAX_ID_F174_SPARSE_IDS_F153_TO_F172_ABSENT_F72_REMAINS_FAIL_UNTIL_FRESH_GATE_EVIDENCE",
+      "current_registry_max_id": 174
     }
   },
   "global_promotion_state": "BLOCKED_PENDING_F72_FRESH_VALIDATION_AND_REPRODUCTION",
