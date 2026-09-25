@@ -1,24 +1,23 @@
 {
   "schema": "CEREBRON_MEMORY_PROMOTION_AUDIT_V2_RECEIPT",
   "date": "2026-09-25",
-  "run_id": 36143095219,
-  "job_id": 108097439157,
+  "run_id": 36155304088,
+  "job_id": 108138259383,
   "status": "PASS",
-  "artifact_id": 10868321773,
-  "artifact_digest": "sha256:d4d91d1a81f872cf9e1876e8dbb413aa8cac8ecf717cbf32f9efb24dd5159221",
-  "receipt_sha256": "367cafbca3c9b0b71392f80e0958255e61e5153d7f8434584db193d87182c88f",
+  "artifact_id": 10873431435,
+  "artifact_digest": "sha256:065a3bf32141e02cc56112f2800db170b61f44f5eba0238074e27fd7a0c2fb6e",
+  "receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
   "checks": {
-    "farm_count": 152,
-    "max_farm_id": 152,
+    "registry_entry_count": 154,
+    "max_farm_id": 174,
+    "sparse_ids_allowed": true,
     "m6_training": "DENY",
     "f72_current": "FAIL",
     "m4_promotion": "BLOCKED_BY_F72",
     "rdx_memory_ingress": "CONFIGURED",
     "rdx_auto_training": false
   },
-  "duplicate_runs_not_independent_evidence": [
-    36143223031,
-    36143282648
-  ],
-  "claim_ceiling": "MEMORY_POLICY_CONFIGURATION_AUDIT_PASS; DOES_NOT_PROVE_F114_F120_RUNTIME_RECALL_OR_NEURAL_TRAINING"
+  "supersedes_run_id": 36143095219,
+  "failed_mechanical_run_not_scientific_failure": 36155091980,
+  "claim_ceiling": "MEMORY_POLICY_CONFIGURATION_AUDIT_PASS_FOR_SPARSE_REGISTRY_THROUGH_F174_NO_NEURAL_TRAINING_CLAIM"
 }
