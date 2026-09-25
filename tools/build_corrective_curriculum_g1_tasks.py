@@ -48,6 +48,13 @@ for f in failures["entries"]:
             if routed_match: reasons.append("FAILURE_CLASS_SPECIALIST_ROUTE")
             route_reasons.setdefault((ident,f.get("FAILURE_ID")),reasons)
 
+def failure_priority(f):
+    status=str(f.get("REPAIR_STATUS","")).upper()
+    hot=any(x in status for x in ("OPEN","BLOCKED","REQUIRED","ROLLBACK","PENDING"))
+    has_curriculum=bool(f.get("CURRICULUM_TARGETS"))
+    # Open/blocked and explicitly routed failures come first; newer timestamp breaks ties.
+    return (0 if hot else 1, 0 if has_curriculum else 1, str(f.get("TIMESTAMP","")), str(f.get("FAILURE_ID","")))
+
 task_types=[
     ("BOUNDARY_CONTRAST","Generate a pair of superficially similar cases whose correct treatment differs on the target skill boundary."),
     ("SURFACE_TRANSFER","Re-express the same underlying skill in a different vocabulary/domain surface without copying benchmark wording."),
@@ -60,7 +67,7 @@ for ident in sorted(targets):
     e=available[ident]
     axes=curr["ai_corrective_axes"][ident]
     refs=[]
-    for f in direct.get(ident,[]):
+    for f in sorted(direct.get(ident,[]), key=failure_priority):
         refs.append({
             "failure_id":f.get("FAILURE_ID"),
             "failure_class":f.get("FAILURE_CLASS"),
@@ -70,6 +77,22 @@ for ident in sorted(targets):
             "curriculum_targets":f.get("CURRICULUM_TARGETS",[]),
             "route_reasons":route_reasons.get((ident,f.get("FAILURE_ID")),[])
         })
+    focus=[]
+    for r in refs[:2]:
+        root=str(r.get("root_cause") or "").replace("\n"," ").strip()
+        if len(root)>240:
+            root=root[:237]+"..."
+        focus.append({
+            "failure_id":r.get("failure_id"),
+            "signature":r.get("signature"),
+            "root_cause":root,
+            "route_reasons":r.get("route_reasons",[])
+        })
+    focus_text=""
+    if focus:
+        focus_text=" Focus the exercise on measured failure(s): " + " | ".join(
+            str(x["failure_id"])+": "+str(x["signature"])+"; cause="+str(x["root_cause"]) for x in focus
+        )
     for i,(kind,instruction) in enumerate(task_types):
         axis=axes[i % len(axes)]
         body={
@@ -78,7 +101,8 @@ for ident in sorted(targets):
             "ai_id":e["ai_id"],
             "kind":kind,
             "corrective_axis":axis,
-            "instruction":instruction,
+            "instruction":instruction+focus_text,
+            "failure_focus":focus,
             "specialization_tags":e.get("specialization_tags",[]),
             "specialization_vector":vec_by_identity[ident]["specialization_vector"],
             "source_failure_refs":refs[:8],
