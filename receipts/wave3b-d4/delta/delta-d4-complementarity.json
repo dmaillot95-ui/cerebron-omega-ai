@@ -1,0 +1,62 @@
+{
+  "schema": "DELTA_D4_COMPLEMENTARITY_PRECHECK_V1",
+  "run_id": 36155099887,
+  "ai_id": "DELTA",
+  "source_d3_run_id": 36142921827,
+  "source_d3_audit_sha256": "49e879b04b01144f22229bacef8b4d7e96bbee9ded9261096a225c5cbfd8d27b",
+  "m6_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
+  "task_count": 72,
+  "qwen_correct": 48,
+  "smol_correct": 44,
+  "both_correct": 44,
+  "qwen_only_correct": 4,
+  "smol_only_correct": 0,
+  "both_wrong": 24,
+  "prediction_disagreement_count": 4,
+  "oracle_union_correct": 48,
+  "oracle_gain_over_best_single": 0,
+  "domain": {
+    "assumption_control": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "dimensional_consistency": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "model_fidelity": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "sensitivity": {
+      "qwen": 8,
+      "smol": 4,
+      "oracle": 8,
+      "total": 12
+    },
+    "simulation_design": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    },
+    "transfer": {
+      "qwen": 8,
+      "smol": 8,
+      "oracle": 8,
+      "total": 12
+    }
+  },
+  "decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+  "independent_evidence_count": 0,
+  "two_models_not_two_independent_proofs": true,
+  "public_rows_fingerprint_sha256": "48bfb2cd464bc7b3333818709a6a42d2da8c2659d7f3d15caf3d0087d9fd2bb9",
+  "claim_ceiling": "D4_COMPLEMENTARITY_PRECHECK_ONLY_NO_RUNTIME_ACTIVATION",
+  "receipt_sha256": "83e1ff3fb7f0fc2ad8a16257d5528f5775cf37d8c4ded0c461ff69163a7f3dc3"
+}

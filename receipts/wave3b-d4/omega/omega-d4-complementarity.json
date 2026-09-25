@@ -1,0 +1,62 @@
+{
+  "schema": "OMEGA_D4_COMPLEMENTARITY_PRECHECK_V1",
+  "run_id": 36155099887,
+  "ai_id": "OMEGA",
+  "source_d3_run_id": 36142921827,
+  "source_d3_audit_sha256": "33cd1d448a97fe52e697785ae439fcfdc2c29154f552d81adbc8c8bafa84ed38",
+  "m6_sha256": "c4d5f9be45d3f12560df67ab091278ad13a10ee297a8a83f6e3578d9e2383248",
+  "task_count": 72,
+  "qwen_correct": 54,
+  "smol_correct": 30,
+  "both_correct": 18,
+  "qwen_only_correct": 36,
+  "smol_only_correct": 12,
+  "both_wrong": 6,
+  "prediction_disagreement_count": 51,
+  "oracle_union_correct": 66,
+  "oracle_gain_over_best_single": 12,
+  "domain": {
+    "assumption_audit": {
+      "qwen": 12,
+      "smol": 4,
+      "oracle": 12,
+      "total": 12
+    },
+    "calibration": {
+      "qwen": 5,
+      "smol": 7,
+      "oracle": 9,
+      "total": 12
+    },
+    "counterexample_search": {
+      "qwen": 12,
+      "smol": 4,
+      "oracle": 12,
+      "total": 12
+    },
+    "formal_validity": {
+      "qwen": 8,
+      "smol": 7,
+      "oracle": 12,
+      "total": 12
+    },
+    "proof_gap_detection": {
+      "qwen": 9,
+      "smol": 4,
+      "oracle": 9,
+      "total": 12
+    },
+    "reproduction": {
+      "qwen": 8,
+      "smol": 4,
+      "oracle": 12,
+      "total": 12
+    }
+  },
+  "decision": "CONTINUE_D4_FUSION_CANARY",
+  "independent_evidence_count": 0,
+  "two_models_not_two_independent_proofs": true,
+  "public_rows_fingerprint_sha256": "9ea206e79a5c432552e4796dc758fd05c38c4627f9a73a647ee3ee473245a3fa",
+  "claim_ceiling": "D4_COMPLEMENTARITY_PRECHECK_ONLY_NO_RUNTIME_ACTIVATION",
+  "receipt_sha256": "164c1aabd265701b6beeab97a540beab5ec77b1629bf2833fd4cc92680a1863e"
+}
