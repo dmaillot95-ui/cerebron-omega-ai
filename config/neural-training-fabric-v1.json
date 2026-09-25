@@ -160,14 +160,23 @@
       "hf_private_readback_sha_pass": true,
       "promotion": "NOT_PROMOTED",
       "pending": [
-        "NOVEL_TRANSFER_GAIN",
-        "ABLATION_SUPPORTS_VALUE",
         "INDEPENDENT_AUDIT",
         "RED_TEAM",
         "F72_REVIEW",
         "AFAH_FINAL_AUTHORITY"
       ],
-      "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY"
+      "claim_ceiling": "REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_VERIFIED_FOR_SCOPED_SAPHEA_EPISTEMIC_CLASSIFIER_ONLY",
+      "transfer_gate": {
+        "run_id": 36101181888,
+        "dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
+        "base_score": 20,
+        "adapter_score": 40,
+        "max_score": 108,
+        "gain": 20,
+        "ablation_supports_value": true,
+        "critical_regression": false,
+        "status": "PASS_SCOPED_SYNTHETIC"
+      }
     }
   ],
   "saphea_first_lora_evidence": {
