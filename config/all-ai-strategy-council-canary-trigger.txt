@@ -1,2 +1,2 @@
-repair=label-parser-v3-no-regex
+repair=short-eight-line-contract-v4
 sample=5
