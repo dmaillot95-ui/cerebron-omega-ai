@@ -1,0 +1,151 @@
+{
+  "schema": "CEREBRON_102_REGISTRY_F174_D4_DEV_ACTIVE_V1",
+  "date": "2026-09-25",
+  "scope": "AI_MEMORY_RDX_TRAINING_INTEGRATION_ONLY_NO_ARCHITECTON_RD_EXECUTION",
+  "registry": {
+    "version": "2.24",
+    "entry_count": 154,
+    "max_farm_id": 174,
+    "max_farms": 174,
+    "farm_ceiling": 174,
+    "sparse_ids": true,
+    "high_ids": [
+      {
+        "id": 152,
+        "name": "CEREBRON RDX EXCHANGE"
+      },
+      {
+        "id": 173,
+        "name": "AÉLYS LIVE",
+        "ownership": "OTHER_SESSION_DO_NOT_MODIFY"
+      },
+      {
+        "id": 174,
+        "name": "ELYRA VISUAL SIMULATION",
+        "ownership": "OTHER_SESSION_DO_NOT_MODIFY"
+      }
+    ],
+    "f152": {
+      "status": "RDX_PRIVATE_WRITE_READ_SHA_RECALL_PASS_PRODUCT_BUILD_SEPARATE",
+      "memory_routes": {
+        "immediate": [
+          114,
+          115,
+          116,
+          119,
+          120
+        ],
+        "conditional_replay": [
+          117
+        ],
+        "gold": [
+          118
+        ]
+      }
+    }
+  },
+  "memory": {
+    "audit_run_id": 36155304088,
+    "audit_status": "PASS",
+    "audit_receipt_sha256": "a1aa212fe635eb29e092b944322e1725973e40bb648a90790e2f7b9ad02759bd",
+    "audit_artifact_digest": "sha256:065a3bf32141e02cc56112f2800db170b61f44f5eba0238074e27fd7a0c2fb6e",
+    "f72": "FAIL",
+    "m4_gold": "BLOCKED_BY_F72",
+    "m6_training": "DENY",
+    "failed_mechanical_run_not_scientific_failure": 36155091980
+  },
+  "rdx": {
+    "ingress_run_id": 36142030500,
+    "ingress": "PASS_MEMORY_RAG_GOLD_BLOCKED",
+    "write_read_recall_run_id": 36143467119,
+    "write_read_recall": "PASS",
+    "write_read_recall_receipt_sha256": "a0544c0d774e34d8107be592b5193ce321d36182a44581786edfb3f76db5450f",
+    "semantic_retrieval_quality": "NOT_TESTED",
+    "neural_training": "NOT_EXECUTED"
+  },
+  "wave3a": {
+    "d3_run_id": 36138864930,
+    "d3": "PASS",
+    "SAELION": {
+      "d4_precheck_run_id": 36146455180,
+      "qwen_correct": 45,
+      "smol_correct": 36,
+      "oracle_union_correct": 45,
+      "oracle_gain_over_best_single": 0,
+      "decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+      "state": "SINGLE_CORE_QWEN_RETAINED"
+    },
+    "NEXUS": {
+      "d4_precheck_run_id": 36146455180,
+      "qwen_correct": 52,
+      "smol_correct": 48,
+      "oracle_union_correct": 56,
+      "oracle_gain_over_best_single": 4,
+      "decision": "CONTINUE_D4_FUSION_CANARY",
+      "fusion_dev_run_id": 36155230931,
+      "fusion_dev_state": "IN_PROGRESS",
+      "rule": "DEV_ONLY_M6_NOT_USED_FOR_TUNING"
+    }
+  },
+  "wave3b": {
+    "d3_run_id": 36142921827,
+    "d3": "PASS_ALL",
+    "d4_precheck_run_id": 36155099887,
+    "ALPHA": {
+      "qwen_correct": 44,
+      "smol_correct": 28,
+      "oracle_union_correct": 47,
+      "oracle_gain_over_best_single": 3,
+      "decision": "CONTINUE_D4_FUSION_CANARY",
+      "fusion_dev_run_id": 36155520110,
+      "fusion_dev_state": "QUEUED"
+    },
+    "OMEGA": {
+      "qwen_correct": 54,
+      "smol_correct": 30,
+      "oracle_union_correct": 66,
+      "oracle_gain_over_best_single": 12,
+      "decision": "CONTINUE_D4_FUSION_CANARY",
+      "fusion_dev_run_id": 36155520110,
+      "fusion_dev_state": "QUEUED"
+    },
+    "DELTA": {
+      "qwen_correct": 48,
+      "smol_correct": 44,
+      "oracle_union_correct": 48,
+      "oracle_gain_over_best_single": 0,
+      "decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY",
+      "state": "SINGLE_CORE_QWEN_RETAINED"
+    }
+  },
+  "elysium": {
+    "d4": "HOLD_NO_ROBUST_GAIN",
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4"
+  },
+  "coordination": {
+    "other_session": "R&D_EXECUTION_PLANE",
+    "this_session": "RDX_REGISTRY_MEMORY_AI_TRAINING_INTEGRATION_PLANE",
+    "collision_rule": "DO_NOT_MODIFY_OTHER_SESSION_ACTIVE_RD_OBJECTS_OR_F173_F174"
+  },
+  "next_exact": [
+    "Close NEXUS fusion DEV run 36155230931. If DEV gain > 0 with max domain regression <= 1, freeze policy and create a NEW fresh private holdout; otherwise HOLD without consuming a holdout.",
+    "Close ALPHA/OMEGA fusion DEV run 36155520110 with the same DEV-only rule.",
+    "Keep SAELION and DELTA on Qwen single-core; do not spend D4 fusion compute unless new independent evidence appears.",
+    "Keep F118 GOLD and RDX neural training blocked while F72 remains FAIL.",
+    "Do not modify F173/F174; they were added by another session."
+  ],
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_DUPLICATE_RUNS",
+    "SPARSE_FARM_IDS_ALLOWED",
+    "QUEUE_IS_NOT_FAILURE",
+    "ORACLE_GAIN_IS_NOT_REAL_FUSION_GAIN",
+    "DEV_IS_NOT_COLD_EVIDENCE",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
