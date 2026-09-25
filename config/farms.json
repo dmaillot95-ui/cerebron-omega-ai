@@ -1511,29 +1511,43 @@
       "repo": "cerebron-farm-174-elyra-visual-simulation",
       "domain": "elyra-visual-simulation",
       "identity": "ELYRA",
-      "status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_NOT_EXECUTED",
+      "status": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
       "type": "VISUAL_SIMULATION_FARM",
       "role": "Prepare replayable visual and video simulation contracts for ELYRA without claiming executed simulation or physical validation.",
       "training_status": "NOT_TRAINED",
-      "simulation_status": "NOT_EXECUTED",
+      "simulation_status": "VISUAL_STATE_SEQUENCE_CANARY_EXECUTED",
       "physical_test_status": "NOT_TESTED",
       "repository_exists": true,
       "repository_initialized": true,
       "local_scaffold": "scaffolds/f174-elyra-visual-simulation",
-      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_SIMULATION_NOT_EXECUTED",
+      "infrastructure_status": "DEDICATED_REPOSITORY_SELFTEST_PASS_VISUAL_CANARY_PASS_EXTERNAL_RENDER_UNQUALIFIED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
         "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
-        "dedicated_repo_head": "fd2327d3016475cdf84561e5d4bdcee89a28f2e5",
-        "dedicated_repo_selftest_run_id": 36156887593
+        "dedicated_repo_head": "7e11aa760be6badfca60f1ff1e60997a12aabb84",
+        "dedicated_repo_selftest_run_id": 36160671044,
+        "visual_canary_run_id": 36160498658,
+        "visual_canary_result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
+        "visual_canary_artifact_id": 10875238594,
+        "visual_canary_artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc"
       },
       "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json",
       "initial_commit": "e270fa591e6f16afee3d9ae7a3f1d458539ec085",
-      "dedicated_repo_head": "fd2327d3016475cdf84561e5d4bdcee89a28f2e5",
-      "dedicated_repo_selftest_run_id": 36156887593
+      "dedicated_repo_head": "7e11aa760be6badfca60f1ff1e60997a12aabb84",
+      "dedicated_repo_selftest_run_id": 36160671044,
+      "visual_simulation_executed": true,
+      "video_render_executed": false,
+      "physical_model_claimed": false,
+      "physical_validation_claimed": false,
+      "visual_canary": {
+        "run_id": 36160498658,
+        "result_sha256": "edfa8d7f50c0906f8f5fa3051f6109c1fb7ba5463722df698e011e822d3d38c9",
+        "artifact_id": 10875238594,
+        "artifact_digest": "sha256:9c81b4805ef626f632fcd1831ac464fba0cdd53f0efe505f1813e91608675bbc"
+      }
     }
   ],
   "max_farms": 174,
@@ -1571,6 +1585,9 @@
     ],
     "extension_repository_selftest_pass_ids": [
       173,
+      174
+    ],
+    "extension_visual_canary_pass_ids": [
       174
     ]
   },
