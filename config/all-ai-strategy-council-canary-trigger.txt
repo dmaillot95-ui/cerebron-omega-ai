@@ -1,2 +1,2 @@
-repair=qwen3-4b-v5-alias-strict
+repair=qwen3-4b-v5-fixed-source
 sample=5
