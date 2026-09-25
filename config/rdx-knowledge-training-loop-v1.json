@@ -264,5 +264,12 @@
     "semantic_retrieval_quality": "NOT_TESTED",
     "gold_write": "NOT_ATTEMPTED",
     "training": "NOT_EXECUTED"
+  },
+  "semantic_retrieval_canary": {
+    "run_id": 36156985796,
+    "state": "IN_PROGRESS",
+    "linked_memory_farm_id": 115,
+    "training": "NOT_EXECUTED",
+    "weights_changed": false
   }
 }
