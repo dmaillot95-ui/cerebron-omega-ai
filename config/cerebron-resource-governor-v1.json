@@ -1,0 +1,123 @@
+{
+  "schema": "CEREBRON_RESOURCE_GOVERNOR_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE_POLICY",
+  "purpose": "Allow all available CEREBRON logical AIs to receive work while limiting concurrent expensive model execution and preventing redundant loads/runs.",
+  "principles": [
+    "ALL_AVAILABLE_AI_MAY_BE_QUEUED",
+    "QUEUED_AI_NE_EXECUTED_AI",
+    "MODEL_LOAD_NE_AI_IDENTITY",
+    "AGENT_COUNT_NE_INDEPENDENT_EVIDENCE",
+    "REUSE_VERIFIED_BEFORE_NEW_EXECUTION",
+    "JOIN_INFLIGHT_BEFORE_DUPLICATE_RUN",
+    "BATCH_SAME_MODEL_LINEAGE_WHEN_COMPATIBLE",
+    "MINIMAL_USEFUL_COALITION",
+    "NO_AUTOMATIC_PAID_PROVIDER",
+    "FAIL_CLOSED_ON_RESOURCE_PRESSURE"
+  ],
+  "limits": {
+    "logical_ai_queue_capacity": 38,
+    "default_heavy_model_parallelism": 2,
+    "hard_heavy_model_parallelism": 4,
+    "default_distinct_heavy_lineages_parallel": 2,
+    "hard_distinct_heavy_lineages_parallel": 4,
+    "training_parallelism_max": 4,
+    "per_ai_training_candidates_max": 2,
+    "per_model_lineage_heavy_loads_default": 1,
+    "light_jobs_parallelism_soft": 16,
+    "model_cache_reuse": true
+  },
+  "execution_classes": {
+    "LIGHT": {
+      "examples": [
+        "JSON_VALIDATION",
+        "HASHING",
+        "ROUTING",
+        "MEMORY_INDEX",
+        "STATIC_AUDIT",
+        "POLICY_GATE"
+      ],
+      "model_required": false,
+      "scheduling": "PARALLEL_SOFT_LIMIT"
+    },
+    "MEDIUM": {
+      "examples": [
+        "SUB_1B_INFERENCE",
+        "SMALL_EMBEDDING",
+        "SMALL_CLASSIFIER"
+      ],
+      "model_required": true,
+      "scheduling": "QUEUE_IF_RUNNER_PRESSURE"
+    },
+    "HEAVY": {
+      "examples": [
+        "3B_4B_CPU_INFERENCE",
+        "MULTI_TURN_MODEL_EVAL",
+        "LARGE_CONTEXT_GENERATION"
+      ],
+      "model_required": true,
+      "scheduling": "STRICT_WAVES"
+    },
+    "TRAINING": {
+      "examples": [
+        "LORA",
+        "QLORA",
+        "FULL_WEIGHT_TRAINING"
+      ],
+      "model_required": true,
+      "scheduling": "STRICT_WAVES_AND_TRAINING_GATES"
+    }
+  },
+  "priority_order": [
+    "SECURITY_OR_REALITY_GATE",
+    "BLOCKING_AUDIT_OR_REPRODUCTION",
+    "USER_INTERACTIVE_REQUEST",
+    "COLD_TRANSFER_REDTEAM",
+    "CORRECTIVE_CURRICULUM",
+    "BACKGROUND_RESEARCH",
+    "OPTIONAL_EXPLORATION"
+  ],
+  "batching": {
+    "same_model_same_revision": true,
+    "compatible_requests_share_single_model_load": true,
+    "preserve_per_ai_prompt_identity": true,
+    "preserve_per_ai_receipts": true,
+    "independence_count_rule": "Multiple AI roles sharing one model lineage remain one model lineage for independence accounting."
+  },
+  "queue_policy": {
+    "duplicate_work": "USE_ANTI_REDUNDANCY_SCHEDULER",
+    "equivalent_verified": "REUSE_VERIFIED",
+    "equivalent_inflight": "JOIN_INFLIGHT",
+    "otherwise": "QUEUE_OR_EXECUTE_BY_CLASS_AND_CAPACITY",
+    "starvation_control": "FIFO_WITH_PRIORITY_AGING",
+    "failed_run_retry": "ONLY_WITH_FAILURE_RECEIPT_AND_BOUNDED_RETRY"
+  },
+  "timeout_policy": {
+    "heavy_cpu_inference_minutes": 25,
+    "training_minutes": 55,
+    "no_progress_interpretation": "DO_NOT_ASSUME_SUCCESS; WAIT_FOR_RECEIPT_OR_TIMEOUT",
+    "retry_after_timeout": "REPLAN_SMALLER_WAVE_OR_SHORTER_OUTPUT_BEFORE_RETRY"
+  },
+  "example_all_ai_launch": {
+    "requested_ai_count": 38,
+    "meaning": "38 logical AI missions admitted to queue, not 38 simultaneous model loads.",
+    "heavy_wave_size_default": 2,
+    "heavy_wave_size_hard_max": 4,
+    "light_control_plane_jobs_may_run_concurrently": true,
+    "expected_execution": "WAVE_1 -> receipts -> WAVE_2 -> receipts -> ... -> fusion"
+  },
+  "protected_operational_boundaries": {
+    "farms": [
+      172,
+      173,
+      174
+    ],
+    "operational_mutation": false,
+    "note": "Resource governance may schedule learning/evaluation work but does not modify protected site/runtime surfaces."
+  },
+  "claim_boundary": {
+    "configured_governor_ne_runtime_scheduler": true,
+    "queue_entry_ne_execution": true,
+    "shared_model_batch_ne_independent_models": true
+  }
+}
