@@ -37,9 +37,15 @@ assert f173["repository_exists"] is True
 assert f173["repository_initialized"] is True
 assert f173["training_status"]=="NOT_TRAINED"
 assert f173["production_status"]=="NOT_DEPLOYED"
-assert f173["dedicated_repo_selftest_run_id"]==36156589051
+assert f173["dedicated_repo_selftest_run_id"]==36162643249
 assert f173["master_plugin_bus_status"]=="DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
+assert f173["status"]=="LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED"
 assert f173["local_contracts_status"]=="QUALIFIED"
+assert f173["local_live_loop_canary_status"]=="PASS"
+assert f173["local_live_loop_canary"]["run_id"]==36162553038
+assert f173["local_live_loop_canary"]["result_sha256"]=="a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4"
+assert f173["local_live_loop_canary"]["external_calls_executed"] is False
+assert f173["local_live_loop_canary"]["production_live_claimed"] is False
 assert f173["external_runtime_status"]=="UNQUALIFIED"
 assert f173["rdx_route_provider"]=="RDX_EXCHANGE"
 assert f173["f152_rdx_route_forbidden"] is True
@@ -77,7 +83,7 @@ print(json.dumps({
   "status":"PASS",
   "registry_max_farm":174,
   "f162":"PREPARED_REPOSITORY_MISSING",
-  "f173":"LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED",
+  "f173":"LOCAL_LIVE_LOOP_CANARY_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
   "f174":"VIDEO_RENDER_CANARY_EXECUTED_PRODUCTION_FALSE_PHYSICAL_NOT_TESTED",
   "training_claims":0,
   "execution_claims":0
