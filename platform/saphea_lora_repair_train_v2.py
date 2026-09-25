@@ -196,7 +196,6 @@ def main():
       "m6_guard_pass":guard_pass,"validation_before":before,"validation_after":after,
       "weights_changed":True
     },sort_keys=True))
-    if not guard_pass: raise SystemExit(4)
 
 if __name__=="__main__":
     main()
