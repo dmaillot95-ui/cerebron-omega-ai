@@ -186,6 +186,37 @@
       "TRANSFER_RISK": "LOW_AFTER_5_OF_5_PARSE_PASS",
       "PARENT_SHA": "355e6ffaff51eba8db5f44cf8a8512dd4113d5bb",
       "TIMESTAMP": "2026-09-25"
+    },
+    {
+      "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-FORMAT-002",
+      "MISSION_ID": "C80-ALL-AI-STRATEGY-COUNCIL-001",
+      "AI_ID": "ETHERION_METRION_CANARY",
+      "AGENT_ID": "A2_ANALYST",
+      "FAILURE_CLASS": "F_FORMAT",
+      "FAILURE_SIGNATURE": "CANARY_V3_5_INFERENCE_PASS_3_PARSE_PASS",
+      "ROOT_CAUSE": "The parser was repaired, but the compact 0.5B model did not consistently follow the eight-field format: ETHERION repeated/emptied labels and METRION reorganized sections, leaving required fields empty.",
+      "EVIDENCE_REFS": [
+        "run:36076314764",
+        "artifact:all-ai-council-repair-canary-36076314764",
+        "artifact:council-canary-ETHERION",
+        "artifact:council-canary-METRION"
+      ],
+      "IMPACT": "Council remains blocked from 38-AI rerun because only 3/5 canary outputs were fully parseable.",
+      "SCOPE": "Output-contract adherence for compact shared council model.",
+      "REPRODUCIBLE": true,
+      "REPAIR_ATTEMPTS": [
+        "short eight-line plain-text contract",
+        "8-30 words per field",
+        "no Markdown/bullets/numbering",
+        "repetition_penalty 1.15",
+        "no_repeat_ngram_size 4",
+        "max_new_tokens 260",
+        "same five-AI canary"
+      ],
+      "REPAIR_STATUS": "V4_CANARY_REQUIRED",
+      "TRANSFER_RISK": "MEDIUM_UNTIL_5_OF_5_PARSE_PASS",
+      "PARENT_SHA": "a8251d24996852e8d3463910601953620716b98a",
+      "TIMESTAMP": "2026-09-25"
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
