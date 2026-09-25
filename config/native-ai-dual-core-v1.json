@@ -402,16 +402,16 @@
           "testability"
         ]
       },
-      "project_state": "D3_PASS_D4_COMPLEMENTARITY_READY",
-      "dual_core_state": "D3_PASS_QWEN_BEST_SINGLE",
+      "project_state": "D4_COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+      "dual_core_state": "D4_COMPLEMENTARITY_PASS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "READY_COMPLEMENTARITY_PRECHECK",
-        "D5": "PENDING",
-        "D6": "PENDING",
+        "D4": "COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+        "D5": "BLOCKED_PENDING_D4_FUSION",
+        "D6": "BLOCKED_PENDING_D4_FUSION",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -428,7 +428,12 @@
         "d3_qwen_correct": 44,
         "d3_smol_correct": 28,
         "d3_best_single_model": "Qwen/Qwen3-4B",
-        "d3_best_single_accuracy": 0.6111111111111112
+        "d3_best_single_accuracy": 0.6111111111111112,
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "cbe2b7b531d3fe5e8727b7e5c197b5548f63feaef5c37409978ad8ee94bedf92",
+        "d4_oracle_union_correct": 47,
+        "d4_oracle_gain_over_best_single": 3,
+        "d4_decision": "CONTINUE_D4_FUSION_CANARY"
       }
     },
     {
@@ -461,16 +466,16 @@
           "explicit_open_gaps"
         ]
       },
-      "project_state": "D3_PASS_D4_COMPLEMENTARITY_READY",
-      "dual_core_state": "D3_PASS_QWEN_BEST_SINGLE",
+      "project_state": "D4_COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+      "dual_core_state": "D4_COMPLEMENTARITY_PASS",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "READY_COMPLEMENTARITY_PRECHECK",
-        "D5": "PENDING",
-        "D6": "PENDING",
+        "D4": "COMPLEMENTARITY_PASS_FUSION_DEV_READY",
+        "D5": "BLOCKED_PENDING_D4_FUSION",
+        "D6": "BLOCKED_PENDING_D4_FUSION",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -487,7 +492,12 @@
         "d3_qwen_correct": 54,
         "d3_smol_correct": 30,
         "d3_best_single_model": "Qwen/Qwen3-4B",
-        "d3_best_single_accuracy": 0.75
+        "d3_best_single_accuracy": 0.75,
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "164c1aabd265701b6beeab97a540beab5ec77b1629bf2833fd4cc92680a1863e",
+        "d4_oracle_union_correct": 66,
+        "d4_oracle_gain_over_best_single": 12,
+        "d4_decision": "CONTINUE_D4_FUSION_CANARY"
       }
     },
     {
@@ -521,16 +531,16 @@
           "testability"
         ]
       },
-      "project_state": "D3_PASS_D4_COMPLEMENTARITY_READY",
-      "dual_core_state": "D3_PASS_QWEN_BEST_SINGLE",
+      "project_state": "D4_STOP_NO_COMPLEMENTARITY",
+      "dual_core_state": "SINGLE_CORE_QWEN_RETAINED",
       "gate_status": {
         "D0": "PASS_REPOSITORY_PRESENT",
         "D1": "PASS_PRIVATE_MEMORY_NAMESPACE_CANARY",
         "D2": "PASS",
         "D3": "PASS",
-        "D4": "READY_COMPLEMENTARITY_PRECHECK",
-        "D5": "PENDING",
-        "D6": "PENDING",
+        "D4": "STOP_NO_COMPLEMENTARITY",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PENDING",
         "D8": "PENDING"
       },
@@ -547,7 +557,12 @@
         "d3_qwen_correct": 48,
         "d3_smol_correct": 44,
         "d3_best_single_model": "Qwen/Qwen3-4B",
-        "d3_best_single_accuracy": 0.6666666666666666
+        "d3_best_single_accuracy": 0.6666666666666666,
+        "d4_precheck_run_id": 36155099887,
+        "d4_receipt_sha256": "83e1ff3fb7f0fc2ad8a16257d5528f5775cf37d8c4ded0c461ff69163a7f3dc3",
+        "d4_oracle_union_correct": 48,
+        "d4_oracle_gain_over_best_single": 0,
+        "d4_decision": "STOP_DUAL_MODEL_NO_COMPLEMENTARITY"
       }
     },
     {
