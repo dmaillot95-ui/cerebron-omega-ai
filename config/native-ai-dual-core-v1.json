@@ -218,16 +218,16 @@
           "claim_ceiling"
         ]
       },
-      "project_state": "D4_FRESH_FUSION_CANARY_IN_PROGRESS",
-      "dual_core_state": "D4_FRESH_PRIVATE_FUSION_CANARY_RUNNING",
+      "project_state": "D4_FRESH_FUSION_HOLD_REPAIR_REQUIRED",
+      "dual_core_state": "D4_HOLD_NO_MEASURED_GAIN",
       "gate_status": {
         "D0": "PASS",
         "D1": "PASS",
         "D2": "PASS",
         "D3": "PASS_PRIVATE_M6_V2",
-        "D4": "IN_PROGRESS_FRESH_PRIVATE_FUSION_CANARY",
-        "D5": "BLOCKED_PENDING_D4_FUSION_GAIN",
-        "D6": "BLOCKED_PENDING_D4_FUSION_GAIN",
+        "D4": "HOLD_NO_MEASURED_GAIN_REPAIR_REQUIRED",
+        "D5": "BLOCKED_BY_D4",
+        "D6": "BLOCKED_BY_D4",
         "D7": "PARTIAL_M6_ISOLATION_PASS_TRAINING_ASSEMBLER_PENDING",
         "D8": "PENDING"
       },
@@ -271,7 +271,24 @@
         "d4_parallel_legacy_evidence_status": "DO_NOT_COUNT_WRONG_D3_LINEAGE",
         "d4_fresh_fusion_run_id": 36134498167,
         "d4_fresh_fusion_policy": "AGREE_ELSE_IF_BOTH_JUDGES_SELECT_QWEN_USE_QWEN_ELSE_SMOL_PRIMARY",
-        "d4_fresh_fusion_holdout": "FRESH_PRIVATE_RUNTIME_GENERATED"
+        "d4_fresh_fusion_holdout": "FRESH_PRIVATE_RUNTIME_GENERATED",
+        "d4_fresh_fusion_artifact_id": 10864572618,
+        "d4_fresh_fusion_artifact_digest": "sha256:a616267e0b17a9a4a8a5a04c7d7e8c8cdf06302d2e060639f2fddc100fa56768",
+        "d4_fresh_fusion_receipt_sha256": "5d6b98614925dfe10b8dbae373b50ab1eb2c341f36280a525ffa29df0a143ac4",
+        "d4_fresh_fusion_holdout_sha256": "6b842c86d133313b29ff334eb45b7421b517896be8b411b42b1e423793466f73",
+        "d4_fresh_fusion_metrics": {
+          "task_count": 24,
+          "qwen_correct": 20,
+          "smol_correct": 18,
+          "best_single_correct": 20,
+          "fusion_correct": 18,
+          "fusion_gain_over_best_single": -2,
+          "switches_to_qwen": 0,
+          "helpful_switches": 0,
+          "harmful_switches": 0,
+          "critical_domain_regression": false
+        },
+        "d4_fresh_fusion_decision": "D4_FRESH_FUSION_HOLD_NO_MEASURED_GAIN"
       }
     },
     {
