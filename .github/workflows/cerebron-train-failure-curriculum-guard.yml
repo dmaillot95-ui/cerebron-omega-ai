@@ -1,0 +1,46 @@
+name: CEREBRON Train Failure Curriculum Guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evolution/build_train_failure_curriculum_v1.py'
+      - 'memory/failure-bank-v1.json'
+      - 'config/cerebron-failure-curriculum-routing-v1.json'
+      - '.github/workflows/cerebron-train-failure-curriculum-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build train-only failure curriculum
+        run: |
+          python -m py_compile evolution/build_train_failure_curriculum_v1.py
+          python evolution/build_train_failure_curriculum_v1.py
+      - name: Enforce no reserved-eval derivation
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/train-failure-curriculum-v1.json"))
+          assert x["all_sources_train_split"] is True
+          assert x["reserved_eval_derivative_count"]==0
+          assert x["training_eligible_count"]==0
+          assert x["weight_training_released"] is False
+          assert all(t["source_split"]=="train" for t in x["tasks"])
+          print("TRAIN_FAILURE_CURRICULUM_GUARD=PASS",x["train_source_failure_count"],x["task_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: train-failure-curriculum-v1
+          path: artifacts/train-failure-curriculum-v1.json
+          if-no-files-found: error
+          retention-days: 30
