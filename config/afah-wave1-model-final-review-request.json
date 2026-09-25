@@ -1,0 +1,22 @@
+{
+  "schema": "AFAH_WAVE1_MODEL_FINAL_REVIEW_REQUEST_V1",
+  "source": {
+    "repo": "dmaillot95-ui/cerebron-omega-ai",
+    "commit": "b8702f2b7c713819a6c7b60df00910a0e5c70f55",
+    "role_receipt": "receipts/wave1/canonical/afah-lora-36109026167.json",
+    "canonical_audit": "receipts/wave1/canonical/wave1-parallel-lora-audit-36109026167.json"
+  },
+  "f72": {
+    "repo": "dmaillot95-ui/cerebron-farm-72-reality-evidence-gate",
+    "commit": "61ef7f29b023f7647c0dd6588d230d4c7c070a17",
+    "receipt": "receipts/wave1-afah-lora-evidence-review-36110722530.json",
+    "run_id": 36110722530,
+    "result_sha256": "71dfa080d9d27687a9b40c1f8c55f875ecf2ddfd36ba188f3be62864b79c014f"
+  },
+  "expected_role": "AFAH",
+  "expected_adapter_sha256": "60695846b0b7d8144c043c4f3340e7a6d4b5862e04b89acf2738acf571f4cda0",
+  "requested_decision": "G6_VERIFIED_RESEARCH_ONLY",
+  "candidate_adapter_used_for_final_review": false,
+  "auto_runtime_activation": false,
+  "auto_g7_promotion": false
+}
