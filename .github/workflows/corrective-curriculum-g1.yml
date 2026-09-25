@@ -1,0 +1,45 @@
+name: CEREBRON Corrective Curriculum G1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'training/CEREBRON_CORRECTIVE_CURRICULUM_G1_V1.json'
+      - 'tools/build_corrective_curriculum_g1_tasks.py'
+      - 'memory/failure-bank-v1.json'
+      - 'config/all-ai-neural-training-coverage-v1.json'
+      - 'config/gvl-specialization-registry-v2.json'
+      - '.github/workflows/corrective-curriculum-g1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build failure-driven task pack
+        run: python tools/build_corrective_curriculum_g1_tasks.py
+      - name: Verify no training release
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("artifacts/corrective_curriculum_g1_tasks.json"))
+          assert x["target_ai_count"]==38
+          assert x["task_count"]==162
+          assert x["training_released"] is False
+          assert all(t["training_eligible"] is False for t in x["tasks"] if "training_eligible" in t)
+          print("CORRECTIVE_G1_TASK_PACK=PASS",x["task_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corrective-curriculum-g1-task-pack
+          path: artifacts/corrective_curriculum_g1_tasks.json
+          if-no-files-found: error
+          retention-days: 30
