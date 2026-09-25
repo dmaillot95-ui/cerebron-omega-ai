@@ -1308,7 +1308,8 @@
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425
-      }
+      },
+      "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json"
     },
     {
       "id": 163,
@@ -1476,7 +1477,7 @@
       "repo": "cerebron-farm-173-aelys-live",
       "domain": "aelys-live-runtime",
       "identity": "AELYS",
-      "status": "BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED",
+      "status": "BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED",
       "type": "INTERFACE_RUNTIME_FARM",
       "role": "Prepare a verifiable low-latency live interaction runtime contract for AELYS without claiming deployment.",
       "training_status": "NOT_TRAINED",
@@ -1484,19 +1485,26 @@
       "repository_exists": true,
       "repository_initialized": true,
       "local_scaffold": "scaffolds/f173-aelys-live",
-      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_SELFTEST_PASS_MASTER_BUS_GUARD_PASS_RUNTIME_UNQUALIFIED",
+      "infrastructure_status": "DEDICATED_REPOSITORY_INITIALIZED_LOCAL_CONTRACTS_PASS_EXTERNAL_RUNTIME_UNQUALIFIED",
       "evidence": {
         "reality_guard_run_id": 36155160206,
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425,
-        "dedicated_repo_selftest_run_id": 36155830169,
+        "dedicated_repo_selftest_run_id": 36156589051,
         "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
-        "unified_plugin_bus_guard_run_id": 36156083228
+        "unified_plugin_bus_guard_run_id": 36156083228,
+        "rdx_route_fix_run_id": 36156539575,
+        "runtime_qualification_run_id": 36156589051
       },
-      "dedicated_repo_head": "1c296ae0ba430fc3706de7ad2d81a2a088ed613c",
-      "dedicated_repo_selftest_run_id": 36155830169,
-      "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED"
+      "dedicated_repo_head": "6a99ba8807ffd77fca95249c3f206b6c636dd024",
+      "dedicated_repo_selftest_run_id": 36156589051,
+      "master_plugin_bus_status": "DECLARED_GUARD_PASS_RUNTIME_UNQUALIFIED",
+      "local_contracts_status": "QUALIFIED",
+      "external_runtime_status": "UNQUALIFIED",
+      "rdx_route_provider": "RDX_EXCHANGE",
+      "f152_rdx_route_forbidden": true,
+      "runtime_qualification_file": "config/runtime-qualification.json"
     },
     {
       "id": 174,
@@ -1518,7 +1526,8 @@
         "omega_core_run_id": 36155316250,
         "main_integration_run_id": 36155316281,
         "crystal_guard_run_id": 36155316425
-      }
+      },
+      "bootstrap_manifest": "config/farm-bootstrap-manifest-f162-f174.json"
     }
   ],
   "max_farms": 174,
