@@ -26,7 +26,15 @@ Dépôt :
 État réel :
 - dépôt initialisé ;
 - contrats locaux qualifiés ;
-- selftest : SUCCESS, run `36156589051` ;
+- canary local de boucle live : SUCCESS, run `36162553038` ;
+- selftest post-canary : SUCCESS, run `36162643249` ;
+- résultat SHA-256 : `a860b0f9becd088496c6580b6febd608af0964e73c10b6ac04452048326fb3a4` ;
+- artifact ID : `10876417068` ;
+- artifact digest : `sha256:0a607e3aa5e0c82b46fa33a85d7b37fd26bd62a3833655516d3041e90f957303` ;
+- la boucle locale exécute ingress → préparation de requêtes → présentation fail-closed ;
+- aucun appel externe n'est exécuté par ce canary ;
+- présentation sans preuve : `HOLD` ;
+- avatar/TTS : `UNQUALIFIED` ;
 - RDX route : `RDX_EXCHANGE` ;
 - F152 interdit comme route RDX ;
 - TikTok / TTS / avatar / runtimes distants : UNQUALIFIED ;
@@ -34,7 +42,7 @@ Dépôt :
 - production live : NOT_DEPLOYED.
 
 Statut :
-`BASE_INSTALLED_LOCAL_CONTRACTS_QUALIFIED_EXTERNAL_RUNTIME_UNQUALIFIED`
+`LOCAL_LIVE_LOOP_CANARY_EXECUTED_EXTERNAL_RUNTIME_UNQUALIFIED`
 
 ## F174 — ELYRA VISUAL / VIDEO SIMULATION
 
@@ -105,9 +113,15 @@ Le MP4 canary est une preuve d'exécution du renderer, pas une qualification pro
 
 ## Guards finaux
 
+Après ajout du canary local F173 :
+- F162/F173/F174 Reality Guard : run `36162875939` — SUCCESS
+- Civilization Crystal Baseline Guard : run `36162882109` — SUCCESS
+- Unified Plugin Bus Guard : run `36162887468` — SUCCESS
+- CÉRÉBRON Omega Core : run `36162887709` — SUCCESS
+- CÉRÉBRON Main Integration Gate : run `36162887441` — SUCCESS
+
+Preuves antérieures F174 MP4 :
 - F162/F173/F174 Reality Guard : run `36161840847` — SUCCESS
-- CÉRÉBRON Omega Core : run `36161840848` — SUCCESS
-- CÉRÉBRON Main Integration Gate : run `36161840863` — SUCCESS
 - Civilization Crystal Baseline Guard : run `36161698459` — SUCCESS
 - Unified Plugin Bus Guard : run `36161712968` — SUCCESS
 - Guardian Security Regression : dernier run concerné `36160995408` — SUCCESS
@@ -118,7 +132,7 @@ F162 :
 `LOCAL_SCAFFOLD_PRESENT / DEDICATED_REPOSITORY_MISSING`
 
 F173 :
-`LOCAL_CONTRACTS_QUALIFIED / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE`
+`LOCAL_LIVE_LOOP_CANARY_PASS / EXTERNAL_RUNTIME_UNQUALIFIED / NOT_LIVE / NOT_TRAINED`
 
 F174 :
 `VISUAL_CANARY_PASS / MP4_RENDER_CANARY_PASS / NOT_PRODUCTION / NOT_PHYSICALLY_VALIDATED / NOT_TRAINED`
@@ -141,7 +155,9 @@ F162 :
 - créer le dépôt dédié quand un outil de création de repository est disponible.
 
 F173 :
-- qualifier les runtimes live réels un par un avec canary + trace.
+- le canary local fail-closed est PASS ;
+- prochaine preuve utile : qualifier un runtime externe réel isolé (par exemple sortie TTS ou client privé), avec canary + trace ;
+- ne pas passer à LIVE tant qu'un endpoint/runtimes externe réel n'est pas exécuté et validé.
 
 F174 :
 - passer d'un avatar MP4 synthétique déterministe à un pipeline visuel plus riche ;
