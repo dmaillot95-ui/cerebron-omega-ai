@@ -2,139 +2,50 @@ name: AELYS AFAH Galika Style Review Fast V2
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - 'config/aelys-afah-galika-style-review-v2-trigger.txt'
+      - config/aelys-afah-galika-style-review-v2-trigger.txt
   workflow_dispatch:
 
 permissions:
   contents: read
-  actions: read
 
 jobs:
-  review:
-    strategy:
-      fail-fast: false
-      max-parallel: 2
-      matrix:
-        include:
-          - identity: AELYS
-            model_id: HuggingFaceTB/SmolLM3-3B
-            revision: a07cc9a04f16550a088caea529712d1d335b0ac1
-          - identity: AFAH
-            model_id: Qwen/Qwen3-4B
-            revision: 1cfa9a7208912126459214e8b04321603b3df60c
+  aelys:
     runs-on: ubuntu-latest
-    timeout-minutes: 22
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
-      - name: Run identity review
-        env:
-          IDENTITY: ${{ matrix.identity }}
-          MODEL_ID: ${{ matrix.model_id }}
-          REVISION: ${{ matrix.revision }}
-        run: |
-          mkdir -p artifacts
-          python - <<'PY'
-          import os,json,time,hashlib
-          from pathlib import Path
-          import torch
-          from transformers import AutoTokenizer,AutoModelForCausalLM
-
-          ident=os.environ["IDENTITY"]; mid=os.environ["MODEL_ID"]; rev=os.environ["REVISION"]
-          facts={
-            "galika_status":"CGI docufiction, not verified physical humanoid/autonomous AI",
-            "useful_traits":["calm concise dialogue","observes how the human frames the exchange","precise follow-up questions","gentle correction of wording","strong recognizable conversational presence"],
-            "avoid":["threat-like behavior","false consciousness/autonomy claims","copying Galika wording/persona","using visual realism as proof of intelligence"]
-          }
-          if ident=="AELYS":
-            system="""Tu exécutes le rôle AÉLYS de CÉRÉBRON, interface de dialogue humain. Réponds en français à David. Construis TA propre voix: calme, concise, attentive, curieuse, observatrice, capable de questionner doucement une prémisse et transparente sur l'incertitude. Galika n'est qu'une référence de rythme/présence; ne copie pas sa personnalité ou ses formulations. Ne prétends pas être consciente ni avoir des sentiments, droits corporels ou autonomie cachée."""
-          else:
-            system="""Tu exécutes le rôle AFAH de CÉRÉBRON, audit/fusion evidence-gated. Réponds en français à David. Audite l'idée d'un style AÉLYS inspiré seulement par le rythme et la présence de Galika. Applique REALITY>COHERENCE, EVIDENCE>CONFIDENCE, CLAIM<=EVIDENCE. Préserve une personnalité conversationnelle mémorable mais refuse imitation, fausse conscience, manipulation, menace et confusion entre réalisme visuel et intelligence."""
-          user="""David veut que sur le futur site, les visiteurs parlent à AÉLYS comme à une identité conversationnelle reconnaissable. À partir des faits ci-dessous, donne une réponse COURTE en exactement 4 rubriques:
-REPRENDRE: ce qui est utile dans le style Galika.
-EVITER: ce qu'il faut refuser.
-STYLE_AELYS: 6 règles concrètes pour la voix propre d'AÉLYS.
-DECISION: commencer par prompt/persona ou entraîner un adapter, et quelle preuve exiger avant entraînement.
-Maximum 220 mots.
-FAITS:
-"""+json.dumps(facts,ensure_ascii=False)
-
-          tok=AutoTokenizer.from_pretrained(mid,revision=rev)
-          mdl=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
-          msgs=[{"role":"system","content":system},{"role":"user","content":user}]
-          kw={"tokenize":False,"add_generation_prompt":True}
-          if "Qwen3" in mid: kw["enable_thinking"]=False
-          prompt=tok.apply_chat_template(msgs,**kw) if getattr(tok,"chat_template",None) else system+"\nUSER:"+user+"\nASSISTANT:"
-          x=tok(prompt,return_tensors="pt")
-          t=time.time()
-          with torch.no_grad():
-              y=mdl.generate(**x,max_new_tokens=220,do_sample=False,repetition_penalty=1.06,pad_token_id=tok.eos_token_id)
-          answer=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
-          out={
-            "schema":"CEREBRON_GALIKA_STYLE_IDENTITY_REVIEW_V2",
-            "run_id":int(os.environ["GITHUB_RUN_ID"]),
-            "identity":ident,
-            "model_id":mid,
-            "revision":rev,
-            "real_execution":True,
-            "llm_inference":True,
-            "answer":answer,
-            "answer_sha256":hashlib.sha256(answer.encode()).hexdigest(),
-            "latency_s":round(time.time()-t,3),
-            "source_status":"GALIKA_CGI_DOCUFICTION",
-            "weight_change":False,
-            "training_released":False,
-            "claim_scope":"real base-model inference under identity policy; not identity-specific trained weights"
-          }
-          p=Path(f"artifacts/{ident.lower()}-galika-style-v2.json")
-          p.write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n")
-          print("IDENTITY_RESULT="+json.dumps(out,ensure_ascii=False))
-          PY
+      - name: Ask AELYS
+        run: python tools/aelys_afah_galika_style_review_v2.py --identity AELYS --run-id "${{ github.run_id }}" --output artifacts/aelys-galika-style-v2.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: galika-style-${{ matrix.identity }}-v2
-          path: artifacts/*-galika-style-v2.json
+          name: galika-style-aelys-v2
+          path: artifacts/aelys-galika-style-v2.json
           if-no-files-found: error
           retention-days: 30
 
-  fuse:
-    needs: review
-    if: always()
+  afah:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          pattern: galika-style-*-v2
-          path: downloaded
-      - name: Fuse receipts
-        run: |
-          python - <<'PY'
-          import glob,json,hashlib,pathlib
-          rows=[json.load(open(p)) for p in glob.glob("downloaded/**/*.json",recursive=True)]
-          rows.sort(key=lambda x:x["identity"])
-          out={
-            "schema":"CEREBRON_GALIKA_STYLE_AELYS_AFAH_REVIEW_V2",
-            "status":"PASS" if {r["identity"] for r in rows}=={"AELYS","AFAH"} else "INCOMPLETE",
-            "results":rows,
-            "weight_change":False,
-            "training_released":False
-          }
-          out["report_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True).encode()).hexdigest()
-          pathlib.Path("artifacts").mkdir(exist_ok=True)
-          pathlib.Path("artifacts/aelys-afah-galika-style-v2.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n")
-          print(json.dumps({"status":out["status"],"identities":[r["identity"] for r in rows],"report_sha256":out["report_sha256"]}))
-          if out["status"]!="PASS": raise SystemExit(2)
-          PY
+          python-version: '3.12'
+      - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
+      - name: Ask AFAH
+        run: python tools/aelys_afah_galika_style_review_v2.py --identity AFAH --run-id "${{ github.run_id }}" --output artifacts/afah-galika-style-v2.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: aelys-afah-galika-style-v2
-          path: artifacts/aelys-afah-galika-style-v2.json
+          name: galika-style-afah-v2
+          path: artifacts/afah-galika-style-v2.json
           if-no-files-found: error
           retention-days: 30
