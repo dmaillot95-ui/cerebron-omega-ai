@@ -382,7 +382,7 @@
         "remove literal backslashes from GitHub Actions expressions",
         "rerun same GOLD/M6/base model without changing benchmark"
       ],
-      "REPAIR_STATUS": "CLOSED_BY_SAME_SCALE_RERUN",
+      "REPAIR_STATUS": "CLOSED_BY_TARGET_PRESERVING_RERUN",
       "TRANSFER_RISK": "LOW_AFTER_SAME_SCALE_RERUN",
       "TIMESTAMP": "2026-09-25",
       "CLOSURE_EVIDENCE": [
