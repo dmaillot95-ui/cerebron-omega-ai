@@ -1,0 +1,74 @@
+{
+  "schema": "CEREBRON_125_RDX_HUMAN_REVIEW_PRE_REGISTRY_SYNTHETIC_BLOCK_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_HUMAN_REVIEW_PRE_REGISTRY_SYNTHETIC_BLOCK_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "9be239c4e01f35e928d3ecfddbd4b01df86d5fef",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "8f7a9cc1e6055fd0cb5cf9379b7dd6cf34049648",
+    "full_validation": {
+      "run_id": 36190213963,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36190213944,
+      "status": "PASS"
+    },
+    "deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "release_chain": {
+    "source_commit": "8f7a9cc1e6055fd0cb5cf9379b7dd6cf34049648",
+    "file_count": 16,
+    "aggregate_sha256": "92a08f69317ec2e90da21cac99bd2f65e26db19a7fb53ab52261cdbd6746ffc2",
+    "release_attestation_sha256": "9ac491a6401b95bda7a7b9781dacfb860cfb96b5ecea67fdbecd170d17f34ed7",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_chain": "PASS"
+  },
+  "human_review_chain": {
+    "workflow_contract": "PASS",
+    "manual_only": true,
+    "auto_apply": false,
+    "approve_or_reject": true,
+    "live_proof_sigstore_required": true,
+    "registration_proposal_sigstore_required": true,
+    "signed_human_review_required": true,
+    "signed_registry_update_proposal_on_approve": true
+  },
+  "pre_registry_anti_synthetic": {
+    "builder_rejects_synthetic_canary": true,
+    "builder_rejects_synthetic_evidence_class": true,
+    "builder_rejects_invalid_domain": true,
+    "validator_rejects_synthetic_canary": true,
+    "validator_rejects_synthetic_evidence_class": true,
+    "validator_rejects_invalid_domain": true,
+    "registry_auto_apply": false
+  },
+  "fail_closed_controls": {
+    "negative_canaries": "PASS_8_OF_8_REJECTED",
+    "production_deployment_verified": false,
+    "proofs_registered": 0,
+    "latest_verified": null
+  },
+  "claim_ceiling": {
+    "actual_live_human_review_executed": false,
+    "actual_registry_update_proposal_from_live_run": false,
+    "production_deployment_verified": false
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "SYNTHETIC_CANARY!=LIVE_EVIDENCE",
+    "NO_SYNTHETIC_PROOF_BEFORE_OR_IN_PRODUCTION_REGISTRY",
+    "NO_SIMULATED_HUMAN_APPROVAL",
+    "NO_AUTO_APPLY_PRODUCTION_REGISTRY",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
