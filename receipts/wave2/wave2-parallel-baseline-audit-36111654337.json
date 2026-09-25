@@ -1,0 +1,56 @@
+{
+  "schema": "CEREBRON_WAVE2_PARALLEL_BASELINE_AUDIT_V1",
+  "run_id": 36111654337,
+  "roles": [
+    "SPIRALION",
+    "HYPERION",
+    "ASTRION",
+    "SAPHEA_MICRO"
+  ],
+  "receipt_count": 4,
+  "real_inference_count": 4,
+  "training_executed_count": 0,
+  "unique_lineage_fingerprints": 2,
+  "independent_evidence_count": 0,
+  "scores": {
+    "ASTRION": {
+      "score": 3,
+      "max": 12,
+      "accuracy": 0.25,
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "training_readiness": "BLOCKED_NO_VALIDATED_AEROSPACE_GOLD",
+      "benchmark_sha256": "01c7b164ebf1cabbec70e8c49a1987f1658c89c11011c9eb26838b9335fec18b"
+    },
+    "HYPERION": {
+      "score": 8,
+      "max": 12,
+      "accuracy": 0.6666666666666666,
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "benchmark_sha256": "0f0bfcd614860a6638e3eeeadf3ae37573f9900d5882f13789c54b856b58b40b"
+    },
+    "SAPHEA_MICRO": {
+      "score": 5,
+      "max": 14,
+      "accuracy": 0.35714285714285715,
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+      "training_readiness": "BLOCKED_DESIGN_ACTIVE_NO_VERSIONED_MICRO_GOLD",
+      "benchmark_sha256": "9bc5a80cc3d649162e9fa0feb0193d9882a5b1a0f594ba1ee01bbc8e8b0fb01f"
+    },
+    "SPIRALION": {
+      "score": 9,
+      "max": 12,
+      "accuracy": 0.75,
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "training_readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+      "benchmark_sha256": "25f422f0fb9a8c83d97000fa9d952847f0280987a4c02d039721e8ace4b6523d"
+    }
+  },
+  "next_gate": "ROLE_SPECIFIC_QUARANTINE_DATA_BUILD_AND_AUDIT",
+  "claim_ceiling": "FOUR_REAL_PARALLEL_BASELINES_TWO_SHARED_MODEL_LINEAGES_NO_TRAINING_CLAIM",
+  "audit_sha256": "d4d5aa276ec2156aa066c5e2c5c7f56839b2046fcbc39aabb4815fab12c2c96d"
+}
