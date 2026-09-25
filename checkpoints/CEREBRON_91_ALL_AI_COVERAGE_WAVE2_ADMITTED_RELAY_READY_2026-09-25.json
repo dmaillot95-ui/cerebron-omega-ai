@@ -1,0 +1,85 @@
+{
+  "schema": "CEREBRON_91_ALL_AI_COVERAGE_WAVE2_ADMITTED_RELAY_READY_V1",
+  "date": "2026-09-25",
+  "coverage": {
+    "registry": "config/all-ai-neural-training-coverage-v1.json",
+    "commit": "7251a0dc240fb63c9de387be2d6a62e431591d0a",
+    "available_ai_count": 38,
+    "neural_training_executed_count": 6,
+    "wave2_pipeline_count": 4,
+    "native_dual_core_pending_count": 7,
+    "specialist_pending_count": 20,
+    "cerebron_orchestrator_pending_count": 1,
+    "invariant": "NO_AVAILABLE_AI_MAY_BE_OMITTED_FROM_THE_TRAINING_ROADMAP"
+  },
+  "wave1": {
+    "closed_checkpoint": "checkpoints/CEREBRON_89_WAVE1_CLOSED_2026-09-25.json",
+    "afah_g6_research_only": true,
+    "rollback_roles": [
+      "AELYS",
+      "ETHERION",
+      "METRION"
+    ]
+  },
+  "wave2": {
+    "baseline_run": 36111654337,
+    "baseline_scores": {
+      "SPIRALION": "9/12",
+      "HYPERION": "8/12",
+      "ASTRION": "3/12",
+      "SAPHEA_MICRO": "5/14"
+    },
+    "quarantine_run": 36112884799,
+    "quarantine_status": "PASS",
+    "manifest_sha256": "c4c1b1db4a6e074c3d88b8cbe20c38a969f8f45d236bb25bc549c82b2722d744",
+    "semantic_pass": "456/456",
+    "tamper_pass": "19/19",
+    "f72_run": 36113384989,
+    "f72_status": "SUPPORTED_E2",
+    "f72_result_sha256": "4ed12347e94ced51fadcb6b9aee0cc589499f79ee0cf1a45e0d7b187489118a7",
+    "afah_admission_run": 36113724966,
+    "afah_review_sha256": "e48495a3c7fa1ad25470628dfc8db59dfff1888ada1d41752e2a09b2e99a3da7",
+    "afah_decision": "ADMIT_WAVE2_SYNTHETIC_CANDIDATE_POOL",
+    "training_released": false,
+    "resource_canary": {
+      "model": "HuggingFaceTB/SmolLM3-3B",
+      "real_training_step": true,
+      "weights_changed": true,
+      "max_rss_kb": 15000368,
+      "decision": "RESOURCE_CANARY_PASS"
+    },
+    "package": {
+      "failed_run": 36114043066,
+      "failure": "F_TOOL_DUPLICATE_COLD_PROMPT",
+      "repaired_run": 36114213946,
+      "state": "QUEUED_AT_CHECKPOINT"
+    },
+    "next_exact": [
+      "Check package run 36114213946.",
+      "If package PASS, read training/WAVE2_PARALLEL_TRAINING_RELEASE_V1.json and release_sha256.",
+      "Trigger CEREBRON Wave2 Parallel Role LoRA exactly once for SPIRALION,HYPERION,ASTRION,SAPHEA_MICRO.",
+      "Classify each role independently G6_CANDIDATE or ROLLBACK.",
+      "Route only G6 candidates to real F72 Wave2 role LoRA reviewer then AFAH final multi-role policy gate.",
+      "Never count same-base or duplicate runs as independent evidence."
+    ]
+  },
+  "openai_agents": {
+    "branch": "feat/openai-agents-cerebron-experimental-v1",
+    "ci_run": 36112564314,
+    "status": "PASS_STATIC_ZERO_SPEND",
+    "astra_future_rnd_authorized_by_user": true,
+    "actual_paid_execution_now": false,
+    "spend_cap_required_before_execution": true
+  },
+  "relay_protocol": {
+    "requested_by_user": true,
+    "start_on_next_user_SUITE": true,
+    "messages_total": 3,
+    "user_says_SUITE_between_messages": true,
+    "content": [
+      "MESSAGE_1_IDENTITY_ARCHITECTURE_AND_EVIDENCE_RULES",
+      "MESSAGE_2_CURRENT_RUNS_AI_COVERAGE_AND_EXACT_STATES",
+      "MESSAGE_3_EXACT_RESUME_COMMANDS_AND_DO_NOT_BREAK_RULES"
+    ]
+  }
+}
