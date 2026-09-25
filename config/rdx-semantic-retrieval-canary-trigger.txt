@@ -1,0 +1,1 @@
+RDX SEMANTIC RETRIEVAL CANARY V1\nsource_farm=F152\nlinked_memory_farm=F115\ntraining=false\nproduction_claim=false\n
