@@ -1,0 +1,86 @@
+{
+  "schema": "CEREBRON_CONTINUOUS_NEURAL_TRAINING_V1",
+  "date": "2026-09-25",
+  "status": "ACTIVE_CONTROLLER_FAIL_CLOSED",
+  "branch": "feat/continuous-neural-training-v1",
+  "objective": "Continuously admit newly released neural-training batches and keep up to four real training slots occupied without duplicating closed runs.",
+  "max_parallel_real_trainings": 4,
+  "resource_governor": "config/cerebron-resource-governor-v1.json",
+  "coverage_registry": "config/all-ai-neural-training-coverage-v1.json",
+  "continuous_policy": "training/EIGHT_AI_CONTINUOUS_BATCH_POLICY.json",
+  "eligible_release_contract": {
+    "required_fields": [
+      "training_released",
+      "continuous_training_eligible",
+      "release_sha256",
+      "roles"
+    ],
+    "training_released": true,
+    "continuous_training_eligible": true,
+    "cold_transfer_red_in_training": "DENY",
+    "old_closed_wave_reuse": "DENY"
+  },
+  "closed_training_runs": [
+    36109026167,
+    36117279297
+  ],
+  "closed_roles": [
+    "SAPHEA",
+    "SPIRALION",
+    "ETHERION",
+    "HYPERION",
+    "ASTRION",
+    "METRION",
+    "AFAH",
+    "AELYS",
+    "ELYRA",
+    "SAPHEA_MICRO"
+  ],
+  "queue_order": [
+    "WAVE3A",
+    "WAVE3B",
+    "WAVE4",
+    "WAVE5",
+    "WAVE6",
+    "WAVE7",
+    "FINAL_ORCHESTRATOR_WAVE",
+    "REPAIR_LANE"
+  ],
+  "global_gates": [
+    "REAL_WEIGHT_OR_ADAPTER_CHANGE_REQUIRED",
+    "NO_BENCHMARK_LEAKAGE",
+    "M6_TRANSFER_RED_DENY_TRAINING",
+    "F72_OR_EQUIVALENT_RELEASE_GATE_MUST_NOT_BE_FAIL",
+    "NO_AUTO_PROMOTION",
+    "NO_PAID_PROVIDER_AUTO_ACTIVATION"
+  ],
+  "current_known_blockers": [
+    {
+      "id": "PLATFORM_RDX_F72_FAIL",
+      "evidence_ref": "feat/cerebron-ai-platform-mvp:checkpoints/CEREBRON_104_REGISTRY_V225_WAVE3_D4_CLOSED_RDX_SEMANTIC_RETRY_ACTIVE_2026-09-25.json",
+      "blocks": "RDX_NEURAL_TRAINING",
+      "note": "Does not block unrelated future role training if its own release chain passes; controller still requires an explicit role release."
+    }
+  ],
+  "scheduler": {
+    "cadence": "HOURLY_PLUS_RELEASE_PUSH",
+    "mode": "PLAN_AND_DISPATCH_ONLY_WHEN_EXPLICIT_RELEASE_EXISTS",
+    "priority": "OLDEST_ELIGIBLE_RELEASE_THEN_WAVE_ORDER",
+    "anti_redundancy": "REUSE_VERIFIED_OR_JOIN_INFLIGHT_BEFORE_NEW_RUN",
+    "max_parallel": 4
+  },
+  "protected_surfaces": {
+    "farms": [
+      172,
+      173,
+      174
+    ],
+    "mutate": false
+  },
+  "claim_boundary": [
+    "CONTROLLER_ACTIVE_NE_TRAINING_EXECUTED",
+    "QUEUED_NE_WEIGHTS_CHANGED",
+    "FOUR_SLOTS_NE_FOUR_INDEPENDENT_MODELS",
+    "PROMOTION_REQUIRES_POSTTRAIN_COLD_TRANSFER_RED_ABLATION"
+  ]
+}
