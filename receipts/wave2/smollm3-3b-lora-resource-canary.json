@@ -1,0 +1,16 @@
+{
+  "schema": "CEREBRON_SMOLLM3_3B_LORA_RESOURCE_CANARY_V1",
+  "model_id": "HuggingFaceTB/SmolLM3-3B",
+  "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+  "device": "cpu",
+  "precision": "float32",
+  "real_training_step": true,
+  "trainable_parameter_count": 958464,
+  "initial_lora_sha256": "ea9845e9511b0b875bf7cebb64317302c1508b9cf13a8ab1de707a3feb966d10",
+  "final_lora_sha256": "8c32c3a178d818e472f259cef7f67f2b3db58e7666d22dc6352a87756a9fff41",
+  "weights_changed": true,
+  "loss": 9.572199821472168,
+  "elapsed_s": 50.741,
+  "max_rss_kb": 15000368,
+  "decision": "RESOURCE_CANARY_PASS"
+}
