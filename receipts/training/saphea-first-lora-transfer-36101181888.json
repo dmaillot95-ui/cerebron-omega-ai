@@ -1,0 +1,29 @@
+{
+  "schema": "SAPHEA_FIRST_LORA_TRANSFER_PUBLIC_RECEIPT_V1",
+  "run_id": 36101181888,
+  "source_training_run": 36100266729,
+  "source_adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+  "transfer_dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
+  "transfer_record_count": 108,
+  "transfer_deny_training": true,
+  "prompt_overlap_with_gold_m6": 0,
+  "id_overlap_with_gold_m6": 0,
+  "base_score": 20,
+  "adapter_score": 40,
+  "max_score": 108,
+  "transfer_gain": 20,
+  "prediction_changed_count": 67,
+  "helpful_change_count": 22,
+  "harmful_change_count": 2,
+  "critical_regression": false,
+  "ablation_supports_value": true,
+  "decision": "TRANSFER_GAIN_POSITIVE_ABLATION_SUPPORTS_VALUE_HOLD_FOR_AUDIT",
+  "promotion": "NOT_PROMOTED",
+  "pending_gates": [
+    "INDEPENDENT_AUDIT",
+    "RED_TEAM",
+    "F72_REVIEW",
+    "AFAH_FINAL_AUTHORITY"
+  ],
+  "claim_ceiling": "SCOPED_SYNTHETIC_HELD_OUT_TRANSFER_ONLY"
+}
