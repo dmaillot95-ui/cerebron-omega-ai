@@ -1,0 +1,66 @@
+{
+  "schema": "CEREBRON_115_RDX_LINK_AND_ANCHOR_INTEGRITY_V1",
+  "date": "2026-09-25",
+  "scope": "RDX_STATIC_NAVIGATION_INTEGRITY_ONLY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "2d9e1d9d5778cc37e9f765b02453f2f5d509b943",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "head": "02e02259f438bae752dc81e5fb13fc4d3d88df0b",
+    "full_validation": {
+      "run_id": 36177708210,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36177708206,
+      "status": "PASS"
+    },
+    "pages_deploy": "SKIPPED_UNTIL_OWNER_ENABLEMENT",
+    "live_verify": "SKIPPED_UNTIL_REAL_DEPLOYMENT"
+  },
+  "navigation_integrity": {
+    "html_files": 7,
+    "internal_links_checked": 28,
+    "internal_fragment_anchors_checked": 16,
+    "broken_links": 0,
+    "broken_anchors": 0,
+    "gate": "RDX Static Link Integrity Gate",
+    "status": "PASS"
+  },
+  "release_integrity": {
+    "source_commit": "02e02259f438bae752dc81e5fb13fc4d3d88df0b",
+    "file_count": 16,
+    "aggregate_sha256": "093d15b116470f98489862ed75b7d610e127dd79f254715bef3ad790dee96d36",
+    "browser_js_syntax": "PASS",
+    "static_security": "PASS",
+    "static_release_build": "PASS"
+  },
+  "browser_verifier": {
+    "source_commit_provenance_check": true,
+    "manifest_source_commit_match": true,
+    "sha256_all_public_files": true,
+    "aggregate_sha256_reconstruction": true
+  },
+  "claim_ceiling": {
+    "production_deployment_verified": false,
+    "rdx_000001": "SOURCED_E2_NOT_VERIFIED_NOT_PUBLISHED"
+  },
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "next_exact": [
+    "Keep link and anchor integrity fail-closed.",
+    "Do not weaken browser provenance or static security gates.",
+    "After owner enables GitHub Pages, require deploy PASS and live proof V2 PASS.",
+    "Do not modify F172-F174 from this session."
+  ],
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "NO_FALSE_DEPLOYMENT_CLAIM",
+    "NO_FORCE_PUSH"
+  ]
+}
