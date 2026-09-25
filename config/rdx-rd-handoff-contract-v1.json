@@ -1,0 +1,148 @@
+{
+  "schema": "CEREBRON_RDX_RD_HANDOFF_CONTRACT_V1",
+  "date": "2026-09-25",
+  "purpose": "Canonical handoff from R&D execution plane to RDX registry/memory/training integration plane.",
+  "required_top_level": [
+    "schema",
+    "handoff_id",
+    "project_id",
+    "producer",
+    "canonical_ids",
+    "artifacts",
+    "sources",
+    "executions",
+    "claims",
+    "dedup",
+    "rights",
+    "human_review",
+    "open_work",
+    "m6_contamination",
+    "transfer",
+    "ablation",
+    "afah_review"
+  ],
+  "canonical_id_prefixes": [
+    "SRC-",
+    "REQ-",
+    "UNK-",
+    "DAT-",
+    "FORMULA-",
+    "CALC-",
+    "ARCH-",
+    "RISK-",
+    "FAIL-",
+    "MODEL-",
+    "SIM-",
+    "RESULT-",
+    "CONCEPT-",
+    "IP-",
+    "CLAIM-",
+    "TEST-",
+    "CTR-",
+    "ALT-",
+    "LIM-",
+    "DEC-",
+    "EXEC-"
+  ],
+  "producer_requirements": {
+    "actual_execution_only": true,
+    "required": [
+      "session_role",
+      "farm_id_or_null",
+      "ai_or_model",
+      "role",
+      "mission"
+    ]
+  },
+  "artifact_requirements": {
+    "required": [
+      "artifact_id",
+      "kind",
+      "sha256",
+      "location",
+      "visibility"
+    ],
+    "sha256_pattern": "^[0-9a-f]{64}$"
+  },
+  "source_requirements": {
+    "required": [
+      "source_id",
+      "origin",
+      "citation_or_location",
+      "rights_status"
+    ],
+    "training_rights_values": [
+      "ALLOWED",
+      "DENIED",
+      "UNKNOWN"
+    ],
+    "rule": "UNKNOWN_OR_DENIED_RIGHTS_BLOCK_SHARED_TRAINING"
+  },
+  "execution_requirements": {
+    "required": [
+      "exec_id",
+      "status",
+      "input_refs",
+      "output_refs",
+      "artifact_refs"
+    ],
+    "accepted_status": [
+      "PASS",
+      "FAIL",
+      "PARTIAL",
+      "HOLD"
+    ],
+    "rule": "NO_EXECUTION_RECORD_NO_EXECUTION_CLAIM"
+  },
+  "claim_requirements": {
+    "required": [
+      "claim_id",
+      "text",
+      "evidence_refs",
+      "limitations",
+      "evidence_level"
+    ],
+    "rule": "CLAIM_LE_EVIDENCE"
+  },
+  "stages": {
+    "MEMORY_INGEST_READY": [
+      "SCHEMA_PASS",
+      "CANONICAL_IDS_PASS",
+      "ARTIFACT_SHA_PASS",
+      "PROVENANCE_PASS",
+      "DEDUP_PASS",
+      "M6_CLEAN"
+    ],
+    "F72_REVIEW_CANDIDATE": [
+      "MEMORY_INGEST_READY",
+      "VERIFIED_EXECUTION_PRESENT",
+      "HUMAN_REVIEW_COMPLETE",
+      "SOURCE_RIGHTS_CLEAR_FOR_TRAINING",
+      "OPEN_WORK_EMPTY",
+      "TRANSFER_PASS",
+      "ABLATION_PASS",
+      "AFAH_PASS"
+    ],
+    "M4_GOLD_ELIGIBLE": [
+      "F72_REVIEW_CANDIDATE",
+      "F72_GLOBAL_PASS",
+      "TRAIN_VALID_SPLIT",
+      "M6_EXCLUSION_E2E"
+    ]
+  },
+  "defaults": {
+    "shared_training_allowed": false,
+    "gold_eligible": false,
+    "auto_train": false
+  },
+  "hard_rules": [
+    "NO_RAW_RDX_AUTO_TRAIN",
+    "M6_NEVER_IN_TRAIN",
+    "MEMORY_NOT_TRAINING",
+    "NO_GOLD_WITHOUT_F72_AND_AFAH",
+    "NO_FAKE_EXECUTIONS",
+    "DEDUP_BEFORE_COUNTING",
+    "ONE_INFORMATION_ONE_CANONICAL_ID",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING"
+  ]
+}
