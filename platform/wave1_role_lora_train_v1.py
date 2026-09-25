@@ -186,7 +186,7 @@ def main():
     tok=AutoTokenizer.from_pretrained(MODEL_ID,revision=REVISION)
     if tok.pad_token_id is None:tok.pad_token=tok.eos_token
     base=AutoModelForCausalLM.from_pretrained(MODEL_ID,revision=REVISION,dtype=torch.float32,low_cpu_mem_usage=True)
-    cfg=LoraConfig(r=LORA_R,lora_alpha=LORA_ALPHA,lora_dropout=LORA_DROPO,bias="none",task_type="CAUSAL_LM",target_modules=["q_proj","v_proj"])
+    cfg=LoraConfig(r=LORA_R,lora_alpha=LORA_ALPHA,lora_dropout=LORA_DROPOUT,bias="none",task_type="CAUSAL_LM",target_modules=["q_proj","v_proj"])
     model=get_peft_model(base,cfg)
     trainable=[n for n,p in model.named_parameters() if p.requires_grad]
     if not trainable or any("lora_" not in n for n in trainable):
