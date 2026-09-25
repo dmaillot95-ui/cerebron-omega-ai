@@ -1,0 +1,142 @@
+name: RDX Memory Write Read Recall Canary V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/rdx-memory-write-read-recall-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Write read verify and recall RDX atomic object
+        run: |
+          mkdir -p receipts/rdx
+          python - <<'PY'
+          import os,json,hashlib,tempfile,datetime,pathlib
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ.get("HF_TOKEN","")
+          if not token: raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)): raise SystemExit("HF_REPO_NOT_PRIVATE")
+
+          payload={
+            "schema":"RDX_ATOMIC_RECORD_V1",
+            "rdx_id":"RDX-MEMORY-CANARY-001",
+            "object_id":"CLAIM-001",
+            "object_type":"CLAIM",
+            "content":"Synthetic RDX memory canary: validated storage and recall route only.",
+            "domain":["rdx","memory","canary"],
+            "provenance":{
+              "source_ids":["SRC-RDX-CANARY-001"],
+              "origin":"CEREBRON_OWNED_SYNTHETIC",
+              "producer":"F152"
+            },
+            "rights":{"class":"OWNED","shared_training_allowed":False},
+            "validated":True,
+            "dedup_pass":True,
+            "license_origin_pass":True,
+            "m6_contamination":False,
+            "afah_pass":True,
+            "memory_class":["M1","M7"],
+            "training_eligible":False,
+            "created_at":datetime.datetime.now(datetime.timezone.utc).isoformat()
+          }
+          raw=(json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False)+"\n").encode()
+          sha=hashlib.sha256(raw).hexdigest()
+          object_path=f"RDX_SHARED/M1/{sha[:2]}/{sha}.json"
+          with tempfile.NamedTemporaryFile("wb",delete=False) as tf:
+              tf.write(raw); src=tf.name
+          api.upload_file(path_or_fileobj=src,path_in_repo=object_path,repo_id=repo,repo_type="model",commit_message="RDX memory write/read/recall canary")
+
+          dst=pathlib.Path(hf_hub_download(repo_id=repo,filename=object_path,repo_type="model",token=token,force_download=True))
+          got=dst.read_bytes(); got_sha=hashlib.sha256(got).hexdigest()
+          if got_sha!=sha: raise SystemExit("RDX_READBACK_SHA_MISMATCH")
+          loaded=json.loads(got)
+          if loaded["rdx_id"]!="RDX-MEMORY-CANARY-001" or loaded["object_id"]!="CLAIM-001":
+              raise SystemExit("RDX_READBACK_CONTENT_MISMATCH")
+
+          # Small recall index object, content addressed back to the canonical object.
+          index={
+            "schema":"RDX_RECALL_INDEX_ENTRY_V1",
+            "rdx_id":loaded["rdx_id"],
+            "object_id":loaded["object_id"],
+            "object_type":loaded["object_type"],
+            "canonical_object_path":object_path,
+            "canonical_sha256":sha,
+            "domain":loaded["domain"],
+            "namespace":"RDX_SHARED",
+            "memory_classes":["M1","M7"]
+          }
+          iraw=(json.dumps(index,sort_keys=True,separators=(",",":"))+"\n").encode()
+          isha=hashlib.sha256(iraw).hexdigest()
+          index_path=f"RDX_SHARED/INDEX/by-rdx-id/{loaded['rdx_id']}/{loaded['object_id']}.json"
+          with tempfile.NamedTemporaryFile("wb",delete=False) as tf:
+              tf.write(iraw); isrc=tf.name
+          api.upload_file(path_or_fileobj=isrc,path_in_repo=index_path,repo_id=repo,repo_type="model",commit_message="RDX recall index canary")
+          idst=pathlib.Path(hf_hub_download(repo_id=repo,filename=index_path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(idst.read_bytes()).hexdigest()!=isha:
+              raise SystemExit("RDX_INDEX_SHA_MISMATCH")
+          recalled=json.loads(idst.read_text())
+          if recalled["canonical_sha256"]!=sha or recalled["canonical_object_path"]!=object_path:
+              raise SystemExit("RDX_RECALL_POINTER_MISMATCH")
+
+          # Follow recalled pointer and revalidate immutable content.
+          rdst=pathlib.Path(hf_hub_download(repo_id=repo,filename=recalled["canonical_object_path"],repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(rdst.read_bytes()).hexdigest()!=recalled["canonical_sha256"]:
+              raise SystemExit("RDX_RECALL_FINAL_SHA_MISMATCH")
+
+          receipt={
+            "schema":"CEREBRON_RDX_MEMORY_WRITE_READ_RECALL_CANARY_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "status":"PASS",
+            "source_farm_id":152,
+            "repo":repo,
+            "repo_private":True,
+            "namespace":"RDX_SHARED",
+            "object_path":object_path,
+            "object_sha256":sha,
+            "index_path":index_path,
+            "index_sha256":isha,
+            "write":"PASS",
+            "authenticated_read":"PASS",
+            "readback_sha":"PASS",
+            "recall_index_lookup":"PASS",
+            "recall_pointer_follow":"PASS",
+            "memory_classes":["M1","M7"],
+            "gold_write":"NOT_ATTEMPTED",
+            "training":"NOT_EXECUTED",
+            "claim_ceiling":"PRIVATE_WRITE_READ_SHA_AND_ID_POINTER_RECALL_PASS; SEMANTIC_RETRIEVAL_QUALITY_NOT_TESTED"
+          }
+          receipt["receipt_sha256"]=hashlib.sha256(json.dumps(receipt,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          pathlib.Path("receipts/rdx/rdx-memory-write-read-recall-canary-v1.json").write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rdx-memory-write-read-recall-canary-v1
+          path: receipts/rdx/rdx-memory-write-read-recall-canary-v1.json
+          if-no-files-found: error
+      - name: Persist public receipt
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/rdx/rdx-memory-write-read-recall-canary-v1.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: RDX memory write read recall canary ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
