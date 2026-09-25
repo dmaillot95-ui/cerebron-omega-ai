@@ -1,0 +1,128 @@
+{
+  "schema": "CEREBRON_ALL_AI_STRATEGY_COUNCIL_FUSION_V1",
+  "run_id": 36084488477,
+  "date": "2026-09-25",
+  "source_audit": "receipts/council/all-ai-strategy-council-36084488477.json",
+  "source_audit_sha256": "eb53171efb7ee1a2baa06514687170763db1db2c5ad04e4da6b7532db00bd64f",
+  "evidence_class": "E1_ADVISORY_CORRELATED",
+  "hard_counts": {
+    "requested": 38,
+    "executed": 38,
+    "parse_pass": 38,
+    "scorable": 38,
+    "unique_lineage_fingerprints": 1,
+    "independent_evidence_count": 0
+  },
+  "measured_diagnostics": {
+    "mean_role_alignment_proxy": 0.2456,
+    "mean_actionability_proxy": 0.7281,
+    "mean_specificity_proxy": 0.8342,
+    "mean_novelty_proxy": 0.6255,
+    "mean_max_redundancy_proxy": 0.3745,
+    "mean_future_utility_proxy": 0.7137,
+    "gvl_heavy_count": 35,
+    "dual_core_yes_count": 38
+  },
+  "interpretation": [
+    "The 38-perspective execution is operationally successful but not independent evidence.",
+    "Strong shared-route anchoring caused specialization collapse toward GVL/geometric-gate language.",
+    "The 38/38 DUAL_CORE YES result is not a valid assignment consensus and must not activate dual-model architectures.",
+    "Future use should extract role-specific proposals by dependency and validate them separately."
+  ],
+  "dependency_fusion": [
+    {
+      "cluster": "DEPENDENCY_CORRELATION_AND_EVIDENCE",
+      "leads": [
+        "F166-RHO",
+        "AFAH"
+      ],
+      "proposals": [
+        "cross-model correlation checks on failed transfer cases",
+        "ablate candidate model-core contributions against held-out evidence"
+      ],
+      "required_test": "duplicate-evidence reduction plus preserved true-positive evidence",
+      "promotion": "TEST_REQUIRED"
+    },
+    {
+      "cluster": "METROLOGY_ENGINEERING",
+      "leads": [
+        "METRION",
+        "ASTRION"
+      ],
+      "proposals": [
+        "stress test transfer gates against physically or operationally grounded datasets",
+        "define stability and feasibility thresholds before scale"
+      ],
+      "required_test": "frozen-domain validation with explicit acceptance thresholds",
+      "promotion": "TEST_REQUIRED"
+    },
+    {
+      "cluster": "INTERFACE_AND_INTEGRATION",
+      "leads": [
+        "NEXUS",
+        "F171-CHI"
+      ],
+      "proposals": [
+        "end-to-end farm bridge -> AGORA -> memory -> rollback latency/throughput test",
+        "schema/interface perturbation stress test"
+      ],
+      "required_test": "error rate and consistency under controlled interface changes",
+      "promotion": "TEST_REQUIRED"
+    },
+    {
+      "cluster": "ROBUSTNESS_SENSITIVITY_TEMPORALITY",
+      "leads": [
+        "F154-EPSILON",
+        "F156-ETA",
+        "F170-PHI",
+        "F172-PSI"
+      ],
+      "proposals": [
+        "perturbation threshold measurement",
+        "transient-input resilience test",
+        "invariance under scaling/symmetry transformations",
+        "hidden-variable ablation"
+      ],
+      "required_test": "distinct frozen held-out family with zero critical regression",
+      "promotion": "TEST_REQUIRED"
+    },
+    {
+      "cluster": "DIALOGUE_MEMORY_COMPRESSION",
+      "leads": [
+        "AELYS",
+        "SPIRALION",
+        "SAELION"
+      ],
+      "proposals": [
+        "cross-role dialogue consistency benchmark",
+        "memory continuity/compression validation",
+        "synthetic-data bias check"
+      ],
+      "required_test": "retention and consistency across three cycles with no memory contamination",
+      "promotion": "TEST_REQUIRED"
+    },
+    {
+      "cluster": "COMPACT_EXECUTION",
+      "leads": [
+        "SAPHEA_MICRO"
+      ],
+      "proposals": [
+        "measure latency reduction against unchanged transfer quality before expanding 7 -> 20"
+      ],
+      "required_test": "ablation versus current 7-unit implementation",
+      "promotion": "NO_SCALE_WITHOUT_GAIN"
+    }
+  ],
+  "non_decisions": [
+    "No new Greek dual-core assignment is activated by this council.",
+    "No operational coalition scale change; STAY_AT_5 remains.",
+    "No geometric-growth claim; GVL remains 1_OF_4.",
+    "No neural-training claim follows from council execution."
+  ],
+  "next_actions": [
+    "M43_REAL_SAPHEA_LORA_IF_TRAINING_PIPELINE_IS_READY_AND_M6_REMAINS_FROZEN",
+    "M43R_ROLE_FIDELITY_COLD_CANARY_BEFORE_ANY_FUTURE_38_ROLE_COUNCIL",
+    "M44_ELYSION_D4_D5_D6_D8_DUAL_MODEL_ABLATION",
+    "M45_GVL_DISTINCT_HELD_OUT_C3"
+  ]
+}
