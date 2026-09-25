@@ -1,0 +1,83 @@
+{
+  "schema": "CEREBRON_93_WAVE3A_ELYSION_D4_HOLD_ELYSIUM_D3_RUNNING_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "branch_head_before_checkpoint": "4da1a9758312f9148b169be75f5674d09ebc7edd",
+  "wave2": {
+    "closed_checkpoint": "checkpoints/CEREBRON_92_WAVE2_CLOSED_2026-09-25.json",
+    "closed_commit": "ac7eeb2142a875a2ed0b7ace6d0d784e3cf1994f",
+    "g6_candidate_count": 0,
+    "rollback_count": 4
+  },
+  "elysion": {
+    "d4_precheck_run_id": 36122176363,
+    "d4_precheck_decision": "CONTINUE_D4_FUSION_CANARY",
+    "d4_true_fusion_run_id": 36123625873,
+    "d4_true_fusion_artifact_id": 10860072136,
+    "d4_true_fusion_artifact_digest": "sha256:7afc5d8d49d48c63e6fb36edaece94fa916fe2587bac88c39320957128231ef2",
+    "d4_true_fusion_receipt_sha256": "903741858e1c01948a6233a8ca0f1f2a9227d577725b615578f9155709595860",
+    "d4_state": "HOLD_NO_MEASURED_GAIN_REPAIR_REQUIRED",
+    "d4_metrics": {
+      "task_count": 24,
+      "best_single_correct": 17,
+      "fusion_correct": 9,
+      "fusion_gain_over_best_single": -8,
+      "resolved": 10,
+      "coverage": 0.4166666666666667,
+      "wrong_commitments": 1,
+      "best_single_wrong": 7,
+      "wrong_commitment_reduction": 6
+    },
+    "d5": "BLOCKED_BY_D4",
+    "d6": "BLOCKED_BY_D4",
+    "runtime_activation": false
+  },
+  "elysium": {
+    "f146_repo": "dmaillot95-ui/cerebron-farm-146-elysium",
+    "d2_run_id": 36129514044,
+    "d2_state": "PASS",
+    "d2_audit_sha256": "58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+    "m6_v1_f146_failed_run_id": 36129831934,
+    "m6_v1_f146_failure_class": "F_SECURITY_HF_TOKEN_MISSING",
+    "m6_v1_public_prompt_suite": "DISQUALIFIED_FROM_COLD_EVIDENCE",
+    "m6_v2_run_id": 36130164581,
+    "m6_v2_state": "SEALED_PRIVATE",
+    "m6_v2_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
+    "m6_v2_receipt_sha256": "0ad8d4ac99ba1c26e68b1f411112e6df62e20fde8a9b5e2aacf96502b7c78abb",
+    "m6_v2_exact_prompts_public": false,
+    "d3_run_id": 36130283226,
+    "d3_state": "IN_PROGRESS",
+    "d3_models": [
+      "Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c",
+      "HuggingFaceTB/SmolLM3-3B@a07cc9a04f16550a088caea529712d1d335b0ac1"
+    ],
+    "d4_precheck_workflow": ".github/workflows/elysium-d4-complementarity-precheck.yml",
+    "d4_precheck_triggered": false,
+    "runtime_activation": false
+  },
+  "contaminated_parallel_run": {
+    "run_id": 36130067318,
+    "workflow": ".github/workflows/elysium-wave3a-m6-d3-v1.yml",
+    "status_at_checkpoint": "IN_PROGRESS",
+    "cold_evidence_status": "DO_NOT_COUNT",
+    "reason": "EXACT_M6_PROMPTS_PUBLIC_IN_WORKFLOW_SOURCE"
+  },
+  "rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "ABLATION_BEFORE_ADDITION",
+    "M6_NEVER_IN_TRAIN",
+    "DO_NOT_COUNT_PUBLICLY_EXPOSED_COLD_PROMPTS_AS_COLD_EVIDENCE",
+    "TWO_MODELS_DO_NOT_EQUAL_TWO_INDEPENDENT_PROOFS",
+    "NO_RUNTIME_ACTIVATION_BEFORE_REQUIRED_GATES_PASS"
+  ],
+  "next_exact": [
+    "Live verify ELYSIUM D3 run 36130283226.",
+    "If D3 PASS, read both public summaries and comparison audit.",
+    "Update F146 G4 and platform contract D3.",
+    "Trigger ELYSIUM D4 complementarity precheck exactly once.",
+    "Do not use run 36130067318 as cold evidence.",
+    "Do not open ELYSIUM D4 fusion canary unless complementarity gain is positive."
+  ]
+}
