@@ -1,0 +1,107 @@
+{
+  "schema": "CEREBRON_87_WAVE1_PARALLEL_PIPELINE_V1",
+  "date": "2026-09-25",
+  "mode": "PARALLEL_EXECUTION_SEPARATE_EVIDENCE",
+  "branch": "feat/wave1-parallel-ai-baselines-v1",
+  "branch_head": "2142414c20df5f328d3e9ddfb0bb9eac8d1b24b2",
+  "baseline": {
+    "run_id": 36103514385,
+    "status": "PASS_CORRECTED_AUDIT",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "roles": {
+      "AELYS": {
+        "score": 3,
+        "max": 12,
+        "accuracy": 0.25,
+        "readiness": "BLOCKED_NO_VALIDATED_GOLD",
+        "artifact_id": 10849659656
+      },
+      "AFAH": {
+        "score": 4,
+        "max": 12,
+        "accuracy": 0.3333333333333333,
+        "readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+        "artifact_id": 10849912253
+      },
+      "ETHERION": {
+        "score": 3,
+        "max": 12,
+        "accuracy": 0.25,
+        "readiness": "BLOCKED_EMPTY_SIX_AI_GOLD_MANIFEST",
+        "artifact_id": 10849858714
+      },
+      "METRION": {
+        "score": 1,
+        "max": 12,
+        "accuracy": 0.08333333333333333,
+        "readiness": "BLOCKED_NO_VALIDATED_ENGINEERING_GOLD",
+        "artifact_id": 10850661419
+      }
+    },
+    "corrected_receipt_count": 4,
+    "real_inference_count": 4,
+    "training_executed_count": 0,
+    "unique_lineage_fingerprints": 1,
+    "independent_evidence_count": 0,
+    "audit_sha256": "c0178c7f504a40718fdbfebab22bb8f31f217ce199ee9a032321dd943117abd8",
+    "audit_correction": "Original recursive glob double-counted 4 receipts as 8; corrected without rerunning models."
+  },
+  "quarantine": {
+    "target_record_count": 432,
+    "roles": {
+      "AELYS": 96,
+      "ETHERION": 144,
+      "AFAH": 96,
+      "METRION": 96
+    },
+    "training_released": false,
+    "first_run": {
+      "run_id": 36103796929,
+      "status": "FAIL_F_TOOL",
+      "failure": "KeyError: limit"
+    },
+    "repair": {
+      "builder_commit": "535ce8c104b4a3e23a36e4b7617fdec5ba3aef04",
+      "trigger_commit": "d2983edfc68a2b0d6b32509a65bfbaeab86f88c7"
+    },
+    "rerun": {
+      "run_id": 36103940944,
+      "status": "QUEUED_AT_CHECKPOINT"
+    },
+    "semantic_audit_tool_commit": "2142414c20df5f328d3e9ddfb0bb9eac8d1b24b2",
+    "next_gate": "SEMANTIC_AUDIT_COUNTER_AUDIT_THEN_F72_AFAH"
+  },
+  "saphea_parallel_lane": {
+    "v3_run": 36102432058,
+    "v3_status": "ROLLBACK_RETAIN_EVIDENCE",
+    "weights_changed": true,
+    "adapter_sha256": "c15cdcb8c2aa01fde4118210c4fe8ab7c038f97ed487182a16d35020d90a470d",
+    "m6_base": 18,
+    "m6_post": 25,
+    "m6_gain": 7,
+    "validation_gate_pass": false,
+    "hf_private_store": "NOT_REACHED_ON_V3",
+    "concurrent_run": {
+      "run_id": 36103623948,
+      "status": "IN_PROGRESS_AT_CHECKPOINT",
+      "title": "Trigger SAPHEA conservative LoRA ablation",
+      "head_sha": "cf8fec40575503ce432736b872d620cd04e11dcd"
+    }
+  },
+  "hard_rules": [
+    "PARALLELIZE_EXECUTION_NOT_EVIDENCE",
+    "BENCHMARK_RECORDS_DENY_TRAINING",
+    "QUARANTINE_IS_NOT_GOLD",
+    "NO_WAVE1_TRAINING_BEFORE_AUDIT_COUNTER_AUDIT_F72_AFAH",
+    "SHARED_BASE_MODEL_OUTPUTS_ARE_CORRELATED",
+    "FAILED_SAPHEA_VALIDATION_MEANS_ROLLBACK_NOT_PROMOTION"
+  ],
+  "exact_resume": [
+    "Check quarantine rerun 36103940944.",
+    "Check SAPHEA conservative ablation run 36103623948 separately.",
+    "If quarantine rerun passes, read manifest SHA and execute tools/wave1_quarantine_semantic_audit.py on regenerated identical candidates.",
+    "Do not rerun wave1 baselines.",
+    "Only after semantic audit/counter-audit plus F72/AFAH may role-specific GOLD manifests be released for parallel LoRA training."
+  ]
+}
