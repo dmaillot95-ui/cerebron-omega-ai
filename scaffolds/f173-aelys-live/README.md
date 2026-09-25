@@ -6,13 +6,13 @@ CÉRÉBRON — F173
 Préparer une couche live AÉLYS vérifiable : contrat de session, ingress, routage, présentation, sortie locale et replay, sans déclarer de production live avant qualification réelle des runtimes externes.
 
 ## État
-LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED
+LOCAL_LOOP_TTS_REPLAY_HTTP_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED
 
 - target_repo: dmaillot95-ui/cerebron-farm-173-aelys-live
 - target_repo_exists: true
 - target_repo_initialized: true
-- dedicated_repo_head: 6742951eb3f5f4a4804f8cb79aaae579b09be5a6
-- dedicated_repo_selftest_run: 36163651569
+- dedicated_repo_head: e9ac658d4c092c3fd3b1b799a7eb2653f645737d
+- dedicated_repo_selftest_run: 36164296182
 - training_status: NOT_TRAINED
 - live_production_status: NOT_DEPLOYED
 - external_runtime_status: UNQUALIFIED
@@ -46,6 +46,21 @@ LOCAL_LIVE_LOOP_TTS_SESSION_REPLAY_CANARIES_PASS_EXTERNAL_RUNTIME_UNQUALIFIED
 - external_calls_executed: false
 - production_live_claimed: false
 
+
+### Local HTTP loopback canary
+- run: 36164204308
+- transport: HTTP_LOOPBACK
+- bind: 127.0.0.1
+- http_status: 200
+- presentation_status: HOLD
+- result_sha256: c9b21d56586df27bd4dee8e9964b170fb241fdec9b9f91822068d86ed77b8450
+- artifact_id: 10876727408
+- artifact_digest: sha256:03fad961a41073e42bd096830a93eb3caf6ef53e4995fae2077a6221c4c2f733
+- external_endpoint_used: false
+- paid_provider_used: false
+- production_live_claimed: false
+- raw_user_ref_persisted: false
+
 REALITY > COHERENCE
 EVIDENCE > CONFIDENCE
 CLAIM <= EVIDENCE
@@ -54,3 +69,5 @@ MEMORY != TRAINING
 LOCAL_CANARY_PASS != EXTERNAL_RUNTIME_QUALIFIED
 TTS_LOCAL_CANARY != PRODUCTION_VOICE
 SESSION_REPLAY != LIVE_DEPLOYMENT
+
+HTTP_LOOPBACK_PASS != EXTERNAL_ENDPOINT_QUALIFIED
