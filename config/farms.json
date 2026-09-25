@@ -1140,7 +1140,7 @@
       "domain": "rdx-exchange-continuous-rd-library-marketplace-api",
       "status": "REPOSITORY_PRESENT_EMPTY_OR_BRANCH_UNVERIFIED",
       "type": "RDX_PRODUCT_FARM",
-      "role": "continuous-rd-production-storage-verification-marketplace-evidence-api",
+      "role": "continuous-rd-production-storage-verification-marketplace-evidence-api-memory-training-ingress",
       "rules": [
         "REALITY>COHERENCE",
         "EVIDENCE>CONFIDENCE",
@@ -1148,7 +1148,12 @@
         "ATOMIC_RD_OBJECTS_PRIMARY",
         "REPORTS_ARE_GENERATED_VIEWS_NOT_PRIMARY_MEMORY",
         "NO_FAKE_CLIENTS_OR_SALES",
-        "NO_RUNTIME_ACTIVATION_BEFORE_REPOSITORY_VERIFICATION"
+        "NO_RUNTIME_ACTIVATION_BEFORE_REPOSITORY_VERIFICATION",
+        "EVERY_VALIDATED_RDX_HAS_MEMORY_PATH",
+        "ONLY_GOLD_TRAIN_ELIGIBLE_RDX_CAN_ENTER_TRAINING",
+        "M6_NEVER_IN_TRAIN",
+        "WEIGHTS_CHANGED_REQUIRED_FOR_NEURAL_LEARNING",
+        "REPORTS_ARE_VIEWS_ATOMIC_KNOWLEDGE_IS_PRIMARY"
       ],
       "repo_full_name": "dmaillot95-ui/cerebron-rdx-exchange",
       "url": "https://github.com/dmaillot95-ui/cerebron-rdx-exchange"
