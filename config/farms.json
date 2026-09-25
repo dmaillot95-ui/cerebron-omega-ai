@@ -382,7 +382,16 @@
       "id": 72,
       "repo": "cerebron-farm-72-reality-evidence-gate",
       "domain": "reality-evidence-gate",
-      "status": "SCAFFOLDED"
+      "status": "S4_REAL_GATE_EXECUTES",
+      "evidence": {
+        "run_id": 36102560865,
+        "job_id": 107968007044,
+        "artifact_id": 10849871768,
+        "artifact_digest": "sha256:8b3aa4f490806070f2930387b9dde4773ff1c651eb863216f0fab80dc83c495f",
+        "result_sha256": "14ade8931dd4b8ee8c4b232baf5edd8066cf38d4ac41dc4ddb14184b42f8cee3",
+        "engine": "python-f72-evidence-review-v1",
+        "scope": "SAPHEA_G1_SCOPED_EVIDENCE_REVIEW_SUPPORTED_E2_NOT_EXTERNAL_VERIFICATION"
+      }
     },
     {
       "id": 73,
