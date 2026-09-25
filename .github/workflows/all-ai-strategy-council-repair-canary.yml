@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - name: Cache compact council model
+      - name: Cache Qwen3-4B council model
         uses: actions/cache@v4
         with:
           path: ~/.cache/huggingface
-          key: hf-qwen25-05b-ec7ddfa904d4d447eedd0b7f126df16957734abb
+          key: hf-qwen3-4b-1cfa9a7208912126459214e8b04321603b3df60c
       - run: pip install --quiet "transformers>=4.53,<5" accelerate safetensors sentencepiece
       - name: Execute repaired council perspective
         run: python tools/all_ai_strategy_council_worker.py --ai "${{ matrix.ai }}" --run-id "${{ github.run_id }}" --output "artifacts/canary/${{ matrix.ai }}/receipt.json"
