@@ -34,15 +34,17 @@ Dépôt :
 `dmaillot95-ui/cerebron-farm-173-aelys-live`
 
 État réel :
-- dépôt GitHub existe ;
-- dépôt dédié actuellement vide / non initialisé ;
-- scaffold local CÉRÉBRON présent et validé ;
+- dépôt GitHub existe et possède une branche `main` ;
+- base d'intégration F173 installée ;
+- selftest dédié : SUCCESS, run `36153266774` ;
+- HEAD vérifié : `eefc374f7639c86c87dafbb174d006c804343b9b` ;
+- adaptateurs live/TikTok/TTS/avatar : UNQUALIFIED ;
 - entraînement : NOT_TRAINED ;
 - production live : NOT_DEPLOYED ;
-- aucune exécution live revendiquée.
+- le fichier de bus maître cité par F173 (`config/cerebron-unified-plugin-bus-v1.json`) n'existe pas dans `main` : binding maître NON CONFIRMÉ.
 
 Statut :
-`PREPARED_NOT_DEPLOYED_REPOSITORY_EMPTY`
+`BASE_INSTALLED_RUNTIME_ADAPTERS_UNQUALIFIED`
 
 Scaffold :
 `scaffolds/f173-aelys-live`
@@ -68,6 +70,7 @@ Scaffold :
 
 ## Preuves GitHub Actions
 
+- F173 dépôt dédié Selftest : run 36153266774 — SUCCESS
 - F162/F173/F174 Reality Guard : run 36155160206 — SUCCESS
 - CÉRÉBRON Omega Core : run 36155316250 — SUCCESS
 - CÉRÉBRON Main Integration Gate : run 36155316281 — SUCCESS
@@ -90,13 +93,19 @@ Les dépôts F173/F174 existants ne doivent pas être confondus avec une capacit
 
 ## Prochaine étape
 
-Quand un outil disposant de la capacité d'initialiser un dépôt GitHub vide est disponible :
+F173 est déjà initialisée : ne pas la réinitialiser ni écraser son architecture dédiée.
 
-1. initialiser F173 et F174 avec un premier commit ;
-2. recopier les scaffolds canoniques depuis le dépôt maître ;
-3. exécuter leurs guards dans les dépôts dédiés ;
+Pour F173 :
+1. qualifier séparément les adaptateurs live réels ;
+2. résoudre/registrer le bus maître réel avant de déclarer un binding confirmé ;
+3. ne jamais passer à LIVE/EXECUTED sans canary/run/artifact.
+
+Pour F174, lorsqu'un outil pouvant initialiser un dépôt GitHub vide est disponible :
+1. créer le premier commit ;
+2. recopier ou réconcilier le scaffold canonique depuis le dépôt maître ;
+3. exécuter le guard dédié ;
 4. seulement après SUCCESS, passer `repository_initialized=true` ;
-5. ne jamais passer à EXECUTED sans run/artifact séparé.
+5. ne jamais confondre simulation visuelle et test physique.
 
 Pour F162 :
 - créer d'abord le dépôt dédié ;
