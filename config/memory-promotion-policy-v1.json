@@ -171,6 +171,52 @@
     "TRANSFERRED_CONTENT_NOT_INDEPENDENT_EVIDENCE",
     "PENDING_NAMESPACE_CANARY_DOES_NOT_ACTIVATE_AI",
     "LIVE_GATE_FAIL_BLOCKS_PROMOTION",
-    "STALE_PACKET_MUST_BE_REGENERATED_AND_REPRODUCED_NOT_EDITED_TO_PASS"
-  ]
+    "STALE_PACKET_MUST_BE_REGENERATED_AND_REPRODUCED_NOT_EDITED_TO_PASS",
+    "RDX_MEMORY_IMMEDIATE_AFTER_INGRESS_GATES",
+    "RDX_TRAINING_ONLY_AFTER_M4_GOLD_PROMOTION"
+  ],
+  "rdx_ingress": {
+    "source_farm_id": 152,
+    "source_name": "CEREBRON RDX EXCHANGE",
+    "status": "ACTIVE_POLICY_GATED",
+    "primary_objects": [
+      "RDX_RESEARCH",
+      "CLAIM",
+      "SOURCE",
+      "TEST",
+      "RESULT",
+      "FAILURE",
+      "ALTERNATIVE",
+      "SIMULATION_RECEIPT",
+      "LIMITATION",
+      "EVIDENCE_LEVEL",
+      "VERSION"
+    ],
+    "immediate_memory_route": {
+      "default": [
+        "M1_TRACE",
+        "M7_EVIDENCE"
+      ],
+      "searchable_rag_after_schema_provenance_dedup": true,
+      "rule": "MEMORY_AVAILABILITY_DOES_NOT_EQUAL_NEURAL_LEARNING"
+    },
+    "training_candidate_route": [
+      "RDX_VALIDATED",
+      "PROVENANCE_PASS",
+      "DEDUP_PASS",
+      "LICENSE_OR_ORIGIN_PASS",
+      "NO_M6_CONTAMINATION",
+      "F72_PASS",
+      "AFAH_PASS",
+      "M4_GOLD",
+      "ROLE_ROUTING",
+      "TRAIN_DATASET"
+    ],
+    "forbidden": [
+      "RAW_RDX_AUTO_TRAIN",
+      "UNVERIFIED_CLAIMS_TO_TRAIN",
+      "CLIENT_PRIVATE_DATA_TO_SHARED_TRAIN_WITHOUT_EXPLICIT_RIGHTS",
+      "M6_CONTENT_OR_PARAPHRASE_TO_TRAIN"
+    ]
+  }
 }
