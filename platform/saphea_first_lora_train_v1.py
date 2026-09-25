@@ -21,12 +21,12 @@ EXPECTED_M6_SHA = "cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4
 EXPECTED_BASELINE_SCORE = 18
 EXPECTED_BASELINE_MAX = 60
 SEED = 3407
-MAX_LENGTH = 256
-LR = 1e-4
+MAX_LENGTH = 512
+LR = 3e-5
 EPOCHS = 1
 GRAD_ACCUM = 8
-LORA_R = 16
-LORA_ALPHA = 32
+LORA_R = 8
+LORA_ALPHA = 16
 LORA_DROPOUT = 0.05
 
 ROOT = pathlib.Path("platform/artifacts")
@@ -199,11 +199,23 @@ def main():
 
     records = list(gold["records"])
     rng = random.Random(SEED)
-    rng.shuffle(records)
-    train_records = records[:150]
-    val_records = records[150:]
+    by_target = {label: [] for label in LABELS}
+    for rec in records:
+        by_target[rec["target"]].append(rec)
+    train_records = []
+    val_records = []
+    for label in LABELS:
+        group = list(by_target[label])
+        rng.shuffle(group)
+        if len(group) != 30:
+            raise SystemExit(f"GOLD_CLASS_COUNT_DRIFT:{label}:{len(group)}")
+        train_records.extend(group[:25])
+        val_records.extend(group[25:])
+    rng.shuffle(train_records)
+    rng.shuffle(val_records)
     split_manifest = {
         "seed": SEED,
+        "method": "STRATIFIED_25_TRAIN_5_VALIDATION_PER_LABEL",
         "train_ids": [r["id"] for r in train_records],
         "validation_ids": [r["id"] for r in val_records],
     }
