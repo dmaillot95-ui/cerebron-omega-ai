@@ -78,6 +78,8 @@ jobs:
           assert r["gold_m6_disjoint"] is True
           assert r["weights_changed"] is True
           assert r["trainable_names_all_lora"] is True
+          assert r["validation_gate_pass"] is True
+          assert r["validation_critical_regression"] is False
           assert r["promotion"]=="NOT_PROMOTED"
           assert adapter.exists() and cfg.exists()
           assert hashlib.sha256(adapter.read_bytes()).hexdigest()==r["adapter_file_sha256"]
