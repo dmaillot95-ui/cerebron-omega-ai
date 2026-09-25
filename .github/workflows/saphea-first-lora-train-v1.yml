@@ -1,0 +1,213 @@
+name: SAPHEA First LoRA V1 Train
+on:
+  push:
+    branches: ['feat/saphea-first-lora-v1']
+    paths:
+      - 'config/saphea-first-lora-train-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: platform
+      HF_TOKEN: \${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned CPU training stack
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece huggingface_hub
+
+      - name: Compile
+        run: |
+          python -m py_compile platform/saphea_epistemic_dataset_v1.py
+          python -m py_compile platform/saphea_epistemic_baseline_v1.py
+          python -m py_compile platform/saphea_first_lora_train_v1.py
+
+      - name: Rebuild deterministic GOLD and sealed M6
+        run: python platform/saphea_epistemic_dataset_v1.py
+
+      - name: Reproduce sealed pre-LoRA M6 baseline
+        run: python platform/saphea_epistemic_baseline_v1.py
+
+      - name: Verify baseline and M6 isolation
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          g=json.loads((root/"saphea-epistemic-gold-v1.json").read_text())
+          m=json.loads((root/"saphea-epistemic-m6-v1.json").read_text())
+          b=json.loads((root/"saphea-epistemic-baseline-v1.json").read_text())
+          assert g["dataset_sha256"]=="efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa"
+          assert m["dataset_sha256"]=="cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63"
+          assert g["training_eligible"] is True
+          assert m["deny_training"] is True
+          assert len(g["records"])==180
+          assert len(m["records"])==60
+          assert {r["id"] for r in g["records"]}.isdisjoint({r["id"] for r in m["records"]})
+          assert b["score"]==18 and b["max_score"]==60
+          assert b["m6_dataset_sha256"]==m["dataset_sha256"]
+          print("SAPHEA_LORA_INPUT_GATE=PASS")
+          PY
+
+      - name: Train real reversible SAPHEA LoRA
+        run: python platform/saphea_first_lora_train_v1.py
+
+      - name: Verify local neural-learning evidence
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path("platform/artifacts")
+          r=json.loads((root/"saphea-first-lora-training-v1.json").read_text())
+          adapter=root/"saphea-first-lora-adapter-v1"/"adapter_model.safetensors"
+          cfg=root/"saphea-first-lora-adapter-v1"/"adapter_config.json"
+          assert r["base_model_id"]=="Qwen/Qwen2.5-0.5B-Instruct"
+          assert r["base_revision"]=="ec7ddfa904d4d447eedd0b7f126df16957734abb"
+          assert r["gold_dataset_sha256"]=="efcc9dd80465a6bab3c05ad0706e2ff356a134afc0d7913c6a917a1b66010eaa"
+          assert r["m6_dataset_sha256"]=="cea1ef908ebf1773f39bbce8876b4041d31b05c73e86878d673dcfe6e3fe4a63"
+          assert r["m6_deny_training"] is True
+          assert r["gold_m6_disjoint"] is True
+          assert r["weights_changed"] is True
+          assert r["trainable_names_all_lora"] is True
+          assert r["promotion"]=="NOT_PROMOTED"
+          assert adapter.exists() and cfg.exists()
+          assert hashlib.sha256(adapter.read_bytes()).hexdigest()==r["adapter_file_sha256"]
+          assert hashlib.sha256(cfg.read_bytes()).hexdigest()==r["adapter_config_sha256"]
+          print("SAPHEA_REAL_LORA_WEIGHT_CHANGE=PASS")
+          print("SAPHEA_M6_BASELINE",r["baseline_m6_score"],r["baseline_m6_max"])
+          print("SAPHEA_M6_POSTTRAIN",r["posttrain_m6_score"],r["posttrain_m6_max"])
+          print("SAPHEA_COLD_GAIN",r["cold_gain"])
+          print("SAPHEA_DECISION",r["decision"])
+          PY
+
+      - name: Store adapter only in private Hugging Face and verify readback
+        run: |
+          mkdir -p receipts/training
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          from huggingface_hub import HfApi,hf_hub_download
+
+          root=pathlib.Path("platform/artifacts")
+          adapter_dir=root/"saphea-first-lora-adapter-v1"
+          report_path=root/"saphea-first-lora-training-v1.json"
+          report=json.loads(report_path.read_text())
+          token=os.environ.get("HF_TOKEN","")
+          if not token:
+              raise SystemExit("HF_TOKEN_MISSING")
+          repo=os.environ["HF_REPO"]
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo,repo_type="model")
+          if not bool(getattr(info,"private",False)):
+              raise SystemExit("HF_REPO_NOT_PRIVATE")
+
+          run_id=os.environ["GITHUB_RUN_ID"]
+          prefix=f"colony/C03-SIGMA/agents/SAPHEA/adapters/G1-EPISTEMIC-V1/run-{run_id}"
+          api.upload_folder(
+              folder_path=str(adapter_dir),
+              path_in_repo=prefix,
+              repo_id=repo,
+              repo_type="model",
+              commit_message=f"SAPHEA G1 LoRA canary run {run_id}",
+          )
+          api.upload_file(
+              path_or_fileobj=str(report_path),
+              path_in_repo=prefix+"/training-report.json",
+              repo_id=repo,
+              repo_type="model",
+              commit_message=f"SAPHEA G1 training report run {run_id}",
+          )
+
+          got_adapter=pathlib.Path(hf_hub_download(
+              repo_id=repo,
+              filename=prefix+"/adapter_model.safetensors",
+              repo_type="model",
+              token=token,
+              force_download=True,
+          ))
+          got_cfg=pathlib.Path(hf_hub_download(
+              repo_id=repo,
+              filename=prefix+"/adapter_config.json",
+              repo_type="model",
+              token=token,
+              force_download=True,
+          ))
+          adapter_sha=hashlib.sha256(got_adapter.read_bytes()).hexdigest()
+          cfg_sha=hashlib.sha256(got_cfg.read_bytes()).hexdigest()
+          if adapter_sha!=report["adapter_file_sha256"]:
+              raise SystemExit("HF_ADAPTER_SHA_MISMATCH")
+          if cfg_sha!=report["adapter_config_sha256"]:
+              raise SystemExit("HF_ADAPTER_CONFIG_SHA_MISMATCH")
+
+          status=(
+              "G6_REAL_LORA_HF_PRIVATE_VERIFIED_HOLD_G7"
+              if report["decision"].startswith("G6_TRAINING_VERIFIED")
+              else "REAL_LORA_EXECUTED_ROLLBACK_RETAINED_PRIVATE"
+          )
+          receipt={
+              "schema":"SAPHEA_FIRST_LORA_PUBLIC_POINTER_V1",
+              "status":status,
+              "run_id":int(run_id),
+              "branch":"feat/saphea-first-lora-v1",
+              "code_commit":os.environ["GITHUB_SHA"],
+              "base_model_id":report["base_model_id"],
+              "base_revision":report["base_revision"],
+              "gold_dataset_sha256":report["gold_dataset_sha256"],
+              "m6_dataset_sha256":report["m6_dataset_sha256"],
+              "m6_deny_training":True,
+              "adapter_sha256":report["adapter_file_sha256"],
+              "adapter_config_sha256":report["adapter_config_sha256"],
+              "hf_private_repo":repo,
+              "hf_private_object_prefix":prefix,
+              "hf_private_readback_sha_pass":True,
+              "weights_changed":report["weights_changed"],
+              "baseline_m6_score":report["baseline_m6_score"],
+              "posttrain_m6_score":report["posttrain_m6_score"],
+              "cold_gain":report["cold_gain"],
+              "critical_regression":report["critical_regression"],
+              "validation_loss_before":report["validation_loss_before"],
+              "validation_loss_after":report["validation_loss_after"],
+              "training_decision":report["decision"],
+              "promotion":"NOT_PROMOTED",
+              "pending_gates":report["pending_gates"],
+              "claim_ceiling":"REAL_REVERSIBLE_LORA_WEIGHT_CHANGE_AND_PRIVATE_SHA_READBACK_ONLY",
+          }
+          out=pathlib.Path("receipts/training")/f"saphea-first-lora-{run_id}.json"
+          out.write_text(json.dumps(receipt,indent=2)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          PY
+
+      - name: Remove private adapter from GitHub workspace artifact set
+        run: rm -rf platform/artifacts/saphea-first-lora-adapter-v1
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saphea-first-lora-training-\${{ github.run_id }}
+          path: |
+            platform/artifacts/saphea-first-lora-training-v1.json
+            platform/artifacts/saphea-epistemic-baseline-v1.json
+            receipts/training/saphea-first-lora-\${{ github.run_id }}.json
+          if-no-files-found: warn
+
+      - name: Persist public metadata pointer only
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/training/saphea-first-lora-\${{ github.run_id }}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: SAPHEA first real LoRA \${{ github.run_id }}"
+          for i in 1 2 3; do
+            git pull --rebase origin feat/saphea-first-lora-v1 && git push && exit 0
+            sleep 5
+          done
+          exit 1
