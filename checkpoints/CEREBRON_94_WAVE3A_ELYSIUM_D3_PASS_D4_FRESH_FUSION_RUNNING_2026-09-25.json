@@ -1,0 +1,42 @@
+{
+  "schema": "CEREBRON_94_WAVE3A_ELYSIUM_D3_PASS_D4_FRESH_FUSION_RUNNING_V1",
+  "date": "2026-09-25",
+  "branch": "feat/cerebron-ai-platform-mvp",
+  "elysion": {
+    "d4_state": "HOLD_REDESIGN_REQUIRED",
+    "failed_dev_repair_run_id": 36129622128,
+    "failed_dev_repair_receipt_sha256": "0149f28e04a4c05bba53a965e83cf8b9ad32af64fe5f31dc4b7235ab59b067cc"
+  },
+  "elysium": {
+    "d2_run_id": 36129514044,
+    "d2_audit_sha256": "58da91a4a1bff949211c2d3fb74814459cf7c36d509657162c27ba38c313e11e",
+    "m6_v2_run_id": 36130164581,
+    "m6_v2_sha256": "46f575b6a7d96332c678b8f18fc200d2e73e0e4a0cb422db3968de745b144ea2",
+    "d3_run_id": 36130283226,
+    "d3_audit_sha256": "ca15b2d01221e5fdc119610e1f1e34c391dc1386273e16e9e0df5e5820cc03f6",
+    "d3_qwen_correct": 51,
+    "d3_smol_correct": 60,
+    "d4_precheck_run_id": 36134272684,
+    "d4_precheck_receipt_sha256": "93e94aaf5e2329edd46ed5ae5868881b96035071afae5e00fed4d47f02d62a63",
+    "d4_oracle_union_correct": 65,
+    "d4_oracle_gain_over_best_single": 5,
+    "d4_fresh_fusion_run_id": 36134498167,
+    "d4_fresh_fusion_state": "IN_PROGRESS",
+    "legacy_parallel_d4_run_id": 36134272612,
+    "legacy_parallel_d4_evidence_status": "DO_NOT_COUNT_WRONG_D3_LINEAGE",
+    "runtime_activation": false
+  },
+  "rules": [
+    "M6_DENY_TRAINING",
+    "EXACT_PROMPTS_PRIVATE",
+    "FUSION_POLICY_FROZEN_BEFORE_FRESH_HOLDOUT",
+    "TWO_MODELS_NOT_TWO_INDEPENDENT_PROOFS",
+    "NO_D5_OR_D6_BEFORE_D4_MEASURED_FUSION_GAIN"
+  ],
+  "next_exact": [
+    "Live verify run 36134498167.",
+    "If success, read elysium-d4-fresh-fusion-canary receipt.",
+    "Only if fusion_gain_over_best_single > 0 and no critical_domain_regression, mark D4 PASS and open D5.",
+    "Otherwise mark D4 HOLD and retain evidence."
+  ]
+}
