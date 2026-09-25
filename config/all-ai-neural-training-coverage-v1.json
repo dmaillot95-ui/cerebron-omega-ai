@@ -1,0 +1,676 @@
+{
+  "schema": "CEREBRON_ALL_AI_NEURAL_TRAINING_COVERAGE_V1",
+  "date": "2026-09-25",
+  "registry_source": "config/gvl-specialization-registry-v2.json",
+  "available_ai_count": 38,
+  "unavailable_ai": [
+    "NU"
+  ],
+  "objective": "Every available CEREBRON AI has an explicit neural-training state or planned wave. No AI may disappear from the training roadmap.",
+  "coverage_counts": {
+    "PENDING_ORCHESTRATOR_POLICY_TRAINING": 1,
+    "NEURAL_TRAINING_EXECUTED": 6,
+    "PIPELINE_ACTIVE_WAVE2": 4,
+    "PENDING_DUAL_MODEL_NEURAL_PIPELINE": 7,
+    "PENDING_SPECIALIST_NEURAL_PIPELINE": 20
+  },
+  "dual_core_native_ais": [
+    "ELYSION",
+    "ELYSIUM",
+    "SAELION",
+    "ALPHA",
+    "OMEGA",
+    "DELTA",
+    "NEXUS"
+  ],
+  "rules": [
+    "ALL_AVAILABLE_AIS_MUST_HAVE_EXPLICIT_COVERAGE_STATE",
+    "TRAINING_EXECUTED_REQUIRES_REAL_WEIGHT_CHANGE",
+    "ROLLBACK_STILL_COUNTS_AS_TRAINING_ATTEMPT_NOT_AS_PROMOTION",
+    "GREEK_NATIVE_DUAL_CORE_REQUIRES_TWO_DISTINCT_MODELS_PER_AI",
+    "TWO_MODELS_DO_NOT_EQUAL_TWO_INDEPENDENT_PROOFS",
+    "M6_TRANSFER_RED_DENY_TRAINING",
+    "NO_AUTO_PROMOTION",
+    "CEREBRON_ORCHESTRATOR_TRAINS_LAST_AFTER_SPECIALIST_EVIDENCE"
+  ],
+  "waves": {
+    "WAVE1": [
+      "AELYS",
+      "ETHERION",
+      "AFAH",
+      "METRION"
+    ],
+    "WAVE2": [
+      "SPIRALION",
+      "HYPERION",
+      "ASTRION",
+      "SAPHEA_MICRO"
+    ],
+    "WAVE3A": [
+      "ELYSION",
+      "ELYSIUM",
+      "SAELION",
+      "NEXUS"
+    ],
+    "WAVE3B": [
+      "ALPHA",
+      "DELTA",
+      "OMEGA"
+    ],
+    "WAVE4": [
+      "BETA",
+      "GAMMA",
+      "EPSILON",
+      "ZETA",
+      "ETA"
+    ],
+    "WAVE5": [
+      "THETA",
+      "IOTA",
+      "KAPPA",
+      "LAMBDA",
+      "MU"
+    ],
+    "WAVE6": [
+      "XI",
+      "OMICRON",
+      "PI",
+      "RHO",
+      "SIGMA"
+    ],
+    "WAVE7": [
+      "TAU",
+      "UPSILON",
+      "PHI",
+      "CHI",
+      "PSI"
+    ],
+    "FINAL_ORCHESTRATOR_WAVE": [
+      "CEREBRON"
+    ],
+    "REPAIR_LANE": [
+      "SAPHEA",
+      "AELYS",
+      "ETHERION",
+      "METRION"
+    ]
+  },
+  "entries": [
+    {
+      "ai_id": "CEREBRON",
+      "identity": "CEREBRON",
+      "available": true,
+      "specialization_tags": [
+        "coordination",
+        "problem_contract",
+        "integration_interfaces",
+        "information_gain"
+      ],
+      "coverage_state": "PENDING_ORCHESTRATOR_POLICY_TRAINING",
+      "planned_wave": "FINAL_ORCHESTRATOR_WAVE",
+      "training_mode": "ROUTING_COORDINATION_POLICY_AFTER_SPECIALISTS",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "SAPHEA",
+      "identity": "SAPHEA",
+      "available": true,
+      "specialization_tags": [
+        "execution_selection",
+        "coordination",
+        "synthesis_compression"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+      "current_fabric_status": "SCOPED_LORA_G6_RESEARCH_ONLY_G7_REVOKED",
+      "runtime_activation": "DENY"
+    },
+    {
+      "ai_id": "SPIRALION",
+      "identity": "SPIRALION",
+      "available": true,
+      "specialization_tags": [
+        "memory_continuity",
+        "synthesis_compression",
+        "integration_interfaces"
+      ],
+      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
+      "planned_wave": "WAVE2",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "ETHERION",
+      "identity": "ETHERION",
+      "available": true,
+      "specialization_tags": [
+        "science_modeling",
+        "formal_reasoning",
+        "invention",
+        "search_exploration"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
+    },
+    {
+      "ai_id": "HYPERION",
+      "identity": "HYPERION",
+      "available": true,
+      "specialization_tags": [
+        "invention",
+        "search_exploration",
+        "causal_mechanism"
+      ],
+      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
+      "planned_wave": "WAVE2",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "ASTRION",
+      "identity": "ASTRION",
+      "available": true,
+      "specialization_tags": [
+        "science_modeling",
+        "engineering_validation",
+        "integration_interfaces"
+      ],
+      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
+      "planned_wave": "WAVE2",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "METRION",
+      "identity": "METRION",
+      "available": true,
+      "specialization_tags": [
+        "engineering_validation",
+        "metrology_benchmark",
+        "simulation",
+        "constraint_feasibility"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
+    },
+    {
+      "ai_id": "AFAH",
+      "identity": "AFAH",
+      "available": true,
+      "specialization_tags": [
+        "evidence_audit",
+        "formal_reasoning",
+        "counterexample",
+        "synthesis_compression"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+      "current_fabric_status": "REAL_LORA_G6_VERIFIED_RESEARCH_ONLY",
+      "runtime_activation": "DENY"
+    },
+    {
+      "ai_id": "AELYS",
+      "identity": "AELYS",
+      "available": true,
+      "specialization_tags": [
+        "human_dialogue",
+        "synthesis_compression",
+        "coordination"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "PEFT_LORA_OR_EQUIVALENT",
+      "current_fabric_status": "REAL_LORA_EXECUTED_ROLLBACK",
+      "runtime_activation": "DENY"
+    },
+    {
+      "ai_id": "ELYRA",
+      "identity": "ELYRA",
+      "available": true,
+      "specialization_tags": [
+        "simulation",
+        "engineering_validation",
+        "execution_selection"
+      ],
+      "coverage_state": "NEURAL_TRAINING_EXECUTED",
+      "planned_wave": "COMPLETED_OR_REPAIR",
+      "training_mode": "SUPERVISED_POLICY",
+      "current_fabric_status": "SCOPED_NEURAL_POLICY_TRAINED_AND_M6_PROMOTED",
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "SAPHEA_MICRO",
+      "identity": "SAPHEA_MICRO",
+      "available": true,
+      "specialization_tags": [
+        "execution_selection",
+        "optimization_efficiency",
+        "metrology_benchmark"
+      ],
+      "coverage_state": "PIPELINE_ACTIVE_WAVE2",
+      "planned_wave": "WAVE2",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "ELYSION",
+      "identity": "ELYSION",
+      "available": true,
+      "specialization_tags": [
+        "invention",
+        "formal_reasoning",
+        "search_exploration"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3A",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "ELYSIUM",
+      "identity": "ELYSIUM",
+      "available": true,
+      "specialization_tags": [
+        "evidence_audit",
+        "counterexample",
+        "transfer_generalization"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3A",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "SAELION",
+      "identity": "SAELION",
+      "available": true,
+      "specialization_tags": [
+        "synthesis_compression",
+        "memory_continuity",
+        "information_gain"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3A",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "NEXUS",
+      "identity": "NEXUS",
+      "available": true,
+      "specialization_tags": [
+        "integration_interfaces",
+        "search_exploration",
+        "memory_continuity"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3A",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F148-ALPHA",
+      "identity": "ALPHA",
+      "available": true,
+      "specialization_tags": [
+        "search_exploration",
+        "representation_transform",
+        "invention"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3B",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F152-BETA",
+      "identity": "BETA",
+      "available": true,
+      "specialization_tags": [
+        "problem_contract",
+        "constraint_feasibility",
+        "evidence_audit"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE4",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F153-GAMMA",
+      "identity": "GAMMA",
+      "available": true,
+      "specialization_tags": [
+        "causal_mechanism",
+        "integration_interfaces",
+        "science_modeling"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE4",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F150-DELTA",
+      "identity": "DELTA",
+      "available": true,
+      "specialization_tags": [
+        "science_modeling",
+        "simulation",
+        "engineering_validation",
+        "evidence_audit"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3B",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F154-EPSILON",
+      "identity": "EPSILON",
+      "available": true,
+      "specialization_tags": [
+        "sensitivity_robustness",
+        "uncertainty",
+        "metrology_benchmark"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE4",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F155-ZETA",
+      "identity": "ZETA",
+      "available": true,
+      "specialization_tags": [
+        "optimization_efficiency",
+        "information_gain",
+        "constraint_feasibility"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE4",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F156-ETA",
+      "identity": "ETA",
+      "available": true,
+      "specialization_tags": [
+        "temporal_dynamics",
+        "uncertainty",
+        "simulation"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE4",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F157-THETA",
+      "identity": "THETA",
+      "available": true,
+      "specialization_tags": [
+        "representation_transform",
+        "formal_reasoning",
+        "search_exploration"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE5",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F158-IOTA",
+      "identity": "IOTA",
+      "available": true,
+      "specialization_tags": [
+        "problem_contract",
+        "counterexample",
+        "formal_reasoning"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE5",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F159-KAPPA",
+      "identity": "KAPPA",
+      "available": true,
+      "specialization_tags": [
+        "constraint_feasibility",
+        "engineering_validation",
+        "problem_contract"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE5",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F160-LAMBDA",
+      "identity": "LAMBDA",
+      "available": true,
+      "specialization_tags": [
+        "representation_transform",
+        "integration_interfaces",
+        "optimization_efficiency"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE5",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F161-MU",
+      "identity": "MU",
+      "available": true,
+      "specialization_tags": [
+        "uncertainty",
+        "metrology_benchmark",
+        "statistics_aggregation"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE5",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F163-XI",
+      "identity": "XI",
+      "available": true,
+      "specialization_tags": [
+        "transfer_generalization",
+        "evidence_audit",
+        "science_modeling"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE6",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F164-OMICRON",
+      "identity": "OMICRON",
+      "available": true,
+      "specialization_tags": [
+        "rare_events",
+        "uncertainty",
+        "counterexample"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE6",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F165-PI",
+      "identity": "PI",
+      "available": true,
+      "specialization_tags": [
+        "search_exploration",
+        "information_gain",
+        "invention"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE6",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F166-RHO",
+      "identity": "RHO",
+      "available": true,
+      "specialization_tags": [
+        "dependency_correlation",
+        "evidence_audit",
+        "counterexample"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE6",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F167-SIGMA",
+      "identity": "SIGMA",
+      "available": true,
+      "specialization_tags": [
+        "statistics_aggregation",
+        "uncertainty",
+        "metrology_benchmark"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE6",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F168-TAU",
+      "identity": "TAU",
+      "available": true,
+      "specialization_tags": [
+        "information_gain",
+        "optimization_efficiency",
+        "coordination"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE7",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F169-UPSILON",
+      "identity": "UPSILON",
+      "available": true,
+      "specialization_tags": [
+        "tradeoff_pareto",
+        "constraint_feasibility",
+        "uncertainty"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE7",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F170-PHI",
+      "identity": "PHI",
+      "available": true,
+      "specialization_tags": [
+        "invariants_scaling",
+        "formal_reasoning",
+        "science_modeling"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE7",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F171-CHI",
+      "identity": "CHI",
+      "available": true,
+      "specialization_tags": [
+        "integration_interfaces",
+        "counterexample",
+        "engineering_validation"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE7",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F172-PSI",
+      "identity": "PSI",
+      "available": true,
+      "specialization_tags": [
+        "hidden_variables",
+        "uncertainty",
+        "counterexample"
+      ],
+      "coverage_state": "PENDING_SPECIALIST_NEURAL_PIPELINE",
+      "planned_wave": "WAVE7",
+      "training_mode": "ROLE_SPECIFIC_LORA",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    },
+    {
+      "ai_id": "F149-OMEGA",
+      "identity": "OMEGA",
+      "available": true,
+      "specialization_tags": [
+        "formal_reasoning",
+        "evidence_audit",
+        "counterexample",
+        "uncertainty"
+      ],
+      "coverage_state": "PENDING_DUAL_MODEL_NEURAL_PIPELINE",
+      "planned_wave": "WAVE3B",
+      "training_mode": "TWO_DISTINCT_MODELS_PER_AI_PLUS_ABLATION",
+      "current_fabric_status": null,
+      "runtime_activation": false
+    }
+  ]
+}
