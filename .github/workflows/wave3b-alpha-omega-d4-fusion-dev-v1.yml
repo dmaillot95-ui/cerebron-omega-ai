@@ -1,0 +1,256 @@
+name: Wave3B ALPHA OMEGA D4 Fusion DEV V1
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/wave3b-alpha-omega-d4-fusion-dev-v1-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fusion_dev:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ai: ALPHA
+            slug: alpha
+            seed: 14820260925
+            source_receipt_sha256: cbe2b7b531d3fe5e8727b7e5c197b5548f63feaef5c37409978ad8ee94bedf92
+          - ai: OMEGA
+            slug: omega
+            seed: 14920260925
+            source_receipt_sha256: 164c1aabd265701b6beeab97a540beab5ec77b1629bf2833fd4cc92680a1863e
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      MODEL_A: Qwen/Qwen3-4B
+      REV_A: 1cfa9a7208912126459214e8b04321603b3df60c
+      MODEL_B: HuggingFaceTB/SmolLM3-3B
+      REV_B: a07cc9a04f16550a088caea529712d1d335b0ac1
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Evaluate candidate fusion policies on DEV only
+        env:
+          AI: ${{ matrix.ai }}
+          SLUG: ${{ matrix.slug }}
+          DEV_SEED: ${{ matrix.seed }}
+          SOURCE_RECEIPT_SHA256: ${{ matrix.source_receipt_sha256 }}
+        run: |
+          mkdir -p "receipts/${SLUG}/d4"
+          python - <<'PY'
+          import gc,hashlib,json,os,random,re,resource,time
+          from collections import defaultdict
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          ai=os.environ["AI"]; slug=os.environ["SLUG"]; rng=random.Random(int(os.environ["DEV_SEED"]))
+          tasks=[]
+          def add(domain,prompt,expected):
+              tasks.append({"id":f"{ai}-DEV-{len(tasks)+1:03d}","domain":domain,"prompt":prompt,"expected":expected})
+
+          if ai=="ALPHA":
+              domains=["diversity","novel_representation","coverage","useful_divergence","redundancy_control","transfer"]
+              for domain in domains:
+                  for _ in range(4):
+                      mode=rng.randrange(3)
+                      n=rng.randint(3,8)
+                      if domain=="diversity":
+                          if mode==0: add(domain,f"A search proposes {n} materially different solution families with distinct mechanisms. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,f"A search lists {n} cosmetic variants of the same mechanism and calls them independent alternatives. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"The search output is unavailable, so diversity cannot be assessed. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="novel_representation":
+                          if mode==0: add(domain,"A new representation changes the state variables and exposes a previously hidden constraint while preserving the original problem. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"A proposal only renames existing variables and claims a novel representation. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"A representation is claimed novel but no prior representation is provided for comparison. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="coverage":
+                          if mode==0: add(domain,"The candidate set explicitly covers nominal, edge, failure, and resource-limited regimes. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"The candidate set covers only the nominal regime but claims complete coverage. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"Coverage is claimed but the required regime list is not specified. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="useful_divergence":
+                          if mode==0: add(domain,"A divergent branch produces a testable alternative with explicit assumptions and a falsification path. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"A divergent branch adds unrelated ideas with no testable connection to the objective. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"A branch may be useful, but no evaluation criterion is available. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="redundancy_control":
+                          if mode==0: add(domain,"Near-duplicate candidates are clustered and counted once while preserving lineage. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,f"{n} near-identical candidates are counted as independent evidence. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"Candidate similarity cannot be checked because fingerprints are missing. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="transfer":
+                          if mode==0: add(domain,"A method is tested on a separate transfer set and the claim is limited to the observed transfer result. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"A method succeeds only on its construction set and is declared transferable without a separate transfer test. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"Transfer is claimed but the transfer set results are unavailable. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+              system="You are ALPHA. Judge divergence, novelty, coverage, redundancy and transfer conservatively. Return only PASS, FAIL, or INSUFFICIENT. /no_think"
+          else:
+              domains=["formal_validity","counterexample_search","proof_gap_detection","assumption_audit","reproduction","calibration"]
+              for domain in domains:
+                  for _ in range(4):
+                      mode=rng.randrange(3); n=rng.randint(2,20)
+                      if domain=="formal_validity":
+                          if mode==0: add(domain,f"A derivation applies the same valid equivalence in both directions across {n} steps with all conditions stated. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"A derivation divides by an expression that may be zero and never handles that case. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"A proof conclusion is shown but several intermediate steps are omitted. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="counterexample_search":
+                          if mode==0: add(domain,"A universal claim is falsified by one explicit verified counterexample. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"A claimed counterexample violates the hypotheses of the theorem it is supposed to refute. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"No counterexample was found in a finite search, and no proof of absence exists. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="proof_gap_detection":
+                          if mode==0: add(domain,"Every lemma used by the conclusion is either proved or cited with matching hypotheses. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"The conclusion uses an unstated lemma that is neither proved nor cited. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"One lemma is cited but the cited statement is unavailable for hypothesis matching. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="assumption_audit":
+                          if mode==0: add(domain,"All assumptions are explicit and each is checked before the result is applied. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"The result relies on independence, but the data-generation process shares a common ancestor and this is ignored. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"An assumption may be required, but the source does not specify whether it holds. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="reproduction":
+                          if mode==0: add(domain,"Code revision, seed, inputs and output hash match the reference reproduction packet. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,"The reproduced output differs from the reference under the same code revision, seed and inputs. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"The reported reproduction omits the seed and code revision. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+                      elif domain=="calibration":
+                          if mode==0: add(domain,"The confidence statement is explicitly limited to the tested sample and its measured uncertainty. Return only PASS, FAIL, or INSUFFICIENT.","PASS")
+                          elif mode==1: add(domain,f"A result from {n} internal cases is described as universally certain. Return only PASS, FAIL, or INSUFFICIENT.","FAIL")
+                          else: add(domain,"A confidence level is reported without sample size or uncertainty method. Return only PASS, FAIL, or INSUFFICIENT.","INSUFFICIENT")
+              system="You are OMEGA. Judge proof validity, counterexamples, proof gaps, assumptions, reproduction and calibration conservatively. Return only PASS, FAIL, or INSUFFICIENT. /no_think"
+
+          assert len(tasks)==24 and len({t["domain"] for t in tasks})==6
+
+          def norm(s):
+              m=re.search(r"\b(PASS|FAIL|INSUFFICIENT)\b",s.upper()); return m.group(1) if m else ""
+          def load(mid,rev):
+              tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+              if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+              model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+              model.eval(); return tok,model
+          def render(tok,sys,user):
+              msgs=[{"role":"system","content":sys},{"role":"user","content":user}]
+              try: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+          def infer(tok,model,sys,user,n=8):
+              p=render(tok,sys,user); x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              return tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+
+          rows={t["id"]:{**t} for t in tasks}; t0=time.time()
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for t in tasks: rows[t["id"]]["qwen"]=norm(infer(tok,model,system,t["prompt"],6))
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_B"],os.environ["REV_B"])
+          for t in tasks:
+              r=rows[t["id"]]; r["smol"]=norm(infer(tok,model,system,t["prompt"],6))
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    f"You are a neutral {ai} fusion judge. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Question: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["smol_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else:r["smol_judge"]="AGREE"
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for t in tasks:
+              r=rows[t["id"]]
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    f"You are a neutral {ai} fusion judge. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Question: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["qwen_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else:r["qwen_judge"]="AGREE"
+          del model,tok; gc.collect()
+
+          def choose(policy,r):
+              if r["qwen"]==r["smol"]: return r["qwen"]
+              qj=r["qwen_judge"]; sj=r["smol_judge"]
+              if policy=="QWEN_PRIMARY": return r["smol"] if qj==sj=="SMOL" else r["qwen"]
+              if policy=="SMOL_PRIMARY": return r["qwen"] if qj==sj=="QWEN" else r["smol"]
+              if policy=="RECIPROCAL_ELSE_QWEN":
+                  if qj==sj=="SMOL": return r["smol"]
+                  if qj==sj=="QWEN": return r["qwen"]
+                  return r["qwen"]
+              if policy=="RECIPROCAL_ELSE_SMOL":
+                  if qj==sj=="SMOL": return r["smol"]
+                  if qj==sj=="QWEN": return r["qwen"]
+                  return r["smol"]
+              raise ValueError(policy)
+
+          policies=["QWEN_PRIMARY","SMOL_PRIMARY","RECIPROCAL_ELSE_QWEN","RECIPROCAL_ELSE_SMOL"]
+          base_q=sum(r["qwen"]==r["expected"] for r in rows.values())
+          base_s=sum(r["smol"]==r["expected"] for r in rows.values())
+          best=max(base_q,base_s); results={}
+          for p in policies:
+              by=defaultdict(lambda:{"correct":0,"total":0}); correct=0
+              for r in rows.values():
+                  ok=choose(p,r)==r["expected"]; correct+=int(ok); by[r["domain"]]["correct"]+=int(ok); by[r["domain"]]["total"]+=1
+              regs=[]
+              for dom,v in by.items():
+                  qb=sum(x["qwen"]==x["expected"] for x in rows.values() if x["domain"]==dom)
+                  sb=sum(x["smol"]==x["expected"] for x in rows.values() if x["domain"]==dom)
+                  regs.append(max(qb,sb)-v["correct"])
+              results[p]={"correct":correct,"gain_over_best_single":correct-best,"max_domain_regression_vs_best_single":max(regs),"domain":dict(sorted(by.items()))}
+
+          ranked=sorted(policies,key=lambda p:(results[p]["correct"],-results[p]["max_domain_regression_vs_best_single"],p),reverse=True)
+          selected=ranked[0]; sel=results[selected]
+          decision="DEV_POLICY_PASS_FREEZE_FOR_FRESH_PRIVATE_HOLDOUT" if sel["gain_over_best_single"]>0 and sel["max_domain_regression_vs_best_single"]<=1 else "DEV_POLICY_HOLD_NO_ROBUST_GAIN"
+          out={
+            "schema":f"{ai}_D4_FUSION_DEV_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "ai_id":ai,
+            "classification":"DEV_POLICY_TUNING_NOT_COLD",
+            "source_precheck_run_id":36155099887,
+            "source_precheck_receipt_sha256":os.environ["SOURCE_RECEIPT_SHA256"],
+            "m6_used_for_tuning":False,
+            "weights_changed":False,
+            "task_count":24,
+            "dev_sha256":hashlib.sha256(json.dumps(tasks,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "qwen_correct":base_q,"smol_correct":base_s,"best_single_correct":best,
+            "candidate_policies":results,"selected_policy":selected,"selected_metrics":sel,
+            "decision":decision,
+            "next_if_pass":"NEW_FRESH_PRIVATE_HOLDOUT_NEVER_SEEN_DURING_POLICY_TUNING",
+            "next_if_hold":"STOP_OR_REDESIGN_WITHOUT_CONSUMING_PRIVATE_HOLDOUT",
+            "claim_ceiling":"DEV_POLICY_TUNING_ONLY_NOT_COLD_EVIDENCE_NO_DUAL_CORE_PROMOTION",
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          p=Path(f"receipts/{slug}/d4/{slug}-d4-fusion-dev-v1.json"); p.write_text(json.dumps(out,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(out,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.slug }}-d4-fusion-dev-v1
+          path: receipts/${{ matrix.slug }}/d4/${{ matrix.slug }}-d4-fusion-dev-v1.json
+          if-no-files-found: error
+
+  persist:
+    needs: fusion_dev
+    if: always() && needs.fusion_dev.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: '*-d4-fusion-dev-v1'
+          path: downloaded
+          merge-multiple: true
+      - name: Persist DEV receipts
+        run: |
+          mkdir -p receipts/alpha/d4 receipts/omega/d4
+          cp downloaded/alpha-d4-fusion-dev-v1.json receipts/alpha/d4/
+          cp downloaded/omega-d4-fusion-dev-v1.json receipts/omega/d4/
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/alpha/d4/ receipts/omega/d4/
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: ALPHA OMEGA D4 fusion DEV V1 ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
