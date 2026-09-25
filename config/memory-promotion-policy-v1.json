@@ -160,10 +160,11 @@
       "state_sha": "7bec961e6e2980bed75b676e7c51200aac348e5c",
       "iteration": 464,
       "observed_packet_count": 144,
-      "current_registry_count": 151
+      "current_registry_count": 152,
+      "registry_sync_note": "REGISTRY_NOW_152_F72_REMAINS_FAIL_UNTIL_FRESH_GATE_EVIDENCE"
     }
   },
-  "global_promotion_state": "BLOCKED_PENDING_F72_REALITY_PACKET_REFRESH_AND_REPRODUCTION",
+  "global_promotion_state": "BLOCKED_PENDING_F72_FRESH_VALIDATION_AND_REPRODUCTION",
   "rules": [
     "MEMORY_NOT_LEARNING",
     "M6_NEVER_IN_TRAIN",
