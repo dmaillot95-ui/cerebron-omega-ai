@@ -1,2 +1,2 @@
-repair=qwen3-4b-v6-preflight-serialized
+repair=qwen3-4b-v7-unicode-alias-cache-warm
 sample=5
