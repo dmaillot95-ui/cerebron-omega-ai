@@ -1,0 +1,57 @@
+{
+  "schema": "CEREBRON_86_M43_SAPHEA_TRANSFER_AUDIT_RUNNING_V1",
+  "date": "2026-09-25",
+  "parent_checkpoint": "checkpoints/CEREBRON_85_M43_SAPHEA_FIRST_LORA_RUNNING_2026-09-25.json",
+  "mission": "M43_SAPHEA_G6_TO_G7_VALIDATION",
+  "saphea_g6": {
+    "status": "PASS_REAL_LORA_NOT_PROMOTED",
+    "training_run": 36100266729,
+    "adapter_sha256": "0187a8e3b1ef1edcfd966b463137c36721fe9bcf5019233b52e4ec1354b01080",
+    "baseline_m6": "18/60",
+    "posttrain_m6": "30/60",
+    "cold_gain": 12,
+    "critical_regression": false,
+    "hf_private_readback_sha_pass": true
+  },
+  "transfer_gate_1": {
+    "status": "PASS_SCOPED_TRANSFER",
+    "run_id": 36101181888,
+    "benchmark_records": 108,
+    "dataset_sha256": "9c72c7d5e83baff006f59b6bbb390abdaaa0e3d9fdd76c9f44d7fe3489b05232",
+    "deny_training": true,
+    "prompt_overlap_with_gold_m6": 0,
+    "id_overlap_with_gold_m6": 0,
+    "base_score": "20/108",
+    "adapter_score": "40/108",
+    "transfer_gain": 20,
+    "helpful_changes": 22,
+    "harmful_changes": 2,
+    "critical_regression": false,
+    "ablation_supports_value": true,
+    "limitation": "Generator reuses training-dataset classification rule code; useful held-out transfer but not sufficient independent audit."
+  },
+  "transfer_gate_2": {
+    "status": "RUNNING",
+    "run_id": 36101455632,
+    "benchmark_records": 72,
+    "design": "SEPARATE_EVALUATOR_CODEPATH_WITH_RED_TEAM_BOUNDARY_CASES",
+    "same_model_lineage": true,
+    "independent_model_evidence": false,
+    "required": [
+      "GAIN_POSITIVE",
+      "NO_CRITICAL_REGRESSION",
+      "RED_TEAM_NONDEGRADING",
+      "NO_GOLD_M6_ID_OVERLAP",
+      "ADAPTER_SHA_MATCH"
+    ]
+  },
+  "promotion": "HOLD_G7",
+  "next_gate": "F72_AND_AFAH_ONLY_IF_TRANSFER_GATE_2_PASS",
+  "exact_resume": [
+    "Check run 36101455632.",
+    "If gate 2 fails, keep SAPHEA at G6 and repair/rollback based on failure class.",
+    "If gate 2 passes, build SAPHEA-specific F72 frozen review packet and separate counter-audit.",
+    "Then run AFAH epistemic decision; no majority vote and no automatic promotion.",
+    "Absolute transfer accuracy remains limited; do not generalize beyond scoped epistemic classification."
+  ]
+}
