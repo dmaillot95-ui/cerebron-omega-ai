@@ -127,10 +127,16 @@
         "increase max_new_tokens 260->420",
         "same-scale 5-AI canary before full rerun"
       ],
-      "REPAIR_STATUS": "REPAIR_IMPLEMENTED_CANARY_PENDING",
+      "REPAIR_STATUS": "CLOSED_BY_V7_CANARY_5_OF_5_PARSE_PASS",
       "TRANSFER_RISK": "MEDIUM_UNTIL_CANARY_AND_FULL_COUNCIL_RETEST",
       "PARENT_SHA": "f045d0c0b3a2c95e69a978c517eb57adce996180",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "artifact:10843261128",
+        "parse_pass_count:5",
+        "all_pass:true"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-REPAIR-REGEX-001",
@@ -152,10 +158,15 @@
         "move hyphen to end of regex character class",
         "same-scale 5-AI canary rerun"
       ],
-      "REPAIR_STATUS": "CORRECTED_RERUN_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_NO_REGEX_PARSER_VERIFIED_V7",
       "TRANSFER_RISK": "LOW_IF_RERUN_PASSES",
       "PARENT_SHA": "38902e1e8a6df3efce1188b2ba1a7ed27e07d058",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "parser:V7_QWEN3_UNICODE_ALIAS_STRICT",
+        "parse_pass_count:5"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-REPAIR-REGEX-002",
@@ -182,10 +193,15 @@
         "deterministic Markdown normalization",
         "same-scale five-AI rerun"
       ],
-      "REPAIR_STATUS": "V3_IMPLEMENTED_CANARY_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_NO_REGEX_PARSER_VERIFIED_V7",
       "TRANSFER_RISK": "LOW_AFTER_5_OF_5_PARSE_PASS",
       "PARENT_SHA": "355e6ffaff51eba8db5f44cf8a8512dd4113d5bb",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "parser:V7_QWEN3_UNICODE_ALIAS_STRICT",
+        "parse_pass_count:5"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-FORMAT-002",
@@ -213,10 +229,15 @@
         "max_new_tokens 260",
         "same five-AI canary"
       ],
-      "REPAIR_STATUS": "V4_CANARY_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_BY_COMPACT_MODEL_REJECTION_AND_QWEN3_REPLACEMENT",
       "TRANSFER_RISK": "MEDIUM_UNTIL_5_OF_5_PARSE_PASS",
       "PARENT_SHA": "a8251d24996852e8d3463910601953620716b98a",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36076654497",
+        "decision:REJECT_QWEN2.5_0.5B_FOR_STRATEGY_COUNCIL",
+        "run:36082948475"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-PATCH-NEWLINE-001",
@@ -237,10 +258,15 @@
         "replace literal backslash-n with real line breaks",
         "retrigger same five-AI canary"
       ],
-      "REPAIR_STATUS": "CORRECTED_RETRIGGER_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_BY_PY_COMPILE_PREFLIGHT_AND_V7_PASS",
       "TRANSFER_RISK": "LOW_AFTER_COMPILE_AND_CANARY_PASS",
       "PARENT_SHA": "77e3d0bd3acb308d44ae5fdddf94f761cd2c1335",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "preflight:PASS",
+        "all_pass:true"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-PATCH-NEWLINE-002",
@@ -262,9 +288,14 @@
         "add py_compile preflight before pip install",
         "serialize five-job canary to max-parallel=1"
       ],
-      "REPAIR_STATUS": "CORRECTED_PREFLIGHT_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_BY_PY_COMPILE_PREFLIGHT_AND_V7_PASS",
       "TRANSFER_RISK": "LOW_AFTER_PY_COMPILE_PASS",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "preflight:PASS",
+        "all_pass:true"
+      ]
     },
     {
       "FAILURE_ID": "FAIL-C80-ALL-AI-COUNCIL-QWEN3-FORMAT-001",
@@ -286,9 +317,15 @@
         "map PRIORITIZE/PRIORITISE to PRIORITY",
         "rerun same five with warm Qwen3 cache"
       ],
-      "REPAIR_STATUS": "V7_CANARY_REQUIRED",
+      "REPAIR_STATUS": "CLOSED_BY_V7_UNICODE_ALIAS_NORMALIZATION",
       "TRANSFER_RISK": "LOW_AFTER_5_OF_5_PASS",
-      "TIMESTAMP": "2026-09-25"
+      "TIMESTAMP": "2026-09-25",
+      "CLOSURE_EVIDENCE": [
+        "run:36082948475",
+        "artifact:10843261128",
+        "parse_pass_count:5",
+        "all_pass:true"
+      ]
     }
   ],
   "rule": "Never delete a failure because a later version succeeds; preserve FAILURE->REPAIR->RETEST->TRANSFER."
