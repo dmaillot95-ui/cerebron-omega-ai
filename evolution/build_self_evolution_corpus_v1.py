@@ -7,7 +7,7 @@ import json, hashlib, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from evolution.cerebron_self_evolution import normalize_text, sha256_text, stable_split
+from evolution.cerebron_self_evolution import normalize_text, sha256_text, stable_split, contamination_scan
 
 def load(p):
     return json.loads((ROOT/p).read_text())
@@ -156,6 +156,19 @@ eligible=[r for r in canonical if r["training_eligible"]]
 splits={k:sum(r["split"]==k for r in canonical) for k in ("train","validation","holdout")}
 eligible_splits={k:sum(r["split"]==k and r["training_eligible"] for r in canonical) for k in ("train","validation","holdout")}
 
+# Decontaminate potential TRAIN material against validation + holdout.
+# Admission eligibility (L5/L6) is distinct from effective trainability.
+train_candidates=[{"id":r["record_id"],"text":r["text"]} for r in canonical if r["split"]=="train"]
+eval_references=[{"id":r["record_id"],"text":r["text"]} for r in canonical if r["split"] in ("validation","holdout")]
+contamination=contamination_scan(train_candidates,eval_references,ngram_size=5,threshold=0.80)
+blocked_train_ids={m.candidate_id for m in contamination if m.blocked}
+for r in canonical:
+    r["decontamination_blocked"]=r["record_id"] in blocked_train_ids
+    r["effective_training_eligible"]=bool(
+        r["training_eligible"] and r["split"]=="train" and not r["decontamination_blocked"]
+    )
+effective=[r for r in canonical if r["effective_training_eligible"]]
+
 report={
   "schema":"CEREBRON_SELF_EVOLUTION_CORPUS_V1",
   "status":"BUILT_NOT_RELEASED",
@@ -171,6 +184,12 @@ report={
   "split_counts":splits,
   "training_eligible_count":len(eligible),
   "training_eligible_split_counts":eligible_splits,
+  "effective_training_eligible_count":len(effective),
+  "holdout_reserved_eligible_count":eligible_splits["holdout"],
+  "validation_reserved_eligible_count":eligible_splits["validation"],
+  "decontamination_match_count":len(contamination),
+  "blocked_train_record_count":len(blocked_train_ids),
+  "decontamination_matches":[m.__dict__ for m in contamination],
   "weight_training_released":False,
   "release_reason":"Requires explicit dataset seal plus minimum target coverage; corpus build alone never releases training.",
   "records":canonical,
@@ -182,5 +201,6 @@ out.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
 print(json.dumps({k:report[k] for k in [
   "status","source_counts","raw_record_count","canonical_record_count",
   "duplicate_count","split_counts","training_eligible_count",
-  "training_eligible_split_counts","weight_training_released"
+  "training_eligible_split_counts","effective_training_eligible_count",
+  "decontamination_match_count","blocked_train_record_count","weight_training_released"
 ]},sort_keys=True))
