@@ -1,0 +1,28 @@
+{
+  "schema": "ALPHA_M6_V2_PRIVATE_RELEASE_RECEIPT",
+  "run_id": 36140085018,
+  "ai_id": "ALPHA",
+  "created_now": true,
+  "private_path": "alpha/M6/ALPHA-M6-V2.json",
+  "dataset_sha256": "ccb4ef540bc8af61d86cee8974f773f5ee1f81614d1e71847bc7214f888f42a8",
+  "task_count": 72,
+  "domain_counts": {
+    "coverage": 12,
+    "diversity": 12,
+    "novel_representation": 12,
+    "redundancy_control": 12,
+    "transfer": 12,
+    "useful_divergence": 12
+  },
+  "label_counts": {
+    "FAIL": 24,
+    "INSUFFICIENT": 24,
+    "PASS": 24
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "exact_prompts_public": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING",
+  "receipt_sha256": "580d3c90be1bb9630e9c3cc6ecab77e78c78b8ee66c7c8ac0639932d651a1143"
+}

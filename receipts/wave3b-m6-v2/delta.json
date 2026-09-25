@@ -1,0 +1,28 @@
+{
+  "schema": "DELTA_M6_V2_PRIVATE_RELEASE_RECEIPT",
+  "run_id": 36140085018,
+  "ai_id": "DELTA",
+  "created_now": true,
+  "private_path": "delta/M6/DELTA-M6-V2.json",
+  "dataset_sha256": "0c1219a7f4dbe2b8115353eea614032ddc53b31dc753d55a317abd34f3b420ef",
+  "task_count": 72,
+  "domain_counts": {
+    "assumption_control": 12,
+    "dimensional_consistency": 12,
+    "model_fidelity": 12,
+    "sensitivity": 12,
+    "simulation_design": 12,
+    "transfer": 12
+  },
+  "label_counts": {
+    "FAIL": 24,
+    "INSUFFICIENT": 24,
+    "PASS": 24
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "exact_prompts_public": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING",
+  "receipt_sha256": "6f5f6fa1f629e950756b42f7b83d84237280c8baaf82f120b86c69d97a1d2b42"
+}

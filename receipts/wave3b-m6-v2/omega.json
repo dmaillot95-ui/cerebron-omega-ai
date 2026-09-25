@@ -1,0 +1,28 @@
+{
+  "schema": "OMEGA_M6_V2_PRIVATE_RELEASE_RECEIPT",
+  "run_id": 36140085018,
+  "ai_id": "OMEGA",
+  "created_now": true,
+  "private_path": "omega/M6/OMEGA-M6-V2.json",
+  "dataset_sha256": "c4d5f9be45d3f12560df67ab091278ad13a10ee297a8a83f6e3578d9e2383248",
+  "task_count": 72,
+  "domain_counts": {
+    "assumption_audit": 12,
+    "calibration": 12,
+    "counterexample_search": 12,
+    "formal_validity": 12,
+    "proof_gap_detection": 12,
+    "reproduction": 12
+  },
+  "label_counts": {
+    "FAIL": 24,
+    "INSUFFICIENT": 24,
+    "PASS": 24
+  },
+  "deny_training": true,
+  "training_eligible": false,
+  "exact_prompts_public": false,
+  "hf_private_readback_sha_pass": true,
+  "claim_ceiling": "PRIVATE_RUNTIME_GENERATED_SYNTHETIC_M6_NO_TRAINING",
+  "receipt_sha256": "1add2d825a9f43bbdfab59952d13389746fc1eba47203f3f7a772a5a5d852c19"
+}
