@@ -36,18 +36,20 @@
     },
     {
       "UNKNOWN_ID": "UNK-DUAL-CORE-ASSIGNMENT-001",
-      "CLASS": "U4",
-      "STATE": "UNTESTED",
-      "DESCRIPTION": "Dual-core logical-AI support is defined, but no repository manifest currently identifies which concrete AIs are dual-core.",
+      "CLASS": "U1",
+      "STATE": "PARTIALLY_MEASURED",
+      "DESCRIPTION": "Platform branch defines seven dual-core candidate assignments (ELYSION, ELYSIUM, SAELION, ALPHA, OMEGA, DELTA, NEXUS). ELYSION has D0-D3 PASS; full dual-core benefit/activation remains unproven until D4-D6/D8 and per-AI gates pass.",
       "MEASURABLE": true,
       "EVIDENCE_REFS": [
+        "branch:feat/cerebron-ai-platform-mvp/config/native-ai-dual-core-v1.json",
+        "run:35960826168",
         "config/cerebron-dual-core-contract-v1.json"
       ],
       "ROUTE_TO": [
         "CEREBRON",
         "A6_MEMORY_KEEPER"
       ],
-      "STATUS": "OPEN_NO_ASSIGNMENT_CLAIM"
+      "STATUS": "OPEN_ACTIVATION_GATES_REMAIN"
     }
   ],
   "rule": "UNKNOWNs must not be silently compressed into certainty."
