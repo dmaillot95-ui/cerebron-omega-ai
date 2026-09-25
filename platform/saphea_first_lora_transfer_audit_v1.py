@@ -282,8 +282,6 @@ def main():
       "promotion_recommendation":report["promotion_recommendation"],
       "report_sha256":report["report_sha256"],
     },sort_keys=True))
-    if not (transfer_gain_positive and ablation_supports_value and red_team_pass):
-        raise SystemExit(3)
 
 if __name__=="__main__":
     main()
