@@ -4,10 +4,6 @@ on:
     branches: ['feat/cerebron-ai-platform-mvp']
     paths:
       - 'config/rdx-knowledge-ingress-canary-trigger.txt'
-      - 'runtime/rdx_knowledge_ingest_v1.py'
-      - 'tests/test_rdx_knowledge_ingest_v1.py'
-      - 'config/rdx-knowledge-training-loop-v1.json'
-      - 'config/memory-promotion-policy-v1.json'
   workflow_dispatch:
 permissions:
   contents: read
