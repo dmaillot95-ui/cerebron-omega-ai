@@ -1,0 +1,8 @@
+RDX SEMANTIC RETRIEVAL FRESH HOLDOUT V2
+policy=RRF_SEM_LEX
+policy_frozen_from_dev_run=36161040992
+dev_source_record_sha256=91d3bac5ba9eb5a17f5925dcfbfbdb4276a864c78271eb45e62cfdb1c65136e2
+fresh_private_runtime_generated=true
+exact_prompts_public=false
+one_shot=true
+training=false
