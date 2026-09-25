@@ -9,21 +9,33 @@ LABELS=["PRIORITY","PROPOSAL","TEST","STOP","UNIQUE_VALUE","BENCHMARK","DUAL_COR
 
 def parse_labels(raw):
     out={}; cur=None
+    aliases={
+        "PRIORITY":"PRIORITY",
+        "PROPOSAL":"PROPOSAL",
+        "TEST":"TEST",
+        "STOP":"STOP",
+        "UNIQUE_VALUE":"UNIQUE_VALUE",
+        "UNIQUE VALUE":"UNIQUE_VALUE",
+        "UNIQUE-VALUE":"UNIQUE_VALUE",
+        "BENCHMARK":"BENCHMARK",
+        "DUAL_CORE":"DUAL_CORE",
+        "DUAL CORE":"DUAL_CORE",
+        "DUAL-CORE":"DUAL_CORE",
+        "RISK":"RISK",
+    }
     for line in raw.splitlines():
         s=line.strip()
         if not s:
             continue
-        # No regex here: normalize common Markdown wrappers deterministically.
         plain=s.lstrip(" \t>#*-").replace("**","").replace("__","").replace("`","").strip()
-        hit=False
-        for lab in LABELS:
-            prefix=lab+":"
-            if plain.upper().startswith(prefix):
-                cur=lab
-                out[lab]=plain[len(prefix):].strip()
-                hit=True
-                break
-        if not hit and cur:
+        if ":" in plain:
+            head,val=plain.split(":",1)
+            key=aliases.get(head.strip().upper())
+            if key:
+                cur=key
+                out[key]=val.strip()
+                continue
+        if cur:
             continuation=plain.strip()
             if continuation:
                 out[cur]=(out[cur]+" "+continuation).strip()
@@ -75,25 +87,25 @@ RISK: state the main unknown or failure mode that could invalidate the proposal.
          "ai_id":a.ai,"identity":spec["identity"],"parent_function":spec["parent_function"],
          "specialization_tags":spec["specialization_tags"],"specialization_vector":spec["specialization_vector"],
          "endpoint":endpoint,"model_id":model_id,"revision":rev,"real_execution":True,"llm_inference":False,
-         "format_contract_version":"V4_SHORT_EIGHT_LINES",
+         "format_contract_version":"V5_QWEN3_4B_ALIAS_STRICT",
          "spiralix_input_envelope":inp,"spiralix_input_sha256":sha256_obj(inp)}
     t=time.time()
     try:
         import torch
         from transformers import AutoTokenizer,AutoModelForCausalLM
         tok=AutoTokenizer.from_pretrained(model_id,revision=rev)
-        model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=torch.float32,low_cpu_mem_usage=True)
+        dtype=torch.bfloat16 if "Qwen3" in model_id else torch.float32\n        model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=dtype,low_cpu_mem_usage=True)
         msgs=[{"role":"system","content":system},{"role":"user","content":user}]
-        try: prompt=tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+        try:\n            kwargs={"tokenize":False,"add_generation_prompt":True}\n            if "Qwen3" in model_id: kwargs["enable_thinking"]=False\n            prompt=tok.apply_chat_template(msgs,**kwargs)
         except Exception: prompt=system+"\n\n"+user+"\nASSISTANT:\n"
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
             y=model.generate(**x,max_new_tokens=260,do_sample=False,repetition_penalty=1.15,no_repeat_ngram_size=4)
         raw=tok.decode(y[0][x["input_ids"].shape[1]:],skip_special_tokens=True).strip()
         parsed=parse_labels(raw)
-        echo=any(p in raw.lower() for p in ["return exactly eight","current line of route:","questions:"])
+        echo=any(p in raw.lower() for p in ["output contract","state the single highest leverage","return exactly eight","current line of route:","questions:"])
         rec.update(llm_inference=True,inference="PASS",raw_output=raw[:7000],parsed=parsed,
-                   parse_ok=all(parsed.get(k) for k in LABELS),prompt_echo=echo,
+                   parse_ok=all(parsed.get(k) for k in LABELS) and not echo,prompt_echo=echo,
                    output_sha256=hashlib.sha256(raw.encode()).hexdigest())
     except Exception as e:
         rec.update(inference="FAIL",failure_class=type(e).__name__,failure_message=str(e)[:1500],parse_ok=False,prompt_echo=False)
