@@ -1,0 +1,237 @@
+name: ELYSION D4 True Dual-Core Fusion Canary
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysion-d4-fusion-canary-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fusion_canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_PRIVATE_REPO: cerebron-omega/cerebron-private-memory
+      M6_PATH: elysion/M6/ELYSION-M6-V1.json
+      M6_SHA256: bc2324c1afffe780c3deb3cc25e70f9838f86253bb4ea27f88fec0cb209b59f6
+      MODEL_A: Qwen/Qwen3-4B
+      REV_A: 1cfa9a7208912126459214e8b04321603b3df60c
+      MODEL_B: HuggingFaceTB/SmolLM3-3B
+      REV_B: a07cc9a04f16550a088caea529712d1d335b0ac1
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install CPU inference runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Execute true dual-core fusion canary
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import gc,hashlib,json,os,re,resource,time
+          from pathlib import Path
+          import torch
+          from huggingface_hub import HfApi,hf_hub_download
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          token=os.environ["HF_TOKEN"]; priv=os.environ["HF_PRIVATE_REPO"]
+          fn=hf_hub_download(repo_id=priv,filename=os.environ["M6_PATH"],repo_type="model",token=token,force_download=True)
+          raw=Path(fn).read_bytes()
+          got=hashlib.sha256(raw).hexdigest()
+          if got!=os.environ["M6_SHA256"]: raise SystemExit("M6_SHA_MISMATCH")
+          m6=json.loads(raw)
+          if not m6.get("deny_training") or m6.get("classification")!="M6_COLD_BENCHMARK_SEALED":
+              raise SystemExit("M6_CLASSIFICATION_FAIL")
+          tasks=m6["tasks"]
+          if len(tasks)!=100: raise SystemExit("M6_COUNT_FAIL")
+
+          # Pre-registered deterministic subset: independent of labels/answers.
+          selected=sorted(tasks,key=lambda t:hashlib.sha256(str(t["id"]).encode()).hexdigest())[:24]
+          selected_ids=[str(t["id"]) for t in selected]
+          subset_sha=hashlib.sha256(json.dumps(selected_ids,separators=(",",":")).encode()).hexdigest()
+          tools={"CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"}
+
+          def normalize(text,expected):
+              s=text.strip(); e=str(expected).strip()
+              if e in {"A","B","C","D"}:
+                  m=re.search(r"\b([ABCD])\b",s.upper()); return m.group(1) if m else ""
+              if e in tools:
+                  up=s.upper()
+                  for x in ["CALCULATOR","WEB","PYTHON","GITHUB","MEMORY"]:
+                      if re.search(rf"\b{x}\b",up): return x
+                  return ""
+              m=re.search(r"[-+]?\d+",s.replace(",",""))
+              return m.group(0) if m else s.split()[0] if s.split() else ""
+
+          def load(mid,rev):
+              tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+              if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+              model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+              model.eval()
+              return tok,model
+
+          def render(tok,system,user):
+              msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+              try:
+                  return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError:
+                  return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+
+          def infer(tok,model,system,user,n=12):
+              p=render(tok,system,user)
+              x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              return tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+
+          details={str(t["id"]):{
+              "id":str(t["id"]),"domain":t["domain"],"prompt":t["prompt"],"expected":str(t["expected"])
+          } for t in selected}
+          t0=time.time()
+
+          # CORE A only.
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(selected,1):
+              out=infer(tok,model,"Answer the benchmark question directly. Return only the requested short answer. /no_think",t["prompt"])
+              d=details[str(t["id"])]
+              d["a_raw"]=out; d["a"]=normalize(out,t["expected"])
+              if i%6==0: print(f"A_PROGRESS {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          # CORE B only + B critiques A when disagreement exists.
+          tok,model=load(os.environ["MODEL_B"],os.environ["REV_B"])
+          for i,t in enumerate(selected,1):
+              d=details[str(t["id"])]
+              out=infer(tok,model,"Answer the benchmark question directly. Return only the requested short answer. /no_think",t["prompt"])
+              d["b_raw"]=out; d["b"]=normalize(out,t["expected"])
+              if d["a"]!=d["b"]:
+                  verdict=infer(
+                    tok,model,
+                    "You are Core B in a dual-core verifier. You do not have an answer key. Choose which candidate is more likely correct. Return exactly SELF or PEER. /no_think",
+                    f"Question: {t['prompt']}\nSELF candidate: {d['b']}\nPEER candidate: {d['a']}",6)
+                  up=verdict.upper()
+                  d["b_verdict"]="SELF" if re.search(r"\bSELF\b",up) else "PEER" if re.search(r"\bPEER\b",up) else "UNRESOLVED"
+              else:
+                  d["b_verdict"]="CONSENSUS"
+              if i%6==0: print(f"B_PROGRESS {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          # CORE A critiques B only on disagreements.
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(selected,1):
+              d=details[str(t["id"])]
+              if d["a"]!=d["b"]:
+                  verdict=infer(
+                    tok,model,
+                    "You are Core A in a dual-core verifier. You do not have an answer key. Choose which candidate is more likely correct. Return exactly SELF or PEER. /no_think",
+                    f"Question: {t['prompt']}\nSELF candidate: {d['a']}\nPEER candidate: {d['b']}",6)
+                  up=verdict.upper()
+                  d["a_verdict"]="SELF" if re.search(r"\bSELF\b",up) else "PEER" if re.search(r"\bPEER\b",up) else "UNRESOLVED"
+              else:
+                  d["a_verdict"]="CONSENSUS"
+              if i%6==0: print(f"A_CRITIQUE_PROGRESS {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          a_correct=b_correct=f_correct=resolved=wrong_commit=0
+          consensus=critique_converged=unresolved=0
+          public_rows=[]
+          for t in selected:
+              d=details[str(t["id"])]
+              exp=d["expected"]
+              a_correct+=int(d["a"]==exp); b_correct+=int(d["b"]==exp)
+              if d["a"]==d["b"]:
+                  fusion=d["a"]; reason="CONSENSUS"; consensus+=1
+              else:
+                  ac = d["a"] if d["a_verdict"]=="SELF" else d["b"] if d["a_verdict"]=="PEER" else ""
+                  bc = d["b"] if d["b_verdict"]=="SELF" else d["a"] if d["b_verdict"]=="PEER" else ""
+                  if ac and ac==bc:
+                      fusion=ac; reason="CROSS_CRITIQUE_CONVERGENCE"; critique_converged+=1
+                  else:
+                      fusion=""; reason="UNRESOLVED"; unresolved+=1
+              d["fusion"]=fusion; d["fusion_reason"]=reason
+              ok=(fusion==exp)
+              f_correct+=int(ok)
+              if fusion:
+                  resolved+=1; wrong_commit+=int(not ok)
+              public_rows.append({
+                "id_sha256":hashlib.sha256(d["id"].encode()).hexdigest(),
+                "a_sha256":hashlib.sha256(d["a"].encode()).hexdigest(),
+                "b_sha256":hashlib.sha256(d["b"].encode()).hexdigest(),
+                "fusion_sha256":hashlib.sha256(fusion.encode()).hexdigest(),
+                "fusion_reason":reason,"fusion_correct":ok
+              })
+
+          n=len(selected); best=max(a_correct,b_correct)
+          best_wrong=n-best
+          gain=f_correct-best
+          coverage=resolved/n
+          risk_reduction=best_wrong-wrong_commit
+          if gain>0:
+              decision="D4_CANARY_PASS_ACCURACY_GAIN"
+          elif risk_reduction>=2 and coverage>=0.75 and f_correct>=best-1:
+              decision="D4_CANARY_PASS_RISK_REDUCTION"
+          else:
+              decision="D4_CANARY_HOLD_NO_MEASURED_GAIN"
+
+          private={
+            "schema":"ELYSION_D4_TRUE_DUAL_CORE_FUSION_CANARY_PRIVATE_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "m6_sha256":got,"m6_deny_training":True,"weights_changed":False,
+            "selection_rule":"SHA256(task_id)_ASC_FIRST_24","subset_sha256":subset_sha,
+            "model_a":{"id":os.environ["MODEL_A"],"revision":os.environ["REV_A"]},
+            "model_b":{"id":os.environ["MODEL_B"],"revision":os.environ["REV_B"]},
+            "fusion_policy":"CONSENSUS_ELSE_RECIPROCAL_CRITIQUE_CONVERGENCE_ELSE_ABSTAIN",
+            "decision_rule":"PASS_GAIN_IF_FUSION_CORRECT_GT_BEST_SINGLE; ELSE_PASS_RISK_IF_WRONG_COMMIT_REDUCTION_GE2_AND_COVERAGE_GE0.75_AND_FUSION_WITHIN1_OF_BEST",
+            "metrics":{
+              "task_count":n,"a_correct":a_correct,"b_correct":b_correct,"best_single_correct":best,
+              "fusion_correct":f_correct,"fusion_gain_over_best_single":gain,
+              "resolved":resolved,"coverage":coverage,"wrong_commitments":wrong_commit,
+              "best_single_wrong":best_wrong,"wrong_commitment_reduction":risk_reduction,
+              "consensus_count":consensus,"cross_critique_converged_count":critique_converged,"unresolved_count":unresolved
+            },
+            "decision":decision,"independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "claim_ceiling":"SCOPED_D4_DUAL_MODEL_FUSION_CANARY_NO_RUNTIME_ACTIVATION",
+            "details":details
+          }
+          private_raw=(json.dumps(private,indent=2,ensure_ascii=False)+"\n").encode()
+          private_sha=hashlib.sha256(private_raw).hexdigest()
+          private_file="/tmp/elysion-d4-fusion-private.json"; Path(private_file).write_bytes(private_raw)
+          private_path=f"elysion/D4-fusion-canary/run-{os.environ['GITHUB_RUN_ID']}/private.json"
+          api=HfApi(token=token)
+          api.upload_file(path_or_fileobj=private_file,path_in_repo=private_path,repo_id=priv,repo_type="model",
+                          commit_message=f"ELYSION D4 true dual-core fusion canary {os.environ['GITHUB_RUN_ID']}")
+          gotp=Path(hf_hub_download(repo_id=priv,filename=private_path,repo_type="model",token=token,force_download=True))
+          if hashlib.sha256(gotp.read_bytes()).hexdigest()!=private_sha: raise SystemExit("PRIVATE_READBACK_SHA_FAIL")
+
+          summary={
+            "schema":"ELYSION_D4_TRUE_DUAL_CORE_FUSION_CANARY_PUBLIC_V1",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "source_d4_precheck_run":36122176363,
+            "m6_sha256":got,"m6_deny_training":True,"weights_changed":False,
+            "selection_rule":"SHA256(task_id)_ASC_FIRST_24","subset_sha256":subset_sha,
+            "model_a":{"id":os.environ["MODEL_A"],"revision":os.environ["REV_A"]},
+            "model_b":{"id":os.environ["MODEL_B"],"revision":os.environ["REV_B"]},
+            "fusion_policy":private["fusion_policy"],"metrics":private["metrics"],
+            "decision":decision,"private_result_path":private_path,"private_result_sha256":private_sha,
+            "hf_private_readback_sha_pass":True,"independent_evidence_count":0,
+            "two_models_not_two_independent_proofs":True,
+            "claim_ceiling":private["claim_ceiling"],
+            "public_rows_fingerprint_sha256":hashlib.sha256(json.dumps(public_rows,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "elapsed_s":round(time.time()-t0,3)
+          }
+          summary["receipt_sha256"]=hashlib.sha256(json.dumps(summary,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          Path("receipts/elysion/elysion-d4-true-dual-core-fusion-canary.json").write_text(json.dumps(summary,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(summary,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: elysion-d4-true-dual-core-fusion-canary
+          path: receipts/elysion/elysion-d4-true-dual-core-fusion-canary.json
+          if-no-files-found: error
