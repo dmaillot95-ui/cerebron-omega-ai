@@ -98,9 +98,12 @@ RISK: state the main unknown or failure mode that could invalidate the proposal.
         model=AutoModelForCausalLM.from_pretrained(model_id,revision=rev,torch_dtype=dtype,low_cpu_mem_usage=True)
         msgs=[{"role":"system","content":system},{"role":"user","content":user}]
         try:
-            kwargs={"tokenize":False,"add_generation_prompt":True}\n            if "Qwen3" in model_id: kwargs["enable_thinking"]=False
+            kwargs={"tokenize":False,"add_generation_prompt":True}
+            if "Qwen3" in model_id:
+                kwargs["enable_thinking"]=False
             prompt=tok.apply_chat_template(msgs,**kwargs)
-        except Exception: prompt=system+"\n\n"+user+"\nASSISTANT:\n"
+        except Exception:
+            prompt=system+"\n\n"+user+"\nASSISTANT:\n"
         x=tok(prompt,return_tensors="pt")
         with torch.no_grad():
             y=model.generate(**x,max_new_tokens=260,do_sample=False,repetition_penalty=1.15,no_repeat_ngram_size=4)
