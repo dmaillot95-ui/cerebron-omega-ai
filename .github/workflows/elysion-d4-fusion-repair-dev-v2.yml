@@ -1,0 +1,182 @@
+name: ELYSION D4 Fusion Repair DEV V2
+on:
+  push:
+    branches: ['feat/cerebron-ai-platform-mvp']
+    paths:
+      - 'config/elysion-d4-fusion-repair-dev-v2-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repair_dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      MODEL_A: Qwen/Qwen3-4B
+      REV_A: 1cfa9a7208912126459214e8b04321603b3df60c
+      MODEL_B: HuggingFaceTB/SmolLM3-3B
+      REV_B: a07cc9a04f16550a088caea529712d1d335b0ac1
+      HF_HOME: /tmp/hf-model
+      TRANSFORMERS_NO_ADVISORY_WARNINGS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU runtime
+        run: |
+          python -m pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --no-cache-dir "transformers>=4.53,<5" accelerate safetensors sentencepiece huggingface_hub
+      - name: Evaluate role-aligned DEV fusion policies
+        run: |
+          mkdir -p receipts/elysion
+          python - <<'PY'
+          import gc,hashlib,json,os,re,resource,time
+          from collections import defaultdict
+          from pathlib import Path
+          import torch
+          from transformers import AutoTokenizer,AutoModelForCausalLM
+
+          tasks=[
+            {"id":"E2-001","domain":"constraint_satisfaction","prompt":"Return only A, B, C, or D. A design must minimize mass, preserve redundancy, and stay under a fixed power cap. A violates power; B violates redundancy; C meets all three; D has unknown power. Best supported choice?","expected":"C"},
+            {"id":"E2-002","domain":"constraint_satisfaction","prompt":"Return only A, B, C, or D. A solution is cheaper but violates a hard safety constraint; B is costlier and satisfies all hard constraints; C has missing safety data; D fails performance. Which remains admissible?","expected":"B"},
+            {"id":"E2-003","domain":"constraint_satisfaction","prompt":"Return only A, B, C, or D. Candidate A meets 4 of 5 soft goals but fails one hard invariant. Candidate B meets all hard invariants and 3 soft goals. Which should survive the gate?","expected":"B"},
+            {"id":"E2-004","domain":"constraint_satisfaction","prompt":"Return only A, B, C, or D. No candidate satisfies all mandatory constraints. What is the evidence-preserving action? A pick highest score anyway, B relax a hard constraint silently, C return unresolved/redesign, D average candidates.","expected":"C"},
+
+            {"id":"E2-005","domain":"decomposition","prompt":"Return only A, B, C, or D. A complex mission has sensing, planning, actuation and verification dependencies. Best first step? A merge all into one opaque task, B build a dependency graph and interfaces, C optimize actuation only, D skip verification.","expected":"B"},
+            {"id":"E2-006","domain":"decomposition","prompt":"Return only A, B, C, or D. Two subtasks can execute independently after the same prerequisite. Best schedule? A serialize all tasks, B run both in parallel after prerequisite, C run before prerequisite, D duplicate prerequisite outputs as independent proofs.","expected":"B"},
+            {"id":"E2-007","domain":"decomposition","prompt":"Return only A, B, C, or D. A failure appears only after integration. Which decomposition best helps diagnosis? A preserve component interfaces and receipts, B remove intermediate logs, C merge all modules, D change all components simultaneously.","expected":"A"},
+            {"id":"E2-008","domain":"decomposition","prompt":"Return only A, B, C, or D. A task requires retrieval, calculation, simulation and audit. Which architecture is most traceable? A single unlogged answer, B staged pipeline with typed outputs and evidence links, C random tool order, D majority vote without provenance.","expected":"B"},
+
+            {"id":"E2-009","domain":"counterexample","prompt":"Return only A, B, C, or D. Claim: all even integers are divisible by 4. Which is a counterexample? A 8, B 12, C 14, D 20.","expected":"C"},
+            {"id":"E2-010","domain":"counterexample","prompt":"Return only A, B, C, or D. Claim: every tested configuration that passes validation will pass transfer. Evidence includes one configuration that passes validation and fails transfer. Status? A proven, B falsified for universal claim, C independent proof, D training success.","expected":"B"},
+            {"id":"E2-011","domain":"counterexample","prompt":"Return only A, B, C, or D. A universal claim has 1000 positive examples and one verified negative example. Which dominates? A positive majority, B the counterexample, C average, D model confidence.","expected":"B"},
+            {"id":"E2-012","domain":"counterexample","prompt":"Return only A, B, C, or D. No counterexample is found in a finite search. What follows? A universal truth, B finite non-falsification only, C theorem, D independent replication.","expected":"B"},
+
+            {"id":"E2-013","domain":"alternative_representation","prompt":"Return only A, B, C, or D. A direct search is combinatorially expensive. Which alternative can preserve correctness while reducing search? A exploit symmetry/equivalence classes, B duplicate every state, C remove constraints, D accept first answer.","expected":"A"},
+            {"id":"E2-014","domain":"alternative_representation","prompt":"Return only A, B, C, or D. Two formulations are mathematically equivalent but one exposes sparsity. Which is preferable for efficient computation if equivalence is verified? A sparse formulation, B denser one by default, C random choice, D both counted as independent evidence.","expected":"A"},
+            {"id":"E2-015","domain":"alternative_representation","prompt":"Return only A, B, C, or D. A graph problem has repeated isomorphic subgraphs. Best representation strategy? A canonicalize/deduplicate isomorphic states, B store every duplicate, C discard edges, D ignore graph structure.","expected":"A"},
+            {"id":"E2-016","domain":"alternative_representation","prompt":"Return only A, B, C, or D. A numerical method is unstable in raw coordinates but stable after a verified change of variables. Which is justified? A use stable representation and preserve inverse mapping, B hide transform, C claim new theorem, D discard validation.","expected":"A"},
+
+            {"id":"E2-017","domain":"solution_selection","prompt":"Return only A, B, C, or D. Solution A scores 90 but fails one critical regression. B scores 86 with no critical regression. C is untested. D is slower and less accurate. Which should pass a safety-first gate?","expected":"B"},
+            {"id":"E2-018","domain":"solution_selection","prompt":"Return only A, B, C, or D. Candidate A is best on validation; B is slightly worse on validation but much better on cold transfer and no regressions. Which evidence is stronger for deployment scope?","expected":"B"},
+            {"id":"E2-019","domain":"solution_selection","prompt":"Return only A, B, C, or D. Two candidates tie on accuracy; A uses half the latency and memory with equal risk. Which is favored by ablation?","expected":"A"},
+            {"id":"E2-020","domain":"solution_selection","prompt":"Return only A, B, C, or D. Adding a second core changes neither accuracy, coverage nor risk but doubles cost. What should ablation support? A keep both for appearance, B remove/disable second core for that scope, C call it independent evidence, D promote globally.","expected":"B"},
+
+            {"id":"E2-021","domain":"evidence_calibration","prompt":"Return only A, B, C, or D. A method passes one synthetic benchmark. Which claim is justified? A universal superiority, B scoped benchmark success only, C AGI, D production readiness.","expected":"B"},
+            {"id":"E2-022","domain":"evidence_calibration","prompt":"Return only A, B, C, or D. Three outputs come from the same model revision and same source data. How should they be counted? A three independent proofs, B correlated outputs unless independence is shown, C theorem, D three trainings.","expected":"B"},
+            {"id":"E2-023","domain":"evidence_calibration","prompt":"Return only A, B, C, or D. A simulation predicts a gain but no physical or external test exists. Which label is safest? A verified real-world gain, B simulated evidence requiring external validation, C proof, D production certification.","expected":"B"},
+            {"id":"E2-024","domain":"evidence_calibration","prompt":"Return only A, B, C, or D. Evidence supports a narrow claim but the proposed conclusion is broader. What rule applies? A claim may exceed evidence, B claim must be bounded by evidence, C confidence overrides evidence, D consensus is enough.","expected":"B"}
+          ]
+
+          def norm(s):
+              m=re.search(r"\b([ABCD])\b",s.upper())
+              return m.group(1) if m else ""
+
+          def load(mid,rev):
+              tok=AutoTokenizer.from_pretrained(mid,revision=rev)
+              if tok.pad_token_id is None: tok.pad_token_id=tok.eos_token_id
+              model=AutoModelForCausalLM.from_pretrained(mid,revision=rev,torch_dtype=torch.bfloat16,low_cpu_mem_usage=True)
+              model.eval(); return tok,model
+
+          def render(tok,system,user):
+              msgs=[{"role":"system","content":system},{"role":"user","content":user}]
+              try: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True,enable_thinking=False)
+              except TypeError: return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
+
+          def infer(tok,model,system,user,n=8):
+              p=render(tok,system,user); x=tok(p,return_tensors="pt")
+              with torch.inference_mode():
+                  y=model.generate(**x,max_new_tokens=n,do_sample=False,pad_token_id=tok.pad_token_id,eos_token_id=tok.eos_token_id)
+              return tok.decode(y[0][x["input_ids"].shape[-1]:],skip_special_tokens=True).strip()
+
+          rows={t["id"]:{**t} for t in tasks}; t0=time.time()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              r["qwen"]=norm(infer(tok,model,"You are ELYSION solution generator. Return only the requested option. /no_think",t["prompt"],6))
+              if i%6==0: print(f"QWEN_BASE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_B"],os.environ["REV_B"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              r["smol"]=norm(infer(tok,model,"You are ELYSION alternative solver and critic. Return only the requested option. /no_think",t["prompt"],6))
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    "Compare two candidate options using only the problem constraints. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Problem: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["smol_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else: r["smol_judge"]="AGREE"
+              if i%6==0: print(f"SMOL_BASE_JUDGE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          tok,model=load(os.environ["MODEL_A"],os.environ["REV_A"])
+          for i,t in enumerate(tasks,1):
+              r=rows[t["id"]]
+              if r["qwen"]!=r["smol"]:
+                  v=infer(tok,model,
+                    "Compare two candidate options using only the problem constraints. Return exactly QWEN, SMOL, or UNSURE. /no_think",
+                    f"Problem: {t['prompt']}\nQWEN={r['qwen']}\nSMOL={r['smol']}",8).upper()
+                  r["qwen_judge"]="QWEN" if re.search(r"\bQWEN\b",v) else "SMOL" if re.search(r"\bSMOL\b",v) else "UNSURE"
+              else: r["qwen_judge"]="AGREE"
+              if i%6==0: print(f"QWEN_JUDGE {i}/24",flush=True)
+          del model,tok; gc.collect()
+
+          def choose(policy,r):
+              if r["qwen"]==r["smol"]: return r["qwen"]
+              qj=r["qwen_judge"]; sj=r["smol_judge"]
+              if qj==sj=="QWEN": return r["qwen"]
+              if qj==sj=="SMOL": return r["smol"]
+              return r["qwen"] if policy=="RECIPROCAL_ELSE_QWEN" else r["smol"]
+
+          policies=["RECIPROCAL_ELSE_QWEN","RECIPROCAL_ELSE_SMOL"]
+          q=sum(r["qwen"]==r["expected"] for r in rows.values())
+          s=sum(r["smol"]==r["expected"] for r in rows.values())
+          best=max(q,s); results={}
+          for p in policies:
+              correct=0; by=defaultdict(lambda:{"correct":0,"total":0})
+              for r in rows.values():
+                  out=choose(p,r); ok=out==r["expected"]; correct+=ok
+                  by[r["domain"]]["correct"]+=ok; by[r["domain"]]["total"]+=1
+              results[p]={"correct":correct,"gain_over_best_single":correct-best,"domain":dict(sorted(by.items()))}
+          selected=max(policies,key=lambda p:(results[p]["correct"],p))
+          decision="DEV_POLICY_PASS_FREEZE_FOR_FRESH_COLD2" if results[selected]["gain_over_best_single"]>0 else "DEV_POLICY_HOLD_NO_GAIN"
+          out={
+            "schema":"ELYSION_D4_FUSION_REPAIR_DEV_V2",
+            "run_id":int(os.environ["GITHUB_RUN_ID"]),
+            "classification":"DEV_POLICY_TUNING_NOT_COLD",
+            "weights_changed":False,
+            "task_count":24,
+            "dev_sha256":hashlib.sha256(json.dumps(tasks,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "qwen_correct":q,"smol_correct":s,"best_single_correct":best,
+            "candidate_policies":results,
+            "selected_policy":selected,
+            "selected_metrics":results[selected],
+            "decision":decision,
+            "claim_ceiling":"DEV_POLICY_TUNING_ONLY_NOT_COLD_EVIDENCE",
+            "independent_evidence_count":0,
+            "elapsed_s":round(time.time()-t0,3),
+            "max_rss_kb":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+          }
+          out["receipt_sha256"]=hashlib.sha256(json.dumps(out,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+          Path("receipts/elysion/elysion-d4-fusion-repair-dev-v2.json").write_text(json.dumps(out,indent=2)+"\n")
+          print("SUMMARY "+json.dumps(out,sort_keys=True),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: elysion-d4-fusion-repair-dev-v2
+          path: receipts/elysion/elysion-d4-fusion-repair-dev-v2.json
+          if-no-files-found: error
+      - name: Persist DEV V2 receipt
+        if: success()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/elysion/elysion-d4-fusion-repair-dev-v2.json
+          git diff --cached --quiet && exit 0
+          git commit -m "receipt: ELYSION D4 fusion repair DEV V2 ${{ github.run_id }}"
+          git pull --rebase origin feat/cerebron-ai-platform-mvp
+          git push origin HEAD:feat/cerebron-ai-platform-mvp
