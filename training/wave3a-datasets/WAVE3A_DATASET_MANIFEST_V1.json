@@ -2,7 +2,7 @@
   "schema": "CEREBRON_WAVE3A_DATASET_MANIFEST_V2",
   "date": "2026-09-26",
   "wave": "WAVE3A",
-  "status": "EXPANDED_SEED_DATASETS_NOT_RELEASED",
+  "status": "AUDITED_PREPARATION_PASS_RELEASE_BLOCKED",
   "training_released": false,
   "continuous_training_eligible": false,
   "roles": ["ELYSION", "ELYSIUM", "SAELION", "NEXUS"],
@@ -18,17 +18,19 @@
     "NEXUS":"WAVE3A_NEXUS_SEED_V1"
   },
   "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
-  "dedup_status": "V2_HEURISTIC_SCREEN_CONFIGURED_CI_REQUIRED",
-  "leakage_status": "STRUCTURAL_SPLIT_DISJOINT_V2_HEURISTIC_SCREEN_CONFIGURED",
-  "provenance_status": "SOURCE_MEMBERSHIP_GATE_CONFIGURED",
+  "dedup_status": "PASS_EXACT_AND_HEURISTIC_AT_0.92",
+  "leakage_status": "STRUCTURAL_AND_HEURISTIC_SCREEN_PASS",
+  "provenance_status": "PASS_SOURCE_MEMBERSHIP",
   "evidence_scope": "EXPANDED_SEED_ONLY_NOT_SUFFICIENT_FOR_RELEASE",
   "deny_training_sections": ["cold","transfer","red"],
+  "latest_audit_receipt": "training/wave3a-datasets/WAVE3A_DATASET_AUDIT_V2.json",
+  "latest_audit_run_id": 36226057788,
   "global_audit": {
-    "sample_id_uniqueness":"GATED",
-    "exact_input_dedup":"GATED",
-    "semantic_near_duplicate_screen":"GATED_THRESHOLD_0.92",
-    "provenance_source_membership":"GATED",
-    "train_seed_floor_12_per_role":"GATED",
+    "sample_id_uniqueness":"PASS",
+    "exact_input_dedup":"PASS",
+    "semantic_near_duplicate_screen":"PASS_HEURISTIC",
+    "provenance_source_membership":"PASS",
+    "train_seed_floor_12_per_role":"PASS",
     "cold_transfer_red_denied_training":true,
     "raw_agora_used":false,
     "m6_used":false,
@@ -39,5 +41,5 @@
   },
   "weights_changed": false,
   "training_executed": false,
-  "claim_boundary": "EXPANDED_DATASET_PREPARATION_ONLY"
+  "claim_boundary": "AUDITED_EXPANDED_DATASET_PREPARATION_ONLY"
 }
