@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_TRICORE_HF_MEMORY_M03_V1",
   "date": "2026-09-26",
-  "status": "PENDING_REAL_HF_WRITE_READ_SHA",
+  "status": "HF_DIRECT_VERIFIED_3_OF_3",
   "runtime_changed": false,
   "hf_private_repo": "cerebron-omega/cerebron-private-memory",
   "repo_type": "model",
@@ -10,7 +10,19 @@
     "all_ai_receipt": "receipts/p03/all-ai-hf-m03/35997653059.json",
     "run_id": 35997653059,
     "run_conclusion": "SUCCESS",
-    "scope": "EXISTING_AI_BACKEND_ONLY_NOT_TRICORE_PROOF"
+    "scope": "EXISTING_AI_BACKEND_ONLY"
+  },
+  "tricore_evidence": {
+    "run_id": 36246961870,
+    "run_conclusion": "SUCCESS",
+    "receipt": "receipts/p03/tricore-hf-m03/36246961870.json",
+    "latest_pointer": "receipts/p03/tricore-hf-m03-latest.json",
+    "receipt_blob_sha": "ed803eeddb56953f8e66b3bb852a66871f33ff19",
+    "private_repo_before": "PASS",
+    "private_repo_after": "PASS",
+    "tested": 3,
+    "passed": 3,
+    "failed": 0
   },
   "entries": [
     {
@@ -19,7 +31,11 @@
       "farm_id": 176,
       "available": true,
       "namespace": "ai/f176-nova/agent/A6_MEMORY_KEEPER",
-      "hf_write_read_sha": "PENDING_M03_CANARY"
+      "hf_write_read_sha": "HF_DIRECT_VERIFIED",
+      "payload_sha256": "69bed14bd1b97b69569fd4265d0a5c91e0e0a69169df6b680305e1a1db87afdb",
+      "downloaded_sha256": "69bed14bd1b97b69569fd4265d0a5c91e0e0a69169df6b680305e1a1db87afdb",
+      "remote_object": "ai/f176-nova/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "hf_commit_oid": "9e2f3e8a0df4d6ce7e76363793ea0aa8d9005e4c"
     },
     {
       "ai_id": "F177-ATLAS",
@@ -27,7 +43,11 @@
       "farm_id": 177,
       "available": true,
       "namespace": "ai/f177-atlas/agent/A6_MEMORY_KEEPER",
-      "hf_write_read_sha": "PENDING_M03_CANARY"
+      "hf_write_read_sha": "HF_DIRECT_VERIFIED",
+      "payload_sha256": "e40cb46cd06a7e0bd84c8fb11149a5c9eba13388a7ebcae1fc0ae3fdefc8da2f",
+      "downloaded_sha256": "e40cb46cd06a7e0bd84c8fb11149a5c9eba13388a7ebcae1fc0ae3fdefc8da2f",
+      "remote_object": "ai/f177-atlas/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "hf_commit_oid": "64f374fee7cbedadd45449cd3520dd59b7b106e6"
     },
     {
       "ai_id": "F178-COLOSSUS",
@@ -35,7 +55,11 @@
       "farm_id": 178,
       "available": true,
       "namespace": "ai/f178-colossus/agent/A6_MEMORY_KEEPER",
-      "hf_write_read_sha": "PENDING_M03_CANARY"
+      "hf_write_read_sha": "HF_DIRECT_VERIFIED",
+      "payload_sha256": "0784e05d6f569989168d1d720c061ea7317798676ce0faaa3e9cf503cdffd506",
+      "downloaded_sha256": "0784e05d6f569989168d1d720c061ea7317798676ce0faaa3e9cf503cdffd506",
+      "remote_object": "ai/f178-colossus/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "hf_commit_oid": "9616f7b0bb3a81bece70dc5fe1c5d0f50970aac5"
     }
   ],
   "memory_class": "M7_EVIDENCE",
@@ -45,5 +69,5 @@
   "runtime_enabled": false,
   "output_enabled": false,
   "pass_rule": "EACH_TRICORE_AI_MUST_PASS_PRIVATE_REPO_WRITE_READ_SHA_IN_ONE_REAL_ACTION_RUN",
-  "claim_boundary": "HISTORICAL_HF_BACKEND_VALIDATED; F176_F178_NOT_VALIDATED_UNTIL_DEDICATED_CANARY_PASS"
+  "claim_boundary": "HF private storage transport is directly verified for F176-F178. This proves storage connectivity only; MEMORY_NE_TRAINING and does not prove semantic indexing, GOLD promotion, neural learning or runtime activation."
 }
