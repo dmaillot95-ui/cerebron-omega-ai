@@ -1,0 +1,43 @@
+{
+  "schema": "CEREBRON_MUSE_GREEK_MEMORY_HF_V1",
+  "status": "REGISTERED_PENDING_M03_CANARY",
+  "runtime_changed": false,
+  "scope": "F179-F190",
+  "members": [
+    {"farm_id":179,"name":"ZEUS"},
+    {"farm_id":180,"name":"POSEIDON"},
+    {"farm_id":181,"name":"HADES"},
+    {"farm_id":182,"name":"ATHENA"},
+    {"farm_id":183,"name":"APOLLO"},
+    {"farm_id":184,"name":"ARTEMIS"},
+    {"farm_id":185,"name":"HERMES"},
+    {"farm_id":186,"name":"HEPHAESTUS"},
+    {"farm_id":187,"name":"APHRODITE"},
+    {"farm_id":188,"name":"ARES"},
+    {"farm_id":189,"name":"DEMETER"},
+    {"farm_id":190,"name":"HERA"}
+  ],
+  "memory_omega": {
+    "farms": [114,115,116,117,118,119,120],
+    "classes": ["M0_EPHEMERAL","M1_TRACE","M2_REPLAY","M3_WARM","M4_GOLD","M5_MODEL","M6_COLD_BENCH","M7_EVIDENCE"],
+    "m6_deny_training": true,
+    "memory_is_not_training": true,
+    "spiralix_memory_glyph": "MΩ",
+    "memory_keeper_slot": "A6_MEMORY_KEEPER"
+  },
+  "hugging_face": {
+    "backend": "PRIVATE_HF_MEMORY",
+    "repository": "cerebron-omega/cerebron-private-memory",
+    "method": "M03_WRITE_READ_SHA_CANARY",
+    "historical_backend_verified": true,
+    "new_members_canary_state": "PENDING",
+    "required_checks": ["AUTH","PRIVATE_REPO","WRITE","READBACK","SHA256_MATCH"],
+    "no_paid_service_auto_activation": true
+  },
+  "training": {
+    "training_executed": false,
+    "weights_changed": false,
+    "raw_memory_is_training_data": false
+  },
+  "claim_boundary": "MEMORY_AND_HF_ROUTING_REGISTERED_FOR_F179_F190_BUT_NEW_MEMBER_WRITE_READ_SHA_CANARY_NOT_YET_EXECUTED"
+}
