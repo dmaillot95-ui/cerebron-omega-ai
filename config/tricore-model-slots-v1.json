@@ -1,0 +1,140 @@
+{
+  "schema": "CEREBRON_TRICORE_MODEL_SLOTS_V1",
+  "date": "2026-09-26",
+  "status": "PREPARED_MUTED_NOT_TRAINED",
+  "total_slots": 9,
+  "candidate_assigned_slots": 6,
+  "blocked_slots": 3,
+  "runtime_enabled": false,
+  "output_enabled": false,
+  "training_enabled": false,
+  "training_executed": false,
+  "weights_changed": false,
+  "adapter_changed": false,
+  "models": {
+    "SMOLLM3_3B_BASE": {
+      "model_id": "HuggingFaceTB/SmolLM3-3B-Base",
+      "revision": "d78a42f79198603e614095753484a04c10c2b940",
+      "pin_receipt": "receipts/p04/HuggingFaceTB__SmolLM3-3B-Base.json",
+      "runtime_receipt": "receipts/p04/smollm3-3b-base-runtime-canary.json",
+      "pin_resolve": "PASS",
+      "config_load": "PASS",
+      "runtime_load": "PASS",
+      "runtime_inference": "PASS",
+      "runtime_scope": "CPU_GITHUB_ACTIONS_CANARY_ONLY",
+      "training_feasibility": "NOT_PROVEN"
+    },
+    "QWEN3_4B_BASE": {
+      "model_id": "Qwen/Qwen3-4B-Base",
+      "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+      "pin_receipt": "receipts/p04/Qwen__Qwen3-4B-Base.json",
+      "pin_resolve": "PASS",
+      "config_load": "PASS",
+      "runtime_load": "NOT_PROVEN_FOR_THIS_BASE_RECEIPT",
+      "runtime_inference": "NOT_PROVEN_FOR_THIS_BASE_RECEIPT",
+      "training_feasibility": "NOT_PROVEN"
+    },
+    "THIRD_LINEAGE": {
+      "model_id": null,
+      "revision": null,
+      "status": "UNASSIGNED_BLOCKED_NO_THIRD_VERIFIED_BASE",
+      "requirements": [
+        "OPEN_OR_FREE_ACCESS_WITHOUT_PAID_AUTO_ACTIVATION",
+        "EXPLICIT_PINNED_REVISION",
+        "CONFIG_LOAD_PASS",
+        "REAL_RUNTIME_CANARY_PASS",
+        "DISTINCT_MODEL_LINEAGE_FROM_QWEN3_AND_SMOLLM3",
+        "TRAINING_FEASIBILITY_MUST_BE_PROVEN_SEPARATELY"
+      ]
+    }
+  },
+  "members": [
+    {
+      "farm_id": 176,
+      "identity": "NOVA",
+      "runtime": "MUTED_HOLD",
+      "slots": [
+        {
+          "slot": "A",
+          "intended_role": "broad exploration and search",
+          "model_ref": "SMOLLM3_3B_BASE",
+          "state": "CANDIDATE_PREPARED_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "B",
+          "intended_role": "invention and representation synthesis",
+          "model_ref": "QWEN3_4B_BASE",
+          "state": "CANDIDATE_PREPARED_RUNTIME_UNPROVEN_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "C",
+          "intended_role": "complementary independent search lineage",
+          "model_ref": "THIRD_LINEAGE",
+          "state": "UNASSIGNED_BLOCKED"
+        }
+      ]
+    },
+    {
+      "farm_id": 177,
+      "identity": "ATLAS",
+      "runtime": "MUTED_HOLD",
+      "slots": [
+        {
+          "slot": "A",
+          "intended_role": "knowledge mapping and retrieval reasoning",
+          "model_ref": "SMOLLM3_3B_BASE",
+          "state": "CANDIDATE_PREPARED_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "B",
+          "intended_role": "integration and transfer analysis",
+          "model_ref": "QWEN3_4B_BASE",
+          "state": "CANDIDATE_PREPARED_RUNTIME_UNPROVEN_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "C",
+          "intended_role": "complementary independent knowledge lineage",
+          "model_ref": "THIRD_LINEAGE",
+          "state": "UNASSIGNED_BLOCKED"
+        }
+      ]
+    },
+    {
+      "farm_id": 178,
+      "identity": "COLOSSUS",
+      "runtime": "MUTED_HOLD",
+      "slots": [
+        {
+          "slot": "A",
+          "intended_role": "difficult reasoning and decomposition",
+          "model_ref": "SMOLLM3_3B_BASE",
+          "state": "CANDIDATE_PREPARED_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "B",
+          "intended_role": "verification and large-scale synthesis",
+          "model_ref": "QWEN3_4B_BASE",
+          "state": "CANDIDATE_PREPARED_RUNTIME_UNPROVEN_NOT_ACTIVE_NOT_TRAINED"
+        },
+        {
+          "slot": "C",
+          "intended_role": "complementary independent verification lineage",
+          "model_ref": "THIRD_LINEAGE",
+          "state": "UNASSIGNED_BLOCKED"
+        }
+      ]
+    }
+  ],
+  "agora_reference": "config/tricore-agora-memory-integration-v1.json",
+  "memory_reference": "config/tricore-hf-memory-m03-v1.json",
+  "hard_rules": [
+    "INTENDED_ROLE_NE_TRAINED_SPECIALIZATION",
+    "MODEL_SLOT_NE_ACTIVE_RUNTIME",
+    "SAME_MODEL_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "MEMORY_NE_TRAINING",
+    "NO_WEIGHT_CHANGE_CLAIM_WITHOUT_REAL_TRAINER_RECEIPT",
+    "NO_PAID_PROVIDER_AUTO_ACTIVATION",
+    "THIRD_LINEAGE_FAIL_CLOSED_UNTIL_VERIFIED"
+  ],
+  "claim_boundary": "Nine logical slots are prepared. Six slots reference two evidenced base-model candidates; three slots remain deliberately unassigned. No tri-core inference runtime or neural training has been activated."
+}
