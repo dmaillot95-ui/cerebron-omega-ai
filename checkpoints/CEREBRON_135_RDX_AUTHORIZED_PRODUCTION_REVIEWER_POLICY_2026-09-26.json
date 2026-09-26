@@ -1,0 +1,115 @@
+{
+  "schema": "CEREBRON_135_RDX_AUTHORIZED_PRODUCTION_REVIEWER_POLICY_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_AUTHORIZED_PRODUCTION_REVIEWER_POLICY_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "e5c34f694386f61a88f751a8e472b4b9923ceaa6",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "5e9eef60727f6671ad9cfddf45e2e4424fac7206",
+    "head": "96469c7ab4b3990546841c94b7b3a67b62359500",
+    "commit_message": "security: enforce authorized production reviewers",
+    "full_validation": {
+      "run_id": 36211388941,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36211388752,
+      "status": "PASS",
+      "event": "push",
+      "deploy_job": "SKIPPED",
+      "verify_live_job": "SKIPPED",
+      "live_deployment_used_as_evidence": false
+    }
+  },
+  "authorized_reviewer_policy": {
+    "schema": "RDX_PRODUCTION_HUMAN_REVIEW_POLICY_V1",
+    "require_authenticated_reviewer": true,
+    "require_authorized_reviewer": true,
+    "authorized_reviewers": [
+      "dmaillot95-ui"
+    ],
+    "authorized_reviewer_count": 1,
+    "workflow_actor_must_match_reviewer_input": true,
+    "workflow_actor_must_be_in_allowlist": true,
+    "builder_rejects_unauthorized_reviewer": true,
+    "human_review_validator_rejects_unauthorized_reviewer": true,
+    "production_promotion_revalidates_reviewer_allowlist": true,
+    "workflow_contract_status": "PASS",
+    "workflow_contract_output": "RDX Production Human Review Workflow Contract: PASS manual_only=true auto_apply=false reviewer_actor_bound=true authorized_reviewer_policy=true",
+    "human_review_contract_status": "PASS",
+    "human_review_contract_output": "RDX Production Human Review Contract Gate: PASS mode=HUMAN_APPROVAL_REQUIRED_NO_AUTO_APPLY authorized_reviewers=1"
+  },
+  "negative_canaries": {
+    "production_fail_closed": {
+      "status": "PASS",
+      "rejected": 9,
+      "total": 9,
+      "new_case": "UNAUTHORIZED_HUMAN_REVIEWER"
+    },
+    "human_review_pre_registry": {
+      "status": "PASS",
+      "rejected": 3,
+      "total": 3,
+      "new_case": "UNAUTHORIZED_REVIEWER_BLOCKED_PRE_REVIEW",
+      "registry_unchanged": true
+    }
+  },
+  "release_chain": {
+    "source_commit": "96469c7ab4b3990546841c94b7b3a67b62359500",
+    "file_count": 16,
+    "aggregate_sha256": "1969a753f717b2667b7a03f1125f0ebb4e454344c7d45517770590e6db114242",
+    "release_attestation_sha256": "d5817275675943dad643f5952cb1345d11c537cf7ccd9a606a43e989c6c85f19",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_policy": "FAIL_CLOSED",
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_gate": "PASS_FAIL_CLOSED_PUBLIC_CLAIM_FALSE_AUTHORIZED_REVIEWERS_1"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED",
+    "claim": "REVIEWER_AUTHORIZATION_IS_VALIDATED_IN_REPOSITORY_CODE_BUT_GITHUB_DOES_NOT_YET_ENFORCE_THE_REPOSITORY_GATES_AS_REQUIRED_MERGE_CHECKS"
+  },
+  "current_blockers": [
+    "NO_REAL_HUMAN_REVIEW_EXECUTED_AGAINST_A_VERIFIED_LIVE_PRODUCTION_PROOF",
+    "NO_REAL_PRODUCTION_PROOF_PR_HAS_EXECUTED_THE_DEDICATED_PR_ONLY_GATE",
+    "NO_VERIFIED_LIVE_PRODUCTION_DEPLOYMENT_PROOF_EXISTS",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "authenticated_reviewer_binding_contract_verified": true,
+    "authorized_reviewer_allowlist_contract_verified": true,
+    "unauthorized_reviewer_negative_canaries_verified": true,
+    "promotion_revalidates_reviewer_authorization": true,
+    "full_validation_verified": true,
+    "github_pages_push_validation_verified": true,
+    "real_human_review_execution_with_live_proof_verified": false,
+    "dedicated_gate_executed_on_real_production_proof_pr": false,
+    "required_merge_check_enforcement_verified": false,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "AUTHENTICATED_ACTOR>FREE_FORM_REVIEWER_LABEL",
+    "AUTHORIZED_REVIEWER>AUTHENTICATED_BUT_UNAUTHORIZED_ACTOR",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "CONTRACT_PASS!=REAL_HUMAN_REVIEW_EXECUTION",
+    "TRIGGERED_CHECK!=REQUIRED_CHECK_WITHOUT_BRANCH_ENFORCEMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
