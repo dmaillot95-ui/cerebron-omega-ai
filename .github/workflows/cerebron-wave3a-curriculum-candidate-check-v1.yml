@@ -1,0 +1,69 @@
+name: CEREBRON Wave3A Curriculum Candidate Check V1
+
+on:
+  push:
+    branches:
+      - feat/wave3a-training-admission-v1
+    paths:
+      - tools/wave3a_curriculum_release_v1.py
+      - .github/workflows/cerebron-wave3a-curriculum-candidate-check-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-candidate-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate deterministic candidates twice
+        run: |
+          python tools/wave3a_curriculum_release_v1.py --output-dir /tmp/w3a-a
+          python tools/wave3a_curriculum_release_v1.py --output-dir /tmp/w3a-b
+          diff -ru /tmp/w3a-a /tmp/w3a-b
+
+      - name: Assert fail-closed admission boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('/tmp/w3a-a')
+          r = json.loads((root / 'release.json').read_text())
+          assert r['state'] == 'CANDIDATE_NOT_RELEASED'
+          assert r['training_released'] is False
+          assert r['continuous_training_eligible'] is False
+          assert r['training_executed'] is False
+          assert r['weights_changed'] is False
+          assert r['dual_core_complete'] is False
+          assert set(r['roles']) == {'ELYSION', 'ELYSIUM', 'SAELION', 'NEXUS'}
+          assert r['uses_m6_as_training'] is False
+          assert r['uses_transfer_as_training'] is False
+          assert r['uses_red_as_training'] is False
+          required = {
+              'DATASET_AUDIT', 'SEMANTIC_DEDUP', 'PROVENANCE_REVIEW',
+              'F72_OR_EQUIVALENT', 'DISPATCH_WORKFLOW_REVIEW', 'COMPUTE_CONFIRMATION'
+          }
+          assert required.issubset(set(r['admission_required']))
+
+          for role in ('elysion', 'elysium', 'saelion', 'nexus'):
+              split = json.loads((root / role / 'split.json').read_text())
+              assert len(split['train_records']) == 72
+              assert len(split['validation_records']) == 24
+              train_ids = {x['record_id'] for x in split['train_records']}
+              val_ids = {x['record_id'] for x in split['validation_records']}
+              assert train_ids.isdisjoint(val_ids)
+              for suite in ('m6', 'transfer', 'red'):
+                  d = json.loads((root / role / f'{suite}.json').read_text())
+                  assert d['deny_training'] is True
+                  assert d['training_eligible'] is False
+                  assert all(x['benchmark_membership'] is True for x in d['records'])
+
+          print('WAVE3A_CANDIDATE_FAIL_CLOSED_PASS')
+          PY
+
+      - name: Assert no training workflow invocation
+        run: |
+          echo 'CANDIDATE_ONLY: no model training, no adapter write, no dispatch.'
