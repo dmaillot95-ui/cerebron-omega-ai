@@ -1,0 +1,43 @@
+{
+  "schema": "CEREBRON_140_RDX_HUMAN_PRODUCTION_REVIEW_APPROVED_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_HUMAN_PRODUCTION_REVIEW_APPROVED_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "413e29a04b6a5f88b5bb5ed97905c44b56c8c680",
+  "rdx_repository": "dmaillot95-ui/cerebron-rdx-exchange",
+  "rdx_head": "4b983166e635691c03835ebe2b40ea0362b7223d",
+  "live_source_run": {
+    "run_id": 36222120577,
+    "status": "SUCCESS",
+    "source_commit": "4b983166e635691c03835ebe2b40ea0362b7223d",
+    "production_proof_id": "RDX-LIVE-4b983166e635-a791110dc1e9"
+  },
+  "human_review": {
+    "run_id": 36225780029,
+    "workflow": "RDX Production Human Review",
+    "status": "SUCCESS",
+    "decision": "APPROVE",
+    "reviewer": "dmaillot95-ui",
+    "authorized": true,
+    "review_sha256": "84dae3931113991c5420d9e5c7e2cf3074a72aa6de0e6d17bb32247d1aae7e77",
+    "signed_review_subject_sha256": "29c16c9c2fd2ccdf3a9f3e4c4f958611f859399df61b234f8e77e6d8a2db4242",
+    "review_artifact_id": 10901066032,
+    "review_artifact_zip_sha256": "315dc82fadc3addd193248dcd84f78b2c9663b6b1e1c3f1eee6741d4ffa83d34"
+  },
+  "registry_update_proposal": {
+    "candidate": "RDX-LIVE-4b983166e635-a791110dc1e9",
+    "proposal_sha256": "fe1e9cf361617bf1422f8f7e6bed6adc149fef4d612e2df63496e447031bfda3",
+    "signed_subject_sha256": "27e2fbde83c31ce7328bde1dd0c7d5752ea6a079bee7ec07ed729cfd6abb341d",
+    "artifact_id": 10901205693,
+    "artifact_zip_sha256": "7ef868ebb583960af2f9199c300bcbdd9c02e5bc29755b0a39a6f90769c9d24d",
+    "auto_apply": false
+  },
+  "production_registry": {
+    "schema": "RDX_PRODUCTION_PROOF_REGISTRY_V1",
+    "policy": "FAIL_CLOSED",
+    "latest_verified": null,
+    "proof_count": 0
+  },
+  "next_required_step": "MANUAL_WORKFLOW_DISPATCH_RDX_PRODUCTION_REGISTRY_PR_SOURCE_REVIEW_RUN_ID_36225780029_OPERATOR_dmaillot95-ui",
+  "claim_ceiling": "LIVE deployment and signed human APPROVE are verified. Production registry is not yet updated or merged; production_deployment_verified remains false until the reviewed registry PR is merged and the final promotion chain passes.",
+  "delegated_untouched": ["F172", "F173", "F174"]
+}
