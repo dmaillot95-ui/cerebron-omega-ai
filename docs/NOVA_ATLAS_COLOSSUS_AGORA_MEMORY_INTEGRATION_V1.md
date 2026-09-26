@@ -78,9 +78,11 @@ Memory classes used by the tri-core AIs:
 
 ## 6. Hugging Face boundary
 
-Historical CÉRÉBRON training has evidence of private Hugging Face adapter storage. On current `main`, however, a shared Hugging Face MEMORY Ω backend was not verified by repository code search.
+The private Hugging Face MEMORY Ω path is now directly verified for F176 NOVA, F177 ATLAS and F178 COLOSSUS by workflow run `36246961870`.
 
-Therefore the target is declared but fail-closed: before claiming Hugging Face memory is connected, execute and record a private-repository write -> read -> SHA verification canary. No paid provider may be enabled automatically.
+The canary verified, for each identity, a private-repository write -> read -> SHA-256 equality check. The recorded state is `HF_DIRECT_VERIFIED_3_OF_3`; the evidence receipt is `receipts/p03/tricore-hf-m03/36246961870.json` and the registry extension is `config/all-ai-memory-matrix-tricore-extension-v1.json`.
+
+This proves storage connectivity and integrity only. It does not prove neural training, model capability, or runtime activation. No paid provider may be enabled automatically.
 
 ## 7. Current state
 
@@ -88,6 +90,8 @@ NOVA / ATLAS / COLOSSUS:
 
 - repositories exist;
 - tri-core contracts exist;
+- private Hugging Face memory write/read/SHA is verified 3/3;
+- global memory-matrix extension is registered and gated;
 - model slots are unassigned;
 - `training_status = NOT_TRAINED`;
 - `weights_changed = false`;
