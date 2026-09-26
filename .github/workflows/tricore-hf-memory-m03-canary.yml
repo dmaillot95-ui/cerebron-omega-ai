@@ -1,0 +1,144 @@
+name: Tri-Core HF Private Memory M03 Canary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/tricore-hf-memory-m03-v1.json'
+      - '.github/workflows/tricore-hf-memory-m03-canary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fail closed without token
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${HF_TOKEN:-}" || { echo 'HF_TOKEN_MISSING'; exit 2; }
+      - name: Install Hugging Face client
+        run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: Tri-core private write read SHA canary
+        env:
+          CEREBRON_RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import datetime, hashlib, json, os
+          from pathlib import Path
+          from huggingface_hub import HfApi, hf_hub_download
+
+          token=os.environ['HF_TOKEN']
+          repo=os.environ['HF_REPO']
+          run_id=os.environ['CEREBRON_RUN_ID']
+          cfg=json.loads(Path('config/tricore-hf-memory-m03-v1.json').read_text())
+          if cfg['hf_private_repo'] != repo or cfg['repo_type'] != 'model':
+              raise SystemExit('HF_CONFIG_MISMATCH')
+
+          api=HfApi(token=token)
+          info=api.repo_info(repo_id=repo, repo_type='model', token=token)
+          if not getattr(info, 'private', False):
+              raise SystemExit('HF_PRIVATE_REPO=FAIL')
+
+          receipt={
+              'schema':'CEREBRON_TRICORE_HF_M03_RECEIPT_V1',
+              'run_id':run_id,
+              'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'repo':repo,
+              'private_repo':'PASS',
+              'results':[],
+              'status':'PASS',
+              'training_executed':False,
+              'weights_changed':False,
+              'runtime_changed':False
+          }
+          for x in cfg['entries']:
+              payload={
+                  'schema':'CEREBRON_AI_MEMORY_CONNECTIVITY_FIXTURE_V1',
+                  'ai_id':x['ai_id'],
+                  'identity':x['identity'],
+                  'farm_id':x['farm_id'],
+                  'agent_slot':'A6_MEMORY_KEEPER',
+                  'memory_class':'M7_EVIDENCE',
+                  'run_id':run_id,
+                  'private':True,
+                  'purpose':'M03_CONNECTIVITY_ONLY_NOT_TRAINING'
+              }
+              raw=(json.dumps(payload,sort_keys=True,separators=(',',':'))+'\n').encode()
+              digest=hashlib.sha256(raw).hexdigest()
+              local=Path('/tmp')/(x['ai_id'].replace('/','-')+'.json')
+              local.write_bytes(raw)
+              remote=x['namespace']+'/M7_EVIDENCE/'+run_id+'.json'
+              commit=api.upload_file(
+                  path_or_fileobj=str(local), path_in_repo=remote,
+                  repo_id=repo, repo_type='model', token=token,
+                  commit_message='Tri-core M03 connectivity fixture '+x['ai_id']
+              )
+              revision=getattr(commit,'oid',None) or 'main'
+              got=hf_hub_download(
+                  repo_id=repo, filename=remote, repo_type='model',
+                  revision=revision, token=token, force_download=True
+              )
+              got_raw=Path(got).read_bytes()
+              got_sha=hashlib.sha256(got_raw).hexdigest()
+              ok=(got_raw==raw and got_sha==digest)
+              receipt['results'].append({
+                  'ai_id':x['ai_id'], 'identity':x['identity'], 'farm_id':x['farm_id'],
+                  'status':'PASS' if ok else 'FAIL',
+                  'write':'PASS', 'read':'PASS', 'sha256':'PASS' if ok else 'FAIL',
+                  'payload_sha256':digest, 'downloaded_sha256':got_sha,
+                  'remote_object':remote, 'commit_oid':getattr(commit,'oid',None)
+              })
+              if not ok:
+                  receipt['status']='FAIL'
+
+          info2=api.repo_info(repo_id=repo, repo_type='model', token=token)
+          if not getattr(info2,'private',False):
+              receipt['status']='FAIL'
+              receipt['private_repo_after']='FAIL'
+          else:
+              receipt['private_repo_after']='PASS'
+          receipt['summary']={
+              'tested':len(receipt['results']),
+              'passed':sum(1 for x in receipt['results'] if x['status']=='PASS'),
+              'failed':sum(1 for x in receipt['results'] if x['status']=='FAIL')
+          }
+          out=Path('receipts/p03/tricore-hf-m03')/f'{run_id}.json'
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_text(json.dumps(receipt,indent=2)+'\n')
+          Path('receipts/p03/tricore-hf-m03-latest.json').write_text(json.dumps({
+              'schema':'CEREBRON_TRICORE_HF_M03_LATEST_V1',
+              'run_id':run_id,
+              'receipt':str(out),
+              'status':receipt['status']
+          },indent=2)+'\n')
+          if receipt['status']!='PASS':
+              raise SystemExit(2)
+          PY
+      - name: Persist non-sensitive receipt
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/tricore-hf-m03/ receipts/p03/tricore-hf-m03-latest.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m 'M03 receipt: tri-core HF private memory canary [skip ci]'
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
