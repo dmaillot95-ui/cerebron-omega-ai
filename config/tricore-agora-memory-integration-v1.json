@@ -1,7 +1,7 @@
 {
   "schema": "CEREBRON_TRICORE_AGORA_MEMORY_INTEGRATION_V1",
   "date": "2026-09-26",
-  "status": "DECLARED_FAIL_CLOSED_NOT_TRAINED",
+  "status": "HF_MEMORY_VERIFIED_RUNTIME_MUTED_NOT_TRAINED",
   "runtime_changed": false,
   "members": [
     {
@@ -46,7 +46,7 @@
     "participates_with_other_ais": true,
     "training_admission_state": "PREPARE_ONLY",
     "training_enabled": false,
-    "reason": "three model slots are unassigned and no tri-core trainer backend has a verified weight-change canary",
+    "reason": "model slots are not fully evidenced and no tri-core trainer backend has a verified weight-change canary",
     "real_training_requires": [
       "three explicit model revisions",
       "role-specific TRAIN datasets",
@@ -62,7 +62,7 @@
     ]
   },
   "memory": {
-    "integration_state": "DECLARED_MEMORY_OMEGA_ROUTE",
+    "integration_state": "MEMORY_OMEGA_ROUTE_PLUS_HF_DIRECT_VERIFIED",
     "nodes": {
       "M0": "EPHEMERAL",
       "M1": "TRACE",
@@ -83,10 +83,14 @@
   },
   "hugging_face": {
     "historical_adapter_storage_proven": true,
-    "shared_memory_backend_proven_on_main": false,
-    "target_state": "PRIVATE_MEMORY_BACKEND_TO_BE_CANARY_VERIFIED",
+    "shared_memory_backend_proven_on_main": true,
+    "private_repo": "cerebron-omega/cerebron-private-memory",
+    "tricore_direct_write_read_sha": "PASS_3_OF_3",
+    "tricore_run_id": 36246961870,
+    "tricore_receipt": "receipts/p03/tricore-hf-m03/36246961870.json",
+    "target_state": "PRIVATE_MEMORY_BACKEND_DIRECTLY_VERIFIED_FOR_F176_F178",
     "automatic_paid_service": false,
-    "claim_boundary": "Do not call Hugging Face connected memory until a private-repo write/read/hash canary is evidenced."
+    "claim_boundary": "HF private storage connectivity is verified for NOVA, ATLAS and COLOSSUS; this is memory transport evidence, not neural training or runtime activation."
   },
   "runtime": {
     "NOVA": "MUTED_HOLD",
