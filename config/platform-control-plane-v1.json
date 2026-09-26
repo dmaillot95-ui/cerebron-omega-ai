@@ -3,7 +3,7 @@
   "status": "CONTROL_PLANE_MVP_LOCAL_FAIL_CLOSED",
   "role": "CEREBRON_CONTROL_PLANE_NOT_A_FARM",
   "farm_count_effect": 0,
-  "farm_cap": 174,
+  "farm_cap": 178,
   "branch": "feat/cerebron-ai-platform-mvp",
   "responsibilities": [
     "mission_intake",
