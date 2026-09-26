@@ -1,0 +1,41 @@
+{
+  "schema": "CEREBRON_WAVE3A_DATASET_WORKPLAN_V1",
+  "date": "2026-09-26",
+  "status": "PREPARATION_ONLY_NO_WEIGHT_CHANGE",
+  "roles": {
+    "ELYSION": {
+      "objective": "native generalist reasoning/fusion curriculum",
+      "train_sources_allowed": ["validated role-specific exercises", "corrected counterexamples", "M4_GOLD lessons", "promoted M2 replay"],
+      "holdouts_required": ["cold", "transfer", "red_team"]
+    },
+    "ELYSIUM": {
+      "objective": "alternative-solver and critic complementarity curriculum",
+      "train_sources_allowed": ["validated alternative-solution exercises", "failure contrasts", "M4_GOLD lessons", "promoted M2 replay"],
+      "holdouts_required": ["cold", "transfer", "red_team"]
+    },
+    "SAELION": {
+      "objective": "specialized role curriculum with measurable complementarity",
+      "train_sources_allowed": ["validated specialization tasks", "role-specific corrections", "M4_GOLD lessons"],
+      "holdouts_required": ["cold", "transfer", "red_team"]
+    },
+    "NEXUS": {
+      "objective": "coordination/selection curriculum focused on choosing useful solver outputs",
+      "train_sources_allowed": ["selector-labelled examples", "oracle-vs-selected contrast examples", "validated routing failures"],
+      "holdouts_required": ["cold", "transfer", "red_team"]
+    }
+  },
+  "global_rules": [
+    "NO_RAW_AGORA_AS_TRAIN",
+    "NO_M6_AS_TRAIN",
+    "NO_TRANSFER_AS_TRAIN",
+    "NO_RED_TEAM_AS_TRAIN",
+    "NO_PROMPT_ONLY_RELEASE",
+    "NO_MEMORY_ONLY_RELEASE",
+    "ONE_CANONICAL_SAMPLE_ID_PER_INFORMATION",
+    "DEDUP_BEFORE_TRAIN_SPLIT",
+    "DATASET_SHA256_BEFORE_RELEASE",
+    "ABLATION_BEFORE_PROMOTION"
+  ],
+  "training_released": false,
+  "weights_changed": false
+}
