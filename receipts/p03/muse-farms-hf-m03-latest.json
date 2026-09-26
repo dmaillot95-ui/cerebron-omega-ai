@@ -1,0 +1,8 @@
+{
+  "schema": "CEREBRON_MUSE_FARMS_HF_M03_LATEST_V1",
+  "run_id": "36252932919",
+  "receipt": "receipts/p03/muse-farms-hf-m03/36252932919.json",
+  "status": "PASS",
+  "training_executed": false,
+  "weights_changed": false
+}
