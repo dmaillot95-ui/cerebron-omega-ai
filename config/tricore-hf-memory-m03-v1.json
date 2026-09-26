@@ -1,0 +1,49 @@
+{
+  "schema": "CEREBRON_TRICORE_HF_MEMORY_M03_V1",
+  "date": "2026-09-26",
+  "status": "PENDING_REAL_HF_WRITE_READ_SHA",
+  "runtime_changed": false,
+  "hf_private_repo": "cerebron-omega/cerebron-private-memory",
+  "repo_type": "model",
+  "historical_backend_evidence": {
+    "health_receipt": "receipts/p03/hf-memory-health.json",
+    "all_ai_receipt": "receipts/p03/all-ai-hf-m03/35997653059.json",
+    "run_id": 35997653059,
+    "run_conclusion": "SUCCESS",
+    "scope": "EXISTING_AI_BACKEND_ONLY_NOT_TRICORE_PROOF"
+  },
+  "entries": [
+    {
+      "ai_id": "F176-NOVA",
+      "identity": "NOVA",
+      "farm_id": 176,
+      "available": true,
+      "namespace": "ai/f176-nova/agent/A6_MEMORY_KEEPER",
+      "hf_write_read_sha": "PENDING_M03_CANARY"
+    },
+    {
+      "ai_id": "F177-ATLAS",
+      "identity": "ATLAS",
+      "farm_id": 177,
+      "available": true,
+      "namespace": "ai/f177-atlas/agent/A6_MEMORY_KEEPER",
+      "hf_write_read_sha": "PENDING_M03_CANARY"
+    },
+    {
+      "ai_id": "F178-COLOSSUS",
+      "identity": "COLOSSUS",
+      "farm_id": 178,
+      "available": true,
+      "namespace": "ai/f178-colossus/agent/A6_MEMORY_KEEPER",
+      "hf_write_read_sha": "PENDING_M03_CANARY"
+    }
+  ],
+  "memory_class": "M7_EVIDENCE",
+  "m6_training_policy": "DENY_TRAINING",
+  "training_executed": false,
+  "weights_changed": false,
+  "runtime_enabled": false,
+  "output_enabled": false,
+  "pass_rule": "EACH_TRICORE_AI_MUST_PASS_PRIVATE_REPO_WRITE_READ_SHA_IN_ONE_REAL_ACTION_RUN",
+  "claim_boundary": "HISTORICAL_HF_BACKEND_VALIDATED; F176_F178_NOT_VALIDATED_UNTIL_DEDICATED_CANARY_PASS"
+}
