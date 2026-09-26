@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_NEXUS_SEED_V1","role":"NEXUS","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"transfer","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"NEX-TE-001","task_type":"dependency_resolution","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"In a manufacturing line, painting depends on curing, which depends on assembly. Assembly fails inspection. What is the correct orchestration action?","target":"Block curing and painting, route the item to repair/reinspection, and avoid downstream work that assumes a passed assembly state."},
+    {"sample_id":"NEX-TE-002","task_type":"multi_source_fusion","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Two databases disagree on a customer's status; one is read-only archival and one is the current system of record. Which should drive action?","target":"Use the current system of record for action while retaining the archival value as historical evidence; surface the discrepancy if it affects decisions."}
+  ]
+}

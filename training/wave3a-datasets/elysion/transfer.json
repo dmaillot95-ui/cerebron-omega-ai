@@ -1,0 +1,15 @@
+{
+  "schema": "CEREBRON_WAVE3A_SPLIT_V1",
+  "dataset_id": "WAVE3A_ELYSION_SEED_V1",
+  "role": "ELYSION",
+  "version": "1.0.0-seed",
+  "status": "CANDIDATE_NOT_RELEASED",
+  "split": "transfer",
+  "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
+  "evidence_scope": "SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE",
+  "deny_training": true,
+  "samples": [
+    {"sample_id":"ELY-TE-001","task_type":"search_exploration","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A scheduling system has tasks with durations and precedence constraints. Explain how you would detect impossible cycles before optimizing total time.","target":"Represent dependencies as a directed graph and run cycle detection/topological sort. If a directed cycle exists, the precedence system is infeasible and optimization should stop before makespan search."},
+    {"sample_id":"ELY-TE-002","task_type":"solution_generation","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"You must choose one sensor query to distinguish between two competing fault models. Model A predicts pressure high/temperature normal; Model B predicts pressure normal/temperature high. Which query has highest information value?","target":"Either pressure or temperature alone separates the models if measurements are reliable. Prefer the measurement with lower noise/cost; if equal, both have equal discriminating value."}
+  ]
+}

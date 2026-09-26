@@ -1,0 +1,26 @@
+{
+  "schema": "CEREBRON_WAVE3A_DATASET_AUDIT_V1",
+  "date": "2026-09-26",
+  "status": "PASS_FOR_PREPARATION_FAIL_FOR_RELEASE",
+  "checks": {
+    "role_specificity": "PASS",
+    "train_cold_transfer_red_separated": "PASS",
+    "sample_ids_unique": "PASS",
+    "m6_in_train": "DENY_CONFIRMED",
+    "raw_agora_in_train": "DENY_CONFIRMED",
+    "transfer_in_train": "DENY_CONFIRMED",
+    "red_in_train": "DENY_CONFIRMED",
+    "cold_in_train": "DENY_CONFIRMED",
+    "dual_core_pins_present": "PASS",
+    "semantic_dedup": "PENDING",
+    "provenance_review": "PENDING",
+    "scale_sufficient_for_training": "FAIL_SEED_ONLY",
+    "dispatch_workflow_review": "PENDING",
+    "f72_or_equivalent_release_gate": "PENDING"
+  },
+  "training_released": false,
+  "continuous_training_eligible": false,
+  "weights_changed": false,
+  "training_executed": false,
+  "next": "EXPAND_AND_REVIEW_ROLE_SPECIFIC_TRAIN_SETS_THEN_RUN_RELEASE_GATES"
+}

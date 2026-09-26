@@ -1,0 +1,19 @@
+{
+  "schema": "CEREBRON_WAVE3A_SPLIT_V1",
+  "dataset_id": "WAVE3A_ELYSIUM_SEED_V1",
+  "role": "ELYSIUM",
+  "version": "1.0.0-seed",
+  "status": "CANDIDATE_NOT_RELEASED",
+  "split": "train",
+  "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
+  "evidence_scope": "SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE",
+  "deny_training": false,
+  "samples": [
+    {"sample_id":"ELM-TR-001","task_type":"evidence_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Claim: 'The new method is better because accuracy rose from 80% to 84% on the training set.' Audit the claim.","target":"The evidence is insufficient. Training-set improvement can reflect overfitting. Require a held-out test/cold set, uncertainty or repeated runs, a baseline under the same conditions, and checks for leakage before claiming improvement."},
+    {"sample_id":"ELM-TR-002","task_type":"counterexample","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Claim: 'If xy=0 then x=0 and y=0.' Provide the smallest counterexample and corrected statement.","target":"Counterexample: x=0,y=1 gives xy=0 but y≠0. Correct statement over an integral domain: if xy=0, then x=0 OR y=0."},
+    {"sample_id":"ELM-TR-003","task_type":"proof_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A derivation divides both sides of (a-b)(a+b)=b(a-b) by (a-b), then sets a=b and concludes 2=1. Locate the invalid step.","target":"When a=b, the factor a-b equals zero. Dividing by a-b is division by zero, so the cancellation is invalid in the case later substituted."},
+    {"sample_id":"ELM-TR-004","task_type":"boundary_case","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A classifier reports 100% accuracy on 20 examples, all from one class. What does this fail to establish?","target":"It does not establish multiclass discrimination, calibration, robustness, or generalization. A trivial always-predict-that-class classifier would also score 100% on this sample."},
+    {"sample_id":"ELM-TR-005","task_type":"transfer_validation","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A method works on numbers 1..100. The author claims it works for all positive integers. What evidence is missing?","target":"Finite testing over 1..100 cannot prove a universal claim. A proof, invariant, or argument covering arbitrary positive integers is needed; broader tests may increase confidence but not prove universality."},
+    {"sample_id":"ELM-TR-006","task_type":"independence_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Three agents using the same base model and prompt family agree. How many independent model-lineage confirmations does this provide?","target":"One model-lineage confirmation, not three independent proofs. Agreement across correlated instances can still be useful operationally but must not be counted as independent evidence."}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_ELYSIUM_SEED_V1","role":"ELYSIUM","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"transfer","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"ELM-TE-001","task_type":"system_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"An API retries failed payments automatically. Audit one failure mode that can create duplicate charges.","target":"If the first request succeeds but the response is lost, an automatic retry can charge again unless the operation is idempotent. Require an idempotency key or transaction reconciliation."},
+    {"sample_id":"ELM-TE-002","task_type":"causal_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Website conversion rose after a redesign launched during a holiday sale. Why is causality not established?","target":"The redesign and holiday promotion are confounded. A controlled experiment, staggered rollout, or credible causal design is needed to isolate the redesign effect."}
+  ]
+}

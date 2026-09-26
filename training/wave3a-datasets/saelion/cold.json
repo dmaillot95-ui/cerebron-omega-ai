@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_SAELION_SEED_V1","role":"SAELION","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"cold","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"SAE-CO-001","task_type":"synthesis_compression","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Compress: 'Test X passed 8/10; failures both involved long context; short-context baseline unchanged.'","target":"X passes most cases but has a long-context failure concentration; short-context performance is unchanged. Investigate long-context robustness before promotion."},
+    {"sample_id":"SAE-CO-002","task_type":"information_gain","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"You can inspect either more training examples or the two failing cold examples. Which first, and why?","target":"Inspect the failing cold examples first: they are directly informative about generalization failure and may reveal a systematic error faster than more training examples."}
+  ]
+}

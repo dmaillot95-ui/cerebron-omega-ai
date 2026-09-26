@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_NEXUS_SEED_V1","role":"NEXUS","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"cold","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"NEX-CO-001","task_type":"interface_contract","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"An upstream tool emits temperature in °F; downstream expects °C. State the adapter requirement.","target":"Convert explicitly using C=(F-32)×5/9, label the output unit, validate range/format, and preserve provenance that a transformation occurred."},
+    {"sample_id":"NEX-CO-002","task_type":"orchestration","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A workflow has two independent checks and one final fusion step. When may fusion start?","target":"After both required checks reach terminal states or the contract defines a safe partial-fusion path. Otherwise, starting early risks missing contradictory evidence."}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "CEREBRON_WAVE3A_SPLIT_V1",
+  "dataset_id": "WAVE3A_ELYSION_SEED_V1",
+  "role": "ELYSION",
+  "version": "1.0.0-seed",
+  "status": "CANDIDATE_NOT_RELEASED",
+  "split": "cold",
+  "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
+  "evidence_scope": "SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE",
+  "deny_training": true,
+  "samples": [
+    {"sample_id":"ELY-CO-001","task_type":"formal_reasoning","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Prove that among any 6 integers, two have the same remainder modulo 5.","target":"There are only 5 remainder classes modulo 5. By the pigeonhole principle, placing 6 integers into 5 classes forces at least one class to contain two integers."},
+    {"sample_id":"ELY-CO-002","task_type":"hypothesis_generation","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A process succeeds 9 times in 10 observed trials. Give three explanations for this rate and specify what additional evidence would separate skill from sampling noise.","target":"Possible explanations include a true success probability near 0.9, a lower true probability with a lucky sample, or selection/reporting bias. Separate them with a larger preregistered sample, known denominator, and independent replication."}
+  ]
+}

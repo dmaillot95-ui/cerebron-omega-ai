@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_ELYSIUM_SEED_V1","role":"ELYSIUM","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"cold","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"ELM-CO-001","task_type":"counterexample","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Claim: 'A function with zero derivative at x=0 has a local maximum there.' Give a counterexample.","target":"f(x)=x^2 has f'(0)=0 but x=0 is a local minimum, not a maximum."},
+    {"sample_id":"ELM-CO-002","task_type":"evidence_audit","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A benchmark score improves by 1 point after fine-tuning, but no pre-registered seed or repeated runs exist. State the safest conclusion.","target":"Only an observed single-run difference is established. Without repeated seeds or uncertainty estimates, the improvement may be noise; do not claim a reliable gain."}
+  ]
+}

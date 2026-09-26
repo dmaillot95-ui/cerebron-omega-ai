@@ -1,0 +1,40 @@
+{
+  "schema": "CEREBRON_WAVE3A_DATASET_MANIFEST_V1",
+  "date": "2026-09-26",
+  "wave": "WAVE3A",
+  "status": "SEED_DATASETS_BUILT_NOT_RELEASED",
+  "training_released": false,
+  "continuous_training_eligible": false,
+  "roles": ["ELYSION", "ELYSIUM", "SAELION", "NEXUS"],
+  "cores": [
+    {"model_id":"Qwen/Qwen3-4B","revision":"1cfa9a7208912126459214e8b04321603b3df60c"},
+    {"model_id":"HuggingFaceTB/SmolLM3-3B","revision":"a07cc9a04f16550a088caea529712d1d335b0ac1"}
+  ],
+  "counts_per_role": {"train":6,"cold":2,"transfer":2,"red":2},
+  "dataset_ids": {
+    "ELYSION":"WAVE3A_ELYSION_SEED_V1",
+    "ELYSIUM":"WAVE3A_ELYSIUM_SEED_V1",
+    "SAELION":"WAVE3A_SAELION_SEED_V1",
+    "NEXUS":"WAVE3A_NEXUS_SEED_V1"
+  },
+  "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
+  "dedup_status": "PASS_SAMPLE_ID_UNIQUE_SEMANTIC_REVIEW_PENDING",
+  "leakage_status": "STRUCTURAL_SPLIT_DISJOINT_SEMANTIC_AUDIT_PENDING",
+  "evidence_scope": "SEED_ONLY_NOT_SUFFICIENT_FOR_RELEASE",
+  "deny_training_sections": ["cold","transfer","red"],
+  "global_audit": {
+    "sample_id_uniqueness":"PASS",
+    "split_path_disjoint":"PASS",
+    "cold_transfer_red_denied_training":true,
+    "raw_agora_used":false,
+    "m6_used":false,
+    "external_fact_dependency":"MINIMIZED_SELF_CONTAINED_TASKS",
+    "semantic_dedup":"PENDING_REVIEW",
+    "minimum_scale_for_training":"NOT_MET_SEED_ONLY",
+    "dispatch_workflow":"NOT_ASSIGNED",
+    "f72_or_equivalent_release_gate":"NOT_RUN"
+  },
+  "weights_changed": false,
+  "training_executed": false,
+  "claim_boundary": "DATASET_SEED_PREPARATION_ONLY"
+}
