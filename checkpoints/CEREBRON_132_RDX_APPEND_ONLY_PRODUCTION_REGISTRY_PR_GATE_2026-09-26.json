@@ -1,0 +1,85 @@
+{
+  "schema": "CEREBRON_132_RDX_APPEND_ONLY_PRODUCTION_REGISTRY_PR_GATE_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_APPEND_ONLY_PRODUCTION_REGISTRY_PR_GATE_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "5e8566983d37c7b579e1c67fb12ca22a1e64d84b",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "a6e5954f0d77e7ab6646ed29079fc37286150bb4",
+    "head": "f1abf67a618e3a2e75d5abd345a4acc0cfb66e13",
+    "commit_message": "security: add append-only production registry PR gate",
+    "full_validation": {
+      "run_id": 36209299985,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36209299958,
+      "status": "PASS",
+      "live_deployment_used_as_evidence": false
+    }
+  },
+  "production_registry_pr_gate": {
+    "trigger": "pull_request_only",
+    "target_branch": "main",
+    "source_branch_pattern": "review/rdx-production-proof-<review_run>-<run>",
+    "allowed_changed_file": "data/deployments/production-proof-registry.json",
+    "append_only": true,
+    "historical_proofs_immutable": true,
+    "exactly_one_new_proof_required": true,
+    "latest_verified_must_reference_new_proof": true,
+    "required_proof_schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "required_proof_status": "PASS",
+    "signed_live_proof_required": true,
+    "synthetic_proof_forbidden": true,
+    "human_review_approve_required": true,
+    "successful_human_review_run_binding_required": true,
+    "promotion_gate_revalidation_required": true,
+    "contract_gate_output": "PASS pull_request_only=true append_only=true source_review_bound=true",
+    "contract_validation_status": "PASS",
+    "real_production_proof_pr_execution_status": "NOT_YET_EXECUTED"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_state": "FAIL_CLOSED_NO_LIVE_PROOF"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED",
+    "claim": "PR_GATE_EXISTS_AND_VALIDATES_CONTRACT_BUT_GITHUB_DOES_NOT_YET_ENFORCE_IT_AS_A_REQUIRED_MERGE_CHECK"
+  },
+  "current_blockers": [
+    "NO_REAL_PRODUCTION_PROOF_PR_HAS_EXECUTED_THE_DEDICATED_PR_ONLY_GATE",
+    "NO_RDX_GITHUB_PAGES_WORKFLOW_DISPATCH_WITH_DEPLOY_TRUE_LIVE_PROOF_OBSERVED",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "append_only_pr_gate_contract_verified": true,
+    "source_review_binding_contract_verified": true,
+    "full_validation_verified": true,
+    "github_pages_push_validation_verified": true,
+    "dedicated_gate_executed_on_real_production_proof_pr": false,
+    "required_merge_check_enforcement_verified": false,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "CONTRACT_PASS!=REAL_PR_EXECUTION",
+    "TRIGGERED_CHECK!=REQUIRED_CHECK_WITHOUT_BRANCH_ENFORCEMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
