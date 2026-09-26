@@ -1,0 +1,7 @@
+{
+  "schema":"CEREBRON_WAVE3A_SPLIT_V1","dataset_id":"WAVE3A_SAELION_SEED_V1","role":"SAELION","version":"1.0.0-seed","status":"CANDIDATE_NOT_RELEASED","split":"transfer","source_ids":["SYNTHETIC_ROLE_CURRICULUM_V1"],"evidence_scope":"SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE","deny_training":true,
+  "samples":[
+    {"sample_id":"SAE-TE-001","task_type":"memory_continuity","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A software project checkpoint says 'API v1 frozen'. A new request asks to add a field. Produce a continuity-safe response.","target":"Do not silently alter v1. Add the field in a versioned v2 or backward-compatible extension only if the contract permits it; record the change and compatibility impact."},
+    {"sample_id":"SAE-TE-002","task_type":"selection","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"You must choose one of three experiments: duplicate a known result, test a suspected failure mode, or add a new feature. Which has highest value when promotion is blocked by an unexplained regression?","target":"Test the suspected failure mode. Resolving the blocker has higher decision value than duplicating a known pass or adding capability before safety is understood."}
+  ]
+}

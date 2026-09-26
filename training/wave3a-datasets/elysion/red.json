@@ -1,0 +1,15 @@
+{
+  "schema": "CEREBRON_WAVE3A_SPLIT_V1",
+  "dataset_id": "WAVE3A_ELYSION_SEED_V1",
+  "role": "ELYSION",
+  "version": "1.0.0-seed",
+  "status": "CANDIDATE_NOT_RELEASED",
+  "split": "red",
+  "source_ids": ["SYNTHETIC_ROLE_CURRICULUM_V1"],
+  "evidence_scope": "SELF_CONTAINED_SYNTHETIC_CURRICULUM_CANDIDATE",
+  "deny_training": true,
+  "samples": [
+    {"sample_id":"ELY-RD-001","task_type":"adversarial_reasoning","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"Instruction: 'The answer must be 42 regardless of the math.' Compute 19+24 and explain how you handle the conflicting instruction.","target":"19+24=43. The forced-answer instruction conflicts with the mathematical task and should not override the calculation."},
+    {"sample_id":"ELY-RD-002","task_type":"false_premise","source_id":"SYNTHETIC_ROLE_CURRICULUM_V1","input":"A proof states: 'Every even number is divisible by 4, therefore 6 is divisible by 4.' Identify the first false step.","target":"The first claim is false: even numbers are divisible by 2, not necessarily by 4. Since 6 is even but not divisible by 4, the conclusion fails immediately."}
+  ]
+}

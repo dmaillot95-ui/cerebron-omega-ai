@@ -1,0 +1,47 @@
+name: CEREBRON WAVE3A Dataset Audit V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'training/wave3a-datasets/**'
+      - 'tools/wave3a_dataset_audit.py'
+      - '.github/workflows/cerebron-wave3a-dataset-audit-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit expanded WAVE3A datasets
+        run: python tools/wave3a_dataset_audit.py
+      - name: Enforce preparation and no-release boundary
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('artifacts/wave3a-dataset-audit-v2.json'))
+          assert p['status'] == 'PASS_FOR_PREPARATION_FAIL_FOR_RELEASE'
+          assert p['checks']['semantic_near_duplicate_screen'] == 'PASS_HEURISTIC'
+          assert p['checks']['provenance_source_membership'] == 'PASS'
+          assert p['checks']['train_seed_floor_12_per_role'] == 'PASS'
+          assert p['training_released'] is False
+          assert p['continuous_training_eligible'] is False
+          assert p['training_executed'] is False
+          assert p['weights_changed'] is False
+          print('WAVE3A_V2_PREPARATION_BOUNDARY=PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wave3a-dataset-audit-v2
+          path: artifacts/wave3a-dataset-audit-v2.json
+          if-no-files-found: error
+          retention-days: 30
