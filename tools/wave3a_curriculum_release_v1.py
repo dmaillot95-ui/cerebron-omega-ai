@@ -51,7 +51,6 @@ def make_records(role,kind,n_per_label,seed):
  for label,tmpls in SPECS[role]["labels"].items():
   for i in range(n_per_label):
    base=tmpls[i%len(tmpls)]
-   # Distinct surface perturbation prevents exact-template duplicates while preserving label contract.
    suffix=f" Evidence ticket={role[:2]}-{kind[:2]}-{i:02d}; priority={1+(i%5)}."
    rows.append(rec(role,label,fill(base,rng)+suffix,i,kind,seed))
  return rows
@@ -62,7 +61,7 @@ def dataset(role,kind,n,seed,deny):
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument("--output-dir",required=True);a=ap.parse_args();root=pathlib.Path(a.output_dir);root.mkdir(parents=True,exist_ok=True)
- release={"schema":"CEREBRON_WAVE3A_COREB_TRAINING_RELEASE_V1","state":"RELEASED_FOR_SCOPED_COREB_LORA_TRAINING","training_released":True,"continuous_training_eligible":True,"materially_new_data_or_method":True,"core":"CORE_B","model":MODEL,"roles":{},"uses_m6_as_training":False,"uses_transfer_as_training":False,"uses_red_as_training":False,"claim_scope":"ROLE_SPECIFIC_CORE_B_POLICY_ADAPTER_CANARY_NOT_GENERAL_CAPABILITY_NOT_DUAL_CORE_COMPLETE"}
+ release={"schema":"CEREBRON_WAVE3A_COREB_CANDIDATE_V1","state":"CANDIDATE_NOT_RELEASED","training_released":False,"continuous_training_eligible":False,"training_executed":False,"weights_changed":False,"materially_new_data_or_method":True,"core":"CORE_B","model":MODEL,"roles":{},"uses_m6_as_training":False,"uses_transfer_as_training":False,"uses_red_as_training":False,"dual_core_complete":False,"admission_required":["DATASET_AUDIT","SEMANTIC_DEDUP","PROVENANCE_REVIEW","F72_OR_EQUIVALENT","DISPATCH_WORKFLOW_REVIEW","COMPUTE_CONFIRMATION"],"claim_scope":"ROLE_SPECIFIC_CORE_B_POLICY_ADAPTER_CANDIDATE_NOT_GENERAL_CAPABILITY_NOT_DUAL_CORE_COMPLETE"}
  all_train_hashes=set();all_bench_hashes=set()
  for ridx,role in enumerate(SPECS):
   pool=make_records(role,"TRAINPOOL",24,SEED+ridx)
@@ -84,5 +83,5 @@ def main():
  if all_train_hashes & all_bench_hashes:raise SystemExit("GLOBAL_TRAIN_BENCH_LEAKAGE")
  release["release_sha256"]=sha(release)
  (root/"release.json").write_text(json.dumps(release,indent=2,ensure_ascii=False)+"\n")
- print(json.dumps({"status":"RELEASED_FOR_SCOPED_COREB_LORA_TRAINING","roles":list(SPECS),"train_per_role":72,"validation_per_role":24,"release_sha256":release["release_sha256"],"benchmark_leakage":False},sort_keys=True))
+ print(json.dumps({"status":"CANDIDATE_NOT_RELEASED","roles":list(SPECS),"train_per_role":72,"validation_per_role":24,"release_sha256":release["release_sha256"],"benchmark_leakage":False,"training_released":False,"continuous_training_eligible":False,"training_executed":False,"weights_changed":False},sort_keys=True))
 if __name__=="__main__":main()
