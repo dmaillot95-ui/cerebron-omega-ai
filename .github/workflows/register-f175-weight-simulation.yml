@@ -54,12 +54,20 @@ jobs:
               })
           farms.sort(key=lambda x:int(x['id']))
           d['version']='2.26'
+          d['max_farms']=175
+          pol=d.setdefault('policy',{})
+          pol['farm_cap']=175
+          pol['no_farm_above_174']=False
+          pol['no_farm_above_175']=True
+          ext=pol.setdefault('extension_farm_ids',[])
+          if 175 not in ext: ext.append(175)
+          ext.sort()
           p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n')
 
           s=pathlib.Path('scaffolds/f175-weight-simulation')
           s.mkdir(parents=True,exist_ok=True)
           (s/'README.md').write_text('''# F175 — Weight Simulation Farm\n\nPurpose: pre-screen candidate LoRA/adapter configurations before real neural training.\n\n## Boundary\n\n- SIMULATION != TRAINING\n- SIMULATED DELTA != CHANGED MODEL WEIGHTS\n- No promotion from simulation alone\n- M6 / TRANSFER / REDTEAM are DENY_TRAINING\n- A selected candidate must still pass real training, weight-hash proof, COLD, TRANSFER, REDTEAM and ablation.\n\n## Candidate search\n\nRank candidate target modules, LoRA rank/alpha/dropout, learning rate, dataset ordering and small proxy delta directions. Keep only the best candidates for real training slots.\n''')
-          print('F175_REGISTERED', len(farms))
+          print('F175_REGISTERED', len(farms), 'MAX', d['max_farms'])
           PY
       - name: Persist registry and scaffold
         run: |
@@ -67,7 +75,7 @@ jobs:
           git config user.email actions@users.noreply.github.com
           git add config/farms.json scaffolds/f175-weight-simulation/README.md
           git diff --cached --quiet && exit 0
-          git commit -m "registry: add F175 weight simulation farm"
+          git commit -m "registry: normalize F175 weight simulation farm"
           for i in 1 2 3; do
             git pull --rebase origin main && git push && exit 0
             sleep 5
