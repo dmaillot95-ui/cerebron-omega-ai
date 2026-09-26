@@ -1,21 +1,36 @@
 {
   "schema": "CEREBRON_HF_PRIVATE_MEMORY_CANARY_V1",
   "date": "2026-09-26",
-  "status": "PREPARED_NOT_EXECUTED",
+  "status": "BACKEND_VERIFIED_GENERIC_WORKFLOW_NOT_EXECUTED",
   "backend": "HUGGING_FACE_HUB_PRIVATE_REPOSITORY",
-  "shared_memory_backend_proven": false,
-  "memory_backend_validated": false,
-  "workflow": ".github/workflows/cerebron-hf-private-memory-canary-v1.yml",
-  "runner": "tools/hf_private_memory_canary.py",
-  "trigger": "workflow_dispatch_only",
+  "shared_memory_backend_proven": true,
+  "memory_backend_validated": true,
+  "verified_private_repo": "cerebron-omega/cerebron-private-memory",
+  "evidence": {
+    "historical_health_receipt": "receipts/p03/hf-memory-health.json",
+    "historical_all_ai_receipt": "receipts/p03/all-ai-hf-m03/35997653059.json",
+    "historical_all_ai_run_id": 35997653059,
+    "historical_all_ai_run_conclusion": "SUCCESS",
+    "tricore_receipt": "receipts/p03/tricore-hf-m03/36246961870.json",
+    "tricore_run_id": 36246961870,
+    "tricore_run_conclusion": "SUCCESS",
+    "tricore_result": "PASS_3_OF_3_WRITE_READ_SHA"
+  },
+  "generic_canary": {
+    "workflow": ".github/workflows/cerebron-hf-private-memory-canary-v1.yml",
+    "runner": "tools/hf_private_memory_canary.py",
+    "trigger": "workflow_dispatch_only",
+    "execution_status": "NOT_EXECUTED",
+    "purpose": "REUSABLE_STRICT_GENERIC_CANARY_NOT_REQUIRED_TO_REPROVE_EXISTING_BACKEND"
+  },
   "credentials": {
     "secret_name": "HF_TOKEN",
-    "secret_presence_readable_by_connector": false,
-    "secret_value_logged": false
+    "secret_value_logged": false,
+    "secret_functionally_proven_by_successful_hf_runs": true
   },
   "target_repository": {
-    "repo_id": "MUST_BE_EXPLICITLY_SUPPLIED_AT_DISPATCH",
-    "repo_type_default": "dataset",
+    "verified_repo_id": "cerebron-omega/cerebron-private-memory",
+    "verified_repo_type": "model",
     "must_already_exist": true,
     "must_be_private": true,
     "automatic_repository_creation": false
@@ -33,13 +48,6 @@
       "SHA256_COMPARE",
       "VERIFY_PRIVATE_AFTER",
       "RECEIPT"
-    ],
-    "pass_requires": [
-      "write_executed=true",
-      "read_executed=true",
-      "sha_match=true",
-      "private_verified_before=true",
-      "private_verified_after=true"
     ]
   },
   "memory_omega": {
@@ -58,5 +66,5 @@
     "automatic_paid_service": false,
     "no_paid_provider_auto_activation": true
   },
-  "claim_boundary": "PREPARED_NOT_EXECUTED until a successful workflow receipt proves private write/read/SHA equality. Historical adapter storage is not sufficient proof of shared memory."
+  "claim_boundary": "Private HF storage transport is proven by real Actions write/read/SHA receipts, including F176-F178. The reusable generic workflow itself remains unexecuted. Storage proof does not imply semantic-memory quality, neural training, weight change or runtime activation."
 }
