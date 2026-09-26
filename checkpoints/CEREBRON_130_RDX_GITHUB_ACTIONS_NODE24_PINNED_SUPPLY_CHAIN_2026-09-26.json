@@ -1,0 +1,106 @@
+{
+  "schema": "CEREBRON_130_RDX_GITHUB_ACTIONS_NODE24_PINNED_SUPPLY_CHAIN_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_GITHUB_ACTIONS_NODE24_RUNTIME_PINNING_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "8519e1eaf405525153edcba94f8da75d37a7d8f7",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "fa1f028beb7ce321f6409e6c10e65880d8dcf8f5",
+    "head": "d5e8c606163560ae84fb0b84f08aecc26f213c2a",
+    "commit_message": "ci: pin checkout and setup-node to Node 24 action runtimes",
+    "full_validation": {
+      "run_id": 36208898149,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36208898065,
+      "status": "PASS",
+      "event": "push",
+      "validate": "PASS",
+      "deploy": "SKIPPED",
+      "verify_live": "SKIPPED"
+    }
+  },
+  "github_actions_supply_chain": {
+    "workflows_scanned": 14,
+    "checkout": {
+      "version": "v7.0.1",
+      "commit_sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "pinned_occurrences": 15
+    },
+    "setup_node": {
+      "version": "v7.0.0",
+      "commit_sha": "820762786026740c76f36085b0efc47a31fe5020",
+      "pinned_occurrences": 15,
+      "application_node_version": "22",
+      "package_manager_cache_false_occurrences": 15
+    },
+    "regression_gate": "scripts/validate-github-actions-runtime-pins.mjs",
+    "regression_gate_status": "PASS",
+    "legacy_node20_action_runtime_warning_observed_after_migration": false,
+    "runner_version_observed": "2.337.0",
+    "runner_image_observed": "ubuntu-24.04"
+  },
+  "auto_run_validation": {
+    "workflow_runs_triggered": 12,
+    "check_runs_observed": 14,
+    "failure_observed": false,
+    "cancelled_observed": false,
+    "neutral_observed": false,
+    "timed_out_observed": false,
+    "expected_skipped_checks": [
+      "RDX GitHub Pages Public Preview/deploy",
+      "RDX GitHub Pages Public Preview/verify-live"
+    ]
+  },
+  "release_chain": {
+    "source_commit": "d5e8c606163560ae84fb0b84f08aecc26f213c2a",
+    "file_count": 16,
+    "aggregate_sha256": "a8a197be0815671244a1db12cf6290b0d148e4f62f6ba11ef45f7f57909dc7d5",
+    "release_attestation_sha256": "254ca2194f740266108e1e51bf7af6ffd2cec91884d9efc58865eb91dc52a220",
+    "reproducible_build_gate": "PASS",
+    "release_attestation_gate": "PASS"
+  },
+  "workflow_artifacts": {
+    "rdx_release_attestation": {
+      "artifact_id": 10894178398,
+      "artifact_digest": "sha256:4d9a32a4359454777d51404312d9549e97962b2a7c3d29cdd8a7b22c91e942fa"
+    },
+    "github_pages": {
+      "artifact_id": 10894303226,
+      "artifact_digest": "sha256:2e60a0ff68edde3cdfb1259bb5fd027ed3d4c2f1a326025a08faa37eb6d6f9a9"
+    }
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion": "DENY_UNTIL_REAL_WORKFLOW_DISPATCH_DEPLOY_AND_LIVE_VERIFY"
+  },
+  "current_blocker": "NO_RDX_GITHUB_PAGES_WORKFLOW_DISPATCH_WITH_DEPLOY_TRUE_OBSERVED",
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "github_actions_runtime_migration_verified": true,
+    "exact_action_commit_pins_verified": true,
+    "runtime_pin_regression_gate_verified": true,
+    "release_build_verified": true,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "PIN_PRIVILEGED_ACTIONS_TO_IMMUTABLE_COMMITS",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
