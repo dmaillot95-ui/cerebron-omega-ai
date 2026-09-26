@@ -1,0 +1,58 @@
+{
+  "schema": "CEREBRON_TRICORE_HF_M03_RECEIPT_V1",
+  "run_id": "36246961870",
+  "checked_at": "2026-09-26T13:59:26.213433+00:00",
+  "repo": "cerebron-omega/cerebron-private-memory",
+  "private_repo": "PASS",
+  "results": [
+    {
+      "ai_id": "F176-NOVA",
+      "identity": "NOVA",
+      "farm_id": 176,
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "69bed14bd1b97b69569fd4265d0a5c91e0e0a69169df6b680305e1a1db87afdb",
+      "downloaded_sha256": "69bed14bd1b97b69569fd4265d0a5c91e0e0a69169df6b680305e1a1db87afdb",
+      "remote_object": "ai/f176-nova/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "commit_oid": "9e2f3e8a0df4d6ce7e76363793ea0aa8d9005e4c"
+    },
+    {
+      "ai_id": "F177-ATLAS",
+      "identity": "ATLAS",
+      "farm_id": 177,
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "e40cb46cd06a7e0bd84c8fb11149a5c9eba13388a7ebcae1fc0ae3fdefc8da2f",
+      "downloaded_sha256": "e40cb46cd06a7e0bd84c8fb11149a5c9eba13388a7ebcae1fc0ae3fdefc8da2f",
+      "remote_object": "ai/f177-atlas/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "commit_oid": "64f374fee7cbedadd45449cd3520dd59b7b106e6"
+    },
+    {
+      "ai_id": "F178-COLOSSUS",
+      "identity": "COLOSSUS",
+      "farm_id": 178,
+      "status": "PASS",
+      "write": "PASS",
+      "read": "PASS",
+      "sha256": "PASS",
+      "payload_sha256": "0784e05d6f569989168d1d720c061ea7317798676ce0faaa3e9cf503cdffd506",
+      "downloaded_sha256": "0784e05d6f569989168d1d720c061ea7317798676ce0faaa3e9cf503cdffd506",
+      "remote_object": "ai/f178-colossus/agent/A6_MEMORY_KEEPER/M7_EVIDENCE/36246961870.json",
+      "commit_oid": "9616f7b0bb3a81bece70dc5fe1c5d0f50970aac5"
+    }
+  ],
+  "status": "PASS",
+  "training_executed": false,
+  "weights_changed": false,
+  "runtime_changed": false,
+  "private_repo_after": "PASS",
+  "summary": {
+    "tested": 3,
+    "passed": 3,
+    "failed": 0
+  }
+}
