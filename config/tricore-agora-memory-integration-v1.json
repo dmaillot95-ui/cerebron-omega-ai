@@ -1,0 +1,107 @@
+{
+  "schema": "CEREBRON_TRICORE_AGORA_MEMORY_INTEGRATION_V1",
+  "date": "2026-09-26",
+  "status": "DECLARED_FAIL_CLOSED_NOT_TRAINED",
+  "runtime_changed": false,
+  "members": [
+    {
+      "farm_id": 176,
+      "identity": "NOVA",
+      "repo": "cerebron-farm-176-nova-tricore",
+      "role": "parallel exploration, invention and representation synthesis",
+      "core_count": 3
+    },
+    {
+      "farm_id": 177,
+      "identity": "ATLAS",
+      "repo": "cerebron-farm-177-atlas-tricore",
+      "role": "parallel knowledge mapping, integration, memory continuity and transfer",
+      "core_count": 3
+    },
+    {
+      "farm_id": 178,
+      "identity": "COLOSSUS",
+      "repo": "cerebron-farm-178-colossus-tricore",
+      "role": "parallel difficult reasoning, verification and large-scale synthesis",
+      "core_count": 3
+    }
+  ],
+  "architecture": "CORE_A||CORE_B||CORE_C->INTERNAL_FUSION",
+  "agora": {
+    "membership_target": "ALL_REAL_AVAILABLE_AIS",
+    "reference": "config/greek-agora-training-v1.json",
+    "integration_state": "DECLARED_NOT_EXECUTED",
+    "task_roles": [
+      {"id": "M1", "name": "PEDAGOGUE", "function": "generate explanations, exercises and teachable curriculum candidates"},
+      {"id": "M2", "name": "EXAMINER", "function": "grade attempts, detect gaps and produce correction candidates"},
+      {"id": "M3", "name": "RED_TEAM", "function": "search counterexamples, regressions, leakage and false confidence"},
+      {"id": "M4", "name": "CONNECTOR", "function": "link validated lessons across models, farms, tools and memories"},
+      {"id": "M5", "name": "COACH", "function": "select next exercises from measured weaknesses and information gain"}
+    ],
+    "task_agents_runtime_proven_from_repo": false,
+    "task_agents_do_not_claim_weight_change": true,
+    "raw_agora_is_training_data": false
+  },
+  "training": {
+    "participates_with_other_ais": true,
+    "training_admission_state": "PREPARE_ONLY",
+    "training_enabled": false,
+    "reason": "three model slots are unassigned and no tri-core trainer backend has a verified weight-change canary",
+    "real_training_requires": [
+      "three explicit model revisions",
+      "role-specific TRAIN datasets",
+      "M6/COLD/TRANSFER/RED exclusion from TRAIN",
+      "trainer workflow with optimizer execution",
+      "weight_or_adapter_sha_before",
+      "weight_or_adapter_sha_after",
+      "training receipt and run id",
+      "cold benchmark",
+      "transfer benchmark",
+      "red-team/regression",
+      "promote_or_rollback"
+    ]
+  },
+  "memory": {
+    "integration_state": "DECLARED_MEMORY_OMEGA_ROUTE",
+    "nodes": {
+      "M0": "EPHEMERAL",
+      "M1": "TRACE",
+      "M2": "REPLAY",
+      "M3": "WARM",
+      "M4": "GOLD",
+      "M5": "MODEL",
+      "M6": "COLD_BENCH_DENY_TRAINING",
+      "M7": "EVIDENCE"
+    },
+    "farms": [114,115,116,117,118,119,120],
+    "rules": [
+      "MEMORY_NE_TRAINING",
+      "M6_NEVER_IN_TRAIN",
+      "DEDUP_BEFORE_WRITE",
+      "FAIL_CLOSED"
+    ]
+  },
+  "hugging_face": {
+    "historical_adapter_storage_proven": true,
+    "shared_memory_backend_proven_on_main": false,
+    "target_state": "PRIVATE_MEMORY_BACKEND_TO_BE_CANARY_VERIFIED",
+    "automatic_paid_service": false,
+    "claim_boundary": "Do not call Hugging Face connected memory until a private-repo write/read/hash canary is evidenced."
+  },
+  "runtime": {
+    "NOVA": "MUTED_HOLD",
+    "ATLAS": "MUTED_HOLD",
+    "COLOSSUS": "MUTED_HOLD",
+    "runtime_enabled": false,
+    "output_enabled": false
+  },
+  "hard_rules": [
+    "CONFIGURATION_NE_EXECUTION",
+    "AGORA_OUTPUT_NE_AUTOMATIC_TRUTH",
+    "AGORA_OUTPUT_NE_AUTOMATIC_TRAIN",
+    "MEMORY_NE_NEURAL_LEARNING",
+    "WEIGHTS_CHANGED_REQUIRED_FOR_TRAINED_CLAIM",
+    "SAME_MODEL_LINEAGE_NE_INDEPENDENT_EVIDENCE",
+    "NO_OUTPUT_UNTIL_EXPLICIT_ACTIVATION"
+  ]
+}
