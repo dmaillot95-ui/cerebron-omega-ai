@@ -1,0 +1,76 @@
+{
+  "schema": "CEREBRON_131_RDX_PRODUCTION_REGISTRY_PR_VALIDATION_COVERAGE_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_PRODUCTION_REGISTRY_PR_VALIDATION_COVERAGE_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "f237e155d5dffad0e158ad0a21abe072071b7599",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "d5e8c606163560ae84fb0b84f08aecc26f213c2a",
+    "head": "a6e5954f0d77e7ab6646ed29079fc37286150bb4",
+    "commit_message": "ci: cover production registry changes with full PR validation",
+    "full_validation": {
+      "run_id": 36209108876,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36209108875,
+      "status_at_checkpoint": "QUEUED",
+      "used_as_evidence_for_this_checkpoint": false
+    }
+  },
+  "production_registry_validation_coverage": {
+    "workflow": ".github/workflows/cerebron-rdx-full-validation.yml",
+    "covered_path": "data/deployments/**",
+    "push_coverage": true,
+    "pull_request_coverage": true,
+    "regression_gate": "scripts/validate-production-registry-pr-validation-coverage.mjs",
+    "regression_gate_status": "PASS",
+    "gate_output": "RDX Production Registry PR Validation Coverage Gate: PASS push=true pull_request=true"
+  },
+  "release_chain": {
+    "source_commit": "a6e5954f0d77e7ab6646ed29079fc37286150bb4",
+    "file_count": 16,
+    "aggregate_sha256": "7b5b94800bd1886264055b28f7f7ddc37434dc2ee872d7d04bae89dc3645ec92",
+    "release_attestation_sha256": "b5f185cbfaf2636396e7676917379d606762a755a4734338801a5275d6b1ea34",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_gate": "PASS_FAIL_CLOSED_PUBLIC_CLAIM_FALSE"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED",
+    "claim": "PR_VALIDATION_NOW_TRIGGERS_FOR_PRODUCTION_REGISTRY_CHANGES_BUT_GITHUB_MERGE_ENFORCEMENT_IS_NOT_YET_CONFIGURED"
+  },
+  "current_blockers": [
+    "NO_RDX_GITHUB_PAGES_WORKFLOW_DISPATCH_WITH_DEPLOY_TRUE_OBSERVED",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "production_registry_pr_validation_trigger_coverage_verified": true,
+    "full_validation_verified": true,
+    "required_merge_check_enforcement_verified": false,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "TRIGGERED_CHECK!=REQUIRED_CHECK_WITHOUT_BRANCH_ENFORCEMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
