@@ -1,0 +1,104 @@
+{
+  "schema": "CEREBRON_137_RDX_THIRD_PARTY_ACTION_BYPASS_CLOSED_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_THIRD_PARTY_ACTION_BYPASS_CLOSED_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "1a136831d363d01dc8108025a3963824aeb3a57c",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "a6657fc202999674c6db4cc0989d74d429fcf4af",
+    "head": "47118e120d5b5d9665505b459078ee2f501f4ed9",
+    "commit_message": "security: close third-party GitHub Action pinning bypass",
+    "full_validation": {
+      "run_id": 36215290447,
+      "job_id": 108329936623,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36215290448,
+      "event": "push",
+      "status_at_checkpoint": "QUEUED",
+      "used_as_evidence_for_this_checkpoint": false
+    }
+  },
+  "github_actions_supply_chain": {
+    "gate": "scripts/validate-github-actions-runtime-pins.mjs",
+    "gate_status": "PASS",
+    "workflow_inventory": 15,
+    "uses_total": 49,
+    "external_actions": 49,
+    "first_party_actions": 49,
+    "local_actions": 0,
+    "immutable_sha_refs": 49,
+    "checkout_pins": 16,
+    "setup_node_pins": 16,
+    "attest_pins": 6,
+    "upload_artifact_pins": 8,
+    "pages_action_pins": 3,
+    "cache_disabled": 16,
+    "all_uses_targets_scanned": true,
+    "unapproved_external_owner_rejected": true,
+    "third_party_bypass_canary": "PASS",
+    "mutable_ref_canary": "PASS",
+    "gate_output": "RDX GitHub Actions Supply-Chain Pin Gate: PASS workflows=15 uses=49 external_actions=49 first_party_actions=49 local_actions=0 immutable_sha_refs=49 checkout_pins=16 setup_node_pins=16 attest_pins=6 upload_artifact_pins=8 pages_action_pins=3 cache_disabled=16 third_party_bypass_canary=PASS mutable_ref_canary=PASS"
+  },
+  "release_chain": {
+    "source_commit": "47118e120d5b5d9665505b459078ee2f501f4ed9",
+    "file_count": 16,
+    "aggregate_sha256": "e7ef95302ba9026589d48b31ff8b8fd84c634b9eafb85f171fac70ab4a93af10",
+    "release_attestation_sha256": "7aaf6d4d2ed32a090ae885ecbb0f64291a7b5758e562a37ac1f5e06dde415dd8",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_policy": "FAIL_CLOSED",
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_gate": "PASS_FAIL_CLOSED_PUBLIC_CLAIM_FALSE_AUTHORIZED_REVIEWERS_1"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED"
+  },
+  "next_observed_gap": {
+    "checkout_persist_credentials": true,
+    "observed_in_full_validation_run": 36215290447,
+    "claim": "READ_ONLY_FULL_VALIDATION_CHECKOUT_CURRENTLY_PERSISTS_GITHUB_CREDENTIALS_IN_LOCAL_GIT_CONFIG",
+    "not_fixed_in_this_checkpoint": true
+  },
+  "current_blockers": [
+    "NO_VERIFIED_LIVE_PRODUCTION_DEPLOYMENT_PROOF_EXISTS",
+    "NO_REAL_HUMAN_REVIEW_EXECUTED_AGAINST_A_VERIFIED_LIVE_PRODUCTION_PROOF",
+    "NO_REAL_PRODUCTION_PROOF_PR_HAS_EXECUTED_THE_DEDICATED_PR_ONLY_GATE",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "all_workflow_uses_targets_scanned": true,
+    "unapproved_external_action_owner_rejected": true,
+    "third_party_action_bypass_negative_canary_verified": true,
+    "mutable_action_ref_negative_canary_verified": true,
+    "full_validation_verified": true,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false,
+    "real_human_review_execution_with_live_proof_verified": false,
+    "dedicated_gate_executed_on_real_production_proof_pr": false,
+    "required_merge_check_enforcement_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "ALL_EXTERNAL_ACTION_OWNERS_MUST_BE_EXPLICITLY_APPROVED",
+    "IMMUTABLE_ACTION_SHA>MAJOR_VERSION_TAG",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
