@@ -11,3 +11,9 @@ A release is eligible only when:
 - any dispatch workflow is explicitly named and reviewed
 
 An empty directory means the controller remains active but performs no neural training.
+
+## Current execution state — 2026-09-26
+
+No eligible neural-training release is registered yet. The controller remains fail-closed and keeps up to 4 slots available. Do not convert scaffolds, AGORA output, memory, prompts, or unvalidated RDX material into `training_released=true`.
+
+Next admissible release must provide, at minimum: role-specific train split, pinned base model/revision, dataset SHA-256, explicit M6/transfer/red exclusion, cold benchmark split, transfer split, red-team split, and a reviewed dispatch workflow.
