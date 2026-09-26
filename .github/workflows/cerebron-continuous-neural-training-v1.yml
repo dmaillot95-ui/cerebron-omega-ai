@@ -13,6 +13,7 @@ on:
       - 'config/all-ai-neural-training-coverage-v1.json'
       - 'training/EIGHT_AI_CONTINUOUS_BATCH_POLICY.json'
       - 'training/continuous-releases/**'
+      - 'training/wave3a-backend/**'
       - 'evolution/continuous_neural_training_controller_v1.py'
       - '.github/workflows/cerebron-continuous-neural-training-v1.yml'
 
@@ -51,13 +52,34 @@ jobs:
                   assert "CLOSED_ROLE_REUSE_DENY" not in rel.get("reasons",[])
           print("CONTINUOUS_TRAINING_CONTROLLER_GUARD=PASS",p["status"],p["selected_count"])
           PY
+      - name: Enforce WAVE3A compute backend gate
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=json.load(open("artifacts/continuous-neural-training-plan-v1.json"))
+          selected=[x for x in p.get("selected",[]) if x.get("wave")=="WAVE3A"]
+          if not selected:
+              print("WAVE3A_COMPUTE_BACKEND_GATE=NOT_SELECTED")
+              raise SystemExit(0)
+          path=pathlib.Path("training/wave3a-backend/WAVE3A_COMPUTE_BACKEND_EVIDENCE_V1.json")
+          if not path.is_file():
+              raise SystemExit("WAVE3A_COMPUTE_BACKEND_EVIDENCE_MISSING")
+          e=json.loads(path.read_text())
+          assert e.get("schema")=="CEREBRON_WAVE3A_COMPUTE_BACKEND_EVIDENCE_V1"
+          assert e.get("wave")=="WAVE3A"
+          assert e.get("status")=="VERIFIED_EXECUTABLE_BACKEND"
+          assert e.get("target_model_canary_pass") is True
+          assert e.get("real_training_backend") is True
+          assert e.get("backend_can_change_weights") is True
+          print("WAVE3A_COMPUTE_BACKEND_GATE=PASS",len(selected))
+          PY
       - name: Dispatch explicitly released training workflows
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPOSITORY: ${{ github.repository }}
         run: |
           python - <<'PY'
-          import json,os,subprocess,sys
+          import json,os,subprocess
           d=json.load(open("artifacts/continuous-neural-training-dispatch-v1.json"))
           reqs=d.get("requests",[])
           if not reqs:
