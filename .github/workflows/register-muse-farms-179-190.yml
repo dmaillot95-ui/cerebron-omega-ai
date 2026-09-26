@@ -1,0 +1,37 @@
+name: Register Muse Farms F179-F190
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/register_muse_farms_179_190.py'
+      - '.github/workflows/register-muse-farms-179-190.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Register F179-F190 fail closed
+        run: python tools/register_muse_farms_179_190.py
+      - name: Commit registry update if needed
+        run: |
+          if git diff --quiet -- config/farms.json; then
+            echo 'REGISTRY_ALREADY_CURRENT=PASS'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add config/farms.json
+          git commit -m 'Register Muse farms F179-F190 [skip ci]'
+          git push
