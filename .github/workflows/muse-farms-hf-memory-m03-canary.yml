@@ -1,0 +1,146 @@
+name: Muse Farms F179-F190 HF Private Memory M03 Canary
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/muse-farms-hf-m03-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO: cerebron-omega/cerebron-private-memory
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet --upgrade huggingface_hub
+      - name: F179-F190 private write read SHA canary
+        env:
+          CEREBRON_RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import os,json,hashlib,datetime
+          from pathlib import Path
+          from huggingface_hub import HfApi,hf_hub_download
+
+          token=os.environ["HF_TOKEN"]
+          repo=os.environ["HF_REPO"]
+          run_id=os.environ["CEREBRON_RUN_ID"]
+          ais=[
+            (179,"ZEUS","orchestration_multi_agent"),
+            (180,"POSEIDON","complex_systems_exploration"),
+            (181,"HADES","red_team_failure_analysis"),
+            (182,"ATHENA","reasoning_strategy_proof"),
+            (183,"APOLLO","science_prediction_synthesis"),
+            (184,"ARTEMIS","targeted_autonomous_research"),
+            (185,"HERMES","tools_api_inter_ai"),
+            (186,"HEPHAESTUS","code_engineering_construction"),
+            (187,"APHRODITE","human_interaction_language_interface"),
+            (188,"ARES","adversarial_hypothesis_stress_test"),
+            (189,"DEMETER","memory_knowledge_consolidation"),
+            (190,"HERA","governance_coordination_audit"),
+          ]
+          api=HfApi(token=token)
+          info_before=api.repo_info(repo_id=repo,repo_type="model")
+          if not getattr(info_before,"private",False):
+              raise SystemExit("HF_PRIVATE_REPO_BEFORE=FAIL")
+
+          receipt={
+            "schema":"CEREBRON_MUSE_FARMS_HF_M03_RECEIPT_V1",
+            "run_id":run_id,
+            "checked_at":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "repo":repo,
+            "farm_range":"F179-F190",
+            "memory_class":"M7_EVIDENCE",
+            "training_executed":False,
+            "weights_changed":False,
+            "counts_as_neural_training":False,
+            "runtime_activation":False,
+            "results":[],
+            "status":"PASS"
+          }
+          for farm_id,identity,role in ais:
+              ai_id=f"F{farm_id}-{identity}"
+              payload={
+                "schema":"CEREBRON_AI_MEMORY_CONNECTIVITY_FIXTURE_V1",
+                "ai_id":ai_id,
+                "identity":identity,
+                "specialization":role,
+                "agent_slot":"A6_MEMORY_KEEPER",
+                "memory_class":"M7_EVIDENCE",
+                "run_id":run_id,
+                "private":True,
+                "synthetic_fixture":True,
+                "purpose":"M03_CONNECTIVITY_ONLY_NOT_TRAINING",
+                "training_executed":False,
+                "weights_changed":False
+              }
+              raw=(json.dumps(payload,sort_keys=True,separators=(",",":"))+"\n").encode()
+              digest=hashlib.sha256(raw).hexdigest()
+              local=f"/tmp/{ai_id}.json"
+              Path(local).write_bytes(raw)
+              remote=f"muse_farms/{ai_id}/M7_EVIDENCE/{run_id}.json"
+              api.upload_file(
+                path_or_fileobj=local,
+                path_in_repo=remote,
+                repo_id=repo,
+                repo_type="model",
+                commit_message=f"M03 versioned connectivity fixture {ai_id}"
+              )
+              got=hf_hub_download(repo_id=repo,filename=remote,repo_type="model",token=token,force_download=True)
+              got_sha=hashlib.sha256(Path(got).read_bytes()).hexdigest()
+              ok=(got_sha==digest)
+              receipt["results"].append({
+                "farm_id":farm_id,"ai_id":ai_id,"identity":identity,
+                "status":"PASS" if ok else "FAIL",
+                "write":"PASS","read":"PASS",
+                "sha256":"PASS" if ok else "FAIL",
+                "payload_sha256":digest,"download_sha256":got_sha,
+                "remote_object":remote
+              })
+              if not ok:
+                  receipt["status"]="FAIL"
+
+          info_after=api.repo_info(repo_id=repo,repo_type="model")
+          receipt["private_before"]=bool(getattr(info_before,"private",False))
+          receipt["private_after"]=bool(getattr(info_after,"private",False))
+          if not receipt["private_after"]:
+              receipt["status"]="FAIL"
+
+          receipt["summary"]={
+            "expected":12,
+            "tested":len(receipt["results"]),
+            "passed":sum(1 for x in receipt["results"] if x["status"]=="PASS"),
+            "failed":sum(1 for x in receipt["results"] if x["status"]=="FAIL")
+          }
+          Path("receipts/p03/muse-farms-hf-m03").mkdir(parents=True,exist_ok=True)
+          versioned=Path("receipts/p03/muse-farms-hf-m03")/f"{run_id}.json"
+          versioned.write_text(json.dumps(receipt,indent=2)+"\n")
+          Path("receipts/p03/muse-farms-hf-m03-latest.json").write_text(json.dumps({
+            "schema":"CEREBRON_MUSE_FARMS_HF_M03_LATEST_V1",
+            "run_id":run_id,
+            "receipt":str(versioned),
+            "status":receipt["status"],
+            "training_executed":False,
+            "weights_changed":False
+          },indent=2)+"\n")
+          if receipt["status"]!="PASS" or receipt["summary"]["passed"]!=12:
+              raise SystemExit(2)
+          PY
+      - name: Persist non-sensitive receipt
+        if: always()
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add receipts/p03/muse-farms-hf-m03/ receipts/p03/muse-farms-hf-m03-latest.json
+          git diff --cached --quiet && exit 0
+          git commit -m "M03 receipt: Muse farms HF private memory canary"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
