@@ -1,0 +1,53 @@
+{
+  "schema": "CEREBRON_WAVE4_SPECIALIST_TRAINING_READINESS_V1",
+  "date": "2026-09-26",
+  "status": "READINESS_AUDIT_ONLY",
+  "wave": "WAVE4",
+  "objective": "Determine whether BETA, GAMMA, EPSILON, ZETA and ETA have enough audited role-specific TRAIN material to enter the continuous neural-training release pipeline without touching WAVE3 or protected runtime surfaces.",
+  "roles": {
+    "BETA": ["problem_contract", "constraint_feasibility", "evidence_audit"],
+    "GAMMA": ["causal_mechanism", "integration_interfaces", "science_modeling"],
+    "EPSILON": ["sensitivity_robustness", "uncertainty", "metrology_benchmark"],
+    "ZETA": ["optimization_efficiency", "information_gain", "constraint_feasibility"],
+    "ETA": ["temporal_dynamics", "uncertainty", "simulation"]
+  },
+  "candidate_sources": [
+    "memory/failure-bank-v1.json",
+    "training/AGORA_TASK_AGENT_TEACHER_LOOP.json",
+    "config/greek-agora-training-v1.json"
+  ],
+  "candidate_source_class": "CANDIDATE_NOT_RELEASED",
+  "minimum_validated_train_records_per_role": 32,
+  "accepted_validation_states": ["GOLD", "VALIDATED_GOLD", "VALIDATED_RED", "VERIFIED_LESSON", "PASS"],
+  "accepted_train_splits": ["TRAIN"],
+  "forbidden_train_splits": ["M6", "BLIND_TEST", "COLD", "TRANSFER", "RED", "RED_TEAM", "ADVERSARIAL", "TEST", "VALIDATION"],
+  "required_record_fields_any": ["provenance", "source", "source_id"],
+  "required_training_release_gates": [
+    "ROLE_SPECIFIC_DATASET_SHA256",
+    "DEDUP_BY_LINEAGE",
+    "PROVENANCE",
+    "LICENSE_PRIVACY",
+    "AUDIT",
+    "COUNTER_AUDIT_OR_RED_TEAM",
+    "NO_BENCHMARK_LEAKAGE",
+    "F72_OR_EQUIVALENT_REALITY_EVIDENCE_PASS",
+    "BASE_MODEL_AND_REVISION_PINNED",
+    "FRESH_COLD_TRANSFER_RED_HELD_OUT"
+  ],
+  "continuous_controller": "config/continuous-neural-training-v1.json",
+  "max_parallel_training_after_release": 4,
+  "protected_surfaces": {
+    "farms": [172, 173, 174],
+    "mutate": false,
+    "wave3_platform_branch_mutate": false
+  },
+  "hard_rules": [
+    "READINESS_NE_TRAINING",
+    "RAW_AGORA_NE_TRAIN",
+    "MEMORY_NE_TRAINING",
+    "M6_TRANSFER_RED_DENY_TRAINING",
+    "NO_SYNTHETIC_GOLD_BY_ASSERTION",
+    "NO_TRAINING_RELEASE_WITHOUT_AUDITED_RECORDS",
+    "WEIGHT_CHANGE_REQUIRED_FOR_NEURAL_TRAINING_CLAIM"
+  ]
+}
