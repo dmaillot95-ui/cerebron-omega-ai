@@ -1,0 +1,46 @@
+{
+  "schema": "CEREBRON_MUSE_GREEK_SEED_SPIRALIX_V1",
+  "status": "REGISTERED_PREP_ONLY_NOT_TRAINED",
+  "runtime_changed": false,
+  "scope": "F179-F190",
+  "members": [
+    {"farm_id":179,"name":"ZEUS"},
+    {"farm_id":180,"name":"POSEIDON"},
+    {"farm_id":181,"name":"HADES"},
+    {"farm_id":182,"name":"ATHENA"},
+    {"farm_id":183,"name":"APOLLO"},
+    {"farm_id":184,"name":"ARTEMIS"},
+    {"farm_id":185,"name":"HERMES"},
+    {"farm_id":186,"name":"HEPHAESTUS"},
+    {"farm_id":187,"name":"APHRODITE"},
+    {"farm_id":188,"name":"ARES"},
+    {"farm_id":189,"name":"DEMETER"},
+    {"farm_id":190,"name":"HERA"}
+  ],
+  "seed_curriculum": {
+    "source_contract": "config/greek-agora-training-v1.json",
+    "inheritance_tiers": ["I1_KNOWLEDGE","I2_CURRICULUM"],
+    "allowed": ["M4_GOLD","validated_RED_lessons","M7_EVIDENCE_METADATA","promoted_M2_replay","validated_exercises","corrections","counterexamples","transfer_tasks","rubrics"],
+    "raw_agora_is_training_data": false,
+    "memory_is_training": false,
+    "m6_cold_transfer_red_deny_training": true,
+    "training_source_gate_required": true,
+    "weights_changed": false,
+    "training_executed": false
+  },
+  "spiralix": {
+    "required": true,
+    "language": "SPIRALIX-OMEGA",
+    "encoding_layer": "GLYPH-VECTOR-OMEGA",
+    "mode": "CEREBRON-M",
+    "bus": "config/spiralix-universal-bus-v1.json",
+    "envelope": "CEREBRON_SPIRALIX_ENVELOPE_V1",
+    "vector_formula": "SV=[P,E,C,U,R,D,M]",
+    "natural_language_projection": "REQUIRED",
+    "json_projection": "REQUIRED",
+    "missing_envelope": "REJECT_FROM_AGORA_FORUM_OR_TRAINING_PIPELINE"
+  },
+  "endpoint_slots_per_ai": 8,
+  "planned_extension_endpoints": 96,
+  "claim_boundary": "SEED_AND_TRANSPORT_LINKAGE_ONLY_NEITHER_TRAINING_NOR_RUNTIME_EXECUTION"
+}
