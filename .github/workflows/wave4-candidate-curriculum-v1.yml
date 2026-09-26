@@ -1,0 +1,47 @@
+name: CEREBRON Wave4 Candidate Curriculum V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/wave4-candidate-curriculum-v1
+    paths:
+      - 'tools/build_wave4_candidate_curriculum_v1.py'
+      - '.github/workflows/wave4-candidate-curriculum-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build candidate curriculum
+        run: |
+          python -m py_compile tools/build_wave4_candidate_curriculum_v1.py
+          python tools/build_wave4_candidate_curriculum_v1.py
+      - name: Enforce candidate-only boundary
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('artifacts/wave4-candidate-curriculum-v1.json'))
+          assert x['status']=='CANDIDATE_NOT_RELEASED'
+          assert x['training_released'] is False
+          assert x['training_executed'] is False
+          assert x['weights_changed'] is False
+          assert set(x['roles'])=={'BETA','GAMMA','EPSILON','ZETA','ETA'}
+          assert all(v['count']>=32 for v in x['roles'].values())
+          assert all(r['training_eligible'] is False and r['target_answer'] is None and r['split']=='CANDIDATE' for v in x['roles'].values() for r in v['records'])
+          print('WAVE4_CANDIDATE_CURRICULUM=PASS',x['total_records'],x['dataset_sha256'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave4-candidate-curriculum-v1
+          path: artifacts/wave4-candidate-curriculum-v1.json
+          if-no-files-found: error
+          retention-days: 30
