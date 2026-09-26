@@ -1,0 +1,36 @@
+{
+  "schema": "CEREBRON_141_RDX_REGISTRY_PROOF_HASH_CANONICALIZATION_FIX_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_REGISTRY_PROOF_HASH_CANONICALIZATION_FIX_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "c94fdff3105f8bf627ae5b3bf6804ab76607a74e",
+  "rdx": {
+    "repository": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "4b983166e635691c03835ebe2b40ea0362b7223d",
+    "fixed_head": "20d343ed8c356b05382ec1c67a171c9c8da244e5",
+    "commit_message": "fix: exclude proof hash from canonical registry proof digest",
+    "failed_registry_pr_run": 36226006833,
+    "failed_registry_pr_job": 108360066028,
+    "failure_step": "Apply reviewed proposal to worktree only",
+    "failure_message": "candidate proof sha256 mismatch",
+    "root_cause": "apply-production-registry-update-proposal.mjs recomputed the canonical deployment proof hash while still including proof_sha256 itself, creating a self-referential digest mismatch. validate-production-promotion.mjs and verify-live-deployment.mjs define the canonical contract with proof_sha256 excluded from the hashed payload.",
+    "fix": "delete proofClone.proof_sha256 before canonical SHA-256 recomputation",
+    "full_validation_run": 36226146436,
+    "full_validation_conclusion": "success"
+  },
+  "production_chain": {
+    "live_deployment_run": 36222120577,
+    "live_verified": true,
+    "human_review_run": 36225780029,
+    "human_review_decision": "APPROVE",
+    "human_review_conclusion": "success",
+    "production_registry_updated": false,
+    "production_deployment_verified_public_claim": false
+  },
+  "next_required_action": "Re-dispatch RDX Production Registry PR from the new main HEAD using source_review_run_id=36225780029 and operator_id=dmaillot95-ui. Do not rerun failed run 36226006833 because it is bound to the old source commit containing the bug.",
+  "claim_ceiling": "The registry proposal apply bug is fixed and Full Validation passed. No production registry entry or final public production promotion is claimed yet.",
+  "delegation": {
+    "F172": "NO_EDIT",
+    "F173": "NO_EDIT",
+    "F174": "NO_EDIT"
+  }
+}
