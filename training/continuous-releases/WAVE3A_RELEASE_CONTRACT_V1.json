@@ -1,0 +1,34 @@
+{
+  "schema": "CEREBRON_CONTINUOUS_TRAINING_RELEASE_CONTRACT_V1",
+  "wave": "WAVE3A",
+  "roles": ["ELYSION", "ELYSIUM", "SAELION", "NEXUS"],
+  "status": "CONTRACT_READY_DATA_NOT_RELEASED",
+  "required_fields_per_role": [
+    "role",
+    "base_model_id",
+    "base_model_revision",
+    "train_split_path",
+    "train_split_sha256",
+    "cold_split_path",
+    "cold_split_sha256",
+    "transfer_split_path",
+    "transfer_split_sha256",
+    "red_split_path",
+    "red_split_sha256",
+    "dispatch_workflow",
+    "training_released",
+    "continuous_training_eligible"
+  ],
+  "gates": {
+    "m6_in_train": "DENY",
+    "transfer_in_train": "DENY",
+    "red_in_train": "DENY",
+    "raw_agora_in_train": "DENY",
+    "memory_only_as_training_proof": "DENY",
+    "prompt_only_as_training_proof": "DENY",
+    "closed_wave_reuse_without_new_data_or_method": "DENY",
+    "max_parallel_real_trainings": 4,
+    "promotion_requires": ["COLD", "TRANSFER", "RED_TEAM", "ABLATION", "NO_CRITICAL_REGRESSION"]
+  },
+  "claim_boundary": "CONTRACT_ONLY_NOT_TRAINING_RELEASE"
+}
