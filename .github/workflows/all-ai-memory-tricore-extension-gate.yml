@@ -1,0 +1,37 @@
+name: All-AI Memory Tri-Core Extension Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/all-ai-memory-matrix-tricore-extension-v1.json'
+      - 'tools/validate_all_ai_memory_tricore_extension.py'
+      - '.github/workflows/all-ai-memory-tricore-extension-gate.yml'
+      - 'receipts/p03/tricore-hf-m03/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate global memory extension
+        run: python tools/validate_all_ai_memory_tricore_extension.py
+      - name: Assert no training boundary
+        run: |
+          python - <<'PY'
+          import json
+          p='config/all-ai-memory-matrix-tricore-extension-v1.json'
+          x=json.load(open(p))
+          assert x['training_executed'] is False
+          assert x['weights_changed'] is False
+          assert x['runtime_changed'] is False
+          print('MEMORY_EXTENSION_NO_TRAINING_BOUNDARY=PASS')
+          PY
