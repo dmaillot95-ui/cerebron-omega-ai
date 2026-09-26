@@ -1,0 +1,89 @@
+name: CEREBRON HF Private Memory Canary V1
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_id:
+        description: Existing PRIVATE Hugging Face repository (owner/name)
+        required: true
+        type: string
+      repo_type:
+        description: Hugging Face repository type
+        required: true
+        default: dataset
+        type: choice
+        options:
+          - dataset
+          - model
+
+permissions:
+  contents: read
+
+jobs:
+  write-read-sha-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+
+      - name: Fail closed if HF_TOKEN is unavailable
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${HF_TOKEN:-}" || { echo "FAIL_CLOSED: HF_TOKEN missing"; exit 2; }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Hugging Face client
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check huggingface_hub
+
+      - name: Execute private write-read-SHA canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/hf_private_memory_canary.py \
+            --repo-id '${{ inputs.repo_id }}' \
+            --repo-type '${{ inputs.repo_type }}' \
+            --canary-id '${{ github.run_id }}-${{ github.run_attempt }}' \
+            --receipt artifacts/hf-private-memory-canary-receipt.json
+
+      - name: Assert receipt boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('artifacts/hf-private-memory-canary-receipt.json')
+          r = json.loads(p.read_text())
+          assert r['status'] == 'PASS'
+          assert r['write_executed'] is True
+          assert r['read_executed'] is True
+          assert r['sha_match'] is True
+          assert r['memory_backend_validated'] is True
+          assert r['private_verified_before'] is True
+          assert r['private_verified_after'] is True
+          assert r['repository_created'] is False
+          assert r['contains_user_data'] is False
+          assert r['contains_raw_agora'] is False
+          assert r['contains_m6_cold_bench'] is False
+          assert r['training_executed'] is False
+          assert r['weights_changed'] is False
+          PY
+
+      - name: Upload evidence receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: hf-private-memory-canary-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/hf-private-memory-canary-receipt.json
+          if-no-files-found: error
+          retention-days: 30
