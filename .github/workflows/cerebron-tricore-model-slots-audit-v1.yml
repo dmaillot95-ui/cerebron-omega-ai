@@ -1,0 +1,43 @@
+name: CEREBRON Tri-Core Model Slots Audit V1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/tricore-model-slots-v1.json'
+      - 'config/tricore-hf-memory-m03-v1.json'
+      - 'tools/validate_tricore_model_slots.py'
+      - '.github/workflows/cerebron-tricore-model-slots-audit-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate nine tri-core slots and evidence boundaries
+        run: python tools/validate_tricore_model_slots.py
+      - name: Assert no runtime or training activation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('config/tricore-model-slots-v1.json').read_text())
+          assert c['total_slots']==9
+          assert c['runtime_enabled'] is False
+          assert c['output_enabled'] is False
+          assert c['training_enabled'] is False
+          assert c['training_executed'] is False
+          assert c['weights_changed'] is False
+          assert c['adapter_changed'] is False
+          print('TRICORE_9_SLOT_AUDIT_PASS_NO_RUNTIME_NO_TRAINING_NO_WEIGHT_CHANGE')
+          PY
