@@ -1,0 +1,7 @@
+CEREBRON_MUSE_FARMS_HF_M03_TRIGGER_V1
+farm_range=F179-F190
+identities=ZEUS,POSEIDON,HADES,ATHENA,APOLLO,ARTEMIS,HERMES,HEPHAESTUS,APHRODITE,ARES,DEMETER,HERA
+purpose=HF_PRIVATE_MEMORY_WRITE_READ_SHA_CANARY_ONLY
+training_executed=false
+weights_changed=false
+counts_as_neural_training=false
