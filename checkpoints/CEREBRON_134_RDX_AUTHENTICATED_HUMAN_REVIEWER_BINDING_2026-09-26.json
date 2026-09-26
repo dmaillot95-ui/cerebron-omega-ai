@@ -1,0 +1,104 @@
+{
+  "schema": "CEREBRON_134_RDX_AUTHENTICATED_HUMAN_REVIEWER_BINDING_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_AUTHENTICATED_HUMAN_REVIEWER_BINDING_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "fe23f3492f382105c6bd5763db08e66ba08c4104",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "cc89d4084a492b5c9524718d165f293d4868f0f9",
+    "head": "5e9eef60727f6671ad9cfddf45e2e4424fac7206",
+    "commit_message": "security: bind production human review identity to GitHub actor",
+    "full_validation": {
+      "run_id": 36211078922,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36211078927,
+      "status": "PASS",
+      "event": "push",
+      "live_deployment_used_as_evidence": false
+    }
+  },
+  "authenticated_human_review_binding": {
+    "workflow": "RDX Production Human Review",
+    "manual_only": true,
+    "auto_apply": false,
+    "reviewer_actor_bound": true,
+    "requested_reviewer_input_required": true,
+    "requested_reviewer_must_equal_github_actor": true,
+    "signed_review_reviewer_id_source": "github.actor",
+    "free_form_reviewer_id_for_signed_artifact_forbidden": true,
+    "source_deployment_workflow_bound": true,
+    "source_run_event_required": "workflow_dispatch",
+    "source_run_branch_required": "main",
+    "live_proof_source_commit_bound_to_source_run_head_sha": true,
+    "signed_live_proof_verification_required": true,
+    "signed_registration_proposal_verification_required": true,
+    "contract_gate_status": "PASS",
+    "contract_gate_output": "RDX Production Human Review Workflow Contract: PASS manual_only=true auto_apply=false reviewer_actor_bound=true",
+    "real_human_review_execution_with_live_proof": false
+  },
+  "production_registry_pr_gate": {
+    "same_repository_required": true,
+    "source_registry_pr_run_bound": true,
+    "pr_parent_sha_bound_to_creator_head_sha": true,
+    "read_only": true,
+    "contract_gate_status": "PASS"
+  },
+  "release_chain": {
+    "source_commit": "5e9eef60727f6671ad9cfddf45e2e4424fac7206",
+    "file_count": 16,
+    "aggregate_sha256": "dd8a03142b63c6bdc74f95d338fb3cf111f315f0d753130eb3baa4ea6578a9b8",
+    "release_attestation_sha256": "5ff2af7710b1b6a7fad34409dfc772122101c1763da7ee957f00348f4b9b461d",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_policy": "FAIL_CLOSED",
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_gate": "PASS_FAIL_CLOSED_PUBLIC_CLAIM_FALSE"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED",
+    "claim": "AUTHENTICATED_REVIEWER_BINDING_IS_VALIDATED_BY_CI_BUT_GITHUB_DOES_NOT_YET_ENFORCE_THE_RELEVANT_GATES_AS_REQUIRED_MERGE_CHECKS"
+  },
+  "current_blockers": [
+    "NO_REAL_HUMAN_REVIEW_EXECUTED_AGAINST_A_VERIFIED_LIVE_PRODUCTION_PROOF",
+    "NO_REAL_PRODUCTION_PROOF_PR_HAS_EXECUTED_THE_DEDICATED_PR_ONLY_GATE",
+    "NO_VERIFIED_LIVE_PRODUCTION_DEPLOYMENT_PROOF_EXISTS",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "authenticated_reviewer_binding_contract_verified": true,
+    "reviewer_input_equals_github_actor_contract_verified": true,
+    "signed_review_uses_authenticated_actor_contract_verified": true,
+    "full_validation_verified": true,
+    "github_pages_push_validation_verified": true,
+    "real_human_review_execution_with_live_proof_verified": false,
+    "dedicated_gate_executed_on_real_production_proof_pr": false,
+    "required_merge_check_enforcement_verified": false,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "AUTHENTICATED_ACTOR>FREE_FORM_REVIEWER_LABEL",
+    "CONTRACT_PASS!=REAL_HUMAN_REVIEW_EXECUTION",
+    "TRIGGERED_CHECK!=REQUIRED_CHECK_WITHOUT_BRANCH_ENFORCEMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
