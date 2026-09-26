@@ -1,0 +1,62 @@
+{
+  "schema": "CEREBRON_HF_PRIVATE_MEMORY_CANARY_V1",
+  "date": "2026-09-26",
+  "status": "PREPARED_NOT_EXECUTED",
+  "backend": "HUGGING_FACE_HUB_PRIVATE_REPOSITORY",
+  "shared_memory_backend_proven": false,
+  "memory_backend_validated": false,
+  "workflow": ".github/workflows/cerebron-hf-private-memory-canary-v1.yml",
+  "runner": "tools/hf_private_memory_canary.py",
+  "trigger": "workflow_dispatch_only",
+  "credentials": {
+    "secret_name": "HF_TOKEN",
+    "secret_presence_readable_by_connector": false,
+    "secret_value_logged": false
+  },
+  "target_repository": {
+    "repo_id": "MUST_BE_EXPLICITLY_SUPPLIED_AT_DISPATCH",
+    "repo_type_default": "dataset",
+    "must_already_exist": true,
+    "must_be_private": true,
+    "automatic_repository_creation": false
+  },
+  "canary": {
+    "content": "SYNTHETIC_JSON_ONLY",
+    "contains_user_data": false,
+    "contains_raw_agora": false,
+    "contains_m6_cold_bench": false,
+    "path_mode": "CONTENT_ADDRESSED_SHA256",
+    "required_sequence": [
+      "VERIFY_PRIVATE_BEFORE",
+      "WRITE",
+      "READ_EXACT_COMMIT",
+      "SHA256_COMPARE",
+      "VERIFY_PRIVATE_AFTER",
+      "RECEIPT"
+    ],
+    "pass_requires": [
+      "write_executed=true",
+      "read_executed=true",
+      "sha_match=true",
+      "private_verified_before=true",
+      "private_verified_after=true"
+    ]
+  },
+  "memory_omega": {
+    "farms": [114, 115, 116, 117, 118, 119, 120],
+    "classes": ["M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7"],
+    "m6_training_policy": "DENY_TRAINING"
+  },
+  "training_boundary": {
+    "memory_ne_training": true,
+    "training_enabled": false,
+    "training_executed": false,
+    "weights_changed": false,
+    "adapter_changed": false
+  },
+  "commercial_boundary": {
+    "automatic_paid_service": false,
+    "no_paid_provider_auto_activation": true
+  },
+  "claim_boundary": "PREPARED_NOT_EXECUTED until a successful workflow receipt proves private write/read/SHA equality. Historical adapter storage is not sufficient proof of shared memory."
+}
