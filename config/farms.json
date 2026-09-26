@@ -1,5 +1,5 @@
 {
-  "version": "2.26",
+  "version": "2.25",
   "owner": "dmaillot95-ui",
   "farms": [
     {
@@ -1631,34 +1631,11 @@
         "artifact_id": 10876145807,
         "artifact_digest": "sha256:a587f435a5d37690979f3378a02e3d6b84263ca11322b371cd805aaafa2c61f7"
       }
-    },
-    {
-      "id": 175,
-      "repo": "cerebron-farm-175-weight-simulation",
-      "domain": "neural-weight-simulation-pretraining-selection",
-      "identity": "WEIGHT_SIM",
-      "status": "SCAFFOLDED_SIMULATION_ONLY",
-      "type": "SIMULATION_FARM",
-      "role": "Simulate and rank candidate LoRA weight deltas, target modules, ranks and hyperparameters before any real neural training.",
-      "training_status": "NOT_TRAINED",
-      "simulation_status": "PREPARATION_ONLY",
-      "repository_exists": false,
-      "local_scaffold": "scaffolds/f175-weight-simulation",
-      "claim_boundary": "SIMULATION_NE_TRAINING_AND_SIMULATED_DELTAS_NE_CHANGED_MODEL_WEIGHTS",
-      "policy": {
-        "simulation_not_training": true,
-        "weights_changed": false,
-        "automatic_promotion": false,
-        "m6_deny_training": true,
-        "transfer_deny_training": true,
-        "redteam_deny_training": true,
-        "requires_real_training_after_selection": true
-      }
     }
   ],
-  "max_farms": 175,
+  "max_farms": 174,
   "policy": {
-    "farm_cap": 175,
+    "farm_cap": 174,
     "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
@@ -1682,8 +1659,7 @@
     "no_farm_above_174": false,
     "extension_farm_ids": [
       173,
-      174,
-      175
+      174
     ],
     "extension_repository_empty_ids": [],
     "extension_repository_initialized_ids": [
@@ -1702,8 +1678,7 @@
     ],
     "extension_local_live_canary_pass_ids": [
       173
-    ],
-    "no_farm_above_175": true
+    ]
   },
   "shared_engines": {
     "NVIDIA": {
