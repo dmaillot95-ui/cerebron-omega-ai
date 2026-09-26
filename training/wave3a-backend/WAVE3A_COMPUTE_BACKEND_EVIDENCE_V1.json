@@ -1,0 +1,60 @@
+{
+  "schema": "CEREBRON_WAVE3A_COMPUTE_BACKEND_EVIDENCE_V1",
+  "wave": "WAVE3A",
+  "status": "BLOCKED_INSUFFICIENT_COMPUTE_EVIDENCE",
+  "training_released": false,
+  "continuous_training_eligible": false,
+  "training_executed": false,
+  "weights_changed": false,
+  "target_model_canary_pass": false,
+  "real_training_backend": false,
+  "backend_can_change_weights": false,
+  "historical_reference": {
+    "run_id": 36109026167,
+    "workflow_name": "CEREBRON Wave1 Parallel Role LoRA",
+    "workflow_path": ".github/workflows/wave1-parallel-role-lora-v1.yml",
+    "head_branch": "feat/wave1-parallel-ai-baselines-v1",
+    "head_sha": "aaea031281cc85b7a826f2c52e10c01bfd541e00",
+    "conclusion": "success",
+    "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_revision": "ec7ddfa904d4d447eedd0b7f126df16957734abb",
+    "runner": "ubuntu-latest CPU",
+    "max_parallel": 4,
+    "proof_boundary": {
+      "real_scoped_lora_training": true,
+      "optimizer_step_present": true,
+      "adapter_saved": true,
+      "weights_changed_receipts": true,
+      "hf_private_adapter_write": true,
+      "hf_private_readback_sha": true,
+      "four_role_jobs_succeeded": true
+    }
+  },
+  "planned_target_cores": [
+    {
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c"
+    },
+    {
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1"
+    }
+  ],
+  "blocking_findings": [
+    "The proven Wave1 backend trained a 0.5B model in float32 on GitHub-hosted CPU runners; this does not prove 3B or 4B training feasibility.",
+    "The proven Wave1 LoRA workflow and training script are not present on main and therefore are not a current main-branch dispatch backend.",
+    "No verified GPU, QLoRA, bitsandbytes, or equivalent target-core training backend was found on main during this audit.",
+    "No real WAVE3A target-core adapter has been trained, hashed, stored, and read back.",
+    "A successful inference canary is not evidence that LoRA training fits memory or runtime limits."
+  ],
+  "requirements_to_pass": [
+    "Provide a main-branch dispatch workflow with an explicit real-training contract.",
+    "Pin the exact target model revision used by each role.",
+    "Run a target-core training canary that performs at least one optimizer step and proves adapter tensors changed.",
+    "Persist the adapter outside GitHub artifacts as required and verify SHA-256 by readback.",
+    "Record runner hardware and peak memory evidence sufficient for the selected parallelism.",
+    "Keep COLD, TRANSFER, RED and M6 denied from training.",
+    "Only then set this evidence status to VERIFIED_EXECUTABLE_BACKEND after independent gate review."
+  ],
+  "claim_ceiling": "HISTORICAL_0P5B_CPU_LORA_BACKEND_PROVEN_WAVE3A_3B_4B_BACKEND_NOT_YET_PROVEN"
+}
