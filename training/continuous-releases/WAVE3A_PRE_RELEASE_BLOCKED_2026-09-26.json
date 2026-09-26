@@ -1,0 +1,27 @@
+{
+  "schema": "CEREBRON_CONTINUOUS_TRAINING_PRE_RELEASE_V1",
+  "date": "2026-09-26",
+  "release_id": "WAVE3A_PRE_RELEASE_BLOCKED_2026-09-26",
+  "wave": "WAVE3A",
+  "status": "BLOCKED_NOT_RELEASED",
+  "training_released": false,
+  "continuous_training_eligible": false,
+  "roles": ["ELYSION", "ELYSIUM", "SAELION", "NEXUS"],
+  "reason": "No new role-specific admissible neural-training dataset has yet satisfied the release contract. Existing scaffolds, prompts, AGORA output, memory and prior closed-wave data are not sufficient evidence for a new weight update.",
+  "required_before_release": [
+    "ROLE_SPECIFIC_TRAIN_SPLIT",
+    "PINNED_BASE_MODEL_AND_REVISION",
+    "DATASET_SHA256",
+    "M6_EXCLUDED_FROM_TRAIN",
+    "TRANSFER_EXCLUDED_FROM_TRAIN",
+    "RED_TEAM_EXCLUDED_FROM_TRAIN",
+    "COLD_BENCHMARK_SPLIT",
+    "TRANSFER_SPLIT",
+    "RED_TEAM_SPLIT",
+    "REVIEWED_DISPATCH_WORKFLOW",
+    "F72_OR_EQUIVALENT_RELEASE_GATE_PASS_WHERE_APPLICABLE"
+  ],
+  "weights_changed": false,
+  "training_executed": false,
+  "claim_boundary": "PRE_RELEASE_BLOCKER_RECORD_ONLY"
+}
