@@ -1,56 +1,65 @@
-# CÉRÉBRON — Hugging Face Private Memory Canary V1
+# CÉRÉBRON — Hugging Face Private Memory V1
 
-Status: **PREPARED_NOT_EXECUTED**
+Status: **BACKEND VERIFIED / GENERIC CANARY NOT EXECUTED**
 
-## Objective
+## Verified backend
 
-Prove, with an executable receipt, that CÉRÉBRON can use an **existing private Hugging Face repository** as a storage backend by performing the exact sequence:
+CÉRÉBRON already has real executable evidence for the private Hugging Face repository:
 
-`VERIFY PRIVATE -> WRITE -> READ SAME REVISION -> SHA-256 COMPARE -> VERIFY PRIVATE -> RECEIPT`
+`cerebron-omega/cerebron-private-memory`
 
-This is a memory/storage test. **MEMORY != TRAINING**.
+Historical run `35997653059` verified private-repository access and per-AI `WRITE -> READ -> SHA-256` equality for the existing AI set.
 
-## Required inputs
+Dedicated tri-core run `36246961870` then verified the same transport for:
 
-- GitHub Actions secret: `HF_TOKEN`.
-- Workflow input `repo_id`: an existing Hugging Face repository in `owner/name` form.
-- Repository must already exist and must be private.
-- Default repository type is `dataset`; `model` is also accepted explicitly.
+- F176 NOVA;
+- F177 ATLAS;
+- F178 COLOSSUS.
 
-The workflow never creates a Hugging Face repository and never activates a paid provider.
+Receipt: `receipts/p03/tricore-hf-m03/36246961870.json`.
 
-## Data written
+Result: **3 tested / 3 PASS / 0 failed**, with repository privacy verified before and after. Each AI has its own A6_MEMORY_KEEPER / M7_EVIDENCE namespace and matching source/download SHA-256.
 
-Only a small synthetic JSON canary is written. It contains no user data, no raw AGORA material, no M6/COLD benchmark material, no adapters and no model weights. The object path is content-addressed from its SHA-256.
+## What this proves
 
-## PASS conditions
+It proves real authenticated private Hugging Face storage connectivity with remote write, exact read-back and content-integrity verification.
 
-A PASS requires all of the following in one real run:
+It does **not** prove semantic retrieval quality, deduplication quality, replay quality, GOLD promotion quality, neural learning, adapter training, model-weight change or production runtime activation.
 
-1. repository privacy verified before write;
-2. upload executed;
-3. exact uploaded revision read back;
-4. downloaded bytes equal source bytes;
-5. SHA-256 before write equals SHA-256 after read;
-6. repository privacy verified again;
-7. receipt artifact emitted.
+**MEMORY != TRAINING.**
 
-The receipt must state `write_executed=true`, `read_executed=true`, `sha_match=true`, `training_executed=false`, and `weights_changed=false`.
+## Memory Ω relationship
 
-## FAIL-CLOSED conditions
+Memory Ω remains governed by F114–F120:
 
-The run fails if `HF_TOKEN` is absent, the repository is public, upload/read fails, SHA differs, privacy cannot be verified, or the evidence receipt cannot be emitted.
+- F114 encyclopedic index;
+- F115 vector-semantic memory;
+- F116 dedup/fusion;
+- F117 replay;
+- F118 GOLD library;
+- F119 evidence archive;
+- F120 governor/freeze.
 
-## Files
+M6/COLD remains `DENY_TRAINING`.
+
+## Generic reusable canary
+
+The reusable manual workflow still exists:
 
 - `tools/hf_private_memory_canary.py`
 - `.github/workflows/cerebron-hf-private-memory-canary-v1.yml`
 - `config/hf-private-memory-canary-v1.json`
 
-## Memory Ω relationship
+That generic workflow itself has **not** been executed. This does not invalidate the backend evidence above because the historical and tri-core M03 workflows already performed real Hugging Face write/read/SHA operations.
 
-The canary validates only the external private storage transport. It does not by itself prove semantic indexing, deduplication, replay, GOLD promotion, evidence quality, or neural learning. F114–F120 remain responsible for those memory functions and governance. M6 remains `DENY_TRAINING`.
+The generic workflow remains useful for validating another explicitly supplied existing private repository. It never creates a repository and never activates a paid provider automatically.
 
-## Activation rule
+## Tri-core integration
 
-Do not change the shared Hugging Face memory claim to validated until a real successful run ID plus receipt SHA is recorded. Until then the authoritative state is **PREPARED_NOT_EXECUTED**.
+Authoritative files:
+
+- `config/tricore-hf-memory-m03-v1.json`
+- `config/tricore-agora-memory-integration-v1.json`
+- `receipts/p03/tricore-hf-m03/36246961870.json`
+
+NOVA, ATLAS and COLOSSUS remain `MUTED_HOLD`, `training_executed=false`, `weights_changed=false`, and `output_enabled=false`.
