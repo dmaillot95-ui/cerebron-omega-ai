@@ -1,0 +1,33 @@
+{
+  "schema": "CEREBRON_WAVE3A_DATASET_AUDIT_V2_RECEIPT",
+  "date": "2026-09-26",
+  "audited_commit": "25ff426e7ebd8b3f17b200f8dd84359cde550d97",
+  "workflow_run_id": 36226057788,
+  "workflow_job_id": 108360209428,
+  "artifact_id": 10900477655,
+  "artifact_zip_sha256": "832631fd6a8de082de34db393eb570154086cd4d409fe8cdf1e3785431412f99",
+  "status": "PASS_FOR_PREPARATION_FAIL_FOR_RELEASE",
+  "roles": ["ELYSION", "ELYSIUM", "SAELION", "NEXUS"],
+  "counts_per_role": {"train":12,"cold":2,"transfer":2,"red":2},
+  "checks": {
+    "structure": "PASS",
+    "sample_id_uniqueness": "PASS",
+    "exact_input_dedup": "PASS",
+    "semantic_near_duplicate_screen": "PASS_HEURISTIC",
+    "semantic_jaccard_threshold": 0.92,
+    "near_duplicate_pairs": 0,
+    "provenance_source_membership": "PASS",
+    "train_seed_floor_12_per_role": "PASS",
+    "cold_transfer_red_deny_training": "PASS",
+    "dual_core_pins": "PASS",
+    "scale_sufficient_for_training": "FAIL_RELEASE_SCALE_NOT_ESTABLISHED",
+    "dispatch_workflow_review": "PENDING",
+    "f72_or_equivalent_release_gate": "PENDING"
+  },
+  "training_released": false,
+  "continuous_training_eligible": false,
+  "training_executed": false,
+  "weights_changed": false,
+  "claim_boundary": "EXPANDED_DATASET_PREPARATION_AND_AUDIT_ONLY_NO_TRAINING",
+  "next": "DESIGN_RELEASE_GATE_AND_DISPATCH_REVIEW_WITHOUT_TRAINING_UNTIL_ALL_RELEASE_BLOCKERS_PASS"
+}
