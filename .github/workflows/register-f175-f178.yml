@@ -1,0 +1,38 @@
+name: Register F175-F178
+
+on:
+  push:
+    paths:
+      - 'tools/register_f175_f178.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch registry deterministically
+        run: python tools/register_f175_f178.py
+      - name: Validate JSON and scope
+        run: |
+          python -m json.tool config/farms.json >/dev/null
+          git diff --exit-code -- . ':(exclude)config/farms.json' || exit 1
+      - name: Commit registry only when changed
+        run: |
+          if git diff --quiet -- config/farms.json; then
+            echo 'Registry already current'
+            exit 0
+          fi
+          git config user.name 'cerebron-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add config/farms.json
+          git commit -m 'Register farms F175-F178 [skip ci]'
+          git push
