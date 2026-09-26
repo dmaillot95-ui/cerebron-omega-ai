@@ -1,0 +1,90 @@
+name: CEREBRON WAVE3A Target Core Canary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/wave3a_target_core_canary_v1.py'
+      - '.github/workflows/cerebron-wave3a-target-core-canary-v1.yml'
+  workflow_dispatch:
+    inputs:
+      model_core:
+        description: Exact pinned WAVE3A target core
+        required: true
+        type: choice
+        options:
+          - QWEN3_4B
+          - SMOLLM3_3B
+      runner_label:
+        description: Runner label. ubuntu-latest is expected to DENY because no GPU is proven.
+        required: true
+        default: ubuntu-latest
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and inspect fail-closed canary contract
+        run: |
+          python -m py_compile tools/wave3a_target_core_canary_v1.py
+          python tools/wave3a_target_core_canary_v1.py --print-contract
+
+  target-core-canary:
+    if: github.event_name == 'workflow_dispatch'
+    needs: contract
+    runs-on: ${{ inputs.runner_label }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fail closed unless a real GPU is present
+        run: |
+          if ! command -v nvidia-smi >/dev/null 2>&1; then
+            echo 'WAVE3A_TARGET_CORE_CANARY=DENY_GPU_DEVICE_NOT_PRESENT'
+            exit 2
+          fi
+          nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
+      - name: Install pinned LoRA stack derived from proven Wave1 backend
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.14.0
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==5.17.0 peft==0.21.0 accelerate safetensors sentencepiece
+      - name: Execute one-step disposable target-core LoRA canary
+        run: |
+          python tools/wave3a_target_core_canary_v1.py \
+            --model-core '${{ inputs.model_core }}' \
+            --output-root artifacts/wave3a-target-core-canary
+      - name: Assert canary cannot release or promote WAVE3A
+        run: |
+          python - <<'PY'
+          import json
+          p='artifacts/wave3a-target-core-canary/canary-report.json'
+          d=json.load(open(p))
+          assert d['status']=='PASS_TARGET_CORE_CANARY'
+          assert d['training_executed'] is True
+          assert d['optimizer_steps']==1
+          assert d['weights_changed'] is True
+          assert d['target_model_canary_pass'] is True
+          assert d['role_training'] is False
+          assert d['dataset_training'] is False
+          assert d['release_eligible'] is False
+          assert d['promotion']=='DENY'
+          print('WAVE3A_TARGET_CORE_CANARY=PASS_CANARY_ONLY_NOT_RELEASED')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wave3a-target-core-canary-${{ inputs.model_core }}-${{ github.run_id }}
+          path: artifacts/wave3a-target-core-canary/
+          if-no-files-found: warn
+          retention-days: 30
