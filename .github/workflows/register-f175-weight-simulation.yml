@@ -1,0 +1,75 @@
+name: Register F175 Weight Simulation Farm
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/register-f175-weight-simulation.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Register F175 fail-closed
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('config/farms.json')
+          d=json.loads(p.read_text())
+          farms=d['farms']
+          ids={int(x['id']) for x in farms}
+          if 175 not in ids:
+              farms.append({
+                'id':175,
+                'repo':'cerebron-farm-175-weight-simulation',
+                'domain':'neural-weight-simulation-pretraining-selection',
+                'identity':'WEIGHT_SIM',
+                'status':'SCAFFOLDED_SIMULATION_ONLY',
+                'type':'SIMULATION_FARM',
+                'role':'Simulate and rank candidate LoRA weight deltas, target modules, ranks and hyperparameters before any real neural training.',
+                'training_status':'NOT_TRAINED',
+                'simulation_status':'PREPARATION_ONLY',
+                'repository_exists':False,
+                'local_scaffold':'scaffolds/f175-weight-simulation',
+                'claim_boundary':'SIMULATION_NE_TRAINING_AND_SIMULATED_DELTAS_NE_CHANGED_MODEL_WEIGHTS',
+                'policy':{
+                  'simulation_not_training':True,
+                  'weights_changed':False,
+                  'automatic_promotion':False,
+                  'm6_deny_training':True,
+                  'transfer_deny_training':True,
+                  'redteam_deny_training':True,
+                  'requires_real_training_after_selection':True
+                }
+              })
+          farms.sort(key=lambda x:int(x['id']))
+          d['version']='2.26'
+          p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n')
+
+          s=pathlib.Path('scaffolds/f175-weight-simulation')
+          s.mkdir(parents=True,exist_ok=True)
+          (s/'README.md').write_text('''# F175 — Weight Simulation Farm\n\nPurpose: pre-screen candidate LoRA/adapter configurations before real neural training.\n\n## Boundary\n\n- SIMULATION != TRAINING\n- SIMULATED DELTA != CHANGED MODEL WEIGHTS\n- No promotion from simulation alone\n- M6 / TRANSFER / REDTEAM are DENY_TRAINING\n- A selected candidate must still pass real training, weight-hash proof, COLD, TRANSFER, REDTEAM and ablation.\n\n## Candidate search\n\nRank candidate target modules, LoRA rank/alpha/dropout, learning rate, dataset ordering and small proxy delta directions. Keep only the best candidates for real training slots.\n''')
+          print('F175_REGISTERED', len(farms))
+          PY
+      - name: Persist registry and scaffold
+        run: |
+          git config user.name cerebron-bot
+          git config user.email actions@users.noreply.github.com
+          git add config/farms.json scaffolds/f175-weight-simulation/README.md
+          git diff --cached --quiet && exit 0
+          git commit -m "registry: add F175 weight simulation farm"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1
