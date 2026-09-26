@@ -1,0 +1,91 @@
+{
+  "schema": "CEREBRON_129_RDX_PUBLIC_HTTPS_LIVE_SURFACE_GATE_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_PUBLIC_HTTPS_LIVE_SURFACE_FAIL_CLOSED_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "0799959c968c3afda640154d73489cc3900b544f",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "2eb81d8eb59868151cda1039d7fdc2eb4394671f",
+    "head": "fa1f028beb7ce321f6409e6c10e65880d8dcf8f5",
+    "commit_message": "security: require public HTTPS surface for live deployment proofs",
+    "full_validation": {
+      "run_id": 36208526898,
+      "status": "PASS"
+    },
+    "github_pages_build": {
+      "run_id": 36208526928,
+      "status": "PASS",
+      "validate": "PASS",
+      "deploy": "SKIPPED_PUSH_EVENT",
+      "live_verify": "SKIPPED_NO_REAL_DEPLOYMENT"
+    }
+  },
+  "release_chain": {
+    "source_commit": "fa1f028beb7ce321f6409e6c10e65880d8dcf8f5",
+    "file_count": 16,
+    "aggregate_sha256": "30d84c4ebf749eddb1dee191c9529958015e95d8db882cccfbe170befcf602cd",
+    "release_attestation_sha256": "11646921eca23dcc20bc36642baaf733240a945b0eec1c9c804145a4a6a37a7e",
+    "reproducible_build_gate": "PASS",
+    "release_sigstore_chain": "PASS"
+  },
+  "public_https_live_surface_gate": {
+    "helper": "scripts/lib/public-deployment-url.mjs",
+    "live_verifier": "scripts/verify-live-deployment.mjs",
+    "negative_canary": "scripts/validate-production-deployment-url-policy.mjs",
+    "requires_https": true,
+    "rejects_credentials": true,
+    "rejects_query_parameters": true,
+    "rejects_fragments": true,
+    "rejects_localhost_and_reserved_domains": true,
+    "rejects_private_loopback_link_local_cgnat_and_documentation_ipv4": true,
+    "rejects_loopback_private_link_local_multicast_and_documentation_ipv6": true,
+    "allows_public_dns_subpaths": true,
+    "canary": {
+      "valid_accepted": 3,
+      "invalid_rejected": 18,
+      "status": "PASS"
+    },
+    "proof_field": "public_https_surface_policy=true"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "live_proof_created": false,
+    "live_verify_pass": false,
+    "promotion": "DENY_UNTIL_REAL_WORKFLOW_DISPATCH_DEPLOY_AND_LIVE_VERIFY"
+  },
+  "current_blocker": "NO_RDX_GITHUB_PAGES_WORKFLOW_DISPATCH_WITH_DEPLOY_TRUE_OBSERVED",
+  "runner_note": "GitHub runner warned that actions/checkout@v4 and actions/setup-node@v4 target deprecated Node.js 20 and were forced onto Node.js 24; validation still passed. Treat as maintenance warning, not production proof failure.",
+  "next_actions": [
+    "RUN_RDX_GITHUB_PAGES_WORKFLOW_DISPATCH_DEPLOY_TRUE",
+    "REQUIRE_DEPLOY_PASS",
+    "REQUIRE_PUBLIC_HTTPS_SURFACE_POLICY_PASS",
+    "REQUIRE_VERIFY_LIVE_PASS",
+    "REQUIRE_SIGNED_RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "RUN_MANUAL_HUMAN_REVIEW",
+    "IF_APPROVED_CREATE_REGISTRY_PR_ONLY"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "public_https_live_surface_policy_verified": true,
+    "negative_url_canaries_verified": true,
+    "build_validation_verified": true,
+    "release_attestation_verified": true,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "SIMULATION!=TEST",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "PUBLIC_REACHABILITY_REQUIRES_REAL_NETWORK_TEST",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
