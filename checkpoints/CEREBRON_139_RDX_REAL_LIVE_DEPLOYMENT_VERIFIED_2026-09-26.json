@@ -1,0 +1,83 @@
+{
+  "schema": "CEREBRON_139_RDX_REAL_LIVE_DEPLOYMENT_VERIFIED_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_REAL_LIVE_DEPLOYMENT_VERIFIED_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "c4f4c64ef25ef2997fcded5b2e0493e92eb2f39e",
+  "rdx": {
+    "repository": "dmaillot95-ui/cerebron-rdx-exchange",
+    "branch": "main",
+    "head": "4b983166e635691c03835ebe2b40ea0362b7223d",
+    "workflow": "RDX GitHub Pages Public Preview",
+    "run_id": 36222120577,
+    "run_number": 68,
+    "event": "workflow_dispatch",
+    "attempt": 2,
+    "validate": "PASS",
+    "deploy": "PASS",
+    "verify_live": "PASS"
+  },
+  "live": {
+    "base_url": "https://dmaillot95-ui.github.io/cerebron-rdx-exchange/",
+    "schema": "RDX_PRODUCTION_DEPLOYMENT_PROOF_V2",
+    "verified_at": "2026-09-26T06:14:59.219Z",
+    "status": "PASS",
+    "public_https_surface_policy": true,
+    "source_commit": "4b983166e635691c03835ebe2b40ea0362b7223d",
+    "release_attestation_sha256": "a2d8b3b54ce46f60e58860f29a0b1158975f3e0e76fce8bf3e72b6a814b5affd",
+    "release_aggregate_sha256": "0e87b80dc66a90c767c91268cc839b1ccf13788558a86f6c69c023d4dafed87f",
+    "release_file_count_expected": 16,
+    "release_file_count_checked": 16,
+    "manifest_file_count_match": true,
+    "manifest_aggregate_match": true,
+    "proof_sha256": "a791110dc1e99e5ddba4e7a7cd7d506704ad9b112456ad5a6905e9d4c5fbdc4d",
+    "registration_proposal_id": "RDX-LIVE-4b983166e635-a791110dc1e9",
+    "known_good_proposal_id": "RDX-KNOWN-GOOD-4b983166e635"
+  },
+  "signed_artifacts": {
+    "production_deployment_proof": {
+      "artifact_id": 10898604938,
+      "artifact_zip_sha256": "f85f6255665a5079feb5ae7932f8386522a42e4250915ac583b7d566c9f6d752",
+      "github_attestation_id": 50375104,
+      "subject_sha256": "e0e4c0b159b94900dd58430ab5f22362fa9f12500632f78fa9aeb8a34cfe7d68"
+    },
+    "production_proof_registration_proposal": {
+      "artifact_id": 10899543478,
+      "artifact_zip_sha256": "0fd1afe972cd9ca6cf9833dd264422135da0cf103ea74f8c06e323b10469a2aa",
+      "github_attestation_id": 50375122,
+      "subject_sha256": "297278b699827180a31db0c9f9f5d68c9c790f1970f0d2b180de72bb74998296"
+    },
+    "known_good_release_registration_proposal": {
+      "artifact_id": 10899906630,
+      "artifact_zip_sha256": "28c8d6386c6f459fb656815e27cbcb0be1a4b1bff2f69347f5bc77179bf40bdc",
+      "github_attestation_id": 50375152,
+      "subject_sha256": "9ded868312386dd67af7701aeddc99dfcc7289936149691ccf2329fd647d7206"
+    }
+  },
+  "production_registry": {
+    "schema": "RDX_PRODUCTION_PROOF_REGISTRY_V1",
+    "policy": "FAIL_CLOSED",
+    "latest_verified": null,
+    "proof_count": 0,
+    "production_deployment_verified": false,
+    "reason": "REAL_LIVE_PROOF_EXISTS_BUT_HUMAN_REVIEW_AND_REGISTRY_PROMOTION_NOT_YET_COMPLETED"
+  },
+  "claim_ceiling": {
+    "live_deployment": true,
+    "live_verification": true,
+    "signed_live_proof": true,
+    "production_registry_promoted": false,
+    "production_deployment_verified": false
+  },
+  "next_required_step": "RUN_RDX_PRODUCTION_HUMAN_REVIEW_FOR_SOURCE_RUN_36222120577_THEN_REGISTRY_PR_AND_PROMOTION",
+  "coordination": {
+    "f172_f173_f174": "DELEGATED_NO_EDIT"
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "LIVE_PROOF_DOES_NOT_EQUAL_REGISTRY_PROMOTION",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_PRODUCTION_CLAIM"
+  ]
+}
