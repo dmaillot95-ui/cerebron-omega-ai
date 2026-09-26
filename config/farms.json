@@ -1656,9 +1656,9 @@
       }
     }
   ],
-  "max_farms": 174,
+  "max_farms": 175,
   "policy": {
-    "farm_cap": 174,
+    "farm_cap": 175,
     "no_farm_above_144": false,
     "route_minimal_useful_coalition": true,
     "shared_tool_fabric": true,
@@ -1679,10 +1679,11 @@
     ],
     "greek_total_infrastructure_present": 23,
     "greek_total_target": 24,
-    "no_farm_above_174": true,
+    "no_farm_above_174": false,
     "extension_farm_ids": [
       173,
-      174
+      174,
+      175
     ],
     "extension_repository_empty_ids": [],
     "extension_repository_initialized_ids": [
@@ -1701,7 +1702,8 @@
     ],
     "extension_local_live_canary_pass_ids": [
       173
-    ]
+    ],
+    "no_farm_above_175": true
   },
   "shared_engines": {
     "NVIDIA": {
