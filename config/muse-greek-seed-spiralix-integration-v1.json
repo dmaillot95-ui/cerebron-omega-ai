@@ -1,0 +1,48 @@
+{
+  "schema": "cerebron-muse-greek-seed-spiralix-integration-v1",
+  "version": "1.0",
+  "date": "2026-09-26",
+  "status": "CONFIG_CONNECTED_NOT_TRAINED",
+  "scope": "F179-F190_ONLY",
+  "seed_binding": {
+    "registry": "training/C42_MACRO_SEED_REGISTRY_V1.json",
+    "mother_seeds": ["SEED-A", "SEED-B", "SEED-OMEGA"],
+    "macrograins": ["MG-01", "MG-02", "MG-03", "MG-04", "MG-05", "MG-06", "MG-07", "MG-08", "MG-09", "MG-10", "MG-11", "MG-12"],
+    "status": "BOUND_TO_EXISTING_SEED_REGISTRY_AWAITING_EXISTING_F72_AFAH_REVALIDATION",
+    "claim_boundary": "Binding does not validate recovered seeds and does not release neural training."
+  },
+  "spiralix_vector_binding": {
+    "protocol": "SPIRALIX",
+    "basis": "training/CEREBRON_RECURSIVE_COAXIAL_VECTOR_LEARNING_V1.json",
+    "routing_space": "32D_SPECIALIZATION_VECTOR",
+    "mode": "VECTOR_ORCHESTRATION_AND_COMPACT_ROUTING",
+    "status": "BOUND_TO_EXISTING_VECTOR_LEARNING_CONTRACT",
+    "claim_boundary": "SPIRALIX is an orchestration/routing language; this configuration is not evidence of a new neural capability."
+  },
+  "farms": [
+    {"farm_id":179,"identity":"ZEUS","repo":"cerebron-farm-179-zeus-muse","specialization":["coordination","routing","decision_fusion"]},
+    {"farm_id":180,"identity":"POSEIDON","repo":"cerebron-farm-180-poseidon-muse","specialization":["complex_systems","simulation","environment"]},
+    {"farm_id":181,"identity":"HADES","repo":"cerebron-farm-181-hades-muse","specialization":["red_team","failure_analysis","counterexample"]},
+    {"farm_id":182,"identity":"ATHENA","repo":"cerebron-farm-182-athena-muse","specialization":["formal_reasoning","strategy","proof"]},
+    {"farm_id":183,"identity":"APOLLO","repo":"cerebron-farm-183-apollo-muse","specialization":["science_modeling","prediction","synthesis"]},
+    {"farm_id":184,"identity":"ARTEMIS","repo":"cerebron-farm-184-artemis-muse","specialization":["search_exploration","targeted_research","information_gain"]},
+    {"farm_id":185,"identity":"HERMES","repo":"cerebron-farm-185-hermes-muse","specialization":["tools","api","inter_ai_communication"]},
+    {"farm_id":186,"identity":"HEPHAESTUS","repo":"cerebron-farm-186-hephaestus-muse","specialization":["code","engineering","construction"]},
+    {"farm_id":187,"identity":"APHRODITE","repo":"cerebron-farm-187-aphrodite-muse","specialization":["human_dialogue","language","interface"]},
+    {"farm_id":188,"identity":"ARES","repo":"cerebron-farm-188-ares-muse","specialization":["adversarial_testing","hypothesis_competition","stress_test"]},
+    {"farm_id":189,"identity":"DEMETER","repo":"cerebron-farm-189-demeter-muse","specialization":["memory_continuity","knowledge_consolidation","compression"]},
+    {"farm_id":190,"identity":"HERA","repo":"cerebron-farm-190-hera-muse","specialization":["governance","coordination","evidence_audit"]}
+  ],
+  "common_contract": {
+    "seed_curriculum_connected": true,
+    "spiralix_vector_connected": true,
+    "agora_compatible": true,
+    "training_executed": false,
+    "weights_changed": false,
+    "training_released": false,
+    "memory_hf_change_in_this_commit": false,
+    "cold_transfer_red_training_allowed": false,
+    "runtime_activation": false
+  },
+  "next_step": "MEMORY_HF_F179_F190_IN_SEPARATE_OPERATION"
+}
