@@ -1,0 +1,98 @@
+{
+  "schema": "CEREBRON_133_RDX_PRODUCTION_REGISTRY_PR_CREATOR_PROVENANCE_BINDING_V1",
+  "date": "2026-09-26",
+  "scope": "RDX_PRODUCTION_REGISTRY_PR_CREATOR_PROVENANCE_BINDING_NO_F172_F173_F174_EDITS",
+  "master_parent_head": "b746fe5e8cd45e7a0ae1a21d73b8972c62971c99",
+  "rdx": {
+    "repo": "dmaillot95-ui/cerebron-rdx-exchange",
+    "previous_head": "f1abf67a618e3a2e75d5abd345a4acc0cfb66e13",
+    "head": "cc89d4084a492b5c9524718d165f293d4868f0f9",
+    "commit_message": "security: bind production registry PR gate to creator run provenance",
+    "full_validation": {
+      "run_id": 36210922174,
+      "status": "PASS"
+    },
+    "github_pages": {
+      "run_id": 36210922203,
+      "status": "PASS",
+      "event": "push",
+      "live_deployment_used_as_evidence": false
+    }
+  },
+  "production_registry_pr_creator_provenance": {
+    "pull_request_only": true,
+    "append_only": true,
+    "source_human_review_bound": true,
+    "same_repository_required": true,
+    "source_registry_pr_run_bound": true,
+    "source_registry_pr_workflow_name": "RDX Production Registry PR",
+    "source_registry_pr_event": "workflow_dispatch",
+    "source_registry_pr_head_branch": "main",
+    "pr_head_parent_bound_to_creator_head_sha": true,
+    "external_fork_rejected_by_contract": true,
+    "gate_permissions": {
+      "contents": "read",
+      "pull_requests": "read",
+      "actions": "read"
+    },
+    "write_permissions_forbidden_by_contract": true,
+    "secrets_reference_forbidden_by_contract": true,
+    "contract_gate_status": "PASS",
+    "contract_gate_output": "RDX Production Registry PR Gate Contract: PASS pull_request_only=true append_only=true source_review_bound=true same_repo=true source_registry_run_bound=true parent_sha_bound=true read_only=true",
+    "dedicated_gate_executed_on_real_production_proof_pr": false
+  },
+  "release_chain": {
+    "source_commit": "cc89d4084a492b5c9524718d165f293d4868f0f9",
+    "file_count": 16,
+    "aggregate_sha256": "6efc47bdce73a236b8ae7ed6c95ab85024020e312798537f96d2ea54bdf75354",
+    "release_attestation_sha256": "de8523db98dd0f0b94a7ca8fd3dc64a922d76160f7bd2411a4c5e4ca0f7c66ca",
+    "reproducible_build_gate": "PASS"
+  },
+  "production_state": {
+    "production_deployment_verified": false,
+    "production_registry_policy": "FAIL_CLOSED",
+    "production_registry_proofs": 0,
+    "latest_verified": null,
+    "live_proof_created": false,
+    "promotion_gate": "PASS_FAIL_CLOSED_PUBLIC_CLAIM_FALSE"
+  },
+  "repository_enforcement_observation": {
+    "main_branch_protected": false,
+    "repository_rulesets_observed": 0,
+    "required_status_checks_enforcement": "NOT_OBSERVED",
+    "claim": "CREATOR_PROVENANCE_IS_VALIDATED_BY_CI_BUT_GITHUB_DOES_NOT_YET_ENFORCE_THE_GATE_AS_A_REQUIRED_MERGE_CHECK"
+  },
+  "current_blockers": [
+    "NO_REAL_PRODUCTION_PROOF_PR_HAS_EXECUTED_THE_DEDICATED_PR_ONLY_GATE",
+    "NO_VERIFIED_LIVE_PRODUCTION_DEPLOYMENT_PROOF_EXISTS",
+    "RDX_MAIN_BRANCH_PROTECTED_FALSE_AND_NO_RULESET_OBSERVED"
+  ],
+  "parallel_coordination": {
+    "F172": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F173": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT",
+    "F174": "DELEGATED_OTHER_AI_NO_LOCAL_EDIT"
+  },
+  "claim_ceiling": {
+    "same_repository_pr_binding_verified": true,
+    "source_registry_creator_run_binding_verified": true,
+    "pr_parent_sha_binding_contract_verified": true,
+    "read_only_pr_gate_contract_verified": true,
+    "full_validation_verified": true,
+    "github_pages_push_validation_verified": true,
+    "dedicated_gate_executed_on_real_production_proof_pr": false,
+    "required_merge_check_enforcement_verified": false,
+    "actual_live_deployment_verified": false,
+    "actual_live_proof_verified": false
+  },
+  "hard_rules": [
+    "REALITY>COHERENCE",
+    "EVIDENCE>CONFIDENCE",
+    "CLAIM<=EVIDENCE",
+    "VERIFY_BEFORE_COMMIT",
+    "WORKFLOW_SUCCESS!=LIVE_DEPLOYMENT",
+    "CONTRACT_PASS!=REAL_PR_EXECUTION",
+    "TRIGGERED_CHECK!=REQUIRED_CHECK_WITHOUT_BRANCH_ENFORCEMENT",
+    "NO_FORCE_PUSH",
+    "NO_FALSE_DEPLOYMENT_CLAIM"
+  ]
+}
