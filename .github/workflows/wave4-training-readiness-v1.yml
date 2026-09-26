@@ -1,0 +1,54 @@
+name: CEREBRON Wave4 Training Readiness V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/wave4-training-readiness-v1
+    paths:
+      - 'config/wave4-specialist-training-readiness-v1.json'
+      - 'tools/wave4_training_readiness_v1.py'
+      - '.github/workflows/wave4-training-readiness-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run readiness audit
+        run: |
+          python -m py_compile tools/wave4_training_readiness_v1.py
+          python tools/wave4_training_readiness_v1.py
+      - name: Enforce fail-closed boundaries
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('artifacts/wave4-training-readiness-v1.json'))
+          assert x['wave']=='WAVE4'
+          assert x['training_released'] is False
+          assert x['training_executed'] is False
+          assert x['weights_changed'] is False
+          assert x['protected_surfaces_mutated'] is False
+          assert x['max_parallel_training_after_release']==4
+          assert set(x['roles'])=={'BETA','GAMMA','EPSILON','ZETA','ETA'}
+          for role,r in x['roles'].items():
+              assert r['coverage_ok'] is True
+              assert r['coverage_state']=='PENDING_SPECIALIST_NEURAL_PIPELINE'
+              assert r['planned_wave']=='WAVE4'
+              assert r['training_released'] is False
+              assert r['weights_changed'] is False
+          print('WAVE4_READINESS_GUARD=PASS',x['status'],x['ready_roles'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wave4-training-readiness-v1
+          path: artifacts/wave4-training-readiness-v1.json
+          if-no-files-found: error
+          retention-days: 30
